@@ -5,30 +5,29 @@ import "dart:math";
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-String _value = "translate.metalune.xyz";
 String fromLanguage = "English";
 String toLanguage = "Arabic";
-String myText = "";
+String instance = "translate.metalune.xyz";
 
-Future<List<String>> instancesGet = () async {
-  var tmpData = json.decode(await rootBundle.loadString('instances.json'));
-  List<String> data = [];
-  for (var x in tmpData) {
-    data.add(x.toString());
-  }
-  return data;
-}();
+String translationOutput = "";
+String translationInput = "";
+
+String customInstance = "";
 
 int instanceIndex = 0;
 
-void main(List<String> args) => runApp(MyApp());
+bool loading = false;
 
-var greyColor = Color(0xff131618);
-var lightgreyColor = Color(0xff495057);
-var secondgreyColor = Color(0xff212529);
-var whiteColor = Color(0xfff5f6f7);
+//Map<String, Map<String, String>> supportedLanguages = {};
 
-var boxDecorationCustom = BoxDecoration(
+var supportedLanguages = "";
+
+const greyColor = Color(0xff131618);
+const lightgreyColor = Color(0xff495057);
+const secondgreyColor = Color(0xff212529);
+const whiteColor = Color(0xfff5f6f7);
+
+final boxDecorationCustom = BoxDecoration(
     color: greyColor,
     border: Border.all(
       color: lightgreyColor,
@@ -36,7 +35,7 @@ var boxDecorationCustom = BoxDecoration(
       style: BorderStyle.solid,
     ));
 
-var customInstance = "";
+void main(List<String> args) => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
@@ -48,10 +47,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: TextTheme(
-            bodyText2: TextStyle(color: whiteColor),
-            subtitle1: TextStyle(color: whiteColor),
-            headline6: TextStyle(color: whiteColor)),
+        textTheme: const TextTheme(
+            bodyText2: const TextStyle(color: whiteColor),
+            subtitle1: const TextStyle(color: whiteColor),
+            headline6: const TextStyle(color: whiteColor)),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(greyColor),
@@ -63,230 +62,300 @@ class _MyAppState extends State<MyApp> {
       title: 'Simply Translate',
       home: Scaffold(
         backgroundColor: secondgreyColor,
-        body: FutureBuilder(
-            future: instancesGet,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                dynamic instances = snapshot.data;
+        body: FutureBuilder(future: () async {
+          final tmpData =
+              json.decode(await rootBundle.loadString('instances.json'));
+          List<String> data = [];
+          for (var x in tmpData) data.add(x.toString());
+          return data;
+        }(), builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            dynamic instances = snapshot.data;
 
-                List<DropdownMenuItem<String>> _instancesDropDown = () {
-                  var list = <DropdownMenuItem<String>>[];
-                  for (String x in instances) {
-                    list.add(DropdownMenuItem(value: x, child: Text(x)));
-                  }
-                  return list;
-                }();
+            // () async {
+            //   final url = Uri.https(
+            //     instance == "custom"
+            //         ? customInstance
+            //         : instances[instanceIndex],
+            //     '/',
+            //   );
+            //   final response = await http.get(url);
+            //   if (response.statusCode == 200) {
+            //     String x = parse(response.body)
+            //         .getElementById("from_language")!
+            //         .innerHtml;
+            //     // x = x.replaceAll('<option value="', '');
+            //     // x = x.replaceAll('</option>', '');
+            //     // x = x.replaceAll('">', '');
+            //     // x = x.replaceAll('selected="', '');
+            //     // x = x.replaceAll(RegExp(''), '');
+            //     // x.replaceAll(RegExp(""), '');
+            //     // print(x);
+            //   } else
+            //     return 'Request failed with status: ${response.statusCode}.';
+            // }();
 
-                Future<String> translate(String input) async {
-                  var url = Uri.https(
-                    _value == "custom"
-                        ? customInstance
-                        : instances[instanceIndex],
-                    '/',
-                  );
-                  var response = await http.post(url, body: {
-                    "from_language": fromLanguage,
-                    "to_language": toLanguage,
-                    "input": input,
-                  });
-                  if (response.statusCode == 200)
-                    return response.body;
-                  else
-                    return 'Request failed with status: ${response.statusCode}.';
-                }
+            Future<String> translate(String input) async {
+              final url = Uri.https(
+                instance == "custom"
+                    ? customInstance
+                    : instances[instanceIndex],
+                '/',
+              );
+              final response = await http.post(url, body: {
+                "from_language": fromLanguage,
+                "to_language": toLanguage,
+                "input": input,
+              });
+              if (response.statusCode == 200)
+                return response.body;
+              else
+                return 'Request failed with status: ${response.statusCode}.';
+            }
 
-                updateTranslation(input, instancesLocal) async =>
-                    parse(await translate(input))
-                        .getElementsByClassName("translation")[0]
-                        .innerHtml;
+            updateTranslation(input) async => parse(await translate(input))
+                .getElementsByClassName("translation")[0]
+                .innerHtml;
 
-                List<Widget> _instancesText = () {
-                  var list = <Widget>[];
-                  for (String x in instances) {
-                    list.add(Text("● $x"));
-                    list.add(SizedBox(height: 10));
-                  }
-                  return list;
-                }();
-                return Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                decoration: boxDecorationCustom,
-                                child: DropdownButton(
-                                  underline: SizedBox.shrink(),
-                                  dropdownColor: greyColor,
-                                  onChanged: (String? value) =>
-                                      setState(() => fromLanguage = value!),
-                                  value: fromLanguage,
-                                  items: [
-                                    DropdownMenuItem(
-                                        child: Text("English"),
-                                        value: "English"),
-                                    DropdownMenuItem(
-                                        child: Text("Arabic"), value: "Arabic"),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                decoration: boxDecorationCustom,
-                                child: TextButton(
-                                  onPressed: () async {
-                                    setState(() {
-                                      var tmp = fromLanguage;
-                                      fromLanguage = toLanguage;
-                                      toLanguage = tmp;
-                                    });
-                                    var x = await updateTranslation(
-                                        myText, snapshot.data);
-                                    setState(() => myText = x);
-                                  },
-                                  child: Text("<->"),
-                                ),
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                decoration: boxDecorationCustom,
-                                child: DropdownButton(
-                                  underline: SizedBox.shrink(),
-                                  dropdownColor: greyColor,
-                                  onChanged: (String? value) =>
-                                      setState(() => toLanguage = value!),
-                                  value: toLanguage,
-                                  items: [
-                                    DropdownMenuItem(
-                                        child: Text("English"),
-                                        value: "English"),
-                                    DropdownMenuItem(
-                                        child: Text("Arabic"), value: "Arabic"),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Container(
-                            width: 350,
-                            height: 150,
-                            decoration: boxDecorationCustom,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: TextField(
-                                  maxLines: 8,
-                                  onChanged: (String? input) async {
-                                    var x = await updateTranslation(
-                                        input!, snapshot.data);
-                                    setState(() => myText = x);
-                                  },
-                                  cursorColor: whiteColor,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintStyle:
-                                          TextStyle(color: lightgreyColor),
-                                      hintText: "Enter Text Here"),
-                                  style: TextStyle(fontSize: 20)),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Container(
-                            width: 350,
-                            height: 150,
-                            decoration: boxDecorationCustom,
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SelectableText(
-                                  myText,
-                                  style: TextStyle(fontSize: 20),
-                                )),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+            submitTranslation() async {
+              FocusScope.of(context).unfocus();
+              setState(() => loading = true);
+              final x = await updateTranslation(translationInput);
+              setState(() {
+                loading = false;
+                translationOutput = x;
+              });
+            }
+
+            return SingleChildScrollView(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                child: FutureBuilder(
+                    future: null,
+                    builder: (context, snapshot) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Row [fromLang, Switch, toLang]
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                // IconButton(
-                                //     onPressed: () {}, icon: Icon(Icons.settings)),
+                                // fromLanguage select button
                                 Container(
-                                  decoration: boxDecorationCustom,
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 8),
+                                  decoration: boxDecorationCustom,
                                   child: DropdownButton(
-                                    underline: SizedBox.shrink(),
+                                    underline: const SizedBox.shrink(),
                                     dropdownColor: greyColor,
-                                    onChanged: (String? value) => setState(() {
-                                      if (value == "random")
-                                        instanceIndex =
-                                            Random().nextInt(instances.length);
-                                      else if (value == "custom")
-                                        instanceIndex = 0;
-                                      else
-                                        instanceIndex = instances.indexOf(
-                                            value!, instances);
-
-                                      _value = value!;
-                                    }),
-                                    value: _value,
+                                    onChanged: (String? value) =>
+                                        setState(() => fromLanguage = value!),
+                                    value: fromLanguage,
                                     items: [
-                                      ..._instancesDropDown,
-                                      DropdownMenuItem(
-                                          value: "random",
-                                          child: Text("Random")),
-                                      DropdownMenuItem(
-                                          value: "custom",
-                                          child: Text("Custom"))
+                                      const DropdownMenuItem(
+                                        child: const Text("English"),
+                                        value: "English",
+                                      ),
+                                      const DropdownMenuItem(
+                                        child: const Text("Arabic"),
+                                        value: "Arabic",
+                                      ),
                                     ],
                                   ),
                                 ),
-                                if (_value == "custom") ...[
-                                  SizedBox(height: 10),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    decoration: boxDecorationCustom,
-                                    child: TextField(
-                                      onChanged: (String? value) =>
-                                          customInstance = value!,
-                                      cursorColor: whiteColor,
-                                      decoration: InputDecoration(
-                                          focusedBorder: InputBorder.none),
-                                      style: TextStyle(
-                                          fontSize: 20, color: whiteColor),
-                                    ),
-                                  )
-                                ] else if (_value == "random") ...[
-                                  SizedBox(height: 10),
-                                  SingleChildScrollView(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: _instancesText,
-                                    ),
-                                  )
-                                ] else
-                                  SizedBox.shrink()
+                                // Switch Language Button
+                                Container(
+                                  decoration: boxDecorationCustom,
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        final tmp = fromLanguage;
+                                        fromLanguage = toLanguage;
+                                        toLanguage = tmp;
+                                      });
+                                      final x = await updateTranslation(
+                                          translationOutput);
+                                      setState(() => translationOutput = x);
+                                    },
+                                    child: const Text("<->"),
+                                  ),
+                                ),
+                                // toLanguage select button
+                                Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  decoration: boxDecorationCustom,
+                                  child: DropdownButton(
+                                    underline: const SizedBox.shrink(),
+                                    dropdownColor: greyColor,
+                                    onChanged: (String? value) =>
+                                        setState(() => toLanguage = value!),
+                                    value: toLanguage,
+                                    items: [
+                                      const DropdownMenuItem(
+                                        child: const Text("English"),
+                                        value: "English",
+                                      ),
+                                      const DropdownMenuItem(
+                                        child: const Text("Arabic"),
+                                        value: "Arabic",
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              } else
-                return Center(child: CircularProgressIndicator());
-            }),
+                            const SizedBox(height: 20),
+                            // Translation input
+                            Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: boxDecorationCustom,
+                              child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: TextField(
+                                      maxLines: 8,
+                                      keyboardType: TextInputType.text,
+                                      onChanged: (String input) async {
+                                        translationInput = input;
+                                      },
+                                      cursorColor: whiteColor,
+                                      decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintStyle: const TextStyle(
+                                              color: lightgreyColor),
+                                          hintText: "Enter Text Here"),
+                                      style: const TextStyle(fontSize: 20),
+                                      onEditingComplete: submitTranslation)),
+                            ),
+                            const SizedBox(height: 10),
+                            // Translation output
+                            Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: boxDecorationCustom,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SelectableText(
+                                  translationOutput,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            // Translate Button
+                            Container(
+                              alignment: Alignment.topLeft,
+                              child: loading
+                                  ? CircularProgressIndicator()
+                                  : TextButton(
+                                      onPressed: submitTranslation,
+                                      child: Text(
+                                        "Translate",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                            ),
+                            const SizedBox(height: 50),
+                            Container(
+                              width: double.infinity,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Instance Select Button.
+                                  Container(
+                                    decoration: boxDecorationCustom,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    child: DropdownButton(
+                                      underline: const SizedBox.shrink(),
+                                      dropdownColor: greyColor,
+                                      onChanged: (String? value) =>
+                                          setState(() {
+                                        if (value == "random")
+                                          instanceIndex = Random()
+                                              .nextInt(instances.length);
+                                        else if (value == "custom")
+                                          instanceIndex = 0;
+                                        else
+                                          instanceIndex =
+                                              instances.indexOf(value!);
+                                        instance = value!;
+                                      }),
+                                      value: instance,
+                                      items: [
+                                        ...() {
+                                          var list =
+                                              <DropdownMenuItem<String>>[];
+                                          for (String x in instances)
+                                            list.add(DropdownMenuItem(
+                                                value: x, child: Text(x)));
+                                          return list;
+                                        }(),
+                                        DropdownMenuItem(
+                                            value: "random",
+                                            child: const Text("Random")),
+                                        DropdownMenuItem(
+                                            value: "custom",
+                                            child: const Text("Custom"))
+                                      ],
+                                    ),
+                                  ),
+                                  // If Instance selection is `Custom Instance`.
+                                  if (instance == "custom") ...[
+                                    SizedBox(height: 10),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8),
+                                      decoration: boxDecorationCustom,
+                                      child: TextField(
+                                        keyboardType: TextInputType.url,
+                                        onChanged: (String? value) =>
+                                            customInstance = value!,
+                                        cursorColor: whiteColor,
+                                        decoration: const InputDecoration(
+                                            focusedBorder: InputBorder.none),
+                                        style: const TextStyle(
+                                            fontSize: 20, color: whiteColor),
+                                      ),
+                                    )
+                                  ]
+                                  // If Instance selection is `Random Instance`.
+                                  else if (instance == "random") ...[
+                                    const SizedBox(height: 10),
+                                    SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: () {
+                                          var list = <Widget>[];
+                                          for (String x in instances) {
+                                            list.add(Text("● $x"));
+                                            list.add(SizedBox(height: 10));
+                                          }
+                                          return list;
+                                        }(),
+                                      ),
+                                    )
+                                  ]
+                                  // Instance Select is one of the `Default Instances`.
+                                  else
+                                    const SizedBox.shrink()
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+            );
+          } else
+            return const Center(child: const CircularProgressIndicator());
+        }),
       ),
     );
   }
