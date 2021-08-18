@@ -7,7 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 
 String fromLanguage = "English";
 String toLanguage = "Arabic";
-String instance = "almaleehserver.asuscomm.com:447";
+String instance = "translate.metalune.xyz";
 
 String translationInput = "";
 String translationOutput = "";
@@ -317,7 +317,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 20),
                   Container(
                     width: double.infinity,
                     child: Column(
@@ -373,7 +373,43 @@ class _MainPageState extends State<MainPage> {
                               style: const TextStyle(
                                   fontSize: 20, color: whiteColor),
                             ),
-                          )
+                          ),
+                          SizedBox(height: 10),
+                          Text.rich(TextSpan(children: [
+                            TextSpan(text: "● Don't put "),
+                            TextSpan(
+                                text: "https://",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue)),
+                            TextSpan(text: ":  "),
+                            TextSpan(
+                                text: "https://example.com",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red)),
+                            TextSpan(text: ". Just the domain name: "),
+                            TextSpan(
+                                text: "example.com",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green)),
+                            TextSpan(
+                                text: ".\n● You can add a port by typing: "),
+                            TextSpan(
+                                text: "example.com:433",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green)),
+                            TextSpan(
+                                text: ".\n● Don't put a slash at the end: "),
+                            TextSpan(
+                                text: "example.com/",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red)),
+                            TextSpan(text: "."),
+                          ]))
                         ]
                         // If Instance selection is `Random Instance`.
                         else if (instance == "random") ...[
