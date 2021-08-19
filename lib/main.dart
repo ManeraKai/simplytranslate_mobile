@@ -7,14 +7,22 @@ import 'package:flutter/services.dart' show rootBundle;
 
 String fromLanguage = "English";
 String toLanguage = "Arabic";
-String instance = "translate.metalune.xyz";
+String instance = "https://translate.metalune.xyz";
+int instanceIndex = 0;
 
 String translationInput = "";
 String translationOutput = "";
 
 String customInstance = "";
+enum customInstanceValidation {
+  False,
+  True,
+  NotChecked,
+}
 
-int instanceIndex = 0;
+var isCustomInstanceValid = customInstanceValidation.NotChecked;
+
+bool checkLoading = false;
 
 bool loading = false;
 
@@ -73,12 +81,30 @@ class _MyAppState extends State<MyApp> {
               dynamic instances = snapshot.data;
 
               Future<String> translate(String input) async {
-                final url = Uri.https(
-                  instance == "custom"
-                      ? customInstance
-                      : instances[instanceIndex],
-                  '/',
-                );
+                final url;
+                if (instance == "custom") {
+                  if (customInstance.endsWith("/")) {
+                    print("trimming last slash");
+                    customInstance =
+                        customInstance.substring(0, customInstance.length - 1);
+                  }
+                  if (customInstance.startsWith("https://")) {
+                    customInstance = customInstance.trim();
+                    url = Uri.https(customInstance.substring(8), '/');
+                    print("custom https://");
+                  } else if (customInstance.startsWith("http://")) {
+                    print("http://");
+                    url = Uri.http(customInstance.substring(7), '/');
+                  } else {
+                    url = Uri.https(customInstance, '/');
+                    print("custom else https://");
+                  }
+                } else {
+                  url = Uri.https(
+                      instances[instanceIndex].toString().substring(8), '/');
+                  print("default https://");
+                }
+
                 final response = await http.post(url, body: {
                   "from_language": fromLanguage,
                   "to_language": toLanguage,
@@ -90,9 +116,11 @@ class _MyAppState extends State<MyApp> {
                   return 'Request failed with status: ${response.statusCode}.';
               }
 
-              updateTranslation(input) async => parse(await translate(input))
-                  .getElementsByClassName("translation")[0]
-                  .innerHtml;
+              updateTranslation(input) async {
+                return parse(await translate(input))
+                    .getElementsByClassName("translation")[0]
+                    .innerHtml;
+              }
 
               var submitTranslation = () async {
                 FocusScope.of(context).unfocus();
@@ -102,12 +130,29 @@ class _MyAppState extends State<MyApp> {
 
               return FutureBuilder(
                 future: () async {
-                  final url = Uri.https(
-                    instance == "custom"
-                        ? customInstance
-                        : instances[instanceIndex],
-                    '/',
-                  );
+                  final url;
+                  if (instance == "custom") {
+                    if (customInstance.endsWith("/")) {
+                      print("trimming last slash");
+                      customInstance = customInstance.substring(
+                          0, customInstance.length - 1);
+                    }
+                    if (customInstance.startsWith("https://")) {
+                      customInstance = customInstance.trim();
+                      url = Uri.https(customInstance.substring(8), '/');
+                      print("custom https://");
+                    } else if (customInstance.startsWith("http://")) {
+                      print("http://");
+                      url = Uri.http(customInstance.substring(7), '/');
+                    } else {
+                      url = Uri.https(customInstance, '/');
+                      print("custom else https://");
+                    }
+                  } else {
+                    url = Uri.https(
+                        instances[instanceIndex].toString().substring(8), '/');
+                    print("default https://");
+                  }
                   final response = await http.get(url);
                   if (response.statusCode == 200) {
                     String x = parse(response.body)
@@ -180,6 +225,51 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  checkInstance() async {
+    setState(() => checkLoading = true);
+
+    final url;
+    if (instance == "custom") {
+      if (customInstance.endsWith("/")) {
+        print("trimming last slash");
+        customInstance = customInstance.substring(0, customInstance.length - 1);
+      }
+      if (customInstance.startsWith("https://")) {
+        customInstance = customInstance.trim();
+        url = Uri.https(customInstance.substring(8), '/');
+        print("custom https://");
+      } else if (customInstance.startsWith("http://")) {
+        print("http://");
+        url = Uri.http(customInstance.substring(7), '/');
+      } else {
+        url = Uri.https(customInstance, '/');
+        print("custom else https://");
+      }
+    } else {
+      url = Uri.https(
+          widget.instances[instanceIndex].toString().substring(8), '/');
+      print("default https://");
+    }
+    final response;
+    try {
+      response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
+            "SimplyTranslate"))
+          setState(() => isCustomInstanceValid = customInstanceValidation.True);
+        else
+          setState(
+              () => isCustomInstanceValid = customInstanceValidation.False);
+      } else
+        setState(() => isCustomInstanceValid = customInstanceValidation.False);
+    } catch (err) {
+      setState(() => isCustomInstanceValid = customInstanceValidation.False);
+    }
+
+    setState(() => checkLoading = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -221,13 +311,17 @@ class _MainPageState extends State<MainPage> {
                         child: TextButton(
                           onPressed: () async {
                             setState(() {
+                              loading = true;
                               final tmp = fromLanguage;
                               fromLanguage = toLanguage;
                               toLanguage = tmp;
                             });
                             final x = await widget
                                 .updateTranslation(translationOutput);
-                            setState(() => translationOutput = x);
+                            setState(() {
+                              loading = false;
+                              translationOutput = x;
+                            });
                           },
                           child: const Text("<->"),
                         ),
@@ -274,9 +368,9 @@ class _MainPageState extends State<MainPage> {
                             hintText: "Enter Text Here"),
                         style: const TextStyle(fontSize: 20),
                         onEditingComplete: () async {
-                          loading = true;
+                          setState(() => loading = true);
                           await widget.submitTranslation();
-                          loading = false;
+                          setState(() => loading = false);
                         },
                       ),
                     ),
@@ -362,11 +456,19 @@ class _MainPageState extends State<MainPage> {
                           SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
-                            decoration: boxDecorationCustom,
+                            decoration: boxDecorationCustom.copyWith(
+                                color: isCustomInstanceValid ==
+                                        customInstanceValidation.True
+                                    ? Colors.green
+                                    : isCustomInstanceValid ==
+                                            customInstanceValidation.False
+                                        ? Colors.red
+                                        : null),
                             child: TextField(
                               keyboardType: TextInputType.url,
                               onChanged: (String? value) =>
                                   customInstance = value!,
+                              onEditingComplete: checkInstance,
                               cursorColor: whiteColor,
                               decoration: const InputDecoration(
                                   focusedBorder: InputBorder.none),
@@ -374,42 +476,20 @@ class _MainPageState extends State<MainPage> {
                                   fontSize: 20, color: whiteColor),
                             ),
                           ),
-                          SizedBox(height: 10),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(text: "● Don't put "),
-                            TextSpan(
-                                text: "https://",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue)),
-                            TextSpan(text: ":  "),
-                            TextSpan(
-                                text: "https://example.com",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red)),
-                            TextSpan(text: ". Just the domain name: "),
-                            TextSpan(
-                                text: "example.com",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green)),
-                            TextSpan(
-                                text: ".\n● You can add a port by typing: "),
-                            TextSpan(
-                                text: "example.com:433",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green)),
-                            TextSpan(
-                                text: ".\n● Don't put a slash at the end: "),
-                            TextSpan(
-                                text: "example.com/",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red)),
-                            TextSpan(text: "."),
-                          ]))
+                          const SizedBox(height: 10),
+                          checkLoading
+                              ? Container(
+                                  width: 50,
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator())
+                              : TextButton(
+                                  style: ButtonStyle(
+                                      backgroundColor: checkLoading
+                                          ? MaterialStateProperty.all(
+                                              Colors.transparent)
+                                          : null),
+                                  onPressed: checkInstance,
+                                  child: Text("Check")),
                         ]
                         // If Instance selection is `Random Instance`.
                         else if (instance == "random") ...[
