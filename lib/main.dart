@@ -466,8 +466,15 @@ class _MainPageState extends State<MainPage> {
                                         : null),
                             child: TextField(
                               keyboardType: TextInputType.url,
-                              onChanged: (String? value) =>
-                                  customInstance = value!,
+                              onChanged: (String? value) {
+                                customInstance = value!;
+                                if (isCustomInstanceValid !=
+                                    customInstanceValidation.NotChecked)
+                                  setState(() {
+                                    isCustomInstanceValid =
+                                        customInstanceValidation.NotChecked;
+                                  });
+                              },
                               onEditingComplete: checkInstance,
                               cursorColor: whiteColor,
                               decoration: const InputDecoration(
