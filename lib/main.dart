@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import "dart:math";
-// import 'package:get_storage/get_storage.dart';
+import 'package:get_storage/get_storage.dart';
 
 import './data.dart';
 
@@ -20,6 +20,7 @@ enum customInstanceValidation {
   True,
   NotChecked,
 }
+String customUrl = '';
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 
@@ -40,7 +41,24 @@ final boxDecorationCustom = BoxDecoration(
       style: BorderStyle.solid,
     ));
 
-void main(List<String> args) => runApp(MyApp());
+void main(List<String> args) async {
+  await GetStorage.init();
+  if (box.read('from_language').toString() != 'null')
+    fromLanguage = box.read('from_language').toString();
+  if (box.read('to_language').toString() != 'null')
+    toLanguage = box.read('to_language').toString();
+
+  instance = box.read('instance_mode').toString() != 'null'
+      ? box.read('instance_mode').toString()
+      : instance;
+
+  customUrl = box.read('url') != null ? box.read('url').toString() : '';
+  customUrlController.text = customUrl;
+
+  return runApp(MyApp());
+}
+
+final box = GetStorage();
 
 class MyApp extends StatefulWidget {
   @override
@@ -54,31 +72,33 @@ class _MyAppState extends State<MyApp> {
       final url;
       if (instance == "custom") {
         if (customInstance.endsWith("/")) {
-          print("trimming last slash");
+          // trimming last slash
           customInstance =
               customInstance.substring(0, customInstance.length - 1);
         }
         if (customInstance.startsWith("https://")) {
           customInstance = customInstance.trim();
           url = Uri.https(customInstance.substring(8), '/');
-          print("custom https://");
+          // custom https://
         } else if (customInstance.startsWith("http://")) {
-          print("http://");
+          // http://
           url = Uri.http(customInstance.substring(7), '/');
         } else {
           url = Uri.https(customInstance, '/');
-          print("custom else https://");
+          // custom else https://
         }
       } else {
         url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
-        print("default https://");
+        // default https://
       }
 
-      final response = await http.post(url, body: {
+      final response;
+      response = await http.post(url, body: {
         "from_language": fromLanguage,
         "to_language": toLanguage,
         "input": input,
       });
+
       if (response.statusCode == 200)
         return response.body;
       else
@@ -140,41 +160,48 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
+final customUrlController = TextEditingController();
+
 class _MainPageState extends State<MainPage> {
   checkInstance() async {
     setState(() => checkLoading = true);
 
     final url;
+    var tmpUrl = '';
     if (instance == "custom") {
+      tmpUrl = customInstance;
       if (customInstance.endsWith("/")) {
-        print("trimming last slash");
+        // trimming last slash
         customInstance = customInstance.substring(0, customInstance.length - 1);
       }
       if (customInstance.startsWith("https://")) {
         customInstance = customInstance.trim();
         url = Uri.https(customInstance.substring(8), '/');
-        print("custom https://");
+
+        // custom https://
       } else if (customInstance.startsWith("http://")) {
-        print("http://");
+        // http://
         url = Uri.http(customInstance.substring(7), '/');
       } else {
         url = Uri.https(customInstance, '/');
-        print("custom else https://");
+        // custom else https://
       }
     } else {
       url = Uri.https(
           widget.instances[instanceIndex].toString().substring(8), '/');
-      print("default https://");
+      // default https://
     }
+
     final response;
     try {
       response = await http.get(url);
 
       if (response.statusCode == 200) {
         if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
-            "SimplyTranslate"))
+            "SimplyTranslate")) {
+          box.write('url', tmpUrl);
           setState(() => isCustomInstanceValid = customInstanceValidation.True);
-        else
+        } else
           setState(
               () => isCustomInstanceValid = customInstanceValidation.False);
       } else
@@ -184,6 +211,11 @@ class _MainPageState extends State<MainPage> {
     }
 
     setState(() => checkLoading = false);
+  }
+
+  void dispose() {
+    customUrlController.dispose();
+    super.dispose();
   }
 
   @override
@@ -206,8 +238,11 @@ class _MainPageState extends State<MainPage> {
                     child: DropdownButton(
                       underline: const SizedBox.shrink(),
                       dropdownColor: greyColor,
-                      onChanged: (String? value) =>
-                          setState(() => fromLanguage = value!),
+                      onChanged: (String? value) {
+                        box.write('from_language', value);
+
+                        setState(() => fromLanguage = value!);
+                      },
                       value: fromLanguage,
                       items: () {
                         var list = <DropdownMenuItem<String>>[];
@@ -224,8 +259,11 @@ class _MainPageState extends State<MainPage> {
                     child: DropdownButton(
                       underline: const SizedBox.shrink(),
                       dropdownColor: greyColor,
-                      onChanged: (String? value) =>
-                          setState(() => toLanguage = value!),
+                      onChanged: (String? value) async {
+                        box.write('to_language', value);
+
+                        setState(() => {toLanguage = value!});
+                      },
                       value: toLanguage,
                       items: () {
                         var list = <DropdownMenuItem<String>>[];
@@ -346,6 +384,7 @@ class _MainPageState extends State<MainPage> {
                           else
                             instanceIndex = widget.instances.indexOf(value!);
                           instance = value!;
+                          box.write('instance_mode', value);
                         }),
                         value: instance,
                         items: [
@@ -377,6 +416,7 @@ class _MainPageState extends State<MainPage> {
                                     ? Colors.red
                                     : null),
                         child: TextField(
+                          controller: customUrlController,
                           keyboardType: TextInputType.url,
                           onChanged: (String? value) {
                             customInstance = value!;
@@ -440,3 +480,4 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
+// save custom url to storage
