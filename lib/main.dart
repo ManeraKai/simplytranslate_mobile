@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
-import "dart:math";
+import 'dart:math';
 import 'package:get_storage/get_storage.dart';
 
 import './data.dart';
 
-String fromLanguage = "English";
-String toLanguage = "Arabic";
-String instance = "https://translate.metalune.xyz";
+String fromLanguage = 'English';
+String toLanguage = 'Arabic';
+String instance = 'https://translate.metalune.xyz';
 int instanceIndex = 0;
 
-String translationInput = "";
-String translationOutput = "";
+String translationInput = '';
+String translationOutput = '';
 
-String customInstance = "";
+String customInstance = '';
 String customUrl = '';
 
 enum customInstanceValidation {
@@ -70,55 +70,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    Future<String> translate(String input) async {
-      final url;
-      if (instance == "custom") {
-        if (customInstance.endsWith("/")) {
-          // trimming last slash
-          customInstance =
-              customInstance.substring(0, customInstance.length - 1);
-        }
-        if (customInstance.startsWith("https://")) {
-          customInstance = customInstance.trim();
-          url = Uri.https(customInstance.substring(8), '/');
-          // custom https://
-        } else if (customInstance.startsWith("http://")) {
-          // http://
-          url = Uri.http(customInstance.substring(7), '/');
-        } else {
-          url = Uri.https(customInstance, '/');
-          // custom else https://
-        }
-      } else {
-        url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
-        // default https://
-      }
-
-      final response;
-      response = await http.post(url, body: {
-        "from_language": fromLanguage,
-        "to_language": toLanguage,
-        "input": input,
-      });
-
-      if (response.statusCode == 200)
-        return response.body;
-      else
-        return 'Request failed with status: ${response.statusCode}.';
-    }
-
-    updateTranslation(input) async {
-      return parse(await translate(input))
-          .getElementsByClassName("translation")[0]
-          .innerHtml;
-    }
-
-    var submitTranslation = () async {
-      FocusScope.of(context).unfocus();
-      final x = await updateTranslation(translationInput);
-      translationOutput = x;
-    };
-
     return MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
@@ -136,27 +87,16 @@ class _MyAppState extends State<MyApp> {
       title: 'Simply Translate',
       home: Scaffold(
         backgroundColor: secondgreyColor,
-        body: MainPage(
-          submitTranslation: submitTranslation,
-          instances: instances,
-          updateTranslation: updateTranslation,
-        ),
+        body: MainPage(),
       ),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage(
-      {Key? key,
-      required this.submitTranslation,
-      required this.instances,
-      required this.updateTranslation})
-      : super(key: key);
-
-  final Future<Null> Function() submitTranslation;
-  final instances;
-  final updateTranslation;
+  const MainPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -165,23 +105,23 @@ class MainPage extends StatefulWidget {
 final customUrlController = TextEditingController();
 
 class _MainPageState extends State<MainPage> {
-  checkInstance() async {
-    setState(() => checkLoading = true);
+  void dispose() {
+    customUrlController.dispose();
+    super.dispose();
+  }
 
+  Future<String> translate(String input) async {
     final url;
-    var tmpUrl = '';
-    if (instance == "custom") {
-      tmpUrl = customInstance;
-      if (customInstance.endsWith("/")) {
+    if (instance == 'custom') {
+      if (customInstance.endsWith('/')) {
         // trimming last slash
         customInstance = customInstance.substring(0, customInstance.length - 1);
       }
-      if (customInstance.startsWith("https://")) {
+      if (customInstance.startsWith('https://')) {
         customInstance = customInstance.trim();
         url = Uri.https(customInstance.substring(8), '/');
-
         // custom https://
-      } else if (customInstance.startsWith("http://")) {
+      } else if (customInstance.startsWith('http://')) {
         // http://
         url = Uri.http(customInstance.substring(7), '/');
       } else {
@@ -189,10 +129,51 @@ class _MainPageState extends State<MainPage> {
         // custom else https://
       }
     } else {
-      url = Uri.https(
-          widget.instances[instanceIndex].toString().substring(8), '/');
+      url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
       // default https://
     }
+
+    final response = await http.post(url, body: {
+      'from_language': fromLanguage,
+      'to_language': toLanguage,
+      'input': input,
+    });
+
+    if (response.statusCode == 200) {
+      final x = parse(response.body)
+          .getElementsByClassName('translation')[0]
+          .innerHtml;
+      translationOutput = x;
+      return x;
+    } else
+      return 'Request failed with status: ${response.statusCode}.';
+  }
+
+  checkInstance() async {
+    setState(() => checkLoading = true);
+
+    final url;
+    var tmpUrl = '';
+    if (instance == 'custom') {
+      tmpUrl = customInstance;
+      if (customInstance.endsWith('/'))
+        // trimming last slash
+        customInstance = customInstance.substring(0, customInstance.length - 1);
+
+      if (customInstance.startsWith('https://')) {
+        customInstance = customInstance.trim();
+        url = Uri.https(customInstance.substring(8), '/');
+        // custom https://
+      } else if (customInstance.startsWith('http://'))
+        // http://
+        url = Uri.http(customInstance.substring(7), '/');
+      else
+        url = Uri.https(customInstance, '/');
+      // custom else https://
+
+    } else
+      url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
+    // default https://
 
     final response;
     try {
@@ -200,7 +181,7 @@ class _MainPageState extends State<MainPage> {
 
       if (response.statusCode == 200) {
         if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
-            "SimplyTranslate")) {
+            'SimplyTranslate')) {
           box.write('url', tmpUrl);
           setState(() => isCustomInstanceValid = customInstanceValidation.True);
         } else
@@ -213,11 +194,6 @@ class _MainPageState extends State<MainPage> {
     }
 
     setState(() => checkLoading = false);
-  }
-
-  void dispose() {
-    customUrlController.dispose();
-    super.dispose();
   }
 
   fromLangWidget() => Container(
@@ -265,19 +241,20 @@ class _MainPageState extends State<MainPage> {
         decoration: boxDecorationCustom,
         child: TextButton(
           onPressed: () async {
+            FocusScope.of(context).unfocus();
             setState(() {
               loading = true;
               final tmp = fromLanguage;
               fromLanguage = toLanguage;
               toLanguage = tmp;
             });
-            final x = await widget.updateTranslation(translationOutput);
+            final x = await translate(translationOutput);
             setState(() {
               loading = false;
               translationOutput = x;
             });
           },
-          child: const Text("<->"),
+          child: const Text('<->'),
         ),
       );
 
@@ -326,11 +303,12 @@ class _MainPageState extends State<MainPage> {
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintStyle: const TextStyle(color: lightgreyColor),
-                        hintText: "Enter Text Here"),
+                        hintText: 'Enter Text Here'),
                     style: const TextStyle(fontSize: 20),
                     onEditingComplete: () async {
+                      FocusScope.of(context).unfocus();
                       setState(() => loading = true);
-                      await widget.submitTranslation();
+                      await translate(translationInput);
                       setState(() => loading = false);
                     },
                   ),
@@ -364,12 +342,13 @@ class _MainPageState extends State<MainPage> {
                         child: CircularProgressIndicator())
                     : TextButton(
                         onPressed: () async {
+                          FocusScope.of(context).unfocus();
                           setState(() => loading = true);
-                          await widget.submitTranslation();
+                          await translate(translationInput);
                           setState(() => loading = false);
                         },
                         child: Text(
-                          "Translate",
+                          'Translate',
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
@@ -390,13 +369,12 @@ class _MainPageState extends State<MainPage> {
                         underline: const SizedBox.shrink(),
                         dropdownColor: greyColor,
                         onChanged: (String? value) => setState(() {
-                          if (value == "random")
-                            instanceIndex =
-                                Random().nextInt(widget.instances.length);
-                          else if (value == "custom")
+                          if (value == 'random')
+                            instanceIndex = Random().nextInt(instances.length);
+                          else if (value == 'custom')
                             instanceIndex = 0;
                           else
-                            instanceIndex = widget.instances.indexOf(value!);
+                            instanceIndex = instances.indexOf(value!);
                           instance = value!;
                           box.write('instance_mode', value);
                         }),
@@ -404,20 +382,20 @@ class _MainPageState extends State<MainPage> {
                         items: [
                           ...() {
                             var list = <DropdownMenuItem<String>>[];
-                            for (String x in widget.instances)
+                            for (String x in instances)
                               list.add(
                                   DropdownMenuItem(value: x, child: Text(x)));
                             return list;
                           }(),
                           DropdownMenuItem(
-                              value: "random", child: const Text("Random")),
+                              value: 'random', child: const Text('Random')),
                           DropdownMenuItem(
-                              value: "custom", child: const Text("Custom"))
+                              value: 'custom', child: const Text('Custom'))
                         ],
                       ),
                     ),
                     //----------------------------------------------------------//
-                    if (instance == "custom") ...[
+                    if (instance == 'custom') ...[
                       SizedBox(height: 10),
                       //------------- Custom Instance URL Input ----------------//
                       Container(
@@ -442,7 +420,10 @@ class _MainPageState extends State<MainPage> {
                                     customInstanceValidation.NotChecked;
                               });
                           },
-                          onEditingComplete: checkInstance,
+                          onEditingComplete: () {
+                            FocusScope.of(context).unfocus();
+                            checkInstance();
+                          },
                           cursorColor: whiteColor,
                           decoration: const InputDecoration(
                               focusedBorder: InputBorder.none),
@@ -468,10 +449,13 @@ class _MainPageState extends State<MainPage> {
                                       ? MaterialStateProperty.all(
                                           Colors.transparent)
                                       : null),
-                              onPressed: checkInstance,
-                              child: Text("Check")),
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                checkInstance();
+                              },
+                              child: Text('Check')),
                       //----------------------------------------------------//
-                    ] else if (instance == "random") ...[
+                    ] else if (instance == 'random') ...[
                       const SizedBox(height: 10),
                       //------- All Known Instances in a Scrollable List -------//
                       SingleChildScrollView(
@@ -479,8 +463,8 @@ class _MainPageState extends State<MainPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: () {
                             var list = <Widget>[];
-                            for (String x in widget.instances) {
-                              list.add(Text("● $x"));
+                            for (String x in instances) {
+                              list.add(Text('● $x'));
                               list.add(SizedBox(height: 10));
                             }
                             return list;
