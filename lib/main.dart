@@ -15,17 +15,17 @@ String translationInput = "";
 String translationOutput = "";
 
 String customInstance = "";
+String customUrl = '';
+
 enum customInstanceValidation {
   False,
   True,
   NotChecked,
 }
-String customUrl = '';
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 
 bool checkLoading = false;
-
 bool loading = false;
 
 const greyColor = Color(0xff131618);
@@ -42,6 +42,7 @@ final boxDecorationCustom = BoxDecoration(
     ));
 
 void main(List<String> args) async {
+  //------ Setting session variables up --------//
   await GetStorage.init();
   if (box.read('from_language').toString() != 'null')
     fromLanguage = box.read('from_language').toString();
@@ -54,6 +55,7 @@ void main(List<String> args) async {
 
   customUrl = box.read('url') != null ? box.read('url').toString() : '';
   customUrlController.text = customUrl;
+  //--------------------------------------------//
 
   return runApp(MyApp());
 }
@@ -218,6 +220,69 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
+  fromLangWidget() => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: boxDecorationCustom,
+        child: DropdownButton(
+          underline: const SizedBox.shrink(),
+          dropdownColor: greyColor,
+          onChanged: (String? value) {
+            box.write('from_language', value);
+            setState(() => fromLanguage = value!);
+          },
+          value: fromLanguage,
+          items: () {
+            var list = <DropdownMenuItem<String>>[];
+            for (String x in supportedLanguages)
+              list.add(DropdownMenuItem(value: x, child: Text(x)));
+            return list;
+          }(),
+        ),
+      );
+
+  toLangWidget() => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: boxDecorationCustom,
+        child: DropdownButton(
+          underline: const SizedBox.shrink(),
+          dropdownColor: greyColor,
+          onChanged: (String? value) async {
+            box.write('to_language', value);
+            setState(() => {toLanguage = value!});
+          },
+          value: toLanguage,
+          items: () {
+            var list = <DropdownMenuItem<String>>[];
+            for (String x in supportedLanguages)
+              list.add(DropdownMenuItem(value: x, child: Text(x)));
+            return list;
+          }(),
+        ),
+      );
+
+  switchLangBtnWidget() => Container(
+        width: 50,
+        decoration: boxDecorationCustom,
+        child: TextButton(
+          onPressed: () async {
+            setState(() {
+              loading = true;
+              final tmp = fromLanguage;
+              fromLanguage = toLanguage;
+              toLanguage = tmp;
+            });
+            final x = await widget.updateTranslation(translationOutput);
+            setState(() {
+              loading = false;
+              translationOutput = x;
+            });
+          },
+          child: const Text("<->"),
+        ),
+      );
+
+  final rowWidth = 430;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -227,79 +292,24 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Row [fromLang, Switch, toLang]
+              //------------- [fromLang, Switch, toLang] -------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // fromLanguage select button
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: boxDecorationCustom,
-                    child: DropdownButton(
-                      underline: const SizedBox.shrink(),
-                      dropdownColor: greyColor,
-                      onChanged: (String? value) {
-                        box.write('from_language', value);
-
-                        setState(() => fromLanguage = value!);
-                      },
-                      value: fromLanguage,
-                      items: () {
-                        var list = <DropdownMenuItem<String>>[];
-                        for (String x in supportedLanguages)
-                          list.add(DropdownMenuItem(value: x, child: Text(x)));
-                        return list;
-                      }(),
-                    ),
-                  ),
-                  // toLanguage select button
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: boxDecorationCustom,
-                    child: DropdownButton(
-                      underline: const SizedBox.shrink(),
-                      dropdownColor: greyColor,
-                      onChanged: (String? value) async {
-                        box.write('to_language', value);
-
-                        setState(() => {toLanguage = value!});
-                      },
-                      value: toLanguage,
-                      items: () {
-                        var list = <DropdownMenuItem<String>>[];
-                        for (String x in supportedLanguages)
-                          list.add(DropdownMenuItem(value: x, child: Text(x)));
-                        return list;
-                      }(),
-                    ),
-                  ),
+                  fromLangWidget(),
+                  MediaQuery.of(context).size.width > rowWidth
+                      ? switchLangBtnWidget()
+                      : SizedBox.shrink(),
+                  toLangWidget(),
                 ],
               ),
               const SizedBox(height: 10),
-              // Switch Language Button
-              Container(
-                height: 40,
-                width: 50,
-                decoration: boxDecorationCustom,
-                child: TextButton(
-                  onPressed: () async {
-                    setState(() {
-                      loading = true;
-                      final tmp = fromLanguage;
-                      fromLanguage = toLanguage;
-                      toLanguage = tmp;
-                    });
-                    final x = await widget.updateTranslation(translationOutput);
-                    setState(() {
-                      loading = false;
-                      translationOutput = x;
-                    });
-                  },
-                  child: const Text("<->"),
-                ),
-              ),
+              MediaQuery.of(context).size.width < rowWidth
+                  ? switchLangBtnWidget()
+                  : SizedBox.shrink(),
+              // ---------------------------------------------------//
               const SizedBox(height: 10),
-              // Translation input
+              //------------------- Translation Input --------------//
               Container(
                 width: double.infinity,
                 height: 150,
@@ -326,8 +336,9 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
+              //----------------------------------------------------------//
               const SizedBox(height: 10),
-              // Translation output
+              //------------------ Translation Output --------------------//
               Container(
                 width: double.infinity,
                 height: 150,
@@ -340,8 +351,9 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
+              //----------------------------------------------------------//
               const SizedBox(height: 10),
-              // Translate Button
+              //---------------------- Translate Button ------------------//
               Container(
                 alignment: Alignment.topLeft,
                 height: 50,
@@ -362,13 +374,15 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
               ),
+              //--------------------------------------------------------//
               const SizedBox(height: 20),
+              //---------------- Settings ------------------//
               Container(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Instance Select Button.
+                    //-------------- Instance Select Button --------------------//
                     Container(
                       decoration: boxDecorationCustom,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -402,9 +416,10 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    // If Instance selection is `Custom Instance`.
+                    //----------------------------------------------------------//
                     if (instance == "custom") ...[
                       SizedBox(height: 10),
+                      //------------- Custom Instance URL Input ----------------//
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         decoration: boxDecorationCustom.copyWith(
@@ -435,13 +450,19 @@ class _MainPageState extends State<MainPage> {
                               const TextStyle(fontSize: 20, color: whiteColor),
                         ),
                       ),
+                      //--------------------------------------------------------//
                       const SizedBox(height: 10),
                       checkLoading
-                          ? Container(
+                          ?
+                          //----------------- Loading Circle --------------------//
+                          Container(
                               width: 50,
                               alignment: Alignment.center,
                               child: CircularProgressIndicator())
-                          : TextButton(
+                          //----------------------------------------------------//
+                          :
+                          //----------------- Check Button ---------------------//
+                          TextButton(
                               style: ButtonStyle(
                                   backgroundColor: checkLoading
                                       ? MaterialStateProperty.all(
@@ -449,10 +470,10 @@ class _MainPageState extends State<MainPage> {
                                       : null),
                               onPressed: checkInstance,
                               child: Text("Check")),
-                    ]
-                    // If Instance selection is `Random Instance`.
-                    else if (instance == "random") ...[
+                      //----------------------------------------------------//
+                    ] else if (instance == "random") ...[
                       const SizedBox(height: 10),
+                      //------- All Known Instances in a Scrollable List -------//
                       SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,13 +487,16 @@ class _MainPageState extends State<MainPage> {
                           }(),
                         ),
                       )
+                      //--------------------------------------------------------//
                     ]
                     // Instance Select is one of the `Default Instances`.
                     else
+                      //---- Nothing... the instance will be selected from the original Select Button -----//
                       const SizedBox.shrink()
                   ],
                 ),
               ),
+              //----------------------------------------------------------//
             ],
           ),
         ),
@@ -480,4 +504,3 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-// save custom url to storage
