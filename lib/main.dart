@@ -44,23 +44,23 @@ final boxDecorationCustom = BoxDecoration(
 void main(List<String> args) async {
   //------ Setting session variables up --------//
   await GetStorage.init();
-  if (box.read('from_language').toString() != 'null')
-    fromLanguage = box.read('from_language').toString();
-  if (box.read('to_language').toString() != 'null')
-    toLanguage = box.read('to_language').toString();
+  if (session.read('from_language').toString() != 'null')
+    fromLanguage = session.read('from_language').toString();
+  if (session.read('to_language').toString() != 'null')
+    toLanguage = session.read('to_language').toString();
 
-  instance = box.read('instance_mode').toString() != 'null'
-      ? box.read('instance_mode').toString()
+  instance = session.read('instance_mode').toString() != 'null'
+      ? session.read('instance_mode').toString()
       : instance;
 
-  customUrl = box.read('url') != null ? box.read('url').toString() : '';
+  customUrl = session.read('url') != null ? session.read('url').toString() : '';
   customUrlController.text = customUrl;
   //--------------------------------------------//
 
   return runApp(MyApp());
 }
 
-final box = GetStorage();
+final session = GetStorage();
 
 class MyApp extends StatefulWidget {
   @override
@@ -103,6 +103,7 @@ class MainPage extends StatefulWidget {
 }
 
 final customUrlController = TextEditingController();
+final translationInputController = TextEditingController();
 
 class _MainPageState extends State<MainPage> {
   void dispose() {
@@ -133,23 +134,45 @@ class _MainPageState extends State<MainPage> {
       // default https://
     }
 
-    final response = await http.post(url, body: {
-      'from_language': fromLanguage,
-      'to_language': toLanguage,
-      'input': input,
-    });
+    showDialogError() {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                backgroundColor: secondgreyColor,
+                title: Text('Something went wrong'),
+                content: Text("Check Instance"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text('ok'),
+                  )
+                ],
+              ));
+    }
 
-    if (response.statusCode == 200) {
-      final x = parse(response.body)
-          .getElementsByClassName('translation')[0]
-          .innerHtml;
-      translationOutput = x;
-      return x;
-    } else
+    try {
+      final response = await http.post(url, body: {
+        'from_language': fromLanguage,
+        'to_language': toLanguage,
+        'input': input,
+      });
+
+      if (response.statusCode == 200) {
+        final x = parse(response.body)
+            .getElementsByClassName('translation')[0]
+            .innerHtml;
+        translationOutput = x;
+        return x;
+      } else
+        showDialogError();
       return 'Request failed with status: ${response.statusCode}.';
+    } catch (err) {
+      showDialogError();
+      return 'something went wrong buddy.';
+    }
   }
 
-  checkInstance() async {
+  Future<void> checkInstance() async {
     setState(() => checkLoading = true);
 
     final url;
@@ -175,14 +198,12 @@ class _MainPageState extends State<MainPage> {
       url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
     // default https://
 
-    final response;
     try {
-      response = await http.get(url);
-
+      final response = await http.get(url);
       if (response.statusCode == 200) {
         if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
             'SimplyTranslate')) {
-          box.write('url', tmpUrl);
+          session.write('url', tmpUrl);
           setState(() => isCustomInstanceValid = customInstanceValidation.True);
         } else
           setState(
@@ -192,8 +213,8 @@ class _MainPageState extends State<MainPage> {
     } catch (err) {
       setState(() => isCustomInstanceValid = customInstanceValidation.False);
     }
-
     setState(() => checkLoading = false);
+    return;
   }
 
   fromLangWidget() => Container(
@@ -203,7 +224,7 @@ class _MainPageState extends State<MainPage> {
           underline: const SizedBox.shrink(),
           dropdownColor: greyColor,
           onChanged: (String? value) {
-            box.write('from_language', value);
+            session.write('from_language', value);
             setState(() => fromLanguage = value!);
           },
           value: fromLanguage,
@@ -223,7 +244,7 @@ class _MainPageState extends State<MainPage> {
           underline: const SizedBox.shrink(),
           dropdownColor: greyColor,
           onChanged: (String? value) async {
-            box.write('to_language', value);
+            session.write('to_language', value);
             setState(() => {toLanguage = value!});
           },
           value: toLanguage,
@@ -242,13 +263,12 @@ class _MainPageState extends State<MainPage> {
         child: TextButton(
           onPressed: () async {
             FocusScope.of(context).unfocus();
-            setState(() {
-              loading = true;
-              final tmp = fromLanguage;
-              fromLanguage = toLanguage;
-              toLanguage = tmp;
-            });
-            final x = await translate(translationOutput);
+            loading = true;
+            final tmp = fromLanguage;
+            fromLanguage = toLanguage;
+            toLanguage = tmp;
+            translationInputController.text = translationOutput;
+            final x = await translate(translationInput);
             setState(() {
               loading = false;
               translationOutput = x;
@@ -295,6 +315,7 @@ class _MainPageState extends State<MainPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: TextField(
                     maxLines: 8,
+                    controller: translationInputController,
                     keyboardType: TextInputType.text,
                     onChanged: (String input) async {
                       translationInput = input;
@@ -376,7 +397,7 @@ class _MainPageState extends State<MainPage> {
                           else
                             instanceIndex = instances.indexOf(value!);
                           instance = value!;
-                          box.write('instance_mode', value);
+                          session.write('instance_mode', value);
                         }),
                         value: instance,
                         items: [
