@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
         ),
         textTheme: const TextTheme(
             bodyText2: const TextStyle(color: whiteColor),
-            subtitle1: const TextStyle(color: whiteColor),
+            subtitle1: const TextStyle(color: whiteColor, fontSize: 16),
             headline6: const TextStyle(color: whiteColor)),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
@@ -222,9 +222,11 @@ class _MainPageState extends State<MainPage> {
   }
 
   fromLangWidget() => Container(
+        width: MediaQuery.of(context).size.width / 3 + 10,
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: boxDecorationCustom,
         child: DropdownButton(
+          isExpanded: true,
           underline: const SizedBox.shrink(),
           dropdownColor: greyColor,
           onChanged: (String? value) {
@@ -242,9 +244,11 @@ class _MainPageState extends State<MainPage> {
       );
 
   toLangWidget() => Container(
+        width: MediaQuery.of(context).size.width / 3 + 10,
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: boxDecorationCustom,
         child: DropdownButton(
+          isExpanded: true,
           underline: const SizedBox.shrink(),
           dropdownColor: greyColor,
           onChanged: (String? value) async {
@@ -262,7 +266,7 @@ class _MainPageState extends State<MainPage> {
       );
 
   switchLangBtnWidget() => Container(
-        width: 50,
+        width: MediaQuery.of(context).size.width / 3 - 60,
         decoration: boxDecorationCustom,
         child: TextButton(
           onPressed: () async {
@@ -295,19 +299,13 @@ class _MainPageState extends State<MainPage> {
             children: [
               //------------- [fromLang, Switch, toLang] -------------//
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   fromLangWidget(),
-                  MediaQuery.of(context).size.width > rowWidth
-                      ? switchLangBtnWidget()
-                      : SizedBox.shrink(),
+                  switchLangBtnWidget(),
                   toLangWidget(),
                 ],
               ),
-              const SizedBox(height: 10),
-              MediaQuery.of(context).size.width < rowWidth
-                  ? switchLangBtnWidget()
-                  : SizedBox.shrink(),
               // ---------------------------------------------------//
               const SizedBox(height: 10),
               //------------------- Translation Input --------------//
@@ -422,6 +420,7 @@ class _MainPageState extends State<MainPage> {
                       decoration: boxDecorationCustom,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: DropdownButton(
+                        isExpanded: true,
                         underline: const SizedBox.shrink(),
                         dropdownColor: greyColor,
                         onChanged: (String? value) => setState(() {
