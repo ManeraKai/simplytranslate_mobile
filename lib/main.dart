@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'package:get_storage/get_storage.dart';
-
 import './data.dart';
 
 String fromLanguage = 'English';
@@ -72,6 +72,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        brightness: Brightness.dark,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: whiteColor,
+        ),
         textTheme: const TextTheme(
             bodyText2: const TextStyle(color: whiteColor),
             subtitle1: const TextStyle(color: whiteColor),
@@ -320,7 +324,6 @@ class _MainPageState extends State<MainPage> {
                     onChanged: (String input) async {
                       translationInput = input;
                     },
-                    cursorColor: whiteColor,
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintStyle: const TextStyle(color: lightgreyColor),
@@ -353,26 +356,58 @@ class _MainPageState extends State<MainPage> {
               //----------------------------------------------------------//
               const SizedBox(height: 10),
               //---------------------- Translate Button ------------------//
-              Container(
-                alignment: Alignment.topLeft,
-                height: 50,
-                child: loading
-                    ? Container(
-                        alignment: Alignment.center,
-                        width: 80,
-                        child: CircularProgressIndicator())
-                    : TextButton(
-                        onPressed: () async {
-                          FocusScope.of(context).unfocus();
-                          setState(() => loading = true);
-                          await translate(translationInput);
-                          setState(() => loading = false);
-                        },
-                        child: Text(
-                          'Translate',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: loading
+                        ? Container(
+                            alignment: Alignment.center,
+                            width: 80,
+                            child: CircularProgressIndicator())
+                        : TextButton(
+                            onPressed: () async {
+                              FocusScope.of(context).unfocus();
+                              setState(() => loading = true);
+                              await translate(translationInput);
+                              setState(() => loading = false);
+                            },
+                            child: Text(
+                              'Translate',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                  ),
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () {
+                        Clipboard.setData(
+                                ClipboardData(text: translationOutput))
+                            .then(
+                          (value) => ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 1),
+                              backgroundColor: greyColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              behavior: SnackBarBehavior.floating,
+                              width: 160,
+                              content: Text(
+                                'copied to clipboard',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: whiteColor),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.copy),
+                    ),
+                  )
+                ],
               ),
               //--------------------------------------------------------//
               const SizedBox(height: 20),
@@ -445,7 +480,6 @@ class _MainPageState extends State<MainPage> {
                             FocusScope.of(context).unfocus();
                             checkInstance();
                           },
-                          cursorColor: whiteColor,
                           decoration: const InputDecoration(
                               focusedBorder: InputBorder.none),
                           style:
