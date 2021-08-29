@@ -1,0 +1,19 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml:1:1-3:12
+INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml:1:1-3:12
+INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml:1:1-3:12
+	package
+		ADDED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml:2:3-44
+		INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
+		INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
+INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
+		ADDED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
+		INJECTED from /home/esmail/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/android/src/main/AndroidManifest.xml
