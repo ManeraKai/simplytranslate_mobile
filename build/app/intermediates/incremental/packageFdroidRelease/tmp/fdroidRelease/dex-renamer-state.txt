@@ -1,0 +1,4 @@
+#Sun Aug 29 19:30:12 TRT 2021
+base.0=/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/app/intermediates/dex/fdroidRelease/minifyFdroidReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

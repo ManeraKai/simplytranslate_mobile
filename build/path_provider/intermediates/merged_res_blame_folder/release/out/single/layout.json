@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/path_provider/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/home/esmail/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/path_provider/intermediates/res/merged/release/layout/notification_action.xml",
+        "source": "/home/esmail/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/path_provider/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
+        "source": "/home/esmail/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/path_provider/intermediates/res/merged/release/layout/custom_dialog.xml",
+        "source": "/home/esmail/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/path_provider/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/home/esmail/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/mnt/Main_Storage/Flutter/simplytranslate-flutter-client/build/path_provider/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
+        "source": "/home/esmail/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/layout/notification_action_tombstone.xml"
+    }
+]
