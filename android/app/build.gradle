@@ -42,7 +42,7 @@ android {
     }
 
     signingConfigs {
-        release {
+        github {
             def keystorePropertiesFile = rootProject.file("key.properties")
             def keystoreProperties = new Properties()
 
@@ -60,7 +60,7 @@ android {
     flavorDimensions 'deploy'
 
     productFlavors {
-        release {
+        github {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             dimension 'deploy'
