@@ -5,15 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "simplytranslate (debug)",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "simplytranslate (release)",
+            "name": "debug",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        }
+            "args": [
+                "--flavor",
+                "development" //development or staging or production
+            ]
+        },
+        // {
+        //     "name": "release",
+        //     "request": "launch",
+        //     "type": "dart",
+        //     "args": [
+        //         "--flavor",
+        //         "github" //development or staging or production
+        //     ]
+        // }
     ]
 }
