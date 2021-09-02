@@ -13,14 +13,14 @@
                 "development" //development or staging or production
             ]
         },
-        // {
-        //     "name": "release",
-        //     "request": "launch",
-        //     "type": "dart",
-        //     "args": [
-        //         "--flavor",
-        //         "github" //development or staging or production
-        //     ]
-        // }
+        {
+            "name": "release",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "github" //development or staging or production
+            ]
+        }
     ]
 }
