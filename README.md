@@ -6,7 +6,8 @@ An mobile client that connects to multiple [SimplyTranslate](https://translate.m
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/>
 
 
-## Copyright (C) 2021 ManeraKai
+## License
+Copyright (C) 2021 ManeraKai
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
