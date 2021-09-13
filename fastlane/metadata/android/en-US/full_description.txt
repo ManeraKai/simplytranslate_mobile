@@ -1,7 +1,7 @@
-<p>Noramlly you would use GoogleTranslate. Problem is either you'll be signed in with your google account, from the same
+<p>Normally you would use GoogleTranslate. Problem is either you'll be signed in with your google account, from the same
     ip as your google account, or some other factors. Translations may be tied to your identity. Sometimes there is no
-    problem with that. Other times there is. Like when browsing wikipeia. We'll know what diseases you have, political,
-    relegious, sexual etc... Translation is a bit worse.
+    problem with that. Other times there is. Like when browsing wikipedia. We'll know what diseases you have, political,
+    religious, sexual etc... Translation is a bit worse.
 </p>
 
 <p><a href="https://metalune.xyz/">Metalune</a> created a proxy server application for GoogleTranslate. You connect to
