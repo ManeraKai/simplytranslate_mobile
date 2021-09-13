@@ -237,6 +237,10 @@ class _MainPageState extends State<MainPage> {
           value: fromLanguage,
           items: () {
             var list = <DropdownMenuItem<String>>[];
+            list.add(DropdownMenuItem(
+              value: 'Autodetect',
+              child: Text('Autodetect'),
+            ));
             for (String x in supportedLanguages)
               list.add(DropdownMenuItem(value: x, child: Text(x)));
             return list;
