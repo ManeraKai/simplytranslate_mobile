@@ -4,6 +4,7 @@ import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import './data.dart';
 
 String fromLanguage = 'English';
@@ -24,7 +25,7 @@ enum customInstanceValidation {
 }
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
-
+List selectLanguages = [];
 bool checkLoading = false;
 bool loading = false;
 
@@ -40,7 +41,6 @@ final boxDecorationCustom = BoxDecoration(
       width: 2,
       style: BorderStyle.solid,
     ));
-
 void main(List<String> args) async {
   //------ Setting session variables up --------//
   await GetStorage.init();
@@ -71,6 +71,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
@@ -238,11 +240,13 @@ class _MainPageState extends State<MainPage> {
           items: () {
             var list = <DropdownMenuItem<String>>[];
             list.add(DropdownMenuItem(
-              value: 'Autodetect',
-              child: Text('Autodetect'),
+              value: AppLocalizations.of(context)!.autodetect,
+              child: Text(AppLocalizations.of(context)!.autodetect),
             ));
-            for (String x in supportedLanguages)
-              list.add(DropdownMenuItem(value: x, child: Text(x)));
+            for (int i = 1; i < supportedLanguages.length; i++)
+              list.add(DropdownMenuItem(
+                  value: supportedLanguages[i],
+                  child: Text(selectLanguages[i])));
             return list;
           }(),
         ),
@@ -263,8 +267,10 @@ class _MainPageState extends State<MainPage> {
           value: toLanguage,
           items: () {
             var list = <DropdownMenuItem<String>>[];
-            for (String x in supportedLanguages)
-              list.add(DropdownMenuItem(value: x, child: Text(x)));
+            for (int i = 1; i < supportedLanguages.length; i++)
+              list.add(DropdownMenuItem(
+                  value: supportedLanguages[i],
+                  child: Text(selectLanguages[i])));
             return list;
           }(),
         ),
@@ -295,6 +301,116 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    selectLanguages = [
+      AppLocalizations.of(context)!.afrikaans,
+      AppLocalizations.of(context)!.albanian,
+      AppLocalizations.of(context)!.amharic,
+      AppLocalizations.of(context)!.arabic,
+      AppLocalizations.of(context)!.armenian,
+      AppLocalizations.of(context)!.azerbaijani,
+      AppLocalizations.of(context)!.basque,
+      AppLocalizations.of(context)!.belarusian,
+      AppLocalizations.of(context)!.bengali,
+      AppLocalizations.of(context)!.bosnian,
+      AppLocalizations.of(context)!.bulgarian,
+      AppLocalizations.of(context)!.catalan,
+      AppLocalizations.of(context)!.cebuano,
+      AppLocalizations.of(context)!.chichewa,
+      AppLocalizations.of(context)!.chinese,
+      AppLocalizations.of(context)!.corsican,
+      AppLocalizations.of(context)!.croatian,
+      AppLocalizations.of(context)!.czech,
+      AppLocalizations.of(context)!.danish,
+      AppLocalizations.of(context)!.dutch,
+      AppLocalizations.of(context)!.english,
+      AppLocalizations.of(context)!.esperanto,
+      AppLocalizations.of(context)!.estonian,
+      AppLocalizations.of(context)!.filipino,
+      AppLocalizations.of(context)!.finnish,
+      AppLocalizations.of(context)!.french,
+      AppLocalizations.of(context)!.frisian,
+      AppLocalizations.of(context)!.galician,
+      AppLocalizations.of(context)!.georgian,
+      AppLocalizations.of(context)!.german,
+      AppLocalizations.of(context)!.greek,
+      AppLocalizations.of(context)!.gujarati,
+      AppLocalizations.of(context)!.haitian_creole,
+      AppLocalizations.of(context)!.hausa,
+      AppLocalizations.of(context)!.hawaiian,
+      AppLocalizations.of(context)!.hebrew,
+      AppLocalizations.of(context)!.hindi,
+      AppLocalizations.of(context)!.hmong,
+      AppLocalizations.of(context)!.hungarian,
+      AppLocalizations.of(context)!.icelandic,
+      AppLocalizations.of(context)!.igbo,
+      AppLocalizations.of(context)!.indonesian,
+      AppLocalizations.of(context)!.irish,
+      AppLocalizations.of(context)!.italian,
+      AppLocalizations.of(context)!.japanese,
+      AppLocalizations.of(context)!.javanese,
+      AppLocalizations.of(context)!.kannada,
+      AppLocalizations.of(context)!.kazakh,
+      AppLocalizations.of(context)!.khmer,
+      AppLocalizations.of(context)!.kinyarwanda,
+      AppLocalizations.of(context)!.korean,
+      AppLocalizations.of(context)!.kurdish_kurmanji,
+      AppLocalizations.of(context)!.kyrgyz,
+      AppLocalizations.of(context)!.lao,
+      AppLocalizations.of(context)!.latin,
+      AppLocalizations.of(context)!.latvian,
+      AppLocalizations.of(context)!.lithuanian,
+      AppLocalizations.of(context)!.luxembourgish,
+      AppLocalizations.of(context)!.macedonian,
+      AppLocalizations.of(context)!.malagasy,
+      AppLocalizations.of(context)!.malay,
+      AppLocalizations.of(context)!.malayalam,
+      AppLocalizations.of(context)!.maltese,
+      AppLocalizations.of(context)!.maori,
+      AppLocalizations.of(context)!.marathi,
+      AppLocalizations.of(context)!.mongolian,
+      AppLocalizations.of(context)!.myanmar_burmese,
+      AppLocalizations.of(context)!.nepali,
+      AppLocalizations.of(context)!.norwegian,
+      AppLocalizations.of(context)!.odia_oriya,
+      AppLocalizations.of(context)!.pashto,
+      AppLocalizations.of(context)!.persian,
+      AppLocalizations.of(context)!.polish,
+      AppLocalizations.of(context)!.portuguese,
+      AppLocalizations.of(context)!.punjabi,
+      AppLocalizations.of(context)!.romanian,
+      AppLocalizations.of(context)!.russian,
+      AppLocalizations.of(context)!.samoan,
+      AppLocalizations.of(context)!.scots_gaelic,
+      AppLocalizations.of(context)!.serbian,
+      AppLocalizations.of(context)!.sesotho,
+      AppLocalizations.of(context)!.shona,
+      AppLocalizations.of(context)!.sindhi,
+      AppLocalizations.of(context)!.sinhala,
+      AppLocalizations.of(context)!.slovak,
+      AppLocalizations.of(context)!.slovenian,
+      AppLocalizations.of(context)!.somali,
+      AppLocalizations.of(context)!.spanish,
+      AppLocalizations.of(context)!.sundanese,
+      AppLocalizations.of(context)!.swahili,
+      AppLocalizations.of(context)!.swedish,
+      AppLocalizations.of(context)!.tajik,
+      AppLocalizations.of(context)!.tamil,
+      AppLocalizations.of(context)!.tatar,
+      AppLocalizations.of(context)!.telugu,
+      AppLocalizations.of(context)!.thai,
+      AppLocalizations.of(context)!.turkish,
+      AppLocalizations.of(context)!.turkmen,
+      AppLocalizations.of(context)!.ukrainian,
+      AppLocalizations.of(context)!.urdu,
+      AppLocalizations.of(context)!.uyghur,
+      AppLocalizations.of(context)!.uzbek,
+      AppLocalizations.of(context)!.vietnamese,
+      AppLocalizations.of(context)!.welsh,
+      AppLocalizations.of(context)!.xhosa,
+      AppLocalizations.of(context)!.yiddish,
+      AppLocalizations.of(context)!.yoruba,
+      AppLocalizations.of(context)!.zulu,
+    ];
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
@@ -376,7 +492,7 @@ class _MainPageState extends State<MainPage> {
                               setState(() => loading = false);
                             },
                             child: Text(
-                              'Translate',
+                              AppLocalizations.of(context)!.translate,
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
