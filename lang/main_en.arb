@@ -109,5 +109,15 @@
     "yoruba": "Yoruba",
     "zulu": "Zulu",
 
-    "translate": "Translate"
+    "copied_to_clipboard": "copied to clipboard",
+
+    "translate": "Translate",
+    "random": "Random",
+    "custom": "Custom",
+    "check": "Check",
+
+    "something_went_wrong": "Something went wrong",
+    "check_instance": "Check Instance",
+    "ok": "ok"
+
 }

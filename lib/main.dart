@@ -146,12 +146,12 @@ class _MainPageState extends State<MainPage> {
           context: context,
           builder: (_) => AlertDialog(
                 backgroundColor: secondgreyColor,
-                title: Text('Something went wrong'),
-                content: Text("Check Instance"),
+                title: Text(AppLocalizations.of(context)!.something_went_wrong),
+                content: Text(AppLocalizations.of(context)!.check_instance),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: Text('ok'),
+                    child: Text(AppLocalizations.of(context)!.ok),
                   )
                 ],
               ));
@@ -515,7 +515,8 @@ class _MainPageState extends State<MainPage> {
                               behavior: SnackBarBehavior.floating,
                               width: 160,
                               content: Text(
-                                'copied to clipboard',
+                                AppLocalizations.of(context)!
+                                    .copied_to_clipboard,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: whiteColor),
                               ),
@@ -564,9 +565,12 @@ class _MainPageState extends State<MainPage> {
                             return list;
                           }(),
                           DropdownMenuItem(
-                              value: 'random', child: const Text('Random')),
+                              value: 'random',
+                              child:
+                                  Text(AppLocalizations.of(context)!.random)),
                           DropdownMenuItem(
-                              value: 'custom', child: const Text('Custom'))
+                              value: 'custom',
+                              child: Text(AppLocalizations.of(context)!.custom))
                         ],
                       ),
                     ),
@@ -628,7 +632,7 @@ class _MainPageState extends State<MainPage> {
                                 FocusScope.of(context).unfocus();
                                 checkInstance();
                               },
-                              child: Text('Check')),
+                              child: Text(AppLocalizations.of(context)!.check)),
                       //----------------------------------------------------//
                     ] else if (instance == 'random') ...[
                       const SizedBox(height: 10),
