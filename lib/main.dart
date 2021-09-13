@@ -443,10 +443,11 @@ class _MainPageState extends State<MainPage> {
                     onChanged: (String input) async {
                       translationInput = input;
                     },
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                         border: InputBorder.none,
                         hintStyle: const TextStyle(color: lightgreyColor),
-                        hintText: 'Enter Text Here'),
+                        hintText:
+                            AppLocalizations.of(context)!.enter_text_here),
                     style: const TextStyle(fontSize: 20),
                     onEditingComplete: () async {
                       FocusScope.of(context).unfocus();
