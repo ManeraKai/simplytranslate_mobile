@@ -216,7 +216,6 @@ class MainPageLocalization extends StatelessWidget {
       AppLocalizations.of(context)!.yoruba: "Yoruba",
       AppLocalizations.of(context)!.zulu: "Zulu",
     };
-    selectLanguages = [];
     selectLanguagesMap.keys.forEach((element) => selectLanguages.add(element));
     selectLanguages.sort();
     return MainPage();
