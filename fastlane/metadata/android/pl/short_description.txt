@@ -1,0 +1,1 @@
+Aplikacja kliencka do obsługi wielu instancji Simply Translate.
