@@ -1,10 +1,24 @@
-# SimplyTranslate
 
-An mobile client that connects to multiple [SimplyTranslate](https://translate.metalune.xyz/) instances.
+<p align="center">
+  <a href="https://github.com/ManeraKai/simplytranslate-flutter-client">
+      <img alt="" title="Simply Translate" src="https://github.com/ManeraKai/simplytranslate-flutter-client/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
+  </a>
+</p>
+<h1 align="center">Simply Translate</h1>
 
+<h4 align="center">A mobile client that connects to multiple <a href="https://translate.metalune.xyz/">SimplyTranslate</a> instances.</h4>
+
+<p align="center">
+  <a href="https://f-droid.org/en/packages/com.simplytranslate/">
+    <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+       alt="Get it on F-Droid"
+       height="80">
+   </a>
+</p>
+
+## Screenshots
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/>
-
 
 ## License
 Copyright (C) 2021 ManeraKai
