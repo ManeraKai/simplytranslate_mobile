@@ -430,6 +430,23 @@ class _MainPageState extends State<MainPage> {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextField(
+                onTap: () {
+                  fieldTextEditingController.selection = TextSelection(
+                    baseOffset: 0,
+                    extentOffset: fieldTextEditingController.text.length,
+                  );
+                },
+                onEditingComplete: () {
+                  FocusScope.of(context).unfocus();
+                  var chosenOne = selectLanguages.firstWhere((word) => word
+                      .toLowerCase()
+                      .startsWith(
+                          fieldTextEditingController.text.toLowerCase()));
+
+                  session.write('from_language', chosenOne);
+                  setState(() => {fromLanguage = chosenOne});
+                  fieldTextEditingController.text = chosenOne;
+                },
                 decoration: InputDecoration(border: InputBorder.none),
                 controller: fieldTextEditingController,
                 focusNode: fieldFocusNode,
@@ -474,6 +491,23 @@ class _MainPageState extends State<MainPage> {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextField(
+                onTap: () {
+                  fieldTextEditingController.selection = TextSelection(
+                    baseOffset: 0,
+                    extentOffset: fieldTextEditingController.text.length,
+                  );
+                },
+                onEditingComplete: () {
+                  FocusScope.of(context).unfocus();
+                  var chosenOne = selectLanguages.firstWhere((word) => word
+                      .toLowerCase()
+                      .startsWith(
+                          fieldTextEditingController.text.toLowerCase()));
+
+                  session.write('to_language', chosenOne);
+                  setState(() => {toLanguage = chosenOne});
+                  fieldTextEditingController.text = chosenOne;
+                },
                 decoration: InputDecoration(border: InputBorder.none),
                 controller: fieldTextEditingController,
                 focusNode: fieldFocusNode,
