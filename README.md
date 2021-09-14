@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  An mobile client that connects to multiple <a href="https://translate.metalune.xyz/">SimplyTranslate</a> instances.
+  A mobile client that connects to multiple <a href="https://translate.metalune.xyz/">SimplyTranslate</a> instances.
 </p>
 
 <p align="center">
