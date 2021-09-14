@@ -7,8 +7,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import './data.dart';
 
-String fromLanguage = 'English';
-String toLanguage = 'Arabic';
+String fromLanguageValue = 'English';
+String toLanguageValue = 'Arabic';
+
+String fromLanguage = '';
+String toLanguage = '';
+
 String instance = 'https://translate.metalune.xyz';
 int instanceIndex = 0;
 
@@ -26,7 +30,9 @@ enum customInstanceValidation {
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 Map selectLanguagesMap = {};
+Map fromSelectLanguagesMap = {};
 List selectLanguages = [];
+List selectLanguagesFrom = [];
 bool checkLoading = false;
 bool loading = false;
 
@@ -139,7 +145,7 @@ class MainPageLocalization extends StatelessWidget {
       AppLocalizations.of(context)!.german: "German",
       AppLocalizations.of(context)!.greek: "Greek",
       AppLocalizations.of(context)!.gujarati: "Gujarati",
-      AppLocalizations.of(context)!.haitian_creole: "Haitian_creole",
+      AppLocalizations.of(context)!.haitian_creole: "Haitian Creole",
       AppLocalizations.of(context)!.hausa: "Hausa",
       AppLocalizations.of(context)!.hawaiian: "Hawaiian",
       AppLocalizations.of(context)!.hebrew: "Hebrew",
@@ -158,7 +164,7 @@ class MainPageLocalization extends StatelessWidget {
       AppLocalizations.of(context)!.khmer: "Khmer",
       AppLocalizations.of(context)!.kinyarwanda: "Kinyarwanda",
       AppLocalizations.of(context)!.korean: "Korean",
-      AppLocalizations.of(context)!.kurdish_kurmanji: "Kurdish_kurmanji",
+      AppLocalizations.of(context)!.kurdish_kurmanji: "Kurdish (Kurmanji)",
       AppLocalizations.of(context)!.kyrgyz: "Kyrgyz",
       AppLocalizations.of(context)!.lao: "Lao",
       AppLocalizations.of(context)!.latin: "Latin",
@@ -173,10 +179,10 @@ class MainPageLocalization extends StatelessWidget {
       AppLocalizations.of(context)!.maori: "Maori",
       AppLocalizations.of(context)!.marathi: "Marathi",
       AppLocalizations.of(context)!.mongolian: "Mongolian",
-      AppLocalizations.of(context)!.myanmar_burmese: "Myanmar_burmese",
+      AppLocalizations.of(context)!.myanmar_burmese: "Myanmar (Burmese)",
       AppLocalizations.of(context)!.nepali: "Nepali",
       AppLocalizations.of(context)!.norwegian: "Norwegian",
-      AppLocalizations.of(context)!.odia_oriya: "Odia_oriya",
+      AppLocalizations.of(context)!.odia_oriya: "Odia (Oriya)",
       AppLocalizations.of(context)!.pashto: "Pashto",
       AppLocalizations.of(context)!.persian: "Persian",
       AppLocalizations.of(context)!.polish: "Polish",
@@ -185,7 +191,7 @@ class MainPageLocalization extends StatelessWidget {
       AppLocalizations.of(context)!.romanian: "Romanian",
       AppLocalizations.of(context)!.russian: "Russian",
       AppLocalizations.of(context)!.samoan: "Samoan",
-      AppLocalizations.of(context)!.scots_gaelic: "Scots_gaelic",
+      AppLocalizations.of(context)!.scots_gaelic: "Scots Gaelic",
       AppLocalizations.of(context)!.serbian: "Serbian",
       AppLocalizations.of(context)!.sesotho: "Sesotho",
       AppLocalizations.of(context)!.shona: "Shona",
@@ -216,9 +222,22 @@ class MainPageLocalization extends StatelessWidget {
       AppLocalizations.of(context)!.yoruba: "Yoruba",
       AppLocalizations.of(context)!.zulu: "Zulu",
     };
+
     selectLanguages = [];
     selectLanguagesMap.keys.forEach((element) => selectLanguages.add(element));
     selectLanguages.sort();
+    fromSelectLanguagesMap = selectLanguagesMap;
+    fromSelectLanguagesMap[AppLocalizations.of(context)!.autodetect] =
+        "Autodetect";
+
+    selectLanguagesFrom = [];
+    selectLanguagesMap.keys
+        .forEach((element) => selectLanguagesFrom.add(element));
+    selectLanguagesFrom.sort();
+
+    fromLanguage = AppLocalizations.of(context)!.english;
+    toLanguage = AppLocalizations.of(context)!.arabic;
+
     return MainPage();
   }
 }
@@ -285,8 +304,8 @@ class _MainPageState extends State<MainPage> {
 
     try {
       final response = await http.post(url, body: {
-        'from_language': fromLanguage,
-        'to_language': toLanguage,
+        'from_language': fromLanguageValue,
+        'to_language': toLanguageValue,
         'input': input,
       });
 
@@ -394,68 +413,74 @@ class _MainPageState extends State<MainPage> {
         );
       };
 
-  Widget fromLangWidget() => Container(
-      width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: boxDecorationCustom,
-      child: () {
-        return Autocomplete<String>(
-          onSelected: (String selectedLanguage) {
-            session.write('from_language', selectedLanguage);
-            setState(() => fromLanguage = selectedLanguage);
-          },
-          optionsBuilder: (TextEditingValue textEditingValue) {
-            List selectLanguagesFrom = ['Autodetect', ...selectLanguages];
-            Iterable<String> selectLanguagesIterable =
-                Iterable.generate(selectLanguagesFrom.length, (i) {
-              return selectLanguagesFrom[i];
-            });
-            return selectLanguagesIterable
-                .where((word) => word
-                    .toLowerCase()
-                    .startsWith(textEditingValue.text.toLowerCase()))
-                .toList();
-          },
-          optionsViewBuilder: languageOptionsViewBuilder(),
-          fieldViewBuilder: (
-            BuildContext context,
-            TextEditingController fieldTextEditingController,
-            FocusNode fieldFocusNode,
-            VoidCallback onFieldSubmitted,
-          ) {
-            if (fromLanguageisDefault) {
-              fieldTextEditingController.text = fromLanguage;
-              fromLanguageisDefault = false;
-            }
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: TextField(
-                onTap: () {
-                  fieldTextEditingController.selection = TextSelection(
-                    baseOffset: 0,
-                    extentOffset: fieldTextEditingController.text.length,
-                  );
-                },
-                onEditingComplete: () {
-                  FocusScope.of(context).unfocus();
-                  var chosenOne = selectLanguages.firstWhere((word) => word
+  Widget fromLangWidget() {
+    return Container(
+        width: MediaQuery.of(context).size.width / 3 + 10,
+        decoration: boxDecorationCustom,
+        child: () {
+          return Autocomplete<String>(
+            onSelected: (String selectedLanguage) {
+              session.write('from_language', selectedLanguage);
+              setState(() {
+                fromLanguage = selectedLanguage;
+                fromLanguageValue = fromSelectLanguagesMap[selectedLanguage];
+              });
+            },
+            optionsBuilder: (TextEditingValue textEditingValue) {
+              Iterable<String> toSelectLanguagesIterable =
+                  Iterable.generate(selectLanguagesFrom.length, (i) {
+                return selectLanguagesFrom[i];
+              });
+              return toSelectLanguagesIterable
+                  .where((word) => word
                       .toLowerCase()
-                      .startsWith(
-                          fieldTextEditingController.text.toLowerCase()));
+                      .startsWith(textEditingValue.text.toLowerCase()))
+                  .toList();
+            },
+            optionsViewBuilder: languageOptionsViewBuilder(),
+            fieldViewBuilder: (
+              BuildContext context,
+              TextEditingController fieldTextEditingController,
+              FocusNode fieldFocusNode,
+              VoidCallback onFieldSubmitted,
+            ) {
+              if (fromLanguageisDefault) {
+                fieldTextEditingController.text = fromLanguage;
+                fromLanguageisDefault = false;
+              }
 
-                  session.write('from_language', chosenOne);
-                  setState(() => {fromLanguage = chosenOne});
-                  fieldTextEditingController.text = chosenOne;
-                },
-                decoration: InputDecoration(border: InputBorder.none),
-                controller: fieldTextEditingController,
-                focusNode: fieldFocusNode,
-                style: const TextStyle(fontSize: 20),
-              ),
-            );
-          },
-        );
-      }());
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: TextField(
+                  onTap: () {
+                    fieldTextEditingController.selection = TextSelection(
+                      baseOffset: 0,
+                      extentOffset: fieldTextEditingController.text.length,
+                    );
+                  },
+                  onEditingComplete: () {
+                    FocusScope.of(context).unfocus();
+                    var chosenOne = selectLanguagesFrom.firstWhere((word) =>
+                        word.toLowerCase().startsWith(
+                            fieldTextEditingController.text.toLowerCase()));
+
+                    session.write('from_language', chosenOne);
+                    setState(() {
+                      fromLanguage = chosenOne;
+                      fromLanguageValue = fromSelectLanguagesMap[chosenOne];
+                    });
+                    fieldTextEditingController.text = chosenOne;
+                  },
+                  decoration: InputDecoration(border: InputBorder.none),
+                  controller: fieldTextEditingController,
+                  focusNode: fieldFocusNode,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              );
+            },
+          );
+        }());
+  }
 
   Widget toLangWidget() => Container(
         width: MediaQuery.of(context).size.width / 3 + 10,
@@ -463,14 +488,17 @@ class _MainPageState extends State<MainPage> {
         child: Autocomplete(
           onSelected: (String selectedLanguage) {
             session.write('to_language', selectedLanguage);
-            setState(() => {toLanguage = selectedLanguage});
+            setState(() {
+              toLanguage = selectedLanguage;
+              toLanguageValue = selectLanguagesMap[selectedLanguage];
+            });
           },
           optionsBuilder: (TextEditingValue textEditingValue) {
-            Iterable<String> selectLanguagesIterable =
+            Iterable<String> fromSelectLanguagesIterable =
                 Iterable.generate(selectLanguages.length, (i) {
               return selectLanguages[i];
             });
-            return selectLanguagesIterable
+            return fromSelectLanguagesIterable
                 .where((word) => word
                     .toLowerCase()
                     .startsWith(textEditingValue.text.toLowerCase()))
@@ -523,7 +551,7 @@ class _MainPageState extends State<MainPage> {
         decoration: boxDecorationCustom,
         child: TextButton(
           onPressed: () async {
-            if (fromLanguage != 'Autodetect') {
+            if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
               FocusScope.of(context).unfocus();
               loading = true;
               final tmp = fromLanguage;
