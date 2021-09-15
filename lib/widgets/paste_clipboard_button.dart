@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../data.dart';
 
 class PasteClipboardButton extends StatelessWidget {
@@ -19,9 +18,11 @@ class PasteClipboardButton extends StatelessWidget {
         highlightColor: Colors.transparent,
         onPressed: () {
           Clipboard.getData(Clipboard.kTextPlain).then((value) {
-            translationInputController.text += value!.text.toString();
-            translationInputController.selection = TextSelection.collapsed(
-                offset: translationInputController.text.length);
+            if (value != null) {
+              translationInputController.text += value.text.toString();
+              translationInputController.selection = TextSelection.collapsed(
+                  offset: translationInputController.text.length);
+            }
           });
         },
         icon: Icon(Icons.paste),
