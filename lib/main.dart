@@ -374,6 +374,8 @@ class _MainPageState extends State<MainPage> {
     return;
   }
 
+  final ScrollController _leftTextviewScrollController = ScrollController();
+
   Widget fromLangWidget() {
     Function changeText = () {};
     return Container(
@@ -414,36 +416,43 @@ class _MainPageState extends State<MainPage> {
                     BoxShadow(offset: Offset(0, 0), blurRadius: 5),
                   ],
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: () {
-                      List<Widget> widgetList = [];
-                      for (int index = 0; index < options.length; index++) {
-                        final option = options.elementAt(index);
-                        widgetList.add(GestureDetector(
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                            session.write('from_language', option);
-                            setState(() {
-                              fromLanguage = option;
-                              fromLanguageValue =
-                                  fromSelectLanguagesMap[option];
-                            });
-                            changeText();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 18),
-                            child: Text(
-                              option,
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        ));
-                      }
-                      return widgetList;
-                    }(),
+                child: Scrollbar(
+                  controller: _leftTextviewScrollController,
+                  isAlwaysShown: true,
+                  child: SingleChildScrollView(
+                    controller: _leftTextviewScrollController,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: () {
+                          List<Widget> widgetList = [];
+                          for (int index = 0; index < options.length; index++) {
+                            final option = options.elementAt(index);
+                            widgetList.add(GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                session.write('from_language', option);
+                                setState(() {
+                                  fromLanguage = option;
+                                  fromLanguageValue =
+                                      fromSelectLanguagesMap[option];
+                                });
+                                changeText();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 18),
+                                child: Text(
+                                  option,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ));
+                          }
+                          return widgetList;
+                        }(),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -495,6 +504,8 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  final ScrollController _rightTextviewScrollController = ScrollController();
+
   Widget toLangWidget() {
     Function changeText = () {};
     return Container(
@@ -536,38 +547,43 @@ class _MainPageState extends State<MainPage> {
                     BoxShadow(offset: Offset(0, 0), blurRadius: 5),
                   ],
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: () {
-                      List<Widget> widgetList = [];
-                      for (int index = 0; index < options.length; index++) {
-                        final option = options.elementAt(index);
-                        widgetList.add(
-                          GestureDetector(
-                            onTap: () {
-                              FocusScope.of(context).unfocus();
-                              session.write('to_language', option);
-                              setState(() {
-                                toLanguage = option;
-                                toLanguageValue = selectLanguagesMap[option];
-                              });
-                              changeText();
-                            },
-                            child: Container(
-                              color: greyColor,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 18),
-                              child: Text(
-                                option,
-                                style: const TextStyle(fontSize: 20),
+                child: Scrollbar(
+                  controller: _rightTextviewScrollController,
+                  isAlwaysShown: true,
+                  child: SingleChildScrollView(
+                    controller: _rightTextviewScrollController,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: () {
+                        List<Widget> widgetList = [];
+                        for (int index = 0; index < options.length; index++) {
+                          final option = options.elementAt(index);
+                          widgetList.add(
+                            GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                session.write('to_language', option);
+                                setState(() {
+                                  toLanguage = option;
+                                  toLanguageValue = selectLanguagesMap[option];
+                                });
+                                changeText();
+                              },
+                              child: Container(
+                                color: greyColor,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 18),
+                                child: Text(
+                                  option,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }
-                      return widgetList;
-                    }(),
+                          );
+                        }
+                        return widgetList;
+                      }(),
+                    ),
                   ),
                 ),
               ),
