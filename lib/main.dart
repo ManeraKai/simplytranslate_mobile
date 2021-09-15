@@ -12,7 +12,6 @@ import './widgets/translation_output_widget.dart';
 import './widgets/from_lang_widget.dart';
 import './widgets/to_lang_widget.dart';
 import './widgets/switch_lang_widget.dart';
-import './widgets/copy_to_clipboard_button.dart';
 
 void main(List<String> args) async {
   //------ Setting session variables up --------//
@@ -360,7 +359,6 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   TranslateButton(
                       setStateParent: setState, translateParent: translate),
-                  CopyToClipboardButton()
                 ],
               ),
               const SizedBox(height: 20),
