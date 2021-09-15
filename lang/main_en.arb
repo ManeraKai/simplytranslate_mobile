@@ -119,6 +119,7 @@
 
     "something_went_wrong": "Something went wrong",
     "check_instance": "Check Instance",
+    "no_internet": "No Internet",
     "ok": "OK"
 
 }

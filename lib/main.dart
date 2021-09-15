@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart' show parse;
@@ -245,7 +246,22 @@ class _MainPageState extends State<MainPage> {
       // default https://
     }
 
-    showDialogError() {
+    showInternetError() {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                backgroundColor: secondgreyColor,
+                title: Text(AppLocalizations.of(context)!.no_internet),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(AppLocalizations.of(context)!.ok),
+                  )
+                ],
+              ));
+    }
+
+    showInstanceError() {
       showDialog(
           context: context,
           builder: (_) => AlertDialog(
@@ -275,10 +291,17 @@ class _MainPageState extends State<MainPage> {
         translationOutput = x;
         return x;
       } else
-        showDialogError();
+        showInstanceError();
       return 'Request failed with status: ${response.statusCode}.';
     } catch (err) {
-      showDialogError();
+      try {
+        final result = await InternetAddress.lookup('exmaple.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          showInstanceError();
+        }
+      } on SocketException catch (_) {
+        showInternetError();
+      }
       return 'something went wrong buddy.';
     }
   }
