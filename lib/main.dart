@@ -2,52 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
-import 'dart:math';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import './data.dart';
+import './widgets/settings_widget.dart';
+import './widgets/translate_button_widget.dart';
+import './widgets/translation_input_widget.dart';
+import './widgets/translation_output_widget.dart';
+import './widgets/from_lang_widget.dart';
+import './widgets/to_lang_widget.dart';
+import './widgets/switch_lang_widget.dart';
+import './widgets/copy_to_clipboard_button.dart';
 
-String fromLanguageValue = 'English';
-String toLanguageValue = 'Arabic';
-
-String fromLanguage = '';
-String toLanguage = '';
-
-String instance = 'https://translate.metalune.xyz';
-int instanceIndex = 0;
-
-String translationInput = '';
-String translationOutput = '';
-
-String customInstance = '';
-String customUrl = '';
-
-enum customInstanceValidation {
-  False,
-  True,
-  NotChecked,
-}
-
-var isCustomInstanceValid = customInstanceValidation.NotChecked;
-Map selectLanguagesMap = {};
-Map fromSelectLanguagesMap = {};
-List selectLanguages = [];
-List selectLanguagesFrom = [];
-bool checkLoading = false;
-bool loading = false;
-
-const greyColor = Color(0xff131618);
-const lightgreyColor = Color(0xff495057);
-const secondgreyColor = Color(0xff212529);
-const whiteColor = Color(0xfff5f6f7);
-
-final boxDecorationCustom = BoxDecoration(
-    color: greyColor,
-    border: Border.all(
-      color: lightgreyColor,
-      width: 2,
-      style: BorderStyle.solid,
-    ));
 void main(List<String> args) async {
   //------ Setting session variables up --------//
   await GetStorage.init();
@@ -61,8 +27,6 @@ void main(List<String> args) async {
 
   return runApp(MyApp());
 }
-
-final session = GetStorage();
 
 class MyApp extends StatefulWidget {
   @override
@@ -253,15 +217,6 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-final customUrlController = TextEditingController();
-final translationInputController = TextEditingController();
-
-bool fromLanguageisDefault = true;
-bool toLanguageisDefault = true;
-
-bool fromIsFirstClick = false;
-bool toIsFirstClick = false;
-
 class _MainPageState extends State<MainPage> {
   void dispose() {
     customUrlController.dispose();
@@ -374,299 +329,6 @@ class _MainPageState extends State<MainPage> {
     return;
   }
 
-  final ScrollController _leftTextviewScrollController = ScrollController();
-
-  Widget fromLangWidget() {
-    Function changeText = () {};
-    return Container(
-      width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: boxDecorationCustom,
-      child: Autocomplete(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          Iterable<String> fromSelectLanguagesIterable = Iterable.generate(
-              selectLanguagesFrom.length, (i) => selectLanguagesFrom[i]);
-          if (fromIsFirstClick) {
-            fromIsFirstClick = false;
-            return fromSelectLanguagesIterable;
-          } else
-            return fromSelectLanguagesIterable
-                .where((word) => word
-                    .toLowerCase()
-                    .startsWith(textEditingValue.text.toLowerCase()))
-                .toList();
-        },
-        optionsViewBuilder: (
-          BuildContext context,
-          AutocompleteOnSelected<String> onSelected,
-          Iterable<String> options,
-        ) {
-          return Align(
-            alignment: Alignment.topLeft,
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                height: MediaQuery.of(context).size.height / 2 <=
-                        (options.length) * (36 + 25)
-                    ? MediaQuery.of(context).size.height / 2
-                    : null,
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  color: greyColor,
-                  boxShadow: [
-                    BoxShadow(offset: Offset(0, 0), blurRadius: 5),
-                  ],
-                ),
-                child: Scrollbar(
-                  controller: _leftTextviewScrollController,
-                  isAlwaysShown: true,
-                  child: SingleChildScrollView(
-                    controller: _leftTextviewScrollController,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: () {
-                        List<Widget> widgetList = [];
-                        for (int index = 0; index < options.length; index++) {
-                          final option = options.elementAt(index);
-                          widgetList.add(GestureDetector(
-                            onTap: () {
-                              FocusScope.of(context).unfocus();
-                              session.write('from_language', option);
-                              setState(() {
-                                fromLanguage = option;
-                                fromLanguageValue =
-                                    fromSelectLanguagesMap[option];
-                              });
-                              changeText();
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 18),
-                              child: Text(
-                                option,
-                                style: const TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ));
-                        }
-                        return widgetList;
-                      }(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        fieldViewBuilder: (
-          BuildContext context,
-          TextEditingController fieldTextEditingController,
-          FocusNode fieldFocusNode,
-          VoidCallback onFieldSubmitted,
-        ) {
-          if (fromLanguageisDefault) {
-            fieldTextEditingController.text = fromLanguage;
-            fromLanguageisDefault = false;
-          }
-          changeText = () => fieldTextEditingController.text = fromLanguage;
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
-              onTap: () {
-                fromIsFirstClick = true;
-                fieldTextEditingController.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingController.text.length,
-                );
-              },
-              onEditingComplete: () {
-                FocusScope.of(context).unfocus();
-                var chosenOne = selectLanguagesFrom.firstWhere((word) => word
-                    .toLowerCase()
-                    .startsWith(fieldTextEditingController.text.toLowerCase()));
-
-                session.write('from_language', chosenOne);
-                setState(() {
-                  fromLanguage = chosenOne;
-                  fromLanguageValue = fromSelectLanguagesMap[chosenOne];
-                });
-                fieldTextEditingController.text = chosenOne;
-              },
-              decoration: InputDecoration(border: InputBorder.none),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 20),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  final ScrollController _rightTextviewScrollController = ScrollController();
-
-  Widget toLangWidget() {
-    Function changeText = () {};
-    return Container(
-      width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: boxDecorationCustom,
-      child: Autocomplete(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          Iterable<String> toSelectLanguagesIterable = Iterable.generate(
-              selectLanguages.length, (i) => selectLanguages[i]);
-          if (toIsFirstClick) {
-            toIsFirstClick = false;
-            return toSelectLanguagesIterable;
-          } else
-            return toSelectLanguagesIterable
-                .where((word) => word
-                    .toLowerCase()
-                    .startsWith(textEditingValue.text.toLowerCase()))
-                .toList();
-        },
-        optionsViewBuilder: (
-          BuildContext context,
-          AutocompleteOnSelected<String> onSelected,
-          Iterable<String> options,
-        ) {
-          return Align(
-            alignment: Alignment.topLeft,
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                width: MediaQuery.of(context).size.width / 3 + 10,
-                height: MediaQuery.of(context).size.height / 2 <=
-                        (options.length) * (36 + 25)
-                    ? MediaQuery.of(context).size.height / 2
-                    : null,
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  color: greyColor,
-                  boxShadow: [
-                    BoxShadow(offset: Offset(0, 0), blurRadius: 5),
-                  ],
-                ),
-                child: Scrollbar(
-                  controller: _rightTextviewScrollController,
-                  isAlwaysShown: true,
-                  child: SingleChildScrollView(
-                    controller: _rightTextviewScrollController,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: () {
-                        List<Widget> widgetList = [];
-                        for (int index = 0; index < options.length; index++) {
-                          final option = options.elementAt(index);
-                          widgetList.add(
-                            GestureDetector(
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
-                                session.write('to_language', option);
-                                setState(() {
-                                  toLanguage = option;
-                                  toLanguageValue = selectLanguagesMap[option];
-                                });
-                                changeText();
-                              },
-                              child: Container(
-                                color: greyColor,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 18),
-                                child: Text(
-                                  option,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        return widgetList;
-                      }(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        fieldViewBuilder: (
-          BuildContext context,
-          TextEditingController fieldTextEditingController,
-          FocusNode fieldFocusNode,
-          VoidCallback onFieldSubmitted,
-        ) {
-          if (toLanguageisDefault) {
-            fieldTextEditingController.text = toLanguage;
-            toLanguageisDefault = false;
-          }
-          changeText = () => fieldTextEditingController.text = toLanguage;
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
-              onTap: () {
-                toIsFirstClick = true;
-                fieldTextEditingController.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingController.text.length,
-                );
-              },
-              onEditingComplete: () {
-                FocusScope.of(context).unfocus();
-                var chosenOne = selectLanguages.firstWhere((word) => word
-                    .toLowerCase()
-                    .startsWith(fieldTextEditingController.text.toLowerCase()));
-
-                session.write('to_language', chosenOne);
-                setState(() {
-                  toLanguage = chosenOne;
-                  toLanguageValue = selectLanguagesMap[chosenOne];
-                });
-                fieldTextEditingController.text = chosenOne;
-              },
-              decoration: InputDecoration(border: InputBorder.none),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 20),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget switchLangBtnWidget() => Container(
-        width: MediaQuery.of(context).size.width / 3 - 60,
-        decoration: boxDecorationCustom,
-        child: TextButton(
-          onPressed: () async {
-            if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
-              FocusScope.of(context).unfocus();
-              loading = true;
-              final tmp = fromLanguage;
-              fromLanguage = toLanguage;
-              toLanguage = tmp;
-
-              session.write('to_language', toLanguage);
-              session.write('from_language', fromLanguage);
-
-              final valuetmp = fromLanguageValue;
-              fromLanguageValue = toLanguageValue;
-              toLanguageValue = valuetmp;
-
-              fromLanguageisDefault = true;
-              toLanguageisDefault = true;
-
-              translationInputController.text = translationOutput;
-              final x = await translate(translationInput);
-              setState(() {
-                loading = false;
-                translationOutput = x;
-              });
-            }
-          },
-          child: const Text('<->'),
-        ),
-      );
-
   final rowWidth = 430;
 
   @override
@@ -678,249 +340,31 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //------------- [fromLang, Switch, toLang] -------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  fromLangWidget(),
-                  switchLangBtnWidget(),
-                  toLangWidget(),
+                  FromLang(),
+                  SwitchLang(
+                      setStateParent: setState, translateParent: translate),
+                  ToLang(),
                 ],
               ),
-              // ---------------------------------------------------//
               const SizedBox(height: 10),
-              //------------------- Translation Input --------------//
-              Container(
-                width: double.infinity,
-                height: 150,
-                decoration: boxDecorationCustom,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextField(
-                    maxLines: 8,
-                    controller: translationInputController,
-                    keyboardType: TextInputType.text,
-                    onChanged: (String input) async {
-                      translationInput = input;
-                    },
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintStyle: const TextStyle(color: lightgreyColor),
-                        hintText:
-                            AppLocalizations.of(context)!.enter_text_here),
-                    style: const TextStyle(fontSize: 20),
-                    onEditingComplete: () async {
-                      FocusScope.of(context).unfocus();
-                      setState(() => loading = true);
-                      await translate(translationInput);
-                      setState(() => loading = false);
-                    },
-                  ),
-                ),
-              ),
-              //----------------------------------------------------------//
+              TranslationInput(
+                  setStateParent: setState, translateParent: translate),
               const SizedBox(height: 10),
-              //------------------ Translation Output --------------------//
-              Container(
-                width: double.infinity,
-                height: 150,
-                decoration: boxDecorationCustom,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SelectableText(
-                    translationOutput,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              //----------------------------------------------------------//
+              TranslationOutput(),
               const SizedBox(height: 10),
-              //---------------------- Translate Button ------------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: loading
-                        ? Container(
-                            alignment: Alignment.center,
-                            width: 80,
-                            child: CircularProgressIndicator())
-                        : TextButton(
-                            onPressed: () async {
-                              FocusScope.of(context).unfocus();
-                              setState(() => loading = true);
-                              await translate(translationInput);
-                              setState(() => loading = false);
-                            },
-                            child: Text(
-                              AppLocalizations.of(context)!.translate,
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                  ),
-                  Container(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onPressed: () {
-                        Clipboard.setData(
-                                ClipboardData(text: translationOutput))
-                            .then(
-                          (value) => ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              duration: Duration(seconds: 1),
-                              backgroundColor: greyColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              behavior: SnackBarBehavior.floating,
-                              width: 160,
-                              content: Text(
-                                AppLocalizations.of(context)!
-                                    .copied_to_clipboard,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: whiteColor),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      icon: Icon(Icons.copy),
-                    ),
-                  )
+                  TranslateButton(
+                      setStateParent: setState, translateParent: translate),
+                  CopyToClipboardButton()
                 ],
               ),
-              //--------------------------------------------------------//
               const SizedBox(height: 20),
-              //---------------- Settings ------------------//
-              Container(
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //-------------- Instance Select Button --------------------//
-                    Container(
-                      decoration: boxDecorationCustom,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: const SizedBox.shrink(),
-                        dropdownColor: greyColor,
-                        onChanged: (String? value) => setState(() {
-                          if (value == 'random')
-                            instanceIndex = Random().nextInt(instances.length);
-                          else if (value == 'custom')
-                            instanceIndex = 0;
-                          else
-                            instanceIndex = instances.indexOf(value!);
-                          instance = value!;
-                          session.write('instance_mode', value);
-                        }),
-                        value: instance,
-                        items: [
-                          ...() {
-                            var list = <DropdownMenuItem<String>>[];
-                            for (String x in instances)
-                              list.add(
-                                  DropdownMenuItem(value: x, child: Text(x)));
-                            return list;
-                          }(),
-                          DropdownMenuItem(
-                              value: 'random',
-                              child:
-                                  Text(AppLocalizations.of(context)!.random)),
-                          DropdownMenuItem(
-                              value: 'custom',
-                              child: Text(AppLocalizations.of(context)!.custom))
-                        ],
-                      ),
-                    ),
-                    //----------------------------------------------------------//
-                    if (instance == 'custom') ...[
-                      SizedBox(height: 10),
-                      //------------- Custom Instance URL Input ----------------//
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        decoration: boxDecorationCustom.copyWith(
-                            color: isCustomInstanceValid ==
-                                    customInstanceValidation.True
-                                ? Colors.green
-                                : isCustomInstanceValid ==
-                                        customInstanceValidation.False
-                                    ? Colors.red
-                                    : null),
-                        child: TextField(
-                          controller: customUrlController,
-                          keyboardType: TextInputType.url,
-                          onChanged: (String? value) {
-                            customInstance = value!;
-                            if (isCustomInstanceValid !=
-                                customInstanceValidation.NotChecked)
-                              setState(() {
-                                isCustomInstanceValid =
-                                    customInstanceValidation.NotChecked;
-                              });
-                          },
-                          onEditingComplete: () {
-                            FocusScope.of(context).unfocus();
-                            checkInstance();
-                          },
-                          decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none),
-                          style:
-                              const TextStyle(fontSize: 20, color: whiteColor),
-                        ),
-                      ),
-                      //--------------------------------------------------------//
-                      const SizedBox(height: 10),
-                      checkLoading
-                          ?
-                          //----------------- Loading Circle --------------------//
-                          Container(
-                              width: 50,
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator())
-                          //----------------------------------------------------//
-                          :
-                          //----------------- Check Button ---------------------//
-                          TextButton(
-                              style: ButtonStyle(
-                                  backgroundColor: checkLoading
-                                      ? MaterialStateProperty.all(
-                                          Colors.transparent)
-                                      : null),
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                checkInstance();
-                              },
-                              child: Text(AppLocalizations.of(context)!.check)),
-                      //----------------------------------------------------//
-                    ] else if (instance == 'random') ...[
-                      const SizedBox(height: 10),
-                      //------- All Known Instances in a Scrollable List -------//
-                      SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: () {
-                            var list = <Widget>[];
-                            for (String x in instances) {
-                              list.add(Text('● $x'));
-                              list.add(SizedBox(height: 10));
-                            }
-                            return list;
-                          }(),
-                        ),
-                      )
-                      //--------------------------------------------------------//
-                    ]
-                    // Instance Select is one of the `Default Instances`.
-                    else
-                      //---- Nothing... the instance will be selected from the original Select Button -----//
-                      const SizedBox.shrink()
-                  ],
-                ),
-              ),
-              //----------------------------------------------------------//
+              Settings(checkInstanceParent: checkInstance),
             ],
           ),
         ),
