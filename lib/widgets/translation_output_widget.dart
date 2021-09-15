@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data.dart';
+import './copy_to_clipboard_button.dart';
 
 class TranslationOutput extends StatelessWidget {
   const TranslationOutput({
@@ -9,15 +10,22 @@ class TranslationOutput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
       height: 150,
       decoration: boxDecorationCustom,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SelectableText(
-          translationOutput,
-          style: const TextStyle(fontSize: 20),
-        ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 12),
+              child: SelectableText(
+                translationOutput,
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          CopyToClipboardButton()
+        ],
       ),
     );
   }
