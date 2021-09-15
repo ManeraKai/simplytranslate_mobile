@@ -421,37 +421,35 @@ class _MainPageState extends State<MainPage> {
                   isAlwaysShown: true,
                   child: SingleChildScrollView(
                     controller: _leftTextviewScrollController,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: () {
-                          List<Widget> widgetList = [];
-                          for (int index = 0; index < options.length; index++) {
-                            final option = options.elementAt(index);
-                            widgetList.add(GestureDetector(
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
-                                session.write('from_language', option);
-                                setState(() {
-                                  fromLanguage = option;
-                                  fromLanguageValue =
-                                      fromSelectLanguagesMap[option];
-                                });
-                                changeText();
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 18),
-                                child: Text(
-                                  option,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: () {
+                        List<Widget> widgetList = [];
+                        for (int index = 0; index < options.length; index++) {
+                          final option = options.elementAt(index);
+                          widgetList.add(GestureDetector(
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              session.write('from_language', option);
+                              setState(() {
+                                fromLanguage = option;
+                                fromLanguageValue =
+                                    fromSelectLanguagesMap[option];
+                              });
+                              changeText();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 18),
+                              child: Text(
+                                option,
+                                style: const TextStyle(fontSize: 20),
                               ),
-                            ));
-                          }
-                          return widgetList;
-                        }(),
-                      ),
+                            ),
+                          ));
+                        }
+                        return widgetList;
+                      }(),
                     ),
                   ),
                 ),
