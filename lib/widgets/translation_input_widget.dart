@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate/widgets/copy_to_clipboard_button.dart';
 import '../data.dart';
 import './paste_clipboard_button.dart';
 
-class TranslationInput extends StatelessWidget {
+class TranslationInput extends StatefulWidget {
   final setStateParent;
   final translateParent;
   const TranslationInput({
@@ -13,6 +14,11 @@ class TranslationInput extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  _TranslationInputState createState() => _TranslationInputState();
+}
+
+class _TranslationInputState extends State<TranslationInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +35,9 @@ class TranslationInput extends StatelessWidget {
                 controller: translationInputController,
                 keyboardType: TextInputType.text,
                 onChanged: (String input) async {
-                  translationInput = input;
+                  setState(() {
+                    translationInput = input;
+                  });
                 },
                 decoration: InputDecoration(
                     border: InputBorder.none,
@@ -38,14 +46,22 @@ class TranslationInput extends StatelessWidget {
                 style: const TextStyle(fontSize: 20),
                 onEditingComplete: () async {
                   FocusScope.of(context).unfocus();
-                  setStateParent(() => loading = true);
-                  await translateParent(translationInput);
-                  setStateParent(() => loading = false);
+                  widget.setStateParent(() => loading = true);
+                  await widget.translateParent(translationInput);
+                  widget.setStateParent(() => loading = false);
                 },
               ),
             ),
           ),
-          PasteClipboardButton(),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CopyToClipboardButton(translationInput),
+                PasteClipboardButton(),
+              ],
+            ),
+          )
         ],
       ),
     );

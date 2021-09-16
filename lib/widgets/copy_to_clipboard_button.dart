@@ -4,7 +4,9 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../data.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
-  const CopyToClipboardButton({
+  final text;
+  const CopyToClipboardButton(
+    this.text, {
     Key? key,
   }) : super(key: key);
 
@@ -13,10 +15,10 @@ class CopyToClipboardButton extends StatelessWidget {
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onPressed: translationOutput == ''
+      onPressed: text == ''
           ? null
           : () {
-              Clipboard.setData(ClipboardData(text: translationOutput)).then(
+              Clipboard.setData(ClipboardData(text: text)).then(
                 (value) => ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 1),
