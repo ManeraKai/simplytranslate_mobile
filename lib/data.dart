@@ -34,6 +34,7 @@ enum customInstanceValidation {
   True,
   NotChecked,
 }
+bool isThereLibreTranslate = false;
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 Map selectLanguagesMap = {};

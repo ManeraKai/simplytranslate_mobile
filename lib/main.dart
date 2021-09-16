@@ -14,6 +14,43 @@ import './widgets/from_lang_widget.dart';
 import './widgets/to_lang_widget.dart';
 import './widgets/switch_lang_widget.dart';
 
+customInstanceFormatting() {
+  final url;
+  if (customInstance.endsWith('/'))
+    // trimming last slash
+    customInstance = customInstance.substring(0, customInstance.length - 1);
+  if (customInstance.startsWith('https://')) {
+    customInstance = customInstance.trim();
+    url =
+        Uri.https(customInstance.substring(8), '/', {'engine': engineSelected});
+    // custom https://
+  } else if (customInstance.startsWith('http://'))
+    // http://
+    url =
+        Uri.http(customInstance.substring(7), '/', {'engine': engineSelected});
+  else
+    url = Uri.https(customInstance, '/', {'engine': engineSelected});
+  // custom else https://
+  return url;
+}
+
+checkLibreTranslatewithRespone(response, {setState}) {
+  if (parse(response.body)
+      .getElementsByTagName('a')[1]
+      .innerHtml
+      .contains('LibreTranslate')) {
+    if (setState != null)
+      setState(() => isThereLibreTranslate = true);
+    else
+      isThereLibreTranslate = true;
+  } else {
+    if (setState != null)
+      setState(() => isThereLibreTranslate = false);
+    else
+      isThereLibreTranslate = false;
+  }
+}
+
 void main(List<String> args) async {
   //------ Setting session variables up --------//
   await GetStorage.init();
@@ -229,28 +266,11 @@ class _MainPageState extends State<MainPage> {
   Future<String> translate(String input) async {
     final url;
     if (instance == 'custom') {
-      if (customInstance.endsWith('/')) {
-        // trimming last slash
-        customInstance = customInstance.substring(0, customInstance.length - 1);
-      }
-      if (customInstance.startsWith('https://')) {
-        customInstance = customInstance.trim();
-        url = Uri.https(
-            customInstance.substring(8), '/', {'engine': engineSelected});
-        // custom https://
-      } else if (customInstance.startsWith('http://')) {
-        // http://
-        url = Uri.http(
-            customInstance.substring(7), '/', {'engine': engineSelected});
-      } else {
-        url = Uri.https(customInstance, '/', {'engine': engineSelected});
-        // custom else https://
-      }
-    } else {
+      url = customInstanceFormatting();
+    } else
       url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
           {'engine': engineSelected});
-      // default https://
-    }
+    // default https://
 
     showInternetError() {
       showDialog(
@@ -295,6 +315,7 @@ class _MainPageState extends State<MainPage> {
             .getElementsByClassName('translation')[0]
             .innerHtml;
         translationOutput = x;
+        checkLibreTranslatewithRespone(response, setState: setState);
         return x;
       } else
         showInstanceError();
@@ -318,24 +339,8 @@ class _MainPageState extends State<MainPage> {
     final url;
     var tmpUrl = '';
     if (instance == 'custom') {
+      url = customInstanceFormatting();
       tmpUrl = customInstance;
-      if (customInstance.endsWith('/'))
-        // trimming last slash
-        customInstance = customInstance.substring(0, customInstance.length - 1);
-
-      if (customInstance.startsWith('https://')) {
-        customInstance = customInstance.trim();
-        url = Uri.https(
-            customInstance.substring(8), '/', {'engine': engineSelected});
-        // custom https://
-      } else if (customInstance.startsWith('http://'))
-        // http://
-        url = Uri.http(
-            customInstance.substring(7), '/', {'engine': engineSelected});
-      else
-        url = Uri.https(customInstance, '/', {'engine': engineSelected});
-      // custom else https://
-
     } else
       url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
           {'engine': engineSelected});
@@ -351,6 +356,7 @@ class _MainPageState extends State<MainPage> {
         } else
           setState(
               () => isCustomInstanceValid = customInstanceValidation.False);
+        checkLibreTranslatewithRespone(response, setState: setState);
       } else
         setState(() => isCustomInstanceValid = customInstanceValidation.False);
     } catch (err) {
@@ -360,8 +366,33 @@ class _MainPageState extends State<MainPage> {
     return;
   }
 
-  final rowWidth = 430;
+  checkLibreTranslate(setStateCustom) async {
+    final url;
+    if (instance == 'custom') {
+      customInstance = customUrlController.text;
+      url = customInstanceFormatting();
+    } else if (instance == 'random') {
+      url = Uri.https(instances[instanceIndex].substring(8), '/',
+          {'engine': engineSelected});
+    } else
+      url = Uri.https(
+          instance.toString().substring(8), '/', {'engine': engineSelected});
+    // default https://
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        checkLibreTranslatewithRespone(response, setState: setStateCustom);
+      }
+    } catch (err) {}
+  }
 
+  @override
+  void initState() {
+    checkLibreTranslate(setState);
+    super.initState();
+  }
+
+  final rowWidth = 430;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -394,7 +425,9 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
               const SizedBox(height: 20),
-              Settings(checkInstanceParent: checkInstance),
+              Settings(
+                  checkInstanceParent: checkInstance,
+                  checkLibreTranslate: checkLibreTranslate),
             ],
           ),
         ),

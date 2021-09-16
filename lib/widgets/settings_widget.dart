@@ -6,8 +6,10 @@ import '../data.dart';
 
 class Settings extends StatefulWidget {
   final checkInstanceParent;
+  final checkLibreTranslate;
   const Settings({
-    @required this.checkInstanceParent,
+    required this.checkInstanceParent,
+    required this.checkLibreTranslate,
     Key? key,
   }) : super(key: key);
 
@@ -41,6 +43,7 @@ class _SettingsState extends State<Settings> {
                   instanceIndex = instances.indexOf(value!);
                 instance = value!;
                 session.write('instance_mode', value);
+                widget.checkLibreTranslate(setState);
               }),
               value: instance,
               items: [
@@ -149,11 +152,13 @@ class _SettingsState extends State<Settings> {
                 engineSelected = value!;
                 session.write('engine', value);
               }),
-              value: engineSelected,
+              value: (isThereLibreTranslate) ? engineSelected : 'google',
               items: [
                 DropdownMenuItem(
                     value: 'google', child: Text('GoogleTranslate')),
-                DropdownMenuItem(value: 'libre', child: Text('LibreTranslate'))
+                if (isThereLibreTranslate)
+                  DropdownMenuItem(
+                      value: 'libre', child: Text('LibreTranslate'))
               ],
             ),
           ),
