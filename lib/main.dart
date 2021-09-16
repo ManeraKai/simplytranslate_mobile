@@ -79,6 +79,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
+        accentColor: Colors.white,
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: whiteColor,
         ),

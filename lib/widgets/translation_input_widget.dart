@@ -30,28 +30,33 @@ class _TranslationInputState extends State<TranslationInput> {
         children: [
           Expanded(
             child: Scrollbar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: TextField(
-                  maxLines: 8,
-                  controller: translationInputController,
-                  keyboardType: TextInputType.text,
-                  onChanged: (String input) async {
-                    setState(() {
-                      translationInput = input;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: const TextStyle(color: lightgreyColor),
-                      hintText: AppLocalizations.of(context)!.enter_text_here),
-                  style: const TextStyle(fontSize: 20),
-                  onEditingComplete: () async {
-                    FocusScope.of(context).unfocus();
-                    widget.setStateParent(() => loading = true);
-                    await widget.translateParent(translationInput);
-                    widget.setStateParent(() => loading = false);
-                  },
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: TextField(
+                    minLines: 1,
+                    maxLines: 10,
+                    controller: translationInputController,
+                    keyboardType: TextInputType.text,
+                    onChanged: (String input) async {
+                      setState(() {
+                        translationInput = input;
+                      });
+                    },
+                    decoration: InputDecoration(
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintStyle: const TextStyle(color: lightgreyColor),
+                        hintText:
+                            AppLocalizations.of(context)!.enter_text_here),
+                    style: const TextStyle(fontSize: 20),
+                    onEditingComplete: () async {
+                      FocusScope.of(context).unfocus();
+                      widget.setStateParent(() => loading = true);
+                      await widget.translateParent(translationInput);
+                      widget.setStateParent(() => loading = false);
+                    },
+                  ),
                 ),
               ),
             ),

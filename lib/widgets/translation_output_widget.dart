@@ -17,11 +17,14 @@ class TranslationOutput extends StatelessWidget {
         children: [
           Expanded(
             child: Scrollbar(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 12),
-                child: SelectableText(
-                  translationOutput,
-                  style: const TextStyle(fontSize: 20),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  child: SelectableText(
+                    translationOutput,
+                    style: const TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
             ),
