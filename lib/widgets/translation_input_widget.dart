@@ -29,28 +29,30 @@ class _TranslationInputState extends State<TranslationInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: TextField(
-                maxLines: 8,
-                controller: translationInputController,
-                keyboardType: TextInputType.text,
-                onChanged: (String input) async {
-                  setState(() {
-                    translationInput = input;
-                  });
-                },
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintStyle: const TextStyle(color: lightgreyColor),
-                    hintText: AppLocalizations.of(context)!.enter_text_here),
-                style: const TextStyle(fontSize: 20),
-                onEditingComplete: () async {
-                  FocusScope.of(context).unfocus();
-                  widget.setStateParent(() => loading = true);
-                  await widget.translateParent(translationInput);
-                  widget.setStateParent(() => loading = false);
-                },
+            child: Scrollbar(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: TextField(
+                  maxLines: 8,
+                  controller: translationInputController,
+                  keyboardType: TextInputType.text,
+                  onChanged: (String input) async {
+                    setState(() {
+                      translationInput = input;
+                    });
+                  },
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: const TextStyle(color: lightgreyColor),
+                      hintText: AppLocalizations.of(context)!.enter_text_here),
+                  style: const TextStyle(fontSize: 20),
+                  onEditingComplete: () async {
+                    FocusScope.of(context).unfocus();
+                    widget.setStateParent(() => loading = true);
+                    await widget.translateParent(translationInput);
+                    widget.setStateParent(() => loading = false);
+                  },
+                ),
               ),
             ),
           ),

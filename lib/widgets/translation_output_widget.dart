@@ -16,11 +16,13 @@ class TranslationOutput extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 12),
-              child: SelectableText(
-                translationOutput,
-                style: const TextStyle(fontSize: 20),
+            child: Scrollbar(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 12),
+                child: SelectableText(
+                  translationOutput,
+                  style: const TextStyle(fontSize: 20),
+                ),
               ),
             ),
           ),
