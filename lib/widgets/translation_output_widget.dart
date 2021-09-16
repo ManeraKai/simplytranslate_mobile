@@ -18,7 +18,7 @@ class TranslationOutput extends StatelessWidget {
           Expanded(
             child: Scrollbar(
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 12),
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 12),
                 child: SelectableText(
                   translationOutput,
                   style: const TextStyle(fontSize: 20),

@@ -31,7 +31,7 @@ class _TranslationInputState extends State<TranslationInput> {
           Expanded(
             child: Scrollbar(
               child: Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: TextField(
                   maxLines: 8,
                   controller: translationInputController,

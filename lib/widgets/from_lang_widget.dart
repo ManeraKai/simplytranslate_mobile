@@ -41,6 +41,7 @@ class _FromLangState extends State<FromLang> {
             child: Material(
               color: Colors.transparent,
               child: Container(
+                width: MediaQuery.of(context).size.width / 3 + 10,
                 height: MediaQuery.of(context).size.height / 2 <=
                         (options.length) * (36 + 25)
                     ? MediaQuery.of(context).size.height / 2
@@ -78,6 +79,7 @@ class _FromLangState extends State<FromLang> {
                                 }
                               },
                               child: Container(
+                                width: double.infinity,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 18),
                                 child: Text(option,

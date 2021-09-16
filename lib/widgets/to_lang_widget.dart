@@ -80,7 +80,7 @@ class _ToLangState extends State<ToLang> {
                                 }
                               },
                               child: Container(
-                                color: greyColor,
+                                width: double.infinity,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 18),
                                 child: Text(
