@@ -19,17 +19,27 @@ class TranslateButton extends StatelessWidget {
           ? Container(
               alignment: Alignment.center,
               width: 80,
+              height: 40,
               child: CircularProgressIndicator())
-          : TextButton(
-              onPressed: () async {
-                FocusScope.of(context).unfocus();
-                setStateParent(() => loading = true);
-                await translateParent(translationInput);
-                setStateParent(() => loading = false);
-              },
-              child: Text(
-                AppLocalizations.of(context)!.translate,
-                style: TextStyle(fontSize: 16),
+          : Ink(
+              height: 40,
+              decoration: boxDecorationCustom,
+              child: Padding(
+                padding: const EdgeInsets.all(6.5),
+                child: Center(
+                  child: InkWell(
+                    onTap: () async {
+                      FocusScope.of(context).unfocus();
+                      setStateParent(() => loading = true);
+                      await translateParent(translationInput);
+                      setStateParent(() => loading = false);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.translate,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
               ),
             ),
     );
