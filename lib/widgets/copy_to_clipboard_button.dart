@@ -13,25 +13,27 @@ class CopyToClipboardButton extends StatelessWidget {
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onPressed: () {
-        Clipboard.setData(ClipboardData(text: translationOutput)).then(
-          (value) => ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              duration: Duration(seconds: 1),
-              backgroundColor: greyColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)),
-              behavior: SnackBarBehavior.floating,
-              width: 160,
-              content: Text(
-                AppLocalizations.of(context)!.copied_to_clipboard,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: whiteColor),
-              ),
-            ),
-          ),
-        );
-      },
+      onPressed: translationOutput == ''
+          ? null
+          : () {
+              Clipboard.setData(ClipboardData(text: translationOutput)).then(
+                (value) => ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: Duration(seconds: 1),
+                    backgroundColor: greyColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    behavior: SnackBarBehavior.floating,
+                    width: 160,
+                    content: Text(
+                      AppLocalizations.of(context)!.copied_to_clipboard,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: whiteColor),
+                    ),
+                  ),
+                ),
+              );
+            },
       icon: Icon(Icons.copy),
     );
   }

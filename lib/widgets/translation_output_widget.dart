@@ -24,7 +24,7 @@ class TranslationOutput extends StatelessWidget {
               ),
             ),
           ),
-          if (translationInput != '') CopyToClipboardButton()
+          CopyToClipboardButton()
         ],
       ),
     );
