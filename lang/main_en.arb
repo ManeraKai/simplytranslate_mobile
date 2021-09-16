@@ -114,12 +114,12 @@
     "translate": "Translate",
     "random": "Random",
     "custom": "Custom",
-    "enter_text_here": "Enter Text Here",
+    "enter_text_here": "Enter text here",
     "check": "Check",
 
     "something_went_wrong": "Something went wrong",
-    "check_instance": "Check Instance",
-    "no_internet": "No Internet",
+    "check_instance": "Check instance",
+    "no_internet": "No internet connection",
     "ok": "OK"
 
 }
