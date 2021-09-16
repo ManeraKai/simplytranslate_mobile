@@ -68,13 +68,16 @@ class _ToLangState extends State<ToLang> {
                           widgetList.add(
                             GestureDetector(
                               onTap: () {
-                                FocusScope.of(context).unfocus();
-                                session.write('to_language', option);
-                                setState(() {
-                                  toLanguage = option;
-                                  toLanguageValue = selectLanguagesMap[option];
-                                });
-                                changeText();
+                                if (option != fromLanguage) {
+                                  FocusScope.of(context).unfocus();
+                                  session.write('to_language', option);
+                                  setState(() {
+                                    toLanguage = option;
+                                    toLanguageValue =
+                                        selectLanguagesMap[option];
+                                  });
+                                  changeText();
+                                }
                               },
                               child: Container(
                                 color: greyColor,
@@ -82,7 +85,11 @@ class _ToLangState extends State<ToLang> {
                                     horizontal: 8, vertical: 18),
                                 child: Text(
                                   option,
-                                  style: const TextStyle(fontSize: 20),
+                                  style: (option == fromLanguage)
+                                      ? const TextStyle(
+                                          fontSize: 20, color: secondgreyColor)
+                                      : const TextStyle(
+                                          fontSize: 20, color: null),
                                 ),
                               ),
                             ),
@@ -119,17 +126,42 @@ class _ToLangState extends State<ToLang> {
                 );
               },
               onEditingComplete: () {
-                FocusScope.of(context).unfocus();
-                var chosenOne = selectLanguages.firstWhere((word) => word
-                    .toLowerCase()
-                    .startsWith(fieldTextEditingController.text.toLowerCase()));
+                try {
+                  var chosenOne = selectLanguages.firstWhere((word) => word
+                      .toLowerCase()
+                      .startsWith(
+                          fieldTextEditingController.text.toLowerCase()));
+                  if (chosenOne != fromLanguage) {
+                    FocusScope.of(context).unfocus();
+                    session.write('to_language', chosenOne);
+                    setState(() {
+                      toLanguage = chosenOne;
+                      toLanguageValue = selectLanguagesMap[chosenOne];
+                    });
+                    fieldTextEditingController.text = chosenOne;
+                  } else {
+                    var dimmedSelectLanguage = selectLanguages.toList();
+                    dimmedSelectLanguage.remove(chosenOne);
 
-                session.write('to_language', chosenOne);
-                setState(() {
-                  toLanguage = chosenOne;
-                  toLanguageValue = selectLanguagesMap[chosenOne];
-                });
-                fieldTextEditingController.text = chosenOne;
+                    try {
+                      chosenOne = dimmedSelectLanguage.firstWhere((word) => word
+                          .toLowerCase()
+                          .startsWith(
+                              fieldTextEditingController.text.toLowerCase()));
+                      if (chosenOne != fromLanguage) {
+                        FocusScope.of(context).unfocus();
+                        session.write('to_language', chosenOne);
+                        setState(() {
+                          toLanguage = chosenOne;
+                          toLanguageValue = selectLanguagesMap[chosenOne];
+                        });
+                        fieldTextEditingController.text = chosenOne;
+                      }
+                    } catch (_) {}
+                  }
+                } catch (_) {}
+
+                // chose the next one if the first is dimmed.
               },
               decoration: InputDecoration(border: InputBorder.none),
               controller: fieldTextEditingController,
