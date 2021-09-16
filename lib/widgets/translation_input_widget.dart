@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate/widgets/copy_to_clipboard_button.dart';
+import 'package:simplytranslate/widgets/delete_translation_input_button.dart';
 import '../data.dart';
 import './paste_clipboard_button.dart';
 
@@ -57,6 +58,9 @@ class _TranslationInputState extends State<TranslationInput> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                DeleteTranslationInputButton(
+                    setStateParent: setState,
+                    setStateParentParent: widget.setStateParent),
                 CopyToClipboardButton(translationInput),
                 PasteClipboardButton(),
               ],
