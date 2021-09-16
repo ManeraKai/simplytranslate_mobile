@@ -49,7 +49,7 @@ class _ToLangState extends State<ToLang> {
                     : null,
                 margin: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
-                  color: greyColor,
+                  color: Colors.transparent,
                   boxShadow: [
                     BoxShadow(offset: Offset(0, 0), blurRadius: 5),
                   ],
@@ -60,36 +60,41 @@ class _ToLangState extends State<ToLang> {
                   child: SingleChildScrollView(
                     controller: rightTextviewScrollController,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: () {
                         List<Widget> widgetList = [];
                         for (int index = 0; index < options.length; index++) {
                           final option = options.elementAt(index);
                           widgetList.add(
-                            GestureDetector(
-                              onTap: () {
-                                if (option != fromLanguage) {
-                                  FocusScope.of(context).unfocus();
-                                  session.write('to_language', option);
-                                  setState(() {
-                                    toLanguage = option;
-                                    toLanguageValue =
-                                        selectLanguagesMap[option];
-                                  });
-                                  changeText();
-                                }
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 18),
-                                child: Text(
-                                  option,
-                                  style: (option == fromLanguage)
-                                      ? const TextStyle(
-                                          fontSize: 20, color: secondgreyColor)
-                                      : const TextStyle(
-                                          fontSize: 20, color: null),
+                            Container(
+                              color: greyColor,
+                              child: GestureDetector(
+                                onTap: option == fromLanguage
+                                    ? null
+                                    : () {
+                                        if (option != fromLanguage) {
+                                          FocusScope.of(context).unfocus();
+                                          session.write('to_language', option);
+                                          setState(() {
+                                            toLanguage = option;
+                                            toLanguageValue =
+                                                selectLanguagesMap[option];
+                                          });
+                                          changeText();
+                                        }
+                                      },
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 18),
+                                  child: Text(
+                                    option,
+                                    style: (option == fromLanguage)
+                                        ? const TextStyle(
+                                            fontSize: 18,
+                                            color: secondgreyColor)
+                                        : const TextStyle(
+                                            fontSize: 18, color: null),
+                                  ),
                                 ),
                               ),
                             ),
@@ -163,10 +168,13 @@ class _ToLangState extends State<ToLang> {
 
                 // chose the next one if the first is dimmed.
               },
-              decoration: InputDecoration(border: InputBorder.none),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
+              ),
               controller: fieldTextEditingController,
               focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 18),
             ),
           );
         },

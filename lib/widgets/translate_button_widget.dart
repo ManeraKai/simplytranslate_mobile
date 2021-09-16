@@ -19,10 +19,10 @@ class TranslateButton extends StatelessWidget {
           ? Container(
               alignment: Alignment.center,
               width: 80,
-              height: 40,
+              height: 38,
               child: CircularProgressIndicator())
           : Ink(
-              height: 40,
+              height: 38,
               decoration: boxDecorationCustom,
               child: Padding(
                 padding: const EdgeInsets.all(6.5),
@@ -36,7 +36,7 @@ class TranslateButton extends StatelessWidget {
                     },
                     child: Text(
                       AppLocalizations.of(context)!.translate,
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ),

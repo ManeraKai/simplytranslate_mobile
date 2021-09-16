@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data.dart';
@@ -48,7 +49,7 @@ class _FromLangState extends State<FromLang> {
                     : null,
                 margin: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
-                  color: greyColor,
+                  color: Colors.transparent,
                   boxShadow: [
                     BoxShadow(offset: Offset(0, 0), blurRadius: 5),
                   ],
@@ -65,30 +66,35 @@ class _FromLangState extends State<FromLang> {
                         for (int index = 0; index < options.length; index++) {
                           final option = options.elementAt(index);
                           widgetList.add(
-                            GestureDetector(
-                              onTap: () {
-                                if (option != toLanguage) {
-                                  FocusScope.of(context).unfocus();
-                                  session.write('from_language', option);
-                                  setState(() {
-                                    fromLanguage = option;
-                                    fromLanguageValue =
-                                        fromSelectLanguagesMap[option];
-                                  });
-                                  changeText();
-                                }
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 18),
-                                child: Text(option,
-                                    style: (option == toLanguage)
-                                        ? const TextStyle(
-                                            fontSize: 20,
-                                            color: secondgreyColor)
-                                        : const TextStyle(
-                                            fontSize: 20, color: null)),
+                            Container(
+                              color: greyColor,
+                              child: GestureDetector(
+                                onTap: option == toLanguage
+                                    ? null
+                                    : () {
+                                        if (option != toLanguage) {
+                                          FocusScope.of(context).unfocus();
+                                          session.write(
+                                              'from_language', option);
+                                          setState(() {
+                                            fromLanguage = option;
+                                            fromLanguageValue =
+                                                fromSelectLanguagesMap[option];
+                                          });
+                                          changeText();
+                                        }
+                                      },
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 18),
+                                  child: Text(option,
+                                      style: (option == toLanguage)
+                                          ? const TextStyle(
+                                              fontSize: 18,
+                                              color: secondgreyColor)
+                                          : const TextStyle(fontSize: 18)),
+                                ),
                               ),
                             ),
                           );
@@ -160,10 +166,13 @@ class _FromLangState extends State<FromLang> {
                   }
                 } catch (_) {}
               },
-              decoration: InputDecoration(border: InputBorder.none),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
+              ),
               controller: fieldTextEditingController,
               focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 18),
             ),
           );
         },

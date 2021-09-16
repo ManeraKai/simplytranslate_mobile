@@ -30,6 +30,7 @@ class _SettingsState extends State<Settings> {
           Container(
             decoration: boxDecorationCustom,
             padding: const EdgeInsets.symmetric(horizontal: 8),
+            height: 43,
             child: DropdownButton(
               isExpanded: true,
               underline: const SizedBox.shrink(),
@@ -46,6 +47,7 @@ class _SettingsState extends State<Settings> {
                 widget.checkLibreTranslate(setState);
               }),
               value: instance,
+              style: TextStyle(fontSize: 17),
               items: [
                 ...() {
                   var list = <DropdownMenuItem<String>>[];
@@ -142,12 +144,14 @@ class _SettingsState extends State<Settings> {
             const SizedBox.shrink(),
           const SizedBox(height: 10),
           Container(
+            height: 43,
             decoration: boxDecorationCustom,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: DropdownButton(
               isExpanded: true,
               underline: const SizedBox.shrink(),
               dropdownColor: greyColor,
+              style: TextStyle(fontSize: 18),
               onChanged: (String? value) => setState(() {
                 engineSelected = value!;
                 session.write('engine', value);

@@ -32,6 +32,7 @@ class SwitchLang extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width / 3 - 60,
         decoration: boxDecorationCustom,
+        height: 41,
         child: TextButton(
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
@@ -59,7 +60,10 @@ class SwitchLang extends StatelessWidget {
               });
             }
           },
-          child: const Text('<->'),
+          child: const Text(
+            '<->',
+            style: TextStyle(fontSize: 18),
+          ),
         ),
       );
 }
