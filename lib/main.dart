@@ -204,6 +204,9 @@ class MainPageLocalization extends StatelessWidget {
     if (session.read('to_language').toString() != 'null')
       toLanguage = session.read('to_language').toString();
 
+    if (session.read('engine').toString() != 'null')
+      engineSelected = session.read('engine').toString();
+
     return MainPage();
   }
 }
@@ -232,17 +235,20 @@ class _MainPageState extends State<MainPage> {
       }
       if (customInstance.startsWith('https://')) {
         customInstance = customInstance.trim();
-        url = Uri.https(customInstance.substring(8), '/');
+        url = Uri.https(
+            customInstance.substring(8), '/', {'engine': engineSelected});
         // custom https://
       } else if (customInstance.startsWith('http://')) {
         // http://
-        url = Uri.http(customInstance.substring(7), '/');
+        url = Uri.http(
+            customInstance.substring(7), '/', {'engine': engineSelected});
       } else {
-        url = Uri.https(customInstance, '/');
+        url = Uri.https(customInstance, '/', {'engine': engineSelected});
         // custom else https://
       }
     } else {
-      url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
+      url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
+          {'engine': engineSelected});
       // default https://
     }
 
@@ -319,17 +325,20 @@ class _MainPageState extends State<MainPage> {
 
       if (customInstance.startsWith('https://')) {
         customInstance = customInstance.trim();
-        url = Uri.https(customInstance.substring(8), '/');
+        url = Uri.https(
+            customInstance.substring(8), '/', {'engine': engineSelected});
         // custom https://
       } else if (customInstance.startsWith('http://'))
         // http://
-        url = Uri.http(customInstance.substring(7), '/');
+        url = Uri.http(
+            customInstance.substring(7), '/', {'engine': engineSelected});
       else
-        url = Uri.https(customInstance, '/');
+        url = Uri.https(customInstance, '/', {'engine': engineSelected});
       // custom else https://
 
     } else
-      url = Uri.https(instances[instanceIndex].toString().substring(8), '/');
+      url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
+          {'engine': engineSelected});
     // default https://
 
     try {

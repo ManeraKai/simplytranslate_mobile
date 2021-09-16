@@ -136,7 +136,27 @@ class _SettingsState extends State<Settings> {
           // Instance Select is one of the `Default Instances`.
           else
             //---- Nothing... the instance will be selected from the original Select Button -----//
-            const SizedBox.shrink()
+            const SizedBox.shrink(),
+          const SizedBox(height: 10),
+          Container(
+            decoration: boxDecorationCustom,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButton(
+              isExpanded: true,
+              underline: const SizedBox.shrink(),
+              dropdownColor: greyColor,
+              onChanged: (String? value) => setState(() {
+                engineSelected = value!;
+                session.write('engine', value);
+              }),
+              value: engineSelected,
+              items: [
+                DropdownMenuItem(
+                    value: 'google', child: Text('GoogleTranslate')),
+                DropdownMenuItem(value: 'libre', child: Text('LibreTranslate'))
+              ],
+            ),
+          ),
         ],
       ),
     );

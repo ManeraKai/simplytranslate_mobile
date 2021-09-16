@@ -58,6 +58,8 @@ final ScrollController leftTextviewScrollController = ScrollController();
 
 final ScrollController rightTextviewScrollController = ScrollController();
 
+String engineSelected = 'google';
+
 var instances = [
   "https://translate.metalune.xyz",
   "https://almaleehserver.asuscomm.com:447"
