@@ -53,8 +53,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       print('wewe');
-      getSharedText();
-      setState(() {});
+      getSharedText(setState);
     }
   }
 
@@ -322,7 +321,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     checkLibreTranslate(setState);
-    getSharedText();
+    getSharedText(setState);
     super.initState();
   }
 

@@ -74,7 +74,7 @@ class _TranslationInputState extends State<TranslationInput> {
                     setStateParent: setState,
                     setStateParentParent: widget.setStateParent),
                 CopyToClipboardButton(translationInput),
-                PasteClipboardButton(),
+                PasteClipboardButton(setStateParent: setState),
               ],
             ),
           )

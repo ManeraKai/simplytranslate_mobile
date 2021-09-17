@@ -4,7 +4,9 @@ import '../data.dart';
 
 class PasteClipboardButton extends StatelessWidget {
   final changeText;
+  final setStateParent;
   const PasteClipboardButton({
+    required this.setStateParent,
     this.changeText,
     Key? key,
   }) : super(key: key);
@@ -19,9 +21,14 @@ class PasteClipboardButton extends StatelessWidget {
         onPressed: () {
           Clipboard.getData(Clipboard.kTextPlain).then((value) {
             if (value != null) {
-              translationInputController.text += value.text.toString();
-              translationInputController.selection = TextSelection.collapsed(
-                  offset: translationInputController.text.length);
+              var newText =
+                  translationInputController.text + value.text.toString();
+              var selection = TextSelection.collapsed(offset: newText.length);
+              setStateParent(() {
+                translationInput = newText;
+                translationInputController.text = newText;
+                translationInputController.selection = selection;
+              });
             }
           });
         },

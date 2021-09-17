@@ -41,13 +41,15 @@ bool isThereLibreTranslate = false;
 
 const methodChannel = MethodChannel('com.simplytranslate/translate');
 
-Future<void> getSharedText() async {
+Future<void> getSharedText(setState) async {
   print('starting ---------------------------------------------');
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
-      translationInput = answer.toString();
-      translationInputController.text = translationInput;
+      setState(() {
+        translationInput = answer.toString();
+        translationInputController.text = translationInput;
+      });
     }
   } on PlatformException catch (e) {
     print(e);
