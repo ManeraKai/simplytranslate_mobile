@@ -28,7 +28,7 @@ jobs:
           java-version: '11.0.11'
       - uses: subosito/flutter-action@v1
       - run: flutter pub get
-      - run: flutter build apk --flavor development
+      - run: flutter build apk --flavor development --debug
       
       - name: Save result
         uses: actions/upload-artifact@v2
