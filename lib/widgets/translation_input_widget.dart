@@ -21,6 +21,11 @@ class TranslationInput extends StatefulWidget {
 
 class _TranslationInputState extends State<TranslationInput> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 150,

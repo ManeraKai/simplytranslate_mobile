@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
 const greyColor = Color(0xff131618);
@@ -35,6 +36,21 @@ enum customInstanceValidation {
   NotChecked,
 }
 bool isThereLibreTranslate = false;
+
+const methodChannel = MethodChannel('com.simplytranslate/translate');
+
+Future<void> getSharedText() async {
+  print('starting ---------------------------------------------');
+  try {
+    var answer = await methodChannel.invokeMethod('getText');
+    if (answer != '') {
+      translationInput = answer.toString();
+      translationInputController.text = translationInput;
+    }
+  } on PlatformException catch (e) {
+    print(e);
+  }
+}
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 Map selectLanguagesMap = {};

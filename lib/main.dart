@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart' show parse;
@@ -70,7 +72,27 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      print('wewe');
+      getSharedText();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -261,6 +283,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   void dispose() {
     customUrlController.dispose();
+
     super.dispose();
   }
 
@@ -390,10 +413,12 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     checkLibreTranslate(setState);
+    getSharedText();
     super.initState();
   }
 
   final rowWidth = 430;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
