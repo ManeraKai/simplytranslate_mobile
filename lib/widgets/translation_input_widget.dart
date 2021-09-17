@@ -28,7 +28,7 @@ class _TranslationInputState extends State<TranslationInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 200,
       decoration: boxDecorationCustom,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

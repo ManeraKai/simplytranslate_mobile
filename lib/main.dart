@@ -7,51 +7,15 @@ import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate/screens/about_screen.dart';
 import './data.dart';
-import './widgets/settings_widget.dart';
+import 'screens/settings_screen.dart';
 import './widgets/translate_button_widget.dart';
 import './widgets/translation_input_widget.dart';
 import './widgets/translation_output_widget.dart';
 import './widgets/from_lang_widget.dart';
 import './widgets/to_lang_widget.dart';
 import './widgets/switch_lang_widget.dart';
-
-customInstanceFormatting() {
-  final url;
-  if (customInstance.endsWith('/'))
-    // trimming last slash
-    customInstance = customInstance.substring(0, customInstance.length - 1);
-  if (customInstance.startsWith('https://')) {
-    customInstance = customInstance.trim();
-    url =
-        Uri.https(customInstance.substring(8), '/', {'engine': engineSelected});
-    // custom https://
-  } else if (customInstance.startsWith('http://'))
-    // http://
-    url =
-        Uri.http(customInstance.substring(7), '/', {'engine': engineSelected});
-  else
-    url = Uri.https(customInstance, '/', {'engine': engineSelected});
-  // custom else https://
-  return url;
-}
-
-checkLibreTranslatewithRespone(response, {setState}) {
-  if (parse(response.body)
-      .getElementsByTagName('a')[1]
-      .innerHtml
-      .contains('LibreTranslate')) {
-    if (setState != null)
-      setState(() => isThereLibreTranslate = true);
-    else
-      isThereLibreTranslate = true;
-  } else {
-    if (setState != null)
-      setState(() => isThereLibreTranslate = false);
-    else
-      isThereLibreTranslate = false;
-  }
-}
 
 void main(List<String> args) async {
   //------ Setting session variables up --------//
@@ -119,6 +83,79 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ),
       title: 'Simply Translate',
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: greyColor,
+          elevation: 0,
+          title: Text('Simply Translate'),
+        ),
+        drawer: Container(
+          width: 200,
+          child: Drawer(
+            child: Container(
+              child: ListView(
+                children: [
+                  Container(
+                    height: 80,
+                    child: DrawerHeader(
+                      padding: EdgeInsets.zero,
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 3.7, right: 2),
+                              child: Image(
+                                image: AssetImage(
+                                    'assets/favicon/simplytranslate_transparent.png'),
+                                height: 28,
+                              ),
+                            ),
+                            Text('imply Translate',
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Builder(
+                    builder: (context) => ListTile(
+                      title: const Text('Settings'),
+                      horizontalTitleGap: 0,
+                      leading: Icon(
+                        Icons.settings,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Settings(setState)),
+                        );
+                      },
+                    ),
+                  ),
+                  Builder(
+                    builder: (context) => ListTile(
+                      title: const Text('About'),
+                      leading: Icon(Icons.person),
+                      horizontalTitleGap: 0,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AboutScreen()),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
         backgroundColor: secondgreyColor,
         body: MainPageLocalization(),
       ),
@@ -281,6 +318,13 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    checkLibreTranslate(setState);
+    getSharedText();
+    super.initState();
+  }
+
   void dispose() {
     customUrlController.dispose();
 
@@ -357,73 +401,13 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  Future<void> checkInstance() async {
-    setState(() => checkLoading = true);
-
-    final url;
-    var tmpUrl = '';
-    if (instance == 'custom') {
-      url = customInstanceFormatting();
-      tmpUrl = customInstance;
-    } else
-      url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
-          {'engine': engineSelected});
-    // default https://
-
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
-            'SimplyTranslate')) {
-          session.write('url', tmpUrl);
-          setState(() => isCustomInstanceValid = customInstanceValidation.True);
-        } else
-          setState(
-              () => isCustomInstanceValid = customInstanceValidation.False);
-        checkLibreTranslatewithRespone(response, setState: setState);
-      } else
-        setState(() => isCustomInstanceValid = customInstanceValidation.False);
-    } catch (err) {
-      setState(() => isCustomInstanceValid = customInstanceValidation.False);
-    }
-    setState(() => checkLoading = false);
-    return;
-  }
-
-  checkLibreTranslate(setStateCustom) async {
-    final url;
-    if (instance == 'custom') {
-      customInstance = customUrlController.text;
-      url = customInstanceFormatting();
-    } else if (instance == 'random') {
-      url = Uri.https(instances[instanceIndex].substring(8), '/',
-          {'engine': engineSelected});
-    } else
-      url = Uri.https(
-          instance.toString().substring(8), '/', {'engine': engineSelected});
-    // default https://
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        checkLibreTranslatewithRespone(response, setState: setStateCustom);
-      }
-    } catch (err) {}
-  }
-
-  @override
-  void initState() {
-    checkLibreTranslate(setState);
-    getSharedText();
-    super.initState();
-  }
-
   final rowWidth = 430;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -451,9 +435,6 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
               const SizedBox(height: 20),
-              Settings(
-                  checkInstanceParent: checkInstance,
-                  checkLibreTranslate: checkLibreTranslate),
             ],
           ),
         ),

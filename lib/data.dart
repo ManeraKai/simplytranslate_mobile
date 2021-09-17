@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:html/parser.dart';
+import 'package:http/http.dart' as http;
 
 const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
@@ -50,6 +52,95 @@ Future<void> getSharedText() async {
   } on PlatformException catch (e) {
     print(e);
   }
+}
+
+customInstanceFormatting() {
+  final url;
+  if (customInstance.endsWith('/'))
+    // trimming last slash
+    customInstance = customInstance.substring(0, customInstance.length - 1);
+  if (customInstance.startsWith('https://')) {
+    customInstance = customInstance.trim();
+    url =
+        Uri.https(customInstance.substring(8), '/', {'engine': engineSelected});
+    // custom https://
+  } else if (customInstance.startsWith('http://'))
+    // http://
+    url =
+        Uri.http(customInstance.substring(7), '/', {'engine': engineSelected});
+  else
+    url = Uri.https(customInstance, '/', {'engine': engineSelected});
+  // custom else https://
+  return url;
+}
+
+checkLibreTranslatewithRespone(response, {setState}) {
+  if (parse(response.body)
+      .getElementsByTagName('a')[1]
+      .innerHtml
+      .contains('LibreTranslate')) {
+    if (setState != null)
+      setState(() => isThereLibreTranslate = true);
+    else
+      isThereLibreTranslate = true;
+  } else {
+    if (setState != null)
+      setState(() => isThereLibreTranslate = false);
+    else
+      isThereLibreTranslate = false;
+  }
+}
+
+checkLibreTranslate(setStateCustom) async {
+  final url;
+  if (instance == 'custom') {
+    customInstance = customUrlController.text;
+    url = customInstanceFormatting();
+  } else if (instance == 'random') {
+    url = Uri.https(
+        instances[instanceIndex].substring(8), '/', {'engine': engineSelected});
+  } else
+    url = Uri.https(
+        instance.toString().substring(8), '/', {'engine': engineSelected});
+  // default https://
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      checkLibreTranslatewithRespone(response, setState: setStateCustom);
+    }
+  } catch (err) {}
+}
+
+Future<void> checkInstance(setState) async {
+  setState(() => checkLoading = true);
+
+  final url;
+  var tmpUrl = '';
+  if (instance == 'custom') {
+    url = customInstanceFormatting();
+    tmpUrl = customInstance;
+  } else
+    url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
+        {'engine': engineSelected});
+  // default https://
+
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
+          'SimplyTranslate')) {
+        session.write('url', tmpUrl);
+        setState(() => isCustomInstanceValid = customInstanceValidation.True);
+      } else
+        setState(() => isCustomInstanceValid = customInstanceValidation.False);
+      checkLibreTranslatewithRespone(response, setState: setState);
+    } else
+      setState(() => isCustomInstanceValid = customInstanceValidation.False);
+  } catch (err) {
+    setState(() => isCustomInstanceValid = customInstanceValidation.False);
+  }
+  setState(() => checkLoading = false);
+  return;
 }
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
