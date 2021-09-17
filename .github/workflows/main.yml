@@ -29,6 +29,12 @@ jobs:
       - uses: subosito/flutter-action@v1
       - run: flutter pub get
       - run: flutter build apk --flavor development
+      
+      - name: Save result
+        uses: actions/upload-artifact@v2
+        with:
+          name: compiled-flutter-code
+          path: build/app/outputs/flutter-apk/app-development-release.apk
 
 
 # You may pin to the exact commit or the version.
