@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       print('wewe');
       getSharedText();
+      setState(() {});
     }
   }
 
