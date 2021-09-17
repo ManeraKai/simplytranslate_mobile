@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: compiled-flutter-code
-          path: build/app/outputs/flutter-apk/app-development-release.apk
+          path: build/app/outputs/flutter-apk/app-development-debug.apk
 
 
 # You may pin to the exact commit or the version.
