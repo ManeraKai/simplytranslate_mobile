@@ -39,7 +39,7 @@ class _TranslationInputState extends State<TranslationInput> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: TextField(
-                    minLines: 5,
+                    minLines: 7,
                     maxLines: 10,
                     controller: translationInputController,
                     keyboardType: TextInputType.text,
