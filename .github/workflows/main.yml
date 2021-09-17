@@ -27,8 +27,6 @@ jobs:
         with:
           java-version: '11.0.11'
       - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '2.14.0'
       - run: flutter pub get
       - run: flutter build apk --flavor development
 
