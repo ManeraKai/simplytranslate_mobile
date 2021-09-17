@@ -30,7 +30,7 @@ jobs:
         with:
           flutter-version: '2.0.5'
       - run: flutter pub get
-      - run: flutter build apk --flavor fdroid
+      - run: flutter build apk --flavor development
 
 
 # You may pin to the exact commit or the version.
