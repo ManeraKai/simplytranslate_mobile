@@ -44,7 +44,7 @@ class _TranslationInputState extends State<TranslationInput> {
                     minLines: 7,
                     maxLines: 10,
                     controller: translationInputController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.multiline,
                     onChanged: (String input) async {
                       setState(() {
                         translationInput = input;
