@@ -1,3 +1,4 @@
+import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
@@ -25,6 +26,8 @@ class _TranslationInputState extends State<TranslationInput> {
     super.initState();
   }
 
+  bool isRTL = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,29 +43,37 @@ class _TranslationInputState extends State<TranslationInput> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextField(
-                    minLines: 7,
-                    maxLines: 10,
-                    controller: translationInputController,
-                    keyboardType: TextInputType.text,
-                    onChanged: (String input) async {
+                  child: AutoDirection(
+                    text: translationInput,
+                    onDirectionChange: (isRTL) {
                       setState(() {
-                        translationInput = input;
+                        this.isRTL = isRTL;
                       });
                     },
-                    decoration: InputDecoration(
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(color: lightgreyColor),
-                        hintText:
-                            AppLocalizations.of(context)!.enter_text_here),
-                    style: const TextStyle(fontSize: 20),
-                    onEditingComplete: () async {
-                      FocusScope.of(context).unfocus();
-                      widget.setStateParent(() => loading = true);
-                      await widget.translateParent(translationInput);
-                      widget.setStateParent(() => loading = false);
-                    },
+                    child: TextField(
+                      minLines: 7,
+                      maxLines: 10,
+                      controller: translationInputController,
+                      keyboardType: TextInputType.text,
+                      onChanged: (String input) async {
+                        setState(() {
+                          translationInput = input;
+                        });
+                      },
+                      decoration: InputDecoration(
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(color: lightgreyColor),
+                          hintText:
+                              AppLocalizations.of(context)!.enter_text_here),
+                      style: const TextStyle(fontSize: 20),
+                      onEditingComplete: () async {
+                        FocusScope.of(context).unfocus();
+                        widget.setStateParent(() => loading = true);
+                        await widget.translateParent(translationInput);
+                        widget.setStateParent(() => loading = false);
+                      },
+                    ),
                   ),
                 ),
               ),

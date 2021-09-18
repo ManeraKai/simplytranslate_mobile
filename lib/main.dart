@@ -165,7 +165,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   ),
                   Builder(
                     builder: (context) => ListTile(
-                      title: const Text('Settings'),
+                      title: Text(AppLocalizations.of(context)!.settings),
                       horizontalTitleGap: 0,
                       leading: Icon(
                         Icons.settings,
@@ -182,7 +182,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   ),
                   Builder(
                     builder: (context) => ListTile(
-                      title: const Text('About'),
+                      title: Text(AppLocalizations.of(context)!.about),
                       leading: Icon(Icons.person),
                       horizontalTitleGap: 0,
                       onTap: () {

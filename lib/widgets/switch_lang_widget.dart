@@ -54,8 +54,13 @@ class SwitchLang extends StatelessWidget {
               fromLanguageisDefault = true;
               toLanguageisDefault = true;
 
-              translationInputController.text = translationOutput;
-              final x = await translateParent(translationInput);
+              final translationInputTmp = translationInput;
+
+              setStateParent(() {
+                translationInput = translationOutput;
+                translationInputController.text = translationOutput;
+              });
+              final x = await translateParent(translationInputTmp);
               setStateParent(() {
                 loading = false;
                 translationOutput = x;

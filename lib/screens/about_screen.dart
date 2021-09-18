@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../data.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -19,7 +20,10 @@ class AboutScreen extends StatelessWidget {
         backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
         iconTheme: IconThemeData(
             color: theme == Brightness.dark ? whiteColor : Colors.black),
-        title: Text('About'),
+        title: Text(AppLocalizations.of(context)!.about,
+            style: theme == Brightness.dark
+                ? TextStyle(color: whiteColor)
+                : TextStyle(color: Colors.black)),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -27,49 +31,9 @@ class AboutScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Developer information:',
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Application version number: 1.0.0',
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Copyright:',
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus.',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Co-Authors:',
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus.',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Contributing:',
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus.',
-              style: TextStyle(fontSize: 18),
-            ),
+              AppLocalizations.of(context)!.about_description,
+              style: TextStyle(fontSize: 20),
+            )
           ],
         ),
       ),

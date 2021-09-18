@@ -26,6 +26,7 @@ dependencies:
   http: ^0.13.3
   html: ^0.15.0
   get_storage: ^2.0.3
+  auto_direction: ^0.0.5
 
   flutter_localizations:
     sdk: flutter

@@ -45,7 +45,7 @@ class _SettingsState extends State<Settings> {
                   children: [
                     //-------------- Instance Select Button --------------------//
                     Text(
-                      'Select Instance',
+                      AppLocalizations.of(context)!.select_instance,
                       style: const TextStyle(fontSize: 25),
                     ),
                     SizedBox(height: 20),
@@ -226,7 +226,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     SizedBox(height: 40),
                     Text(
-                      'Theme',
+                      AppLocalizations.of(context)!.theme,
                       style: const TextStyle(fontSize: 25),
                     ),
                     SizedBox(height: 20),
@@ -260,10 +260,15 @@ class _SettingsState extends State<Settings> {
                         value: themeValue,
                         items: [
                           DropdownMenuItem(
-                              value: 'system', child: Text('Follow System')),
+                              value: 'system',
+                              child: Text(
+                                  AppLocalizations.of(context)!.follow_system)),
                           DropdownMenuItem(
-                              value: 'light', child: Text('Light')),
-                          DropdownMenuItem(value: 'dark', child: Text('Dark'))
+                              value: 'light',
+                              child: Text(AppLocalizations.of(context)!.light)),
+                          DropdownMenuItem(
+                              value: 'dark',
+                              child: Text(AppLocalizations.of(context)!.dark))
                         ],
                       ),
                     ),

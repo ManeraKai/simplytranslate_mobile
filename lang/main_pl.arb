@@ -120,6 +120,16 @@
     "something_went_wrong": "Coś poszło nie tak",
     "check_instance": "Sprawdź instancję",
     "no_internet": "Brak połączenia z Internetem",
-    "ok": "OK"
+    "ok": "OK",
 
+    "settings": "Settings",
+
+    "select_instance": "Select instance",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "follow_system": "Follow system",
+
+    "about": "About",
+    "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est."
 }

@@ -1,3 +1,4 @@
+import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:simplytranslate/screens/maximized_screen.dart';
 import '../data.dart';
@@ -13,6 +14,7 @@ class TranslationOutput extends StatefulWidget {
 }
 
 class _TranslationOutputState extends State<TranslationOutput> {
+  bool isRTL = false;
   double outputFontSize = 20;
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,17 @@ class _TranslationOutputState extends State<TranslationOutput> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: SelectableText(
-                    translationOutput,
-                    style: TextStyle(fontSize: outputFontSize),
+                  child: AutoDirection(
+                    text: translationOutput,
+                    onDirectionChange: (isRTL) {
+                      setState(() {
+                        this.isRTL = isRTL;
+                      });
+                    },
+                    child: SelectableText(
+                      translationOutput,
+                      style: TextStyle(fontSize: outputFontSize),
+                    ),
                   ),
                 ),
               ),
