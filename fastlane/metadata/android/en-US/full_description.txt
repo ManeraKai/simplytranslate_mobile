@@ -1,20 +1,7 @@
-<p>Normally you would use GoogleTranslate. Problem is either you'll be signed in with your google account, from the same
-    ip as your google account, or some other factors. Translations may be tied to your identity. Sometimes there is no
-    problem with that. Other times there is. Like when browsing wikipedia. We'll know what diseases you have, political,
-    religious, sexual etc... Translation is a bit worse.
-</p>
+<p>Normally you would use GoogleTranslate. Problem is either you'll be signed in with your google account, from the same ip as your google account, or some other factors. Translations may be tied to your identity. Sometimes there is no problem with that. Other times there is. Like when browsing wikipedia. We'll know what diseases you have, political, religious, sexual etc. Translation is a bit worse.</p>
 
-<p><a href="https://metalune.xyz/">Metalune</a> created a proxy server application for GoogleTranslate. You connect to
-    one of the so called "<a href="https://simple-web.metalune.xyz/projects/simplytranslate.html">SimplyTranslate</a>"
-    instances(servers). Request data to be translated. The instance will request that data from GoogleTranslate, and
-    give it back to you. Only the instance's identity was exposed. If multiple people used the instance, you'll be
-    obfuscated with them. Using a different instance each time will obfuscate more.</p>
+<p><a href="https://metalune.xyz/">Metalune</a> created a proxy server application for GoogleTranslate. You connect to one of the so called "<a href="https://simple-web.metalune.xyz/projects/simplytranslate.html">SimplyTranslate</a>" instances (servers). Request data to be translated. The instance will request that data from GoogleTranslate, and give it back to you. Only the instance's identity was exposed. If multiple people used the instance, you'll be obfuscated with them. Using a different instance each time will obfuscate more.</p>
 
-<p>Metalune created a <a href="https://translate.metalune.xyz/">web client</a> for
-    SimplyTranslate, and I created a mobile client. Pros of mine is if you want to connect to a different instance each
-    time, you won't have to visit a different website. Just select one of the available ones in instance selector
-    button, let the app choose a random one every launch, or a custom one. All of that without leaving your lovely app.
-</p>
+<p>Metalune created a <a href="https://translate.metalune.xyz/">web client</a> for SimplyTranslate, and I created a mobile client. The nice thing about my app is that to connect to a different instance each time, you won't have to visit a different website. Just select one of the available ones in instance selector button, let the app choose a random one every launch, or a custom one. All of that without leaving your lovely app.</p>
 
-<p>No Instant Camera, Document, or Speech Translation at the time. Those should be implemented first on the proxy
-    server. Then on the client apps. I'll try to help with that.</p>
+<p>No Instant Camera, Document, or Speech Translation at the time. Those should be implemented first on the proxy server. Then on the client app. I'll try to help with that.</p>
