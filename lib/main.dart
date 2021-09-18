@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
@@ -26,6 +27,16 @@ void main(List<String> args) async {
 
   customUrl = session.read('url') != null ? session.read('url').toString() : '';
   customUrlController.text = customUrl;
+
+  var themeSession = session.read('theme').toString();
+  if (themeSession != 'null') {
+    themeValue = themeSession;
+    if (themeSession == 'system')
+      theme = SchedulerBinding.instance!.window.platformBrightness;
+    else if (themeSession == 'light')
+      theme = Brightness.light;
+    else if (themeSession == 'dark') theme = Brightness.dark;
+  }
   //--------------------------------------------//
 
   return runApp(MyApp());
@@ -52,7 +63,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      print('wewe');
       getSharedText(setState);
     }
   }
@@ -64,29 +74,54 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        accentColor: Colors.white,
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: whiteColor,
+            cursorColor: theme == Brightness.dark ? whiteColor : Colors.black),
+        textTheme: TextTheme(
+          bodyText2: theme == Brightness.dark
+              ? TextStyle(color: whiteColor)
+              : TextStyle(color: Colors.black),
+          subtitle1: theme == Brightness.dark
+              ? TextStyle(color: whiteColor, fontSize: 16)
+              : TextStyle(color: Colors.black),
+          headline6: theme == Brightness.dark
+              ? TextStyle(color: whiteColor)
+              : TextStyle(color: Colors.black),
         ),
-        textTheme: const TextTheme(
-            bodyText2: const TextStyle(color: whiteColor),
-            subtitle1: const TextStyle(color: whiteColor, fontSize: 16),
-            headline6: const TextStyle(color: whiteColor)),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(greyColor),
-            overlayColor: MaterialStateProperty.all(greyColor),
-            foregroundColor: MaterialStateProperty.all(whiteColor),
+            backgroundColor: theme == Brightness.dark
+                ? MaterialStateProperty.all(greyColor)
+                : MaterialStateProperty.all(whiteColor),
+            overlayColor: theme == Brightness.dark
+                ? MaterialStateProperty.all(greyColor)
+                : MaterialStateProperty.all(whiteColor),
+            foregroundColor: theme == Brightness.dark
+                ? MaterialStateProperty.all(whiteColor)
+                : MaterialStateProperty.all(Colors.black),
           ),
         ),
+        colorScheme: theme == Brightness.dark
+            ? ColorScheme.dark(onSurface: whiteColor)
+            : ColorScheme.light(onSurface: Colors.black),
       ),
       title: 'Simply Translate',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: greyColor,
+          backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
           elevation: 0,
-          title: Text('Simply Translate'),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(2),
+            child: Container(
+              color: lightgreyColor,
+              height: 2,
+            ),
+          ),
+          iconTheme: IconThemeData(
+              color: theme == Brightness.dark ? whiteColor : Colors.black),
+          title: Text('Simply Translate',
+              style: theme == Brightness.dark
+                  ? TextStyle(color: whiteColor)
+                  : TextStyle(color: Colors.black)),
         ),
         drawer: Container(
           width: 200,
@@ -107,13 +142,22 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                               padding:
                                   const EdgeInsets.only(bottom: 3.7, right: 2),
                               child: Image(
-                                image: AssetImage(
-                                    'assets/favicon/simplytranslate_transparent.png'),
+                                image: theme == Brightness.dark
+                                    ? AssetImage(
+                                        'assets/favicon/simplytranslate_transparent.png')
+                                    : AssetImage(
+                                        'assets/favicon/simplytranslate_transparent_black.png'),
                                 height: 28,
                               ),
                             ),
-                            Text('imply Translate',
-                                style: TextStyle(fontSize: 20)),
+                            Text(
+                              'imply Translate',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: theme == Brightness.dark
+                                      ? whiteColor
+                                      : Colors.black),
+                            ),
                           ],
                         ),
                       ),
@@ -156,7 +200,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
           ),
         ),
-        backgroundColor: secondgreyColor,
+        backgroundColor:
+            theme == Brightness.dark ? secondgreyColor : whiteColor,
         body: MainPageLocalization(),
       ),
     );
@@ -428,7 +473,7 @@ class _MainPageState extends State<MainPage> {
               TranslationOutput(),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   TranslateButton(
                       setStateParent: setState, translateParent: translate),

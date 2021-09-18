@@ -17,8 +17,10 @@ class _TranslationOutputState extends State<TranslationOutput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
-      decoration: boxDecorationCustom,
+      height: 200,
+      decoration: theme == Brightness.dark
+          ? boxDecorationCustomDark
+          : boxDecorationCustomLight,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

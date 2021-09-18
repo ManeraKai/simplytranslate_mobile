@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../data.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -7,6 +8,17 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(2),
+          child: Container(
+            color: lightgreyColor,
+            height: 2,
+          ),
+        ),
+        backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
+        iconTheme: IconThemeData(
+            color: theme == Brightness.dark ? whiteColor : Colors.black),
         title: Text('About'),
       ),
       body: Container(

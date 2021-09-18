@@ -17,7 +17,9 @@ class _FromLangState extends State<FromLang> {
     Function changeText = () {};
     return Container(
       width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: boxDecorationCustom,
+      decoration: theme == Brightness.dark
+          ? boxDecorationCustomDark
+          : boxDecorationCustomLight,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> fromSelectLanguagesIterable = Iterable.generate(
@@ -67,7 +69,9 @@ class _FromLangState extends State<FromLang> {
                           final option = options.elementAt(index);
                           widgetList.add(
                             Container(
-                              color: greyColor,
+                              color: theme == Brightness.dark
+                                  ? greyColor
+                                  : whiteColor,
                               child: GestureDetector(
                                 onTap: option == toLanguage
                                     ? null
@@ -88,12 +92,16 @@ class _FromLangState extends State<FromLang> {
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 18),
-                                  child: Text(option,
-                                      style: (option == toLanguage)
-                                          ? const TextStyle(
-                                              fontSize: 18,
-                                              color: secondgreyColor)
-                                          : const TextStyle(fontSize: 18)),
+                                  child: Text(
+                                    option,
+                                    style: (option == toLanguage)
+                                        ? TextStyle(
+                                            fontSize: 18,
+                                            color: theme == Brightness.dark
+                                                ? secondgreyColor
+                                                : Colors.grey)
+                                        : const TextStyle(fontSize: 18),
+                                  ),
                                 ),
                               ),
                             ),

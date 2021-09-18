@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:html/parser.dart';
@@ -9,8 +10,16 @@ const lightgreyColor = Color(0xff495057);
 const secondgreyColor = Color(0xff212529);
 const whiteColor = Color(0xfff5f6f7);
 
-final boxDecorationCustom = BoxDecoration(
+var boxDecorationCustomDark = BoxDecoration(
     color: greyColor,
+    border: Border.all(
+      color: lightgreyColor,
+      width: 2,
+      style: BorderStyle.solid,
+    ));
+
+var boxDecorationCustomLight = BoxDecoration(
+    color: whiteColor,
     border: Border.all(
       color: lightgreyColor,
       width: 2,
@@ -32,6 +41,9 @@ String translationOutput = '';
 String customInstance = '';
 String customUrl = '';
 
+var themeValue = 'system';
+Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
+
 enum customInstanceValidation {
   False,
   True,
@@ -42,7 +54,6 @@ bool isThereLibreTranslate = false;
 const methodChannel = MethodChannel('com.simplytranslate/translate');
 
 Future<void> getSharedText(setState) async {
-  print('starting ---------------------------------------------');
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {

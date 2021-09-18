@@ -23,7 +23,9 @@ class TranslateButton extends StatelessWidget {
               child: CircularProgressIndicator())
           : Ink(
               height: 38,
-              decoration: boxDecorationCustom,
+              decoration: theme == Brightness.dark
+                  ? boxDecorationCustomDark
+                  : boxDecorationCustomLight,
               child: Padding(
                 padding: const EdgeInsets.all(6.5),
                 child: Center(

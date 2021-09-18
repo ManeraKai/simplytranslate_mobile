@@ -31,7 +31,9 @@ class SwitchLang extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width / 3 - 60,
-        decoration: boxDecorationCustom,
+        decoration: theme == Brightness.dark
+            ? boxDecorationCustomDark
+            : boxDecorationCustomLight,
         height: 41,
         child: TextButton(
           onPressed: () async {

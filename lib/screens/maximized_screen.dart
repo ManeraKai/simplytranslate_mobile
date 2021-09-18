@@ -20,7 +20,13 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
         child: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
-            decoration: boxDecorationCustom,
+            decoration: theme == Brightness.dark
+                ? theme == Brightness.dark
+                    ? boxDecorationCustomDark
+                    : boxDecorationCustomDark
+                : theme == Brightness.dark
+                    ? boxDecorationCustomDark
+                    : boxDecorationCustomLight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

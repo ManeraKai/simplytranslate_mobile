@@ -17,7 +17,9 @@ class _ToLangState extends State<ToLang> {
     Function changeText = () {};
     return Container(
       width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: boxDecorationCustom,
+      decoration: theme == Brightness.dark
+          ? boxDecorationCustomDark
+          : boxDecorationCustomLight,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> toSelectLanguagesIterable = Iterable.generate(
@@ -66,7 +68,9 @@ class _ToLangState extends State<ToLang> {
                           final option = options.elementAt(index);
                           widgetList.add(
                             Container(
-                              color: greyColor,
+                              color: theme == Brightness.dark
+                                  ? greyColor
+                                  : whiteColor,
                               child: GestureDetector(
                                 onTap: option == fromLanguage
                                     ? null
@@ -89,11 +93,12 @@ class _ToLangState extends State<ToLang> {
                                   child: Text(
                                     option,
                                     style: (option == fromLanguage)
-                                        ? const TextStyle(
+                                        ? TextStyle(
                                             fontSize: 18,
-                                            color: secondgreyColor)
-                                        : const TextStyle(
-                                            fontSize: 18, color: null),
+                                            color: theme == Brightness.dark
+                                                ? secondgreyColor
+                                                : Colors.grey)
+                                        : const TextStyle(fontSize: 18),
                                   ),
                                 ),
                               ),

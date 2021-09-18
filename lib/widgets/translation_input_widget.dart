@@ -29,7 +29,9 @@ class _TranslationInputState extends State<TranslationInput> {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      decoration: boxDecorationCustom,
+      decoration: theme == Brightness.dark
+          ? boxDecorationCustomDark
+          : boxDecorationCustomLight,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -51,7 +53,7 @@ class _TranslationInputState extends State<TranslationInput> {
                     decoration: InputDecoration(
                         isDense: true,
                         border: InputBorder.none,
-                        hintStyle: const TextStyle(color: lightgreyColor),
+                        hintStyle: TextStyle(color: lightgreyColor),
                         hintText:
                             AppLocalizations.of(context)!.enter_text_here),
                     style: const TextStyle(fontSize: 20),
