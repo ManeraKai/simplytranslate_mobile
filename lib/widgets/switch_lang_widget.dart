@@ -22,9 +22,11 @@ import '../data.dart';
 class SwitchLang extends StatelessWidget {
   final setStateParent;
   final translateParent;
+  final translateEngine;
   const SwitchLang({
     required this.setStateParent,
     required this.translateParent,
+    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -57,13 +59,23 @@ class SwitchLang extends StatelessWidget {
               final translationInputTmp = translationInput;
 
               setStateParent(() {
-                translationInput = translationOutput;
-                translationInputController.text = translationOutput;
+                translationInput =
+                    (translateEngine == TranslateEngine.GoogleTranslate
+                        ? googleTranslationOutput
+                        : libreTranslationOutput);
+                translationInputController.text =
+                    (translateEngine == TranslateEngine.GoogleTranslate
+                        ? googleTranslationOutput
+                        : libreTranslationOutput);
               });
-              final x = await translateParent(translationInputTmp);
+              final x =
+                  await translateParent(translationInputTmp, translateEngine);
               setStateParent(() {
                 loading = false;
-                translationOutput = x;
+
+                translateEngine == TranslateEngine.GoogleTranslate
+                    ? googleTranslationOutput = x
+                    : libreTranslationOutput = x;
               });
             }
           },

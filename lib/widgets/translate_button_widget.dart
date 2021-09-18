@@ -5,12 +5,14 @@ import '../data.dart';
 class TranslateButton extends StatelessWidget {
   final setStateParent;
   final translateParent;
+  final translateEngine;
 
-  const TranslateButton({
-    Key? key,
-    required this.setStateParent,
-    required this.translateParent,
-  }) : super(key: key);
+  const TranslateButton(
+      {Key? key,
+      required this.setStateParent,
+      required this.translateParent,
+      required this.translateEngine})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class TranslateButton extends StatelessWidget {
                     onTap: () async {
                       FocusScope.of(context).unfocus();
                       setStateParent(() => loading = true);
-                      await translateParent(translationInput);
+                      await translateParent(translationInput, translateEngine);
                       setStateParent(() => loading = false);
                     },
                     child: Text(

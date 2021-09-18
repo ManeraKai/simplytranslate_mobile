@@ -10,9 +10,11 @@ import './paste_clipboard_button.dart';
 class TranslationInput extends StatefulWidget {
   final setStateParent;
   final translateParent;
+  final translateEngine;
   const TranslationInput({
-    @required this.setStateParent,
-    @required this.translateParent,
+    required this.setStateParent,
+    required this.translateParent,
+    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -70,7 +72,8 @@ class _TranslationInputState extends State<TranslationInput> {
                       onEditingComplete: () async {
                         FocusScope.of(context).unfocus();
                         widget.setStateParent(() => loading = true);
-                        await widget.translateParent(translationInput);
+                        await widget.translateParent(
+                            translationInput, widget.translateEngine);
                         widget.setStateParent(() => loading = false);
                       },
                     ),
@@ -85,7 +88,8 @@ class _TranslationInputState extends State<TranslationInput> {
               children: [
                 DeleteTranslationInputButton(
                     setStateParent: setState,
-                    setStateParentParent: widget.setStateParent),
+                    setStateParentParent: widget.setStateParent,
+                    translateEngine: widget.translateEngine),
                 CopyToClipboardButton(translationInput),
                 PasteClipboardButton(setStateParent: setState),
               ],

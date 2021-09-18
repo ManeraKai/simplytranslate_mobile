@@ -5,7 +5,9 @@ import '../data.dart';
 import './copy_to_clipboard_button.dart';
 
 class TranslationOutput extends StatefulWidget {
+  final translateEngine;
   const TranslationOutput({
+    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -33,14 +35,19 @@ class _TranslationOutputState extends State<TranslationOutput> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                   child: AutoDirection(
-                    text: translationOutput,
+                    text: widget.translateEngine ==
+                            TranslateEngine.GoogleTranslate
+                        ? googleTranslationOutput
+                        : libreTranslationOutput,
                     onDirectionChange: (isRTL) {
                       setState(() {
                         this.isRTL = isRTL;
                       });
                     },
                     child: SelectableText(
-                      translationOutput,
+                      widget.translateEngine == TranslateEngine.GoogleTranslate
+                          ? googleTranslationOutput
+                          : libreTranslationOutput,
                       style: TextStyle(fontSize: outputFontSize),
                     ),
                   ),
@@ -50,7 +57,10 @@ class _TranslationOutputState extends State<TranslationOutput> {
           ),
           Column(
             children: [
-              CopyToClipboardButton(translationOutput),
+              CopyToClipboardButton(
+                  widget.translateEngine == TranslateEngine.GoogleTranslate
+                      ? googleTranslationOutput
+                      : libreTranslationOutput),
               IconButton(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
@@ -58,7 +68,9 @@ class _TranslationOutputState extends State<TranslationOutput> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MaximizedScreen()));
+                            builder: (context) => MaximizedScreen(
+                                  translateEngine: widget.translateEngine,
+                                )));
                   },
                   icon: Icon(Icons.fullscreen)),
               IconButton(

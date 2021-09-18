@@ -3,7 +3,9 @@ import '../data.dart';
 import '../widgets/copy_to_clipboard_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
+  final translateEngine;
   const MaximizedScreen({
+    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -35,14 +37,20 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                     child: SelectableText(
-                      translationOutput,
+                      widget.translateEngine == TranslateEngine.GoogleTranslate
+                          ? googleTranslationOutput
+                          : libreTranslationOutput,
                       style: TextStyle(fontSize: outputFontSize),
                     ),
                   ),
                 ),
                 Column(
                   children: [
-                    CopyToClipboardButton(translationOutput),
+                    CopyToClipboardButton(
+                      widget.translateEngine == TranslateEngine.GoogleTranslate
+                          ? googleTranslationOutput
+                          : libreTranslationOutput,
+                    ),
                     IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,

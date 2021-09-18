@@ -36,19 +36,19 @@ String instance = 'https://translate.metalune.xyz';
 int instanceIndex = 0;
 
 String translationInput = '';
-String translationOutput = '';
+String googleTranslationOutput = '';
+String libreTranslationOutput = '';
 
 String customInstance = '';
 String customUrl = '';
 
+enum TranslateEngine { GoogleTranslate, LibreTranslate }
+
 var themeValue = 'system';
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
-enum customInstanceValidation {
-  False,
-  True,
-  NotChecked,
-}
+enum customInstanceValidation { False, True, NotChecked }
+
 bool isThereLibreTranslate = false;
 
 const methodChannel = MethodChannel('com.simplytranslate/translate');
@@ -176,7 +176,6 @@ bool toIsFirstClick = false;
 final session = GetStorage();
 
 final ScrollController leftTextviewScrollController = ScrollController();
-
 final ScrollController rightTextviewScrollController = ScrollController();
 
 String engineSelected = 'google';

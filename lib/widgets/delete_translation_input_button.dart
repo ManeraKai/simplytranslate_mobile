@@ -4,9 +4,11 @@ import '../data.dart';
 class DeleteTranslationInputButton extends StatelessWidget {
   final setStateParent;
   final setStateParentParent;
+  final translateEngine;
   const DeleteTranslationInputButton({
     required this.setStateParent,
     required this.setStateParentParent,
+    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -17,16 +19,21 @@ class DeleteTranslationInputButton extends StatelessWidget {
       child: IconButton(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        onPressed:
-            translationInputController.text == '' && translationOutput == ''
-                ? null
-                : () {
-                    setStateParentParent(() {
-                      translationInputController.text = '';
-                      translationInput = '';
-                      translationOutput = '';
-                    });
-                  },
+        onPressed: translationInputController.text == '' &&
+                (translateEngine == TranslateEngine.GoogleTranslate
+                        ? googleTranslationOutput
+                        : libreTranslationOutput) ==
+                    ''
+            ? null
+            : () {
+                setStateParentParent(() {
+                  translationInputController.text = '';
+                  translationInput = '';
+                  translateEngine == TranslateEngine.GoogleTranslate
+                      ? googleTranslationOutput = ''
+                      : libreTranslationOutput = '';
+                });
+              },
         icon: Icon(Icons.close),
       ),
     );

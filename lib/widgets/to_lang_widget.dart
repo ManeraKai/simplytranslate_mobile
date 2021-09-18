@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data.dart';
 
-class ToLang extends StatefulWidget {
+class ToLang extends StatelessWidget {
+  final setStateOverlord;
   const ToLang({
+    required this.setStateOverlord,
     Key? key,
   }) : super(key: key);
 
-  @override
-  _ToLangState createState() => _ToLangState();
-}
-
-class _ToLangState extends State<ToLang> {
   @override
   Widget build(BuildContext context) {
     Function changeText = () {};
@@ -78,7 +75,7 @@ class _ToLangState extends State<ToLang> {
                                         if (option != fromLanguage) {
                                           FocusScope.of(context).unfocus();
                                           session.write('to_language', option);
-                                          setState(() {
+                                          setStateOverlord(() {
                                             toLanguage = option;
                                             toLanguageValue =
                                                 selectLanguagesMap[option];
@@ -120,7 +117,7 @@ class _ToLangState extends State<ToLang> {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted,
         ) {
-          if (toLanguageisDefault) {
+          if (toLanguage != fieldTextEditingController.text) {
             fieldTextEditingController.text = toLanguage;
             toLanguageisDefault = false;
           }
@@ -144,7 +141,7 @@ class _ToLangState extends State<ToLang> {
                   if (chosenOne != fromLanguage) {
                     FocusScope.of(context).unfocus();
                     session.write('to_language', chosenOne);
-                    setState(() {
+                    setStateOverlord(() {
                       toLanguage = chosenOne;
                       toLanguageValue = selectLanguagesMap[chosenOne];
                     });
@@ -161,7 +158,7 @@ class _ToLangState extends State<ToLang> {
                       if (chosenOne != fromLanguage) {
                         FocusScope.of(context).unfocus();
                         session.write('to_language', chosenOne);
-                        setState(() {
+                        setStateOverlord(() {
                           toLanguage = chosenOne;
                           toLanguageValue = selectLanguagesMap[chosenOne];
                         });

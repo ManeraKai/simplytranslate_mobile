@@ -105,104 +105,110 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             : ColorScheme.light(onSurface: Colors.black),
       ),
       title: 'Simply Translate',
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(2),
-            child: Container(
-              color: lightgreyColor,
-              height: 2,
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
+            elevation: 0,
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: "GoogleTranslate",
+                ),
+                Tab(
+                  text: "LibreTranslate",
+                )
+              ],
             ),
+            iconTheme: IconThemeData(
+                color: theme == Brightness.dark ? whiteColor : Colors.black),
+            title: Text('Simply Translate',
+                style: theme == Brightness.dark
+                    ? TextStyle(color: whiteColor)
+                    : TextStyle(color: Colors.black)),
           ),
-          iconTheme: IconThemeData(
-              color: theme == Brightness.dark ? whiteColor : Colors.black),
-          title: Text('Simply Translate',
-              style: theme == Brightness.dark
-                  ? TextStyle(color: whiteColor)
-                  : TextStyle(color: Colors.black)),
-        ),
-        drawer: Container(
-          width: 200,
-          child: Drawer(
-            child: Container(
-              child: ListView(
-                children: [
-                  Container(
-                    height: 80,
-                    child: DrawerHeader(
-                      padding: EdgeInsets.zero,
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 3.7, right: 2),
-                              child: Image(
-                                image: theme == Brightness.dark
-                                    ? AssetImage(
-                                        'assets/favicon/simplytranslate_transparent.png')
-                                    : AssetImage(
-                                        'assets/favicon/simplytranslate_transparent_black.png'),
-                                height: 28,
+          drawer: Container(
+            width: 200,
+            child: Drawer(
+              child: Container(
+                child: ListView(
+                  children: [
+                    Container(
+                      height: 80,
+                      child: DrawerHeader(
+                        padding: EdgeInsets.zero,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: 3.7, right: 2),
+                                child: Image(
+                                  image: theme == Brightness.dark
+                                      ? AssetImage(
+                                          'assets/favicon/simplytranslate_transparent.png')
+                                      : AssetImage(
+                                          'assets/favicon/simplytranslate_transparent_black.png'),
+                                  height: 28,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'imply Translate',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: theme == Brightness.dark
-                                      ? whiteColor
-                                      : Colors.black),
-                            ),
-                          ],
+                              Text(
+                                'imply Translate',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: theme == Brightness.dark
+                                        ? whiteColor
+                                        : Colors.black),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Builder(
-                    builder: (context) => ListTile(
-                      title: Text(AppLocalizations.of(context)!.settings),
-                      horizontalTitleGap: 0,
-                      leading: Icon(
-                        Icons.settings,
+                    Builder(
+                      builder: (context) => ListTile(
+                        title: Text(AppLocalizations.of(context)!.settings),
+                        horizontalTitleGap: 0,
+                        leading: Icon(
+                          Icons.settings,
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Settings(setState)),
+                          );
+                        },
                       ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Settings(setState)),
-                        );
-                      },
                     ),
-                  ),
-                  Builder(
-                    builder: (context) => ListTile(
-                      title: Text(AppLocalizations.of(context)!.about),
-                      leading: Icon(Icons.person),
-                      horizontalTitleGap: 0,
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AboutScreen()),
-                        );
-                      },
+                    Builder(
+                      builder: (context) => ListTile(
+                        title: Text(AppLocalizations.of(context)!.about),
+                        leading: Icon(Icons.person),
+                        horizontalTitleGap: 0,
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AboutScreen()),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
+          backgroundColor:
+              theme == Brightness.dark ? secondgreyColor : whiteColor,
+          body: MainPageLocalization(),
         ),
-        backgroundColor:
-            theme == Brightness.dark ? secondgreyColor : whiteColor,
-        body: MainPageLocalization(),
       ),
     );
   }
@@ -376,13 +382,17 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  Future<String> translate(String input) async {
+  Future<String> translate(
+      String input, TranslateEngine translateEngine) async {
     final url;
     if (instance == 'custom') {
       url = customInstanceFormatting();
     } else
-      url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
-          {'engine': engineSelected});
+      url = Uri.https(instances[instanceIndex].toString().substring(8), '/', {
+        'engine': translateEngine == TranslateEngine.GoogleTranslate
+            ? 'google'
+            : 'libre'
+      });
     // default https://
 
     showInternetError() {
@@ -427,7 +437,9 @@ class _MainPageState extends State<MainPage> {
         final x = parse(response.body)
             .getElementsByClassName('translation')[0]
             .innerHtml;
-        translationOutput = x;
+        translateEngine == TranslateEngine.GoogleTranslate
+            ? googleTranslationOutput = x
+            : libreTranslationOutput = x;
         checkLibreTranslatewithRespone(response, setState: setState);
         return x;
       } else
@@ -450,40 +462,112 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      children: [
+        SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FromLang(),
-                  SwitchLang(
-                      setStateParent: setState, translateParent: translate),
-                  ToLang(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FromLang(setStateOverlord: setState),
+                      SwitchLang(
+                        setStateParent: setState,
+                        translateParent: translate,
+                        translateEngine: TranslateEngine.GoogleTranslate,
+                      ),
+                      ToLang(
+                        setStateOverlord: setState,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  TranslationInput(
+                    setStateParent: setState,
+                    translateParent: translate,
+                    translateEngine: TranslateEngine.GoogleTranslate,
+                  ),
+                  const SizedBox(height: 10),
+                  TranslationOutput(
+                    translateEngine: TranslateEngine.GoogleTranslate,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TranslateButton(
+                        setStateParent: setState,
+                        translateParent: translate,
+                        translateEngine: TranslateEngine.GoogleTranslate,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
-              const SizedBox(height: 10),
-              TranslationInput(
-                  setStateParent: setState, translateParent: translate),
-              const SizedBox(height: 10),
-              TranslationOutput(),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TranslateButton(
-                      setStateParent: setState, translateParent: translate),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
+            ),
           ),
         ),
-      ),
+        isThereLibreTranslate
+            ? SingleChildScrollView(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FromLang(setStateOverlord: setState),
+                            SwitchLang(
+                              setStateParent: setState,
+                              translateParent: translate,
+                              translateEngine: TranslateEngine.LibreTranslate,
+                            ),
+                            ToLang(
+                              setStateOverlord: setState,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        TranslationInput(
+                          setStateParent: setState,
+                          translateParent: translate,
+                          translateEngine: TranslateEngine.LibreTranslate,
+                        ),
+                        const SizedBox(height: 10),
+                        TranslationOutput(
+                            translateEngine: TranslateEngine.LibreTranslate),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TranslateButton(
+                              setStateParent: setState,
+                              translateParent: translate,
+                              translateEngine: TranslateEngine.LibreTranslate,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : Center(
+                child: Text(
+                'Not available',
+                style: const TextStyle(fontSize: 20),
+              )),
+      ],
     );
   }
 }

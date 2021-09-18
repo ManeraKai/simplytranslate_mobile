@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data.dart';
 
-class FromLang extends StatefulWidget {
+class FromLang extends StatelessWidget {
+  final setStateOverlord;
   const FromLang({
+    required this.setStateOverlord,
     Key? key,
   }) : super(key: key);
 
-  @override
-  _FromLangState createState() => _FromLangState();
-}
-
-class _FromLangState extends State<FromLang> {
   Widget build(BuildContext context) {
     Function changeText = () {};
     return Container(
@@ -80,7 +77,7 @@ class _FromLangState extends State<FromLang> {
                                           FocusScope.of(context).unfocus();
                                           session.write(
                                               'from_language', option);
-                                          setState(() {
+                                          setStateOverlord(() {
                                             fromLanguage = option;
                                             fromLanguageValue =
                                                 fromSelectLanguagesMap[option];
@@ -122,14 +119,14 @@ class _FromLangState extends State<FromLang> {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted,
         ) {
-          if (fromLanguageisDefault) {
+          if (fromLanguage != fieldTextEditingController.text) {
             fieldTextEditingController.text = fromLanguage;
             fromLanguageisDefault = false;
           }
           changeText = () => fieldTextEditingController.text = fromLanguage;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
+            child: TextFormField(
               onTap: () {
                 fromIsFirstClick = true;
                 fieldTextEditingController.selection = TextSelection(
@@ -147,7 +144,7 @@ class _FromLangState extends State<FromLang> {
                     FocusScope.of(context).unfocus();
 
                     session.write('from_language', chosenOne);
-                    setState(() {
+                    setStateOverlord(() {
                       fromLanguage = chosenOne;
                       fromLanguageValue = fromSelectLanguagesMap[chosenOne];
                     });
@@ -164,9 +161,10 @@ class _FromLangState extends State<FromLang> {
                         FocusScope.of(context).unfocus();
 
                         session.write('from_language', chosenOne);
-                        setState(() {
+                        setStateOverlord(() {
                           fromLanguage = chosenOne;
                           fromLanguageValue = fromSelectLanguagesMap[chosenOne];
+                          fromLanguageisDefault = true;
                         });
                         fieldTextEditingController.text = chosenOne;
                       }
