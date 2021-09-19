@@ -199,38 +199,6 @@ class _SettingsState extends State<Settings> {
                     else
                       //---- Nothing... the instance will be selected from the original Select Button -----//
                       const SizedBox.shrink(),
-                    const SizedBox(height: 10),
-                    Container(
-                      height: 43,
-                      decoration: theme == Brightness.dark
-                          ? boxDecorationCustomDark
-                          : boxDecorationCustomLight,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: const SizedBox.shrink(),
-                        dropdownColor:
-                            theme == Brightness.dark ? greyColor : whiteColor,
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: theme == Brightness.dark
-                                ? whiteColor
-                                : Colors.black),
-                        onChanged: (String? value) => setState(() {
-                          engineSelected = value!;
-                          session.write('engine', value);
-                        }),
-                        value:
-                            (isThereLibreTranslate) ? engineSelected : 'google',
-                        items: [
-                          DropdownMenuItem(
-                              value: 'google', child: Text('GoogleTranslate')),
-                          if (isThereLibreTranslate)
-                            DropdownMenuItem(
-                                value: 'libre', child: Text('LibreTranslate'))
-                        ],
-                      ),
-                    ),
                     SizedBox(height: 40),
                     Text(
                       AppLocalizations.of(context)!.theme,
