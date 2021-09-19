@@ -18,8 +18,13 @@ class TranslationOutput extends StatefulWidget {
 class _TranslationOutputState extends State<TranslationOutput> {
   bool isRTL = false;
   double outputFontSize = 20;
+
   @override
   Widget build(BuildContext context) {
+    String translatedText =
+        widget.translateEngine == TranslateEngine.GoogleTranslate
+            ? googleTranslationOutput
+            : libreTranslationOutput;
     return Container(
       height: 200,
       decoration: theme == Brightness.dark
@@ -45,9 +50,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                       });
                     },
                     child: SelectableText(
-                      widget.translateEngine == TranslateEngine.GoogleTranslate
-                          ? googleTranslationOutput
-                          : libreTranslationOutput,
+                      translatedText,
                       style: TextStyle(fontSize: outputFontSize),
                     ),
                   ),
@@ -64,34 +67,40 @@ class _TranslationOutputState extends State<TranslationOutput> {
               IconButton(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MaximizedScreen(
-                                  translateEngine: widget.translateEngine,
-                                )));
-                  },
+                  onPressed: translatedText == ''
+                      ? null
+                      : () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MaximizedScreen(
+                                        translateEngine: widget.translateEngine,
+                                      )));
+                        },
                   icon: Icon(Icons.fullscreen)),
               IconButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () {
-                  setState(() {
-                    outputFontSize += 3;
-                  });
-                },
+                onPressed: translatedText == ''
+                    ? null
+                    : () {
+                        setState(() {
+                          outputFontSize += 3;
+                        });
+                      },
                 icon: Icon(Icons.add),
               ),
               IconButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () {
-                  setState(() {
-                    outputFontSize -= 3;
-                  });
-                },
-                icon: Icon(Icons.minimize),
+                onPressed: translatedText == ''
+                    ? null
+                    : () {
+                        setState(() {
+                          outputFontSize -= 3;
+                        });
+                      },
+                icon: Icon(Icons.remove),
               ),
             ],
           ),

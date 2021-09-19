@@ -69,7 +69,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                           outputFontSize -= 3;
                         });
                       },
-                      icon: Icon(Icons.minimize),
+                      icon: Icon(Icons.remove),
                     ),
                   ],
                 )
