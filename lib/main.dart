@@ -353,10 +353,16 @@ class MainPageLocalization extends StatelessWidget {
     fromLanguage = AppLocalizations.of(context)!.english;
     toLanguage = AppLocalizations.of(context)!.arabic;
 
-    if (session.read('from_language').toString() != 'null')
-      fromLanguage = session.read('from_language').toString();
-    if (session.read('to_language').toString() != 'null')
-      toLanguage = session.read('to_language').toString();
+    if (session.read('from_language').toString() != 'null') {
+      var sessionData = session.read('from_language').toString();
+      fromLanguage = sessionData;
+      fromLanguageValue = fromSelectLanguagesMap[sessionData];
+    }
+    if (session.read('to_language').toString() != 'null') {
+      var sessionData = session.read('to_language').toString();
+      toLanguage = sessionData;
+      toLanguageValue = selectLanguagesMap[sessionData];
+    }
 
     if (session.read('engine').toString() != 'null')
       engineSelected = session.read('engine').toString();

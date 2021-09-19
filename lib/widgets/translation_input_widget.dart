@@ -33,7 +33,7 @@ class _TranslationInputState extends State<TranslationInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 205,
       decoration: theme == Brightness.dark
           ? boxDecorationCustomDark
           : boxDecorationCustomLight,
@@ -42,8 +42,8 @@ class _TranslationInputState extends State<TranslationInput> {
         children: [
           Expanded(
             child: Scrollbar(
-              controller: inputScrollController,
               child: SingleChildScrollView(
+                controller: inputScrollController,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: AutoDirection(
@@ -54,8 +54,9 @@ class _TranslationInputState extends State<TranslationInput> {
                       });
                     },
                     child: TextField(
-                      minLines: 7,
-                      maxLines: 10,
+                      focusNode: focus,
+                      minLines: 8,
+                      maxLines: null,
                       controller: translationInputController,
                       keyboardType: TextInputType.multiline,
                       onChanged: (String input) async {

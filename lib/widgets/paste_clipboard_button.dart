@@ -19,16 +19,41 @@ class PasteClipboardButton extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onPressed: () {
-          Clipboard.getData(Clipboard.kTextPlain).then((value) {
+          Clipboard.getData(Clipboard.kTextPlain).then((value) async {
+            FocusScope.of(context).unfocus();
+
             if (value != null) {
-              var newText =
-                  translationInputController.text + value.text.toString();
-              var selection = TextSelection.collapsed(offset: newText.length);
-              setStateParent(() {
-                translationInput = newText;
-                translationInputController.text = newText;
-                translationInputController.selection = selection;
-              });
+              final valueString = value.text.toString();
+              if (translationInputController.text == '') {
+                await Future.delayed(
+                    const Duration(milliseconds: 1), () => "1");
+                FocusScope.of(context).requestFocus(focus);
+                setStateParent(() {
+                  translationInput = valueString;
+                  translationInputController.text = valueString;
+                });
+              } else {
+                final beforePasteSelection =
+                    translationInputController.selection.baseOffset;
+                var newText = translationInputController.text
+                        .substring(0, beforePasteSelection) +
+                    valueString +
+                    translationInputController.text.substring(
+                        beforePasteSelection,
+                        translationInputController.text.length);
+
+                await Future.delayed(
+                    const Duration(milliseconds: 1), () => "1");
+                FocusScope.of(context).requestFocus(focus);
+
+                setStateParent(() {
+                  translationInput = newText;
+                  translationInputController.text = newText;
+                  translationInputController.selection =
+                      TextSelection.collapsed(
+                          offset: beforePasteSelection + valueString.length);
+                });
+              }
             }
           });
         },

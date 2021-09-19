@@ -20,9 +20,8 @@ var boxDecorationCustomDark = BoxDecoration(
   ),
 );
 
-// var keyboardHeight;
-
-// bool isKeyboardOpen = false;
+var focus = FocusNode();
+var inputScrollController = ScrollController();
 
 var boxDecorationCustomLight = BoxDecoration(
     color: whiteColor,
@@ -180,7 +179,6 @@ final session = GetStorage();
 
 final ScrollController leftTextviewScrollController = ScrollController();
 final ScrollController rightTextviewScrollController = ScrollController();
-var inputScrollController = ScrollController();
 
 String engineSelected = 'google';
 
