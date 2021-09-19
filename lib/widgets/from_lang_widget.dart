@@ -121,7 +121,6 @@ class FromLang extends StatelessWidget {
         ) {
           if (fromLanguage != fieldTextEditingController.text) {
             fieldTextEditingController.text = fromLanguage;
-            fromLanguageisDefault = false;
           }
           changeText = () => fieldTextEditingController.text = fromLanguage;
           return Padding(
@@ -164,7 +163,6 @@ class FromLang extends StatelessWidget {
                         setStateOverlord(() {
                           fromLanguage = chosenOne;
                           fromLanguageValue = fromSelectLanguagesMap[chosenOne];
-                          fromLanguageisDefault = true;
                         });
                         fieldTextEditingController.text = chosenOne;
                       }

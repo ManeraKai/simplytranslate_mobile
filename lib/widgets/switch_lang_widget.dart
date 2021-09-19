@@ -21,7 +21,7 @@ import '../data.dart';
 
 class SwitchLang extends StatelessWidget {
   final setStateParent;
-  final translateParent;
+  final Future<String> Function(String, TranslateEngine) translateParent;
   final translateEngine;
   const SwitchLang({
     required this.setStateParent,
@@ -41,7 +41,9 @@ class SwitchLang extends StatelessWidget {
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
               FocusScope.of(context).unfocus();
-              loading = true;
+              setStateParent(() => loading = true);
+              final translatedText =
+                  await translateParent(translationInput, translateEngine);
               final tmp = fromLanguage;
               fromLanguage = toLanguage;
               toLanguage = tmp;
@@ -53,26 +55,13 @@ class SwitchLang extends StatelessWidget {
               fromLanguageValue = toLanguageValue;
               toLanguageValue = valuetmp;
 
-              fromLanguageisDefault = true;
-              toLanguageisDefault = true;
+              final x = await translateParent(translatedText, translateEngine);
 
-              final translationInputTmp = translationInput;
-
-              setStateParent(() {
-                translationInput =
-                    (translateEngine == TranslateEngine.GoogleTranslate
-                        ? googleTranslationOutput
-                        : libreTranslationOutput);
-                translationInputController.text =
-                    (translateEngine == TranslateEngine.GoogleTranslate
-                        ? googleTranslationOutput
-                        : libreTranslationOutput);
-              });
-              final x =
-                  await translateParent(translationInputTmp, translateEngine);
               setStateParent(() {
                 loading = false;
 
+                translationInput = translatedText;
+                translationInputController.text = translatedText;
                 translateEngine == TranslateEngine.GoogleTranslate
                     ? googleTranslationOutput = x
                     : libreTranslationOutput = x;

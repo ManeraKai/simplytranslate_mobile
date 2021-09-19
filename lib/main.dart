@@ -388,11 +388,17 @@ class _MainPageState extends State<MainPage> {
     if (instance == 'custom') {
       url = customInstanceFormatting();
     } else
-      url = Uri.https(instances[instanceIndex].toString().substring(8), '/', {
-        'engine': translateEngine == TranslateEngine.GoogleTranslate
-            ? 'google'
-            : 'libre'
-      });
+      url = Uri.https(
+          instances
+              .firstWhere((element) => element == instance)
+              .toString()
+              .substring(8),
+          '/',
+          {
+            'engine': translateEngine == TranslateEngine.GoogleTranslate
+                ? 'google'
+                : 'libre'
+          });
     // default https://
 
     showInternetError() {
@@ -437,9 +443,9 @@ class _MainPageState extends State<MainPage> {
         final x = parse(response.body)
             .getElementsByClassName('translation')[0]
             .innerHtml;
-        translateEngine == TranslateEngine.GoogleTranslate
-            ? googleTranslationOutput = x
-            : libreTranslationOutput = x;
+        // translateEngine == TranslateEngine.GoogleTranslate
+        //     ? googleTranslationOutput = x
+        //     : libreTranslationOutput = x;
         checkLibreTranslatewithRespone(response, setState: setState);
         return x;
       } else

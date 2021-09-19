@@ -119,7 +119,6 @@ class ToLang extends StatelessWidget {
         ) {
           if (toLanguage != fieldTextEditingController.text) {
             fieldTextEditingController.text = toLanguage;
-            toLanguageisDefault = false;
           }
           changeText = () => fieldTextEditingController.text = toLanguage;
           return Padding(

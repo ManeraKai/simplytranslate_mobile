@@ -102,7 +102,14 @@ class _SettingsState extends State<Settings> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         decoration: theme == Brightness.dark
-                            ? boxDecorationCustomDark
+                            ? boxDecorationCustomDark.copyWith(
+                                color: isCustomInstanceValid ==
+                                        customInstanceValidation.True
+                                    ? Colors.green
+                                    : isCustomInstanceValid ==
+                                            customInstanceValidation.False
+                                        ? Colors.red
+                                        : null)
                             : boxDecorationCustomLight.copyWith(
                                 color: isCustomInstanceValid ==
                                         customInstanceValidation.True

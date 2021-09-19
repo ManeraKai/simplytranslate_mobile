@@ -167,9 +167,6 @@ bool loading = false;
 final customUrlController = TextEditingController();
 final translationInputController = TextEditingController();
 
-bool fromLanguageisDefault = true;
-bool toLanguageisDefault = true;
-
 bool fromIsFirstClick = false;
 bool toIsFirstClick = false;
 

@@ -4,7 +4,7 @@ import '../data.dart';
 
 class TranslateButton extends StatelessWidget {
   final setStateParent;
-  final translateParent;
+  final Future<String> Function(String, TranslateEngine) translateParent;
   final translateEngine;
 
   const TranslateButton(
@@ -35,8 +35,14 @@ class TranslateButton extends StatelessWidget {
                     onTap: () async {
                       FocusScope.of(context).unfocus();
                       setStateParent(() => loading = true);
-                      await translateParent(translationInput, translateEngine);
-                      setStateParent(() => loading = false);
+                      final translatedText = await translateParent(
+                          translationInput, translateEngine);
+                      setStateParent(() {
+                        translateEngine == TranslateEngine.GoogleTranslate
+                            ? googleTranslationOutput = translatedText
+                            : libreTranslationOutput = translatedText;
+                        loading = false;
+                      });
                     },
                     child: Text(
                       AppLocalizations.of(context)!.translate,

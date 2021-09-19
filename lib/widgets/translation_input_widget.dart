@@ -9,7 +9,7 @@ import './paste_clipboard_button.dart';
 
 class TranslationInput extends StatefulWidget {
   final setStateParent;
-  final translateParent;
+  final Future<String> Function(String, TranslateEngine) translateParent;
   final translateEngine;
   const TranslationInput({
     required this.setStateParent,
@@ -72,9 +72,16 @@ class _TranslationInputState extends State<TranslationInput> {
                       onEditingComplete: () async {
                         FocusScope.of(context).unfocus();
                         widget.setStateParent(() => loading = true);
-                        await widget.translateParent(
+                        final translatedText = await widget.translateParent(
                             translationInput, widget.translateEngine);
-                        widget.setStateParent(() => loading = false);
+                        widget.setStateParent(() {
+                          widget.translateEngine ==
+                                  TranslateEngine.GoogleTranslate
+                              ? googleTranslationOutput = translatedText
+                              : libreTranslationOutput = translatedText;
+
+                          loading = false;
+                        });
                       },
                     ),
                   ),
