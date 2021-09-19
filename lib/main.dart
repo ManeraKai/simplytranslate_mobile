@@ -76,36 +76,37 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textSelectionTheme: TextSelectionThemeData(
-            cursorColor: theme == Brightness.dark ? whiteColor : Colors.black),
-        textTheme: TextTheme(
-          bodyText2: theme == Brightness.dark
-              ? TextStyle(color: whiteColor)
-              : TextStyle(color: Colors.black),
-          subtitle1: theme == Brightness.dark
-              ? TextStyle(color: whiteColor, fontSize: 16)
-              : TextStyle(color: Colors.black),
-          headline6: theme == Brightness.dark
-              ? TextStyle(color: whiteColor)
-              : TextStyle(color: Colors.black),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: theme == Brightness.dark
-                ? MaterialStateProperty.all(greyColor)
-                : MaterialStateProperty.all(whiteColor),
-            overlayColor: theme == Brightness.dark
-                ? MaterialStateProperty.all(greyColor)
-                : MaterialStateProperty.all(whiteColor),
-            foregroundColor: theme == Brightness.dark
-                ? MaterialStateProperty.all(whiteColor)
-                : MaterialStateProperty.all(Colors.black),
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor:
+                  theme == Brightness.dark ? whiteColor : Colors.black),
+          textTheme: TextTheme(
+            bodyText2: theme == Brightness.dark
+                ? TextStyle(color: whiteColor)
+                : TextStyle(color: Colors.black),
+            subtitle1: theme == Brightness.dark
+                ? TextStyle(color: whiteColor, fontSize: 16)
+                : TextStyle(color: Colors.black),
+            headline6: theme == Brightness.dark
+                ? TextStyle(color: whiteColor)
+                : TextStyle(color: Colors.black),
           ),
-        ),
-        colorScheme: theme == Brightness.dark
-            ? ColorScheme.dark(onSurface: whiteColor)
-            : ColorScheme.light(onSurface: Colors.black),
-      ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: theme == Brightness.dark
+                  ? MaterialStateProperty.all(greyColor)
+                  : MaterialStateProperty.all(whiteColor),
+              overlayColor: theme == Brightness.dark
+                  ? MaterialStateProperty.all(greyColor)
+                  : MaterialStateProperty.all(whiteColor),
+              foregroundColor: theme == Brightness.dark
+                  ? MaterialStateProperty.all(whiteColor)
+                  : MaterialStateProperty.all(Colors.black),
+            ),
+          ),
+          colorScheme: theme == Brightness.dark
+              ? ColorScheme.dark(onSurface: whiteColor, primary: greenColor)
+              : ColorScheme.light(
+                  onSurface: Colors.black, primary: greenColor)),
       title: 'Simply Translate',
       home: DefaultTabController(
         length: 2,
