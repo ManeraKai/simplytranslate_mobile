@@ -23,32 +23,29 @@ class TranslateButton extends StatelessWidget {
               width: 80,
               height: 38,
               child: CircularProgressIndicator())
-          : Ink(
-              height: 38,
+          : Container(
               decoration: theme == Brightness.dark
                   ? boxDecorationCustomDark
                   : boxDecorationCustomLight,
-              child: Padding(
-                padding: const EdgeInsets.all(6.5),
-                child: Center(
-                  child: InkWell(
-                    onTap: () async {
-                      FocusScope.of(context).unfocus();
-                      setStateParent(() => loading = true);
-                      final translatedText = await translateParent(
-                          translationInput, translateEngine);
-                      setStateParent(() {
-                        translateEngine == TranslateEngine.GoogleTranslate
-                            ? googleTranslationOutput = translatedText
-                            : libreTranslationOutput = translatedText;
-                        loading = false;
-                      });
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.translate,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
+              height: 35,
+              padding: const EdgeInsets.all(6.5),
+              margin: EdgeInsets.all(10),
+              child: GestureDetector(
+                onTap: () async {
+                  FocusScope.of(context).unfocus();
+                  setStateParent(() => loading = true);
+                  final translatedText =
+                      await translateParent(translationInput, translateEngine);
+                  setStateParent(() {
+                    translateEngine == TranslateEngine.GoogleTranslate
+                        ? googleTranslationOutput = translatedText
+                        : libreTranslationOutput = translatedText;
+                    loading = false;
+                  });
+                },
+                child: Text(
+                  AppLocalizations.of(context)!.translate,
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             ),

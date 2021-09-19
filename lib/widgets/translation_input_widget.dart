@@ -42,6 +42,7 @@ class _TranslationInputState extends State<TranslationInput> {
         children: [
           Expanded(
             child: Scrollbar(
+              controller: inputScrollController,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -56,7 +57,7 @@ class _TranslationInputState extends State<TranslationInput> {
                       minLines: 7,
                       maxLines: 10,
                       controller: translationInputController,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.multiline,
                       onChanged: (String input) async {
                         setState(() {
                           translationInput = input;
@@ -71,7 +72,10 @@ class _TranslationInputState extends State<TranslationInput> {
                       style: const TextStyle(fontSize: 20),
                       onEditingComplete: () async {
                         FocusScope.of(context).unfocus();
-                        widget.setStateParent(() => loading = true);
+
+                        widget.setStateParent(() {
+                          loading = true;
+                        });
                         final translatedText = await widget.translateParent(
                             translationInput, widget.translateEngine);
                         widget.setStateParent(() {

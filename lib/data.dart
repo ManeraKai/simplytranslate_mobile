@@ -9,14 +9,20 @@ const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
 const secondgreyColor = Color(0xff212529);
 const whiteColor = Color(0xfff5f6f7);
+const greenColor = Color(0xff64ffda);
 
 var boxDecorationCustomDark = BoxDecoration(
-    color: greyColor,
-    border: Border.all(
-      color: lightgreyColor,
-      width: 2,
-      style: BorderStyle.solid,
-    ));
+  color: greyColor,
+  border: Border.all(
+    color: lightgreyColor,
+    width: 2,
+    style: BorderStyle.solid,
+  ),
+);
+
+// var keyboardHeight;
+
+// bool isKeyboardOpen = false;
 
 var boxDecorationCustomLight = BoxDecoration(
     color: whiteColor,
@@ -174,6 +180,7 @@ final session = GetStorage();
 
 final ScrollController leftTextviewScrollController = ScrollController();
 final ScrollController rightTextviewScrollController = ScrollController();
+var inputScrollController = ScrollController();
 
 String engineSelected = 'google';
 

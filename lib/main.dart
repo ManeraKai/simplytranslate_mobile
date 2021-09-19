@@ -4,13 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate/screens/about_screen.dart';
+import 'package:simplytranslate/widgets/translate_button_float_widget.dart';
 import './data.dart';
-import 'screens/settings_screen.dart';
+import './screens/settings_screen.dart';
 import './widgets/translate_button_widget.dart';
 import './widgets/translation_input_widget.dart';
 import './widgets/translation_output_widget.dart';
@@ -108,25 +110,29 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
-            elevation: 0,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  text: "GoogleTranslate",
-                ),
-                Tab(
-                  text: "LibreTranslate",
-                )
-              ],
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: AppBar(
+              backgroundColor:
+                  theme == Brightness.dark ? greyColor : whiteColor,
+              elevation: 0,
+              bottom: TabBar(
+                tabs: [
+                  Tab(
+                    text: "GoogleTranslate",
+                  ),
+                  Tab(
+                    text: "LibreTranslate",
+                  )
+                ],
+              ),
+              iconTheme: IconThemeData(
+                  color: theme == Brightness.dark ? whiteColor : Colors.black),
+              title: Text('Simply Translate',
+                  style: theme == Brightness.dark
+                      ? TextStyle(color: whiteColor)
+                      : TextStyle(color: Colors.black)),
             ),
-            iconTheme: IconThemeData(
-                color: theme == Brightness.dark ? whiteColor : Colors.black),
-            title: Text('Simply Translate',
-                style: theme == Brightness.dark
-                    ? TextStyle(color: whiteColor)
-                    : TextStyle(color: Colors.black)),
           ),
           drawer: Container(
             width: 200,
@@ -471,108 +477,158 @@ class _MainPageState extends State<MainPage> {
     return TabBarView(
       physics: NeverScrollableScrollPhysics(),
       children: [
-        SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Stack(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FromLang(setStateOverlord: setState),
-                      SwitchLang(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FromLang(setStateOverlord: setState),
+                          SwitchLang(
+                            setStateParent: setState,
+                            translateParent: translate,
+                            translateEngine: TranslateEngine.GoogleTranslate,
+                          ),
+                          ToLang(
+                            setStateOverlord: setState,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      TranslationInput(
                         setStateParent: setState,
                         translateParent: translate,
                         translateEngine: TranslateEngine.GoogleTranslate,
                       ),
-                      ToLang(
-                        setStateOverlord: setState,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  TranslationInput(
-                    setStateParent: setState,
-                    translateParent: translate,
-                    translateEngine: TranslateEngine.GoogleTranslate,
-                  ),
-                  const SizedBox(height: 10),
-                  TranslationOutput(
-                    translateEngine: TranslateEngine.GoogleTranslate,
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TranslateButton(
-                        setStateParent: setState,
-                        translateParent: translate,
+                      const SizedBox(height: 10),
+                      TranslationOutput(
                         translateEngine: TranslateEngine.GoogleTranslate,
                       ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          KeyboardVisibilityBuilder(
+                            builder: (context, isKeyboardVisible) =>
+                                !isKeyboardVisible
+                                    ? TranslateButton(
+                                        setStateParent: setState,
+                                        translateParent: translate,
+                                        translateEngine:
+                                            TranslateEngine.GoogleTranslate,
+                                      )
+                                    : SizedBox.shrink(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                     ],
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
-        ),
-        isThereLibreTranslate
-            ? SingleChildScrollView(
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            FromLang(setStateOverlord: setState),
-                            SwitchLang(
-                              setStateParent: setState,
-                              translateParent: translate,
-                              translateEngine: TranslateEngine.LibreTranslate,
-                            ),
-                            ToLang(
-                              setStateOverlord: setState,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        TranslationInput(
-                          setStateParent: setState,
-                          translateParent: translate,
-                          translateEngine: TranslateEngine.LibreTranslate,
-                        ),
-                        const SizedBox(height: 10),
-                        TranslationOutput(
-                            translateEngine: TranslateEngine.LibreTranslate),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            TranslateButton(
-                              setStateParent: setState,
-                              translateParent: translate,
-                              translateEngine: TranslateEngine.LibreTranslate,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
                   ),
                 ),
+              ),
+            ),
+            KeyboardVisibilityBuilder(
+              builder: (context, isKeyboardVisible) => isKeyboardVisible
+                  ? Positioned(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                      right: 0,
+                      child: TranslateButtonFloat(
+                        setStateParent: setState,
+                        translateEngine: TranslateEngine.GoogleTranslate,
+                        translateParent: translate,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+            ),
+          ],
+        ),
+        isThereLibreTranslate
+            ? Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                FromLang(setStateOverlord: setState),
+                                SwitchLang(
+                                  setStateParent: setState,
+                                  translateParent: translate,
+                                  translateEngine:
+                                      TranslateEngine.LibreTranslate,
+                                ),
+                                ToLang(
+                                  setStateOverlord: setState,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            TranslationInput(
+                              setStateParent: setState,
+                              translateParent: translate,
+                              translateEngine: TranslateEngine.LibreTranslate,
+                            ),
+                            const SizedBox(height: 10),
+                            TranslationOutput(
+                                translateEngine:
+                                    TranslateEngine.LibreTranslate),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                KeyboardVisibilityBuilder(
+                                  builder: (context, isKeyboardVisible) =>
+                                      !isKeyboardVisible
+                                          ? TranslateButton(
+                                              setStateParent: setState,
+                                              translateParent: translate,
+                                              translateEngine: TranslateEngine
+                                                  .LibreTranslate,
+                                            )
+                                          : SizedBox.shrink(),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  KeyboardVisibilityBuilder(
+                    builder: (context, isKeyboardVisible) => isKeyboardVisible
+                        ? Positioned(
+                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                            right: 0,
+                            child: TranslateButtonFloat(
+                              setStateParent: setState,
+                              translateEngine: TranslateEngine.LibreTranslate,
+                              translateParent: translate,
+                            ),
+                          )
+                        : SizedBox.shrink(),
+                  ),
+                ],
               )
             : Center(
                 child: Text(
-                'Not available',
-                style: const TextStyle(fontSize: 20),
-              )),
+                  'Not available',
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
       ],
     );
   }
