@@ -504,7 +504,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                   const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TranslateButton(
                         setStateParent: setState,

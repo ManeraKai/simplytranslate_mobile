@@ -145,37 +145,43 @@ class _SettingsState extends State<Settings> {
                       ),
                       //--------------------------------------------------------//
                       const SizedBox(height: 10),
-                      checkLoading
-                          ?
-                          //----------------- Loading Circle --------------------//
-                          Container(
-                              width: 50,
-                              height: 45,
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator())
-                          //----------------------------------------------------//
-                          :
-                          //----------------- Check Button ---------------------//
-                          Container(
-                              margin: EdgeInsets.symmetric(vertical: 5),
-                              height: 35,
-                              decoration: theme == Brightness.dark
-                                  ? boxDecorationCustomDark
-                                  : boxDecorationCustomLight,
-                              child: TextButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: checkLoading
-                                          ? MaterialStateProperty.all(
-                                              Colors.transparent)
-                                          : null),
-                                  onPressed: () {
-                                    FocusScope.of(context).unfocus();
-                                    checkInstance(widget.setStateOverlord);
-                                  },
-                                  child: Text(
-                                      AppLocalizations.of(context)!.check,
-                                      style: const TextStyle(fontSize: 16))),
-                            ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          checkLoading
+                              ?
+                              //----------------- Loading Circle --------------------//
+                              Container(
+                                  width: 50,
+                                  height: 45,
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator())
+                              //----------------------------------------------------//
+                              :
+                              //----------------- Check Button ---------------------//
+                              Container(
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  height: 35,
+                                  decoration: theme == Brightness.dark
+                                      ? boxDecorationCustomDark
+                                      : boxDecorationCustomLight,
+                                  child: TextButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: checkLoading
+                                            ? MaterialStateProperty.all(
+                                                Colors.transparent)
+                                            : null),
+                                    onPressed: () {
+                                      FocusScope.of(context).unfocus();
+                                      checkInstance(widget.setStateOverlord);
+                                    },
+                                    child: Text(
+                                        AppLocalizations.of(context)!.check,
+                                        style: const TextStyle(fontSize: 16)),
+                                  ),
+                                ),
+                        ],
+                      ),
                       //----------------------------------------------------//
                     ] else if (instance == 'random') ...[
                       const SizedBox(height: 10),
