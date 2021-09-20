@@ -25,7 +25,9 @@ class TranslateButton extends StatelessWidget {
         loading
             ? Container(
                 alignment: Alignment.center,
-                width: translateButtonWidgetSize.width,
+                width: renderBox == null
+                    ? 100
+                    : translateButtonWidgetSize.width, // here
                 height: 48,
                 child: CircularProgressIndicator())
             : Container(

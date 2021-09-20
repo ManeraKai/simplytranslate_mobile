@@ -58,13 +58,27 @@ bool isThereLibreTranslate = false;
 
 const methodChannel = MethodChannel('com.simplytranslate/translate');
 
-Future<void> getSharedText(setState) async {
+bool callSharedText = false;
+
+Future<void> getSharedText(
+    setStateParent, translateParent, translateEngine) async {
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
-      setState(() {
+      setStateParent(() {
         translationInput = answer.toString();
         translationInputController.text = translationInput;
+        loading = true;
+      });
+      print('translate');
+
+      final translatedText =
+          await translateParent(translationInput, translateEngine);
+      setStateParent(() {
+        translateEngine == TranslateEngine.GoogleTranslate
+            ? googleTranslationOutput = translatedText
+            : libreTranslationOutput = translatedText;
+        loading = false;
       });
     }
   } on PlatformException catch (e) {

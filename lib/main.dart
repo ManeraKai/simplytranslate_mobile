@@ -65,7 +65,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      getSharedText(setState);
+      setState(() {
+        callSharedText = true;
+      });
     }
   }
 
@@ -385,7 +387,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     checkLibreTranslate(setState);
-    getSharedText(setState);
+    getSharedText(setState, translate, TranslateEngine.GoogleTranslate);
     super.initState();
   }
 
@@ -481,6 +483,10 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (callSharedText) {
+      print('calling it');
+      getSharedText(setState, translate, TranslateEngine.GoogleTranslate);
+    }
     return TabBarView(
       physics: NeverScrollableScrollPhysics(),
       children: [
