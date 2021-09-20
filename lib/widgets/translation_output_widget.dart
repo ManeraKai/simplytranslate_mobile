@@ -85,7 +85,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                     ? null
                     : () {
                         setState(() {
-                          outputFontSize += 3;
+                          if (outputFontSize + 3 <= 90) outputFontSize += 3;
                         });
                       },
                 icon: Icon(Icons.add),
@@ -97,7 +97,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                     ? null
                     : () {
                         setState(() {
-                          outputFontSize -= 3;
+                          if (outputFontSize - 3 >= 8) outputFontSize -= 3;
                         });
                       },
                 icon: Icon(Icons.remove),
