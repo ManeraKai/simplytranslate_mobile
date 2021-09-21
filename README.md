@@ -4,7 +4,7 @@
       <img alt="" title="Simply Translate" src="https://github.com/ManeraKai/simplytranslate-flutter-client/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
   </a>
 </p>
-<h1 align="center">Simply Translate</h1>
+<h1 align="center">Simply Translate (Unofficial)</h1>
 
 <h4 align="center">An unoffical mobile client that connects to multiple <a href="https://translate.metalune.xyz/">SimplyTranslate</a> instances.</h4>
 
