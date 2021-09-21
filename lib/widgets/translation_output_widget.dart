@@ -29,7 +29,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
       height: 200,
       decoration: theme == Brightness.dark
           ? boxDecorationCustomDark
-          : boxDecorationCustomLight,
+          : boxDecorationCustomLightBlack,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -65,6 +65,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                       ? googleTranslationOutput
                       : libreTranslationOutput),
               IconButton(
+                  color: theme == Brightness.dark ? null : greenColor,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: translatedText == ''
@@ -79,6 +80,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                         },
                   icon: Icon(Icons.fullscreen)),
               IconButton(
+                color: theme == Brightness.dark ? null : greenColor,
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: translatedText == ''
@@ -91,6 +93,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                 icon: Icon(Icons.add),
               ),
               IconButton(
+                color: theme == Brightness.dark ? null : greenColor,
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: translatedText == ''

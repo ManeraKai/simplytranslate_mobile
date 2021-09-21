@@ -16,6 +16,7 @@ class PasteClipboardButton extends StatelessWidget {
     return Container(
       alignment: Alignment.topRight,
       child: IconButton(
+        color: theme == Brightness.dark ? null : greenColor,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onPressed: () {

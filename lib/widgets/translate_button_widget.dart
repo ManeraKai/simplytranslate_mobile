@@ -28,35 +28,50 @@ class TranslateButton extends StatelessWidget {
                 width: renderBox == null
                     ? 100
                     : translateButtonWidgetSize.width, // here
-                height: 48,
+                height: 38,
                 child: CircularProgressIndicator())
             : Container(
                 key: key,
                 decoration: theme == Brightness.dark
                     ? boxDecorationCustomDark
-                    : boxDecorationCustomLight,
+                    : translationInputController.text != ''
+                        ? boxDecorationCustomLight.copyWith(
+                            color: Color(0xff3fb274),
+                            border: Border.all(
+                                width: 1.5, color: Colors.transparent),
+                          )
+                        : boxDecorationCustomLight.copyWith(
+                            color: Color(
+                              0xffa9a9a9,
+                            ),
+                            border: Border.all(
+                                width: 1.5, color: Colors.transparent),
+                          ),
                 height: 35,
                 padding: const EdgeInsets.all(6.5),
-                margin: EdgeInsets.all(10),
                 child: GestureDetector(
-                  onTap: () async {
-                    renderBox =
-                        key.currentContext?.findRenderObject() as RenderBox;
-                    translateButtonWidgetSize = renderBox.size;
-                    FocusScope.of(context).unfocus();
-                    setStateParent(() => loading = true);
-                    final translatedText = await translateParent(
-                        translationInput, translateEngine);
-                    setStateParent(() {
-                      translateEngine == TranslateEngine.GoogleTranslate
-                          ? googleTranslationOutput = translatedText
-                          : libreTranslationOutput = translatedText;
-                      loading = false;
-                    });
-                  },
+                  onTap: translationInputController.text == ''
+                      ? null
+                      : () async {
+                          renderBox = key.currentContext?.findRenderObject()
+                              as RenderBox;
+                          translateButtonWidgetSize = renderBox.size;
+                          FocusScope.of(context).unfocus();
+                          setStateParent(() => loading = true);
+                          final translatedText = await translateParent(
+                              translationInput, translateEngine);
+                          setStateParent(() {
+                            translateEngine == TranslateEngine.GoogleTranslate
+                                ? googleTranslationOutput = translatedText
+                                : libreTranslationOutput = translatedText;
+                            loading = false;
+                          });
+                        },
                   child: Text(
                     AppLocalizations.of(context)!.translate,
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: theme == Brightness.dark ? null : Colors.white),
                   ),
                 ),
               ),

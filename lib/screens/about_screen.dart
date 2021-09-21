@@ -10,20 +10,13 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(2),
-          child: Container(
-            color: lightgreyColor,
-            height: 2,
-          ),
-        ),
-        backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
+        backgroundColor: theme == Brightness.dark ? greyColor : greenColor,
         iconTheme: IconThemeData(
-            color: theme == Brightness.dark ? whiteColor : Colors.black),
+            color: theme == Brightness.dark ? whiteColor : Colors.white),
         title: Text(AppLocalizations.of(context)!.about,
             style: theme == Brightness.dark
                 ? TextStyle(color: whiteColor)
-                : TextStyle(color: Colors.black)),
+                : TextStyle(color: Colors.white)),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

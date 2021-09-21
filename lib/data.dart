@@ -9,27 +9,39 @@ const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
 const secondgreyColor = Color(0xff212529);
 const whiteColor = Color(0xfff5f6f7);
-const greenColor = Color(0xff64ffda);
+const greenColor = Color(0xff3fb274);
 
 var boxDecorationCustomDark = BoxDecoration(
   color: greyColor,
   border: Border.all(
     color: lightgreyColor,
-    width: 2,
+    width: 1.5,
     style: BorderStyle.solid,
   ),
+  borderRadius: BorderRadius.circular(2),
 );
 
-var focus = FocusNode();
-var inputScrollController = ScrollController();
-
+var themeRadio = AppTheme.dark;
 var boxDecorationCustomLight = BoxDecoration(
     color: whiteColor,
     border: Border.all(
-      color: lightgreyColor,
-      width: 2,
+      color: Color(0xff3fb274),
+      width: 1.5,
       style: BorderStyle.solid,
-    ));
+    ),
+    borderRadius: BorderRadius.circular(2));
+
+var boxDecorationCustomLightBlack = BoxDecoration(
+    color: whiteColor,
+    border: Border.all(
+      color: Color(0xffa9a9a9ff),
+      width: 1.5,
+      style: BorderStyle.solid,
+    ),
+    borderRadius: BorderRadius.circular(2));
+
+var focus = FocusNode();
+var inputScrollController = ScrollController();
 
 String fromLanguageValue = 'English';
 String toLanguageValue = 'Arabic';
@@ -48,6 +60,8 @@ String customInstance = '';
 String customUrl = '';
 
 enum TranslateEngine { GoogleTranslate, LibreTranslate }
+
+enum AppTheme { dark, light, system }
 
 var themeValue = 'system';
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
@@ -102,6 +116,21 @@ customInstanceFormatting() {
         Uri.http(customInstance.substring(7), '/', {'engine': engineSelected});
   else
     url = Uri.https(customInstance, '/', {'engine': engineSelected});
+  // custom else https://
+  return url;
+}
+
+String customUrlFormatting(url) {
+  if (url.endsWith('/'))
+    // trimming last slash
+    url = url.substring(0, url.length - 1);
+  if (url.startsWith('https://')) {
+    url = url.trim();
+    url = url.substring(8);
+    // custom https://
+  } else if (url.startsWith('http://'))
+    // http://
+    url = url.substring(7);
   // custom else https://
   return url;
 }

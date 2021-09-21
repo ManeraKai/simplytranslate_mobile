@@ -125,7 +125,7 @@ class FromLang extends StatelessWidget {
           changeText = () => fieldTextEditingController.text = fromLanguage;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextFormField(
+            child: TextField(
               onTap: () {
                 fromIsFirstClick = true;
                 fieldTextEditingController.selection = TextSelection(
@@ -176,7 +176,9 @@ class FromLang extends StatelessWidget {
               ),
               controller: fieldTextEditingController,
               focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(
+                  fontSize: 18,
+                  color: theme == Brightness.dark ? null : Color(0xff3fb274)),
             ),
           );
         },

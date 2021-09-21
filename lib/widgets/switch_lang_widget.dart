@@ -68,9 +68,11 @@ class SwitchLang extends StatelessWidget {
               });
             }
           },
-          child: const Text(
+          child: Text(
             '<->',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(
+                fontSize: 18,
+                color: theme == Brightness.dark ? null : Color(0xff3fb274)),
           ),
         ),
       );

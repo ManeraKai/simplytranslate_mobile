@@ -36,7 +36,7 @@ class _TranslationInputState extends State<TranslationInput> {
       height: 205,
       decoration: theme == Brightness.dark
           ? boxDecorationCustomDark
-          : boxDecorationCustomLight,
+          : boxDecorationCustomLightBlack,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -60,17 +60,20 @@ class _TranslationInputState extends State<TranslationInput> {
                       controller: translationInputController,
                       keyboardType: TextInputType.multiline,
                       onChanged: (String input) async {
-                        setState(() {
+                        widget.setStateParent(() {
                           translationInput = input;
                         });
                       },
                       decoration: InputDecoration(
                           isDense: true,
                           border: InputBorder.none,
-                          hintStyle: TextStyle(color: lightgreyColor),
+                          hintStyle: TextStyle(
+                              color: theme == Brightness.dark
+                                  ? lightgreyColor
+                                  : Color(0xffa9a9a9ff)),
                           hintText:
                               AppLocalizations.of(context)!.enter_text_here),
-                      style: const TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20),
                       onEditingComplete: () async {
                         FocusScope.of(context).unfocus();
 

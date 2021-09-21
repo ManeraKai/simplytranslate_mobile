@@ -175,7 +175,9 @@ class ToLang extends StatelessWidget {
               ),
               controller: fieldTextEditingController,
               focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(
+                  fontSize: 18,
+                  color: theme == Brightness.dark ? null : Color(0xff3fb274)),
             ),
           );
         },
