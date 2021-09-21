@@ -10,6 +10,7 @@ const lightgreyColor = Color(0xff495057);
 const secondgreyColor = Color(0xff212529);
 const whiteColor = Color(0xfff5f6f7);
 const greenColor = Color(0xff3fb274);
+const lightThemeGreyColor = Color(0xffa9a9a9);
 
 var boxDecorationCustomDark = BoxDecoration(
   color: greyColor,
@@ -21,7 +22,7 @@ var boxDecorationCustomDark = BoxDecoration(
   borderRadius: BorderRadius.circular(2),
 );
 
-var themeRadio = AppTheme.dark;
+var themeRadio = AppTheme.system;
 var boxDecorationCustomLight = BoxDecoration(
     color: whiteColor,
     border: Border.all(
@@ -34,7 +35,7 @@ var boxDecorationCustomLight = BoxDecoration(
 var boxDecorationCustomLightBlack = BoxDecoration(
     color: whiteColor,
     border: Border.all(
-      color: Color(0xffa9a9a9ff),
+      color: lightThemeGreyColor,
       width: 1.5,
       style: BorderStyle.solid,
     ),
@@ -63,7 +64,9 @@ enum TranslateEngine { GoogleTranslate, LibreTranslate }
 
 enum AppTheme { dark, light, system }
 
-var themeValue = 'system';
+var themeValue = '';
+
+var themeTranslation;
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum customInstanceValidation { False, True, NotChecked }
@@ -172,7 +175,7 @@ checkLibreTranslate(setStateCustom) async {
   } catch (err) {}
 }
 
-Future<void> checkInstance(setState) async {
+Future<bool> checkInstance(setState) async {
   setState(() => checkLoading = true);
 
   final url;
@@ -201,7 +204,7 @@ Future<void> checkInstance(setState) async {
     setState(() => isCustomInstanceValid = customInstanceValidation.False);
   }
   setState(() => checkLoading = false);
-  return;
+  return isCustomInstanceValid == customInstanceValidation.True ? true : false;
 }
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;

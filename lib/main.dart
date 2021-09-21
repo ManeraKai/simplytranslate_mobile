@@ -32,13 +32,18 @@ void main(List<String> args) async {
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {
-    themeValue = themeSession;
-    if (themeSession == 'system')
+    if (themeSession == 'system') {
+      themeRadio = AppTheme.system;
       theme = SchedulerBinding.instance!.window.platformBrightness;
-    else if (themeSession == 'light')
+    } else if (themeSession == 'light') {
+      themeRadio = AppTheme.light;
       theme = Brightness.light;
-    else if (themeSession == 'dark') theme = Brightness.dark;
+    } else if (themeSession == 'dark') {
+      themeRadio = AppTheme.dark;
+      theme = Brightness.dark;
+    }
   }
+
   //--------------------------------------------//
 
   return runApp(MyApp());
@@ -207,6 +212,18 @@ class MainPageLocalization extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    themeTranslation = {
+      'dark': AppLocalizations.of(context)!.dark,
+      'light': AppLocalizations.of(context)!.light,
+      'system': AppLocalizations.of(context)!.follow_system,
+    };
+
+    final themeSession = session.read('theme').toString();
+    if (themeSession != 'null')
+      themeValue = themeTranslation[themeSession];
+    else
+      themeValue = themeTranslation['system'];
+
     selectLanguagesMap = {
       AppLocalizations.of(context)!.afrikaans: "Afrikaans",
       AppLocalizations.of(context)!.albanian: "Albanian",

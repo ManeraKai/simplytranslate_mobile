@@ -33,7 +33,7 @@ class _SettingsState extends State<Settings> {
         body: SingleChildScrollView(
           child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

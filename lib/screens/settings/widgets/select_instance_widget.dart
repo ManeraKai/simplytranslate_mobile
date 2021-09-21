@@ -19,6 +19,7 @@ class SelectInstance extends StatelessWidget {
       setState(() => instance = x);
       session.write('instance_mode', x);
       checkLibreTranslate(setStateOverlord);
+      Navigator.of(context).pop();
     }
 
     randomFunc(setState) {
@@ -28,10 +29,12 @@ class SelectInstance extends StatelessWidget {
       });
       session.write('instance_mode', 'random');
       checkLibreTranslate(setStateOverlord);
+      Navigator.of(context).pop();
     }
 
     customFunc(setState) {
       instanceIndex = 0;
+      Navigator.of(context).pop();
       setState(() {
         showDialog(
             context: context,
@@ -64,14 +67,15 @@ class SelectInstance extends StatelessWidget {
                             customInstance = value!;
                             if (isCustomInstanceValid !=
                                 customInstanceValidation.NotChecked)
-                              setState(() {
-                                isCustomInstanceValid =
-                                    customInstanceValidation.NotChecked;
-                              });
+                              isCustomInstanceValid =
+                                  customInstanceValidation.NotChecked;
                           },
-                          onEditingComplete: () {
+                          onEditingComplete: () async {
                             FocusScope.of(context).unfocus();
-                            checkInstance(setStateOverlord);
+                            await checkInstance(setStateOverlord);
+                            if (isCustomInstanceValid ==
+                                customInstanceValidation.True)
+                              Navigator.of(context).pop();
                           },
                           decoration: const InputDecoration(
                               focusedBorder: InputBorder.none),
@@ -89,25 +93,15 @@ class SelectInstance extends StatelessWidget {
                               height: 45,
                               alignment: Alignment.center,
                               child: CircularProgressIndicator())
-                          : Container(
-                              margin: EdgeInsets.symmetric(vertical: 5),
-                              height: 35,
-                              decoration: theme == Brightness.dark
-                                  ? boxDecorationCustomDark
-                                  : boxDecorationCustomLight,
-                              child: TextButton(
-                                style: ButtonStyle(
-                                    backgroundColor: checkLoading
-                                        ? MaterialStateProperty.all(
-                                            Colors.transparent)
-                                        : null),
-                                onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                  checkInstance(setStateOverlord);
-                                },
-                                child: Text(AppLocalizations.of(context)!.check,
-                                    style: const TextStyle(fontSize: 16)),
-                              ),
+                          : IconButton(
+                              onPressed: () async {
+                                FocusScope.of(context).unfocus();
+                                await checkInstance(setStateOverlord);
+                                if (isCustomInstanceValid ==
+                                    customInstanceValidation.True)
+                                  Navigator.of(context).pop();
+                              },
+                              icon: Icon(Icons.check),
                             ),
                     ])
                   ]),
@@ -125,77 +119,86 @@ class SelectInstance extends StatelessWidget {
             builder: (context) {
               return StatefulBuilder(
                 builder: (context, setState) => AlertDialog(
+                  actionsPadding: EdgeInsets.zero,
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Cancel'),
+                    )
+                  ],
                   insetPadding: EdgeInsets.all(0),
-                  title: Column(children: [
+                  content: Column(mainAxisSize: MainAxisSize.min, children: [
                     ...() {
                       var list = <Widget>[];
                       for (String x in instances)
                         list.add(Container(
                           width: double.infinity,
-                          child: Row(
-                            children: [
-                              Radio<String>(
-                                  value: x,
-                                  groupValue: instance,
-                                  onChanged: (_) => instanceFunc(setState, x)),
-                              Expanded(
-                                child: InkWell(
-                                    onTap: () => instanceFunc(setState, x),
-                                    child: Padding(
+                          child: Expanded(
+                            child: InkWell(
+                                onTap: () => instanceFunc(setState, x),
+                                child: Row(
+                                  children: [
+                                    Radio<String>(
+                                        activeColor: greenColor,
+                                        value: x,
+                                        groupValue: instance,
+                                        onChanged: (_) =>
+                                            instanceFunc(setState, x)),
+                                    Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 20),
                                       child: Text(
                                         customUrlFormatting(x),
                                         style: TextStyle(fontSize: 16),
                                       ),
-                                    )),
-                              ),
-                            ],
+                                    ),
+                                  ],
+                                )),
                           ),
                         ));
                       return list;
                     }(),
-                    Row(
-                      children: [
-                        Radio<String>(
-                            value: 'random',
-                            groupValue: instance,
-                            onChanged: (_) => randomFunc(setState)),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => randomFunc(setState),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 20),
-                              child: Text(
-                                AppLocalizations.of(context)!.random,
-                                style: TextStyle(fontSize: 16),
-                              ),
+                    InkWell(
+                      onTap: () => randomFunc(setState),
+                      child: Row(
+                        children: [
+                          Radio<String>(
+                              activeColor: greenColor,
+                              value: 'random',
+                              groupValue: instance,
+                              onChanged: (_) => randomFunc(setState)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 20),
+                            child: Text(
+                              AppLocalizations.of(context)!.random,
+                              style: TextStyle(fontSize: 16),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Radio<String>(
-                            value: 'custom',
-                            groupValue: instance,
-                            onChanged: (_) => customFunc(setState)),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => customFunc(setState),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 20),
-                              child: Text(
-                                AppLocalizations.of(context)!.custom,
-                                style: TextStyle(fontSize: 16),
-                              ),
+                    InkWell(
+                      onTap: () => customFunc(setState),
+                      child: Row(
+                        children: [
+                          Radio<String>(
+                              activeColor: greenColor,
+                              value: 'custom',
+                              groupValue: instance,
+                              onChanged: (_) => customFunc(setState)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 20),
+                            child: Text(
+                              AppLocalizations.of(context)!.custom,
+                              style: TextStyle(fontSize: 16),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ]),
                 ),
@@ -222,7 +225,12 @@ class SelectInstance extends StatelessWidget {
                   Text('Instance', style: TextStyle(fontSize: 18)),
                   Container(
                     width: MediaQuery.of(context).size.width - 100,
-                    child: Text(customUrlFormatting(instance),
+                    child: Text(
+                        instance == 'custom'
+                            ? AppLocalizations.of(context)!.custom
+                            : instance == 'random'
+                                ? AppLocalizations.of(context)!.random
+                                : customUrlFormatting(instance),
                         style: TextStyle(
                             fontSize: 18,
                             color: theme == Brightness.dark

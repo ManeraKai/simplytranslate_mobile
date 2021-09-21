@@ -18,9 +18,10 @@ class SelectTheme extends StatelessWidget {
       });
       setStateOverlord(() {
         session.write('theme', 'dark');
-        themeValue = 'dark';
+        themeValue = AppLocalizations.of(context)!.dark;
         theme = Brightness.dark;
       });
+      Navigator.of(context).pop();
     }
 
     _lightFunc(setState) {
@@ -29,9 +30,10 @@ class SelectTheme extends StatelessWidget {
       });
       setStateOverlord(() {
         session.write('theme', 'light');
-        themeValue = 'light';
+        themeValue = AppLocalizations.of(context)!.light;
         theme = Brightness.light;
       });
+      Navigator.of(context).pop();
     }
 
     _systemFunc(setState) {
@@ -40,9 +42,10 @@ class SelectTheme extends StatelessWidget {
       });
       setStateOverlord(() {
         session.write('theme', 'system');
-        themeValue = 'system';
+        themeValue = AppLocalizations.of(context)!.follow_system;
         theme = MediaQuery.of(context).platformBrightness;
       });
+      Navigator.of(context).pop();
     }
 
     return InkWell(
@@ -52,41 +55,72 @@ class SelectTheme extends StatelessWidget {
           builder: (context) {
             return StatefulBuilder(
               builder: (context, setState) => AlertDialog(
-                content: Container(
-                  alignment: Alignment.center,
-                  height: 170,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
+                title: Text(AppLocalizations.of(context)!.theme),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
                         onTap: () => _darkFunc(setState),
-                        title: Text(AppLocalizations.of(context)!.dark),
-                        leading: Radio<AppTheme>(
-                          value: AppTheme.dark,
-                          groupValue: themeRadio,
-                          onChanged: (_) => _darkFunc(setState),
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () => _lightFunc(setState),
-                        title: Text(AppLocalizations.of(context)!.light),
-                        leading: Radio<AppTheme>(
-                          value: AppTheme.light,
-                          groupValue: themeRadio,
-                          onChanged: (_) => _lightFunc(setState),
-                        ),
-                      ),
-                      ListTile(
-                          onTap: () => _systemFunc(setState),
-                          title:
-                              Text(AppLocalizations.of(context)!.follow_system),
-                          leading: Radio<AppTheme>(
-                              value: AppTheme.system,
+                        child: Row(
+                          children: [
+                            Radio<AppTheme>(
+                              activeColor: greenColor,
+                              value: AppTheme.dark,
                               groupValue: themeRadio,
-                              onChanged: (_) => _systemFunc(setState)))
-                    ],
-                  ),
+                              onChanged: (_) => _darkFunc(setState),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 20),
+                              child: Text(AppLocalizations.of(context)!.dark),
+                            ),
+                          ],
+                        )),
+                    InkWell(
+                      onTap: () => _lightFunc(setState),
+                      child: Row(
+                        children: [
+                          Radio<AppTheme>(
+                            activeColor: greenColor,
+                            value: AppTheme.light,
+                            groupValue: themeRadio,
+                            onChanged: (_) => _lightFunc(setState),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 20),
+                            child: Text(AppLocalizations.of(context)!.light),
+                          ),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                        onTap: () => _systemFunc(setState),
+                        child: Row(
+                          children: [
+                            Radio<AppTheme>(
+                                activeColor: greenColor,
+                                value: AppTheme.system,
+                                groupValue: themeRadio,
+                                onChanged: (_) => _systemFunc(setState)),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 20),
+                              child: Text(
+                                  AppLocalizations.of(context)!.follow_system),
+                            ),
+                          ],
+                        ))
+                  ],
                 ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Cancel'),
+                  )
+                ],
               ),
             );
           },
@@ -99,7 +133,7 @@ class SelectTheme extends StatelessWidget {
           children: [
             Container(
                 child: Icon(
-              Icons.brightness_2,
+              theme == Brightness.dark ? Icons.dark_mode : Icons.light_mode,
               color: theme == Brightness.dark ? Colors.white : greenColor,
               size: 45,
             )),
