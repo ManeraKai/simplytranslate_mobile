@@ -115,65 +115,81 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(100),
-            child: Builder(
-              builder: (context) => AppBar(
-                actions: [
-                  PopupMenuButton(
-                    icon: Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                    ),
-                    color: theme == Brightness.dark
-                        ? secondgreyColor
-                        : Colors.white,
-                    itemBuilder: (BuildContext context) => [
-                      PopupMenuItem<String>(
-                        value: 'settings',
-                        child: Text('Settings'),
+            child: KeyboardVisibilityBuilder(
+              builder: (context, isKeyboardVisible) => Builder(
+                builder: (context) {
+                  if (MediaQuery.of(context).orientation ==
+                      Orientation.landscape)
+                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                        overlays: []);
+                  else
+                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                        overlays: SystemUiOverlay.values);
+                  if (isKeyboardVisible &&
+                      MediaQuery.of(context).orientation ==
+                          Orientation.landscape) {
+                    return SizedBox.shrink();
+                  } else {
+                    return AppBar(
+                      actions: [
+                        PopupMenuButton(
+                          icon: Icon(Icons.more_vert, color: Colors.white),
+                          color: theme == Brightness.dark
+                              ? secondgreyColor
+                              : Colors.white,
+                          itemBuilder: (BuildContext context) => [
+                            PopupMenuItem<String>(
+                                value: 'settings',
+                                child: Text(
+                                    AppLocalizations.of(context)!.settings)),
+                            PopupMenuItem<String>(
+                                value: 'about',
+                                child:
+                                    Text(AppLocalizations.of(context)!.about)),
+                          ],
+                          onSelected: (value) {
+                            if (value == 'settings') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Settings(setState)),
+                              );
+                            } else if (value == 'about') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutScreen()),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                      backgroundColor: theme == Brightness.dark
+                          ? greyColor
+                          : Color(0xff3fb274),
+                      elevation: 3,
+                      bottom: TabBar(
+                        indicatorColor: Colors.white,
+                        tabs: [
+                          Tab(
+                            text: "GoogleTranslate",
+                          ),
+                          Tab(
+                            text: "LibreTranslate",
+                          )
+                        ],
                       ),
-                      PopupMenuItem<String>(
-                        value: 'about',
-                        child: Text('About'),
-                      ),
-                    ],
-                    onSelected: (value) {
-                      if (value == 'settings') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Settings(setState)),
-                        );
-                      } else if (value == 'about') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AboutScreen()),
-                        );
-                      }
-                    },
-                  ),
-                ],
-                backgroundColor:
-                    theme == Brightness.dark ? greyColor : Color(0xff3fb274),
-                elevation: 3,
-                bottom: TabBar(
-                  indicatorColor: Colors.white,
-                  tabs: [
-                    Tab(
-                      text: "GoogleTranslate",
-                    ),
-                    Tab(
-                      text: "LibreTranslate",
-                    )
-                  ],
-                ),
-                iconTheme: IconThemeData(
-                    color:
-                        theme == Brightness.dark ? whiteColor : Colors.black),
-                title: Text('Simply Translate',
-                    style: theme == Brightness.dark
-                        ? TextStyle(color: whiteColor)
-                        : TextStyle(color: Colors.white)),
+                      iconTheme: IconThemeData(
+                          color: theme == Brightness.dark
+                              ? whiteColor
+                              : Colors.black),
+                      title: Text('Simply Translate',
+                          style: theme == Brightness.dark
+                              ? TextStyle(color: whiteColor)
+                              : TextStyle(color: Colors.white)),
+                    );
+                  }
+                },
               ),
             ),
           ),
@@ -468,10 +484,9 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           FromLang(setStateOverlord: setState),
                           SwitchLang(
-                            setStateParent: setState,
-                            translateParent: translate,
-                            translateEngine: TranslateEngine.GoogleTranslate,
-                          ),
+                              setStateParent: setState,
+                              translateParent: translate,
+                              translateEngine: TranslateEngine.GoogleTranslate),
                           ToLang(
                             setStateOverlord: setState,
                           ),
@@ -516,10 +531,9 @@ class _MainPageState extends State<MainPage> {
                       bottom: MediaQuery.of(context).viewInsets.bottom,
                       right: 0,
                       child: TranslateButtonFloat(
-                        setStateParent: setState,
-                        translateEngine: TranslateEngine.GoogleTranslate,
-                        translateParent: translate,
-                      ),
+                          setStateParent: setState,
+                          translateParent: translate,
+                          translateEngine: TranslateEngine.GoogleTranslate),
                     )
                   : SizedBox.shrink(),
             ),

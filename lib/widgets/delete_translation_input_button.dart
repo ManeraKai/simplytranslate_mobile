@@ -30,9 +30,8 @@ class DeleteTranslationInputButton extends StatelessWidget {
                 setStateParentParent(() {
                   translationInputController.text = '';
                   translationInput = '';
-                  translateEngine == TranslateEngine.GoogleTranslate
-                      ? googleTranslationOutput = ''
-                      : libreTranslationOutput = '';
+                  googleTranslationOutput = '';
+                  libreTranslationOutput = '';
                 });
               },
         icon: Icon(Icons.close),
