@@ -2,6 +2,7 @@ import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:simplytranslate/widgets/copy_to_clipboard_button.dart';
 import 'package:simplytranslate/widgets/delete_translation_input_button.dart';
 import '../data.dart';
@@ -41,57 +42,43 @@ class _TranslationInputState extends State<TranslationInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                controller: inputScrollController,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: AutoDirection(
-                    text: translationInput,
-                    onDirectionChange: (isRTL) {
-                      setState(() {
-                        this.isRTL = isRTL;
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: AutoDirection(
+                text: translationInput,
+                onDirectionChange: (isRTL) {
+                  setState(() {
+                    this.isRTL = isRTL;
+                  });
+                },
+                child: NotificationListener<OverscrollIndicatorNotification>(
+                  onNotification: (overscroll) {
+                    overscroll.disallowGlow();
+                    return false;
+                  },
+                  child: TextField(
+                    focusNode: focus,
+                    minLines: 8,
+                    maxLines: null,
+                    controller: translationInputController,
+                    keyboardType: TextInputType.multiline,
+                    // scrollPhysics: BouncingScrollPhysics(),
+                    onChanged: (String input) async {
+                      widget.setStateParent(() {
+                        translationLength =
+                            translationInputController.text.length;
+                        translationInput = input;
                       });
                     },
-                    child: TextField(
-                      focusNode: focus,
-                      minLines: 8,
-                      maxLines: null,
-                      controller: translationInputController,
-                      keyboardType: TextInputType.multiline,
-                      onChanged: (String input) async {
-                        widget.setStateParent(() {
-                          translationInput = input;
-                        });
-                      },
-                      decoration: InputDecoration(
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
-                              color: theme == Brightness.dark
-                                  ? lightgreyColor
-                                  : Color(0xffa9a9a9ff)),
-                          hintText:
-                              AppLocalizations.of(context)!.enter_text_here),
-                      style: TextStyle(fontSize: 20),
-                      onEditingComplete: () async {
-                        FocusScope.of(context).unfocus();
-
-                        widget.setStateParent(() {
-                          loading = true;
-                        });
-                        final translatedText = await widget.translateParent(
-                            translationInput, widget.translateEngine);
-                        widget.setStateParent(() {
-                          widget.translateEngine ==
-                                  TranslateEngine.GoogleTranslate
-                              ? googleTranslationOutput = translatedText
-                              : libreTranslationOutput = translatedText;
-
-                          loading = false;
-                        });
-                      },
-                    ),
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            color: theme == Brightness.dark
+                                ? lightgreyColor
+                                : Color(0xffa9a9a9)),
+                        hintText:
+                            AppLocalizations.of(context)!.enter_text_here),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ),
@@ -107,6 +94,48 @@ class _TranslationInputState extends State<TranslationInput> {
                     translateEngine: widget.translateEngine),
                 CopyToClipboardButton(translationInput),
                 PasteClipboardButton(setStateParent: setState),
+                Expanded(
+                  child: KeyboardVisibilityBuilder(
+                    builder: (context, isKeyboardVisible) => Container(
+                        width: 48,
+                        alignment: isKeyboardVisible
+                            ? Alignment.topCenter
+                            : Alignment.bottomCenter,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+                        child: Column(
+                          children: [
+                            Text(
+                              '$translationLength',
+                              style: TextStyle(
+                                  color: translationLength <= 5000
+                                      ? theme == Brightness.dark
+                                          ? Colors.white
+                                          : lightThemeGreyColor
+                                      : Colors.red),
+                            ),
+                            Container(
+                                margin: EdgeInsets.symmetric(vertical: 3),
+                                height: 1,
+                                width: 30,
+                                color: translationLength <= 5000
+                                    ? theme == Brightness.dark
+                                        ? Colors.white
+                                        : lightThemeGreyColor
+                                    : Colors.red),
+                            Text(
+                              '5000',
+                              style: TextStyle(
+                                  color: translationLength <= 5000
+                                      ? theme == Brightness.dark
+                                          ? Colors.white
+                                          : lightThemeGreyColor
+                                      : Colors.red),
+                            ),
+                          ],
+                        )),
+                  ),
+                )
               ],
             ),
           )

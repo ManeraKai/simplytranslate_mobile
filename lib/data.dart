@@ -26,7 +26,8 @@ var themeRadio = AppTheme.system;
 var boxDecorationCustomLight = BoxDecoration(
     color: whiteColor,
     border: Border.all(
-      color: Color(0xff3fb274),
+      color: lightThemeGreyColor,
+      // color: Color(0xff3fb274),
       width: 1.5,
       style: BorderStyle.solid,
     ),
@@ -50,7 +51,7 @@ String toLanguageValue = 'Arabic';
 String fromLanguage = '';
 String toLanguage = '';
 
-String instance = 'https://translate.metalune.xyz';
+String instance = 'https://simplytranslate.org';
 int instanceIndex = 0;
 
 String translationInput = '';
@@ -59,6 +60,8 @@ String libreTranslationOutput = '';
 
 String customInstance = '';
 String customUrl = '';
+
+int translationLength = 0;
 
 enum TranslateEngine { GoogleTranslate, LibreTranslate }
 

@@ -72,7 +72,7 @@ class SwitchLang extends StatelessWidget {
             '<->',
             style: TextStyle(
                 fontSize: 18,
-                color: theme == Brightness.dark ? null : Color(0xff3fb274)),
+                color: theme == Brightness.dark ? null : Colors.black),
           ),
         ),
       );

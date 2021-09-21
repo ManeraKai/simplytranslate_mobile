@@ -166,9 +166,15 @@ class FromLang extends StatelessWidget {
                         });
                         fieldTextEditingController.text = chosenOne;
                       }
-                    } catch (_) {}
+                    } catch (_) {
+                      FocusScope.of(context).unfocus();
+                      fieldTextEditingController.text = fromLanguage;
+                    }
                   }
-                } catch (_) {}
+                } catch (_) {
+                  FocusScope.of(context).unfocus();
+                  fieldTextEditingController.text = fromLanguage;
+                }
               },
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -178,7 +184,7 @@ class FromLang extends StatelessWidget {
               focusNode: fieldFocusNode,
               style: TextStyle(
                   fontSize: 18,
-                  color: theme == Brightness.dark ? null : Color(0xff3fb274)),
+                  color: theme == Brightness.dark ? null : Colors.black),
             ),
           );
         },

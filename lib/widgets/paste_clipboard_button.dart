@@ -28,6 +28,7 @@ class PasteClipboardButton extends StatelessWidget {
               if (translationInputController.text == '') {
                 await Future.delayed(
                     const Duration(milliseconds: 1), () => "1");
+                print('wewe');
                 FocusScope.of(context).requestFocus(focus);
                 setStateParent(() {
                   translationInput = valueString;
@@ -36,12 +37,16 @@ class PasteClipboardButton extends StatelessWidget {
               } else {
                 final beforePasteSelection =
                     translationInputController.selection.baseOffset;
-                var newText = translationInputController.text
-                        .substring(0, beforePasteSelection) +
-                    valueString +
-                    translationInputController.text.substring(
-                        beforePasteSelection,
-                        translationInputController.text.length);
+                final newText;
+                if (beforePasteSelection == -1)
+                  newText = translationInputController.text + valueString;
+                else
+                  newText = translationInputController.text
+                          .substring(0, beforePasteSelection) +
+                      valueString +
+                      translationInputController.text.substring(
+                          beforePasteSelection,
+                          translationInputController.text.length);
 
                 await Future.delayed(
                     const Duration(milliseconds: 1), () => "1");

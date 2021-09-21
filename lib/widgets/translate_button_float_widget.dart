@@ -23,11 +23,20 @@ class TranslateButtonFloat extends StatelessWidget {
       child: Container(
         decoration: theme == Brightness.dark
             ? boxDecorationCustomDark.copyWith()
-            : translationInputController.text != ''
-                ? boxDecorationCustomLight.copyWith(
-                    color: Color(0xff3fb274),
-                    border: Border.all(width: 1.5, color: Colors.transparent),
-                  )
+            : translationLength <= 5000
+                ? translationInputController.text != ''
+                    ? boxDecorationCustomLight.copyWith(
+                        color: Color(0xff3fb274),
+                        border:
+                            Border.all(width: 1.5, color: Colors.transparent),
+                      )
+                    : boxDecorationCustomLight.copyWith(
+                        color: Color(
+                          0xffa9a9a9,
+                        ),
+                        border:
+                            Border.all(width: 1.5, color: Colors.transparent),
+                      )
                 : boxDecorationCustomLight.copyWith(
                     color: Color(
                       0xffa9a9a9,
@@ -40,22 +49,24 @@ class TranslateButtonFloat extends StatelessWidget {
         child: GestureDetector(
           onTap: translationInputController.text == ''
               ? null
-              : () async {
-                  FocusScope.of(context).unfocus();
-                  setStateParent(() => loading = true);
-                  final translatedText =
-                      await translateParent(translationInput, translateEngine);
-                  setStateParent(() {
-                    translateEngine == TranslateEngine.GoogleTranslate
-                        ? googleTranslationOutput = translatedText
-                        : libreTranslationOutput = translatedText;
-                    loading = false;
-                  });
-                },
-          child: Text(
-            AppLocalizations.of(context)!.translate,
-            style: TextStyle(fontSize: 18),
-          ),
+              : translationLength <= 5000
+                  ? () async {
+                      FocusScope.of(context).unfocus();
+                      setStateParent(() => loading = true);
+                      final translatedText = await translateParent(
+                          translationInput, translateEngine);
+                      setStateParent(() {
+                        translateEngine == TranslateEngine.GoogleTranslate
+                            ? googleTranslationOutput = translatedText
+                            : libreTranslationOutput = translatedText;
+                        loading = false;
+                      });
+                    }
+                  : null,
+          child: Text(AppLocalizations.of(context)!.translate,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: theme == Brightness.dark ? null : Colors.white)),
         ),
       ),
     );

@@ -124,61 +124,65 @@ class ToLang extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: TextField(
-              onTap: () {
-                toIsFirstClick = true;
-                fieldTextEditingController.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingController.text.length,
-                );
-              },
-              onEditingComplete: () {
-                try {
-                  var chosenOne = selectLanguages.firstWhere((word) => word
-                      .toLowerCase()
-                      .startsWith(
-                          fieldTextEditingController.text.toLowerCase()));
-                  if (chosenOne != fromLanguage) {
-                    FocusScope.of(context).unfocus();
-                    session.write('to_language', chosenOne);
-                    setStateOverlord(() {
-                      toLanguage = chosenOne;
-                      toLanguageValue = selectLanguagesMap[chosenOne];
-                    });
-                    fieldTextEditingController.text = chosenOne;
-                  } else {
-                    var dimmedSelectLanguage = selectLanguages.toList();
-                    dimmedSelectLanguage.remove(chosenOne);
+                onTap: () {
+                  toIsFirstClick = true;
+                  fieldTextEditingController.selection = TextSelection(
+                    baseOffset: 0,
+                    extentOffset: fieldTextEditingController.text.length,
+                  );
+                },
+                onEditingComplete: () {
+                  try {
+                    var chosenOne = selectLanguages.firstWhere((word) => word
+                        .toLowerCase()
+                        .startsWith(
+                            fieldTextEditingController.text.toLowerCase()));
+                    if (chosenOne != fromLanguage) {
+                      FocusScope.of(context).unfocus();
+                      session.write('to_language', chosenOne);
+                      setStateOverlord(() {
+                        toLanguage = chosenOne;
+                        toLanguageValue = selectLanguagesMap[chosenOne];
+                      });
+                      fieldTextEditingController.text = chosenOne;
+                    } else {
+                      var dimmedSelectLanguage = selectLanguages.toList();
+                      dimmedSelectLanguage.remove(chosenOne);
 
-                    try {
-                      chosenOne = dimmedSelectLanguage.firstWhere((word) => word
-                          .toLowerCase()
-                          .startsWith(
-                              fieldTextEditingController.text.toLowerCase()));
-                      if (chosenOne != fromLanguage) {
+                      try {
+                        chosenOne = dimmedSelectLanguage.firstWhere((word) =>
+                            word.toLowerCase().startsWith(
+                                fieldTextEditingController.text.toLowerCase()));
+                        if (chosenOne != fromLanguage) {
+                          FocusScope.of(context).unfocus();
+                          session.write('to_language', chosenOne);
+                          setStateOverlord(() {
+                            toLanguage = chosenOne;
+                            toLanguageValue = selectLanguagesMap[chosenOne];
+                          });
+                          fieldTextEditingController.text = chosenOne;
+                        }
+                      } catch (_) {
                         FocusScope.of(context).unfocus();
-                        session.write('to_language', chosenOne);
-                        setStateOverlord(() {
-                          toLanguage = chosenOne;
-                          toLanguageValue = selectLanguagesMap[chosenOne];
-                        });
-                        fieldTextEditingController.text = chosenOne;
+                        fieldTextEditingController.text = toLanguage;
                       }
-                    } catch (_) {}
+                    }
+                  } catch (_) {
+                    FocusScope.of(context).unfocus();
+                    fieldTextEditingController.text = toLanguage;
                   }
-                } catch (_) {}
 
-                // chose the next one if the first is dimmed.
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                isDense: true,
-              ),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: theme == Brightness.dark ? null : Color(0xff3fb274)),
-            ),
+                  // chose the next one if the first is dimmed.
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  isDense: true,
+                ),
+                controller: fieldTextEditingController,
+                focusNode: fieldFocusNode,
+                style: TextStyle(
+                    fontSize: 18,
+                    color: theme == Brightness.dark ? null : Colors.black)),
           );
         },
       ),
