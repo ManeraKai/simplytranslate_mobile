@@ -6,7 +6,7 @@
 </p>
 <h1 align="center">Simply Translate</h1>
 
-<h4 align="center">A mobile client that connects to multiple <a href="https://translate.metalune.xyz/">SimplyTranslate</a> instances.</h4>
+<h4 align="center">An unoffical mobile client that connects to multiple <a href="https://translate.metalune.xyz/">SimplyTranslate</a> instances.</h4>
 
 <p align="center">
   <a href="https://f-droid.org/en/packages/com.simplytranslate/">
