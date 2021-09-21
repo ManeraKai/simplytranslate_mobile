@@ -1,1 +1,1 @@
-An app client that connects to multiple Simply Translate instances.
+An unofficial app client that connects to multiple Simply Translate instances.
