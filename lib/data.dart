@@ -229,7 +229,8 @@ final ScrollController rightTextviewScrollController = ScrollController();
 String engineSelected = 'google';
 
 var instances = [
-  "https://translate.metalune.xyz",
+  "https://simplytranslate.org",
+  "https://st.alefvanoon.xyz",
   "https://almaleehserver.asuscomm.com:447"
 ];
 
