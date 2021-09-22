@@ -121,10 +121,11 @@
     "check_instance": "(السيرفر)تحقق من المثيل",
     "no_internet": "لا يوجد انترنت",
     "ok": "حسناً",
+    "cancel": "Cancel",
 
     "settings": "الإعدادات",
 
-    "select_instance": "اختر المثيل(السيرفر)",
+    "instance": "اختر المثيل(السيرفر)",
     "theme": "السمة",
     "light": "فاتح",
     "dark": "داكن",

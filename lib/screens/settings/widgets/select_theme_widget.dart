@@ -118,7 +118,7 @@ class SelectTheme extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Cancel'),
+                    child: Text(AppLocalizations.of(context)!.cancel),
                   )
                 ],
               ),
