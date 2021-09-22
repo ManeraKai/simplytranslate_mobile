@@ -27,7 +27,7 @@ dependencies:
   html: ^0.15.0
   get_storage: ^2.0.3
   auto_direction: ^0.0.5
-  # flutter_keyboard_visibility: ^5.0.3
+  clipboard_listener: ^2.0.0
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0

@@ -108,6 +108,8 @@ Future<void> getSharedText(
   }
 }
 
+bool isClipboardEmpty = true;
+
 customInstanceFormatting() {
   final url;
   if (customInstance.endsWith('/'))

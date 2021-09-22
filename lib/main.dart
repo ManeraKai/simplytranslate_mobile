@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -58,6 +59,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
+    ClipboardListener.addListener(() async {
+      final _clipData = await Clipboard.getData(Clipboard.kTextPlain);
+      if (_clipData == null)
+        setState(() => isClipboardEmpty = true);
+      else
+        setState(() => isClipboardEmpty = false);
+    });
     super.initState();
   }
 
@@ -65,6 +73,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
+    ClipboardListener.removeListener(() {});
   }
 
   @override
