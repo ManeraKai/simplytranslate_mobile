@@ -2,11 +2,11 @@ import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:simplytranslate/widgets/copy_to_clipboard_button.dart';
 import 'package:simplytranslate/widgets/delete_translation_input_button.dart';
 import '../data.dart';
 import './paste_clipboard_button.dart';
+import 'keyboard_visibility_widget.dart';
 
 class TranslationInput extends StatefulWidget {
   final setStateParent;
@@ -62,9 +62,12 @@ class _TranslationInputState extends State<TranslationInput> {
                     maxLines: null,
                     controller: translationInputController,
                     keyboardType: TextInputType.multiline,
-                    // scrollPhysics: BouncingScrollPhysics(),
+                    onTap: () {
+                      widget.setStateParent(() => translationInputOpen = true);
+                    },
                     onChanged: (String input) async {
                       widget.setStateParent(() {
+                        translationInputOpen = true;
                         translationLength =
                             translationInputController.text.length;
                         translationInput = input;
@@ -96,7 +99,7 @@ class _TranslationInputState extends State<TranslationInput> {
                 PasteClipboardButton(setStateParent: setState),
                 Expanded(
                   child: KeyboardVisibilityBuilder(
-                    builder: (context, isKeyboardVisible) => Container(
+                    builder: (context, child, isKeyboardVisible) => Container(
                         width: 48,
                         alignment: isKeyboardVisible
                             ? Alignment.topCenter

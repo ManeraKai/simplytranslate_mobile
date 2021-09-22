@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
@@ -19,6 +18,7 @@ import './widgets/translation_output_widget.dart';
 import './widgets/from_lang_widget.dart';
 import './widgets/to_lang_widget.dart';
 import './widgets/switch_lang_widget.dart';
+import 'widgets/keyboard_visibility_widget.dart';
 
 void main(List<String> args) async {
   //------ Setting session variables up --------//
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(100),
             child: KeyboardVisibilityBuilder(
-              builder: (context, isKeyboardVisible) => Builder(
+              builder: (context, child, isKeyboardVisible) => Builder(
                 builder: (context) {
                   if (MediaQuery.of(context).orientation ==
                       Orientation.landscape)
@@ -524,7 +524,7 @@ class _MainPageState extends State<MainPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           KeyboardVisibilityBuilder(
-                            builder: (context, isKeyboardVisible) =>
+                            builder: (context, child, isKeyboardVisible) =>
                                 !isKeyboardVisible
                                     ? TranslateButton(
                                         setStateParent: setState,
@@ -543,7 +543,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             KeyboardVisibilityBuilder(
-              builder: (context, isKeyboardVisible) => isKeyboardVisible
+              builder: (context, child, isKeyboardVisible) => isKeyboardVisible
                   ? Positioned(
                       bottom: MediaQuery.of(context).viewInsets.bottom,
                       right: 0,
@@ -597,7 +597,8 @@ class _MainPageState extends State<MainPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 KeyboardVisibilityBuilder(
-                                  builder: (context, isKeyboardVisible) =>
+                                  builder: (context, child,
+                                          isKeyboardVisible) =>
                                       !isKeyboardVisible
                                           ? TranslateButton(
                                               setStateParent: setState,
@@ -616,17 +617,20 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                   KeyboardVisibilityBuilder(
-                    builder: (context, isKeyboardVisible) => isKeyboardVisible
-                        ? Positioned(
-                            bottom: MediaQuery.of(context).viewInsets.bottom,
-                            right: 0,
-                            child: TranslateButtonFloat(
-                              setStateParent: setState,
-                              translateEngine: TranslateEngine.LibreTranslate,
-                              translateParent: translate,
-                            ),
-                          )
-                        : SizedBox.shrink(),
+                    builder: (context, child, isKeyboardVisible) =>
+                        isKeyboardVisible
+                            ? Positioned(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom,
+                                right: 0,
+                                child: TranslateButtonFloat(
+                                  setStateParent: setState,
+                                  translateEngine:
+                                      TranslateEngine.LibreTranslate,
+                                  translateParent: translate,
+                                ),
+                              )
+                            : SizedBox.shrink(),
                   ),
                 ],
               )

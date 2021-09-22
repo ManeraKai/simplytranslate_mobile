@@ -61,6 +61,8 @@ String libreTranslationOutput = '';
 String customInstance = '';
 String customUrl = '';
 
+bool translationInputOpen = false;
+
 int translationLength = 0;
 
 enum TranslateEngine { GoogleTranslate, LibreTranslate }

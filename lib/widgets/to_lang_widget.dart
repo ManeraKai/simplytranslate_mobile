@@ -125,6 +125,7 @@ class ToLang extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: TextField(
                 onTap: () {
+                  setStateOverlord(() => translationInputOpen = false);
                   toIsFirstClick = true;
                   fieldTextEditingController.selection = TextSelection(
                     baseOffset: 0,
