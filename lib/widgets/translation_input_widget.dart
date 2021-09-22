@@ -56,32 +56,38 @@ class _TranslationInputState extends State<TranslationInput> {
                     overscroll.disallowGlow();
                     return false;
                   },
-                  child: TextField(
-                    focusNode: focus,
-                    minLines: 8,
-                    maxLines: null,
-                    controller: translationInputController,
-                    keyboardType: TextInputType.multiline,
-                    onTap: () {
-                      widget.setStateParent(() => translationInputOpen = true);
-                    },
-                    onChanged: (String input) async {
-                      widget.setStateParent(() {
-                        translationInputOpen = true;
-                        translationLength =
-                            translationInputController.text.length;
-                        translationInput = input;
-                      });
-                    },
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                            color: theme == Brightness.dark
-                                ? lightgreyColor
-                                : Color(0xffa9a9a9)),
-                        hintText:
-                            AppLocalizations.of(context)!.enter_text_here),
-                    style: TextStyle(fontSize: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Scrollbar(
+                      child: TextField(
+                        focusNode: focus,
+                        minLines: 8,
+                        maxLines: null,
+                        controller: translationInputController,
+                        keyboardType: TextInputType.multiline,
+                        onTap: () {
+                          widget.setStateParent(
+                              () => translationInputOpen = true);
+                        },
+                        onChanged: (String input) async {
+                          widget.setStateParent(() {
+                            translationInputOpen = true;
+                            translationLength =
+                                translationInputController.text.length;
+                            translationInput = input;
+                          });
+                        },
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintStyle: TextStyle(
+                                color: theme == Brightness.dark
+                                    ? lightgreyColor
+                                    : Color(0xffa9a9a9)),
+                            hintText:
+                                AppLocalizations.of(context)!.enter_text_here),
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
                   ),
                 ),
               ),
