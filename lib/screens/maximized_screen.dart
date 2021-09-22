@@ -52,24 +52,26 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                           : libreTranslationOutput,
                     ),
                     IconButton(
+                      color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {
                         setState(() {
-                          outputFontSize += 3;
+                          if (outputFontSize + 3 <= 90) outputFontSize += 3;
                         });
                       },
                       icon: Icon(Icons.add),
                     ),
                     IconButton(
+                      color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {
                         setState(() {
-                          outputFontSize -= 3;
+                          if (outputFontSize - 3 >= 8) outputFontSize -= 3;
                         });
                       },
-                      icon: Icon(Icons.minimize),
+                      icon: Icon(Icons.remove),
                     ),
                   ],
                 )

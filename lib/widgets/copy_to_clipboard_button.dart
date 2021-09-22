@@ -13,6 +13,7 @@ class CopyToClipboardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      color: theme == Brightness.dark ? null : greenColor,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: text == ''

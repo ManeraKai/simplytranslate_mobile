@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -9,14 +10,16 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate/screens/about_screen.dart';
+import 'package:simplytranslate/widgets/translate_button_float_widget.dart';
 import './data.dart';
-import 'screens/settings_screen.dart';
+import 'screens/settings/settings_screen.dart';
 import './widgets/translate_button_widget.dart';
 import './widgets/translation_input_widget.dart';
 import './widgets/translation_output_widget.dart';
 import './widgets/from_lang_widget.dart';
 import './widgets/to_lang_widget.dart';
 import './widgets/switch_lang_widget.dart';
+import 'widgets/keyboard_visibility_widget.dart';
 
 void main(List<String> args) async {
   //------ Setting session variables up --------//
@@ -30,13 +33,23 @@ void main(List<String> args) async {
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {
-    themeValue = themeSession;
-    if (themeSession == 'system')
+    if (themeSession == 'system') {
+      themeRadio = AppTheme.system;
       theme = SchedulerBinding.instance!.window.platformBrightness;
-    else if (themeSession == 'light')
+    } else if (themeSession == 'light') {
+      themeRadio = AppTheme.light;
       theme = Brightness.light;
-    else if (themeSession == 'dark') theme = Brightness.dark;
+    } else if (themeSession == 'dark') {
+      themeRadio = AppTheme.dark;
+      theme = Brightness.dark;
+    }
   }
+  var _clipData =
+      (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
+  if (_clipData == '')
+    isClipboardEmpty = true;
+  else
+    isClipboardEmpty = false;
   //--------------------------------------------//
 
   return runApp(MyApp());
@@ -51,6 +64,23 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
+    ClipboardListener.addListener(() async {
+      var _clipData =
+          (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
+      if (_clipData == '') {
+        if (!isClipboardEmpty) {
+          setState(() {
+            isClipboardEmpty = true;
+          });
+        }
+      } else {
+        if (isClipboardEmpty) {
+          setState(() {
+            isClipboardEmpty = false;
+          });
+        }
+      }
+    });
     super.initState();
   }
 
@@ -58,12 +88,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
+    ClipboardListener.removeListener(() {});
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      getSharedText(setState);
+      setState(() {
+        callSharedText = true;
+      });
     }
   }
 
@@ -74,134 +107,118 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textSelectionTheme: TextSelectionThemeData(
-            cursorColor: theme == Brightness.dark ? whiteColor : Colors.black),
-        textTheme: TextTheme(
-          bodyText2: theme == Brightness.dark
-              ? TextStyle(color: whiteColor)
-              : TextStyle(color: Colors.black),
-          subtitle1: theme == Brightness.dark
-              ? TextStyle(color: whiteColor, fontSize: 16)
-              : TextStyle(color: Colors.black),
-          headline6: theme == Brightness.dark
-              ? TextStyle(color: whiteColor)
-              : TextStyle(color: Colors.black),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: theme == Brightness.dark
-                ? MaterialStateProperty.all(greyColor)
-                : MaterialStateProperty.all(whiteColor),
-            overlayColor: theme == Brightness.dark
-                ? MaterialStateProperty.all(greyColor)
-                : MaterialStateProperty.all(whiteColor),
-            foregroundColor: theme == Brightness.dark
-                ? MaterialStateProperty.all(whiteColor)
-                : MaterialStateProperty.all(Colors.black),
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor:
+                  theme == Brightness.dark ? whiteColor : Colors.black),
+          textTheme: TextTheme(
+            bodyText2: theme == Brightness.dark
+                ? TextStyle(color: whiteColor)
+                : TextStyle(color: Colors.black),
+            subtitle1: theme == Brightness.dark
+                ? TextStyle(color: whiteColor, fontSize: 16)
+                : TextStyle(color: Colors.black),
+            headline6: theme == Brightness.dark
+                ? TextStyle(color: whiteColor)
+                : TextStyle(color: Colors.black),
           ),
-        ),
-        colorScheme: theme == Brightness.dark
-            ? ColorScheme.dark(onSurface: whiteColor)
-            : ColorScheme.light(onSurface: Colors.black),
-      ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: theme == Brightness.dark
+                  ? MaterialStateProperty.all(greyColor)
+                  : MaterialStateProperty.all(whiteColor),
+              overlayColor: theme == Brightness.dark
+                  ? MaterialStateProperty.all(greyColor)
+                  : MaterialStateProperty.all(whiteColor),
+              foregroundColor: theme == Brightness.dark
+                  ? MaterialStateProperty.all(whiteColor)
+                  : MaterialStateProperty.all(Colors.black),
+            ),
+          ),
+          colorScheme: theme == Brightness.dark
+              ? ColorScheme.dark(onSurface: whiteColor, primary: greenColor)
+              : ColorScheme.light(
+                  onSurface: Colors.black, primary: greenColor)),
       title: 'Simply Translate',
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: theme == Brightness.dark ? greyColor : whiteColor,
-            elevation: 0,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  text: "GoogleTranslate",
-                ),
-                Tab(
-                  text: "LibreTranslate",
-                )
-              ],
-            ),
-            iconTheme: IconThemeData(
-                color: theme == Brightness.dark ? whiteColor : Colors.black),
-            title: Text('Simply Translate',
-                style: theme == Brightness.dark
-                    ? TextStyle(color: whiteColor)
-                    : TextStyle(color: Colors.black)),
-          ),
-          drawer: Container(
-            width: 200,
-            child: Drawer(
-              child: Container(
-                child: ListView(
-                  children: [
-                    Container(
-                      height: 80,
-                      child: DrawerHeader(
-                        padding: EdgeInsets.zero,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 3.7, right: 2),
-                                child: Image(
-                                  image: theme == Brightness.dark
-                                      ? AssetImage(
-                                          'assets/favicon/simplytranslate_transparent.png')
-                                      : AssetImage(
-                                          'assets/favicon/simplytranslate_transparent_black.png'),
-                                  height: 28,
-                                ),
-                              ),
-                              Text(
-                                'imply Translate',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: theme == Brightness.dark
-                                        ? whiteColor
-                                        : Colors.black),
-                              ),
-                            ],
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: KeyboardVisibilityBuilder(
+              builder: (context, child, isKeyboardVisible) => Builder(
+                builder: (context) {
+                  if (MediaQuery.of(context).orientation ==
+                      Orientation.landscape)
+                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                        overlays: []);
+                  else
+                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                        overlays: SystemUiOverlay.values);
+                  if (isKeyboardVisible &&
+                      MediaQuery.of(context).orientation ==
+                          Orientation.landscape) {
+                    return SizedBox.shrink();
+                  } else {
+                    return AppBar(
+                      actions: [
+                        PopupMenuButton(
+                          icon: Icon(Icons.more_vert, color: Colors.white),
+                          color: theme == Brightness.dark
+                              ? secondgreyColor
+                              : Colors.white,
+                          itemBuilder: (BuildContext context) => [
+                            PopupMenuItem<String>(
+                                value: 'settings',
+                                child: Text(
+                                    AppLocalizations.of(context)!.settings)),
+                            PopupMenuItem<String>(
+                                value: 'about',
+                                child:
+                                    Text(AppLocalizations.of(context)!.about)),
+                          ],
+                          onSelected: (value) {
+                            if (value == 'settings') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Settings(setState)),
+                              );
+                            } else if (value == 'about') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutScreen()),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                      backgroundColor: theme == Brightness.dark
+                          ? greyColor
+                          : Color(0xff3fb274),
+                      elevation: 3,
+                      bottom: TabBar(
+                        indicatorColor: Colors.white,
+                        tabs: [
+                          Tab(
+                            text: "GoogleTranslate",
                           ),
-                        ),
+                          Tab(
+                            text: "LibreTranslate",
+                          )
+                        ],
                       ),
-                    ),
-                    Builder(
-                      builder: (context) => ListTile(
-                        title: Text(AppLocalizations.of(context)!.settings),
-                        horizontalTitleGap: 0,
-                        leading: Icon(
-                          Icons.settings,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Settings(setState)),
-                          );
-                        },
-                      ),
-                    ),
-                    Builder(
-                      builder: (context) => ListTile(
-                        title: Text(AppLocalizations.of(context)!.about),
-                        leading: Icon(Icons.person),
-                        horizontalTitleGap: 0,
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AboutScreen()),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                      iconTheme: IconThemeData(
+                          color: theme == Brightness.dark
+                              ? whiteColor
+                              : Colors.black),
+                      title: Text('Simply Translate',
+                          style: theme == Brightness.dark
+                              ? TextStyle(color: whiteColor)
+                              : TextStyle(color: Colors.white)),
+                    );
+                  }
+                },
               ),
             ),
           ),
@@ -219,6 +236,18 @@ class MainPageLocalization extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    themeTranslation = {
+      'dark': AppLocalizations.of(context)!.dark,
+      'light': AppLocalizations.of(context)!.light,
+      'system': AppLocalizations.of(context)!.follow_system,
+    };
+
+    final themeSession = session.read('theme').toString();
+    if (themeSession != 'null')
+      themeValue = themeTranslation[themeSession];
+    else
+      themeValue = themeTranslation['system'];
+
     selectLanguagesMap = {
       AppLocalizations.of(context)!.afrikaans: "Afrikaans",
       AppLocalizations.of(context)!.albanian: "Albanian",
@@ -347,10 +376,16 @@ class MainPageLocalization extends StatelessWidget {
     fromLanguage = AppLocalizations.of(context)!.english;
     toLanguage = AppLocalizations.of(context)!.arabic;
 
-    if (session.read('from_language').toString() != 'null')
-      fromLanguage = session.read('from_language').toString();
-    if (session.read('to_language').toString() != 'null')
-      toLanguage = session.read('to_language').toString();
+    if (session.read('from_language').toString() != 'null') {
+      var sessionData = session.read('from_language').toString();
+      fromLanguage = sessionData;
+      fromLanguageValue = fromSelectLanguagesMap[sessionData];
+    }
+    if (session.read('to_language').toString() != 'null') {
+      var sessionData = session.read('to_language').toString();
+      toLanguage = sessionData;
+      toLanguageValue = selectLanguagesMap[sessionData];
+    }
 
     if (session.read('engine').toString() != 'null')
       engineSelected = session.read('engine').toString();
@@ -372,7 +407,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     checkLibreTranslate(setState);
-    getSharedText(setState);
+    getSharedText(setState, translate, TranslateEngine.GoogleTranslate);
     super.initState();
   }
 
@@ -468,111 +503,167 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (callSharedText) {
+      print('calling it');
+      getSharedText(setState, translate, TranslateEngine.GoogleTranslate);
+    }
     return TabBarView(
       physics: NeverScrollableScrollPhysics(),
       children: [
-        SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Stack(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FromLang(setStateOverlord: setState),
-                      SwitchLang(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FromLang(setStateOverlord: setState),
+                          SwitchLang(
+                              setStateParent: setState,
+                              translateParent: translate,
+                              translateEngine: TranslateEngine.GoogleTranslate),
+                          ToLang(
+                            setStateOverlord: setState,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      TranslationInput(
                         setStateParent: setState,
                         translateParent: translate,
                         translateEngine: TranslateEngine.GoogleTranslate,
                       ),
-                      ToLang(
-                        setStateOverlord: setState,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  TranslationInput(
-                    setStateParent: setState,
-                    translateParent: translate,
-                    translateEngine: TranslateEngine.GoogleTranslate,
-                  ),
-                  const SizedBox(height: 10),
-                  TranslationOutput(
-                    translateEngine: TranslateEngine.GoogleTranslate,
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TranslateButton(
-                        setStateParent: setState,
-                        translateParent: translate,
+                      const SizedBox(height: 10),
+                      TranslationOutput(
                         translateEngine: TranslateEngine.GoogleTranslate,
                       ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          KeyboardVisibilityBuilder(
+                            builder: (context, child, isKeyboardVisible) =>
+                                !isKeyboardVisible
+                                    ? TranslateButton(
+                                        setStateParent: setState,
+                                        translateParent: translate,
+                                        translateEngine:
+                                            TranslateEngine.GoogleTranslate,
+                                      )
+                                    : SizedBox.shrink(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                     ],
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
-        ),
-        isThereLibreTranslate
-            ? SingleChildScrollView(
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            FromLang(setStateOverlord: setState),
-                            SwitchLang(
-                              setStateParent: setState,
-                              translateParent: translate,
-                              translateEngine: TranslateEngine.LibreTranslate,
-                            ),
-                            ToLang(
-                              setStateOverlord: setState,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        TranslationInput(
-                          setStateParent: setState,
-                          translateParent: translate,
-                          translateEngine: TranslateEngine.LibreTranslate,
-                        ),
-                        const SizedBox(height: 10),
-                        TranslationOutput(
-                            translateEngine: TranslateEngine.LibreTranslate),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            TranslateButton(
-                              setStateParent: setState,
-                              translateParent: translate,
-                              translateEngine: TranslateEngine.LibreTranslate,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
                   ),
                 ),
+              ),
+            ),
+            KeyboardVisibilityBuilder(
+              builder: (context, child, isKeyboardVisible) => isKeyboardVisible
+                  ? Positioned(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                      right: 0,
+                      child: TranslateButtonFloat(
+                          setStateParent: setState,
+                          translateParent: translate,
+                          translateEngine: TranslateEngine.GoogleTranslate),
+                    )
+                  : SizedBox.shrink(),
+            ),
+          ],
+        ),
+        isThereLibreTranslate
+            ? Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                FromLang(setStateOverlord: setState),
+                                SwitchLang(
+                                  setStateParent: setState,
+                                  translateParent: translate,
+                                  translateEngine:
+                                      TranslateEngine.LibreTranslate,
+                                ),
+                                ToLang(
+                                  setStateOverlord: setState,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            TranslationInput(
+                              setStateParent: setState,
+                              translateParent: translate,
+                              translateEngine: TranslateEngine.LibreTranslate,
+                            ),
+                            const SizedBox(height: 10),
+                            TranslationOutput(
+                                translateEngine:
+                                    TranslateEngine.LibreTranslate),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                KeyboardVisibilityBuilder(
+                                  builder: (context, child,
+                                          isKeyboardVisible) =>
+                                      !isKeyboardVisible
+                                          ? TranslateButton(
+                                              setStateParent: setState,
+                                              translateParent: translate,
+                                              translateEngine: TranslateEngine
+                                                  .LibreTranslate,
+                                            )
+                                          : SizedBox.shrink(),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  KeyboardVisibilityBuilder(
+                    builder: (context, child, isKeyboardVisible) =>
+                        isKeyboardVisible
+                            ? Positioned(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom,
+                                right: 0,
+                                child: TranslateButtonFloat(
+                                  setStateParent: setState,
+                                  translateEngine:
+                                      TranslateEngine.LibreTranslate,
+                                  translateParent: translate,
+                                ),
+                              )
+                            : SizedBox.shrink(),
+                  ),
+                ],
               )
             : Center(
                 child: Text(
-                'Not available',
-                style: const TextStyle(fontSize: 20),
-              )),
+                  AppLocalizations.of(context)!.not_available,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
       ],
     );
   }

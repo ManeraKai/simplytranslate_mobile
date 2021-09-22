@@ -9,22 +9,41 @@ const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
 const secondgreyColor = Color(0xff212529);
 const whiteColor = Color(0xfff5f6f7);
+const greenColor = Color(0xff3fb274);
+const lightThemeGreyColor = Color(0xffa9a9a9);
 
 var boxDecorationCustomDark = BoxDecoration(
-    color: greyColor,
-    border: Border.all(
-      color: lightgreyColor,
-      width: 2,
-      style: BorderStyle.solid,
-    ));
+  color: greyColor,
+  border: Border.all(
+    color: lightgreyColor,
+    width: 1.5,
+    style: BorderStyle.solid,
+  ),
+  borderRadius: BorderRadius.circular(2),
+);
 
+var themeRadio = AppTheme.system;
 var boxDecorationCustomLight = BoxDecoration(
     color: whiteColor,
     border: Border.all(
-      color: lightgreyColor,
-      width: 2,
+      color: lightThemeGreyColor,
+      // color: Color(0xff3fb274),
+      width: 1.5,
       style: BorderStyle.solid,
-    ));
+    ),
+    borderRadius: BorderRadius.circular(2));
+
+var boxDecorationCustomLightBlack = BoxDecoration(
+    color: whiteColor,
+    border: Border.all(
+      color: lightThemeGreyColor,
+      width: 1.5,
+      style: BorderStyle.solid,
+    ),
+    borderRadius: BorderRadius.circular(2));
+
+var focus = FocusNode();
+var inputScrollController = ScrollController();
 
 String fromLanguageValue = 'English';
 String toLanguageValue = 'Arabic';
@@ -32,7 +51,7 @@ String toLanguageValue = 'Arabic';
 String fromLanguage = '';
 String toLanguage = '';
 
-String instance = 'https://translate.metalune.xyz';
+String instance = 'https://simplytranslate.org';
 int instanceIndex = 0;
 
 String translationInput = '';
@@ -42,9 +61,17 @@ String libreTranslationOutput = '';
 String customInstance = '';
 String customUrl = '';
 
+bool translationInputOpen = false;
+
+int translationLength = 0;
+
 enum TranslateEngine { GoogleTranslate, LibreTranslate }
 
-var themeValue = 'system';
+enum AppTheme { dark, light, system }
+
+var themeValue = '';
+
+var themeTranslation;
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum customInstanceValidation { False, True, NotChecked }
@@ -53,19 +80,36 @@ bool isThereLibreTranslate = false;
 
 const methodChannel = MethodChannel('com.simplytranslate/translate');
 
-Future<void> getSharedText(setState) async {
+bool callSharedText = false;
+
+Future<void> getSharedText(
+    setStateParent, translateParent, translateEngine) async {
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
-      setState(() {
+      setStateParent(() {
         translationInput = answer.toString();
         translationInputController.text = translationInput;
+        translationLength = translationInputController.text.length;
+        loading = true;
+      });
+      print('translate');
+
+      final translatedText =
+          await translateParent(translationInput, translateEngine);
+      setStateParent(() {
+        translateEngine == TranslateEngine.GoogleTranslate
+            ? googleTranslationOutput = translatedText
+            : libreTranslationOutput = translatedText;
+        loading = false;
       });
     }
   } on PlatformException catch (e) {
     print(e);
   }
 }
+
+bool isClipboardEmpty = true;
 
 customInstanceFormatting() {
   final url;
@@ -83,6 +127,21 @@ customInstanceFormatting() {
         Uri.http(customInstance.substring(7), '/', {'engine': engineSelected});
   else
     url = Uri.https(customInstance, '/', {'engine': engineSelected});
+  // custom else https://
+  return url;
+}
+
+String customUrlFormatting(url) {
+  if (url.endsWith('/'))
+    // trimming last slash
+    url = url.substring(0, url.length - 1);
+  if (url.startsWith('https://')) {
+    url = url.trim();
+    url = url.substring(8);
+    // custom https://
+  } else if (url.startsWith('http://'))
+    // http://
+    url = url.substring(7);
   // custom else https://
   return url;
 }
@@ -124,7 +183,7 @@ checkLibreTranslate(setStateCustom) async {
   } catch (err) {}
 }
 
-Future<void> checkInstance(setState) async {
+Future<bool> checkInstance(setState) async {
   setState(() => checkLoading = true);
 
   final url;
@@ -153,7 +212,7 @@ Future<void> checkInstance(setState) async {
     setState(() => isCustomInstanceValid = customInstanceValidation.False);
   }
   setState(() => checkLoading = false);
-  return;
+  return isCustomInstanceValid == customInstanceValidation.True ? true : false;
 }
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
@@ -178,7 +237,8 @@ final ScrollController rightTextviewScrollController = ScrollController();
 String engineSelected = 'google';
 
 var instances = [
-  "https://translate.metalune.xyz",
+  "https://simplytranslate.org",
+  "https://st.alefvanoon.xyz",
   "https://almaleehserver.asuscomm.com:447"
 ];
 

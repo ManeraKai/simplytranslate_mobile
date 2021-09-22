@@ -19,6 +19,7 @@ class DeleteTranslationInputButton extends StatelessWidget {
       child: IconButton(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
+        color: theme == Brightness.dark ? null : greenColor,
         onPressed: translationInputController.text == '' &&
                 (translateEngine == TranslateEngine.GoogleTranslate
                         ? googleTranslationOutput
@@ -29,9 +30,9 @@ class DeleteTranslationInputButton extends StatelessWidget {
                 setStateParentParent(() {
                   translationInputController.text = '';
                   translationInput = '';
-                  translateEngine == TranslateEngine.GoogleTranslate
-                      ? googleTranslationOutput = ''
-                      : libreTranslationOutput = '';
+                  googleTranslationOutput = '';
+                  libreTranslationOutput = '';
+                  translationLength = 0;
                 });
               },
         icon: Icon(Icons.close),

@@ -118,7 +118,7 @@
     "check": "Check",
 
     "something_went_wrong": "Something went wrong",
-    "check_instance": "Check instance",
+    "check_instance": "Check instance.",
     "no_internet": "No internet connection",
     "ok": "OK",
 
@@ -131,5 +131,8 @@
     "follow_system": "Follow system",
 
     "about": "About",
-    "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est."
+    "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.",
+
+    "not_available": "Not available"
+    
 }

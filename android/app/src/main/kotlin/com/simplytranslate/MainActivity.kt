@@ -30,11 +30,6 @@ class MainActivity: FlutterActivity() {
 
     }
 
-    override fun onDestroy() {
-        teardownChannels()
-        super.onDestroy()
-    }
-
     private fun setupChannels(context:Context, messenger: BinaryMessenger){
         translateChannel = MethodChannel(messenger, TRANSLATE_CHANNEL_NAME)
         translateChannel!!.setMethodCallHandler{

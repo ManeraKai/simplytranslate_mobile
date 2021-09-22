@@ -125,8 +125,9 @@ class FromLang extends StatelessWidget {
           changeText = () => fieldTextEditingController.text = fromLanguage;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextFormField(
+            child: TextField(
               onTap: () {
+                setStateOverlord(() => translationInputOpen = false);
                 fromIsFirstClick = true;
                 fieldTextEditingController.selection = TextSelection(
                   baseOffset: 0,
@@ -166,9 +167,15 @@ class FromLang extends StatelessWidget {
                         });
                         fieldTextEditingController.text = chosenOne;
                       }
-                    } catch (_) {}
+                    } catch (_) {
+                      FocusScope.of(context).unfocus();
+                      fieldTextEditingController.text = fromLanguage;
+                    }
                   }
-                } catch (_) {}
+                } catch (_) {
+                  FocusScope.of(context).unfocus();
+                  fieldTextEditingController.text = fromLanguage;
+                }
               },
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -176,7 +183,9 @@ class FromLang extends StatelessWidget {
               ),
               controller: fieldTextEditingController,
               focusNode: fieldFocusNode,
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(
+                  fontSize: 18,
+                  color: theme == Brightness.dark ? null : Colors.black),
             ),
           );
         },
