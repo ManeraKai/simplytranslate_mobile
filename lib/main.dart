@@ -660,7 +660,7 @@ class _MainPageState extends State<MainPage> {
               )
             : Center(
                 child: Text(
-                  'Not available',
+                  AppLocalizations.of(context)!.not_available,
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
