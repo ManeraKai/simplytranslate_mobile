@@ -65,12 +65,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
     ClipboardListener.addListener(() async {
-      final _clipData =
-          (await Clipboard.getData(Clipboard.kTextPlain)).toString();
-      if (_clipData == '')
-        setState(() => isClipboardEmpty = true);
-      else
-        setState(() => isClipboardEmpty = false);
+      var _clipData =
+          (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
+      if (_clipData == '') {
+        if (!isClipboardEmpty) {
+          setState(() {
+            isClipboardEmpty = true;
+          });
+        }
+      } else {
+        if (isClipboardEmpty) {
+          setState(() {
+            isClipboardEmpty = false;
+          });
+        }
+      }
     });
     super.initState();
   }
