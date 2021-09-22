@@ -74,6 +74,10 @@ class TranslateButton extends StatelessWidget {
                                         TranslateEngine.GoogleTranslate
                                     ? googleTranslationOutput = translatedText
                                     : libreTranslationOutput = translatedText;
+                                translateEngine ==
+                                        TranslateEngine.GoogleTranslate
+                                    ? libreTranslationOutput = ''
+                                    : googleTranslationOutput = '';
                                 loading = false;
                               });
                             }
