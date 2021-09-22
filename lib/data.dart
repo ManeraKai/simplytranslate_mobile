@@ -90,6 +90,7 @@ Future<void> getSharedText(
       setStateParent(() {
         translationInput = answer.toString();
         translationInputController.text = translationInput;
+        translationLength = translationInputController.text.length;
         loading = true;
       });
       print('translate');

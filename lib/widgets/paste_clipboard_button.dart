@@ -13,13 +13,14 @@ class PasteClipboardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(isClipboardEmpty);
     return Container(
       alignment: Alignment.topRight,
       child: IconButton(
         color: theme == Brightness.dark ? null : greenColor,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        onPressed: isClipboardEmpty
+        onPressed: isClipboardEmpty == true
             ? null
             : () {
                 Clipboard.getData(Clipboard.kTextPlain).then((value) async {
@@ -35,6 +36,8 @@ class PasteClipboardButton extends StatelessWidget {
                       setStateParent(() {
                         translationInput = valueString;
                         translationInputController.text = valueString;
+                        translationLength =
+                            translationInputController.text.length;
                       });
                     } else {
                       final beforePasteSelection =

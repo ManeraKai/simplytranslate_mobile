@@ -44,7 +44,12 @@ void main(List<String> args) async {
       theme = Brightness.dark;
     }
   }
-
+  var _clipData =
+      (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
+  if (_clipData == '')
+    isClipboardEmpty = true;
+  else
+    isClipboardEmpty = false;
   //--------------------------------------------//
 
   return runApp(MyApp());
@@ -60,8 +65,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
     ClipboardListener.addListener(() async {
-      final _clipData = await Clipboard.getData(Clipboard.kTextPlain);
-      if (_clipData == null)
+      final _clipData =
+          (await Clipboard.getData(Clipboard.kTextPlain)).toString();
+      if (_clipData == '')
         setState(() => isClipboardEmpty = true);
       else
         setState(() => isClipboardEmpty = false);
