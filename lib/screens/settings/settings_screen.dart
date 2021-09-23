@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../data.dart';
 import 'widgets/select_instance_widget.dart';
 import 'widgets/select_theme_widget.dart';
@@ -22,7 +23,7 @@ class _SettingsState extends State<Settings> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Settings'),
+          title: Text(AppLocalizations.of(context)!.settings),
           elevation: 3,
           iconTheme: IconThemeData(
               color: theme == Brightness.dark ? whiteColor : Colors.white),

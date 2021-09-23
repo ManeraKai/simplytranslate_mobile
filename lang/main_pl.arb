@@ -121,10 +121,11 @@
     "check_instance": "Sprawdź instancję",
     "no_internet": "Brak połączenia z Internetem",
     "ok": "OK",
+    "cancel": "Anuluj",
 
     "settings": "Settings",
 
-    "select_instance": "Select instance",
+    "instance": "Instancja",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",

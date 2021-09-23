@@ -125,7 +125,8 @@ class SelectInstance extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Instance', style: TextStyle(fontSize: 18)),
+                          Text(AppLocalizations.of(context)!.instance,
+                              style: TextStyle(fontSize: 18)),
                           Text(
                             instance == 'custom'
                                 ? AppLocalizations.of(context)!.custom
@@ -174,7 +175,7 @@ class SelectInstance extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel'),
+                          child: Text(AppLocalizations.of(context)!.cancel),
                         )
                       ],
                       insetPadding: EdgeInsets.all(0),
@@ -318,7 +319,7 @@ class SelectInstance extends StatelessWidget {
                               checkLoading = false;
                             });
                           },
-                          child: Text('Cancel'),
+                          child: Text(AppLocalizations.of(context)!.cancel),
                         ),
                         checkLoading
                             ? Container(
@@ -329,7 +330,8 @@ class SelectInstance extends StatelessWidget {
                               )
                             : TextButton(
                                 onPressed: customCheck,
-                                child: Text('Check'),
+                                child:
+                                    Text(AppLocalizations.of(context)!.check),
                               ),
                       ],
                     )
