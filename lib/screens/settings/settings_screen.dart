@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate/screens/settings/widgets/update_list.dart';
 import '../../data.dart';
-import 'widgets/select_instance_widget.dart';
-import 'widgets/select_theme_widget.dart';
+import 'widgets/select_instance.dart';
+import 'widgets/select_theme.dart';
 
 class Settings extends StatefulWidget {
   final setStateOverlord;
@@ -37,7 +38,29 @@ class _SettingsState extends State<Settings> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 10),
+                    Text(
+                      'Instances',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 10, bottom: 5),
+                        height: 1.5,
+                        color: theme == Brightness.dark
+                            ? Colors.white
+                            : lightThemeGreyColor),
                     SelectInstance(setStateOverlord: widget.setStateOverlord),
+                    UpdateList(setStateOverlord: widget.setStateOverlord),
+                    SizedBox(height: 20),
+                    Text(
+                      'Appearance',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 10, bottom: 5),
+                        height: 1.5,
+                        color: theme == Brightness.dark
+                            ? Colors.white
+                            : lightThemeGreyColor),
                     SelectTheme(setStateOverlord: widget.setStateOverlord),
                   ])),
         ),

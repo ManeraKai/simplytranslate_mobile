@@ -50,7 +50,7 @@ Future<customInstanceValidation> checkInstance(
 
 class SelectInstance extends StatelessWidget {
   const SelectInstance({
-    this.setStateOverlord,
+    required this.setStateOverlord,
     Key? key,
   }) : super(key: key);
 
@@ -108,13 +108,19 @@ class SelectInstance extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      child: Icon(
-                        Icons.dns,
-                        color: theme == Brightness.dark
-                            ? Colors.white
-                            : greenColor,
-                        size: 45,
-                      ),
+                      child: loading
+                          ? Container(
+                              height: 45,
+                              width: 45,
+                              padding: EdgeInsets.all(5),
+                              child: CircularProgressIndicator())
+                          : Icon(
+                              Icons.dns,
+                              color: theme == Brightness.dark
+                                  ? Colors.white
+                                  : greenColor,
+                              size: 45,
+                            ),
                     ),
                     SizedBox(width: 10),
                     Expanded(
@@ -140,20 +146,20 @@ class SelectInstance extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: loading
-                            ? CircularProgressIndicator()
-                            : isCustomInstanceValid ==
-                                    customInstanceValidation.NotChecked
-                                ? SizedBox.shrink()
-                                : isCustomInstanceValid ==
-                                        customInstanceValidation.True
-                                    ? Icon(Icons.check)
-                                    : Icon(Icons.close),
-                      ),
-                    ),
+                    // Center(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    //     child: loading
+                    //         ? CircularProgressIndicator()
+                    //         : isCustomInstanceValid ==
+                    //                 customInstanceValidation.NotChecked
+                    //             ? SizedBox.shrink()
+                    //             : isCustomInstanceValid ==
+                    //                     customInstanceValidation.True
+                    //                 ? Icon(Icons.check)
+                    //                 : Icon(Icons.close),
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
@@ -320,67 +326,6 @@ class SelectInstance extends StatelessWidget {
                 ),
               )
             : SizedBox.shrink(),
-        Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
-          child: Container(
-            height: 70,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Update official list',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    onPressed: () async {
-                      setStateOverlord(() => loading = true);
-                      final response = await http.get(Uri.parse(
-                          'https://simple-web.org/instances/simplytranslate'));
-                      List<String> newInstances = [];
-                      parse(response.body)
-                          .body!
-                          .innerHtml
-                          .trim()
-                          .split('\n')
-                          .forEach((element) {
-                        newInstances.add('https://$element');
-                      });
-                      session.write('instances', newInstances);
-                      instances = newInstances;
-                      setStateOverlord(() => loading = false);
-                    },
-                  ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: OutlinedButton(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Check current instance',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    onPressed: () async {
-                      setStateOverlord(() => loading = true);
-                      await checkInstance(
-                          setStateOverlord, instances[instanceIndex]);
-                      if (!isCanceled) {
-                        if (isCustomInstanceValid ==
-                            customInstanceValidation.True) isCanceled = false;
-                      }
-                      setStateOverlord(() => loading = false);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ],
     );
   }
