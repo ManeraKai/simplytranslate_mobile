@@ -55,7 +55,7 @@ class SelectTheme extends StatelessWidget {
           builder: (context) {
             return StatefulBuilder(
               builder: (context, setState) => AlertDialog(
-                title: Text(AppLocalizations.of(context)!.theme),
+                contentPadding: EdgeInsets.all(5),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -118,7 +118,7 @@ class SelectTheme extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Cancel'),
+                    child: Text(AppLocalizations.of(context)!.cancel),
                   )
                 ],
               ),

@@ -17,7 +17,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import '../data.dart';
+import '../../data.dart';
 
 class SwitchLang extends StatelessWidget {
   final setStateParent;
@@ -40,33 +40,50 @@ class SwitchLang extends StatelessWidget {
         child: TextButton(
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
-              FocusScope.of(context).unfocus();
-              setStateParent(() => loading = true);
-              final translatedText =
-                  await translateParent(translationInput, translateEngine);
-              final tmp = fromLanguage;
-              fromLanguage = toLanguage;
-              toLanguage = tmp;
+              if (translationInputController.text.length <= 500) {
+                FocusScope.of(context).unfocus();
+                setStateParent(() => loading = true);
 
-              session.write('to_language', toLanguage);
-              session.write('from_language', fromLanguage);
+                final translatedText =
+                    await translateParent(translationInput, translateEngine);
+                final tmp = fromLanguage;
+                fromLanguage = toLanguage;
+                toLanguage = tmp;
 
-              final valuetmp = fromLanguageValue;
-              fromLanguageValue = toLanguageValue;
-              toLanguageValue = valuetmp;
+                session.write('to_language', toLanguage);
+                session.write('from_language', fromLanguage);
 
-              final x = await translateParent(translatedText, translateEngine);
+                final valuetmp = fromLanguageValue;
+                fromLanguageValue = toLanguageValue;
+                toLanguageValue = valuetmp;
 
-              setStateParent(() {
-                loading = false;
+                final x =
+                    await translateParent(translatedText, translateEngine);
 
-                translationInput = translatedText;
-                translationInputController.text = translatedText;
-                translateEngine == TranslateEngine.GoogleTranslate
-                    ? googleTranslationOutput = x
-                    : libreTranslationOutput = x;
-              });
+                setStateParent(() {
+                  loading = false;
+
+                  translationInput = translatedText;
+                  translationInputController.text = translatedText;
+                  translateEngine == TranslateEngine.GoogleTranslate
+                      ? googleTranslationOutput = x
+                      : libreTranslationOutput = x;
+                });
+              } else {
+                final tmp = fromLanguage;
+                fromLanguage = toLanguage;
+                toLanguage = tmp;
+
+                session.write('to_language', toLanguage);
+                session.write('from_language', fromLanguage);
+
+                final valuetmp = fromLanguageValue;
+                fromLanguageValue = toLanguageValue;
+                toLanguageValue = valuetmp;
+                setStateParent(() {});
+              }
             }
+            translationLength = translationInputController.text.length;
           },
           child: Text(
             '<->',

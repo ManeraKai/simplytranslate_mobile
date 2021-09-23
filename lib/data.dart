@@ -43,7 +43,6 @@ var boxDecorationCustomLightBlack = BoxDecoration(
     borderRadius: BorderRadius.circular(2));
 
 var focus = FocusNode();
-var inputScrollController = ScrollController();
 
 String fromLanguageValue = 'English';
 String toLanguageValue = 'Arabic';
@@ -71,7 +70,6 @@ enum AppTheme { dark, light, system }
 
 var themeValue = '';
 
-var themeTranslation;
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum customInstanceValidation { False, True, NotChecked }
@@ -80,71 +78,7 @@ bool isThereLibreTranslate = false;
 
 const methodChannel = MethodChannel('com.simplytranslate/translate');
 
-bool callSharedText = false;
-
-Future<void> getSharedText(
-    setStateParent, translateParent, translateEngine) async {
-  try {
-    var answer = await methodChannel.invokeMethod('getText');
-    if (answer != '') {
-      setStateParent(() {
-        translationInput = answer.toString();
-        translationInputController.text = translationInput;
-        translationLength = translationInputController.text.length;
-        loading = true;
-      });
-      print('translate');
-
-      final translatedText =
-          await translateParent(translationInput, translateEngine);
-      setStateParent(() {
-        translateEngine == TranslateEngine.GoogleTranslate
-            ? googleTranslationOutput = translatedText
-            : libreTranslationOutput = translatedText;
-        loading = false;
-      });
-    }
-  } on PlatformException catch (e) {
-    print(e);
-  }
-}
-
 bool isClipboardEmpty = true;
-
-customInstanceFormatting() {
-  final url;
-  if (customInstance.endsWith('/'))
-    // trimming last slash
-    customInstance = customInstance.substring(0, customInstance.length - 1);
-  if (customInstance.startsWith('https://')) {
-    customInstance = customInstance.trim();
-    url =
-        Uri.https(customInstance.substring(8), '/', {'engine': engineSelected});
-    // custom https://
-  } else if (customInstance.startsWith('http://'))
-    // http://
-    url =
-        Uri.http(customInstance.substring(7), '/', {'engine': engineSelected});
-  else
-    url = Uri.https(customInstance, '/', {'engine': engineSelected});
-  // custom else https://
-  return url;
-}
-
-String customUrlFormatting(url) {
-  if (url.endsWith('/'))
-    // trimming last slash
-    url = url.substring(0, url.length - 1);
-  if (url.startsWith('https://')) {
-    url = url.trim();
-    url = url.substring(8);
-    // custom https://
-  } else if (url.startsWith('http://'))
-    // http://
-    url = url.substring(7);
-  // custom else https://
-  return url;
-}
 
 checkLibreTranslatewithRespone(response, {setState}) {
   if (parse(response.body)
@@ -167,7 +101,7 @@ checkLibreTranslate(setStateCustom) async {
   final url;
   if (instance == 'custom') {
     customInstance = customUrlController.text;
-    url = customInstanceFormatting();
+    url = Uri.parse('customInstance?engine:$engineSelected');
   } else if (instance == 'random') {
     url = Uri.https(
         instances[instanceIndex].substring(8), '/', {'engine': engineSelected});
@@ -183,63 +117,23 @@ checkLibreTranslate(setStateCustom) async {
   } catch (err) {}
 }
 
-Future<bool> checkInstance(setState) async {
-  setState(() => checkLoading = true);
-
-  final url;
-  var tmpUrl = '';
-  if (instance == 'custom') {
-    url = customInstanceFormatting();
-    tmpUrl = customInstance;
-  } else
-    url = Uri.https(instances[instanceIndex].toString().substring(8), '/',
-        {'engine': engineSelected});
-  // default https://
-
-  try {
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
-          'SimplyTranslate')) {
-        session.write('url', tmpUrl);
-        setState(() => isCustomInstanceValid = customInstanceValidation.True);
-      } else
-        setState(() => isCustomInstanceValid = customInstanceValidation.False);
-      checkLibreTranslatewithRespone(response, setState: setState);
-    } else
-      setState(() => isCustomInstanceValid = customInstanceValidation.False);
-  } catch (err) {
-    setState(() => isCustomInstanceValid = customInstanceValidation.False);
-  }
-  setState(() => checkLoading = false);
-  return isCustomInstanceValid == customInstanceValidation.True ? true : false;
-}
-
-var isCustomInstanceValid = customInstanceValidation.NotChecked;
 Map selectLanguagesMap = {};
 Map fromSelectLanguagesMap = {};
 List selectLanguages = [];
 List selectLanguagesFrom = [];
-bool checkLoading = false;
+
 bool loading = false;
 
 final customUrlController = TextEditingController();
 final translationInputController = TextEditingController();
 
-bool fromIsFirstClick = false;
-bool toIsFirstClick = false;
-
 final session = GetStorage();
-
-final ScrollController leftTextviewScrollController = ScrollController();
-final ScrollController rightTextviewScrollController = ScrollController();
 
 String engineSelected = 'google';
 
 var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
-  "https://almaleehserver.asuscomm.com:447"
 ];
 
 var supportedLanguages = [
