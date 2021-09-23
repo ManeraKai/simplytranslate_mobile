@@ -1,13 +1,11 @@
 import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
-import 'package:simplytranslate/screens/maximized_screen.dart';
-import '../data.dart';
-import 'text_tool_widgets/copy_to_clipboard_button.dart';
+import '/data.dart';
+import '../../screens/maximized/maximized.dart';
+import '../translation_input/widgets/copy_button.dart';
 
-class TranslationOutput extends StatefulWidget {
-  final translateEngine;
-  const TranslationOutput({
-    required this.translateEngine,
+class GoogleTranslationOutput extends StatefulWidget {
+  const GoogleTranslationOutput({
     Key? key,
   }) : super(key: key);
 
@@ -15,17 +13,23 @@ class TranslationOutput extends StatefulWidget {
   _TranslationOutputState createState() => _TranslationOutputState();
 }
 
-class _TranslationOutputState extends State<TranslationOutput> {
+class _TranslationOutputState extends State<GoogleTranslationOutput> {
+  var _key;
+
+  @override
+  void initState() {
+    _key = GlobalKey();
+    super.initState();
+  }
+
   bool isRTL = false;
   double outputFontSize = 20;
 
   @override
   Widget build(BuildContext context) {
-    String translatedText =
-        widget.translateEngine == TranslateEngine.GoogleTranslate
-            ? googleTranslationOutput
-            : libreTranslationOutput;
+    String translatedText = googleTranslationOutput;
     return Container(
+      key: _key,
       height: 200,
       decoration: theme == Brightness.dark
           ? boxDecorationCustomDark
@@ -40,10 +44,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                   child: AutoDirection(
-                    text: widget.translateEngine ==
-                            TranslateEngine.GoogleTranslate
-                        ? googleTranslationOutput
-                        : libreTranslationOutput,
+                    text: translatedText,
                     onDirectionChange: (isRTL) {
                       setState(() {
                         this.isRTL = isRTL;
@@ -60,10 +61,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
           ),
           Column(
             children: [
-              CopyToClipboardButton(
-                  widget.translateEngine == TranslateEngine.GoogleTranslate
-                      ? googleTranslationOutput
-                      : libreTranslationOutput),
+              CopyToClipboardButton(translatedText),
               IconButton(
                   color: theme == Brightness.dark ? null : greenColor,
                   splashColor: Colors.transparent,
@@ -74,9 +72,7 @@ class _TranslationOutputState extends State<TranslationOutput> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MaximizedScreen(
-                                        translateEngine: widget.translateEngine,
-                                      )));
+                                  builder: (context) => MaximizedScreen()));
                         },
                   icon: Icon(Icons.fullscreen)),
               IconButton(

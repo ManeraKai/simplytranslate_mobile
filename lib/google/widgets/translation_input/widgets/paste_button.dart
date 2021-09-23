@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simplytranslate/widgets/keyboard_visibility_widget.dart';
-import '../../data.dart';
+import 'package:simplytranslate/widgets/keyboard_visibility.dart';
+import '/data.dart';
 
 class PasteClipboardButton extends StatelessWidget {
   final changeText;
@@ -29,28 +29,30 @@ class PasteClipboardButton extends StatelessWidget {
 
                     if (value != null) {
                       final valueString = value.text.toString();
-                      if (translationInputController.text == '') {
+                      if (googleTranslationInputController.text == '') {
                         await Future.delayed(
                             const Duration(milliseconds: 1), () => "1");
                         FocusScope.of(context).requestFocus(focus);
                         setStateParent(() {
                           translationInput = valueString;
-                          translationInputController.text = valueString;
+                          googleTranslationInputController.text = valueString;
+                          translationInputOpen = true;
                         });
                       } else {
                         final beforePasteSelection =
-                            translationInputController.selection.baseOffset;
+                            googleTranslationInputController
+                                .selection.baseOffset;
                         final newText;
                         if (beforePasteSelection == -1)
-                          newText =
-                              translationInputController.text + valueString;
+                          newText = googleTranslationInputController.text +
+                              valueString;
                         else
-                          newText = translationInputController.text
+                          newText = googleTranslationInputController.text
                                   .substring(0, beforePasteSelection) +
                               valueString +
-                              translationInputController.text.substring(
+                              googleTranslationInputController.text.substring(
                                   beforePasteSelection,
-                                  translationInputController.text.length);
+                                  googleTranslationInputController.text.length);
 
                         await Future.delayed(
                             const Duration(milliseconds: 1), () => "1");
@@ -58,17 +60,17 @@ class PasteClipboardButton extends StatelessWidget {
 
                         setStateParent(() {
                           translationInput = newText;
-                          translationInputController.text = newText;
+                          googleTranslationInputController.text = newText;
                           if (isKeyboardVisible) {
-                            translationInputController.selection =
+                            googleTranslationInputController.selection =
                                 TextSelection.collapsed(
                                     offset: beforePasteSelection +
                                         valueString.length);
                           } else {
-                            translationInputController.selection =
+                            googleTranslationInputController.selection =
                                 TextSelection.collapsed(
-                                    offset:
-                                        translationInputController.text.length);
+                                    offset: googleTranslationInputController
+                                        .text.length);
                           }
                         });
                       }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../data.dart';
+import '/data.dart';
 
 final ScrollController rightTextviewScrollController = ScrollController();
 bool toIsFirstClick = false;
 
-class ToLang extends StatelessWidget {
+class GoogleToLang extends StatelessWidget {
   final setStateOverlord;
-  const ToLang({
+  const GoogleToLang({
     required this.setStateOverlord,
     Key? key,
   }) : super(key: key);

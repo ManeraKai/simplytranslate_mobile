@@ -34,7 +34,6 @@ Future<customInstanceValidation> checkInstance(
               () => isCustomInstanceValid = customInstanceValidation.False);
         }
       }
-      checkLibreTranslatewithRespone(response, setState: setState);
     } else {
       if (!isCanceled) {
         setState(() => isCustomInstanceValid = customInstanceValidation.False);
@@ -67,7 +66,6 @@ class SelectInstance extends StatelessWidget {
       await checkInstance(setStateOverlord, instances[instanceIndex]);
       setStateOverlord(() => loading = false);
       session.write('instance_mode', x);
-      checkLibreTranslate(setStateOverlord);
     }
 
     randomFunc(setState) async {
@@ -78,7 +76,6 @@ class SelectInstance extends StatelessWidget {
       await checkInstance(setStateOverlord, instances[instanceIndex]);
       setStateOverlord(() => loading = false);
       session.write('instance_mode', 'random');
-      checkLibreTranslate(setStateOverlord);
     }
 
     customCheck() async {

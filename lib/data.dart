@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
 
 const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
@@ -55,16 +53,11 @@ int instanceIndex = 0;
 
 String translationInput = '';
 String googleTranslationOutput = '';
-String libreTranslationOutput = '';
 
 String customInstance = '';
 String customUrl = '';
 
 bool translationInputOpen = false;
-
-// int translationInputController.text.length = 0;
-
-enum TranslateEngine { GoogleTranslate, LibreTranslate }
 
 enum AppTheme { dark, light, system }
 
@@ -74,48 +67,9 @@ Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum customInstanceValidation { False, True, NotChecked }
 
-bool isThereLibreTranslate = false;
-
 const methodChannel = MethodChannel('com.simplytranslate/translate');
 
 bool isClipboardEmpty = true;
-
-checkLibreTranslatewithRespone(response, {setState}) {
-  if (parse(response.body)
-      .getElementsByTagName('a')[1]
-      .innerHtml
-      .contains('LibreTranslate')) {
-    if (setState != null)
-      setState(() => isThereLibreTranslate = true);
-    else
-      isThereLibreTranslate = true;
-  } else {
-    if (setState != null)
-      setState(() => isThereLibreTranslate = false);
-    else
-      isThereLibreTranslate = false;
-  }
-}
-
-checkLibreTranslate(setStateCustom) async {
-  final url;
-  if (instance == 'custom') {
-    customInstance = customUrlController.text;
-    url = Uri.parse('customInstance?engine:$engineSelected');
-  } else if (instance == 'random') {
-    url = Uri.https(
-        instances[instanceIndex].substring(8), '/', {'engine': engineSelected});
-  } else
-    url = Uri.https(
-        instance.toString().substring(8), '/', {'engine': engineSelected});
-  // default https://
-  try {
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      checkLibreTranslatewithRespone(response, setState: setStateCustom);
-    }
-  } catch (err) {}
-}
 
 Map selectLanguagesMap = {};
 Map fromSelectLanguagesMap = {};
@@ -125,11 +79,9 @@ List selectLanguagesFrom = [];
 bool loading = false;
 
 final customUrlController = TextEditingController();
-final translationInputController = TextEditingController();
+final googleTranslationInputController = TextEditingController();
 
 final session = GetStorage();
-
-String engineSelected = 'google';
 
 var instances = [
   "https://simplytranslate.org",

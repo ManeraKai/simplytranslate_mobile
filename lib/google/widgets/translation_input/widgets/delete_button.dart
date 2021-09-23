@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../data.dart';
+import '/data.dart';
 
 class DeleteTranslationInputButton extends StatelessWidget {
   final setStateParent;
   final setStateParentParent;
-  final translateEngine;
   const DeleteTranslationInputButton({
     required this.setStateParent,
     required this.setStateParentParent,
-    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -20,18 +18,13 @@ class DeleteTranslationInputButton extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         color: theme == Brightness.dark ? null : greenColor,
-        onPressed: translationInputController.text == '' &&
-                (translateEngine == TranslateEngine.GoogleTranslate
-                        ? googleTranslationOutput
-                        : libreTranslationOutput) ==
-                    ''
+        onPressed: googleTranslationInputController.text == ''
             ? null
             : () {
                 setStateParentParent(() {
-                  translationInputController.text = '';
+                  googleTranslationInputController.text = '';
                   translationInput = '';
                   googleTranslationOutput = '';
-                  libreTranslationOutput = '';
                 });
               },
         icon: Icon(Icons.close),

@@ -1,21 +1,18 @@
-// import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import '../text_tool_widgets/copy_to_clipboard_button.dart';
-import '../text_tool_widgets/delete_translation_input_button.dart';
-import '../../data.dart';
-import '../text_tool_widgets/paste_clipboard_button.dart';
-import 'character_limit_widget.dart';
+import 'widgets/copy_button.dart';
+import 'widgets/delete_button.dart';
+import 'widgets/paste_button.dart';
+import 'widgets/character_limit.dart';
+import '/data.dart';
 
-class TranslationInput extends StatefulWidget {
+class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
-  final Future<String> Function(String, TranslateEngine) translateParent;
-  final translateEngine;
-  const TranslationInput({
+  final Future<String> Function(String) translateParent;
+  const GoogleTranslationInput({
     required this.setStateParent,
     required this.translateParent,
-    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -23,10 +20,19 @@ class TranslationInput extends StatefulWidget {
   _TranslationInputState createState() => _TranslationInputState();
 }
 
-class _TranslationInputState extends State<TranslationInput> {
+class _TranslationInputState extends State<GoogleTranslationInput> {
+  var _key;
+
+  @override
+  void initState() {
+    _key = GlobalKey();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: _key,
       height: 205,
       decoration: theme == Brightness.dark
           ? boxDecorationCustomDark
@@ -47,12 +53,12 @@ class _TranslationInputState extends State<TranslationInput> {
                     focusNode: focus,
                     minLines: 8,
                     maxLines: null,
-                    controller: translationInputController,
+                    controller: googleTranslationInputController,
                     keyboardType: TextInputType.multiline,
                     onTap: () {
                       widget.setStateParent(() => translationInputOpen = true);
                     },
-                    onChanged: (String input) async {
+                    onChanged: (String input) {
                       widget.setStateParent(() {
                         translationInputOpen = true;
                         translationInput = input;
@@ -76,11 +82,10 @@ class _TranslationInputState extends State<TranslationInput> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DeleteTranslationInputButton(
-                  setStateParent: setState,
-                  setStateParentParent: widget.setStateParent,
-                  translateEngine: widget.translateEngine),
+                  setStateParent: widget.setStateParent,
+                  setStateParentParent: widget.setStateParent),
               CopyToClipboardButton(translationInput),
-              PasteClipboardButton(setStateParent: setState),
+              PasteClipboardButton(setStateParent: widget.setStateParent),
               CharacterLimit(),
             ],
           )

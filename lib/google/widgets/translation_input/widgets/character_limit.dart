@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../data.dart';
-import '../keyboard_visibility_widget.dart';
+import '../../../../../widgets/keyboard_visibility.dart';
+import '/data.dart';
 
 class CharacterLimit extends StatelessWidget {
   const CharacterLimit({
@@ -20,9 +20,9 @@ class CharacterLimit extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '${translationInputController.text.length}',
+                '${googleTranslationInputController.text.length}',
                 style: TextStyle(
-                    color: translationInputController.text.length <= 5000
+                    color: googleTranslationInputController.text.length <= 5000
                         ? theme == Brightness.dark
                             ? Colors.white
                             : lightThemeGreyColor
@@ -32,7 +32,7 @@ class CharacterLimit extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 3),
                   height: 1,
                   width: 30,
-                  color: translationInputController.text.length <= 5000
+                  color: googleTranslationInputController.text.length <= 5000
                       ? theme == Brightness.dark
                           ? Colors.white
                           : lightThemeGreyColor
@@ -40,7 +40,7 @@ class CharacterLimit extends StatelessWidget {
               Text(
                 '5000',
                 style: TextStyle(
-                    color: translationInputController.text.length <= 5000
+                    color: googleTranslationInputController.text.length <= 5000
                         ? theme == Brightness.dark
                             ? Colors.white
                             : lightThemeGreyColor

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import '../../data.dart';
+import '/data.dart';
 
 var renderBox;
 var translateButtonWidgetSize;
 
-class TranslateButton extends StatelessWidget {
+class GoogleTranslateButton extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function(String, TranslateEngine) translateParent;
-  final translateEngine;
+  final Future<String> Function(String) translateParent;
 
-  const TranslateButton(
-      {Key? key,
-      required this.setStateParent,
-      required this.translateParent,
-      required this.translateEngine})
-      : super(key: key);
+  const GoogleTranslateButton({
+    Key? key,
+    required this.setStateParent,
+    required this.translateParent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +32,8 @@ class TranslateButton extends StatelessWidget {
                 key: key,
                 decoration: theme == Brightness.dark
                     ? boxDecorationCustomDark
-                    : translationInputController.text.length <= 5000
-                        ? translationInputController.text != ''
+                    : googleTranslationInputController.text.length <= 5000
+                        ? googleTranslationInputController.text != ''
                             ? boxDecorationCustomLight.copyWith(
                                 color: Color(0xff3fb274),
                                 border: Border.all(
@@ -58,26 +56,19 @@ class TranslateButton extends StatelessWidget {
                 height: 35,
                 padding: const EdgeInsets.all(6.5),
                 child: GestureDetector(
-                  onTap: translationInputController.text == ''
+                  onTap: googleTranslationInputController.text == ''
                       ? null
-                      : translationInputController.text.length <= 5000
+                      : googleTranslationInputController.text.length <= 5000
                           ? () async {
                               renderBox = key.currentContext?.findRenderObject()
                                   as RenderBox;
                               translateButtonWidgetSize = renderBox.size;
                               FocusScope.of(context).unfocus();
                               setStateParent(() => loading = true);
-                              final translatedText = await translateParent(
-                                  translationInput, translateEngine);
+                              final translatedText =
+                                  await translateParent(translationInput);
                               setStateParent(() {
-                                translateEngine ==
-                                        TranslateEngine.GoogleTranslate
-                                    ? googleTranslationOutput = translatedText
-                                    : libreTranslationOutput = translatedText;
-                                translateEngine ==
-                                        TranslateEngine.GoogleTranslate
-                                    ? libreTranslationOutput = ''
-                                    : googleTranslationOutput = '';
+                                googleTranslationOutput = translatedText;
                                 loading = false;
                               });
                             }

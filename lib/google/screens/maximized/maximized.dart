@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../data.dart';
-import '../widgets/text_tool_widgets/copy_to_clipboard_button.dart';
+import '/data.dart';
+import '../../widgets/translation_input/widgets/copy_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
-  final translateEngine;
   const MaximizedScreen({
-    required this.translateEngine,
     Key? key,
   }) : super(key: key);
 
@@ -37,20 +35,14 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                     child: SelectableText(
-                      widget.translateEngine == TranslateEngine.GoogleTranslate
-                          ? googleTranslationOutput
-                          : libreTranslationOutput,
+                      googleTranslationOutput,
                       style: TextStyle(fontSize: outputFontSize),
                     ),
                   ),
                 ),
                 Column(
                   children: [
-                    CopyToClipboardButton(
-                      widget.translateEngine == TranslateEngine.GoogleTranslate
-                          ? googleTranslationOutput
-                          : libreTranslationOutput,
-                    ),
+                    CopyToClipboardButton(googleTranslationOutput),
                     IconButton(
                       color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,

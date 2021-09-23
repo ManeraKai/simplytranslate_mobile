@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import '../../data.dart';
+import '/data.dart';
 
 class TranslateButtonFloat extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function(String, TranslateEngine) translateParent;
-  final translateEngine;
+  final Future<String> Function(String) translateParent;
 
-  const TranslateButtonFloat(
-      {Key? key,
-      required this.setStateParent,
-      required this.translateParent,
-      required this.translateEngine})
-      : super(key: key);
+  const TranslateButtonFloat({
+    Key? key,
+    required this.setStateParent,
+    required this.translateParent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +22,8 @@ class TranslateButtonFloat extends StatelessWidget {
             child: Container(
                 decoration: theme == Brightness.dark
                     ? boxDecorationCustomDark.copyWith()
-                    : translationInputController.text.length <= 5000
-                        ? translationInputController.text != ''
+                    : googleTranslationInputController.text.length <= 5000
+                        ? googleTranslationInputController.text != ''
                             ? boxDecorationCustomLight.copyWith(
                                 color: Color(0xff3fb274),
                                 border: Border.all(
@@ -49,23 +47,16 @@ class TranslateButtonFloat extends StatelessWidget {
                 padding: const EdgeInsets.all(6.5),
                 // margin: EdgeInsets.all(10),
                 child: GestureDetector(
-                  onTap: translationInputController.text == ''
+                  onTap: googleTranslationInputController.text == ''
                       ? null
-                      : translationInputController.text.length <= 5000
+                      : googleTranslationInputController.text.length <= 5000
                           ? () async {
                               FocusScope.of(context).unfocus();
                               setStateParent(() => loading = true);
-                              final translatedText = await translateParent(
-                                  translationInput, translateEngine);
+                              final translatedText =
+                                  await translateParent(translationInput);
                               setStateParent(() {
-                                translateEngine ==
-                                        TranslateEngine.GoogleTranslate
-                                    ? googleTranslationOutput = translatedText
-                                    : libreTranslationOutput = translatedText;
-                                translateEngine ==
-                                        TranslateEngine.GoogleTranslate
-                                    ? libreTranslationOutput = ''
-                                    : googleTranslationOutput = '';
+                                googleTranslationOutput = translatedText;
                                 loading = false;
                               });
                             }

@@ -1,14 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../data.dart';
+import '/data.dart';
 
 final ScrollController leftTextviewScrollController = ScrollController();
 bool fromIsFirstClick = false;
 
-class FromLang extends StatelessWidget {
+class GoogleFromLang extends StatelessWidget {
   final setStateOverlord;
-  const FromLang({
+  const GoogleFromLang({
     required this.setStateOverlord,
     Key? key,
   }) : super(key: key);
