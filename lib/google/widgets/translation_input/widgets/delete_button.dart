@@ -17,7 +17,7 @@ class DeleteTranslationInputButton extends StatelessWidget {
       child: IconButton(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        color: theme == Brightness.dark ? null : greenColor,
+        // color: theme == Brightness.dark ? null : greenColor,
         onPressed: googleTranslationInputController.text == ''
             ? null
             : () {

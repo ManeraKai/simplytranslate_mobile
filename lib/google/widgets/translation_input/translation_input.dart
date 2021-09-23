@@ -34,9 +34,16 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
     return Container(
       key: _key,
       height: 205,
-      decoration: theme == Brightness.dark
-          ? boxDecorationCustomDark
-          : boxDecorationCustomLightBlack,
+      decoration: BoxDecoration(
+        color: theme == Brightness.dark ? Color(0xff131618) : null,
+        border: Border.all(
+          color:
+              theme == Brightness.dark ? Color(0xff495057) : Color(0xffa9a9a9),
+          width: 1.5,
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -65,11 +72,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                       });
                     },
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                            color: theme == Brightness.dark
-                                ? lightgreyColor
-                                : Color(0xffa9a9a9)),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
                         hintText:
                             AppLocalizations.of(context)!.enter_text_here),
                     style: TextStyle(fontSize: 20),

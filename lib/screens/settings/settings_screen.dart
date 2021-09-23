@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../data.dart';
 import 'widgets/select_instance_widget.dart';
@@ -25,12 +25,10 @@ class _SettingsState extends State<Settings> {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.settings),
           elevation: 3,
-          iconTheme: IconThemeData(
-              color: theme == Brightness.dark ? whiteColor : Colors.white),
-          backgroundColor: theme == Brightness.dark ? greyColor : greenColor,
+          // backgroundColor: theme == Brightness.dark ? greyColor : greenColor,
         ),
-        backgroundColor:
-            theme == Brightness.dark ? secondgreyColor : whiteColor,
+        // backgroundColor:
+        //     theme == Brightness.dark ? secondgreyColor : whiteColor,
         body: SingleChildScrollView(
           child: Container(
               width: double.infinity,

@@ -17,9 +17,6 @@ class GoogleToLang extends StatelessWidget {
     Function changeText = () {};
     return Container(
       width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: theme == Brightness.dark
-          ? boxDecorationCustomDark
-          : boxDecorationCustomLight,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> toSelectLanguagesIterable = Iterable.generate(
@@ -68,9 +65,9 @@ class GoogleToLang extends StatelessWidget {
                           final option = options.elementAt(index);
                           widgetList.add(
                             Container(
-                              color: theme == Brightness.dark
-                                  ? greyColor
-                                  : whiteColor,
+                              // color: theme == Brightness.dark
+                              //     ? greyColor
+                              //     : whiteColor,
                               child: GestureDetector(
                                 onTap: option == fromLanguage
                                     ? null
@@ -95,9 +92,10 @@ class GoogleToLang extends StatelessWidget {
                                     style: (option == fromLanguage)
                                         ? TextStyle(
                                             fontSize: 18,
-                                            color: theme == Brightness.dark
-                                                ? secondgreyColor
-                                                : Colors.grey)
+                                            // color: theme == Brightness.dark
+                                            //     ? secondgreyColor
+                                            //     : Colors.grey
+                                          )
                                         : const TextStyle(fontSize: 18),
                                   ),
                                 ),
@@ -124,70 +122,69 @@ class GoogleToLang extends StatelessWidget {
             fieldTextEditingController.text = toLanguage;
           }
           changeText = () => fieldTextEditingController.text = toLanguage;
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
-                onTap: () {
-                  setStateOverlord(() => translationInputOpen = false);
-                  toIsFirstClick = true;
-                  fieldTextEditingController.selection = TextSelection(
-                    baseOffset: 0,
-                    extentOffset: fieldTextEditingController.text.length,
-                  );
-                },
-                onEditingComplete: () {
-                  try {
-                    var chosenOne = selectLanguages.firstWhere((word) => word
-                        .toLowerCase()
-                        .startsWith(
-                            fieldTextEditingController.text.toLowerCase()));
-                    if (chosenOne != fromLanguage) {
-                      FocusScope.of(context).unfocus();
-                      session.write('to_language', chosenOne);
-                      setStateOverlord(() {
-                        toLanguage = chosenOne;
-                        toLanguageValue = selectLanguagesMap[chosenOne];
-                      });
-                      fieldTextEditingController.text = chosenOne;
-                    } else {
-                      var dimmedSelectLanguage = selectLanguages.toList();
-                      dimmedSelectLanguage.remove(chosenOne);
-
-                      try {
-                        chosenOne = dimmedSelectLanguage.firstWhere((word) =>
-                            word.toLowerCase().startsWith(
-                                fieldTextEditingController.text.toLowerCase()));
-                        if (chosenOne != fromLanguage) {
-                          FocusScope.of(context).unfocus();
-                          session.write('to_language', chosenOne);
-                          setStateOverlord(() {
-                            toLanguage = chosenOne;
-                            toLanguageValue = selectLanguagesMap[chosenOne];
-                          });
-                          fieldTextEditingController.text = chosenOne;
-                        }
-                      } catch (_) {
-                        FocusScope.of(context).unfocus();
-                        fieldTextEditingController.text = toLanguage;
-                      }
-                    }
-                  } catch (_) {
+          return TextField(
+              onTap: () {
+                setStateOverlord(() => translationInputOpen = false);
+                toIsFirstClick = true;
+                fieldTextEditingController.selection = TextSelection(
+                  baseOffset: 0,
+                  extentOffset: fieldTextEditingController.text.length,
+                );
+              },
+              onEditingComplete: () {
+                try {
+                  var chosenOne = selectLanguages.firstWhere((word) => word
+                      .toLowerCase()
+                      .startsWith(
+                          fieldTextEditingController.text.toLowerCase()));
+                  if (chosenOne != fromLanguage) {
                     FocusScope.of(context).unfocus();
-                    fieldTextEditingController.text = toLanguage;
-                  }
+                    session.write('to_language', chosenOne);
+                    setStateOverlord(() {
+                      toLanguage = chosenOne;
+                      toLanguageValue = selectLanguagesMap[chosenOne];
+                    });
+                    fieldTextEditingController.text = chosenOne;
+                  } else {
+                    var dimmedSelectLanguage = selectLanguages.toList();
+                    dimmedSelectLanguage.remove(chosenOne);
 
-                  // chose the next one if the first is dimmed.
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  isDense: true,
-                ),
-                controller: fieldTextEditingController,
-                focusNode: fieldFocusNode,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: theme == Brightness.dark ? null : Colors.black)),
-          );
+                    try {
+                      chosenOne = dimmedSelectLanguage.firstWhere((word) => word
+                          .toLowerCase()
+                          .startsWith(
+                              fieldTextEditingController.text.toLowerCase()));
+                      if (chosenOne != fromLanguage) {
+                        FocusScope.of(context).unfocus();
+                        session.write('to_language', chosenOne);
+                        setStateOverlord(() {
+                          toLanguage = chosenOne;
+                          toLanguageValue = selectLanguagesMap[chosenOne];
+                        });
+                        fieldTextEditingController.text = chosenOne;
+                      }
+                    } catch (_) {
+                      FocusScope.of(context).unfocus();
+                      fieldTextEditingController.text = toLanguage;
+                    }
+                  }
+                } catch (_) {
+                  FocusScope.of(context).unfocus();
+                  fieldTextEditingController.text = toLanguage;
+                }
+
+                // chose the next one if the first is dimmed.
+              },
+              decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                isDense: true,
+              ),
+              controller: fieldTextEditingController,
+              focusNode: fieldFocusNode,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: theme == Brightness.dark ? null : Colors.black));
         },
       ),
     );

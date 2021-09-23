@@ -10,35 +10,35 @@ const whiteColor = Color(0xfff5f6f7);
 const greenColor = Color(0xff3fb274);
 const lightThemeGreyColor = Color(0xffa9a9a9);
 
-var boxDecorationCustomDark = BoxDecoration(
-  color: greyColor,
-  border: Border.all(
-    color: lightgreyColor,
-    width: 1.5,
-    style: BorderStyle.solid,
-  ),
-  borderRadius: BorderRadius.circular(2),
-);
+// var boxDecorationCustomDark = BoxDecoration(
+//   color: greyColor,
+//   border: Border.all(
+//     color: lightgreyColor,
+//     width: 1.5,
+//     style: BorderStyle.solid,
+//   ),
+//   borderRadius: BorderRadius.circular(2),
+// );
 
 var themeRadio = AppTheme.system;
-var boxDecorationCustomLight = BoxDecoration(
-    color: whiteColor,
-    border: Border.all(
-      color: lightThemeGreyColor,
-      // color: Color(0xff3fb274),
-      width: 1.5,
-      style: BorderStyle.solid,
-    ),
-    borderRadius: BorderRadius.circular(2));
+// var boxDecorationCustomLight = BoxDecoration(
+//     color: whiteColor,
+//     border: Border.all(
+//       color: lightThemeGreyColor,
+//       // color: Color(0xff3fb274),
+//       width: 1.5,
+//       style: BorderStyle.solid,
+//     ),
+//     borderRadius: BorderRadius.circular(2));
 
-var boxDecorationCustomLightBlack = BoxDecoration(
-    color: whiteColor,
-    border: Border.all(
-      color: lightThemeGreyColor,
-      width: 1.5,
-      style: BorderStyle.solid,
-    ),
-    borderRadius: BorderRadius.circular(2));
+// var boxDecorationCustomLightBlack = BoxDecoration(
+//     color: whiteColor,
+//     border: Border.all(
+//       color: lightThemeGreyColor,
+//       width: 1.5,
+//       style: BorderStyle.solid,
+//     ),
+//     borderRadius: BorderRadius.circular(2));
 
 var focus = FocusNode();
 

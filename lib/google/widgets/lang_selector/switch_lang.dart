@@ -15,11 +15,10 @@ class GoogleSwitchLang extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width / 3 - 60,
-        decoration: theme == Brightness.dark
-            ? boxDecorationCustomDark
-            : boxDecorationCustomLight,
-        height: 41,
-        child: TextButton(
+        child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+          ),
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
               if (googleTranslationInputController.text.length <= 5000) {
@@ -65,7 +64,7 @@ class GoogleSwitchLang extends StatelessWidget {
             '<->',
             style: TextStyle(
                 fontSize: 18,
-                color: theme == Brightness.dark ? null : Colors.black),
+                color: theme == Brightness.dark ? Colors.white : Colors.black),
           ),
         ),
       );

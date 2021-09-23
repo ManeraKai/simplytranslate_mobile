@@ -18,7 +18,7 @@ class PasteClipboardButton extends StatelessWidget {
       alignment: Alignment.topRight,
       child: KeyboardVisibilityBuilder(
         builder: (context, _, isKeyboardVisible) => IconButton(
-          color: theme == Brightness.dark ? null : greenColor,
+          // color: theme == Brightness.dark ? null : greenColor,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: isClipboardEmpty == true

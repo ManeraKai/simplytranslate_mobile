@@ -31,9 +31,16 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
     return Container(
       key: _key,
       height: 200,
-      decoration: theme == Brightness.dark
-          ? boxDecorationCustomDark
-          : boxDecorationCustomLightBlack,
+      decoration: BoxDecoration(
+        color: theme == Brightness.dark ? Color(0xff131618) : null,
+        border: Border.all(
+          color:
+              theme == Brightness.dark ? Color(0xff495057) : Color(0xffa9a9a9),
+          width: 1.5,
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,7 +70,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
             children: [
               CopyToClipboardButton(translatedText),
               IconButton(
-                  color: theme == Brightness.dark ? null : greenColor,
+                  // color: theme == Brightness.dark ? null : greenColor,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: translatedText == ''
@@ -76,7 +83,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                         },
                   icon: Icon(Icons.fullscreen)),
               IconButton(
-                color: theme == Brightness.dark ? null : greenColor,
+                // color: theme == Brightness.dark ? null : greenColor,
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: translatedText == ''
@@ -89,7 +96,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                 icon: Icon(Icons.add),
               ),
               IconButton(
-                color: theme == Brightness.dark ? null : greenColor,
+                // color: theme == Brightness.dark ? null : greenColor,
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: translatedText == ''

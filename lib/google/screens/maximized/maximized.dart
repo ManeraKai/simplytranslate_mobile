@@ -20,13 +20,6 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
         child: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
-            decoration: theme == Brightness.dark
-                ? theme == Brightness.dark
-                    ? boxDecorationCustomDark
-                    : boxDecorationCustomDark
-                : theme == Brightness.dark
-                    ? boxDecorationCustomDark
-                    : boxDecorationCustomLight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -44,7 +37,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                   children: [
                     CopyToClipboardButton(googleTranslationOutput),
                     IconButton(
-                      color: theme == Brightness.dark ? null : greenColor,
+                      // color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {
@@ -55,7 +48,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                       icon: Icon(Icons.add),
                     ),
                     IconButton(
-                      color: theme == Brightness.dark ? null : greenColor,
+                      // color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {

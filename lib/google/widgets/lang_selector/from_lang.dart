@@ -17,9 +17,6 @@ class GoogleFromLang extends StatelessWidget {
     Function changeText = () {};
     return Container(
       width: MediaQuery.of(context).size.width / 3 + 10,
-      decoration: theme == Brightness.dark
-          ? boxDecorationCustomDark
-          : boxDecorationCustomLight,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> fromSelectLanguagesIterable = Iterable.generate(
@@ -69,9 +66,9 @@ class GoogleFromLang extends StatelessWidget {
                           final option = options.elementAt(index);
                           widgetList.add(
                             Container(
-                              color: theme == Brightness.dark
-                                  ? greyColor
-                                  : whiteColor,
+                              // color: theme == Brightness.dark
+                              //     ? greyColor
+                              //     : whiteColor,
                               child: GestureDetector(
                                 onTap: option == toLanguage
                                     ? null
@@ -97,9 +94,10 @@ class GoogleFromLang extends StatelessWidget {
                                     style: (option == toLanguage)
                                         ? TextStyle(
                                             fontSize: 18,
-                                            color: theme == Brightness.dark
-                                                ? secondgreyColor
-                                                : Colors.grey)
+                                            // color: theme == Brightness.dark
+                                            //     ? secondgreyColor
+                                            //     : Colors.grey
+                                          )
                                         : const TextStyle(fontSize: 18),
                                   ),
                                 ),
@@ -126,69 +124,66 @@ class GoogleFromLang extends StatelessWidget {
             fieldTextEditingController.text = fromLanguage;
           }
           changeText = () => fieldTextEditingController.text = fromLanguage;
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
-              onTap: () {
-                setStateOverlord(() => translationInputOpen = false);
-                fromIsFirstClick = true;
-                fieldTextEditingController.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingController.text.length,
-                );
-              },
-              onEditingComplete: () {
-                try {
-                  var chosenOne = selectLanguagesFrom.firstWhere((word) => word
-                      .toLowerCase()
-                      .startsWith(
-                          fieldTextEditingController.text.toLowerCase()));
-                  if (chosenOne != toLanguage) {
-                    FocusScope.of(context).unfocus();
-
-                    session.write('from_language', chosenOne);
-                    setStateOverlord(() {
-                      fromLanguage = chosenOne;
-                      fromLanguageValue = fromSelectLanguagesMap[chosenOne];
-                    });
-                    fieldTextEditingController.text = chosenOne;
-                  } else {
-                    var dimmedSelectLanguagesFrom =
-                        selectLanguagesFrom.toList();
-                    dimmedSelectLanguagesFrom.remove(chosenOne);
-                    try {
-                      var chosenOne = dimmedSelectLanguagesFrom.firstWhere(
-                          (word) => word.toLowerCase().startsWith(
-                              fieldTextEditingController.text.toLowerCase()));
-                      if (chosenOne != toLanguage) {
-                        FocusScope.of(context).unfocus();
-
-                        session.write('from_language', chosenOne);
-                        setStateOverlord(() {
-                          fromLanguage = chosenOne;
-                          fromLanguageValue = fromSelectLanguagesMap[chosenOne];
-                        });
-                        fieldTextEditingController.text = chosenOne;
-                      }
-                    } catch (_) {
-                      FocusScope.of(context).unfocus();
-                      fieldTextEditingController.text = fromLanguage;
-                    }
-                  }
-                } catch (_) {
+          return TextField(
+            onTap: () {
+              setStateOverlord(() => translationInputOpen = false);
+              fromIsFirstClick = true;
+              fieldTextEditingController.selection = TextSelection(
+                baseOffset: 0,
+                extentOffset: fieldTextEditingController.text.length,
+              );
+            },
+            onEditingComplete: () {
+              try {
+                var chosenOne = selectLanguagesFrom.firstWhere((word) => word
+                    .toLowerCase()
+                    .startsWith(fieldTextEditingController.text.toLowerCase()));
+                if (chosenOne != toLanguage) {
                   FocusScope.of(context).unfocus();
-                  fieldTextEditingController.text = fromLanguage;
+
+                  session.write('from_language', chosenOne);
+                  setStateOverlord(() {
+                    fromLanguage = chosenOne;
+                    fromLanguageValue = fromSelectLanguagesMap[chosenOne];
+                  });
+                  fieldTextEditingController.text = chosenOne;
+                } else {
+                  var dimmedSelectLanguagesFrom = selectLanguagesFrom.toList();
+                  dimmedSelectLanguagesFrom.remove(chosenOne);
+                  try {
+                    var chosenOne = dimmedSelectLanguagesFrom.firstWhere(
+                        (word) => word.toLowerCase().startsWith(
+                            fieldTextEditingController.text.toLowerCase()));
+                    if (chosenOne != toLanguage) {
+                      FocusScope.of(context).unfocus();
+
+                      session.write('from_language', chosenOne);
+                      setStateOverlord(() {
+                        fromLanguage = chosenOne;
+                        fromLanguageValue = fromSelectLanguagesMap[chosenOne];
+                      });
+                      fieldTextEditingController.text = chosenOne;
+                    }
+                  } catch (_) {
+                    FocusScope.of(context).unfocus();
+                    fieldTextEditingController.text = fromLanguage;
+                  }
                 }
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                isDense: true,
-              ),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: theme == Brightness.dark ? null : Colors.black),
+              } catch (_) {
+                FocusScope.of(context).unfocus();
+                fieldTextEditingController.text = fromLanguage;
+              }
+            },
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              isDense: true,
+            ),
+            controller: fieldTextEditingController,
+            focusNode: fieldFocusNode,
+            style: TextStyle(
+              fontSize: 18,
+              //     color: theme == Brightness.dark ? null : Colors.black),
             ),
           );
         },

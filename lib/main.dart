@@ -148,41 +148,100 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          textSelectionTheme: TextSelectionThemeData(
-              cursorColor:
-                  theme == Brightness.dark ? whiteColor : Colors.black),
-          textTheme: TextTheme(
-            bodyText2: theme == Brightness.dark
-                ? TextStyle(color: whiteColor)
-                : TextStyle(color: Colors.black),
-            subtitle1: theme == Brightness.dark
-                ? TextStyle(color: whiteColor, fontSize: 16)
-                : TextStyle(color: Colors.black),
-            headline6: theme == Brightness.dark
-                ? TextStyle(color: whiteColor)
-                : TextStyle(color: Colors.black),
+        colorScheme: ColorScheme(
+          primary: greenColor,
+          primaryVariant: greenColor,
+          secondary: greenColor,
+          secondaryVariant: greenColor,
+          surface: Colors.white,
+          background: Colors.white,
+          error: Colors.red,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          brightness: Brightness.light,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Color(0xffa9a9a9), width: 1.5),
           ),
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: theme == Brightness.dark
-                  ? MaterialStateProperty.all(greyColor)
-                  : MaterialStateProperty.all(whiteColor),
-              overlayColor: theme == Brightness.dark
-                  ? MaterialStateProperty.all(greyColor)
-                  : MaterialStateProperty.all(whiteColor),
-              foregroundColor: theme == Brightness.dark
-                  ? MaterialStateProperty.all(whiteColor)
-                  : MaterialStateProperty.all(Colors.black),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Color(0xffa9a9a9), width: 1.5),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          side: BorderSide(
+            width: 1.5,
+            color: Color(0xffa9a9a9),
+          ),
+        )),
+        toggleableActiveColor: greenColor,
+        iconTheme: IconThemeData(color: greenColor),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme(
+          primary: greenColor,
+          primaryVariant: greenColor,
+          secondary: greenColor,
+          secondaryVariant: greenColor,
+          surface: Color(0xff131618),
+          background: Color(0xff131618),
+          error: Colors.red,
+          onPrimary: Colors.white,
+          onSecondary: Colors.redAccent,
+          onSurface: Colors.white,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: Color(0xff212529),
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: Color(0xff131618),
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Color(0xff495057), width: 1.5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Color(0xff495057), width: 1.5),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          backgroundColor: Color(0xff131618),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          side: BorderSide(
+            width: 1.5,
+            color: Color(0xff495057),
+          ),
+        )),
+        toggleableActiveColor: greenColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed))
+                  return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+                else if (states.contains(MaterialState.disabled))
+                  return lightgreyColor;
+                return greenColor; // Use the component's default.
+              },
             ),
           ),
-          colorScheme: theme == Brightness.dark
-              ? ColorScheme.dark(onSurface: whiteColor, primary: greenColor)
-              : ColorScheme.light(
-                  onSurface: Colors.black, primary: greenColor)),
+        ),
+      ),
+      themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
       title: 'Simply Translate',
       home: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50),
+          preferredSize: Size.fromHeight(60),
           child: KeyboardVisibilityBuilder(
             builder: (context, child, isKeyboardVisible) => Builder(
               builder: (context) {
@@ -202,12 +261,16 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       FocusScope.of(context).unfocus();
                     },
                     child: AppBar(
+                      bottom: PreferredSize(
+                        preferredSize: Size.fromHeight(2),
+                        child: Container(height: 2, color: greenColor),
+                      ),
                       actions: [
                         PopupMenuButton(
                           icon: Icon(Icons.more_vert, color: Colors.white),
-                          color: theme == Brightness.dark
-                              ? secondgreyColor
-                              : Colors.white,
+                          // color: theme == Brightness.dark
+                          //     ? secondgreyColor
+                          //     : Colors.white,
                           itemBuilder: (BuildContext context) => [
                             PopupMenuItem<String>(
                                 value: 'settings',
@@ -235,18 +298,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           },
                         ),
                       ],
-                      backgroundColor: theme == Brightness.dark
-                          ? greyColor
-                          : Color(0xff3fb274),
+                      // backgroundColor: theme == Brightness.dark
+                      //     ? greyColor
+                      //     : greenColor,
                       elevation: 3,
                       iconTheme: IconThemeData(
-                          color: theme == Brightness.dark
-                              ? whiteColor
-                              : Colors.black),
-                      title: Text('Simply Translate',
-                          style: theme == Brightness.dark
-                              ? TextStyle(color: whiteColor)
-                              : TextStyle(color: Colors.white)),
+                          // color: theme == Brightness.dark
+                          //     ? whiteColor
+                          //     : Colors.black
+                          ),
+                      title: Text(
+                        'Simply Translate',
+                        // style: theme == Brightness.dark
+                        //     ? TextStyle(color: whiteColor)
+                        //     : TextStyle(color: Colors.white)
+                      ),
                     ),
                   );
                 }
@@ -254,8 +320,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
           ),
         ),
-        backgroundColor:
-            theme == Brightness.dark ? secondgreyColor : whiteColor,
+        // backgroundColor:
+        //     theme == Brightness.dark ? secondgreyColor : whiteColor,
         body: MainPageLocalization(),
       ),
     );
@@ -462,7 +528,7 @@ class _MainPageState extends State<MainPage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  backgroundColor: secondgreyColor,
+                  // backgroundColor: secondgreyColor,
                   title: Text(AppLocalizations.of(context)!.no_internet),
                   actions: [
                     TextButton(
@@ -477,7 +543,7 @@ class _MainPageState extends State<MainPage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  backgroundColor: secondgreyColor,
+                  // backgroundColor: secondgreyColor,
                   title:
                       Text(AppLocalizations.of(context)!.something_went_wrong),
                   content: Text(AppLocalizations.of(context)!.check_instance),

@@ -188,7 +188,7 @@ class SelectInstance extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       Radio<String>(
-                                          activeColor: greenColor,
+                                          // activeColor: greenColor,
                                           value: x,
                                           groupValue: instance,
                                           onChanged: (_) =>
@@ -213,7 +213,7 @@ class SelectInstance extends StatelessWidget {
                           child: Row(
                             children: [
                               Radio<String>(
-                                  activeColor: greenColor,
+                                  // activeColor: greenColor,
                                   value: 'random',
                                   groupValue: instance,
                                   onChanged: (_) => randomFunc(setState)),
@@ -233,7 +233,7 @@ class SelectInstance extends StatelessWidget {
                           child: Row(
                             children: [
                               Radio<String>(
-                                  activeColor: greenColor,
+                                  // activeColor: greenColor,
                                   value: 'custom',
                                   groupValue: instance,
                                   onChanged: (_) => customFunc(setState)),
@@ -264,23 +264,6 @@ class SelectInstance extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      decoration: theme == Brightness.dark
-                          ? boxDecorationCustomDark.copyWith(
-                              color: isCustomInstanceValid ==
-                                      customInstanceValidation.True
-                                  ? Colors.green
-                                  : isCustomInstanceValid ==
-                                          customInstanceValidation.False
-                                      ? Colors.red
-                                      : null)
-                          : boxDecorationCustomLight.copyWith(
-                              color: isCustomInstanceValid ==
-                                      customInstanceValidation.True
-                                  ? Colors.green
-                                  : isCustomInstanceValid ==
-                                          customInstanceValidation.False
-                                      ? Colors.red
-                                      : null),
                       child: TextField(
                         controller: customUrlController,
                         keyboardType: TextInputType.url,
@@ -297,10 +280,11 @@ class SelectInstance extends StatelessWidget {
                             focusedBorder: InputBorder.none,
                             isDense: true),
                         style: TextStyle(
-                            fontSize: 20,
-                            color: theme == Brightness.dark
-                                ? whiteColor
-                                : Colors.black),
+                          fontSize: 20,
+                          // color: theme == Brightness.dark
+                          //     ? whiteColor
+                          //     : Colors.black
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),

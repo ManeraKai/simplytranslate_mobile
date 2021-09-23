@@ -64,7 +64,7 @@ class SelectTheme extends StatelessWidget {
                         child: Row(
                           children: [
                             Radio<AppTheme>(
-                              activeColor: greenColor,
+                              // activeColor: greenColor,
                               value: AppTheme.dark,
                               groupValue: themeRadio,
                               onChanged: (_) => _darkFunc(setState),
@@ -81,7 +81,7 @@ class SelectTheme extends StatelessWidget {
                       child: Row(
                         children: [
                           Radio<AppTheme>(
-                            activeColor: greenColor,
+                            // activeColor: greenColor,
                             value: AppTheme.light,
                             groupValue: themeRadio,
                             onChanged: (_) => _lightFunc(setState),
@@ -99,7 +99,7 @@ class SelectTheme extends StatelessWidget {
                         child: Row(
                           children: [
                             Radio<AppTheme>(
-                                activeColor: greenColor,
+                                // activeColor: greenColor,
                                 value: AppTheme.system,
                                 groupValue: themeRadio,
                                 onChanged: (_) => _systemFunc(setState)),
