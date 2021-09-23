@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../data.dart';
+import '../../data.dart';
 
 class PasteClipboardButton extends StatelessWidget {
   final changeText;
@@ -13,7 +13,6 @@ class PasteClipboardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(isClipboardEmpty);
     return Container(
       alignment: Alignment.topRight,
       child: IconButton(
@@ -31,7 +30,6 @@ class PasteClipboardButton extends StatelessWidget {
                     if (translationInputController.text == '') {
                       await Future.delayed(
                           const Duration(milliseconds: 1), () => "1");
-                      print('wewe');
                       FocusScope.of(context).requestFocus(focus);
                       setStateParent(() {
                         translationInput = valueString;
@@ -66,6 +64,7 @@ class PasteClipboardButton extends StatelessWidget {
                                     beforePasteSelection + valueString.length);
                       });
                     }
+                    translationLength = translationInputController.text.length;
                   }
                 });
               },

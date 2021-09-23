@@ -38,6 +38,7 @@ class _SettingsState extends State<Settings> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 10),
                     SelectInstance(setStateOverlord: widget.setStateOverlord),
                     SelectTheme(setStateOverlord: widget.setStateOverlord),
                   ])),

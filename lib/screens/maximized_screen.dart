@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data.dart';
-import '../widgets/copy_to_clipboard_button.dart';
+import '../widgets/text_tool_widgets/copy_to_clipboard_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
   final translateEngine;
