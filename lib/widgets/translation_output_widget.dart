@@ -2,7 +2,7 @@ import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:simplytranslate/screens/maximized_screen.dart';
 import '../data.dart';
-import './copy_to_clipboard_button.dart';
+import 'text_tool_widgets/copy_to_clipboard_button.dart';
 
 class TranslationOutput extends StatefulWidget {
   final translateEngine;

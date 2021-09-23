@@ -10,20 +10,58 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate/screens/about_screen.dart';
-import 'package:simplytranslate/widgets/translate_button_float_widget.dart';
+import 'package:simplytranslate/widgets/translate_button_widgets/translate_button_float_widget.dart';
 import './data.dart';
 import 'screens/settings/settings_screen.dart';
-import './widgets/translate_button_widget.dart';
-import './widgets/translation_input_widget.dart';
+import 'widgets/translate_button_widgets/translate_button_widget.dart';
+import 'widgets/translation_input_widget/translation_input_widget.dart';
 import './widgets/translation_output_widget.dart';
-import './widgets/from_lang_widget.dart';
-import './widgets/to_lang_widget.dart';
-import './widgets/switch_lang_widget.dart';
+import 'widgets/lang_selector_widgets/from_lang_widget.dart';
+import 'widgets/lang_selector_widgets/to_lang_widget.dart';
+import 'widgets/lang_selector_widgets/switch_lang_widget.dart';
 import 'widgets/keyboard_visibility_widget.dart';
 
+bool callSharedText = false;
+var themeTranslation;
+
+Future<void> getSharedText(
+    setStateParent, translateParent, translateEngine) async {
+  try {
+    var answer = await methodChannel.invokeMethod('getText');
+    if (answer != '') {
+      setStateParent(() {
+        translationInput = answer.toString();
+        translationInputController.text = translationInput;
+        translationLength = translationInputController.text.length;
+        loading = true;
+      });
+
+      final translatedText =
+          await translateParent(translationInput, translateEngine);
+      setStateParent(() {
+        translateEngine == TranslateEngine.GoogleTranslate
+            ? googleTranslationOutput = translatedText
+            : libreTranslationOutput = translatedText;
+        loading = false;
+      });
+    }
+  } on PlatformException catch (e) {
+    print(e);
+  }
+}
+
 void main(List<String> args) async {
-  //------ Setting session variables up --------//
   await GetStorage.init();
+
+  var sessionInstances = session.read('instances');
+  if (sessionInstances != null) {
+    List<String> sessionInstancesString = [];
+    for (var item in sessionInstances) {
+      sessionInstancesString.add(item.toString());
+    }
+    instances = sessionInstancesString;
+  }
+
   instance = session.read('instance_mode').toString() != 'null'
       ? session.read('instance_mode').toString()
       : instance;
@@ -50,7 +88,6 @@ void main(List<String> args) async {
     isClipboardEmpty = true;
   else
     isClipboardEmpty = false;
-  //--------------------------------------------//
 
   return runApp(MyApp());
 }
@@ -419,84 +456,88 @@ class _MainPageState extends State<MainPage> {
 
   Future<String> translate(
       String input, TranslateEngine translateEngine) async {
-    final url;
-    if (instance == 'custom') {
-      url = customInstanceFormatting();
-    } else
-      url = Uri.https(
-          instances
-              .firstWhere((element) => element == instance)
-              .toString()
-              .substring(8),
-          '/',
-          {
-            'engine': translateEngine == TranslateEngine.GoogleTranslate
-                ? 'google'
-                : 'libre'
-          });
-    // default https://
-
-    showInternetError() {
-      showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                backgroundColor: secondgreyColor,
-                title: Text(AppLocalizations.of(context)!.no_internet),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(AppLocalizations.of(context)!.ok),
-                  )
-                ],
-              ));
-    }
-
-    showInstanceError() {
-      showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                backgroundColor: secondgreyColor,
-                title: Text(AppLocalizations.of(context)!.something_went_wrong),
-                content: Text(AppLocalizations.of(context)!.check_instance),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(AppLocalizations.of(context)!.ok),
-                  )
-                ],
-              ));
-    }
-
-    try {
-      final response = await http.post(url, body: {
-        'from_language': fromLanguageValue,
-        'to_language': toLanguageValue,
-        'input': input,
-      });
-
-      if (response.statusCode == 200) {
-        final x = parse(response.body)
-            .getElementsByClassName('translation')[0]
-            .innerHtml;
-        // translateEngine == TranslateEngine.GoogleTranslate
-        //     ? googleTranslationOutput = x
-        //     : libreTranslationOutput = x;
-        checkLibreTranslatewithRespone(response, setState: setState);
-        return x;
+    if (input.length <= 500) {
+      final url;
+      if (instance == 'custom') {
+        url = Uri.parse('customInstance?engine:$engineSelected');
       } else
-        showInstanceError();
-      return 'Request failed with status: ${response.statusCode}.';
-    } catch (err) {
-      try {
-        final result = await InternetAddress.lookup('exmaple.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-          showInstanceError();
-        }
-      } on SocketException catch (_) {
-        showInternetError();
+        url = Uri.https(
+            instances
+                .firstWhere((element) => element == instance)
+                .toString()
+                .substring(8),
+            '/',
+            {
+              'engine': translateEngine == TranslateEngine.GoogleTranslate
+                  ? 'google'
+                  : 'libre'
+            });
+      // default https://
+
+      showInternetError() {
+        showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  backgroundColor: secondgreyColor,
+                  title: Text(AppLocalizations.of(context)!.no_internet),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(AppLocalizations.of(context)!.ok),
+                    )
+                  ],
+                ));
       }
-      return 'something went wrong buddy.';
-    }
+
+      showInstanceError() {
+        showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  backgroundColor: secondgreyColor,
+                  title:
+                      Text(AppLocalizations.of(context)!.something_went_wrong),
+                  content: Text(AppLocalizations.of(context)!.check_instance),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(AppLocalizations.of(context)!.ok),
+                    )
+                  ],
+                ));
+      }
+
+      try {
+        final response = await http.post(url, body: {
+          'from_language': fromLanguageValue,
+          'to_language': toLanguageValue,
+          'input': input,
+        });
+
+        if (response.statusCode == 200) {
+          final x = parse(response.body)
+              .getElementsByClassName('translation')[0]
+              .innerHtml;
+          // translateEngine == TranslateEngine.GoogleTranslate
+          //     ? googleTranslationOutput = x
+          //     : libreTranslationOutput = x;
+          checkLibreTranslatewithRespone(response, setState: setState);
+          return x;
+        } else
+          showInstanceError();
+        return 'Request failed with status: ${response.statusCode}.';
+      } catch (err) {
+        try {
+          final result = await InternetAddress.lookup('exmaple.com');
+          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+            showInstanceError();
+          }
+        } on SocketException catch (_) {
+          showInternetError();
+        }
+        return '';
+      }
+    } else
+      return '';
   }
 
   final rowWidth = 430;
@@ -504,7 +545,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     if (callSharedText) {
-      print('calling it');
       getSharedText(setState, translate, TranslateEngine.GoogleTranslate);
     }
     return TabBarView(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import '../data.dart';
+import '../../data.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
   final text;
