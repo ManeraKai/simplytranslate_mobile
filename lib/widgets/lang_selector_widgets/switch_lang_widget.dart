@@ -40,7 +40,7 @@ class SwitchLang extends StatelessWidget {
         child: TextButton(
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
-              if (translationInputController.text.length <= 500) {
+              if (translationInputController.text.length <= 5000) {
                 FocusScope.of(context).unfocus();
                 setStateParent(() => loading = true);
 
@@ -62,7 +62,6 @@ class SwitchLang extends StatelessWidget {
 
                 setStateParent(() {
                   loading = false;
-
                   translationInput = translatedText;
                   translationInputController.text = translatedText;
                   translateEngine == TranslateEngine.GoogleTranslate

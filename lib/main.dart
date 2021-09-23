@@ -84,7 +84,8 @@ void main(List<String> args) async {
   }
   var _clipData =
       (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
-  if (_clipData == '')
+  print(_clipData);
+  if (_clipData == '' || _clipData == null)
     isClipboardEmpty = true;
   else
     isClipboardEmpty = false;
@@ -104,7 +105,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     ClipboardListener.addListener(() async {
       var _clipData =
           (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
-      if (_clipData == '') {
+      if (_clipData == '' || _clipData == null) {
         if (!isClipboardEmpty) {
           setState(() {
             isClipboardEmpty = true;
@@ -129,11 +130,26 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       setState(() {
         callSharedText = true;
       });
+      var _clipData =
+          (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
+      if (_clipData == '' || _clipData == null) {
+        if (!isClipboardEmpty) {
+          setState(() {
+            isClipboardEmpty = true;
+          });
+        }
+      } else {
+        if (isClipboardEmpty) {
+          setState(() {
+            isClipboardEmpty = false;
+          });
+        }
+      }
     }
   }
 
@@ -450,13 +466,12 @@ class _MainPageState extends State<MainPage> {
 
   void dispose() {
     customUrlController.dispose();
-
     super.dispose();
   }
 
   Future<String> translate(
       String input, TranslateEngine translateEngine) async {
-    if (input.length <= 500) {
+    if (input.length <= 5000) {
       final url;
       if (instance == 'custom') {
         url = Uri.parse('customInstance?engine:$engineSelected');

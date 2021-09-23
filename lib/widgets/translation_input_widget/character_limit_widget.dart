@@ -14,10 +14,10 @@ class CharacterLimit extends StatelessWidget {
       child: KeyboardVisibilityBuilder(
         builder: (context, child, isKeyboardVisible) => Container(
           width: 48,
-          alignment:
-              isKeyboardVisible ? Alignment.topCenter : Alignment.bottomCenter,
+          alignment: Alignment.bottomCenter,
           padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 '$translationLength',
