@@ -32,7 +32,6 @@ class DeleteTranslationInputButton extends StatelessWidget {
                   translationInput = '';
                   googleTranslationOutput = '';
                   libreTranslationOutput = '';
-                  translationLength = 0;
                 });
               },
         icon: Icon(Icons.close),

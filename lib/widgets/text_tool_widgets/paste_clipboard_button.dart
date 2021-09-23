@@ -36,8 +36,6 @@ class PasteClipboardButton extends StatelessWidget {
                         setStateParent(() {
                           translationInput = valueString;
                           translationInputController.text = valueString;
-                          translationLength =
-                              translationInputController.text.length;
                         });
                       } else {
                         final beforePasteSelection =
@@ -74,8 +72,6 @@ class PasteClipboardButton extends StatelessWidget {
                           }
                         });
                       }
-                      translationLength =
-                          translationInputController.text.length;
                     }
                   });
                 },

@@ -1,4 +1,4 @@
-import 'package:auto_direction/auto_direction.dart';
+// import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
@@ -25,13 +25,6 @@ class TranslationInput extends StatefulWidget {
 
 class _TranslationInputState extends State<TranslationInput> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  bool isRTL = false;
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       height: 205,
@@ -44,65 +37,52 @@ class _TranslationInputState extends State<TranslationInput> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: AutoDirection(
-                text: translationInput,
-                onDirectionChange: (isRTL) {
-                  setState(() {
-                    this.isRTL = isRTL;
-                  });
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (overscroll) {
+                  overscroll.disallowGlow();
+                  return false;
                 },
-                child: NotificationListener<OverscrollIndicatorNotification>(
-                  onNotification: (overscroll) {
-                    overscroll.disallowGlow();
-                    return false;
-                  },
-                  child: Scrollbar(
-                    child: TextField(
-                      focusNode: focus,
-                      minLines: 8,
-                      maxLines: null,
-                      controller: translationInputController,
-                      keyboardType: TextInputType.multiline,
-                      onTap: () {
-                        widget
-                            .setStateParent(() => translationInputOpen = true);
-                      },
-                      onChanged: (String input) async {
-                        widget.setStateParent(() {
-                          translationInputOpen = true;
-                          translationLength =
-                              translationInputController.text.length;
-                          translationInput = input;
-                        });
-                      },
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
-                              color: theme == Brightness.dark
-                                  ? lightgreyColor
-                                  : Color(0xffa9a9a9)),
-                          hintText:
-                              AppLocalizations.of(context)!.enter_text_here),
-                      style: TextStyle(fontSize: 20),
-                    ),
+                child: Scrollbar(
+                  child: TextField(
+                    focusNode: focus,
+                    minLines: 8,
+                    maxLines: null,
+                    controller: translationInputController,
+                    keyboardType: TextInputType.multiline,
+                    onTap: () {
+                      widget.setStateParent(() => translationInputOpen = true);
+                    },
+                    onChanged: (String input) async {
+                      widget.setStateParent(() {
+                        translationInputOpen = true;
+                        translationInput = input;
+                      });
+                    },
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            color: theme == Brightness.dark
+                                ? lightgreyColor
+                                : Color(0xffa9a9a9)),
+                        hintText:
+                            AppLocalizations.of(context)!.enter_text_here),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ),
             ),
           ),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                DeleteTranslationInputButton(
-                    setStateParent: setState,
-                    setStateParentParent: widget.setStateParent,
-                    translateEngine: widget.translateEngine),
-                CopyToClipboardButton(translationInput),
-                PasteClipboardButton(setStateParent: setState),
-                CharacterLimit(),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              DeleteTranslationInputButton(
+                  setStateParent: setState,
+                  setStateParentParent: widget.setStateParent,
+                  translateEngine: widget.translateEngine),
+              CopyToClipboardButton(translationInput),
+              PasteClipboardButton(setStateParent: setState),
+              CharacterLimit(),
+            ],
           )
         ],
       ),

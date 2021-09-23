@@ -20,9 +20,9 @@ class CharacterLimit extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '$translationLength',
+                '${translationInputController.text.length}',
                 style: TextStyle(
-                    color: translationLength <= 5000
+                    color: translationInputController.text.length <= 5000
                         ? theme == Brightness.dark
                             ? Colors.white
                             : lightThemeGreyColor
@@ -32,7 +32,7 @@ class CharacterLimit extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 3),
                   height: 1,
                   width: 30,
-                  color: translationLength <= 5000
+                  color: translationInputController.text.length <= 5000
                       ? theme == Brightness.dark
                           ? Colors.white
                           : lightThemeGreyColor
@@ -40,7 +40,7 @@ class CharacterLimit extends StatelessWidget {
               Text(
                 '5000',
                 style: TextStyle(
-                    color: translationLength <= 5000
+                    color: translationInputController.text.length <= 5000
                         ? theme == Brightness.dark
                             ? Colors.white
                             : lightThemeGreyColor

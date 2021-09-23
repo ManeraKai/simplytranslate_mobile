@@ -24,7 +24,7 @@ class TranslateButtonFloat extends StatelessWidget {
             child: Container(
                 decoration: theme == Brightness.dark
                     ? boxDecorationCustomDark.copyWith()
-                    : translationLength <= 5000
+                    : translationInputController.text.length <= 5000
                         ? translationInputController.text != ''
                             ? boxDecorationCustomLight.copyWith(
                                 color: Color(0xff3fb274),
@@ -51,7 +51,7 @@ class TranslateButtonFloat extends StatelessWidget {
                 child: GestureDetector(
                   onTap: translationInputController.text == ''
                       ? null
-                      : translationLength <= 5000
+                      : translationInputController.text.length <= 5000
                           ? () async {
                               FocusScope.of(context).unfocus();
                               setStateParent(() => loading = true);

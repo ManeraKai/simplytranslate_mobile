@@ -34,7 +34,7 @@ class TranslateButton extends StatelessWidget {
                 key: key,
                 decoration: theme == Brightness.dark
                     ? boxDecorationCustomDark
-                    : translationLength <= 5000
+                    : translationInputController.text.length <= 5000
                         ? translationInputController.text != ''
                             ? boxDecorationCustomLight.copyWith(
                                 color: Color(0xff3fb274),
@@ -60,7 +60,7 @@ class TranslateButton extends StatelessWidget {
                 child: GestureDetector(
                   onTap: translationInputController.text == ''
                       ? null
-                      : translationLength <= 5000
+                      : translationInputController.text.length <= 5000
                           ? () async {
                               renderBox = key.currentContext?.findRenderObject()
                                   as RenderBox;

@@ -62,7 +62,7 @@ String customUrl = '';
 
 bool translationInputOpen = false;
 
-int translationLength = 0;
+// int translationInputController.text.length = 0;
 
 enum TranslateEngine { GoogleTranslate, LibreTranslate }
 

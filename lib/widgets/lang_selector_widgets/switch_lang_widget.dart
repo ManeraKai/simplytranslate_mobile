@@ -82,7 +82,6 @@ class SwitchLang extends StatelessWidget {
                 setStateParent(() {});
               }
             }
-            translationLength = translationInputController.text.length;
           },
           child: Text(
             '<->',

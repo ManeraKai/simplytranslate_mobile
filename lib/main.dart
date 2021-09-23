@@ -32,7 +32,6 @@ Future<void> getSharedText(
       setStateParent(() {
         translationInput = answer.toString();
         translationInputController.text = translationInput;
-        translationLength = translationInputController.text.length;
         loading = true;
       });
 
@@ -212,63 +211,68 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           Orientation.landscape) {
                     return SizedBox.shrink();
                   } else {
-                    return AppBar(
-                      actions: [
-                        PopupMenuButton(
-                          icon: Icon(Icons.more_vert, color: Colors.white),
-                          color: theme == Brightness.dark
-                              ? secondgreyColor
-                              : Colors.white,
-                          itemBuilder: (BuildContext context) => [
-                            PopupMenuItem<String>(
-                                value: 'settings',
-                                child: Text(
-                                    AppLocalizations.of(context)!.settings)),
-                            PopupMenuItem<String>(
-                                value: 'about',
-                                child:
-                                    Text(AppLocalizations.of(context)!.about)),
-                          ],
-                          onSelected: (value) {
-                            if (value == 'settings') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Settings(setState)),
-                              );
-                            } else if (value == 'about') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AboutScreen()),
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                      backgroundColor: theme == Brightness.dark
-                          ? greyColor
-                          : Color(0xff3fb274),
-                      elevation: 3,
-                      bottom: TabBar(
-                        indicatorColor: Colors.white,
-                        tabs: [
-                          Tab(
-                            text: "GoogleTranslate",
+                    return GestureDetector(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                      child: AppBar(
+                        actions: [
+                          PopupMenuButton(
+                            icon: Icon(Icons.more_vert, color: Colors.white),
+                            color: theme == Brightness.dark
+                                ? secondgreyColor
+                                : Colors.white,
+                            itemBuilder: (BuildContext context) => [
+                              PopupMenuItem<String>(
+                                  value: 'settings',
+                                  child: Text(
+                                      AppLocalizations.of(context)!.settings)),
+                              PopupMenuItem<String>(
+                                  value: 'about',
+                                  child: Text(
+                                      AppLocalizations.of(context)!.about)),
+                            ],
+                            onSelected: (value) {
+                              if (value == 'settings') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Settings(setState)),
+                                );
+                              } else if (value == 'about') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AboutScreen()),
+                                );
+                              }
+                            },
                           ),
-                          Tab(
-                            text: "LibreTranslate",
-                          )
                         ],
+                        backgroundColor: theme == Brightness.dark
+                            ? greyColor
+                            : Color(0xff3fb274),
+                        elevation: 3,
+                        bottom: TabBar(
+                          indicatorColor: Colors.white,
+                          tabs: [
+                            Tab(
+                              text: "GoogleTranslate",
+                            ),
+                            Tab(
+                              text: "LibreTranslate",
+                            )
+                          ],
+                        ),
+                        iconTheme: IconThemeData(
+                            color: theme == Brightness.dark
+                                ? whiteColor
+                                : Colors.black),
+                        title: Text('Simply Translate',
+                            style: theme == Brightness.dark
+                                ? TextStyle(color: whiteColor)
+                                : TextStyle(color: Colors.white)),
                       ),
-                      iconTheme: IconThemeData(
-                          color: theme == Brightness.dark
-                              ? whiteColor
-                              : Colors.black),
-                      title: Text('Simply Translate',
-                          style: theme == Brightness.dark
-                              ? TextStyle(color: whiteColor)
-                              : TextStyle(color: Colors.white)),
                     );
                   }
                 },
@@ -562,164 +566,173 @@ class _MainPageState extends State<MainPage> {
     if (callSharedText) {
       getSharedText(setState, translate, TranslateEngine.GoogleTranslate);
     }
-    return TabBarView(
-      physics: NeverScrollableScrollPhysics(),
-      children: [
-        Stack(
-          children: [
-            SingleChildScrollView(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FromLang(setStateOverlord: setState),
-                          SwitchLang(
-                              setStateParent: setState,
-                              translateParent: translate,
-                              translateEngine: TranslateEngine.GoogleTranslate),
-                          ToLang(
-                            setStateOverlord: setState,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      TranslationInput(
-                        setStateParent: setState,
-                        translateParent: translate,
-                        translateEngine: TranslateEngine.GoogleTranslate,
-                      ),
-                      const SizedBox(height: 10),
-                      TranslationOutput(
-                        translateEngine: TranslateEngine.GoogleTranslate,
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          KeyboardVisibilityBuilder(
-                            builder: (context, child, isKeyboardVisible) =>
-                                !isKeyboardVisible
-                                    ? TranslateButton(
-                                        setStateParent: setState,
-                                        translateParent: translate,
-                                        translateEngine:
-                                            TranslateEngine.GoogleTranslate,
-                                      )
-                                    : SizedBox.shrink(),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                    ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          Stack(
+            children: [
+              SingleChildScrollView(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FromLang(setStateOverlord: setState),
+                            SwitchLang(
+                                setStateParent: setState,
+                                translateParent: translate,
+                                translateEngine:
+                                    TranslateEngine.GoogleTranslate),
+                            ToLang(
+                              setStateOverlord: setState,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        TranslationInput(
+                          setStateParent: setState,
+                          translateParent: translate,
+                          translateEngine: TranslateEngine.GoogleTranslate,
+                        ),
+                        const SizedBox(height: 10),
+                        TranslationOutput(
+                          translateEngine: TranslateEngine.GoogleTranslate,
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            KeyboardVisibilityBuilder(
+                              builder: (context, child, isKeyboardVisible) =>
+                                  !isKeyboardVisible
+                                      ? TranslateButton(
+                                          setStateParent: setState,
+                                          translateParent: translate,
+                                          translateEngine:
+                                              TranslateEngine.GoogleTranslate,
+                                        )
+                                      : SizedBox.shrink(),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            KeyboardVisibilityBuilder(
-              builder: (context, child, isKeyboardVisible) => isKeyboardVisible
-                  ? Positioned(
-                      bottom: MediaQuery.of(context).viewInsets.bottom,
-                      right: 0,
-                      child: TranslateButtonFloat(
-                          setStateParent: setState,
-                          translateParent: translate,
-                          translateEngine: TranslateEngine.GoogleTranslate),
-                    )
-                  : SizedBox.shrink(),
-            ),
-          ],
-        ),
-        isThereLibreTranslate
-            ? Stack(
-                children: [
-                  SingleChildScrollView(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                FromLang(setStateOverlord: setState),
-                                SwitchLang(
-                                  setStateParent: setState,
-                                  translateParent: translate,
-                                  translateEngine:
-                                      TranslateEngine.LibreTranslate,
-                                ),
-                                ToLang(
-                                  setStateOverlord: setState,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            TranslationInput(
-                              setStateParent: setState,
-                              translateParent: translate,
-                              translateEngine: TranslateEngine.LibreTranslate,
-                            ),
-                            const SizedBox(height: 10),
-                            TranslationOutput(
+              KeyboardVisibilityBuilder(
+                builder: (context, child, isKeyboardVisible) =>
+                    isKeyboardVisible
+                        ? Positioned(
+                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                            right: 0,
+                            child: TranslateButtonFloat(
+                                setStateParent: setState,
+                                translateParent: translate,
                                 translateEngine:
-                                    TranslateEngine.LibreTranslate),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                KeyboardVisibilityBuilder(
-                                  builder: (context, child,
-                                          isKeyboardVisible) =>
-                                      !isKeyboardVisible
-                                          ? TranslateButton(
-                                              setStateParent: setState,
-                                              translateParent: translate,
-                                              translateEngine: TranslateEngine
-                                                  .LibreTranslate,
-                                            )
-                                          : SizedBox.shrink(),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                          ],
+                                    TranslateEngine.GoogleTranslate),
+                          )
+                        : SizedBox.shrink(),
+              ),
+            ],
+          ),
+          isThereLibreTranslate
+              ? Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  FromLang(setStateOverlord: setState),
+                                  SwitchLang(
+                                    setStateParent: setState,
+                                    translateParent: translate,
+                                    translateEngine:
+                                        TranslateEngine.LibreTranslate,
+                                  ),
+                                  ToLang(
+                                    setStateOverlord: setState,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              TranslationInput(
+                                setStateParent: setState,
+                                translateParent: translate,
+                                translateEngine: TranslateEngine.LibreTranslate,
+                              ),
+                              const SizedBox(height: 10),
+                              TranslationOutput(
+                                  translateEngine:
+                                      TranslateEngine.LibreTranslate),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  KeyboardVisibilityBuilder(
+                                    builder: (context, child,
+                                            isKeyboardVisible) =>
+                                        !isKeyboardVisible
+                                            ? TranslateButton(
+                                                setStateParent: setState,
+                                                translateParent: translate,
+                                                translateEngine: TranslateEngine
+                                                    .LibreTranslate,
+                                              )
+                                            : SizedBox.shrink(),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                            ],
+                          ),
                         ),
                       ),
                     ),
+                    KeyboardVisibilityBuilder(
+                      builder: (context, child, isKeyboardVisible) =>
+                          isKeyboardVisible
+                              ? Positioned(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom,
+                                  right: 0,
+                                  child: TranslateButtonFloat(
+                                    setStateParent: setState,
+                                    translateEngine:
+                                        TranslateEngine.LibreTranslate,
+                                    translateParent: translate,
+                                  ),
+                                )
+                              : SizedBox.shrink(),
+                    ),
+                  ],
+                )
+              : Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.not_available,
+                    style: const TextStyle(fontSize: 20),
                   ),
-                  KeyboardVisibilityBuilder(
-                    builder: (context, child, isKeyboardVisible) =>
-                        isKeyboardVisible
-                            ? Positioned(
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom,
-                                right: 0,
-                                child: TranslateButtonFloat(
-                                  setStateParent: setState,
-                                  translateEngine:
-                                      TranslateEngine.LibreTranslate,
-                                  translateParent: translate,
-                                ),
-                              )
-                            : SizedBox.shrink(),
-                  ),
-                ],
-              )
-            : Center(
-                child: Text(
-                  AppLocalizations.of(context)!.not_available,
-                  style: const TextStyle(fontSize: 20),
                 ),
-              ),
-      ],
+        ],
+      ),
     );
   }
 }
