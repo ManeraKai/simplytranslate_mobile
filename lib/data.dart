@@ -79,6 +79,7 @@ List selectLanguages = [];
 List selectLanguagesFrom = [];
 
 bool loading = false;
+bool isTranslationCanceled = false;
 
 final customUrlController = TextEditingController();
 final googleTranslationInputController = TextEditingController();

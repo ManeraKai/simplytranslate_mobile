@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:simplytranslate/google/widgets/translate_button/cancel_translation_button.dart';
 import '../../widgets/keyboard_visibility.dart';
 import 'widgets/translate_button/translate_button_float.dart';
 import 'widgets/translate_button/translate_button.dart';
@@ -9,6 +10,7 @@ import 'widgets/translation_output/translation_output.dart';
 import 'widgets/lang_selector/from_lang.dart';
 import 'widgets/lang_selector/to_lang.dart';
 import 'widgets/lang_selector/switch_lang.dart';
+import '/data.dart';
 
 class GoogleTranslate extends StatefulWidget {
   final Future<String> Function(String) translateParent;
@@ -58,14 +60,22 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       KeyboardVisibilityBuilder(
-                        builder: (context, child, isKeyboardVisible) =>
-                            !isKeyboardVisible
-                                ? GoogleTranslateButton(
-                                    setStateParent: widget.setStateParent,
-                                    translateParent: widget.translateParent,
-                                  )
-                                : SizedBox.shrink(),
-                      ),
+                          builder: (context, child, isKeyboardVisible) =>
+                              Column(
+                                children: [
+                                  loading
+                                      ? GoogleCancelTranslationButton(
+                                          setStateParent: widget.setStateParent)
+                                      : SizedBox.shrink(),
+                                  !isKeyboardVisible
+                                      ? GoogleTranslateButton(
+                                          setStateParent: widget.setStateParent,
+                                          translateParent:
+                                              widget.translateParent,
+                                        )
+                                      : SizedBox.shrink(),
+                                ],
+                              )),
                     ],
                   ),
                   const SizedBox(height: 20),

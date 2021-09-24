@@ -28,13 +28,16 @@ class TranslateButtonFloat extends StatelessWidget {
                   : googleTranslationInputController.text.length <= 5000
                       ? () async {
                           FocusScope.of(context).unfocus();
+                          isTranslationCanceled = false;
                           setStateParent(() => loading = true);
                           final translatedText =
                               await translateParent(translationInput);
-                          setStateParent(() {
-                            googleTranslationOutput = translatedText;
-                            loading = false;
-                          });
+                          if (!isTranslationCanceled) {
+                            setStateParent(() {
+                              googleTranslationOutput = translatedText;
+                              loading = false;
+                            });
+                          }
                         }
                       : null,
               child: Text(AppLocalizations.of(context)!.translate,
