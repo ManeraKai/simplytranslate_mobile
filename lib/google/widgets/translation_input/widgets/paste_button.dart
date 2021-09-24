@@ -26,7 +26,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
           // color: theme == Brightness.dark ? null : greenColor,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          onPressed: googleTranslationInputController.text.length >= 5000
+          onPressed: googleTranslationInputController.text.length >= 99999
               ? null
               : () {
                   Clipboard.getData(Clipboard.kTextPlain).then((value) async {
@@ -34,8 +34,8 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
 
                     if (value != null) {
                       var valueString = value.text.toString();
-                      if (valueString.length > 5000) {
-                        valueString = valueString.substring(1, 5001);
+                      if (valueString.length > 99999) {
+                        valueString = valueString.substring(1, 100000);
                       }
                       if (googleTranslationInputController.text == '') {
                         await Future.delayed(
@@ -47,7 +47,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                           translationInputOpen = true;
                         });
                       } else if (googleTranslationInputController.text.length <
-                          5000) {
+                          99999) {
                         final beforePasteSelection =
                             googleTranslationInputController
                                 .selection.baseOffset;
@@ -55,8 +55,8 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                         if (beforePasteSelection == -1) {
                           newText = googleTranslationInputController.text +
                               valueString;
-                          if (newText.length >= 5000) {
-                            newText = newText.substring(1, 5001);
+                          if (newText.length >= 99999) {
+                            newText = newText.substring(1, 100000);
                           }
                         } else {
                           newText = googleTranslationInputController.text
@@ -65,8 +65,8 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               googleTranslationInputController.text.substring(
                                   beforePasteSelection,
                                   googleTranslationInputController.text.length);
-                          if (newText.length >= 5000) {
-                            newText = newText.substring(1, 5001);
+                          if (newText.length >= 99999) {
+                            newText = newText.substring(1, 100000);
                           }
                         }
 
@@ -79,7 +79,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                           googleTranslationInputController.text = newText;
                           if (isKeyboardVisible) {
                             if (beforePasteSelection + valueString.length >=
-                                5000) {
+                                99999) {
                             } else {
                               googleTranslationInputController.selection =
                                   TextSelection.collapsed(

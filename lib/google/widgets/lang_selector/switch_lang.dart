@@ -43,13 +43,21 @@ class GoogleSwitchLang extends StatelessWidget {
                 fromLanguageValue = toLanguageValue;
                 toLanguageValue = valuetmp;
 
-                if (translatedText.length <= 500)
-                  translatedText = translatedText.substring(0, 5001);
-
-                final x = await translateParent(
-                    input: translatedText,
-                    fromLanguageValue: fromLanguageValue,
-                    toLanguageValue: toLanguageValue);
+                final x;
+                if (translatedText.length <= 500) {
+                  x = await translateParent(
+                      input: translatedText,
+                      fromLanguageValue: fromLanguageValue,
+                      toLanguageValue: toLanguageValue);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      'The translation input is above 5000.',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ));
+                  x = '';
+                }
                 setStateParent(() {
                   loading = false;
                   translationInput = translatedText;
