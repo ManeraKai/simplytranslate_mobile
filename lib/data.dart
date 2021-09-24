@@ -46,9 +46,11 @@ var focus = FocusNode();
 
 String fromLanguageValue = 'English';
 String toLanguageValue = 'Arabic';
+String toLanguageValueShareDefault = 'Arabic';
 
 String fromLanguage = '';
 String toLanguage = '';
+String toLanguageShareDefault = '';
 
 String instance = 'https://simplytranslate.org';
 int instanceIndex = 0;

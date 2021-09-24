@@ -18,7 +18,13 @@ import 'widgets/keyboard_visibility.dart';
 bool callSharedText = false;
 var themeTranslation;
 
-Future<void> getSharedText(setStateParent, translateParent) async {
+Future<void> getSharedText(
+    setStateParent,
+    Future<String> Function(
+            {required String input,
+            required String fromLanguageValue,
+            required String toLanguageValue})
+        translateParent) async {
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
@@ -28,7 +34,10 @@ Future<void> getSharedText(setStateParent, translateParent) async {
         loading = true;
       });
 
-      final translatedText = await translateParent(translationInput);
+      final translatedText = await translateParent(
+          input: translationInput,
+          fromLanguageValue: 'Autodetect',
+          toLanguageValue: toLanguageValueShareDefault);
       setStateParent(() {
         googleTranslationOutput = translatedText;
         loading = false;
@@ -473,6 +482,12 @@ class MainPageLocalization extends StatelessWidget {
       toLanguageValue = selectLanguagesMap[sessionData];
     }
 
+    if (session.read('to_language_share_default').toString() != 'null') {
+      var sessionData = session.read('to_language_share_default').toString();
+      toLanguageShareDefault = sessionData;
+      toLanguageValueShareDefault = selectLanguagesMap[sessionData];
+    }
+
     return MainPage();
   }
 }
@@ -499,7 +514,10 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  Future<String> translate(String input) async {
+  Future<String> translate(
+      {required String input,
+      required String fromLanguageValue,
+      required String toLanguageValue}) async {
     if (input.length <= 5000) {
       final url;
       if (instance == 'custom') {

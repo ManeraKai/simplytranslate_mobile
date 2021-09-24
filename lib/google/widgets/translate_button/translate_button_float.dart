@@ -4,7 +4,10 @@ import '/data.dart';
 
 class TranslateButtonFloat extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function(String) translateParent;
+  final Future<String> Function(
+      {required String input,
+      required String fromLanguageValue,
+      required String toLanguageValue}) translateParent;
 
   const TranslateButtonFloat({
     Key? key,
@@ -30,8 +33,10 @@ class TranslateButtonFloat extends StatelessWidget {
                           FocusScope.of(context).unfocus();
                           isTranslationCanceled = false;
                           setStateParent(() => loading = true);
-                          final translatedText =
-                              await translateParent(translationInput);
+                          final translatedText = await translateParent(
+                              input: translationInput,
+                              fromLanguageValue: fromLanguageValue,
+                              toLanguageValue: toLanguageValue);
                           if (!isTranslationCanceled) {
                             setStateParent(() {
                               googleTranslationOutput = translatedText;

@@ -1,23 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '/data.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import '../../../data.dart';
 
 final ScrollController _rightTextviewScrollController = ScrollController();
 bool toIsFirstClick = false;
 
-class GoogleToLang extends StatelessWidget {
+class SelectDefaultLang extends StatelessWidget {
   final setStateOverlord;
-  const GoogleToLang({
+  const SelectDefaultLang({
     required this.setStateOverlord,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return StatefulBuilder(
+              builder: (context, setState) =>
+                  SelectDefaultLangDialog(setStateOverlord: setStateOverlord),
+            );
+          },
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              child: Icon(
+                Icons.translate,
+                color: theme == Brightness.dark ? Colors.white : greenColor,
+                size: 45,
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Default share to-language',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  Text(
+                    toLanguageValueShareDefault,
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: theme == Brightness.dark
+                            ? Colors.white54
+                            : Colors.black54),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SelectDefaultLangDialog extends StatelessWidget {
+  const SelectDefaultLangDialog({
+    Key? key,
+    required this.setStateOverlord,
+  }) : super(key: key);
+
+  final setStateOverlord;
+
+  @override
+  Widget build(BuildContext context) {
     Function changeText = () {};
-    return Container(
-      width: MediaQuery.of(context).size.width / 3 + 10,
-      child: Autocomplete(
+    return AlertDialog(
+      contentPadding: EdgeInsets.all(20),
+      content: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> toSelectLanguagesIterable = Iterable.generate(
               selectLanguages.length, (i) => selectLanguages[i]);
@@ -41,7 +104,7 @@ class GoogleToLang extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: Container(
-                width: MediaQuery.of(context).size.width / 3 + 10,
+                width: MediaQuery.of(context).size.width / 3 + 10, //Here brozer
                 height: MediaQuery.of(context).size.height / 2 <=
                         (options.length) * (36 + 25)
                     ? MediaQuery.of(context).size.height / 2
@@ -49,9 +112,7 @@ class GoogleToLang extends StatelessWidget {
                 margin: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  boxShadow: [
-                    BoxShadow(offset: Offset(0, 0), blurRadius: 5),
-                  ],
+                  boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 5)],
                 ),
                 child: Scrollbar(
                   controller: _rightTextviewScrollController,
@@ -69,20 +130,17 @@ class GoogleToLang extends StatelessWidget {
                                   ? greyColor
                                   : whiteColor,
                               child: GestureDetector(
-                                onTap: option == fromLanguage
-                                    ? null
-                                    : () {
-                                        if (option != fromLanguage) {
-                                          FocusScope.of(context).unfocus();
-                                          session.write('to_language', option);
-                                          setStateOverlord(() {
-                                            toLanguage = option;
-                                            toLanguageValue =
-                                                selectLanguagesMap[option];
-                                          });
-                                          changeText();
-                                        }
-                                      },
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  session.write('to_language', option);
+                                  setStateOverlord(() {
+                                    toLanguageShareDefault = option;
+                                    toLanguageValueShareDefault =
+                                        selectLanguagesMap[option];
+                                  });
+                                  changeText();
+                                  Navigator.of(context).pop();
+                                },
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
@@ -90,9 +148,7 @@ class GoogleToLang extends StatelessWidget {
                                   child: Text(
                                     option,
                                     style: (option == fromLanguage)
-                                        ? TextStyle(
-                                            fontSize: 18,
-                                          )
+                                        ? TextStyle(fontSize: 18)
                                         : const TextStyle(fontSize: 18),
                                   ),
                                 ),
@@ -115,11 +171,13 @@ class GoogleToLang extends StatelessWidget {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted,
         ) {
-          if (toLanguage != fieldTextEditingController.text) {
-            fieldTextEditingController.text = toLanguage;
+          if (toLanguageShareDefault != fieldTextEditingController.text) {
+            fieldTextEditingController.text = toLanguageShareDefault;
           }
-          changeText = () => fieldTextEditingController.text = toLanguage;
+          changeText =
+              () => fieldTextEditingController.text = toLanguageShareDefault;
           return TextField(
+              autofocus: true,
               onTap: () {
                 setStateOverlord(() => translationInputOpen = false);
                 toIsFirstClick = true;
@@ -134,43 +192,19 @@ class GoogleToLang extends StatelessWidget {
                       .toLowerCase()
                       .startsWith(
                           fieldTextEditingController.text.toLowerCase()));
-                  if (chosenOne != fromLanguage) {
-                    FocusScope.of(context).unfocus();
-                    session.write('to_language', chosenOne);
-                    setStateOverlord(() {
-                      toLanguage = chosenOne;
-                      toLanguageValue = selectLanguagesMap[chosenOne];
-                    });
-                    fieldTextEditingController.text = chosenOne;
-                  } else {
-                    var dimmedSelectLanguage = selectLanguages.toList();
-                    dimmedSelectLanguage.remove(chosenOne);
 
-                    try {
-                      chosenOne = dimmedSelectLanguage.firstWhere((word) => word
-                          .toLowerCase()
-                          .startsWith(
-                              fieldTextEditingController.text.toLowerCase()));
-                      if (chosenOne != fromLanguage) {
-                        FocusScope.of(context).unfocus();
-                        session.write('to_language', chosenOne);
-                        setStateOverlord(() {
-                          toLanguage = chosenOne;
-                          toLanguageValue = selectLanguagesMap[chosenOne];
-                        });
-                        fieldTextEditingController.text = chosenOne;
-                      }
-                    } catch (_) {
-                      FocusScope.of(context).unfocus();
-                      fieldTextEditingController.text = toLanguage;
-                    }
-                  }
+                  FocusScope.of(context).unfocus();
+                  session.write('to_language_share_default', chosenOne);
+                  setStateOverlord(() {
+                    toLanguageShareDefault = chosenOne;
+                    toLanguageValueShareDefault = selectLanguagesMap[chosenOne];
+                  });
+                  fieldTextEditingController.text = chosenOne;
                 } catch (_) {
                   FocusScope.of(context).unfocus();
-                  fieldTextEditingController.text = toLanguage;
+                  fieldTextEditingController.text = toLanguageShareDefault;
                 }
-
-                // chose the next one if the first is dimmed.
+                Navigator.of(context).pop();
               },
               decoration: InputDecoration(
                 contentPadding:
@@ -184,6 +218,14 @@ class GoogleToLang extends StatelessWidget {
                   color: theme == Brightness.dark ? null : Colors.black));
         },
       ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(AppLocalizations.of(context)!.cancel),
+        )
+      ],
     );
   }
 }

@@ -4,7 +4,10 @@ import '/data.dart';
 
 class GoogleSwitchLang extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function(String) translateParent;
+  final Future<String> Function(
+      {required String input,
+      required String fromLanguageValue,
+      required String toLanguageValue}) translateParent;
 
   const GoogleSwitchLang({
     required this.setStateParent,
@@ -25,7 +28,10 @@ class GoogleSwitchLang extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 setStateParent(() => loading = true);
 
-                var translatedText = await translateParent(translationInput);
+                var translatedText = await translateParent(
+                    input: translationInput,
+                    fromLanguageValue: fromLanguageValue,
+                    toLanguageValue: toLanguageValue);
                 final tmp = fromLanguage;
                 fromLanguage = toLanguage;
                 toLanguage = tmp;
@@ -40,7 +46,10 @@ class GoogleSwitchLang extends StatelessWidget {
                 if (translatedText.length <= 500)
                   translatedText = translatedText.substring(0, 5001);
 
-                final x = await translateParent(translatedText);
+                final x = await translateParent(
+                    input: translatedText,
+                    fromLanguageValue: fromLanguageValue,
+                    toLanguageValue: toLanguageValue);
                 setStateParent(() {
                   loading = false;
                   translationInput = translatedText;

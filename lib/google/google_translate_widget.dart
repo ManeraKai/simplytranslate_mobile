@@ -13,7 +13,10 @@ import 'widgets/lang_selector/switch_lang.dart';
 import '/data.dart';
 
 class GoogleTranslate extends StatefulWidget {
-  final Future<String> Function(String) translateParent;
+  final Future<String> Function(
+      {required String input,
+      required String fromLanguageValue,
+      required String toLanguageValue}) translateParent;
   final setStateParent;
   const GoogleTranslate({
     required this.translateParent,

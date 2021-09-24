@@ -9,7 +9,10 @@ import '/data.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
-  final Future<String> Function(String) translateParent;
+  final Future<String> Function(
+      {required String input,
+      required String fromLanguageValue,
+      required String toLanguageValue}) translateParent;
   const GoogleTranslationInput({
     required this.setStateParent,
     required this.translateParent,
