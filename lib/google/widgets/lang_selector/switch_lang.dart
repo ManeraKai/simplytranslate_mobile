@@ -25,7 +25,7 @@ class GoogleSwitchLang extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 setStateParent(() => loading = true);
 
-                final translatedText = await translateParent(translationInput);
+                var translatedText = await translateParent(translationInput);
                 final tmp = fromLanguage;
                 fromLanguage = toLanguage;
                 toLanguage = tmp;
@@ -36,11 +36,11 @@ class GoogleSwitchLang extends StatelessWidget {
                 final valuetmp = fromLanguageValue;
                 fromLanguageValue = toLanguageValue;
                 toLanguageValue = valuetmp;
-                final x;
+
                 if (translatedText.length <= 500)
-                  x = await translateParent(translatedText);
-                else
-                  x = '';
+                  translatedText = translatedText.substring(0, 5001);
+
+                final x = await translateParent(translatedText);
                 setStateParent(() {
                   loading = false;
                   translationInput = translatedText;
