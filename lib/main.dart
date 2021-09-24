@@ -120,27 +120,25 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     ClipboardListener.removeListener(() {});
   }
 
-  @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       setState(() {
         callSharedText = true;
       });
-      var _clipData =
-          (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
-      if (_clipData == '' || _clipData == null) {
-        if (!isClipboardEmpty) {
-          setState(() {
-            isClipboardEmpty = true;
-          });
+
+      Clipboard.getData(Clipboard.kTextPlain).then((value) {
+        print('trying');
+        if (value != null) {
+          final valueString = value.text.toString();
+          if (valueString == '') {
+            setState(() => isClipboardEmpty = true);
+          } else {
+            setState(() => isClipboardEmpty = false);
+          }
+        } else {
+          setState(() => isClipboardEmpty = false);
         }
-      } else {
-        if (isClipboardEmpty) {
-          setState(() {
-            isClipboardEmpty = false;
-          });
-        }
-      }
+      });
     }
   }
 
@@ -507,6 +505,7 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
+  @override
   void dispose() {
     customUrlController.dispose();
     super.dispose();

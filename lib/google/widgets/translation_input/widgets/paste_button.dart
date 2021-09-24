@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:simplytranslate/widgets/keyboard_visibility.dart';
 import '/data.dart';
 
-class PasteClipboardButton extends StatelessWidget {
+class PasteClipboardButton extends StatefulWidget {
   final changeText;
   final setStateParent;
   const PasteClipboardButton({
@@ -12,6 +12,11 @@ class PasteClipboardButton extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<PasteClipboardButton> createState() => _PasteClipboardButtonState();
+}
+
+class _PasteClipboardButtonState extends State<PasteClipboardButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +38,7 @@ class PasteClipboardButton extends StatelessWidget {
                         await Future.delayed(
                             const Duration(milliseconds: 1), () => "1");
                         FocusScope.of(context).requestFocus(focus);
-                        setStateParent(() {
+                        widget.setStateParent(() {
                           translationInput = valueString;
                           googleTranslationInputController.text = valueString;
                           translationInputOpen = true;
@@ -58,7 +63,7 @@ class PasteClipboardButton extends StatelessWidget {
                             const Duration(milliseconds: 1), () => "1");
                         FocusScope.of(context).requestFocus(focus);
 
-                        setStateParent(() {
+                        widget.setStateParent(() {
                           translationInput = newText;
                           googleTranslationInputController.text = newText;
                           if (isKeyboardVisible) {
