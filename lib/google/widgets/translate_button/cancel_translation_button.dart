@@ -29,8 +29,8 @@ class GoogleCancelTranslationButton extends StatelessWidget {
       child: Text(
         AppLocalizations.of(context)!.cancel,
         style: TextStyle(
-            fontSize: 18,
-            color: theme == Brightness.dark ? null : Colors.white),
+          fontSize: 18,
+        ),
       ),
     );
   }
