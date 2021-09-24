@@ -299,20 +299,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           },
                         ),
                       ],
-                      // backgroundColor: theme == Brightness.dark
-                      //     ? greyColor
-                      //     : greenColor,
                       elevation: 3,
-                      iconTheme: IconThemeData(
-                          // color: theme == Brightness.dark
-                          //     ? whiteColor
-                          //     : Colors.black
-                          ),
+                      iconTheme: IconThemeData(),
                       title: Text(
                         'Simply Translate',
-                        // style: theme == Brightness.dark
-                        //     ? TextStyle(color: whiteColor)
-                        //     : TextStyle(color: Colors.white)
                       ),
                     ),
                   );
@@ -321,8 +311,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
           ),
         ),
-        // backgroundColor:
-        //     theme == Brightness.dark ? secondgreyColor : whiteColor,
         body: MainPageLocalization(),
       ),
     );
@@ -530,7 +518,6 @@ class _MainPageState extends State<MainPage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  // backgroundColor: secondgreyColor,
                   title: Text(AppLocalizations.of(context)!.no_internet),
                   actions: [
                     TextButton(
@@ -545,7 +532,6 @@ class _MainPageState extends State<MainPage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  // backgroundColor: secondgreyColor,
                   title:
                       Text(AppLocalizations.of(context)!.something_went_wrong),
                   content: Text(AppLocalizations.of(context)!.check_instance),

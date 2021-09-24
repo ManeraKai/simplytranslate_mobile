@@ -26,7 +26,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
           // color: theme == Brightness.dark ? null : greenColor,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          onPressed: isClipboardEmpty == true
+          onPressed: googleTranslationInputController.text.length >= 5000
               ? null
               : () {
                   Clipboard.getData(Clipboard.kTextPlain).then((value) async {

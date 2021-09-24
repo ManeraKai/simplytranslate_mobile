@@ -48,37 +48,38 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                onNotification: (overscroll) {
-                  overscroll.disallowGlow();
-                  return false;
-                },
-                child: Scrollbar(
-                  child: TextField(
-                    focusNode: focus,
-                    minLines: 8,
-                    maxLines: null,
-                    controller: googleTranslationInputController,
-                    keyboardType: TextInputType.multiline,
-                    onTap: () {
-                      widget.setStateParent(() => translationInputOpen = true);
-                    },
-                    onChanged: (String input) {
-                      widget.setStateParent(() {
-                        translationInputOpen = true;
-                        translationInput = input;
-                      });
-                    },
-                    maxLength: 5000,
-                    decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText:
-                            AppLocalizations.of(context)!.enter_text_here),
-                    style: TextStyle(fontSize: 20),
-                  ),
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overscroll) {
+                overscroll.disallowGlow();
+                return false;
+              },
+              child: Scrollbar(
+                child: TextField(
+                  focusNode: focus,
+                  minLines: 8,
+                  maxLines: null,
+                  controller: googleTranslationInputController,
+                  keyboardType: TextInputType.multiline,
+                  onTap: () {
+                    widget.setStateParent(() => translationInputOpen = true);
+                  },
+                  onChanged: (String input) {
+                    widget.setStateParent(() {
+                      translationInputOpen = true;
+                      translationInput = input;
+                    });
+                  },
+                  maxLength: 5001,
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                      errorStyle: TextStyle(color: Colors.transparent),
+                      errorBorder: InputBorder.none,
+                      counterStyle: TextStyle(color: Colors.transparent),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      hintText: AppLocalizations.of(context)!.enter_text_here),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
             ),

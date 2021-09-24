@@ -20,27 +20,31 @@ class CharacterLimit extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                googleTranslationInputController.text.length >= 10000
-                    ? '9999'
-                    : googleTranslationInputController.text.length.toString(),
+                googleTranslationInputController.text.length.toString(),
                 style: TextStyle(
-                    color: theme == Brightness.dark
-                        ? Colors.white
-                        : lightThemeGreyColor),
+                    color: googleTranslationInputController.text.length > 5000
+                        ? Colors.red
+                        : theme == Brightness.dark
+                            ? Colors.white
+                            : lightThemeGreyColor),
               ),
               Container(
                   margin: EdgeInsets.symmetric(vertical: 3),
                   height: 1,
                   width: 30,
-                  color: theme == Brightness.dark
-                      ? Colors.white
-                      : lightThemeGreyColor),
+                  color: googleTranslationInputController.text.length > 5000
+                      ? Colors.red
+                      : theme == Brightness.dark
+                          ? Colors.white
+                          : lightThemeGreyColor),
               Text(
                 '5000',
                 style: TextStyle(
-                    color: theme == Brightness.dark
-                        ? Colors.white
-                        : lightThemeGreyColor),
+                    color: googleTranslationInputController.text.length > 5000
+                        ? Colors.red
+                        : theme == Brightness.dark
+                            ? Colors.white
+                            : lightThemeGreyColor),
               ),
             ],
           ),

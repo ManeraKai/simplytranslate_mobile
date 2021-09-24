@@ -21,8 +21,8 @@ class GoogleTranslateButton extends StatelessWidget {
         ? Container(
             alignment: Alignment.center,
             width: 100,
-            height: 50,
-            child: CircularProgressIndicator())
+            // height: 50,
+            child: LinearProgressIndicator())
         : ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -33,17 +33,17 @@ class GoogleTranslateButton extends StatelessWidget {
                 ? null
                 : googleTranslationInputController.text.length <= 5000
                     ? () async {
-                        // renderBox =
-                        //     key.currentContext?.findRenderObject() as RenderBox;
-                        // translateButtonWidgetSize = renderBox.size;
                         FocusScope.of(context).unfocus();
+                        isTranslationCanceled = false;
                         setStateParent(() => loading = true);
                         final translatedText =
                             await translateParent(translationInput);
-                        setStateParent(() {
-                          googleTranslationOutput = translatedText;
-                          loading = false;
-                        });
+                        if (!isTranslationCanceled) {
+                          setStateParent(() {
+                            googleTranslationOutput = translatedText;
+                            loading = false;
+                          });
+                        }
                       }
                     : null,
             child: Text(
