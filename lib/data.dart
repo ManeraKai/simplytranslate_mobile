@@ -94,7 +94,7 @@ Future<customInstanceValidation> checkInstance(
     return customInstanceValidation.False;
   }
   try {
-    final response = await http.get(url);
+    final response = await http.post(url);
     if (response.statusCode == 200) {
       if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
           'SimplyTranslate')) {

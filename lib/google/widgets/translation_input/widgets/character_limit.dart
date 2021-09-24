@@ -24,29 +24,23 @@ class CharacterLimit extends StatelessWidget {
                     ? '9999'
                     : googleTranslationInputController.text.length.toString(),
                 style: TextStyle(
-                    color: googleTranslationInputController.text.length <= 5000
-                        ? theme == Brightness.dark
-                            ? Colors.white
-                            : lightThemeGreyColor
-                        : Colors.red),
+                    color: theme == Brightness.dark
+                        ? Colors.white
+                        : lightThemeGreyColor),
               ),
               Container(
                   margin: EdgeInsets.symmetric(vertical: 3),
                   height: 1,
                   width: 30,
-                  color: googleTranslationInputController.text.length <= 5000
-                      ? theme == Brightness.dark
-                          ? Colors.white
-                          : lightThemeGreyColor
-                      : Colors.red),
+                  color: theme == Brightness.dark
+                      ? Colors.white
+                      : lightThemeGreyColor),
               Text(
                 '5000',
                 style: TextStyle(
-                    color: googleTranslationInputController.text.length <= 5000
-                        ? theme == Brightness.dark
-                            ? Colors.white
-                            : lightThemeGreyColor
-                        : Colors.red),
+                    color: theme == Brightness.dark
+                        ? Colors.white
+                        : lightThemeGreyColor),
               ),
             ],
           ),
