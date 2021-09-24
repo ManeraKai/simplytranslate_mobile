@@ -67,13 +67,36 @@ class SelectDefaultLang extends StatelessWidget {
   }
 }
 
-class SelectDefaultLangDialog extends StatelessWidget {
+class SelectDefaultLangDialog extends StatefulWidget {
   const SelectDefaultLangDialog({
     Key? key,
     required this.setStateOverlord,
   }) : super(key: key);
 
   final setStateOverlord;
+
+  @override
+  State<SelectDefaultLangDialog> createState() =>
+      _SelectDefaultLangDialogState();
+}
+
+var fieldTextEditingControllerGlobal;
+var _focus = FocusNode();
+
+class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focus);
+      widget.setStateOverlord(() => translationInputOpen = false);
+      toIsFirstClick = true;
+      fieldTextEditingControllerGlobal.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: fieldTextEditingControllerGlobal.text.length,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +157,7 @@ class SelectDefaultLangDialog extends StatelessWidget {
                                   FocusScope.of(context).unfocus();
                                   session.write(
                                       'to_language_share_default', option);
-                                  setStateOverlord(() {
+                                  widget.setStateOverlord(() {
                                     toLanguageShareDefault = option;
                                     toLanguageValueShareDefault =
                                         selectLanguagesMap[option];
@@ -172,21 +195,14 @@ class SelectDefaultLangDialog extends StatelessWidget {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted,
         ) {
+          _focus = fieldFocusNode;
+          fieldTextEditingControllerGlobal = fieldTextEditingController;
           if (toLanguageShareDefault != fieldTextEditingController.text) {
             fieldTextEditingController.text = toLanguageShareDefault;
           }
           changeText =
               () => fieldTextEditingController.text = toLanguageShareDefault;
           return TextField(
-              autofocus: true,
-              onTap: () {
-                setStateOverlord(() => translationInputOpen = false);
-                toIsFirstClick = true;
-                fieldTextEditingController.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingController.text.length,
-                );
-              },
               onEditingComplete: () {
                 try {
                   var chosenOne = selectLanguages.firstWhere((word) => word
@@ -196,7 +212,7 @@ class SelectDefaultLangDialog extends StatelessWidget {
 
                   FocusScope.of(context).unfocus();
                   session.write('to_language_share_default', chosenOne);
-                  setStateOverlord(() {
+                  widget.setStateOverlord(() {
                     toLanguageShareDefault = chosenOne;
                     toLanguageValueShareDefault = selectLanguagesMap[chosenOne];
                   });

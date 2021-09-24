@@ -124,7 +124,7 @@ class GoogleFromLang extends StatelessWidget {
           changeText = () => fieldTextEditingController.text = fromLanguage;
           return TextField(
             onTap: () {
-              setStateOverlord(() => translationInputOpen = false);
+              // setStateOverlord(() => translationInputOpen = false);
               fromIsFirstClick = true;
               fieldTextEditingController.selection = TextSelection(
                 baseOffset: 0,
