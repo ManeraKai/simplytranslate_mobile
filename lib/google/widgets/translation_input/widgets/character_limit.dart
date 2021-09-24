@@ -20,7 +20,9 @@ class CharacterLimit extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '${googleTranslationInputController.text.length}',
+                googleTranslationInputController.text.length >= 10000
+                    ? '9999'
+                    : googleTranslationInputController.text.length.toString(),
                 style: TextStyle(
                     color: googleTranslationInputController.text.length <= 5000
                         ? theme == Brightness.dark

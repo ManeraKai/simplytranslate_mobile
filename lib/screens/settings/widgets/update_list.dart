@@ -10,41 +10,6 @@ var loading = false;
 bool checkLoading = false;
 bool isCanceled = false;
 
-Future<customInstanceValidation> checkInstance(
-    Function setState, String urlValue) async {
-  setState(() => checkLoading = true);
-  var url;
-  try {
-    url = Uri.parse(urlValue);
-  } catch (_) {}
-  try {
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
-          'SimplyTranslate')) {
-        if (!isCanceled) {
-          setState(() => isCustomInstanceValid = customInstanceValidation.True);
-        }
-      } else {
-        if (!isCanceled) {
-          setState(
-              () => isCustomInstanceValid = customInstanceValidation.False);
-        }
-      }
-    } else {
-      if (!isCanceled) {
-        setState(() => isCustomInstanceValid = customInstanceValidation.False);
-      }
-    }
-  } catch (err) {
-    if (!isCanceled) {
-      setState(() => isCustomInstanceValid = customInstanceValidation.False);
-    }
-  }
-  setState(() => checkLoading = false);
-  return isCustomInstanceValid;
-}
-
 class UpdateList extends StatelessWidget {
   const UpdateList({
     required this.setStateOverlord,
@@ -52,6 +17,27 @@ class UpdateList extends StatelessWidget {
   }) : super(key: key);
 
   final setStateOverlord;
+
+  Future<bool> updateList() async {
+    try {
+      final response = await http
+          .get(Uri.parse('https://simple-web.org/instances/simplytranslate'));
+      List<String> newInstances = [];
+      parse(response.body)
+          .body!
+          .innerHtml
+          .trim()
+          .split('\n')
+          .forEach((element) {
+        newInstances.add('https://$element');
+      });
+      session.write('instances', newInstances);
+      instances = newInstances;
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +91,17 @@ class UpdateList extends StatelessWidget {
       ),
       onTap: () async {
         setStateOverlord(() => loading = true);
-        await checkInstance(setStateOverlord, instances[instanceIndex]);
-        if (!isCanceled) {
-          if (isCustomInstanceValid == customInstanceValidation.True)
-            isCanceled = false;
-        }
+        var response = await updateList();
         setStateOverlord(() => loading = false);
+        if (response) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Updated Successfully')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('There was an error')),
+          );
+        }
       },
     );
   }

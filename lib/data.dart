@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:html/parser.dart';
+import 'package:http/http.dart' as http;
 
 const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
@@ -82,6 +84,31 @@ final customUrlController = TextEditingController();
 final googleTranslationInputController = TextEditingController();
 
 final session = GetStorage();
+
+Future<customInstanceValidation> checkInstance(
+    Function setState, String urlValue) async {
+  var url;
+  try {
+    url = Uri.parse(urlValue);
+  } catch (_) {
+    return customInstanceValidation.False;
+  }
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
+          'SimplyTranslate')) {
+        return customInstanceValidation.True;
+      } else {
+        return customInstanceValidation.False;
+      }
+    } else {
+      return customInstanceValidation.False;
+    }
+  } catch (err) {
+    return customInstanceValidation.False;
+  }
+}
 
 var instances = [
   "https://simplytranslate.org",

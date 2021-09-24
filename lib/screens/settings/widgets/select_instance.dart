@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../../data.dart';
 
@@ -11,31 +10,6 @@ var isCustomInstanceValid = customInstanceValidation.NotChecked;
 var loading = false;
 bool checkLoading = false;
 bool isCanceled = false;
-
-Future<customInstanceValidation> checkInstance(
-    Function setState, String urlValue) async {
-  var url;
-  try {
-    url = Uri.parse(urlValue);
-  } catch (_) {
-    return customInstanceValidation.False;
-  }
-  try {
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
-          'SimplyTranslate')) {
-        return customInstanceValidation.True;
-      } else {
-        return customInstanceValidation.False;
-      }
-    } else {
-      return customInstanceValidation.False;
-    }
-  } catch (err) {
-    return customInstanceValidation.False;
-  }
-}
 
 class SelectInstance extends StatelessWidget {
   const SelectInstance({
