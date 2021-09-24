@@ -31,6 +31,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
               : () {
                   Clipboard.getData(Clipboard.kTextPlain).then((value) async {
                     FocusScope.of(context).unfocus();
+                    print('wewe');
 
                     if (value != null) {
                       var valueString = value.text.toString();
@@ -105,9 +106,20 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               'Clipboard is Empty',
                               style: TextStyle(fontSize: 18),
                             ),
+                            duration: Duration(seconds: 1),
                           ),
                         );
                       }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Clipboard is Empty',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
                     }
                   });
                 },
