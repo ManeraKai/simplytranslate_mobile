@@ -34,65 +34,79 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
 
                     if (value != null) {
                       var valueString = value.text.toString();
-                      if (valueString.length > 99999) {
-                        valueString = valueString.substring(1, 100000);
-                      }
-                      if (googleTranslationInputController.text == '') {
-                        await Future.delayed(
-                            const Duration(milliseconds: 1), () => "1");
-                        FocusScope.of(context).requestFocus(focus);
-                        widget.setStateParent(() {
-                          translationInput = valueString;
-                          googleTranslationInputController.text = valueString;
-                          translationInputOpen = true;
-                        });
-                      } else if (googleTranslationInputController.text.length <
-                          99999) {
-                        final beforePasteSelection =
-                            googleTranslationInputController
-                                .selection.baseOffset;
-                        var newText;
-                        if (beforePasteSelection == -1) {
-                          newText = googleTranslationInputController.text +
-                              valueString;
-                          if (newText.length >= 99999) {
-                            newText = newText.substring(1, 100000);
-                          }
-                        } else {
-                          newText = googleTranslationInputController.text
-                                  .substring(0, beforePasteSelection) +
-                              valueString +
-                              googleTranslationInputController.text.substring(
-                                  beforePasteSelection,
-                                  googleTranslationInputController.text.length);
-                          if (newText.length >= 99999) {
-                            newText = newText.substring(1, 100000);
-                          }
+
+                      if (valueString != '') {
+                        if (valueString.length > 99999) {
+                          valueString = valueString.substring(1, 100000);
                         }
+                        if (googleTranslationInputController.text == '') {
+                          await Future.delayed(
+                              const Duration(milliseconds: 1), () => "1");
+                          FocusScope.of(context).requestFocus(focus);
+                          widget.setStateParent(() {
+                            translationInput = valueString;
+                            googleTranslationInputController.text = valueString;
+                            translationInputOpen = true;
+                          });
+                        } else if (googleTranslationInputController
+                                .text.length <
+                            99999) {
+                          final beforePasteSelection =
+                              googleTranslationInputController
+                                  .selection.baseOffset;
+                          var newText;
+                          if (beforePasteSelection == -1) {
+                            newText = googleTranslationInputController.text +
+                                valueString;
+                            if (newText.length >= 99999) {
+                              newText = newText.substring(1, 100000);
+                            }
+                          } else {
+                            newText = googleTranslationInputController.text
+                                    .substring(0, beforePasteSelection) +
+                                valueString +
+                                googleTranslationInputController.text.substring(
+                                    beforePasteSelection,
+                                    googleTranslationInputController
+                                        .text.length);
+                            if (newText.length >= 99999) {
+                              newText = newText.substring(1, 100000);
+                            }
+                          }
 
-                        await Future.delayed(
-                            const Duration(milliseconds: 1), () => "1");
-                        FocusScope.of(context).requestFocus(focus);
+                          await Future.delayed(
+                              const Duration(milliseconds: 1), () => "1");
+                          FocusScope.of(context).requestFocus(focus);
 
-                        widget.setStateParent(() {
-                          translationInput = newText;
-                          googleTranslationInputController.text = newText;
-                          if (isKeyboardVisible) {
-                            if (beforePasteSelection + valueString.length >=
-                                99999) {
+                          widget.setStateParent(() {
+                            translationInput = newText;
+                            googleTranslationInputController.text = newText;
+                            if (isKeyboardVisible) {
+                              if (beforePasteSelection + valueString.length >=
+                                  99999) {
+                              } else {
+                                googleTranslationInputController.selection =
+                                    TextSelection.collapsed(
+                                        offset: beforePasteSelection +
+                                            valueString.length);
+                              }
                             } else {
                               googleTranslationInputController.selection =
                                   TextSelection.collapsed(
-                                      offset: beforePasteSelection +
-                                          valueString.length);
+                                      offset: googleTranslationInputController
+                                          .text.length);
                             }
-                          } else {
-                            googleTranslationInputController.selection =
-                                TextSelection.collapsed(
-                                    offset: googleTranslationInputController
-                                        .text.length);
-                          }
-                        });
+                          });
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Clipboard is Empty',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        );
                       }
                     }
                   });
