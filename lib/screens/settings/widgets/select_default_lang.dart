@@ -81,27 +81,14 @@ class SelectDefaultLangDialog extends StatefulWidget {
 }
 
 var fieldTextEditingControllerGlobal;
-var _focus = FocusNode();
+// var _focus = FocusNode();
 
 class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      FocusScope.of(context).requestFocus(_focus);
-      widget.setStateOverlord(() => translationInputOpen = false);
-      toIsFirstClick = true;
-      fieldTextEditingControllerGlobal.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: fieldTextEditingControllerGlobal.text.length,
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     Function changeText = () {};
     return AlertDialog(
+      insetPadding: EdgeInsets.all(0),
       contentPadding: EdgeInsets.all(20),
       content: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
@@ -127,7 +114,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
             child: Material(
               color: Colors.transparent,
               child: Container(
-                width: MediaQuery.of(context).size.width / 3 + 10, //Here brozer
+                width: MediaQuery.of(context).size.width - 100,
                 height: MediaQuery.of(context).size.height / 2 <=
                         (options.length) * (36 + 25)
                     ? MediaQuery.of(context).size.height / 2
@@ -195,44 +182,55 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted,
         ) {
-          _focus = fieldFocusNode;
+          // _focus = fieldFocusNode;
           fieldTextEditingControllerGlobal = fieldTextEditingController;
           if (toLanguageShareDefault != fieldTextEditingController.text) {
             fieldTextEditingController.text = toLanguageShareDefault;
           }
           changeText =
               () => fieldTextEditingController.text = toLanguageShareDefault;
-          return TextField(
-              onEditingComplete: () {
-                try {
-                  var chosenOne = selectLanguages.firstWhere((word) => word
-                      .toLowerCase()
-                      .startsWith(
-                          fieldTextEditingController.text.toLowerCase()));
+          return Container(
+            width: MediaQuery.of(context).size.width - 100,
+            child: TextField(
+                onTap: () {
+                  toIsFirstClick = true;
+                  fieldTextEditingControllerGlobal.selection = TextSelection(
+                    baseOffset: 0,
+                    extentOffset: fieldTextEditingControllerGlobal.text.length,
+                  );
+                },
+                onEditingComplete: () {
+                  try {
+                    var chosenOne = selectLanguages.firstWhere((word) => word
+                        .toLowerCase()
+                        .startsWith(
+                            fieldTextEditingController.text.toLowerCase()));
 
-                  FocusScope.of(context).unfocus();
-                  session.write('to_language_share_default', chosenOne);
-                  widget.setStateOverlord(() {
-                    toLanguageShareDefault = chosenOne;
-                    toLanguageValueShareDefault = selectLanguagesMap[chosenOne];
-                  });
-                  fieldTextEditingController.text = chosenOne;
-                } catch (_) {
-                  FocusScope.of(context).unfocus();
-                  fieldTextEditingController.text = toLanguageShareDefault;
-                }
-                Navigator.of(context).pop();
-              },
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                isDense: true,
-              ),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: theme == Brightness.dark ? null : Colors.black));
+                    FocusScope.of(context).unfocus();
+                    session.write('to_language_share_default', chosenOne);
+                    widget.setStateOverlord(() {
+                      toLanguageShareDefault = chosenOne;
+                      toLanguageValueShareDefault =
+                          selectLanguagesMap[chosenOne];
+                    });
+                    fieldTextEditingController.text = chosenOne;
+                  } catch (_) {
+                    FocusScope.of(context).unfocus();
+                    fieldTextEditingController.text = toLanguageShareDefault;
+                  }
+                  Navigator.of(context).pop();
+                },
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  isDense: true,
+                ),
+                controller: fieldTextEditingController,
+                focusNode: fieldFocusNode,
+                style: TextStyle(
+                    fontSize: 18,
+                    color: theme == Brightness.dark ? null : Colors.black)),
+          );
         },
       ),
       actions: [
