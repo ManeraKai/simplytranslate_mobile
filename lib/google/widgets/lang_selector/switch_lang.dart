@@ -36,9 +36,11 @@ class GoogleSwitchLang extends StatelessWidget {
                 final valuetmp = fromLanguageValue;
                 fromLanguageValue = toLanguageValue;
                 toLanguageValue = valuetmp;
-
-                final x = await translateParent(translatedText);
-
+                final x;
+                if (translatedText.length <= 500)
+                  x = await translateParent(translatedText);
+                else
+                  x = '';
                 setStateParent(() {
                   loading = false;
                   translationInput = translatedText;

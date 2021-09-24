@@ -75,78 +75,84 @@ class SelectInstance extends StatelessWidget {
       showDialog(
         context: context,
         builder: (builder) => StatefulBuilder(
-          builder: (context, setState) => AlertDialog(
-            content: TextField(
-              controller: customUrlController,
-              keyboardType: TextInputType.url,
-              onChanged: (String? value) {
-                if (isCustomInstanceValid !=
-                    customInstanceValidation.NotChecked)
-                  isCustomInstanceValid = customInstanceValidation.NotChecked;
-              },
-              onEditingComplete: () => customCheck(setState),
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1.5,
-                      color: isCustomInstanceValid ==
-                              customInstanceValidation.NotChecked
-                          ? lightThemeGreyColor
-                          : isCustomInstanceValid ==
-                                  customInstanceValidation.True
-                              ? Colors.green
-                              : Colors.red,
-                    ),
+          builder: (context, setState) => Center(
+            child: SingleChildScrollView(
+              child: AlertDialog(
+                content: TextField(
+                  controller: customUrlController,
+                  keyboardType: TextInputType.url,
+                  onChanged: (String? value) {
+                    if (isCustomInstanceValid !=
+                        customInstanceValidation.NotChecked)
+                      isCustomInstanceValid =
+                          customInstanceValidation.NotChecked;
+                  },
+                  onEditingComplete: () => customCheck(setState),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: isCustomInstanceValid ==
+                                  customInstanceValidation.NotChecked
+                              ? lightThemeGreyColor
+                              : isCustomInstanceValid ==
+                                      customInstanceValidation.True
+                                  ? Colors.green
+                                  : Colors.red,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: isCustomInstanceValid ==
+                                  customInstanceValidation.NotChecked
+                              ? lightThemeGreyColor
+                              : isCustomInstanceValid ==
+                                      customInstanceValidation.True
+                                  ? Colors.green
+                                  : Colors.red,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: isCustomInstanceValid ==
+                                  customInstanceValidation.NotChecked
+                              ? lightThemeGreyColor
+                              : isCustomInstanceValid ==
+                                      customInstanceValidation.True
+                                  ? Colors.green
+                                  : Colors.red,
+                        ),
+                      ),
+                      isDense: true),
+                  style: TextStyle(fontSize: 20),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                    onPressed: () {
+                      isCanceled = true;
+                      isCustomInstanceValid =
+                          customInstanceValidation.NotChecked;
+                      checkLoading = false;
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1.5,
-                      color: isCustomInstanceValid ==
-                              customInstanceValidation.NotChecked
-                          ? lightThemeGreyColor
-                          : isCustomInstanceValid ==
-                                  customInstanceValidation.True
-                              ? Colors.green
-                              : Colors.red,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1.5,
-                      color: isCustomInstanceValid ==
-                              customInstanceValidation.NotChecked
-                          ? lightThemeGreyColor
-                          : isCustomInstanceValid ==
-                                  customInstanceValidation.True
-                              ? Colors.green
-                              : Colors.red,
-                    ),
-                  ),
-                  isDense: true),
-              style: TextStyle(fontSize: 20),
-            ),
-            actions: [
-              TextButton(
-                child: Text(AppLocalizations.of(context)!.cancel),
-                onPressed: () {
-                  isCanceled = true;
-                  isCustomInstanceValid = customInstanceValidation.NotChecked;
-                  checkLoading = false;
-                  Navigator.of(context).pop();
-                },
+                  checkLoading
+                      ? Container(
+                          width: 50,
+                          height: 45,
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(),
+                        )
+                      : TextButton(
+                          onPressed: () => customCheck(setState),
+                          child: Text(AppLocalizations.of(context)!.check),
+                        ),
+                ],
               ),
-              checkLoading
-                  ? Container(
-                      width: 50,
-                      height: 45,
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator(),
-                    )
-                  : TextButton(
-                      onPressed: () => customCheck(setState),
-                      child: Text(AppLocalizations.of(context)!.check),
-                    ),
-            ],
+            ),
           ),
         ),
       );

@@ -71,6 +71,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                         translationInput = input;
                       });
                     },
+                    maxLength: 5000,
                     decoration: InputDecoration(
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
