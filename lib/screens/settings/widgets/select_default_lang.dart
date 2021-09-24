@@ -132,7 +132,8 @@ class SelectDefaultLangDialog extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
-                                  session.write('to_language', option);
+                                  session.write(
+                                      'to_language_share_default', option);
                                   setStateOverlord(() {
                                     toLanguageShareDefault = option;
                                     toLanguageValueShareDefault =

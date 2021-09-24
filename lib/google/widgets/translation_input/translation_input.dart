@@ -67,18 +67,33 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                     widget.setStateParent(() => translationInputOpen = true);
                   },
                   onChanged: (String input) {
+                    if (googleTranslationInputController.text.length > 99999) {
+                      final tmpSelection;
+                      if (googleTranslationInputController
+                              .selection.baseOffset >=
+                          100000) {
+                        tmpSelection = TextSelection.collapsed(offset: 99999);
+                      } else {
+                        tmpSelection = TextSelection.collapsed(
+                            offset: googleTranslationInputController
+                                .selection.baseOffset);
+                      }
+
+                      googleTranslationInputController.text =
+                          googleTranslationInputController.text
+                              .substring(0, 99999);
+                      print(tmpSelection.baseOffset);
+
+                      googleTranslationInputController.selection = tmpSelection;
+                    }
                     widget.setStateParent(() {
                       translationInputOpen = true;
                       translationInput = input;
                     });
                   },
-                  maxLength: 99999,
                   decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                      errorStyle: TextStyle(color: Colors.transparent),
-                      errorBorder: InputBorder.none,
-                      counterStyle: TextStyle(color: Colors.transparent),
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       hintText: AppLocalizations.of(context)!.enter_text_here),

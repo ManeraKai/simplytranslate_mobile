@@ -92,6 +92,7 @@ class GoogleToLang extends StatelessWidget {
                                     style: (option == fromLanguage)
                                         ? TextStyle(
                                             fontSize: 18,
+                                            color: lightThemeGreyColor,
                                           )
                                         : const TextStyle(fontSize: 18),
                                   ),
