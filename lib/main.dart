@@ -55,8 +55,11 @@ void main(List<String> args) async {
       ? session.read('instance_mode').toString()
       : instance;
 
-  customUrl = session.read('url') != null ? session.read('url').toString() : '';
+  customUrl = session.read('customInstance') != null
+      ? session.read('customInstance').toString()
+      : '';
   customUrlController.text = customUrl;
+  customInstance = customUrl;
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {
@@ -513,7 +516,7 @@ class _MainPageState extends State<MainPage> {
     if (input.length <= 5000) {
       final url;
       if (instance == 'custom') {
-        url = Uri.parse('customInstance');
+        url = Uri.parse(customInstance);
       } else
         url = Uri.https(
           instances

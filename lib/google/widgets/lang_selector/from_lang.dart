@@ -66,9 +66,9 @@ class GoogleFromLang extends StatelessWidget {
                           final option = options.elementAt(index);
                           widgetList.add(
                             Container(
-                              // color: theme == Brightness.dark
-                              //     ? greyColor
-                              //     : whiteColor,
+                              color: theme == Brightness.dark
+                                  ? greyColor
+                                  : whiteColor,
                               child: GestureDetector(
                                 onTap: option == toLanguage
                                     ? null
@@ -94,9 +94,6 @@ class GoogleFromLang extends StatelessWidget {
                                     style: (option == toLanguage)
                                         ? TextStyle(
                                             fontSize: 18,
-                                            // color: theme == Brightness.dark
-                                            //     ? secondgreyColor
-                                            //     : Colors.grey
                                           )
                                         : const TextStyle(fontSize: 18),
                                   ),
@@ -183,7 +180,6 @@ class GoogleFromLang extends StatelessWidget {
             focusNode: fieldFocusNode,
             style: TextStyle(
               fontSize: 18,
-              //     color: theme == Brightness.dark ? null : Colors.black),
             ),
           );
         },

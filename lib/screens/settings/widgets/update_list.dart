@@ -22,7 +22,6 @@ Future<customInstanceValidation> checkInstance(
     if (response.statusCode == 200) {
       if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
           'SimplyTranslate')) {
-        session.write('url', customInstance);
         if (!isCanceled) {
           setState(() => isCustomInstanceValid = customInstanceValidation.True);
         }

@@ -20,7 +20,6 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    customInstance = customUrlController.text;
     return Material(
       child: Scaffold(
         appBar: AppBar(
