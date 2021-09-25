@@ -65,18 +65,27 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       KeyboardVisibilityBuilder(
                           builder: (context, child, isKeyboardVisible) =>
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
+                                  loading
+                                      ? Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              20,
+                                          child: LinearProgressIndicator())
+                                      : SizedBox.shrink(),
                                   loading
                                       ? GoogleCancelTranslationButton(
                                           setStateParent: widget.setStateParent)
-                                      : SizedBox.shrink(),
-                                  !isKeyboardVisible
-                                      ? GoogleTranslateButton(
-                                          setStateParent: widget.setStateParent,
-                                          translateParent:
-                                              widget.translateParent,
-                                        )
-                                      : SizedBox.shrink(),
+                                      : !isKeyboardVisible
+                                          ? GoogleTranslateButton(
+                                              setStateParent:
+                                                  widget.setStateParent,
+                                              translateParent:
+                                                  widget.translateParent,
+                                            )
+                                          : SizedBox.shrink(),
                                 ],
                               )),
                     ],

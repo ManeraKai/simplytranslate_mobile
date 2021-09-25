@@ -15,21 +15,28 @@ class GoogleCancelTranslationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: googleTranslationInputController.text == ''
-          ? null
-          : googleTranslationInputController.text.length <= 5000
-              ? () async {
-                  setStateParent(() {
-                    loading = false;
-                    isTranslationCanceled = true;
-                  });
-                }
-              : null,
-      child: Text(
-        AppLocalizations.of(context)!.cancel,
-        style: TextStyle(
-          fontSize: 18,
+    return Container(
+      width: 100,
+      child: GestureDetector(
+        onTap: googleTranslationInputController.text == ''
+            ? null
+            : googleTranslationInputController.text.length <= 5000
+                ? () async {
+                    setStateParent(() {
+                      loading = false;
+                      isTranslationCanceled = true;
+                    });
+                  }
+                : null,
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Text(
+            AppLocalizations.of(context)!.cancel,
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
         ),
       ),
     );

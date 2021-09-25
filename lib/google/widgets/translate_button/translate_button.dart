@@ -20,43 +20,36 @@ class GoogleTranslateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Container(
-            alignment: Alignment.center,
-            width: 100,
-            // height: 50,
-            child: LinearProgressIndicator())
-        : ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(2)),
-            ),
-            onPressed: googleTranslationInputController.text == ''
-                ? null
-                : googleTranslationInputController.text.length <= 5000
-                    ? () async {
-                        FocusScope.of(context).unfocus();
-                        isTranslationCanceled = false;
-                        setStateParent(() => loading = true);
-                        final translatedText = await translateParent(
-                            input: translationInput,
-                            fromLanguageValue: fromLanguageValue,
-                            toLanguageValue: toLanguageValue);
-                        if (!isTranslationCanceled) {
-                          setStateParent(() {
-                            googleTranslationOutput = translatedText;
-                            loading = false;
-                          });
-                        }
-                      }
-                    : null,
-            child: Text(
-              AppLocalizations.of(context)!.translate,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: theme == Brightness.dark ? null : Colors.white),
-            ),
-          );
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+      ),
+      onPressed: googleTranslationInputController.text == ''
+          ? null
+          : googleTranslationInputController.text.length <= 5000
+              ? () async {
+                  FocusScope.of(context).unfocus();
+                  isTranslationCanceled = false;
+                  setStateParent(() => loading = true);
+                  final translatedText = await translateParent(
+                      input: translationInput,
+                      fromLanguageValue: fromLanguageValue,
+                      toLanguageValue: toLanguageValue);
+                  if (!isTranslationCanceled) {
+                    setStateParent(() {
+                      googleTranslationOutput = translatedText;
+                      loading = false;
+                    });
+                  }
+                }
+              : null,
+      child: Text(
+        AppLocalizations.of(context)!.translate,
+        style: TextStyle(
+            fontSize: 18,
+            color: theme == Brightness.dark ? null : Colors.white),
+      ),
+    );
   }
 }
