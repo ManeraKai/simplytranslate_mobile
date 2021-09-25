@@ -123,7 +123,7 @@
     "ok": "OK",
     "cancel": "Cancel",
     "empty_clipboard": "Clipboard is empty",
-    "input_limit": "The translation input is above 5000",
+    "input_limit": "The translation input is above 5 000",
 
     "settings": "Settings",
 
@@ -137,7 +137,7 @@
     "dark": "Dark",
     "follow_system": "Follow system",
 
-    "update_list": "Update official list",
+    "update_list": "Update list",
     "update_list_summary": "Updates the official list of instances",
     "updated_successfully": "Updated successfully",
     "error": "There was an error",
