@@ -63,12 +63,16 @@ class GoogleSwitchLang extends StatelessWidget {
                         fromLanguageValue: fromLanguageValue,
                         toLanguageValue: toLanguageValue);
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                        AppLocalizations.of(context)!.input_limit,
-                        style: TextStyle(fontSize: 18),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 1),
+                        width: 160,
+                        content: Text(
+                          AppLocalizations.of(context)!.input_limit,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ));
+                    );
                     translatedText2 = '';
                   }
                   setStateParent(() {
