@@ -103,22 +103,22 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(
-                              AppLocalizations.of(context)!.empty_clipboard,
-                              style: TextStyle(fontSize: 16),
-                            ),
                             duration: Duration(seconds: 1),
+                            width: 160,
+                            content: Text(
+                                AppLocalizations.of(context)!.empty_clipboard),
                           ),
                         );
                       }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
+                          duration: Duration(seconds: 1),
+                          width: 160,
                           content: Text(
                             AppLocalizations.of(context)!.empty_clipboard,
-                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.center,
                           ),
-                          duration: Duration(seconds: 1),
                         ),
                       );
                     }
