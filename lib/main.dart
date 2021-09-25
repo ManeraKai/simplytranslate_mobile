@@ -470,6 +470,7 @@ class MainPageLocalization extends StatelessWidget {
 
     fromLanguage = AppLocalizations.of(context)!.english;
     toLanguage = AppLocalizations.of(context)!.arabic;
+    toLanguageShareDefault = AppLocalizations.of(context)!.arabic;
 
     if (session.read('from_language').toString() != 'null') {
       var sessionData = session.read('from_language').toString();

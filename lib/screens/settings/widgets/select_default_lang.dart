@@ -5,6 +5,7 @@ import '../../../data.dart';
 
 final ScrollController _rightTextviewScrollController = ScrollController();
 bool toIsFirstClick = false;
+var selectLanguagesMapFlipped = {};
 
 class SelectDefaultLang extends StatelessWidget {
   final setStateOverlord;
@@ -50,7 +51,7 @@ class SelectDefaultLang extends StatelessWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(
-                    toLanguageValueShareDefault,
+                    toLanguageShareDefault,
                     style: TextStyle(
                         fontSize: 18,
                         color: theme == Brightness.dark
@@ -182,6 +183,8 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted,
         ) {
+          print(toLanguageShareDefault);
+          print(fieldTextEditingController.text);
           // _focus = fieldFocusNode;
           fieldTextEditingControllerGlobal = fieldTextEditingController;
           if (toLanguageShareDefault != fieldTextEditingController.text) {
