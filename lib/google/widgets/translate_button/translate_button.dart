@@ -39,7 +39,11 @@ class GoogleTranslateButton extends StatelessWidget {
                         loading = false;
                       });
                     }
-                  } catch (_) {}
+                  } catch (_) {
+                    setStateParent(() {
+                      loading = false;
+                    });
+                  }
                 }
               : null,
       child: Text(

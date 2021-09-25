@@ -33,13 +33,19 @@ class TranslateButtonFloat extends StatelessWidget {
                           FocusScope.of(context).unfocus();
                           isTranslationCanceled = false;
                           setStateParent(() => loading = true);
-                          final translatedText = await translateParent(
-                              input: translationInput,
-                              fromLanguageValue: fromLanguageValue,
-                              toLanguageValue: toLanguageValue);
-                          if (!isTranslationCanceled) {
+                          try {
+                            final translatedText = await translateParent(
+                                input: translationInput,
+                                fromLanguageValue: fromLanguageValue,
+                                toLanguageValue: toLanguageValue);
+                            if (!isTranslationCanceled) {
+                              setStateParent(() {
+                                googleTranslationOutput = translatedText;
+                                loading = false;
+                              });
+                            }
+                          } catch (_) {
                             setStateParent(() {
-                              googleTranslationOutput = translatedText;
                               loading = false;
                             });
                           }
