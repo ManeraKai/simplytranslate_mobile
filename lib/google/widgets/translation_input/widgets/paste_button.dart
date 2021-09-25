@@ -105,7 +105,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                           SnackBar(
                             content: Text(
                               AppLocalizations.of(context)!.empty_clipboard,
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: 16),
                             ),
                             duration: Duration(seconds: 1),
                           ),
@@ -116,7 +116,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                         SnackBar(
                           content: Text(
                             AppLocalizations.of(context)!.empty_clipboard,
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 16),
                           ),
                           duration: Duration(seconds: 1),
                         ),
