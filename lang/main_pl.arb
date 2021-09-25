@@ -123,7 +123,7 @@
     "ok": "OK",
     "cancel": "Anuluj",
     "empty_clipboard": "Schowek jest pusty",
-    "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
+    "input_limit": "Tekst źródłowy ma ponad 5 000 znaków",
 
     "settings": "Ustawienia",
 
@@ -137,7 +137,7 @@
     "dark": "Ciemny",
     "follow_system": "Zgodny z systemowym",
 
-    "update_list": "Zaktualizuj oficjalną listę",
+    "update_list": "Zaktualizuj listę",
     "update_list_summary": "Aktualizuje oficjalną listę instancji",
     "updated_successfully": "Zaktualizowano pomyślnie",
     "error": "Wystąpił błąd",
