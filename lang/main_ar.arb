@@ -122,14 +122,27 @@
     "no_internet": "لا يوجد انترنت",
     "ok": "حسناً",
     "cancel": "Cancel",
+    "empty_clipboard": "Clipboard is empty",
+    "input_limit": "The translation input is above 5000",
 
     "settings": "الإعدادات",
+
+    "instances": "Instances",
+    "appearance": "Appearance",
+    "translation": "Translation",
 
     "instance": "اختر المثيل(السيرفر)",
     "theme": "السمة",
     "light": "فاتح",
     "dark": "داكن",
     "follow_system": "حسب النظام",
+
+    "update_list": "Update official list",
+    "update_list_summary": "Update the official list of instances",
+    "updated_successfully": "Updated successfully",
+    "error": "There was an error",
+
+    "share_to_lang": "Default share to-language",
 
     "about": "عن",
     "about_description": "لكن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ولكن بفضل هؤلاء الأشخاص الذين لا يدركون بأن السعادة لا بد أن نستشعرها بصورة أكثر عقلانية ومنطقية فيعرضهم هذا لمواجهة الظروف الأليمة، وأكرر بأنه لا يوجد من يرغب في الحب ونيل المنال ويتلذذ بالآلام، الألم هو الألم ولكن نتيجة لظروف ما قد تكمن السعاده فيما نتحمله من كد وأسي.",

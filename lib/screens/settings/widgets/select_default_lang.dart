@@ -46,7 +46,7 @@ class SelectDefaultLang extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Default share to-language',
+                    AppLocalizations.of(context)!.share_to_lang,
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(

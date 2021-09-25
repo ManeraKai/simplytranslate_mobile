@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../../data.dart';
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
@@ -70,10 +71,10 @@ class UpdateList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Update official list',
+                      Text(AppLocalizations.of(context)!.update_list,
                           style: TextStyle(fontSize: 18)),
                       Text(
-                        'Update the official list of instances',
+                        AppLocalizations.of(context)!.update_list_summary,
                         style: TextStyle(
                           fontSize: 18,
                           color: theme == Brightness.dark
@@ -95,11 +96,13 @@ class UpdateList extends StatelessWidget {
         setStateOverlord(() => loading = false);
         if (response) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Updated Successfully')),
+            SnackBar(
+                content:
+                    Text(AppLocalizations.of(context)!.updated_successfully)),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('There was an error')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.error)),
           );
         }
       },

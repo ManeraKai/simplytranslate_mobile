@@ -122,14 +122,27 @@
     "no_internet": "Brak połączenia z Internetem",
     "ok": "OK",
     "cancel": "Anuluj",
+    "empty_clipboard": "Schowek jest pusty",
+    "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
 
     "settings": "Ustawienia",
+
+    "instances": "Instancje",
+    "appearance": "Wygląd",
+    "translation": "Tłumaczenie",
 
     "instance": "Instancja",
     "theme": "Motyw",
     "light": "Jasny",
     "dark": "Ciemny",
     "follow_system": "Zgodny z systemowym",
+
+    "update_list": "Zaktualizuj oficjalną listę",
+    "update_list_summary": "Zaktualizuj oficjalną listę instancji",
+    "updated_successfully": "Zaktualizowano pomyślnie",
+    "error": "Wystąpił błąd",
+
+    "share_to_lang": "Domyślny język przy udostępnianiu",
 
     "about": "O aplikacji",
     "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.",

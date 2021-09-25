@@ -52,7 +52,7 @@ class GoogleSwitchLang extends StatelessWidget {
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
-                      'The translation input is above 5000.',
+                      AppLocalizations.of(context)!.input_limit,
                       style: TextStyle(fontSize: 18),
                     ),
                   ));
