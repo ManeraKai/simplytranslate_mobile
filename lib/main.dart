@@ -203,6 +203,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
           ),
         ),
+        snackBarTheme: SnackBarThemeData(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          behavior: SnackBarBehavior.floating,
+        ),
         toggleableActiveColor: greenColor,
         iconTheme: IconThemeData(color: greenColor),
       ),
@@ -257,6 +262,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               },
             ),
           ),
+        ),
+        snackBarTheme: SnackBarThemeData(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          behavior: SnackBarBehavior.floating,
         ),
       ),
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,

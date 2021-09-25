@@ -10,15 +10,8 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: theme == Brightness.dark ? greyColor : greenColor,
-        // iconTheme: IconThemeData(
-        //   color: Colors.white,
-        // ),
         title: Text(
           AppLocalizations.of(context)!.about,
-          // style: theme == Brightness.dark
-          //     ? TextStyle(color: whiteColor)
-          //     : TextStyle(color: Colors.white),
         ),
       ),
       body: Container(
