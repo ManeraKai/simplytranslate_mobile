@@ -137,7 +137,7 @@
     "dark": "Dark",
     "follow_system": "Follow system",
 
-    "update_list": "Update official list",
+    "update_list": "Update list",
     "update_list_summary": "Updates the official list of instances",
     "updated_successfully": "Updated successfully",
     "error": "There was an error",
