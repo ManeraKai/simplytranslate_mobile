@@ -122,14 +122,27 @@
     "no_internet": "No internet connection",
     "ok": "OK",
     "cancel": "Cancel",
+    "empty_clipboard": "Clipboard is empty",
+    "input_limit": "The translation input is above 5000",
 
     "settings": "Settings",
+
+    "instances": "Instances",
+    "appearance": "Appearance",
+    "translation": "Translation",
 
     "instance": "Instance",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
     "follow_system": "Follow system",
+
+    "update_list": "Update official list",
+    "update_list_summary": "Update the official list of instances",
+    "updated_successfully": "Updated successfully",
+    "error": "There was an error",
+
+    "share_to_lang": "Default share to-language",
 
     "about": "About",
     "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.",

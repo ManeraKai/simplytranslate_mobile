@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate/widgets/keyboard_visibility.dart';
 import '/data.dart';
 
@@ -103,7 +104,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Clipboard is Empty',
+                              AppLocalizations.of(context)!.empty_clipboard,
                               style: TextStyle(fontSize: 18),
                             ),
                             duration: Duration(seconds: 1),
@@ -114,7 +115,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            'Clipboard is Empty',
+                            AppLocalizations.of(context)!.empty_clipboard,
                             style: TextStyle(fontSize: 18),
                           ),
                           duration: Duration(seconds: 1),

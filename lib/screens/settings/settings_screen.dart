@@ -39,7 +39,7 @@ class _SettingsState extends State<Settings> {
               children: [
                 SizedBox(height: 10),
                 Text(
-                  'Instances',
+                  AppLocalizations.of(context)!.instances,
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
@@ -52,7 +52,7 @@ class _SettingsState extends State<Settings> {
                 UpdateList(setStateOverlord: widget.setStateOverlord),
                 SizedBox(height: 20),
                 Text(
-                  'Appearance',
+                  AppLocalizations.of(context)!.appearance,
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
@@ -64,7 +64,7 @@ class _SettingsState extends State<Settings> {
                 SelectTheme(setStateOverlord: widget.setStateOverlord),
                 SizedBox(height: 20),
                 Text(
-                  'Translation',
+                  AppLocalizations.of(context)!.translation,
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
