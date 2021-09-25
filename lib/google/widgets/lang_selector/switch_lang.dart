@@ -24,14 +24,7 @@ class GoogleSwitchLang extends StatelessWidget {
           ),
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
-              if (googleTranslationInputController.text.length <= 5000) {
-                FocusScope.of(context).unfocus();
-                setStateParent(() => loading = true);
-
-                var translatedText = await translateParent(
-                    input: translationInput,
-                    fromLanguageValue: fromLanguageValue,
-                    toLanguageValue: toLanguageValue);
+              if (googleTranslationInputController.text.isEmpty) {
                 final tmp = fromLanguage;
                 fromLanguage = toLanguage;
                 toLanguage = tmp;
@@ -42,28 +35,63 @@ class GoogleSwitchLang extends StatelessWidget {
                 final valuetmp = fromLanguageValue;
                 fromLanguageValue = toLanguageValue;
                 toLanguageValue = valuetmp;
-
-                final x;
-                if (translatedText.length <= 500) {
-                  x = await translateParent(
-                      input: translatedText,
+                setStateParent(() {});
+              } else if (googleTranslationInputController.text.length <= 5000) {
+                FocusScope.of(context).unfocus();
+                setStateParent(() => loading = true);
+                try {
+                  var translatedText = await translateParent(
+                      input: translationInput,
                       fromLanguageValue: fromLanguageValue,
                       toLanguageValue: toLanguageValue);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                      AppLocalizations.of(context)!.input_limit,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ));
-                  x = '';
+
+                  final tmp = fromLanguage;
+                  fromLanguage = toLanguage;
+                  toLanguage = tmp;
+
+                  session.write('to_language', toLanguage);
+                  session.write('from_language', fromLanguage);
+
+                  final valuetmp = fromLanguageValue;
+                  fromLanguageValue = toLanguageValue;
+                  toLanguageValue = valuetmp;
+
+                  final x;
+                  if (translatedText.length <= 500) {
+                    x = await translateParent(
+                        input: translatedText,
+                        fromLanguageValue: fromLanguageValue,
+                        toLanguageValue: toLanguageValue);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        AppLocalizations.of(context)!.input_limit,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ));
+                    x = '';
+                  }
+                  setStateParent(() {
+                    loading = false;
+                    translationInput = translatedText;
+                    googleTranslationInputController.text = translatedText;
+                    googleTranslationOutput = x;
+                  });
+                } catch (_) {
+                  final tmp = fromLanguage;
+                  fromLanguage = toLanguage;
+                  toLanguage = tmp;
+
+                  session.write('to_language', toLanguage);
+                  session.write('from_language', fromLanguage);
+
+                  final valuetmp = fromLanguageValue;
+                  fromLanguageValue = toLanguageValue;
+                  toLanguageValue = valuetmp;
+                  setStateParent(() {
+                    loading = false;
+                  });
                 }
-                setStateParent(() {
-                  loading = false;
-                  translationInput = translatedText;
-                  googleTranslationInputController.text = translatedText;
-                  googleTranslationOutput = x;
-                });
               } else {
                 final tmp = fromLanguage;
                 fromLanguage = toLanguage;

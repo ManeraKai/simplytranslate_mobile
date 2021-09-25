@@ -19,12 +19,14 @@ bool callSharedText = false;
 var themeTranslation;
 
 Future<void> getSharedText(
-    setStateParent,
-    Future<String> Function(
-            {required String input,
-            required String fromLanguageValue,
-            required String toLanguageValue})
-        translateParent) async {
+  setStateParent,
+  Future<String> Function({
+    required String input,
+    required String fromLanguageValue,
+    required String toLanguageValue,
+  })
+      translateParent,
+) async {
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
@@ -515,10 +517,11 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  Future<String> translate(
-      {required String input,
-      required String fromLanguageValue,
-      required String toLanguageValue}) async {
+  Future<String> translate({
+    required String input,
+    required String fromLanguageValue,
+    required String toLanguageValue,
+  }) async {
     if (input.length <= 5000) {
       final url;
       if (instance == 'custom') {
@@ -583,9 +586,11 @@ class _MainPageState extends State<MainPage> {
           final result = await InternetAddress.lookup('exmaple.com');
           if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
             showInstanceError();
+            throw ('Instnace not valid');
           }
         } on SocketException catch (_) {
           showInternetError();
+          throw ('No internet');
         }
         return '';
       }
