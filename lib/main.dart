@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -533,14 +534,10 @@ class _MainPageState extends State<MainPage> {
       final url;
       if (instance == 'custom') {
         url = Uri.parse(customInstance);
-      } else
-        url = Uri.https(
-          instances
-              .firstWhere((element) => element == instance)
-              .toString()
-              .substring(8),
-          '/',
-        );
+      } else if (instance == 'random')
+        url = Uri.parse(instances[Random().nextInt(instances.length)]);
+      else
+        url = Uri.parse(instance);
       // default https://
 
       showInternetError() {
