@@ -40,7 +40,7 @@ class GoogleSwitchLang extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 setStateParent(() => loading = true);
                 try {
-                  var translatedText = await translateParent(
+                  final translatedText = await translateParent(
                       input: translationInput,
                       fromLanguageValue: fromLanguageValue,
                       toLanguageValue: toLanguageValue);
@@ -56,9 +56,9 @@ class GoogleSwitchLang extends StatelessWidget {
                   fromLanguageValue = toLanguageValue;
                   toLanguageValue = valuetmp;
 
-                  final x;
-                  if (translatedText.length <= 500) {
-                    x = await translateParent(
+                  final translatedText2;
+                  if (translatedText.length <= 5000) {
+                    translatedText2 = await translateParent(
                         input: translatedText,
                         fromLanguageValue: fromLanguageValue,
                         toLanguageValue: toLanguageValue);
@@ -69,13 +69,13 @@ class GoogleSwitchLang extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                     ));
-                    x = '';
+                    translatedText2 = '';
                   }
                   setStateParent(() {
                     loading = false;
                     translationInput = translatedText;
                     googleTranslationInputController.text = translatedText;
-                    googleTranslationOutput = x;
+                    googleTranslationOutput = translatedText2;
                   });
                 } catch (_) {
                   final tmp = fromLanguage;
