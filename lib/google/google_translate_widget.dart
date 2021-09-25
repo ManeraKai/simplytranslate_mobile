@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:simplytranslate/google/widgets/translate_button/cancel_translation_button.dart';
 import '../../widgets/keyboard_visibility.dart';
 import 'widgets/translate_button/translate_button_float.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:intl/intl.dart' as intl;
 import 'widgets/translate_button/translate_button.dart';
 import 'widgets/translation_input/translation_input.dart';
 import 'widgets/translation_output/translation_output.dart';
@@ -100,7 +102,14 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
           builder: (context, child, isKeyboardVisible) => isKeyboardVisible
               ? Positioned(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
-                  right: 0,
+                  right: intl.Bidi.detectRtlDirectionality(
+                          AppLocalizations.of(context)!.arabic)
+                      ? null
+                      : 0,
+                  left: intl.Bidi.detectRtlDirectionality(
+                          AppLocalizations.of(context)!.arabic)
+                      ? 0
+                      : null,
                   child: TranslateButtonFloat(
                     setStateParent: widget.setStateParent,
                     translateParent: widget.translateParent,
