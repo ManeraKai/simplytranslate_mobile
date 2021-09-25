@@ -139,6 +139,7 @@ class SelectTheme extends StatelessWidget {
             )),
             SizedBox(width: 10),
             Container(
+              width: MediaQuery.of(context).size.width - 95,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,

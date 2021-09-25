@@ -28,16 +28,18 @@ class GoogleTranslateButton extends StatelessWidget {
                   FocusScope.of(context).unfocus();
                   isTranslationCanceled = false;
                   setStateParent(() => loading = true);
-                  final translatedText = await translateParent(
-                      input: translationInput,
-                      fromLanguageValue: fromLanguageValue,
-                      toLanguageValue: toLanguageValue);
-                  if (!isTranslationCanceled) {
-                    setStateParent(() {
-                      googleTranslationOutput = translatedText;
-                      loading = false;
-                    });
-                  }
+                  try {
+                    final translatedText = await translateParent(
+                        input: translationInput,
+                        fromLanguageValue: fromLanguageValue,
+                        toLanguageValue: toLanguageValue);
+                    if (!isTranslationCanceled) {
+                      setStateParent(() {
+                        googleTranslationOutput = translatedText;
+                        loading = false;
+                      });
+                    }
+                  } catch (_) {}
                 }
               : null,
       child: Text(

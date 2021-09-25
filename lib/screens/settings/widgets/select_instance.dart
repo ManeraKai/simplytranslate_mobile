@@ -183,26 +183,29 @@ class SelectInstance extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(AppLocalizations.of(context)!.instance,
-                          style: TextStyle(fontSize: 18)),
-                      Text(
-                        instance == 'custom'
-                            ? AppLocalizations.of(context)!.custom
-                            : instance == 'random'
-                                ? AppLocalizations.of(context)!.random
-                                : instance,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: theme == Brightness.dark
-                              ? Colors.white54
-                              : Colors.black54,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 95,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(AppLocalizations.of(context)!.instance,
+                            style: TextStyle(fontSize: 18)),
+                        Text(
+                          instance == 'custom'
+                              ? AppLocalizations.of(context)!.custom
+                              : instance == 'random'
+                                  ? AppLocalizations.of(context)!.random
+                                  : instance,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: theme == Brightness.dark
+                                ? Colors.white54
+                                : Colors.black54,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
