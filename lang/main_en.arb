@@ -123,7 +123,7 @@
     "ok": "OK",
     "cancel": "Cancel",
     "empty_clipboard": "Clipboard is empty",
-    "input_limit": "The translation input is above 5 000",
+    "input_limit": "The translation input is above 5000",
 
     "settings": "Settings",
 
