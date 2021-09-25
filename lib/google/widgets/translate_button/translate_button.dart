@@ -21,10 +21,6 @@ class GoogleTranslateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-      ),
       onPressed: googleTranslationInputController.text == ''
           ? null
           : googleTranslationInputController.text.length <= 5000
@@ -48,7 +44,11 @@ class GoogleTranslateButton extends StatelessWidget {
         AppLocalizations.of(context)!.translate,
         style: TextStyle(
             fontSize: 18,
-            color: theme == Brightness.dark ? null : Colors.white),
+            color: theme == Brightness.dark
+                ? null
+                : googleTranslationInputController.text == ''
+                    ? lightThemeGreyColor
+                    : Colors.white),
       ),
     );
   }

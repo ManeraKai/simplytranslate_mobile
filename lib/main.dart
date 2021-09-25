@@ -193,6 +193,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             color: Color(0xffa9a9a9),
           ),
         )),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          ),
+        ),
         toggleableActiveColor: greenColor,
         iconTheme: IconThemeData(color: greenColor),
       ),
