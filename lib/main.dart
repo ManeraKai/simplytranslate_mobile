@@ -46,8 +46,10 @@ Future<void> getSharedText(
         loading = false;
       });
     }
-  } on PlatformException catch (e) {
-    print(e);
+  } catch (_) {
+    setStateParent(() {
+      loading = false;
+    });
   }
 }
 
