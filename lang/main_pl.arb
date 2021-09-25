@@ -112,28 +112,28 @@
     "copied_to_clipboard": "Skopiowano do schowka",
 
     "translate": "Przetłumacz",
-    "random": "Losowy",
-    "custom": "Własny",
-    "enter_text_here": "Wprowadź tutaj tekst",
+    "random": "Losowa",
+    "custom": "Własna",
+    "enter_text_here": "Wpisz tutaj tekst",
     "check": "Sprawdź",
 
     "something_went_wrong": "Coś poszło nie tak",
-    "check_instance": "Sprawdź instancję",
+    "check_instance": "Sprawdź instancję.",
     "no_internet": "Brak połączenia z Internetem",
     "ok": "OK",
     "cancel": "Anuluj",
 
-    "settings": "Settings",
+    "settings": "Ustawienia",
 
     "instance": "Instancja",
-    "theme": "Theme",
-    "light": "Light",
-    "dark": "Dark",
-    "follow_system": "Follow system",
+    "theme": "Motyw",
+    "light": "Jasny",
+    "dark": "Ciemny",
+    "follow_system": "Zgodny z systemowym",
 
-    "about": "About",
+    "about": "O aplikacji",
     "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.",
 
-    "not_available": "Not available"
+    "not_available": "Usługa jest niedostępna"
     
 }
