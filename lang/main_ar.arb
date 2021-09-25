@@ -137,8 +137,8 @@
     "dark": "داكن",
     "follow_system": "حسب النظام",
 
-    "update_list": "تحديث القائمة الرسمية",
-    "update_list_summary": "تحديث قائمة المُثلاء (السيرفرات) الرسمية",
+    "update_list": "تحديث القائمة",
+    "update_list_summary": "تحديث قائمة المُثلاء (السيرفرات)",
     "updated_successfully": "تم التحديث بنجاح",
     "error": "هناك خطأ ما",
 
