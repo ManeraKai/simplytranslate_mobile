@@ -53,8 +53,8 @@ class UpdateList extends StatelessWidget {
                 Container(
                   child: loading
                       ? Container(
-                          height: 45,
-                          width: 45,
+                          height: 35,
+                          width: 35,
                           padding: EdgeInsets.all(5),
                           child: CircularProgressIndicator())
                       : Icon(
@@ -62,7 +62,7 @@ class UpdateList extends StatelessWidget {
                           color: theme == Brightness.dark
                               ? Colors.white
                               : greenColor,
-                          size: 45,
+                          size: 35,
                         ),
                 ),
                 SizedBox(width: 10),
@@ -98,9 +98,14 @@ class UpdateList extends StatelessWidget {
         var response = await updateList();
         setStateOverlord(() => loading = false);
         if (response) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content:
-                  Text(AppLocalizations.of(context)!.updated_successfully)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.updated_successfully,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
