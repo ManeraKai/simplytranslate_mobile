@@ -333,7 +333,10 @@ class MyTextSelectionToolbarState extends State<MyTextSelectionToolbar> {
           padding: TextSelectionToolbarTextButton.getPadding(
               childIndex++, itemDatas.length),
           onPressed: itemData.onPressed,
-          child: Text(itemData.label),
+          child: Text(
+            itemData.label,
+            style: TextStyle(color: Colors.white),
+          ),
         );
       }).toList(),
     );
