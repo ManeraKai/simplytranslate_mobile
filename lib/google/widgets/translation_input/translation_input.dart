@@ -65,11 +65,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 child: TextSelectionToolbarTextButton(
                   padding: EdgeInsets.all(1),
                   child: TextField(
-                    expands: true,
                     selectionControls: MyMaterialTextSelectionControls(),
                     focusNode: focus,
-                    // minLines: 8,
-                    minLines: null,
+                    minLines: 8,
                     maxLines: null,
                     controller: googleTranslationInputController,
                     keyboardType: TextInputType.multiline,
