@@ -146,9 +146,7 @@ class AboutScreen extends StatelessWidget {
                                 child: CircularProgressIndicator())
                             : Icon(
                                 Icons.groups,
-                                color: theme == Brightness.dark
-                                    ? Colors.white
-                                    : greenColor,
+                                color: Colors.blue,
                                 size: 45,
                               ),
                       ),
@@ -195,9 +193,7 @@ class AboutScreen extends StatelessWidget {
                                 child: CircularProgressIndicator())
                             : Icon(
                                 Icons.favorite,
-                                color: theme == Brightness.dark
-                                    ? Colors.white
-                                    : greenColor,
+                                color: Colors.red,
                                 size: 45,
                               ),
                       ),
@@ -245,9 +241,7 @@ class AboutScreen extends StatelessWidget {
                                   child: CircularProgressIndicator())
                               : Icon(
                                   Icons.info,
-                                  color: theme == Brightness.dark
-                                      ? Colors.white
-                                      : greenColor,
+                                  color: Colors.orange,
                                   size: 45,
                                 ),
                         ),
@@ -308,7 +302,7 @@ class AboutScreen extends StatelessWidget {
                                 Icons.copyright,
                                 color: theme == Brightness.dark
                                     ? Colors.white
-                                    : greenColor,
+                                    : Colors.black,
                                 size: 45,
                               ),
                       ),
