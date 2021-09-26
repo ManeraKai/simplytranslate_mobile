@@ -145,14 +145,15 @@
 
     "share_to_lang": "إلى-لغة المشاركة الإفتراضية",
 
-    
+   
     "about": "عن",
 
-    "team": "Team",
-    "team_summary": "Coders, translators, and testers",
-    "contribute": "Contribute",
-    "contribute_summary": "Help make it better!",
-    "version": "Version",
-    "license": "License"
+    "team": "الفريق",
+    "team_summary": "المبرمجون، المترجمون والمختبرون",
+    "contribute": "المساهمة",
+    "contribute_summary": "ساعد على تحسينه!",
+    "version": "الإصدار",
+    "license": "الرخصة"
+    
     
 }
