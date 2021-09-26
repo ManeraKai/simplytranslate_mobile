@@ -160,7 +160,7 @@ class AboutScreen extends StatelessWidget {
                             children: [
                               Text('Team', style: TextStyle(fontSize: 18)),
                               Text(
-                                'Coders, translators, and testers',
+                                'Coders, translators and testers',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: theme == Brightness.dark
