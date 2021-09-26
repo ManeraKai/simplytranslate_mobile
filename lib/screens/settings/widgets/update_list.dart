@@ -100,6 +100,8 @@ class UpdateList extends StatelessWidget {
         if (response) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
+              duration: Duration(seconds: 1),
+              width: 160,
               content: Text(
                 AppLocalizations.of(context)!.updated_successfully,
                 textAlign: TextAlign.center,
