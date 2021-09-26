@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:package_info_plus/package_info_plus.dart';
 
 const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
@@ -87,6 +88,8 @@ final customUrlController = TextEditingController();
 final googleTranslationInputController = TextEditingController();
 
 final session = GetStorage();
+
+late final PackageInfo packageInfo;
 
 Future<customInstanceValidation> checkInstance(
     Function setState, String urlValue) async {
