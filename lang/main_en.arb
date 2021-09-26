@@ -109,14 +109,10 @@
     "yoruba": "Yoruba",
     "zulu": "Zulu",
 
+
     "copied_to_clipboard": "Copied to clipboard",
-
     "translate": "Translate",
-    "random": "Random",
-    "custom": "Custom",
     "enter_text_here": "Enter text here",
-    "check": "Check",
-
     "something_went_wrong": "Something went wrong",
     "check_instance": "Check instance.",
     "no_internet": "No internet connection",
@@ -124,6 +120,8 @@
     "cancel": "Cancel",
     "empty_clipboard": "Clipboard is empty",
     "input_limit": "The translation input is above 5000",
+    "not_available": "Service is not available",
+
 
     "settings": "Settings",
 
@@ -132,21 +130,29 @@
     "translation": "Translation",
 
     "instance": "Instance",
-    "theme": "Theme",
-    "light": "Light",
-    "dark": "Dark",
-    "follow_system": "Follow system",
-
+    "random": "Random",
+    "custom": "Custom",
+    "check": "Check",
     "update_list": "Update list",
     "update_list_summary": "Updates the official list of instances",
     "updated_successfully": "Updated successfully",
     "error": "There was an error",
 
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "follow_system": "Follow system",
+
     "share_to_lang": "Default share to-language",
 
-    "about": "About",
-    "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.",
 
-    "not_available": "Service is not available"
+    "about": "About",
+
+    "team": "Team",
+    "team_summary": "Coders, translators, and testers",
+    "contribute": "Contribute",
+    "contribute_summary": "Help make it better!",
+    "version": "Version",
+    "license": "License"
     
 }

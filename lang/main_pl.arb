@@ -109,14 +109,10 @@
     "yoruba": "joruba",
     "zulu": "zulu",
 
+
     "copied_to_clipboard": "Skopiowano do schowka",
-
     "translate": "Przetłumacz",
-    "random": "Losowa",
-    "custom": "Własna",
     "enter_text_here": "Wpisz tutaj tekst",
-    "check": "Sprawdź",
-
     "something_went_wrong": "Coś poszło nie tak",
     "check_instance": "Sprawdź instancję.",
     "no_internet": "Brak połączenia z Internetem",
@@ -124,6 +120,8 @@
     "cancel": "Anuluj",
     "empty_clipboard": "Schowek jest pusty",
     "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
+    "not_available": "Usługa jest niedostępna",
+
 
     "settings": "Ustawienia",
 
@@ -132,21 +130,29 @@
     "translation": "Tłumaczenie",
 
     "instance": "Instancja",
-    "theme": "Motyw",
-    "light": "Jasny",
-    "dark": "Ciemny",
-    "follow_system": "Zgodny z systemowym",
-
+    "random": "Losowa",
+    "custom": "Własna",
+    "check": "Sprawdź",
     "update_list": "Zaktualizuj listę",
     "update_list_summary": "Aktualizuje oficjalną listę instancji",
     "updated_successfully": "Zaktualizowano pomyślnie",
     "error": "Wystąpił błąd",
 
+    "theme": "Motyw",
+    "light": "Jasny",
+    "dark": "Ciemny",
+    "follow_system": "Zgodny z systemowym",
+
     "share_to_lang": "Domyślny język przy udostępnianiu",
 
-    "about": "O aplikacji",
-    "about_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, tellus id tincidunt faucibus, odio ante tristique metus, id tincidunt dui mauris vel est.",
 
-    "not_available": "Usługa jest niedostępna"
+    "about": "O aplikacji",
+
+    "team": "Zespół",
+    "team_summary": "Programiści, tłumacze i testerzy",
+    "contribute": "Wnieś swój wkład",
+    "contribute_summary": "Pomóż udoskonalić aplikację!",
+    "version": "Wersja",
+    "license": "Licencja"
     
 }
