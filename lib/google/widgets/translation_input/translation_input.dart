@@ -62,54 +62,48 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 return false;
               },
               child: Scrollbar(
-                child: TextSelectionToolbarTextButton(
-                  padding: EdgeInsets.all(1),
-                  child: TextField(
-                    // selectionControls: MyMaterialTextSelectionControls(),
-                    focusNode: focus,
-                    minLines: 8,
-                    maxLines: null,
-                    controller: googleTranslationInputController,
-                    keyboardType: TextInputType.multiline,
-                    onTap: () {
-                      widget.setStateParent(() => translationInputOpen = true);
-                    },
-                    onChanged: (String input) {
-                      if (googleTranslationInputController.text.length >
-                          99999) {
-                        final tmpSelection;
-                        if (googleTranslationInputController
-                                .selection.baseOffset >=
-                            100000) {
-                          tmpSelection = TextSelection.collapsed(offset: 99999);
-                        } else {
-                          tmpSelection = TextSelection.collapsed(
-                              offset: googleTranslationInputController
-                                  .selection.baseOffset);
-                        }
-
-                        googleTranslationInputController.text =
-                            googleTranslationInputController.text
-                                .substring(0, 99999);
-                        print(tmpSelection.baseOffset);
-
-                        googleTranslationInputController.selection =
-                            tmpSelection;
+                child: TextField(
+                  // selectionControls: MyMaterialTextSelectionControls(),
+                  focusNode: focus,
+                  minLines: 8,
+                  maxLines: null,
+                  controller: googleTranslationInputController,
+                  keyboardType: TextInputType.multiline,
+                  onTap: () {
+                    widget.setStateParent(() => translationInputOpen = true);
+                  },
+                  onChanged: (String input) {
+                    if (googleTranslationInputController.text.length > 99999) {
+                      final tmpSelection;
+                      if (googleTranslationInputController
+                              .selection.baseOffset >=
+                          100000) {
+                        tmpSelection = TextSelection.collapsed(offset: 99999);
+                      } else {
+                        tmpSelection = TextSelection.collapsed(
+                            offset: googleTranslationInputController
+                                .selection.baseOffset);
                       }
-                      widget.setStateParent(() {
-                        translationInputOpen = true;
-                        translationInput = input;
-                      });
-                    },
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText:
-                            AppLocalizations.of(context)!.enter_text_here),
-                    style: TextStyle(fontSize: 20),
-                  ),
+
+                      googleTranslationInputController.text =
+                          googleTranslationInputController.text
+                              .substring(0, 99999);
+                      print(tmpSelection.baseOffset);
+
+                      googleTranslationInputController.selection = tmpSelection;
+                    }
+                    widget.setStateParent(() {
+                      translationInputOpen = true;
+                      translationInput = input;
+                    });
+                  },
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      hintText: AppLocalizations.of(context)!.enter_text_here),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
             ),

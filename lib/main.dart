@@ -291,53 +291,47 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                         Orientation.landscape) {
                   return SizedBox.shrink();
                 } else {
-                  return GestureDetector(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
-                    },
-                    child: AppBar(
-                      bottom: PreferredSize(
-                        preferredSize: Size.fromHeight(2),
-                        child: Container(height: 2, color: greenColor),
+                  return AppBar(
+                    bottom: PreferredSize(
+                      preferredSize: Size.fromHeight(2),
+                      child: Container(height: 2, color: greenColor),
+                    ),
+                    actions: [
+                      PopupMenuButton(
+                        icon: Icon(Icons.more_vert, color: Colors.white),
+                        // color: theme == Brightness.dark
+                        //     ? secondgreyColor
+                        //     : Colors.white,
+                        itemBuilder: (BuildContext context) => [
+                          PopupMenuItem<String>(
+                              value: 'settings',
+                              child:
+                                  Text(AppLocalizations.of(context)!.settings)),
+                          PopupMenuItem<String>(
+                              value: 'about',
+                              child: Text(AppLocalizations.of(context)!.about)),
+                        ],
+                        onSelected: (value) {
+                          if (value == 'settings') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Settings(setState)),
+                            );
+                          } else if (value == 'about') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AboutScreen()),
+                            );
+                          }
+                        },
                       ),
-                      actions: [
-                        PopupMenuButton(
-                          icon: Icon(Icons.more_vert, color: Colors.white),
-                          // color: theme == Brightness.dark
-                          //     ? secondgreyColor
-                          //     : Colors.white,
-                          itemBuilder: (BuildContext context) => [
-                            PopupMenuItem<String>(
-                                value: 'settings',
-                                child: Text(
-                                    AppLocalizations.of(context)!.settings)),
-                            PopupMenuItem<String>(
-                                value: 'about',
-                                child:
-                                    Text(AppLocalizations.of(context)!.about)),
-                          ],
-                          onSelected: (value) {
-                            if (value == 'settings') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Settings(setState)),
-                              );
-                            } else if (value == 'about') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AboutScreen()),
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                      elevation: 3,
-                      iconTheme: IconThemeData(),
-                      title: Text(
-                        'Simply Translate',
-                      ),
+                    ],
+                    elevation: 3,
+                    iconTheme: IconThemeData(),
+                    title: Text(
+                      'Simply Translate',
                     ),
                   );
                 }
