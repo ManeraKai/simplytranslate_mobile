@@ -53,8 +53,8 @@ class UpdateList extends StatelessWidget {
                 Container(
                   child: loading
                       ? Container(
-                          height: 35,
-                          width: 35,
+                          height: 45,
+                          width: 45,
                           padding: EdgeInsets.all(5),
                           child: CircularProgressIndicator())
                       : Icon(
@@ -62,7 +62,7 @@ class UpdateList extends StatelessWidget {
                           color: theme == Brightness.dark
                               ? Colors.white
                               : greenColor,
-                          size: 35,
+                          size: 45,
                         ),
                 ),
                 SizedBox(width: 10),
