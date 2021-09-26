@@ -211,7 +211,8 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                             fieldTextEditingController.text.toLowerCase()));
 
                     FocusScope.of(context).unfocus();
-                    session.write('to_language_share_default', chosenOne);
+                    session.write('to_language_share_default',
+                        selectLanguagesMap[chosenOne]);
                     widget.setStateOverlord(() {
                       toLanguageShareDefault = chosenOne;
                       toLanguageValueShareDefault =

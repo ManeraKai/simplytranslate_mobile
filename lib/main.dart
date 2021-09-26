@@ -499,19 +499,28 @@ class MainPageLocalization extends StatelessWidget {
 
     if (session.read('from_language').toString() != 'null') {
       var sessionData = session.read('from_language').toString();
-      fromLanguage = sessionData;
-      fromLanguageValue = fromSelectLanguagesMap[sessionData];
+      fromLanguage = fromSelectLanguagesMap.entries
+          .firstWhere((element) => element.value == sessionData)
+          .key;
+      // fromLanguageValue = fromSelectLanguagesMap[sessionData];
+      fromLanguageValue = sessionData;
     }
     if (session.read('to_language').toString() != 'null') {
       var sessionData = session.read('to_language').toString();
-      toLanguage = sessionData;
-      toLanguageValue = selectLanguagesMap[sessionData];
+      toLanguage = selectLanguagesMap.entries
+          .firstWhere((element) => element.value == sessionData)
+          .key;
+      // toLanguageValue = selectLanguagesMap[sessionData];
+      toLanguageValue = sessionData;
     }
 
     if (session.read('to_language_share_default').toString() != 'null') {
       var sessionData = session.read('to_language_share_default').toString();
-      toLanguageShareDefault = sessionData;
-      toLanguageValueShareDefault = selectLanguagesMap[sessionData];
+      toLanguageShareDefault = selectLanguagesMap.entries
+          .firstWhere((element) => element.value == sessionData)
+          .key;
+      // toLanguageValueShareDefault = selectLanguagesMap[sessionData];
+      toLanguageValueShareDefault = sessionData;
     }
 
     return MainPage();

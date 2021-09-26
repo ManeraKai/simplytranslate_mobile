@@ -29,12 +29,13 @@ class GoogleSwitchLang extends StatelessWidget {
                 fromLanguage = toLanguage;
                 toLanguage = tmp;
 
-                session.write('to_language', toLanguage);
-                session.write('from_language', fromLanguage);
-
                 final valuetmp = fromLanguageValue;
                 fromLanguageValue = toLanguageValue;
                 toLanguageValue = valuetmp;
+
+                session.write('to_language', toLanguageValue);
+                session.write('from_language', fromLanguageValue);
+
                 setStateParent(() {});
               } else if (googleTranslationInputController.text.length <= 5000) {
                 FocusScope.of(context).unfocus();
@@ -49,12 +50,12 @@ class GoogleSwitchLang extends StatelessWidget {
                   fromLanguage = toLanguage;
                   toLanguage = tmp;
 
-                  session.write('to_language', toLanguage);
-                  session.write('from_language', fromLanguage);
-
                   final valuetmp = fromLanguageValue;
                   fromLanguageValue = toLanguageValue;
                   toLanguageValue = valuetmp;
+
+                  session.write('to_language', toLanguageValue);
+                  session.write('from_language', fromLanguageValue);
 
                   final translatedText2;
                   if (translatedText.length <= 5000) {
@@ -86,12 +87,13 @@ class GoogleSwitchLang extends StatelessWidget {
                   fromLanguage = toLanguage;
                   toLanguage = tmp;
 
-                  session.write('to_language', toLanguage);
-                  session.write('from_language', fromLanguage);
-
                   final valuetmp = fromLanguageValue;
                   fromLanguageValue = toLanguageValue;
                   toLanguageValue = valuetmp;
+
+                  session.write('to_language', toLanguageValue);
+                  session.write('from_language', fromLanguageValue);
+
                   setStateParent(() {
                     loading = false;
                   });
@@ -101,12 +103,13 @@ class GoogleSwitchLang extends StatelessWidget {
                 fromLanguage = toLanguage;
                 toLanguage = tmp;
 
-                session.write('to_language', toLanguage);
-                session.write('from_language', fromLanguage);
-
                 final valuetmp = fromLanguageValue;
                 fromLanguageValue = toLanguageValue;
                 toLanguageValue = valuetmp;
+
+                session.write('to_language', toLanguageValue);
+                session.write('from_language', fromLanguageValue);
+
                 setStateParent(() {});
               }
             }

@@ -74,7 +74,8 @@ class GoogleToLang extends StatelessWidget {
                                     : () {
                                         if (option != fromLanguage) {
                                           FocusScope.of(context).unfocus();
-                                          session.write('to_language', option);
+                                          session.write('to_language',
+                                              selectLanguagesMap[option]);
                                           setStateOverlord(() {
                                             toLanguage = option;
                                             toLanguageValue =
@@ -137,7 +138,7 @@ class GoogleToLang extends StatelessWidget {
                           fieldTextEditingController.text.toLowerCase()));
                   if (chosenOne != fromLanguage) {
                     FocusScope.of(context).unfocus();
-                    session.write('to_language', chosenOne);
+                    session.write('to_language', selectLanguagesMap[chosenOne]);
                     setStateOverlord(() {
                       toLanguage = chosenOne;
                       toLanguageValue = selectLanguagesMap[chosenOne];
@@ -154,7 +155,8 @@ class GoogleToLang extends StatelessWidget {
                               fieldTextEditingController.text.toLowerCase()));
                       if (chosenOne != fromLanguage) {
                         FocusScope.of(context).unfocus();
-                        session.write('to_language', chosenOne);
+                        session.write(
+                            'to_language', selectLanguagesMap[chosenOne]);
                         setStateOverlord(() {
                           toLanguage = chosenOne;
                           toLanguageValue = selectLanguagesMap[chosenOne];
