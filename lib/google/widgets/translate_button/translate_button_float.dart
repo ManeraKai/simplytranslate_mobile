@@ -52,13 +52,13 @@ class TranslateButtonFloat extends StatelessWidget {
                         }
                       : null,
               child: Text(AppLocalizations.of(context)!.translate,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: theme == Brightness.dark
-                        ? null
-                        : googleTranslationInputController.text == ''
-                            ? lightThemeGreyColor
-                            : Colors.white)),
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: theme == Brightness.dark
+                          ? null
+                          : googleTranslationInputController.text == ''
+                              ? lightThemeGreyColor
+                              : Colors.white)),
             ),
           )
         : SizedBox.shrink();
