@@ -103,11 +103,13 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
               ? Positioned(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                   right: intl.Bidi.detectRtlDirectionality(
-                          AppLocalizations.of(context)!.arabic)
+                    AppLocalizations.of(context)!.arabic,
+                  )
                       ? null
                       : 0,
                   left: intl.Bidi.detectRtlDirectionality(
-                          AppLocalizations.of(context)!.arabic)
+                    AppLocalizations.of(context)!.arabic,
+                  )
                       ? 0
                       : null,
                   child: TranslateButtonFloat(

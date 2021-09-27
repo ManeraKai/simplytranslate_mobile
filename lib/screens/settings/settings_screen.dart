@@ -24,7 +24,9 @@ class _SettingsState extends State<Settings> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.settings),
+          title: Text(
+            AppLocalizations.of(context)!.settings,
+          ),
           elevation: 3,
           // backgroundColor: theme == Brightness.dark ? greyColor : greenColor,
         ),

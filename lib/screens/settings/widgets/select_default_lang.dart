@@ -243,7 +243,9 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text(AppLocalizations.of(context)!.cancel),
+          child: Text(
+            AppLocalizations.of(context)!.cancel,
+          ),
         )
       ],
     );

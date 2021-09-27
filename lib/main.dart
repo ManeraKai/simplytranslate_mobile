@@ -308,13 +308,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           //     : Colors.white,
                           itemBuilder: (BuildContext context) => [
                             PopupMenuItem<String>(
-                                value: 'settings',
-                                child: Text(
-                                    AppLocalizations.of(context)!.settings)),
+                              value: 'settings',
+                              child: Text(
+                                AppLocalizations.of(context)!.settings,
+                              ),
+                            ),
                             PopupMenuItem<String>(
-                                value: 'about',
-                                child:
-                                    Text(AppLocalizations.of(context)!.about)),
+                              value: 'about',
+                              child: Text(
+                                AppLocalizations.of(context)!.about,
+                              ),
+                            ),
                           ],
                           onSelected: (value) {
                             if (value == 'settings') {
@@ -491,7 +495,10 @@ class MainPageLocalization extends StatelessWidget {
     selectLanguagesFrom.sort();
     fromSelectLanguagesMap[AppLocalizations.of(context)!.autodetect] =
         "Autodetect";
-    selectLanguagesFrom.insert(0, AppLocalizations.of(context)!.autodetect);
+    selectLanguagesFrom.insert(
+      0,
+      AppLocalizations.of(context)!.autodetect,
+    );
 
     fromLanguage = AppLocalizations.of(context)!.english;
     toLanguage = AppLocalizations.of(context)!.arabic;
@@ -568,11 +575,15 @@ class _MainPageState extends State<MainPage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  title: Text(AppLocalizations.of(context)!.no_internet),
+                  title: Text(
+                    AppLocalizations.of(context)!.no_internet,
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(AppLocalizations.of(context)!.ok),
+                      child: Text(
+                        AppLocalizations.of(context)!.ok,
+                      ),
                     )
                   ],
                 ));
@@ -582,13 +593,18 @@ class _MainPageState extends State<MainPage> {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  title:
-                      Text(AppLocalizations.of(context)!.something_went_wrong),
-                  content: Text(AppLocalizations.of(context)!.check_instance),
+                  title: Text(
+                    AppLocalizations.of(context)!.something_went_wrong,
+                  ),
+                  content: Text(
+                    AppLocalizations.of(context)!.check_instance,
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(AppLocalizations.of(context)!.ok),
+                      child: Text(
+                        AppLocalizations.of(context)!.ok,
+                      ),
                     )
                   ],
                 ));

@@ -106,7 +106,8 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                             duration: Duration(seconds: 1),
                             width: 160,
                             content: Text(
-                                AppLocalizations.of(context)!.empty_clipboard),
+                              AppLocalizations.of(context)!.empty_clipboard,
+                            ),
                           ),
                         );
                       }

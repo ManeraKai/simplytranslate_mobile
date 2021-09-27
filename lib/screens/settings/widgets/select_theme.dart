@@ -72,7 +72,9 @@ class SelectTheme extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 20),
-                              child: Text(AppLocalizations.of(context)!.dark),
+                              child: Text(
+                                AppLocalizations.of(context)!.dark,
+                              ),
                             ),
                           ],
                         )),
@@ -89,7 +91,9 @@ class SelectTheme extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
-                            child: Text(AppLocalizations.of(context)!.light),
+                            child: Text(
+                              AppLocalizations.of(context)!.light,
+                            ),
                           ),
                         ],
                       ),
@@ -118,7 +122,9 @@ class SelectTheme extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(AppLocalizations.of(context)!.cancel),
+                    child: Text(
+                      AppLocalizations.of(context)!.cancel,
+                    ),
                   )
                 ],
               ),
@@ -144,8 +150,10 @@ class SelectTheme extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(AppLocalizations.of(context)!.theme,
-                      style: TextStyle(fontSize: 18)),
+                  Text(
+                    AppLocalizations.of(context)!.theme,
+                    style: TextStyle(fontSize: 18),
+                  ),
                   Text(
                     themeValue,
                     style: TextStyle(

@@ -73,8 +73,10 @@ class UpdateList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(AppLocalizations.of(context)!.update_list,
-                            style: TextStyle(fontSize: 18)),
+                        Text(
+                          AppLocalizations.of(context)!.update_list,
+                          style: TextStyle(fontSize: 18),
+                        ),
                         Text(
                           AppLocalizations.of(context)!.update_list_summary,
                           style: TextStyle(
