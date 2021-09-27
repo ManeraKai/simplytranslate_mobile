@@ -254,7 +254,7 @@ class AboutScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(AppLocalizations.of(context)!.version,
-                                  style: TextStyle(fontSize: 18)),
+                                    style: TextStyle(fontSize: 18)),
                                 Text(
                                   packageInfo.version,
                                   style: TextStyle(
@@ -316,7 +316,7 @@ class AboutScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(AppLocalizations.of(context)!.license,
-                                style: TextStyle(fontSize: 18)),
+                                  style: TextStyle(fontSize: 18)),
                               Text(
                                 'GPL-3.0 License',
                                 style: TextStyle(
