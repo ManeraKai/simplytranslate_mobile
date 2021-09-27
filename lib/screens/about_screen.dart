@@ -206,11 +206,9 @@ class AboutScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                AppLocalizations.of(context)!.contribute,
+                              Text(AppLocalizations.of(context)!.contribute,
                                 style: TextStyle(fontSize: 18)),
-                              Text(
-                                AppLocalizations.of(context)!.contribute_summary,
+                              Text(AppLocalizations.of(context)!.contribute_summary,
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: theme == Brightness.dark
@@ -255,8 +253,7 @@ class AboutScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  AppLocalizations.of(context)!.version,
+                                Text(AppLocalizations.of(context)!.version,
                                   style: TextStyle(fontSize: 18)),
                                 Text(
                                   packageInfo.version,
@@ -318,8 +315,7 @@ class AboutScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                AppLocalizations.of(context)!.license,
+                              Text(AppLocalizations.of(context)!.license,
                                 style: TextStyle(fontSize: 18)),
                               Text(
                                 'GPL-3.0 License',
