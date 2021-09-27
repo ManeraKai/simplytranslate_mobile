@@ -22,7 +22,11 @@
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" alt="drawing" width="200"/> | 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" alt="drawing" width="200"/>
 
-**Note:** The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12 ](https://joelchrono12.ml/).
+**Note:** The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
+
+## Translation
+
+Please support us to translate this application [here](https://github.com/ManeraKai/simplytranslate-flutter-client/blob/main/lang/main_en.arb).
 
 ## License
 Copyright (C) 2021 ManeraKai
