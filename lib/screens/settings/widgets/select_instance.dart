@@ -190,7 +190,7 @@ class SelectInstance extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(AppLocalizations.of(context)!.instance,
-                          style: TextStyle(fontSize: 18)),
+                            style: TextStyle(fontSize: 18)),
                         Text(
                           instance == 'custom'
                               ? AppLocalizations.of(context)!.custom
