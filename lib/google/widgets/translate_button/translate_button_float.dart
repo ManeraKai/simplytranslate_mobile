@@ -51,8 +51,7 @@ class TranslateButtonFloat extends StatelessWidget {
                           }
                         }
                       : null,
-              child: Text(
-                AppLocalizations.of(context)!.translate,
+              child: Text(AppLocalizations.of(context)!.translate,
                 style: TextStyle(
                     fontSize: 18,
                     color: theme == Brightness.dark
