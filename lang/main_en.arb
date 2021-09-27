@@ -120,6 +120,7 @@
     "cancel": "Cancel",
     "empty_clipboard": "Clipboard is empty",
     "input_limit": "The translation input is above 5000",
+    "not_available": "Service is not available",
 
 
     "settings": "Settings",
