@@ -213,8 +213,7 @@ class AboutScreen extends StatelessWidget {
                                 style: TextStyle(fontSize: 18),
                               ),
                               Text(
-                                AppLocalizations.of(context)!
-                                    .contribute_summary,
+                                AppLocalizations.of(context)!.contribute_summary,
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: theme == Brightness.dark
