@@ -4,4 +4,4 @@
 
 <p>Metalune stworzył <a href="https://simplytranslate.org">frontend webowy</a> dla SimplyTranslate, a ja stworzyłem nieoficjalną kliencką aplikację mobilną. Zaletą mojej aplikacji jest to, że możesz bez problemu połączyć się za każdym razem z inną instancją bez potrzeby odwiedzania innej strony internetowej. Wystarczy wybrać jedną z dostępnych instancji w selektorze lub pozwolić aplikacji wylosować jedną z nich. Można również wpisać własny adres internetowy. Wszystko to bez potrzeby wychodzenia z Twojej ulubionej aplikacji.</p>
 
-<p>Na razie bez natychmiastowych tłumaczeń z aparatu, tłumaczenia dokumentów lub tłumaczenia ze słuchu. Te powinny zostać najpierw zaimplementowane na serwerze proxy, a dopiero potem w aplikacji klienckiej. Postaram się w tym pomóc.</p>
+<p>Na razie bez natychmiastowego tłumaczenia z aparatu, tłumaczenia dokumentów lub tłumaczenia ze słuchu. Te powinny zostać najpierw zaimplementowane na serwerze proxy, a dopiero potem w aplikacji klienckiej. Postaram się w tym pomóc.</p>
