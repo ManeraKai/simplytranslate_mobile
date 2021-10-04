@@ -137,6 +137,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
+      await Future.delayed(Duration(seconds: 1));
       print('Cycle resumed');
       setState(() {
         callSharedText = true;
