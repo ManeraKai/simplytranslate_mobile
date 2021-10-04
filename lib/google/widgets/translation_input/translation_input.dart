@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +10,7 @@ import 'widgets/character_limit.dart';
 import '/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart' as intl;
 
 class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
@@ -62,48 +62,57 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 return false;
               },
               child: Scrollbar(
-                child: TextField(
-                  // selectionControls: MyMaterialTextSelectionControls(),
-                  focusNode: focus,
-                  minLines: 8,
-                  maxLines: null,
-                  controller: googleTranslationInputController,
-                  keyboardType: TextInputType.multiline,
-                  onTap: () {
-                    widget.setStateParent(() => translationInputOpen = true);
-                  },
-                  onChanged: (String input) {
-                    if (googleTranslationInputController.text.length > 99999) {
-                      final tmpSelection;
-                      if (googleTranslationInputController
-                              .selection.baseOffset >=
-                          100000) {
-                        tmpSelection = TextSelection.collapsed(offset: 99999);
-                      } else {
-                        tmpSelection = TextSelection.collapsed(
-                            offset: googleTranslationInputController
-                                .selection.baseOffset);
+                child: Directionality(
+                  textDirection:
+                      intl.Bidi.detectRtlDirectionality(translationInput)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                  child: TextField(
+                    // selectionControls: MyMaterialTextSelectionControls(),
+                    focusNode: focus,
+                    minLines: 8,
+                    maxLines: null,
+                    controller: googleTranslationInputController,
+                    keyboardType: TextInputType.multiline,
+                    onTap: () {
+                      widget.setStateParent(() => translationInputOpen = true);
+                    },
+                    onChanged: (String input) {
+                      if (googleTranslationInputController.text.length >
+                          99999) {
+                        final tmpSelection;
+                        if (googleTranslationInputController
+                                .selection.baseOffset >=
+                            100000) {
+                          tmpSelection = TextSelection.collapsed(offset: 99999);
+                        } else {
+                          tmpSelection = TextSelection.collapsed(
+                              offset: googleTranslationInputController
+                                  .selection.baseOffset);
+                        }
+
+                        googleTranslationInputController.text =
+                            googleTranslationInputController.text
+                                .substring(0, 99999);
+                        print(tmpSelection.baseOffset);
+
+                        googleTranslationInputController.selection =
+                            tmpSelection;
                       }
-
-                      googleTranslationInputController.text =
-                          googleTranslationInputController.text
-                              .substring(0, 99999);
-                      print(tmpSelection.baseOffset);
-
-                      googleTranslationInputController.selection = tmpSelection;
-                    }
-                    widget.setStateParent(() {
-                      translationInputOpen = true;
-                      translationInput = input;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      hintText: AppLocalizations.of(context)!.enter_text_here),
-                  style: TextStyle(fontSize: 20),
+                      widget.setStateParent(() {
+                        translationInputOpen = true;
+                        translationInput = input;
+                      });
+                    },
+                    decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        hintText:
+                            AppLocalizations.of(context)!.enter_text_here),
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
             ),

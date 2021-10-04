@@ -1,8 +1,8 @@
-import 'package:auto_direction/auto_direction.dart';
 import 'package:flutter/material.dart';
 import '/data.dart';
 import '../../screens/maximized/maximized.dart';
 import '../translation_input/widgets/copy_button.dart';
+import 'package:intl/intl.dart' as intl;
 
 class GoogleTranslationOutput extends StatefulWidget {
   const GoogleTranslationOutput({
@@ -50,13 +50,11 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: AutoDirection(
-                    text: translatedText,
-                    onDirectionChange: (isRTL) {
-                      setState(() {
-                        this.isRTL = isRTL;
-                      });
-                    },
+                  child: Directionality(
+                    textDirection:
+                        intl.Bidi.detectRtlDirectionality(translatedText)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                     child: SelectableText(
                       translatedText,
                       style: TextStyle(fontSize: outputFontSize),

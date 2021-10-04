@@ -89,9 +89,8 @@ void main(List<String> args) async {
       theme = Brightness.dark;
     }
   }
-  var _clipData =
-      (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
-  if (_clipData == '' || _clipData == null)
+  var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
+  if (_clipData.toString() == '' || _clipData == null)
     isClipboardEmpty = true;
   else
     isClipboardEmpty = false;
@@ -111,9 +110,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
     ClipboardListener.addListener(() async {
-      var _clipData =
-          (await Clipboard.getData(Clipboard.kTextPlain))?.text.toString();
-      if (_clipData == '' || _clipData == null) {
+      var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
+      if (_clipData.toString() == '' || _clipData == null) {
         if (!isClipboardEmpty) {
           setState(() {
             isClipboardEmpty = true;
@@ -147,13 +145,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         print('trying');
         if (value != null) {
           final valueString = value.text.toString();
-          if (valueString == '') {
-            setState(() => isClipboardEmpty = true);
-          } else {
+          if (valueString != '') {
             setState(() => isClipboardEmpty = false);
+          } else {
+            setState(() => isClipboardEmpty = true);
           }
         } else {
-          setState(() => isClipboardEmpty = false);
+          setState(() => isClipboardEmpty = true);
         }
       });
     }
