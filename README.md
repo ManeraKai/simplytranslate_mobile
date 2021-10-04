@@ -25,8 +25,11 @@
 **Note:** The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
 
 ## Translation
+1. Copy the [English translation file](https://github.com/ManeraKai/simplytranslate-mobile/blob/main/lang/main_en.arb).
+2. Translate it to your language.
+3. Add your new translated to [this directory](https://github.com/ManeraKai/simplytranslate-mobile/blob/main/lang/) with name: **main_[$langCode](https://developers.google.com/admin-sdk/directory/v1/languages)**.arb
 
-Please support us to translate this application [here](https://github.com/ManeraKai/simplytranslate-mobile/blob/main/lang/main_en.arb).
+We appreciate it!
 
 ## License
 Copyright (C) 2021 ManeraKai
