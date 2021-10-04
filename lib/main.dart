@@ -278,7 +278,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
       ),
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
-      title: 'Simply Translate',
+      title: 'Simply Translate Mobile',
       home: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60),
@@ -345,7 +345,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       elevation: 3,
                       iconTheme: IconThemeData(),
                       title: Text(
-                        'Simply Translate',
+                        'Simply Translate Mobile',
                       ),
                     ),
                   );
