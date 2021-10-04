@@ -44,7 +44,7 @@ Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum customInstanceValidation { False, True, NotChecked }
 
-const methodChannel = MethodChannel('com.simplytranslatemobile/translate');
+const methodChannel = MethodChannel('com.simplytranslate_mobile/translate');
 
 bool isClipboardEmpty = true;
 

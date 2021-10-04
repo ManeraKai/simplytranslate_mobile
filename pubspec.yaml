@@ -1,4 +1,4 @@
-name: simplytranslate
+name: simplytranslate_mobile
 description: An app client that connects to multiple Simply Translate instances.
 
 # The following line prevents the package from being accidentally published to

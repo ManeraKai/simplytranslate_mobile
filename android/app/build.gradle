@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId 'com.simplytranslatemobile'
+        applicationId 'com.simplytranslate_mobile'
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 3

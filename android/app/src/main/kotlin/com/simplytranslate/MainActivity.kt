@@ -1,4 +1,4 @@
-package com.simplytranslatemobile
+package com.simplytranslate_mobile
 
 import android.app.Activity
 import android.content.Context
@@ -20,7 +20,7 @@ import java.lang.reflect.Method
 
 class MainActivity: FlutterActivity() {
 
-    private val TRANSLATE_CHANNEL_NAME = "com.simplytranslatemobile/translate"
+    private val TRANSLATE_CHANNEL_NAME = "com.simplytranslate_mobile/translate"
     private var translateChannel: MethodChannel? = null
 
     override fun configureFlutterEngine(@NotNull flutterEngine: FlutterEngine) {
@@ -54,7 +54,7 @@ class UppercaseActivity : Activity() {
 
        text = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString()
 
-        val launchIntent = packageManager.getLaunchIntentForPackage("com.simplytranslatemobile")
+        val launchIntent = packageManager.getLaunchIntentForPackage("com.simplytranslate_mobile")
         launchIntent?.let { startActivity(it) }
 
         finish()

@@ -1,7 +1,7 @@
 
 <p align="center">
-  <a href="https://github.com/ManeraKai/simplytranslate-mobile">
-      <img alt="" title="Simply Translate" src="https://github.com/ManeraKai/simplytranslate-mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
+  <a href="https://github.com/ManeraKai/simplytranslate_mobile">
+      <img alt="" title="Simply Translate" src="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
   </a>
 </p>
 <h1 align="center">Simply Translate Mobile (Unofficial)</h1>
@@ -9,7 +9,7 @@
 <h4 align="center">An unofficial mobile client that connects to multiple <a href="https://simplytranslate.org/">SimplyTranslate</a> instances.</h4>
 
 <p align="center">
-  <a href="https://f-droid.org/en/packages/com.simplytranslatemobile/">
+  <a href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">
     <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
        alt="Get it on F-Droid"
        height="80">
@@ -25,9 +25,9 @@
 **Note:** The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
 
 ## Translation
-1. Copy the [English translation file](https://github.com/ManeraKai/simplytranslate-mobile/blob/main/lang/main_en.arb).
+1. Copy the [English translation file](https://github.com/ManeraKai/simplytranslate_mobile/blob/main/lang/main_en.arb).
 2. Translate it to your language.
-3. Add your new translated to [this directory](https://github.com/ManeraKai/simplytranslate-mobile/blob/main/lang/) with name: **main_[$langCode](https://developers.google.com/admin-sdk/directory/v1/languages)**.arb
+3. Add your new translated to [this directory](https://github.com/ManeraKai/simplytranslate_mobile/blob/main/lang/) with name: **main_[$langCode](https://developers.google.com/admin-sdk/directory/v1/languages)**.arb
 
 We appreciate it!
 

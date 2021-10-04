@@ -179,7 +179,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate-mobile/graphs/contributors'),
+                    'https://github.com/ManeraKai/simplytranslate_mobile/graphs/contributors'),
               ),
               InkWell(
                 child: Padding(
@@ -230,7 +230,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate-mobile'),
+                    'https://github.com/ManeraKai/simplytranslate_mobile'),
               ),
               InkWell(
                   child: Padding(
@@ -344,7 +344,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate-mobile/blob/main/LICENSE'),
+                    'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE'),
               ),
             ],
           ),
