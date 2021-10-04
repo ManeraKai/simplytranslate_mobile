@@ -144,8 +144,8 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                               child: GestureDetector(
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
-                                  session.write(
-                                      'to_language_share_default', option);
+                                  session.write('to_language_share_default',
+                                      selectLanguagesMap[option]);
                                   widget.setStateOverlord(() {
                                     toLanguageShareDefault = option;
                                     toLanguageValueShareDefault =

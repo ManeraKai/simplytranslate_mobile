@@ -523,9 +523,14 @@ class MainPageLocalization extends StatelessWidget {
 
     if (session.read('to_language_share_default').toString() != 'null') {
       var sessionData = session.read('to_language_share_default').toString();
-      toLanguageShareDefault = selectLanguagesMap.entries
-          .firstWhere((element) => element.value == sessionData)
-          .key;
+      try {
+        toLanguageShareDefault = selectLanguagesMap.entries
+            .firstWhere((element) => element.value == sessionData)
+            .key;
+      } catch (e) {
+        print('There is some error here');
+      }
+
       // toLanguageValueShareDefault = selectLanguagesMap[sessionData];
       toLanguageValueShareDefault = sessionData;
     }
