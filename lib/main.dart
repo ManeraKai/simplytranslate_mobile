@@ -137,29 +137,35 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
+      print('Cycle resumed');
       setState(() {
         callSharedText = true;
       });
 
-      Clipboard.getData(Clipboard.kTextPlain).then((value) {
-        print('trying');
-        if (value != null) {
-          final valueString = value.text.toString();
-          if (valueString != '') {
-            setState(() => isClipboardEmpty = false);
-          } else {
-            setState(() => isClipboardEmpty = true);
-          }
-        } else {
+      var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
+      if (_clipData.toString() == '' || _clipData == null) {
+        if (!isClipboardEmpty) {
+          print('empty');
           setState(() => isClipboardEmpty = true);
         }
-      });
+      } else {
+        if (isClipboardEmpty) {
+          print('not empty');
+          setState(() => isClipboardEmpty = false);
+        }
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localeListResolutionCallback: (locales, supportedLocales) {
+        for (Locale locale in locales!)
+          if (supportedLocales.contains(locale)) return locale;
+
+        return Locale('en');
+      },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
