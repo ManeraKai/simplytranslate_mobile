@@ -179,7 +179,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate-flutter-client/graphs/contributors'),
+                    'https://github.com/ManeraKai/simplytranslate-mobile/graphs/contributors'),
               ),
               InkWell(
                 child: Padding(
@@ -230,7 +230,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate-flutter-client'),
+                    'https://github.com/ManeraKai/simplytranslate-mobile'),
               ),
               InkWell(
                   child: Padding(
@@ -344,7 +344,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate-flutter-client/blob/main/LICENSE'),
+                    'https://github.com/ManeraKai/simplytranslate-mobile/blob/main/LICENSE'),
               ),
             ],
           ),
