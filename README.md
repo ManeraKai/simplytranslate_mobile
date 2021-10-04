@@ -9,7 +9,7 @@
 <h4 align="center">An unofficial mobile client that connects to multiple <a href="https://simplytranslate.org/">SimplyTranslate</a> instances.</h4>
 
 <p align="center">
-  <a href="https://f-droid.org/en/packages/com.simplytranslate/">
+  <a href="https://f-droid.org/en/packages/com.simplytranslatemobile/">
     <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
        alt="Get it on F-Droid"
        height="80">
