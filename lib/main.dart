@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:simplytranslate/screens/about_screen.dart';
+import 'package:simplytranslate_mobile/screens/about_screen.dart';
 import './data.dart';
 import 'google/google_translate_widget.dart';
 import 'screens/settings/settings_screen.dart';

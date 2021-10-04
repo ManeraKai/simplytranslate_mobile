@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import 'package:simplytranslate/data.dart';
+import 'package:simplytranslate_mobile/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import '../data.dart';
 

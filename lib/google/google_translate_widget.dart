@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:simplytranslate/google/widgets/translate_button/cancel_translation_button.dart';
+import 'package:simplytranslate_mobile/google/widgets/translate_button/cancel_translation_button.dart';
 import '../../widgets/keyboard_visibility.dart';
 import 'widgets/translate_button/translate_button_float.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';

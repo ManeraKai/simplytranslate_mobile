@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import 'package:simplytranslate/screens/settings/widgets/select_default_lang.dart';
-import 'package:simplytranslate/screens/settings/widgets/update_list.dart';
+import 'package:simplytranslate_mobile/screens/settings/widgets/select_default_lang.dart';
+import 'package:simplytranslate_mobile/screens/settings/widgets/update_list.dart';
 import '../../data.dart';
 import 'widgets/select_instance.dart';
 import 'widgets/select_theme.dart';
