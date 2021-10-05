@@ -105,8 +105,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                       });
                     },
                     decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 10),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         hintText:

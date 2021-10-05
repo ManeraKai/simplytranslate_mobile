@@ -4,9 +4,9 @@ import 'dart:math';
 
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../../data.dart';
+import './settings_button.dart';
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
-// Complete working on the custom instance input and it's coloring.
 var loading = false;
 bool checkLoading = false;
 bool isCanceled = false;
@@ -56,7 +56,7 @@ class SelectInstance extends StatelessWidget {
           isCustomInstanceValid = responseBool;
         });
         if (isCustomInstanceValid == customInstanceValidation.True) {
-          session.write('customInstance', customInstance);
+          session.write('customInstance', customUrl);
           setStateOverlord(() {
             customInstance = customUrl;
           });
@@ -162,70 +162,14 @@ class SelectInstance extends StatelessWidget {
       );
     }
 
-    return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  child: loading
-                      ? Container(
-                          height: 45,
-                          width: 45,
-                          padding: EdgeInsets.all(5),
-                          child: CircularProgressIndicator())
-                      : Icon(
-                          Icons.dns,
-                          color: theme == Brightness.dark
-                              ? Colors.white
-                              : greenColor,
-                          size: 45,
-                        ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width - 95,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.instance,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          instance == 'custom'
-                              ? AppLocalizations.of(context)!.custom
-                              : instance == 'random'
-                                  ? AppLocalizations.of(context)!.random
-                                  : instance,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: theme == Brightness.dark
-                                ? Colors.white54
-                                : Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+    return SettingsButton(
       onTap: () {
         showDialog(
             context: context,
             builder: (context) {
               return StatefulBuilder(
                 builder: (context, setState) => AlertDialog(
-                  contentPadding: EdgeInsets.all(5),
+                  contentPadding: const EdgeInsets.all(5),
                   actionsPadding: EdgeInsets.zero,
                   actions: [
                     TextButton(
@@ -237,7 +181,7 @@ class SelectInstance extends StatelessWidget {
                       ),
                     )
                   ],
-                  insetPadding: EdgeInsets.all(0),
+                  insetPadding: const EdgeInsets.all(0),
                   content: Column(mainAxisSize: MainAxisSize.min, children: [
                     ...() {
                       var list = <Widget>[];
@@ -317,6 +261,15 @@ class SelectInstance extends StatelessWidget {
           isCustomInstanceValid = customInstanceValidation.NotChecked;
         });
       },
+      icon: Icons.dns,
+      iconColor: theme == Brightness.dark ? Colors.white : greenColor,
+      title: AppLocalizations.of(context)!.instance,
+      content: instance == 'custom'
+          ? '${AppLocalizations.of(context)!.custom}: $customInstance'
+          : instance == 'random'
+              ? AppLocalizations.of(context)!.random
+              : instance,
+      loading: loading,
     );
   }
 }

@@ -19,7 +19,8 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
+            margin:
+                const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

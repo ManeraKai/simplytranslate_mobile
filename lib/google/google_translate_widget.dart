@@ -76,7 +76,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                                                   .width -
                                               20,
                                           child: LinearProgressIndicator())
-                                      : SizedBox.shrink(),
+                                      : const SizedBox.shrink(),
                                   loading
                                       ? GoogleCancelTranslationButton(
                                           setStateParent: widget.setStateParent)
@@ -87,7 +87,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                                               translateParent:
                                                   widget.translateParent,
                                             )
-                                          : SizedBox.shrink(),
+                                          : const SizedBox.shrink(),
                                 ],
                               )),
                     ],
@@ -117,7 +117,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                     translateParent: widget.translateParent,
                   ),
                 )
-              : SizedBox.shrink(),
+              : const SizedBox.shrink(),
         ),
       ],
     );

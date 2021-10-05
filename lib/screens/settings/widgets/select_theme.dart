@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 import '../../../data.dart';
 
 class SelectTheme extends StatelessWidget {
@@ -48,7 +49,7 @@ class SelectTheme extends StatelessWidget {
       Navigator.of(context).pop();
     }
 
-    return InkWell(
+    return SettingsButton(
       onTap: () {
         showDialog(
           context: context,
@@ -132,42 +133,10 @@ class SelectTheme extends StatelessWidget {
           },
         );
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-                child: Icon(
-              theme == Brightness.dark ? Icons.dark_mode : Icons.light_mode,
-              color: theme == Brightness.dark ? Colors.white : greenColor,
-              size: 45,
-            )),
-            SizedBox(width: 10),
-            Container(
-              width: MediaQuery.of(context).size.width - 95,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.theme,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    themeValue,
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: theme == Brightness.dark
-                            ? Colors.white54
-                            : Colors.black54),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      icon: theme == Brightness.dark ? Icons.dark_mode : Icons.light_mode,
+      iconColor: theme == Brightness.dark ? Colors.white : greenColor,
+      title: AppLocalizations.of(context)!.theme,
+      content: themeValue,
     );
   }
 }

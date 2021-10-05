@@ -23,333 +23,122 @@ class AboutScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // SizedBox(height: 10),
-              // Text(
-              //   'Team:',
-              //   style: TextStyle(fontSize: 25),
-              // ),
-              // Container(
-              //     margin: EdgeInsets.symmetric(vertical: 10),
-              //     height: 1,
-              //     color: theme == Brightness.dark
-              //         ? Colors.grey
-              //         : lightThemeGreyColor),
-              // SizedBox(height: 5),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     ClipRRect(
-              //       borderRadius: BorderRadius.circular(50),
-              //       child: Image.network(
-              //         'https://avatars.githubusercontent.com/u/40805353?v=4',
-              //         width: 30,
-              //       ),
-              //     ),
-              //     SizedBox(width: 5),
-              //     Container(
-              //       height: 30,
-              //       child: Text.rich(
-              //         TextSpan(
-              //           text: 'ManeraKai',
-              //           recognizer: TapGestureRecognizer()
-              //             ..onTap = () {
-              //               launch('https://github.com/ManeraKai');
-              //             },
-              //           style: TextStyle(
-              //             height: 1.5,
-              //             fontSize: 18,
-              //             color: Colors.blue,
-              //             // decoration: TextDecoration.underline,
-              //           ),
-              //         ),
-              //         textAlign: TextAlign.center,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: 10),
-              // Row(
-              //   children: [
-              //     ClipRRect(
-              //       borderRadius: BorderRadius.circular(50),
-              //       child: Image.network(
-              //         'https://avatars.githubusercontent.com/u/47037905?v=4',
-              //         width: 30,
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     Container(
-              //       height: 30,
-              //       child: Text.rich(
-              //         TextSpan(
-              //           text: 'Valdnet',
-              //           style: TextStyle(
-              //             height: 1.5,
-              //             fontSize: 18,
-              //             color: Colors.blue,
-              //             // decoration: TextDecoration.underline,
-              //           ),
-              //           recognizer: TapGestureRecognizer()
-              //             ..onTap = () {
-              //               launch('https://github.com/Valdnet');
-              //             },
-              //         ),
-              //         textAlign: TextAlign.center,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: 10),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     ClipRRect(
-              //       borderRadius: BorderRadius.circular(50),
-              //       child: Image.network(
-              //         'https://avatars.githubusercontent.com/u/85929121?v=4',
-              //         width: 30,
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     Container(
-              //       height: 30,
-              //       child: Text.rich(
-              //           TextSpan(
-              //             text: 'Agnieszka C (Aga-C)',
-              //             style: TextStyle(
-              //               height: 1.5,
-              //               fontSize: 18,
-              //               color: Colors.blue,
-              //               // decoration: TextDecoration.underline,
-              //             ),
-              //             recognizer: TapGestureRecognizer()
-              //               ..onTap = () {
-              //                 launch('https://github.com/Aga-C');
-              //               },
-              //           ),
-              //           textAlign: TextAlign.center),
-              //     ),
-              //   ],
-              // ),
-              InkWell(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        child: loading
-                            ? Container(
-                                height: 45,
-                                width: 45,
-                                padding: EdgeInsets.all(5),
-                                child: CircularProgressIndicator())
-                            : Icon(
-                                Icons.groups,
-                                color: Colors.blue,
-                                size: 45,
-                              ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width - 95,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.team,
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.team_summary,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: theme == Brightness.dark
-                                      ? Colors.white54
-                                      : Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              AboutButton(
+                icon: Icons.groups,
+                iconColor: Colors.blue,
+                title: AppLocalizations.of(context)!.team,
+                content: AppLocalizations.of(context)!.team_summary,
                 onTap: () => launch(
                     'https://github.com/ManeraKai/simplytranslate_mobile/graphs/contributors'),
               ),
-              InkWell(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        child: loading
-                            ? Container(
-                                height: 45,
-                                width: 45,
-                                padding: EdgeInsets.all(5),
-                                child: CircularProgressIndicator())
-                            : Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                                size: 45,
-                              ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width - 95,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.contribute,
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .contribute_summary,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: theme == Brightness.dark
-                                      ? Colors.white54
-                                      : Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              AboutButton(
+                icon: Icons.favorite,
+                iconColor: Colors.red,
+                title: AppLocalizations.of(context)!.contribute,
+                content: AppLocalizations.of(context)!.contribute_summary,
                 onTap: () => launch(
                     'https://github.com/ManeraKai/simplytranslate_mobile'),
               ),
-              InkWell(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-                    child: Row(
-                      children: [
-                        Container(
-                          child: loading
-                              ? Container(
-                                  height: 45,
-                                  width: 45,
-                                  padding: EdgeInsets.all(5),
-                                  child: CircularProgressIndicator())
-                              : Icon(
-                                  Icons.info,
-                                  color: Colors.orange,
-                                  size: 45,
-                                ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 95,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!.version,
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                Text(
-                                  packageInfo.version,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: theme == Brightness.dark
-                                        ? Colors.white54
-                                        : Colors.black54,
-                                  ),
-                                ),
-                              ],
+              AboutButton(
+                  icon: Icons.info,
+                  iconColor: Colors.orange,
+                  title: AppLocalizations.of(context)!.version,
+                  content: packageInfo.version,
+                  onTap: () => Clipboard.setData(
+                              ClipboardData(text: packageInfo.version))
+                          .then(
+                        (value) => ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: Duration(seconds: 1),
+                            width: 160,
+                            content: Text(
+                              AppLocalizations.of(context)!.copied_to_clipboard,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    Clipboard.setData(ClipboardData(text: packageInfo.version))
-                        .then(
-                      (value) => ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: Duration(seconds: 1),
-                          width: 160,
-                          content: Text(
-                            AppLocalizations.of(context)!.copied_to_clipboard,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
-              InkWell(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        child: loading
-                            ? Container(
-                                height: 45,
-                                width: 45,
-                                padding: EdgeInsets.all(5),
-                                child: CircularProgressIndicator())
-                            : Icon(
-                                Icons.copyright,
-                                color: theme == Brightness.dark
-                                    ? Colors.white
-                                    : Colors.black,
-                                size: 45,
-                              ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width - 95,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.license,
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Text(
-                                'GPL-3.0 License',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: theme == Brightness.dark
-                                      ? Colors.white54
-                                      : Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                      )),
+              AboutButton(
+                icon: Icons.copyright,
+                iconColor:
+                    theme == Brightness.dark ? Colors.white : Colors.black,
+                title: AppLocalizations.of(context)!.license,
+                content: 'GPL-3.0 License',
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE'),
-              ),
+                  'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE',
+                ),
+              )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class AboutButton extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String content;
+  final void Function() onTap;
+
+  const AboutButton({
+    required this.icon,
+    required this.title,
+    required this.content,
+    required this.onTap,
+    required this.iconColor,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+        child: Row(
+          children: [
+            Container(
+              child: loading
+                  ? Container(
+                      height: 45,
+                      width: 45,
+                      padding: const EdgeInsets.all(5),
+                      child: CircularProgressIndicator(),
+                    )
+                  : Icon(
+                      icon,
+                      color: iconColor,
+                      size: 45,
+                    ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width - 95,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: TextStyle(fontSize: 18)),
+                    Text(
+                      content,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: theme == Brightness.dark
+                            ? Colors.white54
+                            : Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      onTap: onTap,
     );
   }
 }

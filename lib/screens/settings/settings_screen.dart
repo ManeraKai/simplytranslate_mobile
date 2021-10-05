@@ -39,38 +39,38 @@ class _SettingsState extends State<Settings> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   AppLocalizations.of(context)!.instances,
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    margin: const EdgeInsets.only(top: 10, bottom: 5),
                     height: 1.5,
                     color: theme == Brightness.dark
                         ? Colors.white
                         : lightThemeGreyColor),
                 SelectInstance(setStateOverlord: widget.setStateOverlord),
                 UpdateList(setStateOverlord: widget.setStateOverlord),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.appearance,
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    margin: const EdgeInsets.only(top: 10, bottom: 5),
                     height: 1.5,
                     color: theme == Brightness.dark
                         ? Colors.white
                         : lightThemeGreyColor),
                 SelectTheme(setStateOverlord: widget.setStateOverlord),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.translation,
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    margin: const EdgeInsets.only(top: 10, bottom: 5),
                     height: 1.5,
                     color: theme == Brightness.dark
                         ? Colors.white

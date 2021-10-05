@@ -15,7 +15,7 @@ class CharacterLimit extends StatelessWidget {
         builder: (context, child, isKeyboardVisible) => Container(
           width: 48,
           alignment: Alignment.bottomCenter,
-          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -29,7 +29,7 @@ class CharacterLimit extends StatelessWidget {
                             : lightThemeGreyColor),
               ),
               Container(
-                  margin: EdgeInsets.symmetric(vertical: 3),
+                  margin: const EdgeInsets.symmetric(vertical: 3),
                   height: 1,
                   width: 30,
                   color: googleTranslationInputController.text.length > 5000

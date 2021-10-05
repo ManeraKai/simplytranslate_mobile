@@ -32,7 +32,6 @@ String translationInput = '';
 String googleTranslationOutput = '';
 
 String customInstance = '';
-String customUrl = '';
 
 bool translationInputOpen = false;
 

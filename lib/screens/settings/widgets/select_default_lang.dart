@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../../data.dart';
+import './settings_button.dart';
 
 final ScrollController _rightTextviewScrollController = ScrollController();
 bool toIsFirstClick = false;
@@ -16,55 +17,20 @@ class SelectDefaultLang extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return StatefulBuilder(
-              builder: (context, setState) =>
-                  SelectDefaultLangDialog(setStateOverlord: setStateOverlord),
-            );
-          },
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              child: Icon(
-                Icons.translate,
-                color: theme == Brightness.dark ? Colors.white : greenColor,
-                size: 45,
-              ),
-            ),
-            SizedBox(width: 10),
-            Container(
-              width: MediaQuery.of(context).size.width - 95,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.share_to_lang,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    toLanguageShareDefault,
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: theme == Brightness.dark
-                            ? Colors.white54
-                            : Colors.black54),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+    return SettingsButton(
+      onTap: () => showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (context, setState) =>
+                SelectDefaultLangDialog(setStateOverlord: setStateOverlord),
+          );
+        },
       ),
+      icon: Icons.translate,
+      iconColor: theme == Brightness.dark ? Colors.white : greenColor,
+      title: AppLocalizations.of(context)!.share_to_lang,
+      content: toLanguageShareDefault,
     );
   }
 }
@@ -83,15 +49,14 @@ class SelectDefaultLangDialog extends StatefulWidget {
 }
 
 var fieldTextEditingControllerGlobal;
-// var _focus = FocusNode();
 
 class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
   @override
   Widget build(BuildContext context) {
     Function changeText = () {};
     return AlertDialog(
-      insetPadding: EdgeInsets.all(0),
-      contentPadding: EdgeInsets.all(20),
+      insetPadding: const EdgeInsets.all(0),
+      contentPadding: const EdgeInsets.all(20),
       content: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> toSelectLanguagesIterable = Iterable.generate(
@@ -121,7 +86,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                         (options.length) * (36 + 25)
                     ? MediaQuery.of(context).size.height / 2
                     : null,
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 5)],
@@ -227,7 +192,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                 },
                 decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   isDense: true,
                 ),
                 controller: fieldTextEditingController,

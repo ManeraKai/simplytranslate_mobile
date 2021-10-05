@@ -46,7 +46,7 @@ class GoogleFromLang extends StatelessWidget {
                         (options.length) * (36 + 25)
                     ? MediaQuery.of(context).size.height / 2
                     : null,
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   boxShadow: [
@@ -176,7 +176,7 @@ class GoogleFromLang extends StatelessWidget {
             },
             decoration: InputDecoration(
               contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               isDense: true,
             ),
             controller: fieldTextEditingController,

@@ -70,11 +70,11 @@ void main(List<String> args) async {
       ? session.read('instance_mode').toString()
       : instance;
 
-  customUrl = session.read('customInstance') != null
+  final _sessionCustomInstance = session.read('customInstance') != null
       ? session.read('customInstance').toString()
       : '';
-  customUrlController.text = customUrl;
-  customInstance = customUrl;
+  customUrlController.text = _sessionCustomInstance;
+  customInstance = _sessionCustomInstance;
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {
@@ -206,7 +206,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         )),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
           ),
@@ -294,7 +294,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 if (isKeyboardVisible &&
                     MediaQuery.of(context).orientation ==
                         Orientation.landscape) {
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 } else {
                   return GestureDetector(
                     onTap: () {
@@ -344,9 +344,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       ],
                       elevation: 3,
                       iconTheme: IconThemeData(),
-                      title: Text(
-                        'Simply Translate Mobile',
-                      ),
+                      title: const Text('Simply Translate Mobile'),
                     ),
                   );
                 }

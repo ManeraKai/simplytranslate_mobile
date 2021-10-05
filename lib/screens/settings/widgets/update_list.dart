@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 import '../../../data.dart';
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
@@ -42,59 +43,7 @@ class UpdateList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  child: loading
-                      ? Container(
-                          height: 45,
-                          width: 45,
-                          padding: EdgeInsets.all(5),
-                          child: CircularProgressIndicator())
-                      : Icon(
-                          Icons.download,
-                          color: theme == Brightness.dark
-                              ? Colors.white
-                              : greenColor,
-                          size: 45,
-                        ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width - 95,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.update_list,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.update_list_summary,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: theme == Brightness.dark
-                                ? Colors.white54
-                                : Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+    return SettingsButton(
       onTap: () async {
         setStateOverlord(() => loading = true);
         var response = await updateList();
@@ -123,6 +72,11 @@ class UpdateList extends StatelessWidget {
           );
         }
       },
+      icon: Icons.download,
+      iconColor: theme == Brightness.dark ? Colors.white : greenColor,
+      title: AppLocalizations.of(context)!.update_list,
+      content: AppLocalizations.of(context)!.update_list_summary,
+      loading: loading,
     );
   }
 }

@@ -20,7 +20,7 @@ class GoogleSwitchLang extends StatelessWidget {
         width: MediaQuery.of(context).size.width / 3 - 60,
         child: OutlinedButton(
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           ),
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {

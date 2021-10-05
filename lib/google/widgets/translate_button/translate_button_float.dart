@@ -20,11 +20,11 @@ class TranslateButtonFloat extends StatelessWidget {
     return translationInputOpen
         ? Container(
             height: 50,
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             alignment: Alignment.topRight,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
               ),
               onPressed: googleTranslationInputController.text == ''
                   ? null
@@ -63,6 +63,6 @@ class TranslateButtonFloat extends StatelessWidget {
               ),
             ),
           )
-        : SizedBox.shrink();
+        : const SizedBox.shrink();
   }
 }
