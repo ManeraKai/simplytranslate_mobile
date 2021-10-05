@@ -17,10 +17,15 @@
 </p>
 
 ## Screenshots
-
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" alt="drawing" width="200"/> | 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" alt="drawing" width="200"/> | 
+<div align=center>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/>&nbsp
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/>&nbsp
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/>&nbsp
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/>&nbsp
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" alt="drawing" width="200"/>&nbsp
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" alt="drawing" width="200"/>&nbsp
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" alt="drawing" width="200"/>
+</div>
 
 **Note:** The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
 
