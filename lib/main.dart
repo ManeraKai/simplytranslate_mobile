@@ -11,48 +11,14 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:simplytranslate_mobile/screens/about_screen.dart';
-import './data.dart';
+import 'data.dart';
+import 'screens/about/about_screen.dart';
 import 'google/google_translate_widget.dart';
 import 'screens/settings/settings_screen.dart';
 import 'widgets/keyboard_visibility.dart';
 
 bool callSharedText = false;
 var themeTranslation;
-
-Future<void> getSharedText(
-  setStateParent,
-  Future<String> Function({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-  })
-      translateParent,
-) async {
-  try {
-    var answer = await methodChannel.invokeMethod('getText');
-    if (answer != '') {
-      setStateParent(() {
-        translationInput = answer.toString();
-        googleTranslationInputController.text = translationInput;
-        loading = true;
-      });
-
-      final translatedText = await translateParent(
-          input: translationInput,
-          fromLanguageValue: 'Autodetect',
-          toLanguageValue: toLanguageValueShareDefault);
-      setStateParent(() {
-        googleTranslationOutput = translatedText;
-        loading = false;
-      });
-    }
-  } catch (_) {
-    setStateParent(() {
-      loading = false;
-    });
-  }
-}
 
 void main(List<String> args) async {
   await GetStorage.init();
@@ -138,7 +104,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       await Future.delayed(Duration(seconds: 1));
-      print('Cycle resumed');
       setState(() {
         callSharedText = true;
       });
@@ -146,12 +111,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
       if (_clipData.toString() == '' || _clipData == null) {
         if (!isClipboardEmpty) {
-          print('empty');
           setState(() => isClipboardEmpty = true);
         }
       } else {
         if (isClipboardEmpty) {
-          print('not empty');
           setState(() => isClipboardEmpty = false);
         }
       }
@@ -162,9 +125,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
-        for (Locale locale in locales!)
-          if (supportedLocales.contains(locale)) return locale;
-
+        for (Locale locale in AppLocalizations.supportedLocales)
+          if (supportedLocales.contains(locale)) return null;
         return Locale('en');
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -189,20 +151,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         inputDecorationTheme: InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(2),
-            borderSide: BorderSide(color: Color(0xffa9a9a9), width: 1.5),
+            borderSide: BorderSide(color: const Color(0xffa9a9a9), width: 1.5),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(2),
-            borderSide: BorderSide(color: Color(0xffa9a9a9), width: 1.5),
+            borderSide: BorderSide(color: const Color(0xffa9a9a9), width: 1.5),
           ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-          side: BorderSide(
-            width: 1.5,
-            color: Color(0xffa9a9a9),
-          ),
+          side: BorderSide(width: 1.5, color: const Color(0xffa9a9a9)),
         )),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -225,8 +184,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           primaryVariant: greenColor,
           secondary: greenColor,
           secondaryVariant: greenColor,
-          surface: Color(0xff131618),
-          background: Color(0xff131618),
+          surface: const Color(0xff131618),
+          background: const Color(0xff131618),
           error: Colors.red,
           onPrimary: Colors.white,
           onSecondary: Colors.redAccent,
@@ -235,9 +194,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           onError: Colors.white,
           brightness: Brightness.dark,
         ),
-        scaffoldBackgroundColor: Color(0xff212529),
+        scaffoldBackgroundColor: const Color(0xff212529),
         inputDecorationTheme: InputDecorationTheme(
-          fillColor: Color(0xff131618),
+          fillColor: const Color(0xff131618),
           filled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(2),
@@ -250,11 +209,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-          backgroundColor: Color(0xff131618),
+          backgroundColor: const Color(0xff131618),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
           side: BorderSide(
             width: 1.5,
-            color: Color(0xff495057),
+            color: const Color(0xff495057),
           ),
         )),
         toggleableActiveColor: greenColor,
@@ -297,9 +256,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   return const SizedBox.shrink();
                 } else {
                   return GestureDetector(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
-                    },
+                    onTap: () => FocusScope.of(context).unfocus(),
                     child: AppBar(
                       bottom: PreferredSize(
                         preferredSize: Size.fromHeight(2),
@@ -308,9 +265,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       actions: [
                         PopupMenuButton(
                           icon: Icon(Icons.more_vert, color: Colors.white),
-                          // color: theme == Brightness.dark
-                          //     ? secondgreyColor
-                          //     : Colors.white,
                           itemBuilder: (BuildContext context) => [
                             PopupMenuItem<String>(
                               value: 'settings',
@@ -363,7 +317,7 @@ class MainPageLocalization extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    themeTranslation = {
+    final Map<String, String> themeTranslation = {
       'dark': AppLocalizations.of(context)!.dark,
       'light': AppLocalizations.of(context)!.light,
       'system': AppLocalizations.of(context)!.follow_system,
@@ -371,9 +325,9 @@ class MainPageLocalization extends StatelessWidget {
 
     final themeSession = session.read('theme').toString();
     if (themeSession != 'null')
-      themeValue = themeTranslation[themeSession];
+      themeValue = themeTranslation[themeSession]!;
     else
-      themeValue = themeTranslation['system'];
+      themeValue = themeTranslation['system']!;
 
     selectLanguagesMap = {
       AppLocalizations.of(context)!.afrikaans: "Afrikaans",
@@ -498,10 +452,7 @@ class MainPageLocalization extends StatelessWidget {
     selectLanguagesFrom.sort();
     fromSelectLanguagesMap[AppLocalizations.of(context)!.autodetect] =
         "Autodetect";
-    selectLanguagesFrom.insert(
-      0,
-      AppLocalizations.of(context)!.autodetect,
-    );
+    selectLanguagesFrom.insert(0, AppLocalizations.of(context)!.autodetect);
 
     fromLanguage = AppLocalizations.of(context)!.english;
     toLanguage = AppLocalizations.of(context)!.arabic;

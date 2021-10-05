@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 
-// var renderBox;
-// var translateButtonWidgetSize;
-
 class GoogleCancelTranslationButton extends StatelessWidget {
   final setStateParent;
 

@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/data.dart';
@@ -47,10 +46,10 @@ class GoogleFromLang extends StatelessWidget {
                     ? MediaQuery.of(context).size.height / 2
                     : null,
                 margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
-                  boxShadow: [
-                    BoxShadow(offset: Offset(0, 0), blurRadius: 5),
+                  boxShadow: const [
+                    const BoxShadow(offset: Offset(0, 0), blurRadius: 5)
                   ],
                 ),
                 child: Scrollbar(
@@ -92,7 +91,7 @@ class GoogleFromLang extends StatelessWidget {
                                   child: Text(
                                     option,
                                     style: (option == toLanguage)
-                                        ? TextStyle(
+                                        ? const TextStyle(
                                             fontSize: 18,
                                             color: lightThemeGreyColor,
                                           )
@@ -138,7 +137,6 @@ class GoogleFromLang extends StatelessWidget {
                     .startsWith(fieldTextEditingController.text.toLowerCase()));
                 if (chosenOne != toLanguage) {
                   FocusScope.of(context).unfocus();
-
                   session.write(
                       'from_language', fromSelectLanguagesMap[chosenOne]);
                   setStateOverlord(() {

@@ -126,7 +126,7 @@ class SelectInstance extends StatelessWidget {
                         ),
                       ),
                       isDense: true),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 actions: [
                   TextButton(
@@ -146,7 +146,7 @@ class SelectInstance extends StatelessWidget {
                           width: 50,
                           height: 45,
                           alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
+                          child: const CircularProgressIndicator(),
                         )
                       : TextButton(
                           onPressed: () => customCheck(setState),
@@ -173,9 +173,7 @@ class SelectInstance extends StatelessWidget {
                   actionsPadding: EdgeInsets.zero,
                   actions: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () => Navigator.of(context).pop(),
                       child: Text(
                         AppLocalizations.of(context)!.cancel,
                       ),
@@ -186,14 +184,14 @@ class SelectInstance extends StatelessWidget {
                     ...() {
                       var list = <Widget>[];
                       for (String x in instances)
-                        list.add(Container(
-                          width: double.infinity,
-                          child: InkWell(
+                        list.add(
+                          Container(
+                            width: double.infinity,
+                            child: InkWell(
                               onTap: () => instanceFunc(setState, x),
                               child: Row(
                                 children: [
                                   Radio<String>(
-                                      // activeColor: greenColor,
                                       value: x,
                                       groupValue: instance,
                                       onChanged: (_) =>
@@ -204,13 +202,15 @@ class SelectInstance extends StatelessWidget {
                                           horizontal: 10, vertical: 20),
                                       child: Text(
                                         x,
-                                        style: TextStyle(fontSize: 16),
+                                        style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
                                   ),
                                 ],
-                              )),
-                        ));
+                              ),
+                            ),
+                          ),
+                        );
                       return list;
                     }(),
                     InkWell(
@@ -218,7 +218,6 @@ class SelectInstance extends StatelessWidget {
                       child: Row(
                         children: [
                           Radio<String>(
-                              // activeColor: greenColor,
                               value: 'random',
                               groupValue: instance,
                               onChanged: (_) => randomFunc(setState)),
@@ -227,7 +226,7 @@ class SelectInstance extends StatelessWidget {
                                 horizontal: 10, vertical: 20),
                             child: Text(
                               AppLocalizations.of(context)!.random,
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ],
@@ -238,7 +237,6 @@ class SelectInstance extends StatelessWidget {
                       child: Row(
                         children: [
                           Radio<String>(
-                              // activeColor: greenColor,
                               value: 'custom',
                               groupValue: instance,
                               onChanged: (_) => customFunc(setState)),
@@ -247,7 +245,7 @@ class SelectInstance extends StatelessWidget {
                                 horizontal: 10, vertical: 20),
                             child: Text(
                               AppLocalizations.of(context)!.custom,
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ],

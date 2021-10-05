@@ -47,7 +47,7 @@ const methodChannel = MethodChannel('com.simplytranslate_mobile/translate');
 
 bool isClipboardEmpty = true;
 
-Map selectLanguagesMap = {};
+late Map selectLanguagesMap;
 Map fromSelectLanguagesMap = {};
 List selectLanguages = [];
 List selectLanguagesFrom = [];
@@ -84,6 +84,40 @@ Future<customInstanceValidation> checkInstance(
     }
   } catch (err) {
     return customInstanceValidation.False;
+  }
+}
+
+Future<void> getSharedText(
+  setStateParent,
+  Future<String> Function({
+    required String input,
+    required String fromLanguageValue,
+    required String toLanguageValue,
+  })
+      translateParent,
+) async {
+  try {
+    var answer = await methodChannel.invokeMethod('getText');
+    if (answer != '') {
+      setStateParent(() {
+        translationInput = answer.toString();
+        googleTranslationInputController.text = translationInput;
+        loading = true;
+      });
+
+      final translatedText = await translateParent(
+          input: translationInput,
+          fromLanguageValue: 'Autodetect',
+          toLanguageValue: toLanguageValueShareDefault);
+      setStateParent(() {
+        googleTranslationOutput = translatedText;
+        loading = false;
+      });
+    }
+  } catch (_) {
+    setStateParent(() {
+      loading = false;
+    });
   }
 }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/data.dart';
-import '../../widgets/translation_input/widgets/copy_button.dart';
+import '/google/widgets/translation_input/widgets/copy_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
   const MaximizedScreen({
@@ -38,7 +38,6 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                   children: [
                     CopyToClipboardButton(googleTranslationOutput),
                     IconButton(
-                      // color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {
@@ -49,7 +48,6 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                       icon: Icon(Icons.add),
                     ),
                     IconButton(
-                      // color: theme == Brightness.dark ? null : greenColor,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {

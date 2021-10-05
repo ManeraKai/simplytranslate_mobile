@@ -1,16 +1,12 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import '/data.dart';
 import 'widgets/copy_button.dart';
 import 'widgets/delete_button.dart';
 import 'widgets/paste_button.dart';
 import 'widgets/character_limit.dart';
-import '/data.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart' as intl;
 
 class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
@@ -29,18 +25,14 @@ class GoogleTranslationInput extends StatefulWidget {
 }
 
 class _TranslationInputState extends State<GoogleTranslationInput> {
-  var _key;
-
   @override
   void initState() {
-    _key = GlobalKey();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: _key,
       height: 205,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
@@ -111,7 +103,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                         focusedBorder: InputBorder.none,
                         hintText:
                             AppLocalizations.of(context)!.enter_text_here),
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
               ),
@@ -121,7 +113,6 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DeleteTranslationInputButton(
-                  setStateParent: widget.setStateParent,
                   setStateParentParent: widget.setStateParent),
               CopyToClipboardButton(translationInput),
               PasteClipboardButton(setStateParent: widget.setStateParent),

@@ -4,7 +4,7 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
-import '../../../data.dart';
+import '/data.dart';
 
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 
@@ -51,7 +51,7 @@ class UpdateList extends StatelessWidget {
         if (response) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               width: 160,
               content: Text(
                 AppLocalizations.of(context)!.updated_successfully,
@@ -62,7 +62,7 @@ class UpdateList extends StatelessWidget {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               width: 160,
               content: Text(
                 AppLocalizations.of(context)!.error,

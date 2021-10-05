@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import '/data.dart';
-import '../../screens/maximized/maximized.dart';
-import '../translation_input/widgets/copy_button.dart';
 import 'package:intl/intl.dart' as intl;
+import '/data.dart';
+import '/google/screens/maximized/maximized.dart';
+import '/google/widgets/translation_input/widgets/copy_button.dart';
 
 class GoogleTranslationOutput extends StatefulWidget {
-  const GoogleTranslationOutput({
-    Key? key,
-  }) : super(key: key);
+  const GoogleTranslationOutput({Key? key}) : super(key: key);
 
   @override
   _TranslationOutputState createState() => _TranslationOutputState();
 }
 
 class _TranslationOutputState extends State<GoogleTranslationOutput> {
-  var _key;
-
   @override
   void initState() {
-    _key = GlobalKey();
     super.initState();
   }
 
@@ -29,7 +24,6 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
   Widget build(BuildContext context) {
     String translatedText = googleTranslationOutput;
     return Container(
-      key: _key,
       height: 200,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
@@ -68,43 +62,35 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
             children: [
               CopyToClipboardButton(translatedText),
               IconButton(
-                  // color: theme == Brightness.dark ? null : greenColor,
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: translatedText == ''
-                      ? null
-                      : () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MaximizedScreen()));
-                        },
-                  icon: Icon(Icons.fullscreen)),
-              IconButton(
-                // color: theme == Brightness.dark ? null : greenColor,
+                icon: Icon(Icons.fullscreen),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: translatedText == ''
                     ? null
-                    : () {
-                        setState(() {
-                          if (outputFontSize + 3 <= 90) outputFontSize += 3;
-                        });
-                      },
-                icon: Icon(Icons.add),
+                    : () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MaximizedScreen())),
               ),
               IconButton(
-                // color: theme == Brightness.dark ? null : greenColor,
+                icon: Icon(Icons.add),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: translatedText == ''
                     ? null
-                    : () {
-                        setState(() {
-                          if (outputFontSize - 3 >= 8) outputFontSize -= 3;
-                        });
-                      },
+                    : () => setState(() {
+                          if (outputFontSize + 3 <= 90) outputFontSize += 3;
+                        }),
+              ),
+              IconButton(
                 icon: Icon(Icons.remove),
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: translatedText == ''
+                    ? null
+                    : () => setState(() {
+                          if (outputFontSize - 3 >= 8) outputFontSize -= 3;
+                        }),
               ),
             ],
           ),

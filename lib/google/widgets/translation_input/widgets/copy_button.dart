@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-// import '/data.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
   final text;
@@ -13,13 +12,11 @@ class CopyToClipboardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      // color: theme == Brightness.dark ? null : greenColor,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: text == ''
           ? null
-          : () {
-              Clipboard.setData(ClipboardData(text: text)).then(
+          : () => Clipboard.setData(ClipboardData(text: text)).then(
                 (value) => ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 1),
@@ -30,8 +27,7 @@ class CopyToClipboardButton extends StatelessWidget {
                     ),
                   ),
                 ),
-              );
-            },
+              ),
       icon: Icon(Icons.copy),
     );
   }

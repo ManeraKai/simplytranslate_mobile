@@ -38,9 +38,7 @@ class SelectTheme extends StatelessWidget {
     }
 
     _systemFunc(setState) {
-      setState(() {
-        themeRadio = AppTheme.system;
-      });
+      setState(() => themeRadio = AppTheme.system);
       setStateOverlord(() {
         session.write('theme', 'system');
         themeValue = AppLocalizations.of(context)!.follow_system;
@@ -65,7 +63,6 @@ class SelectTheme extends StatelessWidget {
                         child: Row(
                           children: [
                             Radio<AppTheme>(
-                              // activeColor: greenColor,
                               value: AppTheme.dark,
                               groupValue: themeRadio,
                               onChanged: (_) => _darkFunc(setState),
@@ -84,7 +81,6 @@ class SelectTheme extends StatelessWidget {
                       child: Row(
                         children: [
                           Radio<AppTheme>(
-                            // activeColor: greenColor,
                             value: AppTheme.light,
                             groupValue: themeRadio,
                             onChanged: (_) => _lightFunc(setState),
@@ -104,7 +100,6 @@ class SelectTheme extends StatelessWidget {
                         child: Row(
                           children: [
                             Radio<AppTheme>(
-                                // activeColor: greenColor,
                                 value: AppTheme.system,
                                 groupValue: themeRadio,
                                 onChanged: (_) => _systemFunc(setState)),
@@ -120,9 +115,7 @@ class SelectTheme extends StatelessWidget {
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: () => Navigator.of(context).pop(),
                     child: Text(
                       AppLocalizations.of(context)!.cancel,
                     ),

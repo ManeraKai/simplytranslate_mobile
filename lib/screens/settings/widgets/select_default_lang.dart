@@ -87,9 +87,11 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                     ? MediaQuery.of(context).size.height / 2
                     : null,
                 margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
-                  boxShadow: [BoxShadow(offset: Offset(0, 0), blurRadius: 5)],
+                  boxShadow: const [
+                    const BoxShadow(offset: Offset(0, 0), blurRadius: 5)
+                  ],
                 ),
                 child: Scrollbar(
                   controller: _rightTextviewScrollController,
@@ -123,12 +125,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 18),
-                                  child: Text(
-                                    option,
-                                    style: (option == fromLanguage)
-                                        ? TextStyle(fontSize: 18)
-                                        : const TextStyle(fontSize: 18),
-                                  ),
+                                  child: Text(option),
                                 ),
                               ),
                             ),
@@ -190,7 +187,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                   }
                   Navigator.of(context).pop();
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   isDense: true,
@@ -205,9 +202,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Navigator.of(context).pop(),
           child: Text(
             AppLocalizations.of(context)!.cancel,
           ),

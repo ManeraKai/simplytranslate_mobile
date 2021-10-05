@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import 'package:simplytranslate_mobile/widgets/keyboard_visibility.dart';
+import '/widgets/keyboard_visibility.dart';
 import '/data.dart';
 
 class PasteClipboardButton extends StatefulWidget {
@@ -24,7 +24,6 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
       alignment: Alignment.topRight,
       child: KeyboardVisibilityBuilder(
         builder: (context, _, isKeyboardVisible) => IconButton(
-          // color: theme == Brightness.dark ? null : greenColor,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: isClipboardEmpty
@@ -35,7 +34,6 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                       Clipboard.getData(Clipboard.kTextPlain)
                           .then((value) async {
                         FocusScope.of(context).unfocus();
-                        print('wewe');
 
                         if (value != null) {
                           var valueString = value.text.toString();
@@ -119,7 +117,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               ),
                             );
                           }
-                        } else {
+                        } else
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               duration: Duration(seconds: 1),
@@ -130,7 +128,6 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               ),
                             ),
                           );
-                        }
                       });
                     },
           icon: Icon(Icons.paste),

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../data.dart';
-
-// Loading widgets don't work.
+import '/data.dart';
 
 class SettingsButton extends StatelessWidget {
+  final void Function() onTap;
   final IconData icon;
   final Color iconColor;
   final String title;
   final String content;
-  final void Function() onTap;
   final bool loading;
 
   const SettingsButton({
@@ -37,8 +35,8 @@ class SettingsButton extends StatelessWidget {
                       ? Container(
                           height: 45,
                           width: 45,
-                          padding: EdgeInsets.all(5),
-                          child: CircularProgressIndicator())
+                          padding: const EdgeInsets.all(5),
+                          child: const CircularProgressIndicator())
                       : Icon(
                           icon,
                           color: iconColor,

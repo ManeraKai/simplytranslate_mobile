@@ -28,10 +28,7 @@ class _SettingsState extends State<Settings> {
             AppLocalizations.of(context)!.settings,
           ),
           elevation: 3,
-          // backgroundColor: theme == Brightness.dark ? greyColor : greenColor,
         ),
-        // backgroundColor:
-        //     theme == Brightness.dark ? secondgreyColor : whiteColor,
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
@@ -42,20 +39,21 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(height: 10),
                 Text(
                   AppLocalizations.of(context)!.instances,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 5),
-                    height: 1.5,
-                    color: theme == Brightness.dark
-                        ? Colors.white
-                        : lightThemeGreyColor),
+                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  height: 1.5,
+                  color: theme == Brightness.dark
+                      ? Colors.white
+                      : lightThemeGreyColor,
+                ),
                 SelectInstance(setStateOverlord: widget.setStateOverlord),
                 UpdateList(setStateOverlord: widget.setStateOverlord),
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.appearance,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 5),
@@ -67,7 +65,7 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.translation,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 5),

@@ -1,18 +1,17 @@
-import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/google/widgets/translate_button/cancel_translation_button.dart';
-import '../../widgets/keyboard_visibility.dart';
-import 'widgets/translate_button/translate_button_float.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:intl/intl.dart' as intl;
+import 'dart:async';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import '/data.dart';
+import '/google/widgets/translate_button/cancel_translation_button.dart';
+import '/widgets/keyboard_visibility.dart';
+import 'widgets/translate_button/translate_button_float.dart';
 import 'widgets/translate_button/translate_button.dart';
 import 'widgets/translation_input/translation_input.dart';
 import 'widgets/translation_output/translation_output.dart';
 import 'widgets/lang_selector/from_lang.dart';
 import 'widgets/lang_selector/to_lang.dart';
 import 'widgets/lang_selector/switch_lang.dart';
-import '/data.dart';
 
 class GoogleTranslate extends StatefulWidget {
   final Future<String> Function(
