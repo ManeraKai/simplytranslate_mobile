@@ -35,7 +35,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 205,
+      height: 255,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -140,6 +140,15 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   setStateParentParent: widget.setStateParent),
               CopyToClipboardButton(translationInput),
               PasteClipboardButton(setStateParent: widget.setStateParent),
+              IconButton(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: googleTranslationInputController.text == ''
+                    ? null
+                    : () => audioPlayer.play(
+                        'https://simplytranslate.org/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleTranslationInputController.text}'),
+                icon: Icon(Icons.volume_up),
+              ),
               CharacterLimit(),
             ],
           )

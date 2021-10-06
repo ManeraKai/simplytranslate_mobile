@@ -24,7 +24,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
   Widget build(BuildContext context) {
     String translatedText = googleTranslationOutput;
     return Container(
-      height: 200,
+      height: 250,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -91,6 +91,15 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                     : () => setState(() {
                           if (outputFontSize - 3 >= 8) outputFontSize -= 3;
                         }),
+              ),
+              IconButton(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: googleTranslationOutput == ''
+                    ? null
+                    : () => audioPlayer.play(
+                        'https://simplytranslate.org/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput'),
+                icon: Icon(Icons.volume_up),
               ),
             ],
           ),

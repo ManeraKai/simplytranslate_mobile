@@ -32,6 +32,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  audioplayers: ^0.20.1
   
 
 dev_dependencies:
