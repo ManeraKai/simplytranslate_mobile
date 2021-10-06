@@ -128,6 +128,26 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               ),
                             ),
                           );
+
+                        if (googleTranslationInputController.text.length >
+                            5000) {
+                          print('wewe');
+                          if (!isSnackBarVisible) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 1),
+                                width: 300,
+                                content: Text(
+                                  'The translation input is above 5000',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                            isSnackBarVisible = true;
+                            Future.delayed(Duration(seconds: 1))
+                                .then((value) => isSnackBarVisible = false);
+                          }
+                        }
                       });
                     },
           icon: Icon(Icons.paste),

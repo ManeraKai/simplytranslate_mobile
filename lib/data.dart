@@ -125,3 +125,5 @@ var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
 ];
+
+bool isSnackBarVisible = false;
