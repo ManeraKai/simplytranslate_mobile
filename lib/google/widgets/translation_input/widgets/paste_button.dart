@@ -131,7 +131,6 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
 
                         if (googleTranslationInputController.text.length >
                             5000) {
-                          print('wewe');
                           if (!isSnackBarVisible) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -144,9 +143,9 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               ),
                             );
                             isSnackBarVisible = true;
-                            Future.delayed(Duration(seconds: 1))
-                                .then((value) => isSnackBarVisible = false);
                           }
+                        } else {
+                          isSnackBarVisible = false;
                         }
                       });
                     },

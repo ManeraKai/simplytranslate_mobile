@@ -108,9 +108,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                               ),
                             );
                             isSnackBarVisible = true;
-                            Future.delayed(Duration(seconds: 1))
-                                .then((value) => isSnackBarVisible = false);
                           }
+                        } else {
+                          isSnackBarVisible = false;
                         }
                       }
                       _pastTextLength =
