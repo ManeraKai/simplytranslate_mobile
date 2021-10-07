@@ -11,6 +11,7 @@ class CharacterLimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textLength = googleTranslationInputController.text.length;
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
@@ -22,14 +23,32 @@ class CharacterLimit extends StatelessWidget {
                 duration: Duration(seconds: 1),
                 width: 300,
                 content: Text(
-                  googleTranslationInputController.text.length > 5000
-                      ? AppLocalizations.of(context)!.input_calc.replaceFirst(
-                          '\$lengthDifference',
-                          '${googleTranslationInputController.text.length - 5000}')
-                      : AppLocalizations.of(context)!
-                          .input_fraction
-                          .replaceFirst('\$length',
-                              '${googleTranslationInputController.text.length}'),
+                  () {
+                    if (textLength > 5000) {
+                      return AppLocalizations.of(context)!
+                          .input_calc
+                          .replaceFirst(
+                              '\$lengthDifference', '${textLength - 5000}');
+                    } else {
+                      if (textLength == 1) {
+                        return AppLocalizations.of(context)!
+                            .input_fraction_one
+                            .replaceFirst('\$length', '$textLength');
+                      } else if (textLength > 1 && textLength < 5) {
+                        return AppLocalizations.of(context)!
+                            .input_fraction_few
+                            .replaceFirst('\$length', '$textLength');
+                      } else if (textLength >= 5) {
+                        return AppLocalizations.of(context)!
+                            .input_fraction_many
+                            .replaceFirst('\$length', '$textLength');
+                      } else {
+                        return AppLocalizations.of(context)!
+                            .input_fraction_other
+                            .replaceFirst('\$length', '$textLength');
+                      }
+                    }
+                  }(),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -43,9 +62,9 @@ class CharacterLimit extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              googleTranslationInputController.text.length.toString(),
+              textLength.toString(),
               style: TextStyle(
-                color: googleTranslationInputController.text.length > 5000
+                color: textLength > 5000
                     ? Colors.red
                     : theme == Brightness.dark
                         ? Colors.white
@@ -56,7 +75,7 @@ class CharacterLimit extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 3),
               height: 1,
               width: 30,
-              color: googleTranslationInputController.text.length > 5000
+              color: textLength > 5000
                   ? Colors.red
                   : theme == Brightness.dark
                       ? Colors.white
@@ -65,7 +84,7 @@ class CharacterLimit extends StatelessWidget {
             Text(
               '5000',
               style: TextStyle(
-                  color: googleTranslationInputController.text.length > 5000
+                  color: textLength > 5000
                       ? Colors.red
                       : theme == Brightness.dark
                           ? Colors.white

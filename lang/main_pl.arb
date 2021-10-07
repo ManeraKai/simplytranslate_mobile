@@ -121,8 +121,13 @@
     "empty_clipboard": "Schowek jest pusty",
     "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
     "input_calc": "Exceeded 5000 character limit by $lengthDifference",
-    "input_fraction": "Entered $length characters out of 5000 possible",
-    "audio_limit": "Can't get audio for more than 200 characters.",
+
+    "input_fraction_one": "Entered $length character out of 5000 possible",
+    "input_fraction_few": "Entered $length characters out of 5000 possible",
+    "input_fraction_many": "Entered $length characters out of 5000 possible",
+    "input_fraction_other": "Entered $length characters out of 5000 possible",
+    
+    "audio_limit": "Cannot get audio for more than 200 characters.",
     "not_available": "Usługa jest niedostępna",
 
 
