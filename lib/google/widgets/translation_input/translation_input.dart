@@ -9,8 +9,6 @@ import 'widgets/delete_button.dart';
 import 'widgets/paste_button.dart';
 import 'widgets/character_limit.dart';
 
-int _pastTextLength = 0;
-
 class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
   final Future<String> Function(
@@ -95,27 +93,24 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                             tmpSelection;
                       } else if (googleTranslationInputController.text.length >
                           5000) {
-                        if (_pastTextLength <
-                            googleTranslationInputController.text.length) {
-                          if (!isSnackBarVisible) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 1),
-                                width: 300,
-                                content: Text(
-                                  'The translation input is above 5000',
-                                  textAlign: TextAlign.center,
-                                ),
+                        if (!isSnackBarVisible) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 1),
+                              width: 300,
+                              content: Text(
+                                'The translation input is above 5000',
+                                textAlign: TextAlign.center,
                               ),
-                            );
-                            isSnackBarVisible = true;
-                          }
-                        } else {
+                            ),
+                          );
+                          isSnackBarVisible = true;
+                        }
+                      } else {
+                        if (isSnackBarVisible) {
                           isSnackBarVisible = false;
                         }
                       }
-                      _pastTextLength =
-                          googleTranslationInputController.text.length;
                       widget.setStateParent(() {
                         translationInputOpen = true;
                         translationInput = input;

@@ -17,11 +17,17 @@ class DeleteTranslationInputButton extends StatelessWidget {
         highlightColor: Colors.transparent,
         onPressed: googleTranslationInputController.text == ''
             ? null
-            : () => setStateParentParent(() {
+            : () {
+                setStateParentParent(() {
                   googleTranslationInputController.text = '';
                   translationInput = '';
                   googleTranslationOutput = '';
-                }),
+                });
+
+                if (isSnackBarVisible) {
+                  isSnackBarVisible = false;
+                }
+              },
         icon: Icon(Icons.close),
       ),
     );
