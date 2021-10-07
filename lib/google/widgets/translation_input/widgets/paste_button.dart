@@ -137,7 +137,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                                 duration: Duration(seconds: 1),
                                 width: 300,
                                 content: Text(
-                                  'The translation input is above 5000',
+                                  AppLocalizations.of(context)!.input_limit,
                                   textAlign: TextAlign.center,
                                 ),
                               ),

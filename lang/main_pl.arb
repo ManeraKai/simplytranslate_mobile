@@ -120,6 +120,8 @@
     "cancel": "Anuluj",
     "empty_clipboard": "Schowek jest pusty",
     "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
+    "input_calc": "Exceeded 5000 character limit by ${inputLength - 5000}",
+    "input_fraction": "Entered $inputLength characters out of 5000 possible",
     "not_available": "Usługa jest niedostępna",
 
 

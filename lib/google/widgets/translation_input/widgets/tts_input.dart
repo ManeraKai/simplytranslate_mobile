@@ -28,8 +28,17 @@ class _TtsOutputState extends State<TtsInput> {
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onPressed: googleTranslationOutput == ''
-          ? null
+      onPressed: googleTranslationInputController.text == ''
+          ? () async {
+              final result = await audioPlayer.stop();
+              if (result == 1) {
+                setState(() {
+                  listening = false;
+                });
+              } else {
+                print('something is wrong');
+              }
+            }
           : !listening
               ? () async {
                   final result = await audioPlayer
@@ -48,6 +57,8 @@ class _TtsOutputState extends State<TtsInput> {
                     setState(() {
                       listening = false;
                     });
+                  } else {
+                    print('something is wrong');
                   }
                 },
       icon: Icon(listening ? Icons.stop : Icons.volume_up),

@@ -120,6 +120,8 @@
     "cancel": "Cancel",
     "empty_clipboard": "Clipboard is empty",
     "input_limit": "The translation input is above 5000",
+    "input_calc": "Exceeded 5000 character limit by ${inputLength - 5000}",
+    "input_fraction": "Entered $inputLength characters out of 5000 possible",
     "not_available": "Service is not available",
 
 
@@ -155,4 +157,6 @@
     "version": "Version",
     "license": "License"
     
+
+
 }
