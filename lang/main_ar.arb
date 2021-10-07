@@ -109,27 +109,25 @@
     "yoruba": "اليورباية",
     "zulu": "الزولوية",
 
-
     "copied_to_clipboard": "نُسخ إلى الحافظة",
     "translate": "ترجم",
     "enter_text_here": "أدخل النص هنا",
     "something_went_wrong": "هناك خطأ ما",
-    "check_instance": "(السيرفر)تحقق من المثيل",
+    "check_instance": "(السيرفر) تحقق من المثيل",
     "no_internet": "لا يوجد انترنت",
     "ok": "حسناً",
-    "cancel": "Cancel",
+    "cancel": "إلغاء",
     "empty_clipboard": "الحافظة فارغة",
     "input_limit": "عدد أحرف النص أكثر من 5000",
-    "input_calc": "Exceeded 5000 character limit by $lengthDifference",
+    "input_calc": "اُجتِيزَ حد الـ5000 حرف بـ$lengthDifference",
     
-    "input_fraction_one": "Entered $length character out of 5000 possible",
-    "input_fraction_few": "Entered $length characters out of 5000 possible",
-    "input_fraction_many": "Entered $length characters out of 5000 possible",
-    "input_fraction_other": "Entered $length characters out of 5000 possible",
+    "input_fraction_one": "أُدخل $length حرف من أصل 5000 متاح",
+    "input_fraction_few": "أُدخل $length أحرف من أصل 5000 متاحين",
+    "input_fraction_many": "أُدخل $length حرف من أصل 5000 متاح",
+    "input_fraction_other": "أُدخل $length حرف من أصل 5000 متاح",
     
-    "audio_limit": "Cannot get audio for more than 200 characters.",
+    "audio_limit": "لا يمكن جلب الصوت لأكثر من 200 حرف",
     "not_available": "غير متاح",
-
 
     "settings": "الإعدادات",
 
@@ -153,7 +151,6 @@
 
     "share_to_lang": "إلى-لغة المشاركة الإفتراضية",
 
-   
     "about": "عن",
 
     "team": "الفريق",
@@ -161,7 +158,5 @@
     "contribute": "المساهمة",
     "contribute_summary": "ساعد على تحسينه!",
     "version": "الإصدار",
-    "license": "الرخصة"
-    
-    
+    "license": "الرخصة"    
 }
