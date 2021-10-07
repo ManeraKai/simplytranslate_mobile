@@ -4,10 +4,12 @@ import '/data.dart';
 
 class GoogleSwitchLang extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function(
-      {required String input,
-      required String fromLanguageValue,
-      required String toLanguageValue}) translateParent;
+  final Future<String> Function({
+    required String input,
+    required String fromLanguageValue,
+    required String toLanguageValue,
+    required BuildContext context,
+  }) translateParent;
 
   const GoogleSwitchLang({
     required this.setStateParent,
@@ -42,9 +44,11 @@ class GoogleSwitchLang extends StatelessWidget {
                 setStateParent(() => loading = true);
                 try {
                   final translatedText = await translateParent(
-                      input: translationInput,
-                      fromLanguageValue: fromLanguageValue,
-                      toLanguageValue: toLanguageValue);
+                    input: translationInput,
+                    fromLanguageValue: fromLanguageValue,
+                    toLanguageValue: toLanguageValue,
+                    context: context,
+                  );
 
                   final tmp = fromLanguage;
                   fromLanguage = toLanguage;
@@ -60,9 +64,11 @@ class GoogleSwitchLang extends StatelessWidget {
                   final translatedText2;
                   if (translatedText.length <= 5000) {
                     translatedText2 = await translateParent(
-                        input: translatedText,
-                        fromLanguageValue: fromLanguageValue,
-                        toLanguageValue: toLanguageValue);
+                      input: translatedText,
+                      fromLanguageValue: fromLanguageValue,
+                      toLanguageValue: toLanguageValue,
+                      context: context,
+                    );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

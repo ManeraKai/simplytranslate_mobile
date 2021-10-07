@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:html/parser.dart' show parse;
-import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -505,7 +501,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
-    getSharedText(setState, translate);
+    getSharedText(setState, context, translate);
     super.initState();
   }
 
@@ -515,98 +511,12 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  Future<String> translate({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-  }) async {
-    if (input.length <= 5000) {
-      final url;
-      if (instance == 'custom') {
-        url = Uri.parse(customInstance);
-      } else if (instance == 'random')
-        url = Uri.parse(instances[Random().nextInt(instances.length)]);
-      else
-        url = Uri.parse(instance);
-      // default https://
-
-      showInternetError() {
-        showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-                  title: Text(
-                    AppLocalizations.of(context)!.no_internet,
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
-                        AppLocalizations.of(context)!.ok,
-                      ),
-                    )
-                  ],
-                ));
-      }
-
-      showInstanceError() {
-        showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-                  title: Text(
-                    AppLocalizations.of(context)!.something_went_wrong,
-                  ),
-                  content: Text(
-                    AppLocalizations.of(context)!.check_instance,
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
-                        AppLocalizations.of(context)!.ok,
-                      ),
-                    )
-                  ],
-                ));
-      }
-
-      try {
-        final response = await http.post(url, body: {
-          'from_language': fromLanguageValue,
-          'to_language': toLanguageValue,
-          'input': input,
-        });
-
-        if (response.statusCode == 200) {
-          final x = parse(response.body)
-              .getElementsByClassName('translation')[0]
-              .innerHtml;
-          return x;
-        } else
-          showInstanceError();
-        return 'Request failed with status: ${response.statusCode}.';
-      } catch (err) {
-        try {
-          final result = await InternetAddress.lookup('exmaple.com');
-          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-            showInstanceError();
-            throw ('Instnace not valid');
-          }
-        } on SocketException catch (_) {
-          showInternetError();
-          throw ('No internet');
-        }
-        return '';
-      }
-    } else
-      return '';
-  }
-
   final rowWidth = 430;
 
   @override
   Widget build(BuildContext context) {
     if (callSharedText) {
-      getSharedText(setState, translate);
+      getSharedText(setState, context, translate);
     }
     return GestureDetector(
       onTap: () {

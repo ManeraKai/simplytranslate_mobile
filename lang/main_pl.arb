@@ -123,7 +123,7 @@
     "input_calc": "Przekroczono limit 5000 znaków o $lengthDifference",
 
     "input_fraction_one": "Wpisano $length znak z 5000 możliwych",
-    "input_fraction_few": "Wpisano $length znaki z 5000 możliwych",,
+    "input_fraction_few": "Wpisano $length znaki z 5000 możliwych",
     "input_fraction_many": "Wpisano $length znaków z 5000 możliwych",
     "input_fraction_other": "Wpisano $length znaków z 5000 możliwych",
     

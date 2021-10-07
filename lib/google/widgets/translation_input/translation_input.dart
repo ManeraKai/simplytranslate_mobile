@@ -11,10 +11,12 @@ import 'widgets/character_limit.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
-  final Future<String> Function(
-      {required String input,
-      required String fromLanguageValue,
-      required String toLanguageValue}) translateParent;
+  final Future<String> Function({
+    required String input,
+    required String fromLanguageValue,
+    required String toLanguageValue,
+    required BuildContext context,
+  }) translateParent;
   const GoogleTranslationInput({
     required this.setStateParent,
     required this.translateParent,
@@ -67,7 +69,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                               : TextDirection.ltr,
                   // selectionControls: MyMaterialTextSelectionControls(),
                   focusNode: focus,
-                  minLines: 8,
+                  minLines: 10,
                   maxLines: null,
                   controller: googleTranslationInputController,
                   keyboardType: TextInputType.multiline,

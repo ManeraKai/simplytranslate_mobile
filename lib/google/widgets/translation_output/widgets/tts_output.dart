@@ -1,4 +1,8 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 
@@ -63,14 +67,40 @@ class _TtsOutputState extends State<TtsOutput> {
                       }
                     }
                   : () async {
-                      final result = await audioPlayer
-                          .play(
-                              'https://simplytranslate.org/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput')
-                          .whenComplete(() => null);
-                      if (result == 1) {
-                        setState(() {
-                          listening = true;
-                        });
+                      final _url;
+                      if (instance == 'custom') {
+                        _url = Uri.parse(
+                            '$customInstance/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput');
+                      } else if (instance == 'random')
+                        _url = Uri.parse(
+                            '${instances[Random().nextInt(instances.length)]}/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput');
+                      else
+                        _url = Uri.parse(
+                            '$instance/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput');
+                      try {
+                        final response = await http.get(_url);
+                        if (response.statusCode == 200) {
+                          final result = await audioPlayer
+                              .playBytes(response.bodyBytes)
+                              .whenComplete(() => null);
+                          if (result == 1) {
+                            setState(() {
+                              listening = true;
+                            });
+                          }
+                        } else
+                          showInstanceError(context);
+                      } catch (err) {
+                        try {
+                          final result =
+                              await InternetAddress.lookup('exmaple.com');
+                          if (result.isNotEmpty &&
+                              result[0].rawAddress.isNotEmpty) {
+                            showInstanceError(context);
+                          }
+                        } on SocketException catch (_) {
+                          showInternetError(context);
+                        }
                       }
                     }
               : () async {

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -6,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 
 const greyColor = Color(0xff131618);
 const lightgreyColor = Color(0xff495057);
@@ -90,10 +94,12 @@ Future<customInstanceValidation> checkInstance(
 
 Future<void> getSharedText(
   setStateParent,
+  context,
   Future<String> Function({
     required String input,
     required String fromLanguageValue,
     required String toLanguageValue,
+    required BuildContext context,
   })
       translateParent,
 ) async {
@@ -107,9 +113,11 @@ Future<void> getSharedText(
       });
 
       final translatedText = await translateParent(
-          input: translationInput,
-          fromLanguageValue: 'Autodetect',
-          toLanguageValue: toLanguageValueShareDefault);
+        input: translationInput,
+        fromLanguageValue: 'Autodetect',
+        toLanguageValue: toLanguageValueShareDefault,
+        context: context,
+      );
       setStateParent(() {
         googleTranslationOutput = translatedText;
         loading = false;
@@ -122,11 +130,98 @@ Future<void> getSharedText(
   }
 }
 
+bool isSnackBarVisible = false;
+
+AudioPlayer audioPlayer = AudioPlayer();
+
+showInstanceError(context) {
+  showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+            title: Text(
+              AppLocalizations.of(context)!.something_went_wrong,
+            ),
+            content: Text(
+              AppLocalizations.of(context)!.check_instance,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  AppLocalizations.of(context)!.ok,
+                ),
+              )
+            ],
+          ));
+}
+
+showInternetError(context) {
+  showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+            title: Text(
+              AppLocalizations.of(context)!.no_internet,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  AppLocalizations.of(context)!.ok,
+                ),
+              )
+            ],
+          ));
+}
+
+Future<String> translate({
+  required String input,
+  required String fromLanguageValue,
+  required String toLanguageValue,
+  required BuildContext context,
+}) async {
+  if (input.length <= 5000) {
+    final url;
+    if (instance == 'custom') {
+      url = Uri.parse(customInstance);
+    } else if (instance == 'random')
+      url = Uri.parse(instances[Random().nextInt(instances.length)]);
+    else
+      url = Uri.parse(instance);
+    // default https://
+
+    try {
+      final response = await http.post(url, body: {
+        'from_language': fromLanguageValue,
+        'to_language': toLanguageValue,
+        'input': input,
+      });
+
+      if (response.statusCode == 200) {
+        final x = parse(response.body)
+            .getElementsByClassName('translation')[0]
+            .innerHtml;
+        return x;
+      } else
+        showInstanceError(context);
+      return 'Request failed with status: ${response.statusCode}.';
+    } catch (err) {
+      try {
+        final result = await InternetAddress.lookup('exmaple.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          showInstanceError(context);
+          throw ('Instnace not valid');
+        }
+      } on SocketException catch (_) {
+        showInternetError(context);
+        throw ('No internet');
+      }
+      return '';
+    }
+  } else
+    return '';
+}
+
 var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
 ];
-
-bool isSnackBarVisible = false;
-
-AudioPlayer audioPlayer = AudioPlayer();

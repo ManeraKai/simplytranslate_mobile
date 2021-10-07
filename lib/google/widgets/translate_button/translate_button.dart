@@ -7,10 +7,12 @@ import '/data.dart';
 
 class GoogleTranslateButton extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function(
-      {required String input,
-      required String fromLanguageValue,
-      required String toLanguageValue}) translateParent;
+  final Future<String> Function({
+    required String input,
+    required String fromLanguageValue,
+    required String toLanguageValue,
+    required BuildContext context,
+  }) translateParent;
 
   const GoogleTranslateButton({
     Key? key,
@@ -30,9 +32,11 @@ class GoogleTranslateButton extends StatelessWidget {
                   setStateParent(() => loading = true);
                   try {
                     final translatedText = await translateParent(
-                        input: translationInput,
-                        fromLanguageValue: fromLanguageValue,
-                        toLanguageValue: toLanguageValue);
+                      input: translationInput,
+                      fromLanguageValue: fromLanguageValue,
+                      toLanguageValue: toLanguageValue,
+                      context: context,
+                    );
                     if (!isTranslationCanceled) {
                       setStateParent(() {
                         googleTranslationOutput = translatedText;
