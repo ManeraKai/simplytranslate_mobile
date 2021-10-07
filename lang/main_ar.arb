@@ -120,8 +120,8 @@
     "cancel": "Cancel",
     "empty_clipboard": "الحافظة فارغة",
     "input_limit": "عدد أحرف النص أكثر من 5000",
-    "input_calc": "Exceeded 5000 character limit by ${inputLength - 5000}",
-    "input_fraction": "Entered $inputLength characters out of 5000 possible",
+    "input_calc": "Exceeded 5000 character limit by $lengthDifference",
+    "input_fraction": "Entered $length characters out of 5000 possible",
     "not_available": "غير متاح",
 
 

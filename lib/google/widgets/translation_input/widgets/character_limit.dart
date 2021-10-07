@@ -24,11 +24,11 @@ class CharacterLimit extends StatelessWidget {
                 content: Text(
                   googleTranslationInputController.text.length > 5000
                       ? AppLocalizations.of(context)!.input_calc.replaceFirst(
-                          '\${inputLength - 5000}}',
+                          '\$lengthDifference',
                           '${googleTranslationInputController.text.length - 5000}')
                       : AppLocalizations.of(context)!
                           .input_fraction
-                          .replaceFirst('\$inputLength',
+                          .replaceFirst('\$length',
                               '${googleTranslationInputController.text.length}'),
                   textAlign: TextAlign.center,
                 ),
