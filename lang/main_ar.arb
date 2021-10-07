@@ -122,6 +122,7 @@
     "input_limit": "عدد أحرف النص أكثر من 5000",
     "input_calc": "Exceeded 5000 character limit by $lengthDifference",
     "input_fraction": "Entered $length characters out of 5000 possible",
+    "audio_limit": "Can't get audio for more than 200 characters.",
     "not_available": "غير متاح",
 
 
