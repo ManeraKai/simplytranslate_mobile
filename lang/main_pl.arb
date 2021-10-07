@@ -120,14 +120,14 @@
     "cancel": "Anuluj",
     "empty_clipboard": "Schowek jest pusty",
     "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
-    "input_calc": "Exceeded 5000 character limit by $lengthDifference",
+    "input_calc": "Przekroczono limit 5000 znaków o $lengthDifference",
 
-    "input_fraction_one": "Entered $length character out of 5000 possible",
-    "input_fraction_few": "Entered $length characters out of 5000 possible",
-    "input_fraction_many": "Entered $length characters out of 5000 possible",
-    "input_fraction_other": "Entered $length characters out of 5000 possible",
+    "input_fraction_one": "Wpisano $length znak z 5000 możliwych",
+    "input_fraction_few": "Wpisano $length znaki z 5000 możliwych",,
+    "input_fraction_many": "Wpisano $length znaków z 5000 możliwych",
+    "input_fraction_other": "Wpisano $length znaków z 5000 możliwych",
     
-    "audio_limit": "Cannot get audio for more than 200 characters.",
+    "audio_limit": "Nie można uzyskać dźwięku powyżej 200 znaków",
     "not_available": "Usługa jest niedostępna",
 
 

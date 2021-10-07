@@ -127,7 +127,7 @@
     "input_fraction_many": "Entered $length characters out of 5000 possible",
     "input_fraction_other": "Entered $length characters out of 5000 possible",
     
-    "audio_limit": "Cannot get audio for more than 200 characters.",
+    "audio_limit": "Cannot get audio for more than 200 characters",
     "not_available": "Service is not available",
 
 
