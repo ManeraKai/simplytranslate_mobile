@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import '/google/widgets/translation_input/widgets/tts_input.dart';
 import '/data.dart';
 import 'widgets/copy_button.dart';
 import 'widgets/delete_button.dart';
@@ -140,15 +141,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   setStateParentParent: widget.setStateParent),
               CopyToClipboardButton(translationInput),
               PasteClipboardButton(setStateParent: widget.setStateParent),
-              IconButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: googleTranslationInputController.text == ''
-                    ? null
-                    : () => audioPlayer.play(
-                        'https://simplytranslate.org/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleTranslationInputController.text}'),
-                icon: Icon(Icons.volume_up),
-              ),
+              TtsInput(),
               CharacterLimit(),
             ],
           )

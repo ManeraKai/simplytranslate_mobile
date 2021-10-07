@@ -3,6 +3,7 @@ import 'package:intl/intl.dart' as intl;
 import '/data.dart';
 import '/google/screens/maximized/maximized.dart';
 import '/google/widgets/translation_input/widgets/copy_button.dart';
+import 'widgets/tts_output.dart';
 
 class GoogleTranslationOutput extends StatefulWidget {
   const GoogleTranslationOutput({Key? key}) : super(key: key);
@@ -92,15 +93,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                           if (outputFontSize - 3 >= 8) outputFontSize -= 3;
                         }),
               ),
-              IconButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: googleTranslationOutput == ''
-                    ? null
-                    : () => audioPlayer.play(
-                        'https://simplytranslate.org/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput'),
-                icon: Icon(Icons.volume_up),
-              ),
+              TtsOutput(),
             ],
           ),
         ],

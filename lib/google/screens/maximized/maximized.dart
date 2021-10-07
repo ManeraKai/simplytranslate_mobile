@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/google/widgets/translation_output/widgets/tts_output.dart';
 import '/data.dart';
 import '/google/widgets/translation_input/widgets/copy_button.dart';
 
@@ -19,6 +20,17 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Container(
+            decoration: BoxDecoration(
+              color: theme == Brightness.dark ? Color(0xff131618) : null,
+              border: Border.all(
+                color: theme == Brightness.dark
+                    ? Color(0xff495057)
+                    : Color(0xffa9a9a9),
+                width: 1.5,
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(2),
+            ),
             margin:
                 const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
             child: Row(
@@ -57,6 +69,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                       },
                       icon: Icon(Icons.remove),
                     ),
+                    TtsOutput(),
                   ],
                 )
               ],
