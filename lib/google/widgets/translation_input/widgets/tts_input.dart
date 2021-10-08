@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 
-bool listening = false;
+bool _listening = false;
 bool _isSnackBarPressed = false;
 
 class TtsInput extends StatefulWidget {
@@ -23,7 +23,7 @@ class _TtsOutputState extends State<TtsInput> {
   void initState() {
     audioPlayer.onPlayerCompletion.listen((event) {
       setState(() {
-        listening = false;
+        _listening = false;
       });
     });
     super.initState();
@@ -35,19 +35,16 @@ class _TtsOutputState extends State<TtsInput> {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: googleTranslationInputController.text == ''
-          ? listening
+          ? _listening
               ? () async {
                   final result = await audioPlayer.stop();
-                  if (result == 1) {
-                    setState(() {
-                      listening = false;
-                    });
-                  } else {
+                  if (result == 1)
+                    setState(() => _listening = false);
+                  else
                     print('something is wrong');
-                  }
                 }
               : null
-          : !listening
+          : !_listening
               ? googleTranslationInputController.text.length > 200
                   ? () {
                       if (!_isSnackBarPressed) {
@@ -68,10 +65,10 @@ class _TtsOutputState extends State<TtsInput> {
                     }
                   : () async {
                       final _url;
-                      if (instance == 'custom') {
+                      if (instance == 'custom')
                         _url = Uri.parse(
                             '$customInstance/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleTranslationInputController.text}');
-                      } else if (instance == 'random')
+                      else if (instance == 'random')
                         _url = Uri.parse(
                             '${instances[Random().nextInt(instances.length)]}/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleTranslationInputController.text}');
                       else
@@ -85,19 +82,18 @@ class _TtsOutputState extends State<TtsInput> {
                               .whenComplete(() => null);
                           if (result == 1) {
                             setState(() {
-                              listening = true;
+                              _listening = true;
                             });
                           }
                         } else
-                          showInstanceError(context);
+                          showInstanceTtsError(context);
                       } catch (err) {
                         try {
                           final result =
                               await InternetAddress.lookup('exmaple.com');
                           if (result.isNotEmpty &&
-                              result[0].rawAddress.isNotEmpty) {
-                            showInstanceError(context);
-                          }
+                              result[0].rawAddress.isNotEmpty)
+                            showInstanceTtsError(context);
                         } on SocketException catch (_) {
                           showInternetError(context);
                         }
@@ -105,17 +101,11 @@ class _TtsOutputState extends State<TtsInput> {
                     }
               : () async {
                   final result = await audioPlayer.stop();
-                  if (result == 1) {
-                    setState(() {
-                      listening = false;
-                    });
-                  } else {
-                    print('something is wrong');
-                  }
+                  if (result == 1) setState(() => _listening = false);
                 },
       icon: Icon(
-        listening ? Icons.stop : Icons.volume_up,
-        color: googleTranslationInputController.text.length > 200 && !listening
+        _listening ? Icons.stop : Icons.volume_up,
+        color: googleTranslationInputController.text.length > 200 && !_listening
             ? Colors.grey
             : null,
       ),

@@ -92,17 +92,16 @@ Future<customInstanceValidation> checkInstance(
   }
 }
 
-Future<void> getSharedText(
-  setStateParent,
-  context,
-  Future<String> Function({
+Future<void> getSharedText({
+  required setStateParent,
+  required context,
+  required Future<String> translateParent({
     required String input,
     required String fromLanguageValue,
     required String toLanguageValue,
     required BuildContext context,
-  })
-      translateParent,
-) async {
+  }),
+}) async {
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
@@ -124,9 +123,7 @@ Future<void> getSharedText(
       });
     }
   } catch (_) {
-    setStateParent(() {
-      loading = false;
-    });
+    setStateParent(() => loading = false);
   }
 }
 
@@ -136,41 +133,65 @@ AudioPlayer audioPlayer = AudioPlayer();
 
 showInstanceError(context) {
   showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-            title: Text(
-              AppLocalizations.of(context)!.something_went_wrong,
-            ),
-            content: Text(
-              AppLocalizations.of(context)!.check_instance,
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  AppLocalizations.of(context)!.ok,
-                ),
-              )
-            ],
-          ));
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text(
+        AppLocalizations.of(context)!.something_went_wrong,
+      ),
+      content: Text(
+        AppLocalizations.of(context)!.check_instance,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            AppLocalizations.of(context)!.ok,
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+showInstanceTtsError(context) {
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text(
+        AppLocalizations.of(context)!.something_went_wrong,
+      ),
+      content: Text(
+        AppLocalizations.of(context)!.check_instnace_audio,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            AppLocalizations.of(context)!.ok,
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 showInternetError(context) {
   showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-            title: Text(
-              AppLocalizations.of(context)!.no_internet,
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  AppLocalizations.of(context)!.ok,
-                ),
-              )
-            ],
-          ));
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text(
+        AppLocalizations.of(context)!.no_internet,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            AppLocalizations.of(context)!.ok,
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 Future<String> translate({

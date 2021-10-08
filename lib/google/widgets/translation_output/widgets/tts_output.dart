@@ -89,14 +89,14 @@ class _TtsOutputState extends State<TtsOutput> {
                             });
                           }
                         } else
-                          showInstanceError(context);
+                          showInstanceTtsError(context);
                       } catch (err) {
                         try {
                           final result =
                               await InternetAddress.lookup('exmaple.com');
                           if (result.isNotEmpty &&
                               result[0].rawAddress.isNotEmpty) {
-                            showInstanceError(context);
+                            showInstanceTtsError(context);
                           }
                         } on SocketException catch (_) {
                           showInternetError(context);

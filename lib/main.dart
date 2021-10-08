@@ -501,7 +501,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
-    getSharedText(setState, context, translate);
+    getSharedText(
+      setStateParent: setState,
+      context: context,
+      translateParent: translate,
+    );
     super.initState();
   }
 
@@ -516,7 +520,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     if (callSharedText) {
-      getSharedText(setState, context, translate);
+      getSharedText(
+        setStateParent: setState,
+        context: context,
+        translateParent: translate,
+      );
     }
     return GestureDetector(
       onTap: () {

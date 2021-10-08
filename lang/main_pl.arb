@@ -115,6 +115,7 @@
     "enter_text_here": "Wpisz tutaj tekst",
     "something_went_wrong": "Coś poszło nie tak",
     "check_instance": "Sprawdź instancję.",
+    "check_instnace_audio": "Check instance and its tts (text-to-speach) support.",
     "no_internet": "Brak połączenia z Internetem",
     "ok": "OK",
     "cancel": "Anuluj",
