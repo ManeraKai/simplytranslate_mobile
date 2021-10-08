@@ -4,10 +4,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
   final text;
-  const CopyToClipboardButton(
-    this.text, {
-    Key? key,
-  }) : super(key: key);
+  const CopyToClipboardButton(this.text, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

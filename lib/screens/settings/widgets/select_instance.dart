@@ -12,10 +12,8 @@ bool checkLoading = false;
 bool isCanceled = false;
 
 class SelectInstance extends StatelessWidget {
-  const SelectInstance({
-    required this.setStateOverlord,
-    Key? key,
-  }) : super(key: key);
+  const SelectInstance({required this.setStateOverlord, Key? key})
+      : super(key: key);
 
   final setStateOverlord;
 
@@ -223,7 +221,9 @@ class SelectInstance extends StatelessWidget {
                               onChanged: (_) => randomFunc(setState)),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
+                              horizontal: 10,
+                              vertical: 20,
+                            ),
                             child: Text(
                               AppLocalizations.of(context)!.random,
                               style: const TextStyle(fontSize: 16),
@@ -242,7 +242,9 @@ class SelectInstance extends StatelessWidget {
                               onChanged: (_) => customFunc(setState)),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
+                              horizontal: 10,
+                              vertical: 20,
+                            ),
                             child: Text(
                               AppLocalizations.of(context)!.custom,
                               style: const TextStyle(fontSize: 16),

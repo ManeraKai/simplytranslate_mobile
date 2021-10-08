@@ -52,21 +52,17 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                     IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onPressed: () {
-                        setState(() {
-                          if (outputFontSize + 3 <= 90) outputFontSize += 3;
-                        });
-                      },
+                      onPressed: () => setState(() {
+                        if (outputFontSize + 3 <= 90) outputFontSize += 3;
+                      }),
                       icon: Icon(Icons.add),
                     ),
                     IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onPressed: () {
-                        setState(() {
-                          if (outputFontSize - 3 >= 8) outputFontSize -= 3;
-                        });
-                      },
+                      onPressed: () => setState(() {
+                        if (outputFontSize - 3 >= 8) outputFontSize -= 3;
+                      }),
                       icon: Icon(Icons.remove),
                     ),
                     TtsOutput(),

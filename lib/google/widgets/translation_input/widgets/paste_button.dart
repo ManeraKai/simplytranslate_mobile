@@ -144,9 +144,8 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                             );
                             isSnackBarVisible = true;
                           }
-                        } else {
+                        } else
                           isSnackBarVisible = false;
-                        }
                       });
                     },
           icon: Icon(Icons.paste),

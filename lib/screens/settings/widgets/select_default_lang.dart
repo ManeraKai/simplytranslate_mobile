@@ -10,22 +10,18 @@ var selectLanguagesMapFlipped = {};
 
 class SelectDefaultLang extends StatelessWidget {
   final setStateOverlord;
-  const SelectDefaultLang({
-    required this.setStateOverlord,
-    Key? key,
-  }) : super(key: key);
+  const SelectDefaultLang({required this.setStateOverlord, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SettingsButton(
       onTap: () => showDialog(
         context: context,
-        builder: (context) {
-          return StatefulBuilder(
-            builder: (context, setState) =>
-                SelectDefaultLangDialog(setStateOverlord: setStateOverlord),
-          );
-        },
+        builder: (context) => StatefulBuilder(
+          builder: (context, setState) =>
+              SelectDefaultLangDialog(setStateOverlord: setStateOverlord),
+        ),
       ),
       icon: Icons.translate,
       iconColor: theme == Brightness.dark ? Colors.white : greenColor,
@@ -36,10 +32,8 @@ class SelectDefaultLang extends StatelessWidget {
 }
 
 class SelectDefaultLangDialog extends StatefulWidget {
-  const SelectDefaultLangDialog({
-    Key? key,
-    required this.setStateOverlord,
-  }) : super(key: key);
+  const SelectDefaultLangDialog({Key? key, required this.setStateOverlord})
+      : super(key: key);
 
   final setStateOverlord;
 
@@ -203,9 +197,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(
-            AppLocalizations.of(context)!.cancel,
-          ),
+          child: Text(AppLocalizations.of(context)!.cancel),
         )
       ],
     );

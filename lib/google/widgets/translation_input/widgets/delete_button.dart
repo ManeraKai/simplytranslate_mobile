@@ -3,10 +3,9 @@ import '/data.dart';
 
 class DeleteTranslationInputButton extends StatelessWidget {
   final setStateParentParent;
-  const DeleteTranslationInputButton({
-    required this.setStateParentParent,
-    Key? key,
-  }) : super(key: key);
+  const DeleteTranslationInputButton(
+      {required this.setStateParentParent, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +23,7 @@ class DeleteTranslationInputButton extends StatelessWidget {
                   googleTranslationOutput = '';
                 });
 
-                if (isSnackBarVisible) {
-                  isSnackBarVisible = false;
-                }
+                if (isSnackBarVisible) isSnackBarVisible = false;
               },
         icon: Icon(Icons.close),
       ),

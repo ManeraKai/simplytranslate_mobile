@@ -36,12 +36,9 @@ class SettingsButton extends StatelessWidget {
                           height: 45,
                           width: 45,
                           padding: const EdgeInsets.all(5),
-                          child: const CircularProgressIndicator())
-                      : Icon(
-                          icon,
-                          color: iconColor,
-                          size: 45,
-                        ),
+                          child: const CircularProgressIndicator(),
+                        )
+                      : Icon(icon, color: iconColor, size: 45),
                 ),
                 SizedBox(width: 10),
                 Expanded(
@@ -51,10 +48,7 @@ class SettingsButton extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          title,
-                          style: TextStyle(fontSize: 18),
-                        ),
+                        Text(title, style: TextStyle(fontSize: 18)),
                         Text(
                           content,
                           style: TextStyle(

@@ -5,10 +5,8 @@ import '/data.dart';
 class GoogleCancelTranslationButton extends StatelessWidget {
   final setStateParent;
 
-  const GoogleCancelTranslationButton({
-    Key? key,
-    required this.setStateParent,
-  }) : super(key: key);
+  const GoogleCancelTranslationButton({Key? key, required this.setStateParent})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +28,7 @@ class GoogleCancelTranslationButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
             AppLocalizations.of(context)!.cancel,
-            style: TextStyle(
-              fontSize: 18,
-            ),
+            style: const TextStyle(fontSize: 18),
           ),
         ),
       ),

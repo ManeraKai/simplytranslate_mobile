@@ -61,7 +61,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   textDirection:
                       googleTranslationInputController.text.length == 0
                           ? intl.Bidi.detectRtlDirectionality(
-                                  AppLocalizations.of(context)!.arabic)
+                              AppLocalizations.of(context)!.arabic,
+                            )
                               ? TextDirection.rtl
                               : TextDirection.ltr
                           : intl.Bidi.detectRtlDirectionality(translationInput)
@@ -73,9 +74,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   maxLines: null,
                   controller: googleTranslationInputController,
                   keyboardType: TextInputType.multiline,
-                  onTap: () {
-                    widget.setStateParent(() => translationInputOpen = true);
-                  },
+                  onTap: () =>
+                      widget.setStateParent(() => translationInputOpen = true),
                   onChanged: (String input) {
                     if (googleTranslationInputController.text.length > 99999) {
                       final tmpSelection;
@@ -111,9 +111,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                         isSnackBarVisible = true;
                       }
                     } else {
-                      if (isSnackBarVisible) {
-                        isSnackBarVisible = false;
-                      }
+                      if (isSnackBarVisible) isSnackBarVisible = false;
                     }
                     widget.setStateParent(() {
                       translationInputOpen = true;

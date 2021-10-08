@@ -44,21 +44,20 @@ class GoogleTranslateButton extends StatelessWidget {
                       });
                     }
                   } catch (_) {
-                    setStateParent(() {
-                      loading = false;
-                    });
+                    setStateParent(() => loading = false);
                   }
                 }
               : null,
       child: Text(
         AppLocalizations.of(context)!.translate,
         style: TextStyle(
-            fontSize: 18,
-            color: theme == Brightness.dark
-                ? null
-                : googleTranslationInputController.text == ''
-                    ? lightThemeGreyColor
-                    : Colors.white),
+          fontSize: 18,
+          color: theme == Brightness.dark
+              ? null
+              : googleTranslationInputController.text == ''
+                  ? lightThemeGreyColor
+                  : Colors.white,
+        ),
       ),
     );
   }

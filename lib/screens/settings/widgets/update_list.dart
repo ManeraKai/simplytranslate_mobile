@@ -13,10 +13,8 @@ bool checkLoading = false;
 bool isCanceled = false;
 
 class UpdateList extends StatelessWidget {
-  const UpdateList({
-    required this.setStateOverlord,
-    Key? key,
-  }) : super(key: key);
+  const UpdateList({required this.setStateOverlord, Key? key})
+      : super(key: key);
 
   final setStateOverlord;
 

@@ -14,9 +14,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
-          AppLocalizations.of(context)!.about,
-        ),
+        title: Text(AppLocalizations.of(context)!.about),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -41,24 +39,25 @@ class AboutScreen extends StatelessWidget {
                     'https://github.com/ManeraKai/simplytranslate_mobile'),
               ),
               AboutButton(
-                  icon: Icons.info,
-                  iconColor: Colors.orange,
-                  title: AppLocalizations.of(context)!.version,
-                  content: packageInfo.version,
-                  onTap: () => Clipboard.setData(
-                              ClipboardData(text: packageInfo.version))
-                          .then(
-                        (value) => ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            duration: Duration(seconds: 1),
-                            width: 160,
-                            content: Text(
-                              AppLocalizations.of(context)!.copied_to_clipboard,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      )),
+                icon: Icons.info,
+                iconColor: Colors.orange,
+                title: AppLocalizations.of(context)!.version,
+                content: packageInfo.version,
+                onTap: () =>
+                    Clipboard.setData(ClipboardData(text: packageInfo.version))
+                        .then(
+                  (_) => ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(seconds: 1),
+                      width: 160,
+                      content: Text(
+                        AppLocalizations.of(context)!.copied_to_clipboard,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               AboutButton(
                 icon: Icons.copyright,
                 iconColor:

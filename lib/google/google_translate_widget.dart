@@ -48,8 +48,9 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                     children: [
                       GoogleFromLang(setStateOverlord: widget.setStateParent),
                       GoogleSwitchLang(
-                          setStateParent: widget.setStateParent,
-                          translateParent: widget.translateParent),
+                        setStateParent: widget.setStateParent,
+                        translateParent: widget.translateParent,
+                      ),
                       GoogleToLang(
                         setStateOverlord: widget.setStateParent,
                       ),
@@ -57,8 +58,9 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                   ),
                   const SizedBox(height: 10),
                   GoogleTranslationInput(
-                      setStateParent: widget.setStateParent,
-                      translateParent: widget.translateParent),
+                    setStateParent: widget.setStateParent,
+                    translateParent: widget.translateParent,
+                  ),
                   const SizedBox(height: 10),
                   GoogleTranslationOutput(),
                   const SizedBox(height: 10),

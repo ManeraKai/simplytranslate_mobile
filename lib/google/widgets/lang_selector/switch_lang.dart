@@ -123,8 +123,9 @@ class GoogleSwitchLang extends StatelessWidget {
           child: Text(
             '<->',
             style: TextStyle(
-                fontSize: 18,
-                color: theme == Brightness.dark ? Colors.white : Colors.black),
+              fontSize: 18,
+              color: theme == Brightness.dark ? Colors.white : Colors.black,
+            ),
           ),
         ),
       );

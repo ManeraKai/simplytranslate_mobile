@@ -14,9 +14,7 @@ class SelectTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _darkFunc(setState) {
-      setState(() {
-        themeRadio = AppTheme.dark;
-      });
+      setState(() => themeRadio = AppTheme.dark);
       setStateOverlord(() {
         session.write('theme', 'dark');
         themeValue = AppLocalizations.of(context)!.dark;
@@ -26,9 +24,7 @@ class SelectTheme extends StatelessWidget {
     }
 
     _lightFunc(setState) {
-      setState(() {
-        themeRadio = AppTheme.light;
-      });
+      setState(() => themeRadio = AppTheme.light);
       setStateOverlord(() {
         session.write('theme', 'light');
         themeValue = AppLocalizations.of(context)!.light;
@@ -70,9 +66,7 @@ class SelectTheme extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 20),
-                              child: Text(
-                                AppLocalizations.of(context)!.dark,
-                              ),
+                              child: Text(AppLocalizations.of(context)!.dark),
                             ),
                           ],
                         )),
@@ -88,9 +82,7 @@ class SelectTheme extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
-                            child: Text(
-                              AppLocalizations.of(context)!.light,
-                            ),
+                            child: Text(AppLocalizations.of(context)!.light),
                           ),
                         ],
                       ),

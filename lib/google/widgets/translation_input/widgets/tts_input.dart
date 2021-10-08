@@ -21,11 +21,8 @@ class TtsInput extends StatefulWidget {
 class _TtsOutputState extends State<TtsInput> {
   @override
   void initState() {
-    audioPlayer.onPlayerCompletion.listen((event) {
-      setState(() {
-        _listening = false;
-      });
-    });
+    audioPlayer.onPlayerCompletion
+        .listen((event) => setState(() => _listening = false));
     super.initState();
   }
 

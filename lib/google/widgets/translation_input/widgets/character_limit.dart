@@ -5,9 +5,7 @@ import '/data.dart';
 bool _isSnackBarVisible = false;
 
 class CharacterLimit extends StatelessWidget {
-  const CharacterLimit({
-    Key? key,
-  }) : super(key: key);
+  const CharacterLimit({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,23 +33,22 @@ class CharacterLimit extends StatelessWidget {
                           .replaceFirst(
                               '\$lengthDifference', '${_textLength - 5000}');
                     } else {
-                      if (_textLength == 1) {
+                      if (_textLength == 1)
                         return AppLocalizations.of(context)!
                             .input_fraction_one
                             .replaceFirst('\$length', '$_textLength');
-                      } else if (_textLength > 1 && _textLength < 5) {
+                      else if (_textLength > 1 && _textLength < 5)
                         return AppLocalizations.of(context)!
                             .input_fraction_few
                             .replaceFirst('\$length', '$_textLength');
-                      } else if (_textLength >= 5) {
+                      else if (_textLength >= 5)
                         return AppLocalizations.of(context)!
                             .input_fraction_many
                             .replaceFirst('\$length', '$_textLength');
-                      } else {
+                      else
                         return AppLocalizations.of(context)!
                             .input_fraction_other
                             .replaceFirst('\$length', '$_textLength');
-                      }
                     }
                   }(),
                   textAlign: TextAlign.center,

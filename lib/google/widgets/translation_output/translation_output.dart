@@ -13,13 +13,7 @@ class GoogleTranslationOutput extends StatefulWidget {
 }
 
 class _TranslationOutputState extends State<GoogleTranslationOutput> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  bool isRTL = false;
-  double outputFontSize = 20;
+  double _outputFontSize = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +46,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                             : TextDirection.ltr,
                     child: SelectableText(
                       translatedText,
-                      style: TextStyle(fontSize: outputFontSize),
+                      style: TextStyle(fontSize: _outputFontSize),
                     ),
                   ),
                 ),
@@ -80,7 +74,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                 onPressed: translatedText == ''
                     ? null
                     : () => setState(() {
-                          if (outputFontSize + 3 <= 90) outputFontSize += 3;
+                          if (_outputFontSize + 3 <= 90) _outputFontSize += 3;
                         }),
               ),
               IconButton(
@@ -90,7 +84,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                 onPressed: translatedText == ''
                     ? null
                     : () => setState(() {
-                          if (outputFontSize - 3 >= 8) outputFontSize -= 3;
+                          if (_outputFontSize - 3 >= 8) _outputFontSize -= 3;
                         }),
               ),
               TtsOutput(),

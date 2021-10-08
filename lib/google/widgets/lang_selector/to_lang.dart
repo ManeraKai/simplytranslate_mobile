@@ -7,10 +7,8 @@ bool toIsFirstClick = false;
 
 class GoogleToLang extends StatelessWidget {
   final setStateOverlord;
-  const GoogleToLang({
-    required this.setStateOverlord,
-    Key? key,
-  }) : super(key: key);
+  const GoogleToLang({required this.setStateOverlord, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

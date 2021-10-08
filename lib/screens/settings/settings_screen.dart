@@ -9,10 +9,7 @@ import 'widgets/select_theme.dart';
 
 class Settings extends StatefulWidget {
   final setStateOverlord;
-  const Settings(
-    this.setStateOverlord, {
-    Key? key,
-  }) : super(key: key);
+  const Settings(this.setStateOverlord, {Key? key}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -24,9 +21,7 @@ class _SettingsState extends State<Settings> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context)!.settings,
-          ),
+          title: Text(AppLocalizations.of(context)!.settings),
           elevation: 3,
         ),
         body: SingleChildScrollView(
@@ -56,11 +51,12 @@ class _SettingsState extends State<Settings> {
                   style: const TextStyle(fontSize: 20),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 5),
-                    height: 1.5,
-                    color: theme == Brightness.dark
-                        ? Colors.white
-                        : lightThemeGreyColor),
+                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  height: 1.5,
+                  color: theme == Brightness.dark
+                      ? Colors.white
+                      : lightThemeGreyColor,
+                ),
                 SelectTheme(setStateOverlord: widget.setStateOverlord),
                 const SizedBox(height: 20),
                 Text(
@@ -68,11 +64,12 @@ class _SettingsState extends State<Settings> {
                   style: const TextStyle(fontSize: 20),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 5),
-                    height: 1.5,
-                    color: theme == Brightness.dark
-                        ? Colors.white
-                        : lightThemeGreyColor),
+                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  height: 1.5,
+                  color: theme == Brightness.dark
+                      ? Colors.white
+                      : lightThemeGreyColor,
+                ),
                 SelectDefaultLang(setStateOverlord: widget.setStateOverlord)
               ],
             ),

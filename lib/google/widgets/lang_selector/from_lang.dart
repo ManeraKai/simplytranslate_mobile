@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/data.dart';
 
-final ScrollController leftTextviewScrollController = ScrollController();
-bool fromIsFirstClick = false;
+final ScrollController _leftTextviewScrollController = ScrollController();
+bool _fromIsFirstClick = false;
 
 class GoogleFromLang extends StatelessWidget {
   final setStateOverlord;
-  const GoogleFromLang({
-    required this.setStateOverlord,
-    Key? key,
-  }) : super(key: key);
+  const GoogleFromLang({required this.setStateOverlord, Key? key})
+      : super(key: key);
 
   Widget build(BuildContext context) {
     Function changeText = () {};
@@ -20,8 +18,8 @@ class GoogleFromLang extends StatelessWidget {
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> fromSelectLanguagesIterable = Iterable.generate(
               selectLanguagesFrom.length, (i) => selectLanguagesFrom[i]);
-          if (fromIsFirstClick) {
-            fromIsFirstClick = false;
+          if (_fromIsFirstClick) {
+            _fromIsFirstClick = false;
             return fromSelectLanguagesIterable;
           } else
             return fromSelectLanguagesIterable
@@ -53,10 +51,10 @@ class GoogleFromLang extends StatelessWidget {
                   ],
                 ),
                 child: Scrollbar(
-                  controller: leftTextviewScrollController,
+                  controller: _leftTextviewScrollController,
                   isAlwaysShown: true,
                   child: SingleChildScrollView(
-                    controller: leftTextviewScrollController,
+                    controller: _leftTextviewScrollController,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: () {
@@ -87,7 +85,9 @@ class GoogleFromLang extends StatelessWidget {
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 18),
+                                    horizontal: 8,
+                                    vertical: 18,
+                                  ),
                                   child: Text(
                                     option,
                                     style: (option == toLanguage)
@@ -124,7 +124,7 @@ class GoogleFromLang extends StatelessWidget {
           return TextField(
             onTap: () {
               // setStateOverlord(() => translationInputOpen = false);
-              fromIsFirstClick = true;
+              _fromIsFirstClick = true;
               fieldTextEditingController.selection = TextSelection(
                 baseOffset: 0,
                 extentOffset: fieldTextEditingController.text.length,
@@ -173,15 +173,15 @@ class GoogleFromLang extends StatelessWidget {
               }
             },
             decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
               isDense: true,
             ),
             controller: fieldTextEditingController,
             focusNode: fieldFocusNode,
-            style: TextStyle(
-              fontSize: 18,
-            ),
+            style: const TextStyle(fontSize: 18),
           );
         },
       ),

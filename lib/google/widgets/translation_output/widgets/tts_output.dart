@@ -21,11 +21,8 @@ class TtsOutput extends StatefulWidget {
 class _TtsOutputState extends State<TtsOutput> {
   @override
   void initState() {
-    audioPlayer.onPlayerCompletion.listen((event) {
-      setState(() {
-        listening = false;
-      });
-    });
+    audioPlayer.onPlayerCompletion
+        .listen((event) => setState(() => listening = false));
     super.initState();
   }
 
@@ -38,13 +35,10 @@ class _TtsOutputState extends State<TtsOutput> {
           ? listening
               ? () async {
                   final result = await audioPlayer.stop();
-                  if (result == 1) {
-                    setState(() {
-                      listening = false;
-                    });
-                  } else {
+                  if (result == 1)
+                    setState(() => listening = false);
+                  else
                     print('something is wrong');
-                  }
                 }
               : null
           : !listening
@@ -68,10 +62,10 @@ class _TtsOutputState extends State<TtsOutput> {
                     }
                   : () async {
                       final _url;
-                      if (instance == 'custom') {
+                      if (instance == 'custom')
                         _url = Uri.parse(
                             '$customInstance/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput');
-                      } else if (instance == 'random')
+                      else if (instance == 'random')
                         _url = Uri.parse(
                             '${instances[Random().nextInt(instances.length)]}/api/tts/?engine=google&lang=$toLanguageValue&text=$googleTranslationOutput');
                       else
@@ -83,11 +77,7 @@ class _TtsOutputState extends State<TtsOutput> {
                           final result = await audioPlayer
                               .playBytes(response.bodyBytes)
                               .whenComplete(() => null);
-                          if (result == 1) {
-                            setState(() {
-                              listening = true;
-                            });
-                          }
+                          if (result == 1) setState(() => listening = true);
                         } else
                           showInstanceTtsError(context);
                       } catch (err) {
@@ -105,13 +95,10 @@ class _TtsOutputState extends State<TtsOutput> {
                     }
               : () async {
                   final result = await audioPlayer.stop();
-                  if (result == 1) {
-                    setState(() {
-                      listening = false;
-                    });
-                  } else {
+                  if (result == 1)
+                    setState(() => listening = false);
+                  else
                     print('something is wrong');
-                  }
                 },
       icon: Icon(
         listening ? Icons.stop : Icons.volume_up,
