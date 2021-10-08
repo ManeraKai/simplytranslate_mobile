@@ -115,6 +115,7 @@
     "enter_text_here": "在此處輸入文本",
     "something_went_wrong": "出了點問題",
     "check_instance": "檢查實例。",
+    "check_instnace_tts": "檢查實例及其 TTS (Text-to-Speech) 支持。",
     "no_internet": "沒有網絡連接",
     "ok": "OK",
     "cancel": "取消",
@@ -162,7 +163,6 @@
     "contribute_summary": "幫助它變得更好！",
     "version": "版本",
     "license": "許可證"
-    
 
 
 }
