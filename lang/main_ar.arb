@@ -114,7 +114,7 @@
     "enter_text_here": "أدخل النص هنا",
     "something_went_wrong": "هناك خطأ ما",
     "check_instance": "(السيرفر) تحقق من المثيل",
-    "check_instnace_audio": "تحقق من المثيل (السيرفر) ومن دعمه للـtts (كلام إلى نص)",
+    "check_instnace_tts": "تحقق من المثيل (السيرفر) ومن دعمه للـtts (كلام إلى نص)",
     "no_internet": "لا يوجد انترنت",
     "ok": "حسناً",
     "cancel": "إلغاء",
