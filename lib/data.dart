@@ -161,7 +161,7 @@ showInstanceTtsError(context) {
         AppLocalizations.of(context)!.something_went_wrong,
       ),
       content: Text(
-        AppLocalizations.of(context)!.check_instnace_audio,
+        AppLocalizations.of(context)!.check_instnace_tts,
       ),
       actions: [
         TextButton(
