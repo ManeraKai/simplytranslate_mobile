@@ -12,6 +12,11 @@ class CharacterLimit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textLength = googleTranslationInputController.text.length;
+    final _color = textLength > 5000
+        ? Colors.red
+        : theme == Brightness.dark
+            ? Colors.white
+            : greenColor;
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
@@ -63,32 +68,17 @@ class CharacterLimit extends StatelessWidget {
           children: [
             Text(
               textLength.toString(),
-              style: TextStyle(
-                color: textLength > 5000
-                    ? Colors.red
-                    : theme == Brightness.dark
-                        ? Colors.white
-                        : lightThemeGreyColor,
-              ),
+              style: TextStyle(color: _color),
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 3),
               height: 1,
               width: 30,
-              color: textLength > 5000
-                  ? Colors.red
-                  : theme == Brightness.dark
-                      ? Colors.white
-                      : lightThemeGreyColor,
+              color: _color,
             ),
             Text(
               '5000',
-              style: TextStyle(
-                  color: textLength > 5000
-                      ? Colors.red
-                      : theme == Brightness.dark
-                          ? Colors.white
-                          : lightThemeGreyColor),
+              style: TextStyle(color: _color),
             ),
           ],
         ),
