@@ -115,7 +115,7 @@ class _TtsOutputState extends State<TtsOutput> {
       }(),
       icon: Icon(
         _listening ? Icons.stop : Icons.volume_up,
-        color: googleTranslationInputController.text.length > 200 && !_listening
+        color: googleTranslationOutput.length > 200 && !_listening
             ? Colors.grey
             : null,
       ),
