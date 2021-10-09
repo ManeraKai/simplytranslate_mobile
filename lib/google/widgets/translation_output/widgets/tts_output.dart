@@ -2,12 +2,13 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
+import 'package:http/http.dart' as http;
 
 bool _listening = false;
 bool _isSnackBarPressed = false;
+bool _loading = false;
 
 class TtsOutput extends StatefulWidget {
   const TtsOutput({
@@ -62,29 +63,55 @@ class _TtsOutputState extends State<TtsOutput> {
     }
 
     startPlayer() async {
+      final _random = Random().nextInt(instances.length);
       final _url;
       if (instance == 'custom')
         _url = Uri.parse(
             '$customInstance/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
       else if (instance == 'random')
         _url = Uri.parse(
-            '${instances[Random().nextInt(instances.length)]}/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
+            '${instances[_random]}/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
       else
         _url = Uri.parse(
             '$instance/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
       try {
+        setState(() => _loading = true);
         final response = await http.get(_url);
         if (response.statusCode == 200) {
           final result = await audioPlayer
               .playBytes(response.bodyBytes)
               .whenComplete(() => null);
-          if (result == 1) {
-            setState(() {
-              _listening = true;
-            });
-          }
-        } else
-          showInstanceTtsError(context);
+          if (result == 1) setState(() => _listening = true);
+        } else {
+          if (instance == 'random') {
+            final List excludedInstances = instances.toList();
+            excludedInstances.removeAt(_random);
+            final randomExcluded = Random().nextInt(excludedInstances.length);
+            final _urlExcluded = Uri.parse(
+                '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
+            try {
+              final response = await http.get(_urlExcluded);
+              if (response.statusCode == 200) {
+                final result = await audioPlayer
+                    .playBytes(response.bodyBytes)
+                    .whenComplete(() => null);
+                if (result == 1) setState(() => _listening = true);
+              } else {
+                showInstanceTtsError(context);
+              }
+            } catch (err) {
+              try {
+                final result = await InternetAddress.lookup('exmaple.com');
+                if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
+                  showInstanceTtsError(context);
+              } on SocketException catch (_) {
+                showInternetError(context);
+              }
+            }
+          } else
+            showInstanceTtsError(context);
+        }
+        setState(() => _loading = false);
       } catch (err) {
         try {
           final result = await InternetAddress.lookup('exmaple.com');
@@ -93,32 +120,45 @@ class _TtsOutputState extends State<TtsOutput> {
         } on SocketException catch (_) {
           showInternetError(context);
         }
+        setState(() => _loading = false);
       }
     }
 
-    return IconButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onPressed: () {
-        if (_input == '') {
-          if (_listening)
-            return stopPlayer;
-          else
-            return null;
-        } else if (!_listening) {
-          if (_input.length > 200)
-            return audioLimit;
-          else
-            return startPlayer;
-        } else
-          return stopPlayer;
-      }(),
-      icon: Icon(
-        _listening ? Icons.stop : Icons.volume_up,
-        color: googleTranslationOutput.length > 200 && !_listening
-            ? Colors.grey
-            : null,
-      ),
-    );
+    return _loading
+        ? Container(
+            height: 48,
+            width: 48,
+            alignment: Alignment.center,
+            child: Container(
+              alignment: Alignment.center,
+              height: 24,
+              width: 24,
+              child: const CircularProgressIndicator(strokeWidth: 3),
+            ),
+          )
+        : IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              if (_input == '') {
+                if (_listening)
+                  return stopPlayer;
+                else
+                  return null;
+              } else if (!_listening) {
+                if (_input.length > 200)
+                  return audioLimit;
+                else
+                  return startPlayer;
+              } else
+                return stopPlayer;
+            }(),
+            icon: Icon(
+              _listening ? Icons.stop : Icons.volume_up,
+              color: googleTranslationOutput.length > 200 && !_listening
+                  ? Colors.grey
+                  : null,
+            ),
+          );
   }
 }
