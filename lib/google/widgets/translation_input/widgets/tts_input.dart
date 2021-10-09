@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
@@ -9,6 +10,8 @@ import '/data.dart';
 bool _listening = false;
 bool _isSnackBarPressed = false;
 bool _loading = false;
+
+AudioPlayer _audioPlayer = AudioPlayer();
 
 class TtsInput extends StatefulWidget {
   const TtsInput({
@@ -22,14 +25,14 @@ class TtsInput extends StatefulWidget {
 class _TtsOutputState extends State<TtsInput> {
   @override
   void initState() {
-    audioPlayer.onPlayerCompletion
+    _audioPlayer.onPlayerCompletion
         .listen((event) => setState(() => _listening = false));
     super.initState();
   }
 
   @override
   void dispose() {
-    audioPlayer.dispose();
+    _audioPlayer.dispose();
     super.dispose();
   }
 
@@ -37,7 +40,7 @@ class _TtsOutputState extends State<TtsInput> {
   Widget build(BuildContext context) {
     final _input = googleTranslationInputController.text;
     stopPlayer() async {
-      final result = await audioPlayer.stop();
+      final result = await _audioPlayer.stop();
       if (result == 1)
         setState(() => _listening = false);
       else
@@ -78,7 +81,7 @@ class _TtsOutputState extends State<TtsInput> {
         setState(() => _loading = true);
         final response = await http.get(_url);
         if (response.statusCode == 200) {
-          final result = await audioPlayer
+          final result = await _audioPlayer
               .playBytes(response.bodyBytes)
               .whenComplete(() => null);
           if (result == 1) setState(() => _listening = true);
@@ -92,7 +95,7 @@ class _TtsOutputState extends State<TtsInput> {
             try {
               final response = await http.get(_urlExcluded);
               if (response.statusCode == 200) {
-                final result = await audioPlayer
+                final result = await _audioPlayer
                     .playBytes(response.bodyBytes)
                     .whenComplete(() => null);
                 if (result == 1) setState(() => _listening = true);
