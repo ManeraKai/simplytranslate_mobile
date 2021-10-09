@@ -30,7 +30,7 @@ class GoogleToLang extends StatelessWidget {
                 .toList();
         },
         optionsViewBuilder: (
-          BuildContext context,
+          BuildContext _context,
           AutocompleteOnSelected<String> onSelected,
           Iterable<String> options,
         ) {
@@ -85,7 +85,9 @@ class GoogleToLang extends StatelessWidget {
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 18),
+                                    horizontal: 8,
+                                    vertical: 18,
+                                  ),
                                   child: Text(
                                     option,
                                     style: (option == fromLanguage)
@@ -120,69 +122,67 @@ class GoogleToLang extends StatelessWidget {
           }
           changeText = () => fieldTextEditingController.text = toLanguage;
           return TextField(
-              onTap: () {
-                // setStateOverlord(() => translationInputOpen = false);
-                toIsFirstClick = true;
-                fieldTextEditingController.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingController.text.length,
-                );
-              },
-              onEditingComplete: () {
-                try {
-                  var chosenOne = selectLanguages.firstWhere((word) => word
-                      .toLowerCase()
-                      .startsWith(
-                          fieldTextEditingController.text.toLowerCase()));
-                  if (chosenOne != fromLanguage) {
-                    FocusScope.of(context).unfocus();
-                    session.write('to_language', selectLanguagesMap[chosenOne]);
-                    setStateOverlord(() {
-                      toLanguage = chosenOne;
-                      toLanguageValue = selectLanguagesMap[chosenOne];
-                    });
-                    fieldTextEditingController.text = chosenOne;
-                  } else {
-                    var dimmedSelectLanguage = selectLanguages.toList();
-                    dimmedSelectLanguage.remove(chosenOne);
-
-                    try {
-                      chosenOne = dimmedSelectLanguage.firstWhere((word) => word
-                          .toLowerCase()
-                          .startsWith(
-                              fieldTextEditingController.text.toLowerCase()));
-                      if (chosenOne != fromLanguage) {
-                        FocusScope.of(context).unfocus();
-                        session.write(
-                            'to_language', selectLanguagesMap[chosenOne]);
-                        setStateOverlord(() {
-                          toLanguage = chosenOne;
-                          toLanguageValue = selectLanguagesMap[chosenOne];
-                        });
-                        fieldTextEditingController.text = chosenOne;
-                      }
-                    } catch (_) {
-                      FocusScope.of(context).unfocus();
-                      fieldTextEditingController.text = toLanguage;
-                    }
-                  }
-                } catch (_) {
+            onTap: () {
+              // setStateOverlord(() => translationInputOpen = false);
+              toIsFirstClick = true;
+              fieldTextEditingController.selection = TextSelection(
+                baseOffset: 0,
+                extentOffset: fieldTextEditingController.text.length,
+              );
+            },
+            onEditingComplete: () {
+              try {
+                var chosenOne = selectLanguages.firstWhere((word) => word
+                    .toLowerCase()
+                    .startsWith(fieldTextEditingController.text.toLowerCase()));
+                if (chosenOne != fromLanguage) {
                   FocusScope.of(context).unfocus();
-                  fieldTextEditingController.text = toLanguage;
+                  session.write('to_language', selectLanguagesMap[chosenOne]);
+                  setStateOverlord(() {
+                    toLanguage = chosenOne;
+                    toLanguageValue = selectLanguagesMap[chosenOne];
+                  });
+                  fieldTextEditingController.text = chosenOne;
+                } else {
+                  var dimmedSelectLanguage = selectLanguages.toList();
+                  dimmedSelectLanguage.remove(chosenOne);
+                  try {
+                    chosenOne = dimmedSelectLanguage.firstWhere((word) => word
+                        .toLowerCase()
+                        .startsWith(
+                            fieldTextEditingController.text.toLowerCase()));
+                    if (chosenOne != fromLanguage) {
+                      FocusScope.of(context).unfocus();
+                      session.write(
+                          'to_language', selectLanguagesMap[chosenOne]);
+                      setStateOverlord(() {
+                        toLanguage = chosenOne;
+                        toLanguageValue = selectLanguagesMap[chosenOne];
+                      });
+                      fieldTextEditingController.text = chosenOne;
+                    }
+                  } catch (_) {
+                    FocusScope.of(context).unfocus();
+                    fieldTextEditingController.text = toLanguage;
+                  }
                 }
-
-                // chose the next one if the first is dimmed.
-              },
-              decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                isDense: true,
-              ),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: theme == Brightness.dark ? null : Colors.black));
+              } catch (_) {
+                FocusScope.of(context).unfocus();
+                fieldTextEditingController.text = toLanguage;
+              }
+            },
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              isDense: true,
+            ),
+            controller: fieldTextEditingController,
+            focusNode: fieldFocusNode,
+            style: TextStyle(
+              fontSize: 18,
+              color: theme == Brightness.dark ? null : Colors.black,
+            ),
+          );
         },
       ),
     );
