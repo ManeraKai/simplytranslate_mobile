@@ -16,7 +16,7 @@ class GoogleCancelTranslationButton extends StatelessWidget {
         onTap: googleTranslationInputController.text == ''
             ? null
             : googleTranslationInputController.text.length <= 5000
-                ? () async {
+                ? () {
                     setStateParent(() {
                       loading = false;
                       isTranslationCanceled = true;
