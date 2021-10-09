@@ -17,6 +17,9 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 import org.jetbrains.annotations.NotNull
 import java.lang.reflect.Method
+import android.content.Intent.getIntent
+import android.os.Parcelable
+
 
 class MainActivity: FlutterActivity() {
 
@@ -46,9 +49,14 @@ class MainActivity: FlutterActivity() {
         teardownChannels()
         translateChannel!!.setMethodCallHandler(null)
     }
+
+
+
+
 }
 var text = ""
 class UppercaseActivity : Activity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,7 +64,23 @@ class UppercaseActivity : Activity() {
 
         val launchIntent = packageManager.getLaunchIntentForPackage("com.simplytranslate_mobile")
         launchIntent?.let { startActivity(it) }
-
         finish()
+
     }
+    
+}
+
+class SharedActivity : Activity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        text = intent.getCharSequenceExtra(Intent.EXTRA_TEXT).toString()
+
+        val launchIntent = packageManager.getLaunchIntentForPackage("com.simplytranslate_mobile")
+        launchIntent?.let { startActivity(it) }
+        finish()
+
+    }
+
 }
