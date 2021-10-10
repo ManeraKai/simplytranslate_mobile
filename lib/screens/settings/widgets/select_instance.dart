@@ -9,7 +9,7 @@ import './settings_button.dart';
 var isCustomInstanceValid = customInstanceValidation.NotChecked;
 var loading = false;
 bool checkLoading = false;
-bool isCanceled = false;
+bool _isCanceled = false;
 
 class SelectInstance extends StatelessWidget {
   const SelectInstance({required this.setStateOverlord, Key? key})
@@ -43,12 +43,12 @@ class SelectInstance extends StatelessWidget {
       FocusScope.of(context).unfocus();
       final customUrl = customUrlController.text;
       setState(() {
-        isCanceled = false;
+        _isCanceled = false;
         checkLoading = true;
       });
       var responseBool = await checkInstance(setState, customUrl);
       print(responseBool);
-      if (!isCanceled) {
+      if (!_isCanceled) {
         setState(() {
           checkLoading = false;
           isCustomInstanceValid = responseBool;
@@ -132,7 +132,7 @@ class SelectInstance extends StatelessWidget {
                       AppLocalizations.of(context)!.cancel,
                     ),
                     onPressed: () {
-                      isCanceled = true;
+                      _isCanceled = true;
                       isCustomInstanceValid =
                           customInstanceValidation.NotChecked;
                       checkLoading = false;

@@ -10,6 +10,7 @@ import '/data.dart';
 bool _listening = false;
 bool _isSnackBarPressed = false;
 bool _loading = false;
+bool _isCanceled = false;
 
 AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -66,6 +67,7 @@ class _TtsOutputState extends State<TtsInput> {
     }
 
     startPlayer() async {
+      _isCanceled = false;
       final _random = Random().nextInt(instances.length);
       final _url;
       if (instance == 'custom')
@@ -80,41 +82,45 @@ class _TtsOutputState extends State<TtsInput> {
       try {
         setState(() => _loading = true);
         final response = await http.get(_url);
-        if (response.statusCode == 200) {
-          final result = await _audioPlayer
-              .playBytes(response.bodyBytes)
-              .whenComplete(() => null);
-          if (result == 1) setState(() => _listening = true);
-        } else {
-          if (instance == 'random') {
-            final List excludedInstances = instances.toList();
-            excludedInstances.removeAt(_random);
-            final randomExcluded = Random().nextInt(excludedInstances.length);
-            final _urlExcluded = Uri.parse(
-                '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input');
-            try {
-              final response = await http.get(_urlExcluded);
-              if (response.statusCode == 200) {
-                final result = await _audioPlayer
-                    .playBytes(response.bodyBytes)
-                    .whenComplete(() => null);
-                if (result == 1) setState(() => _listening = true);
-              } else {
-                showInstanceTtsError(context);
-              }
-            } catch (err) {
+        if (!_isCanceled) {
+          if (response.statusCode == 200) {
+            final result = await _audioPlayer
+                .playBytes(response.bodyBytes)
+                .whenComplete(() => null);
+            if (result == 1) setState(() => _listening = true);
+          } else {
+            if (instance == 'random') {
+              final List excludedInstances = instances.toList();
+              excludedInstances.removeAt(_random);
+              final randomExcluded = Random().nextInt(excludedInstances.length);
+              final _urlExcluded = Uri.parse(
+                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input');
               try {
-                final result = await InternetAddress.lookup('exmaple.com');
-                if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
-                  showInstanceTtsError(context);
-              } on SocketException catch (_) {
-                showInternetError(context);
+                final response = await http.get(_urlExcluded);
+                if (!_isCanceled) {
+                  if (response.statusCode == 200) {
+                    final result = await _audioPlayer
+                        .playBytes(response.bodyBytes)
+                        .whenComplete(() => null);
+                    if (result == 1) setState(() => _listening = true);
+                  } else {
+                    showInstanceTtsError(context);
+                  }
+                }
+              } catch (err) {
+                try {
+                  final result = await InternetAddress.lookup('exmaple.com');
+                  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
+                    showInstanceTtsError(context);
+                } on SocketException catch (_) {
+                  showInternetError(context);
+                }
               }
-            }
-          } else
-            showInstanceTtsError(context);
+            } else
+              showInstanceTtsError(context);
+          }
+          setState(() => _loading = false);
         }
-        setState(() => _loading = false);
       } catch (err) {
         try {
           final result = await InternetAddress.lookup('exmaple.com');
@@ -128,15 +134,24 @@ class _TtsOutputState extends State<TtsInput> {
     }
 
     return _loading
-        ? Container(
-            height: 48,
-            width: 48,
-            alignment: Alignment.center,
+        ? InkWell(
+            onTap: () {
+              print('rofrof');
+              setState(() {
+                _loading = false;
+                _isCanceled = true;
+              });
+            },
             child: Container(
+              height: 48,
+              width: 48,
               alignment: Alignment.center,
-              height: 24,
-              width: 24,
-              child: const CircularProgressIndicator(strokeWidth: 3),
+              child: Container(
+                alignment: Alignment.center,
+                height: 24,
+                width: 24,
+                child: const CircularProgressIndicator(strokeWidth: 3),
+              ),
             ),
           )
         : IconButton(
