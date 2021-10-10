@@ -11,15 +11,8 @@ import 'widgets/character_limit.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
   final setStateParent;
-  final Future<String> Function({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-    required BuildContext context,
-  }) translateParent;
   const GoogleTranslationInput({
     required this.setStateParent,
-    required this.translateParent,
     Key? key,
   }) : super(key: key);
 

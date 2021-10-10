@@ -4,17 +4,11 @@ import '/data.dart';
 
 class TranslateButtonFloat extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-    required BuildContext context,
-  }) translateParent;
-
+  final contextParent;
   const TranslateButtonFloat({
     Key? key,
     required this.setStateParent,
-    required this.translateParent,
+    required this.contextParent,
   }) : super(key: key);
 
   @override
@@ -36,11 +30,11 @@ class TranslateButtonFloat extends StatelessWidget {
                           isTranslationCanceled = false;
                           setStateParent(() => loading = true);
                           try {
-                            final translatedText = await translateParent(
+                            final translatedText = await translate(
                               input: translationInput,
                               fromLanguageValue: fromLanguageValue,
                               toLanguageValue: toLanguageValue,
-                              context: context,
+                              context: contextParent,
                             );
                             if (!isTranslationCanceled) {
                               setStateParent(() {

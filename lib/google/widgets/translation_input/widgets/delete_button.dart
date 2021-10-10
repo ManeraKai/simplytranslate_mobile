@@ -20,6 +20,10 @@ class DeleteTranslationInputButton extends StatelessWidget {
                 setStateParentParent(() {
                   loading = false;
                   isTranslationCanceled = true;
+                  ttsInputloading = false;
+                  isTtsInputCanceled = true;
+                  ttsOutputloading = false;
+                  isTtsOutputCanceled = true;
                   googleTranslationInputController.text = '';
                   translationInput = '';
                   googleTranslationOutput = '';

@@ -271,7 +271,6 @@ class _MainPageState extends State<MainPage> {
     getSharedText(
       setStateParent: setState,
       context: context,
-      translateParent: translate,
     );
     super.initState();
   }
@@ -290,13 +289,11 @@ class _MainPageState extends State<MainPage> {
       getSharedText(
         setStateParent: setState,
         context: context,
-        translateParent: translate,
       );
     }
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: GoogleTranslate(
-        translateParent: translate,
         setStateParent: setState,
       ),
     );

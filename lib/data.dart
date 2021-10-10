@@ -201,12 +201,6 @@ Future<customInstanceValidation> checkInstance(
 Future<void> getSharedText({
   required setStateParent,
   required context,
-  required Future<String> translateParent({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-    required BuildContext context,
-  }),
 }) async {
   try {
     var answer = await methodChannel.invokeMethod('getText');
@@ -217,7 +211,7 @@ Future<void> getSharedText({
         loading = true;
       });
 
-      final translatedText = await translateParent(
+      final translatedText = await translate(
         input: translationInput,
         fromLanguageValue: 'Autodetect',
         toLanguageValue: toLanguageValueShareDefault,
@@ -440,24 +434,30 @@ Future<String> translate({
             .innerHtml;
         return x;
       } else
-        showInstanceError(context);
+        await showInstanceError(context);
       return 'Request failed with status: ${response.statusCode}.';
     } catch (err) {
       try {
         final result = await InternetAddress.lookup('exmaple.com');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-          showInstanceError(context);
-          throw ('Instnace not valid');
+          await showInstanceError(context);
+          // throw ('Instnace not valid');
         }
       } on SocketException catch (_) {
-        showInternetError(context);
-        throw ('No internet');
+        await showInternetError(context);
+        // throw ('No internet');
       }
       return '';
     }
   } else
     return '';
 }
+
+bool isTtsInputCanceled = false;
+bool ttsInputloading = false;
+
+bool ttsOutputloading = false;
+bool isTtsOutputCanceled = false;
 
 var instances = [
   "https://simplytranslate.org",

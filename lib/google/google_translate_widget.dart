@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'dart:async';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 import '/google/widgets/translate_button/cancel_translation_button.dart';
@@ -14,15 +13,8 @@ import 'widgets/lang_selector/to_lang.dart';
 import 'widgets/lang_selector/switch_lang.dart';
 
 class GoogleTranslate extends StatefulWidget {
-  final Future<String> Function({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-    required BuildContext context,
-  }) translateParent;
   final setStateParent;
   const GoogleTranslate({
-    required this.translateParent,
     required this.setStateParent,
     Key? key,
   }) : super(key: key);
@@ -49,7 +41,6 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       GoogleFromLang(setStateOverlord: widget.setStateParent),
                       GoogleSwitchLang(
                         setStateParent: widget.setStateParent,
-                        translateParent: widget.translateParent,
                       ),
                       GoogleToLang(
                         setStateOverlord: widget.setStateParent,
@@ -59,7 +50,6 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                   const SizedBox(height: 10),
                   GoogleTranslationInput(
                     setStateParent: widget.setStateParent,
-                    translateParent: widget.translateParent,
                   ),
                   const SizedBox(height: 10),
                   GoogleTranslationOutput(),
@@ -68,31 +58,28 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       KeyboardVisibilityBuilder(
-                          builder: (context, child, isKeyboardVisible) =>
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  loading
-                                      ? Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              20,
-                                          child: LinearProgressIndicator())
-                                      : const SizedBox.shrink(),
-                                  loading
-                                      ? GoogleCancelTranslationButton(
-                                          setStateParent: widget.setStateParent)
-                                      : !isKeyboardVisible
-                                          ? GoogleTranslateButton(
-                                              setStateParent:
-                                                  widget.setStateParent,
-                                              translateParent:
-                                                  widget.translateParent,
-                                            )
-                                          : const SizedBox.shrink(),
-                                ],
-                              )),
+                        builder: (context, child, isKeyboardVisible) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            loading
+                                ? Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 20,
+                                    child: LinearProgressIndicator(),
+                                  )
+                                : const SizedBox.shrink(),
+                            loading
+                                ? GoogleCancelTranslationButton(
+                                    setStateParent: widget.setStateParent)
+                                : !isKeyboardVisible
+                                    ? GoogleTranslateButton(
+                                        setStateParent: widget.setStateParent,
+                                        contextParent: context,
+                                      )
+                                    : const SizedBox.shrink(),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -117,7 +104,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       : null,
                   child: TranslateButtonFloat(
                     setStateParent: widget.setStateParent,
-                    translateParent: widget.translateParent,
+                    contextParent: context,
                   ),
                 )
               : const SizedBox.shrink(),

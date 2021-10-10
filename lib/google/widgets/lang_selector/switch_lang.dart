@@ -4,16 +4,9 @@ import '/data.dart';
 
 class GoogleSwitchLang extends StatelessWidget {
   final setStateParent;
-  final Future<String> Function({
-    required String input,
-    required String fromLanguageValue,
-    required String toLanguageValue,
-    required BuildContext context,
-  }) translateParent;
 
   const GoogleSwitchLang({
     required this.setStateParent,
-    required this.translateParent,
     Key? key,
   }) : super(key: key);
 
@@ -58,7 +51,7 @@ class GoogleSwitchLang extends StatelessWidget {
                   session.write('to_language', toLanguageValue);
                   session.write('from_language', fromLanguageValue);
 
-                  final translatedText = await translateParent(
+                  final translatedText = await translate(
                     input: translationInputTransTmp,
                     fromLanguageValue: fromLanguageValueTransTmp,
                     toLanguageValue: toLanguageValueTransTmp,
@@ -67,7 +60,7 @@ class GoogleSwitchLang extends StatelessWidget {
                   if (!isTranslationCanceled) {
                     final translatedText2;
                     if (translatedText.length <= 5000) {
-                      translatedText2 = await translateParent(
+                      translatedText2 = await translate(
                         input: translatedText,
                         fromLanguageValue: fromLanguageValue,
                         toLanguageValue: toLanguageValue,

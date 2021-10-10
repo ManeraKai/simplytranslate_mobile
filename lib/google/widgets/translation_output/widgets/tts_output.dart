@@ -9,8 +9,6 @@ import 'package:http/http.dart' as http;
 
 bool _listening = false;
 bool _isSnackBarPressed = false;
-bool _loading = false;
-bool _isCanceled = false;
 
 AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -67,7 +65,7 @@ class _TtsOutputState extends State<TtsOutput> {
     }
 
     startPlayer() async {
-      _isCanceled = false;
+      isTtsOutputCanceled = false;
       final _random = Random().nextInt(instances.length);
       final _url;
       if (instance == 'custom')
@@ -80,9 +78,9 @@ class _TtsOutputState extends State<TtsOutput> {
         _url = Uri.parse(
             '$instance/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
       try {
-        setState(() => _loading = true);
+        setState(() => ttsOutputloading = true);
         final response = await http.get(_url);
-        if (!_isCanceled) {
+        if (!isTtsOutputCanceled) {
           if (response.statusCode == 200) {
             final result = await _audioPlayer
                 .playBytes(response.bodyBytes)
@@ -97,7 +95,7 @@ class _TtsOutputState extends State<TtsOutput> {
                   '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
               try {
                 final response = await http.get(_urlExcluded);
-                if (!_isCanceled) {
+                if (!isTtsOutputCanceled) {
                   if (response.statusCode == 200) {
                     final result = await _audioPlayer
                         .playBytes(response.bodyBytes)
@@ -119,7 +117,7 @@ class _TtsOutputState extends State<TtsOutput> {
             } else
               showInstanceTtsError(context);
           }
-          setState(() => _loading = false);
+          setState(() => ttsOutputloading = false);
         }
       } catch (err) {
         try {
@@ -129,17 +127,17 @@ class _TtsOutputState extends State<TtsOutput> {
         } on SocketException catch (_) {
           showInternetError(context);
         }
-        setState(() => _loading = false);
+        setState(() => ttsOutputloading = false);
       }
     }
 
-    return _loading
+    return ttsOutputloading
         ? InkWell(
             onTap: () {
               print('rofrof');
               setState(() {
-                _loading = false;
-                _isCanceled = true;
+                ttsOutputloading = false;
+                isTtsOutputCanceled = true;
               });
             },
             child: Container(
