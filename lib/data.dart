@@ -441,11 +441,11 @@ Future<String> translate({
         final result = await InternetAddress.lookup('exmaple.com');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           await showInstanceError(context);
-          // throw ('Instnace not valid');
+          throw ('Instnace not valid');
         }
       } on SocketException catch (_) {
         await showInternetError(context);
-        // throw ('No internet');
+        throw ('No internet');
       }
       return '';
     }

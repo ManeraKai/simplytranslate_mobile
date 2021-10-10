@@ -10,6 +10,19 @@ class GoogleSwitchLang extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  switchLangsWithCookies() {
+    final tmp = fromLanguage;
+    fromLanguage = toLanguage;
+    toLanguage = tmp;
+
+    final valuetmp = fromLanguageValue;
+    fromLanguageValue = toLanguageValue;
+    toLanguageValue = valuetmp;
+
+    session.write('to_language', toLanguageValue);
+    session.write('from_language', fromLanguageValue);
+  }
+
   @override
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width / 3 - 60,
@@ -25,19 +38,8 @@ class GoogleSwitchLang extends StatelessWidget {
                 isTtsOutputCanceled = true;
                 ttsInputloading = false;
               });
-
               if (googleTranslationInputController.text.isEmpty) {
-                final tmp = fromLanguage;
-                fromLanguage = toLanguage;
-                toLanguage = tmp;
-
-                final valuetmp = fromLanguageValue;
-                fromLanguageValue = toLanguageValue;
-                toLanguageValue = valuetmp;
-
-                session.write('to_language', toLanguageValue);
-                session.write('from_language', fromLanguageValue);
-
+                switchLangsWithCookies();
                 setStateParent(() {});
               } else if (googleTranslationInputController.text.length <= 5000) {
                 FocusScope.of(context).unfocus();
@@ -46,18 +48,7 @@ class GoogleSwitchLang extends StatelessWidget {
                   final translationInputTransTmp = translationInput;
                   final fromLanguageValueTransTmp = fromLanguageValue;
                   final toLanguageValueTransTmp = toLanguageValue;
-
-                  final tmp = fromLanguage;
-                  fromLanguage = toLanguage;
-                  toLanguage = tmp;
-
-                  final valuetmp = fromLanguageValue;
-                  fromLanguageValue = toLanguageValue;
-                  toLanguageValue = valuetmp;
-
-                  session.write('to_language', toLanguageValue);
-                  session.write('from_language', fromLanguageValue);
-
+                  switchLangsWithCookies();
                   final translatedText = await translate(
                     input: translationInputTransTmp,
                     fromLanguageValue: fromLanguageValueTransTmp,
@@ -93,21 +84,12 @@ class GoogleSwitchLang extends StatelessWidget {
                       googleTranslationOutput = translatedText2;
                     });
                   }
-                } catch (_) {
-                  print('something went wrong with switching langs buddy.');
+                } catch (error) {
+                  setStateParent(() => loading = false);
+                  print('translate error: $error');
                 }
               } else {
-                final tmp = fromLanguage;
-                fromLanguage = toLanguage;
-                toLanguage = tmp;
-
-                final valuetmp = fromLanguageValue;
-                fromLanguageValue = toLanguageValue;
-                toLanguageValue = valuetmp;
-
-                session.write('to_language', toLanguageValue);
-                session.write('from_language', fromLanguageValue);
-
+                switchLangsWithCookies();
                 setStateParent(() {});
               }
             }
