@@ -19,6 +19,13 @@ class GoogleSwitchLang extends StatelessWidget {
           ),
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
+              setStateParent(() {
+                isTtsInputCanceled = true;
+                ttsOutputloading = false;
+                isTtsOutputCanceled = true;
+                ttsInputloading = false;
+              });
+
               if (googleTranslationInputController.text.isEmpty) {
                 final tmp = fromLanguage;
                 fromLanguage = toLanguage;
