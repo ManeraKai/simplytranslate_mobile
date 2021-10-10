@@ -18,6 +18,12 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
+    Widget line = Container(
+      margin: const EdgeInsets.only(top: 10, bottom: 5),
+      height: 1.5,
+      color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
+    );
+    const textStyle = const TextStyle(fontSize: 20);
     return Material(
       child: Scaffold(
         appBar: AppBar(
@@ -34,42 +40,24 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(height: 10),
                 Text(
                   AppLocalizations.of(context)!.instances,
-                  style: const TextStyle(fontSize: 20),
+                  style: textStyle,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 5),
-                  height: 1.5,
-                  color: theme == Brightness.dark
-                      ? Colors.white
-                      : lightThemeGreyColor,
-                ),
+                line,
                 SelectInstance(setStateOverlord: widget.setStateOverlord),
                 UpdateList(setStateOverlord: widget.setStateOverlord),
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.appearance,
-                  style: const TextStyle(fontSize: 20),
+                  style: textStyle,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 5),
-                  height: 1.5,
-                  color: theme == Brightness.dark
-                      ? Colors.white
-                      : lightThemeGreyColor,
-                ),
+                line,
                 SelectTheme(setStateOverlord: widget.setStateOverlord),
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.translation,
-                  style: const TextStyle(fontSize: 20),
+                  style: textStyle,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 5),
-                  height: 1.5,
-                  color: theme == Brightness.dark
-                      ? Colors.white
-                      : lightThemeGreyColor,
-                ),
+                line,
                 SelectDefaultLang(setStateOverlord: widget.setStateOverlord)
               ],
             ),

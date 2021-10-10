@@ -10,6 +10,8 @@ var isCustomInstanceValid = customInstanceValidation.NotChecked;
 var loading = false;
 bool checkLoading = false;
 bool _isCanceled = false;
+String _tmpInstance = '';
+var _tmpInput = '';
 
 class SelectInstance extends StatelessWidget {
   const SelectInstance({required this.setStateOverlord, Key? key})
@@ -42,6 +44,7 @@ class SelectInstance extends StatelessWidget {
     customCheck(setState) async {
       FocusScope.of(context).unfocus();
       final customUrl = customUrlController.text;
+
       setState(() {
         _isCanceled = false;
         checkLoading = true;
@@ -53,7 +56,7 @@ class SelectInstance extends StatelessWidget {
           checkLoading = false;
           isCustomInstanceValid = responseBool;
         });
-        if (isCustomInstanceValid == customInstanceValidation.True) {
+        if (responseBool == customInstanceValidation.True) {
           session.write('customInstance', customUrl);
           setStateOverlord(() {
             customInstance = customUrl;
@@ -63,14 +66,16 @@ class SelectInstance extends StatelessWidget {
       }
     }
 
-    customFunc(setState) {
+    customFunc(setState) async {
+      _tmpInstance = instance;
+      _tmpInput = customUrlController.text;
       instanceIndex = 0;
       Navigator.of(context).pop();
       setStateOverlord(() {
         instance = 'custom';
         session.write('instance_mode', 'custom');
       });
-      showDialog(
+      await showDialog(
         context: context,
         builder: (builder) => StatefulBuilder(
           builder: (context, setState) => Center(
@@ -128,9 +133,7 @@ class SelectInstance extends StatelessWidget {
                 ),
                 actions: [
                   TextButton(
-                    child: Text(
-                      AppLocalizations.of(context)!.cancel,
-                    ),
+                    child: Text(AppLocalizations.of(context)!.cancel),
                     onPressed: () {
                       _isCanceled = true;
                       isCustomInstanceValid =
@@ -148,9 +151,7 @@ class SelectInstance extends StatelessWidget {
                         )
                       : TextButton(
                           onPressed: () => customCheck(setState),
-                          child: Text(
-                            AppLocalizations.of(context)!.check,
-                          ),
+                          child: Text(AppLocalizations.of(context)!.check),
                         ),
                 ],
               ),
@@ -158,6 +159,12 @@ class SelectInstance extends StatelessWidget {
           ),
         ),
       );
+      if (isCustomInstanceValid != customInstanceValidation.True) {
+        if (_tmpInput != '') customUrlController.text = _tmpInput;
+        print('tmp input is: $_tmpInput');
+        setStateOverlord(() => instance = _tmpInstance);
+        session.write('instance_mode', _tmpInstance);
+      }
     }
 
     return SettingsButton(
@@ -172,9 +179,7 @@ class SelectInstance extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
-                        AppLocalizations.of(context)!.cancel,
-                      ),
+                      child: Text(AppLocalizations.of(context)!.cancel),
                     )
                   ],
                   insetPadding: const EdgeInsets.all(0),
@@ -197,7 +202,9 @@ class SelectInstance extends StatelessWidget {
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 20),
+                                        horizontal: 10,
+                                        vertical: 20,
+                                      ),
                                       child: Text(
                                         x,
                                         style: const TextStyle(fontSize: 16),
@@ -216,9 +223,10 @@ class SelectInstance extends StatelessWidget {
                       child: Row(
                         children: [
                           Radio<String>(
-                              value: 'random',
-                              groupValue: instance,
-                              onChanged: (_) => randomFunc(setState)),
+                            value: 'random',
+                            groupValue: instance,
+                            onChanged: (_) => randomFunc(setState),
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
@@ -237,9 +245,10 @@ class SelectInstance extends StatelessWidget {
                       child: Row(
                         children: [
                           Radio<String>(
-                              value: 'custom',
-                              groupValue: instance,
-                              onChanged: (_) => customFunc(setState)),
+                            value: 'custom',
+                            groupValue: instance,
+                            onChanged: (_) => customFunc(setState),
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
