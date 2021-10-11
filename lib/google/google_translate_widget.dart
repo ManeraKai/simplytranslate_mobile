@@ -12,6 +12,8 @@ import 'widgets/lang_selector/from_lang.dart';
 import 'widgets/lang_selector/to_lang.dart';
 import 'widgets/lang_selector/switch_lang.dart';
 
+var _scrollController = ScrollController();
+
 class GoogleTranslate extends StatefulWidget {
   final setStateParent;
   const GoogleTranslate({
@@ -23,12 +25,28 @@ class GoogleTranslate extends StatefulWidget {
   State<GoogleTranslate> createState() => _GoogleTranslateState();
 }
 
+var _isBefore = false;
+
 class _GoogleTranslateState extends State<GoogleTranslate> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      _isBefore = true;
+    } else if (MediaQuery.of(context).orientation == Orientation.portrait &&
+        _isBefore) {
+      _scrollController.jumpTo(0);
+      _isBefore = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         SingleChildScrollView(
+          controller: _scrollController,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Center(

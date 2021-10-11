@@ -167,6 +167,8 @@ class SelectInstance extends StatelessWidget {
       }
     }
 
+    const _textStyle = const TextStyle(fontSize: 16);
+    const _padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 20);
     return SettingsButton(
       onTap: () {
         showDialog(
@@ -201,14 +203,8 @@ class SelectInstance extends StatelessWidget {
                                           instanceFunc(setState, x)),
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 20,
-                                      ),
-                                      child: Text(
-                                        x,
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
+                                      padding: _padding,
+                                      child: Text(x, style: _textStyle),
                                     ),
                                   ),
                                 ],
@@ -228,13 +224,10 @@ class SelectInstance extends StatelessWidget {
                             onChanged: (_) => randomFunc(setState),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 20,
-                            ),
+                            padding: _padding,
                             child: Text(
                               AppLocalizations.of(context)!.random,
-                              style: const TextStyle(fontSize: 16),
+                              style: _textStyle,
                             ),
                           ),
                         ],
@@ -250,13 +243,10 @@ class SelectInstance extends StatelessWidget {
                             onChanged: (_) => customFunc(setState),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 20,
-                            ),
+                            padding: _padding,
                             child: Text(
                               AppLocalizations.of(context)!.custom,
-                              style: const TextStyle(fontSize: 16),
+                              style: _textStyle,
                             ),
                           ),
                         ],
