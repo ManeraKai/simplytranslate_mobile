@@ -109,11 +109,47 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
-        for (Locale locale in locales!)
-          if (supportedLocales
-              .toString()
-              .contains(locale.toString().substring(0, 2))) return null;
+        List supportedLocalesCountryCode = [];
+        for (var item in supportedLocales) {
+          supportedLocalesCountryCode.add(item.countryCode);
+        }
 
+        List supportedLocalesLanguageCode = [];
+        for (var item in supportedLocales) {
+          supportedLocalesLanguageCode.add(item.languageCode);
+        }
+
+        locales!;
+        List localesCountryCode = [];
+        for (var item in locales) {
+          localesCountryCode.add(item.countryCode);
+        }
+
+        List localesLanguageCode = [];
+        for (var item in locales) {
+          localesLanguageCode.add(item.languageCode);
+        }
+
+        // print('Supported Locales CountryCode: $supportedLocalesCountryCode');
+        // print('Supported Locales LanguageCode: $supportedLocalesLanguageCode');
+
+        // print('Locales CountryCode: $localesCountryCode');
+        // print('Locales LanguageCode: $localesLanguageCode');
+
+        for (var i = 0; i < locales.length; i++) {
+          if (supportedLocalesCountryCode.contains(localesCountryCode[i]) &&
+              supportedLocalesLanguageCode.contains(localesLanguageCode[i])) {
+            print(
+                'Yes country: ${localesCountryCode[i]}, ${localesLanguageCode[i]}');
+            return Locale(localesLanguageCode[i], localesCountryCode[i]);
+          } else if (supportedLocalesLanguageCode
+              .contains(localesLanguageCode[i])) {
+            print('Yes language: ${localesLanguageCode[i]}');
+            return Locale(localesLanguageCode[i]);
+          } else {
+            print('Nothing');
+          }
+        }
         return Locale('en');
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
