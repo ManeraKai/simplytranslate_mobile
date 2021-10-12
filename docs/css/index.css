@@ -20,7 +20,6 @@ body {
 a{
     color: #3ee08a;
     text-decoration: underline;
-
 }
 
 .main_logo {
@@ -31,11 +30,14 @@ a{
 }
 
 .sub-head {
-    font-size: 20px
+    font-size: 20px;
+} 
+p{
+    font-size: 18px;
 }
 
 .general-text {
-    font-size: 18px
+    font-size: 18px;
 }
 
 .textt {
@@ -46,18 +48,11 @@ a{
     font-size: 30px
 }
 
-.ss-title {
-    text-align: center;
-    padding-top: 30px;
-    font-size: 35px;
-}
-
 .main-font {
     font-family: 'Montserrat', sans-serif;
 }
 
 .primary-color {
-    /* color: #1f83e7 !important */
     color: #3ee08a;
 }
 
@@ -68,19 +63,11 @@ a{
 .block {
     margin: 20px 0;
     padding-left: 1.5rem;
-    /* border-left: 5px solid #1f83e7; */
     border-left: 5px solid #3ee08a;
 }
 
 .btn {
     width: 175px
-}
-
-.teamm {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
 }
 
 .card-title {
@@ -132,11 +119,6 @@ a{
     height: 100%;
 }
 
-.ss-img {
-    height: 368px;
-    width: 207px;
-}
-
 .buttons-center {
     text-align: center;
     margin-top: 60px;
@@ -151,27 +133,6 @@ a{
     background-color: #1e1e1e;
 }
 
-.collapsible-header {
-    border-bottom: 0px solid #ddd;
-    background-color: #1e1e1e;
-}
-
-.collapsible-body {
-    border-bottom: 0px solid #ddd;
-    background-color: #1e1e1e;
-}
-
-.text-align-left {
-    text-align: left;
-}
-
-.select-dropdown li.disabled,
-.select-dropdown li.disabled>span,
-.select-dropdown li.optgroup {
-    color: #fafafa59;
-    background-color: transparent;
-}
-
 .datapacket-text {
     vertical-align: middle;
     font-size: 16px;
@@ -181,4 +142,29 @@ a{
 .datapacket-logo {
     height: 25px;
     vertical-align: middle;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -moz-font-feature-settings: 'liga';
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
