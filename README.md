@@ -52,6 +52,12 @@ We appreciate it!
 ## Icon
 The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
 
+## Donation
+
+ - [Liberapay](https://liberapay.com/simplytranslate_mobile)
+
+We really appreciate it!
+
 ## License
 Copyright (C) 2021 ManeraKai
 
