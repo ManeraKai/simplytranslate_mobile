@@ -4,7 +4,7 @@
       <img alt="" title="Simply Translate Mobile" src="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
   </a>
 </p>
-<h1 align="center">Simply Translate Mobile (Unofficial)</h1>
+<h1 align="center">SimplyTranslate Mobile (Unofficial)</h1>
 
 <h4 align="center">An unofficial mobile client that connects to multiple <a href="https://simplytranslate.org/">SimplyTranslate</a> instances.</h4>
 
