@@ -46,7 +46,7 @@ We appreciate it!
 - **🇸🇦 Arabic**: [ManeraKai](https://github.com/ManeraKai)
 - **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
 - **🇨🇳 Chinese, Hong Kong:** [CafeTango](https://github.com/CafeTango)
-- **🇩🇪 German:** [metalune](metalune.xyz/)
+- **🇩🇪 German:** [metalune](https://metalune.xyz/)
 
 
 ## Icon
