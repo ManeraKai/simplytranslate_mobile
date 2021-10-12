@@ -109,8 +109,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
-        for (Locale locale in AppLocalizations.supportedLocales)
-          if (supportedLocales.contains(locale)) return null;
+        for (Locale locale in locales!)
+          if (supportedLocales
+              .toString()
+              .contains(locale.toString().substring(0, 2))) return null;
+
         return Locale('en');
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
