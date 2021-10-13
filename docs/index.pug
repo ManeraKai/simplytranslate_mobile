@@ -1,0 +1,173 @@
+
+doctype html
+include ./lang/en/home.pug
+html(lang="en")
+    head    
+        meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" )
+        meta(name="theme-color" content="#141414" )
+        link(rel="shortcut icon" type="image/png" href="./img/favicon.png" )
+        meta(name="description" content="a mobile client for Simply Translate")
+        title Simply Translate Mobile
+
+        link( href="./css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection")
+        link(href="./css/index.css" type="text/css" rel="stylesheet" media="screen,projection" )
+    body
+        div.navbar-fixed
+            nav.nav-background.black-text.z-depth-0.hide-on-med-and-down
+                div.nav-wrapper.container
+                    div.nav-wrapper
+                        ul.right.hide-on-med-and-down
+                            
+                            li.tab.col.s3
+                                a.main-font.white-text(style="text-decoration: none" href="index.html")= translations['home']
+                            li.tab.col.s3
+                                a.main-font.white-text(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
+                                
+                            li.tab.col.s3
+                                a.main-font.white-text(style="text-decoration: none" href="https://github.com/ManeraKai/simplytranslate_mobile")= translations['source']
+                                
+                            li.tab.col.s3
+                                a.main-font.white-text(style="text-decoration: none" href="https://liberapay.com/simplytranslate_mobile/")= translations['donate']
+        div.main-box
+            div.section.no-pad-bot#banner
+                div.container
+                    div.center
+                        br
+                        img.main_logo(src="./img/logo.svg")
+                        h2.textt.main-font.center.white-text Simply Translate Mobile
+
+                        br
+
+                        a.waves-effect.hoverable.waves-white.white.btn.z-depth-3.hd-btn2(href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")=translations['source']
+
+                        br
+                        br
+
+        div.container
+            div.section
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['about']
+                //- - linkoo = a(href="https://simplytranslate.org/")
+                p.flow-text.main-font.paragraph.text3.text-lighten-3=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
+                    a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
+                    =translations['about-text'].substring(translations['about-text'].indexOf('</a>')+4, translations['about-text'].length)
+                br
+                div.divider.padding
+
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['screenshots']
+                
+                div.row
+                    div.col.s6.m6.l3
+                        img.center.responsive-img(src="./img/1.png")
+                    div.col.s6.m6.l3
+                        img.center.responsive-img(src="./img/2.png")
+                    div.col.s6.m6.l3
+                        img.center.responsive-img(src="./img/3.png")
+                    div.col.s6.m6.l3
+                        img.center.responsive-img(src="./img/4.png")
+                br
+
+                div.divider.padding
+
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['translation']
+
+                ol
+                    li.general-text=translations['translation-text.1'].substring(0, translations['translation-text.1'].indexOf('<a>'))
+                        a(href="https://simplytranslate.org/")=translations['translation-text.1'].substring(translations['translation-text.1'].indexOf('<a>')+3, translations['translation-text.1'].indexOf('</a>'))
+                        =translations['translation-text.1'].substring(translations['translation-text.1'].indexOf('</a>')+4, translations['translation-text.1'].length)
+                    
+                    li.general-text=translations['translation-text.2']
+
+                    li.general-text=translations['translation-text.3'].substring(0, translations['translation-text.3'].indexOf('<a1>'))
+                        a(href="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/lang/")=translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('<a1>')+4, translations['translation-text.3'].indexOf('</a1>'))
+                        =translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('</a1>')+5, translations['translation-text.3'].indexOf('<a2>'))
+                        a(href="https://developers.google.com/admin-sdk/directory/v1/languages")=translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('<a2>')+4, translations['translation-text.3'].indexOf('</a2>'))
+                        =translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('</a2>')+5, translations['translation-text.3'].length)
+            
+
+                    li.general-text=translations['translation-text.4'].substring(0, translations['translation-text.4'].indexOf('<mailto>'))
+                        a(href="mailto:manerakai@protonmail.com")=translations['translation-text.4'].substring(translations['translation-text.4'].indexOf('<mailto>')+8, translations['translation-text.4'].indexOf('</mailto>'))
+                        =translations['translation-text.4'].substring(translations['translation-text.4'].indexOf('</mailto>')+9, translations['translation-text.4'].length)
+                p=translations['we-appreciate-it']
+
+                br
+
+                div.divider.padding
+
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['want-to-donate']
+
+                p
+                    a(href="https://liberapay.com/simplytranslate_mobile/") Liberapay
+                p=translations['we-really-appreciate-it']
+                
+                br
+
+                div.divider.padding
+
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['translators']
+
+                p 🇵🇱 
+                    =translations['polish']
+                    | : 
+                    a(href="https://github.com/Aga-C") Aga-C
+                    | , 
+                    a(href="https://github.com/Valdnet") Valdnet
+
+                p 🇸🇦 
+                    =translations['arabic']
+                    | : 
+                    a(href="https://github.com/ManeraKai") ManeraKai
+                
+                p 🇮🇳 
+                    =translations['malayalam']
+                    | : 
+                    a(href="https://github.com/sunilpaulmathew") sunilpaulmathew
+                
+                p 🇨🇳 
+                    =translations['chinese-hong-kong']
+                    | : 
+                    a(href="https://github.com/CafeTango") CafeTango
+                
+                p 🇩🇪 
+                    =translations['german']
+                    | : 
+                    a(href="https://metalune.xyz/") metalune
+
+                br
+
+                div.divider.padding
+
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['icon']
+
+                p=translations['icon-text'].substring(0, translations['icon-text'].indexOf('<a>'))
+                    a(href="https://simplytranslate.org/")=translations['icon-text'].substring(translations['icon-text'].indexOf('<a>')+3, translations['icon-text'].indexOf('</a>'))
+                    =translations['icon-text'].substring(translations['icon-text'].indexOf('</a>')+4, translations['icon-text'].length)
+                
+                br
+
+                div.divider.padding
+
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['license']
+
+                p Copyright (C) 2021 
+                    a(href="https://github.com/ManeraKai") ManeraKai
+                    br
+                    br
+                    | This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+                    br
+                    br
+                    | This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+                    br
+                    br
+                    | You should have received a copy of the 
+                    a(href="https://www.gnu.org/licenses/") GNU General Public License
+                    |  along with this program.
+        footer.page-footer.card-theme-color
+            div.container
