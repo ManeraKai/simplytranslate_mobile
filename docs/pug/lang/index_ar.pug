@@ -1,0 +1,13 @@
+include ../../lang/ar/home.pug
+doctype html
+html(lang="ar" dir='rtl')
+    style.
+        .block {
+            margin: 20px 0;
+            padding-right: 1.5rem;
+            border-right: 5px solid #3ee08a;
+            padding-left: 0 !important;
+            border-left: none !important;
+        }
+    - var isRtl = true
+    include ./../index_main.pug
