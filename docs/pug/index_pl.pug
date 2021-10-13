@@ -1,7 +1,7 @@
 
 doctype html
-include ./lang/en/home.pug
-html(lang=en)
+include ../lang/pl/home.pug
+html(lang="en")
     head    
         meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" )
@@ -156,19 +156,19 @@ html(lang=en)
                 blockquote.block
                     h2.header.main-font.primary-color=translations['license']
 
-                p Copyright (C) 2021 
+                p=translations["license-text.1"].substring(0, translations["license-text.1"].indexOf('<a>'))
                     a(href="https://github.com/ManeraKai") ManeraKai
+                    =translations["license-text.1"].substring(translations["license-text.1"].indexOf('</a>')+4, translations["license-text.1"].length)
+                    br
+                    =translations["license-text.2"]
                     br
                     br
-                    | This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+                    =translations["license-text.3"]
                     br
                     br
-                    | This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-                    br
-                    br
-                    | You should have received a copy of the 
+                    =translations["license-text.4"].substring(0, translations["license-text.4"].indexOf('<a>'))
                     a(href="https://www.gnu.org/licenses/") GNU General Public License
                     |  along with this program.
         footer.page-footer.card-theme-color
             div.container
-    script(src="language.js") 
+    script(src="language.js")
