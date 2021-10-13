@@ -19,7 +19,6 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
   Widget build(BuildContext context) {
     String translatedText = googleTranslationOutput;
     return Container(
-      height: 250,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -34,21 +33,15 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: Directionality(
-                    textDirection:
-                        intl.Bidi.detectRtlDirectionality(translatedText)
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                    child: SelectableText(
-                      translatedText,
-                      style: TextStyle(fontSize: _outputFontSize),
-                    ),
-                  ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              child: Directionality(
+                textDirection: intl.Bidi.detectRtlDirectionality(translatedText)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr,
+                child: SelectableText(
+                  translatedText,
+                  style: TextStyle(fontSize: _outputFontSize),
                 ),
               ),
             ),

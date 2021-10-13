@@ -22,14 +22,9 @@ class GoogleTranslationInput extends StatefulWidget {
 
 class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-      height: 255,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -44,87 +39,76 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: NotificationListener<OverscrollIndicatorNotification>(
-              onNotification: (overscroll) {
-                overscroll.disallowGlow();
-                return false;
+            child: TextField(
+              textDirection: googleTranslationInputController.text.length == 0
+                  ? intl.Bidi.detectRtlDirectionality(
+                      AppLocalizations.of(context)!.arabic,
+                    )
+                      ? TextDirection.rtl
+                      : TextDirection.ltr
+                  : intl.Bidi.detectRtlDirectionality(translationInput)
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+              // selectionControls: MyMaterialTextSelectionControls(),
+              focusNode: focus,
+              minLines: 10,
+              maxLines: null,
+              controller: googleTranslationInputController,
+              keyboardType: TextInputType.multiline,
+              onTap: () =>
+                  widget.setStateParent(() => translationInputOpen = true),
+              onChanged: (String input) {
+                if (googleTranslationInputController.text.length > 99999) {
+                  final tmpSelection;
+                  if (googleTranslationInputController.selection.baseOffset >=
+                      100000) {
+                    tmpSelection = TextSelection.collapsed(offset: 99999);
+                  } else {
+                    tmpSelection = TextSelection.collapsed(
+                        offset: googleTranslationInputController
+                            .selection.baseOffset);
+                  }
+
+                  googleTranslationInputController.text =
+                      googleTranslationInputController.text.substring(0, 99999);
+                  print(tmpSelection.baseOffset);
+
+                  googleTranslationInputController.selection = tmpSelection;
+                } else if (googleTranslationInputController.text.length >
+                    5000) {
+                  if (!isSnackBarVisible) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 1),
+                        width: 300,
+                        content: Text(
+                          AppLocalizations.of(context)!.input_limit,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                    isSnackBarVisible = true;
+                  }
+                } else {
+                  if (isSnackBarVisible) isSnackBarVisible = false;
+                }
+                widget.setStateParent(() {
+                  translationInputOpen = true;
+                  translationInput = input;
+                });
               },
-              child: Scrollbar(
-                child: TextField(
-                  textDirection:
-                      googleTranslationInputController.text.length == 0
-                          ? intl.Bidi.detectRtlDirectionality(
-                              AppLocalizations.of(context)!.arabic,
-                            )
-                              ? TextDirection.rtl
-                              : TextDirection.ltr
-                          : intl.Bidi.detectRtlDirectionality(translationInput)
-                              ? TextDirection.rtl
-                              : TextDirection.ltr,
-                  // selectionControls: MyMaterialTextSelectionControls(),
-                  focusNode: focus,
-                  minLines: 10,
-                  maxLines: null,
-                  controller: googleTranslationInputController,
-                  keyboardType: TextInputType.multiline,
-                  onTap: () =>
-                      widget.setStateParent(() => translationInputOpen = true),
-                  onChanged: (String input) {
-                    if (googleTranslationInputController.text.length > 99999) {
-                      final tmpSelection;
-                      if (googleTranslationInputController
-                              .selection.baseOffset >=
-                          100000) {
-                        tmpSelection = TextSelection.collapsed(offset: 99999);
-                      } else {
-                        tmpSelection = TextSelection.collapsed(
-                            offset: googleTranslationInputController
-                                .selection.baseOffset);
-                      }
-
-                      googleTranslationInputController.text =
-                          googleTranslationInputController.text
-                              .substring(0, 99999);
-                      print(tmpSelection.baseOffset);
-
-                      googleTranslationInputController.selection = tmpSelection;
-                    } else if (googleTranslationInputController.text.length >
-                        5000) {
-                      if (!isSnackBarVisible) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            duration: Duration(seconds: 1),
-                            width: 300,
-                            content: Text(
-                              AppLocalizations.of(context)!.input_limit,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                        isSnackBarVisible = true;
-                      }
-                    } else {
-                      if (isSnackBarVisible) isSnackBarVisible = false;
-                    }
-                    widget.setStateParent(() {
-                      translationInputOpen = true;
-                      translationInput = input;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    hintText: AppLocalizations.of(context)!.enter_text_here,
-                    hintTextDirection: intl.Bidi.detectRtlDirectionality(
-                            AppLocalizations.of(context)!.arabic)
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
-                  ),
-                  style: const TextStyle(fontSize: 20),
-                ),
+              decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                hintText: AppLocalizations.of(context)!.enter_text_here,
+                hintTextDirection: intl.Bidi.detectRtlDirectionality(
+                        AppLocalizations.of(context)!.arabic)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr,
               ),
+              style: const TextStyle(fontSize: 20),
             ),
           ),
           Column(
