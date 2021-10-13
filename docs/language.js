@@ -3,3 +3,9 @@ if (navigator.language.substring(0, 2) == 'pl') {
     if (!window.location.href.endsWith('index_pl.html'))
     window.location.replace("./index_pl.html");
 }
+else if (navigator.language.substring(0, 2) == 'ar') {
+    console.log('redirecting to index_ar.html');
+    if (!window.location.href.endsWith('index_ar.html'))
+    window.location.replace("./index_ar.html");
+}
+
