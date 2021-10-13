@@ -159,71 +159,24 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       darkTheme: materialAppDarkTheme(context),
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
       title: 'Simply Translate Mobile',
-      home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: KeyboardVisibilityBuilder(
-            builder: (context, child, isKeyboardVisible) => Builder(
-              builder: (context) {
-                if (MediaQuery.of(context).orientation == Orientation.landscape)
-                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-                      overlays: []);
-                else
-                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-                      overlays: SystemUiOverlay.values);
-                if (isKeyboardVisible &&
-                    MediaQuery.of(context).orientation ==
-                        Orientation.landscape) {
-                  return const SizedBox.shrink();
-                } else {
-                  return GestureDetector(
-                    onTap: () => FocusScope.of(context).unfocus(),
-                    child: AppBar(
-                      bottom: PreferredSize(
-                        preferredSize: Size.fromHeight(2),
-                        child: Container(height: 2, color: greenColor),
-                      ),
-                      actions: [
-                        PopupMenuButton(
-                          icon: Icon(Icons.more_vert, color: Colors.white),
-                          itemBuilder: (BuildContext context) => [
-                            PopupMenuItem<String>(
-                              value: 'settings',
-                              child:
-                                  Text(AppLocalizations.of(context)!.settings),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'about',
-                              child: Text(AppLocalizations.of(context)!.about),
-                            ),
-                          ],
-                          onSelected: (value) {
-                            if (value == 'settings')
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Settings(setState)),
-                              );
-                            else if (value == 'about')
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AboutScreen()),
-                              );
-                          },
-                        ),
-                      ],
-                      elevation: 3,
-                      iconTheme: IconThemeData(),
-                      title: const Text('Simply Translate Mobile'),
-                    ),
-                  );
-                }
-              },
-            ),
-          ),
+      home: KeyboardVisibilityBuilder(
+        builder: (context, child, isKeyboardVisible) => Builder(
+          builder: (context) {
+            if (MediaQuery.of(context).orientation == Orientation.landscape)
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                  overlays: []);
+            else
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                  overlays: SystemUiOverlay.values);
+            if (isKeyboardVisible &&
+                MediaQuery.of(context).orientation == Orientation.landscape)
+              return const SizedBox.shrink();
+            else
+              return Scaffold(
+                body: MainPageLocalization(),
+              );
+          },
         ),
-        body: MainPageLocalization(),
       ),
     );
   }
@@ -330,10 +283,57 @@ class _MainPageState extends State<MainPage> {
         context: context,
       );
     }
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: GoogleTranslate(
-        setStateParent: setState,
+    return SingleChildScrollView(
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Column(
+          children: [
+            Container(
+              height: 80,
+              child: AppBar(
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(2),
+                  child: Container(height: 2, color: greenColor),
+                ),
+                actions: [
+                  PopupMenuButton(
+                    icon: Icon(Icons.more_vert, color: Colors.white),
+                    itemBuilder: (BuildContext context) => [
+                      PopupMenuItem<String>(
+                        value: 'settings',
+                        child: Text(AppLocalizations.of(context)!.settings),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'about',
+                        child: Text(AppLocalizations.of(context)!.about),
+                      ),
+                    ],
+                    onSelected: (value) {
+                      if (value == 'settings')
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Settings(setState)),
+                        );
+                      else if (value == 'about')
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AboutScreen()),
+                        );
+                    },
+                  ),
+                ],
+                elevation: 3,
+                iconTheme: IconThemeData(),
+                title: const Text('Simply Translate Mobile'),
+              ),
+            ),
+            GoogleTranslate(
+              setStateParent: setState,
+            ),
+          ],
+        ),
       ),
     );
   }
