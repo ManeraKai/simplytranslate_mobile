@@ -40,7 +40,12 @@ For the most up-to-date versions. Download the most recent **Artifact** from the
 
 We appreciate it!
 
-## 👨‍🔧 Translators
+## 👨‍🔧 Contributers
+
+### Testers
+- [Valdnet](https://github.com/Valdnet)
+
+### Translators
 
 - **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
 - **🇸🇦 Arabic**: [ManeraKai](https://github.com/ManeraKai)
