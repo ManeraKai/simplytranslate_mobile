@@ -123,10 +123,10 @@
     "input_limit": "ورودی ترجمه بالای ۵۰۰۰ نویسه است",
     "input_calc": "Exceeded 5000 character limit by $lengthDifference",
 
-    "input_fraction_one": "Entered $length character out of 5000 possible",
-    "input_fraction_few": "Entered $length characters out of 5000 possible",
-    "input_fraction_many": "Entered $length characters out of 5000 possible",
-    "input_fraction_other": "Entered $length characters out of 5000 possible",
+    "input_fraction_one": "$length کاراکتر از ۵۰۰۰ کاراکتر ممکن وارد شده است",
+    "input_fraction_few": "$length کاراکتر از ۵۰۰۰ کاراکتر ممکن وارد شده است",
+    "input_fraction_many": "$length کاراکتر از ۵۰۰۰ کاراکتر ممکن وارد شده است",
+    "input_fraction_other": "$length کاراکتر از ۵۰۰۰ کاراکتر ممکن وارد شده است",
     
     "audio_limit": "نمی توان برای بیش از ۲۰۰ نویسه صدا دریافت کرد",
     "not_available": "سرویس در دسترس نیست",
