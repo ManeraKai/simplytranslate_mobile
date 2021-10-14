@@ -58,6 +58,7 @@ We really appreciate it!
 - **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
 - **🇨🇳 Chinese, Hong Kong:** [CafeTango](https://github.com/CafeTango)
 - **🇩🇪 German:** [metalune](https://metalune.xyz/)
+- **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
 
 
 ## Icon
