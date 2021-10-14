@@ -13,10 +13,7 @@ bool checkLoading = false;
 bool isCanceled = false;
 
 class UpdateList extends StatelessWidget {
-  const UpdateList({required this.setStateOverlord, Key? key})
-      : super(key: key);
-
-  final setStateOverlord;
+  const UpdateList({Key? key}) : super(key: key);
 
   Future<bool> updateList() async {
     try {
@@ -43,9 +40,9 @@ class UpdateList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsButton(
       onTap: () async {
-        setStateOverlord(() => loading = true);
+        setStateOverlordData(() => loading = true);
         var response = await updateList();
-        setStateOverlord(() => loading = false);
+        setStateOverlordData(() => loading = false);
         if (response) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

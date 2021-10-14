@@ -9,9 +9,7 @@ bool toIsFirstClick = false;
 var selectLanguagesMapFlipped = {};
 
 class SelectDefaultLang extends StatelessWidget {
-  final setStateOverlord;
-  const SelectDefaultLang({required this.setStateOverlord, Key? key})
-      : super(key: key);
+  const SelectDefaultLang({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +17,7 @@ class SelectDefaultLang extends StatelessWidget {
       onTap: () => showDialog(
         context: context,
         builder: (context) => StatefulBuilder(
-          builder: (context, setState) =>
-              SelectDefaultLangDialog(setStateOverlord: setStateOverlord),
+          builder: (context, setState) => SelectDefaultLangDialog(),
         ),
       ),
       icon: Icons.translate,
@@ -32,10 +29,7 @@ class SelectDefaultLang extends StatelessWidget {
 }
 
 class SelectDefaultLangDialog extends StatefulWidget {
-  const SelectDefaultLangDialog({Key? key, required this.setStateOverlord})
-      : super(key: key);
-
-  final setStateOverlord;
+  const SelectDefaultLangDialog({Key? key}) : super(key: key);
 
   @override
   State<SelectDefaultLangDialog> createState() =>
@@ -107,7 +101,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                   FocusScope.of(context).unfocus();
                                   session.write('to_language_share_default',
                                       selectLanguagesMap[option]);
-                                  widget.setStateOverlord(() {
+                                  setStateOverlordData(() {
                                     toLanguageShareDefault = option;
                                     toLanguageValueShareDefault =
                                         selectLanguagesMap[option];
@@ -169,7 +163,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                     FocusScope.of(context).unfocus();
                     session.write('to_language_share_default',
                         selectLanguagesMap[chosenOne]);
-                    widget.setStateOverlord(() {
+                    setStateOverlordData(() {
                       toLanguageShareDefault = chosenOne;
                       toLanguageValueShareDefault =
                           selectLanguagesMap[chosenOne];

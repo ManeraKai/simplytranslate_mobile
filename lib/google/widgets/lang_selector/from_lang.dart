@@ -6,9 +6,7 @@ final ScrollController _leftTextviewScrollController = ScrollController();
 bool _fromIsFirstClick = false;
 
 class GoogleFromLang extends StatelessWidget {
-  final setStateOverlord;
-  const GoogleFromLang({required this.setStateOverlord, Key? key})
-      : super(key: key);
+  const GoogleFromLang({Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     Function changeText = () {};
@@ -74,7 +72,7 @@ class GoogleFromLang extends StatelessWidget {
                                           FocusScope.of(context).unfocus();
                                           session.write(
                                               'from_language', option);
-                                          setStateOverlord(() {
+                                          setStateOverlordData(() {
                                             fromLanguage = option;
                                             fromLanguageValue =
                                                 fromSelectLanguagesMap[option];
@@ -123,7 +121,7 @@ class GoogleFromLang extends StatelessWidget {
           changeText = () => fieldTextEditingController.text = fromLanguage;
           return TextField(
             onTap: () {
-              // setStateOverlord(() => translationInputOpen = false);
+              // setStateOverlordData(() => translationInputOpen = false);
               _fromIsFirstClick = true;
               fieldTextEditingController.selection = TextSelection(
                 baseOffset: 0,
@@ -139,7 +137,7 @@ class GoogleFromLang extends StatelessWidget {
                   FocusScope.of(context).unfocus();
                   session.write(
                       'from_language', fromSelectLanguagesMap[chosenOne]);
-                  setStateOverlord(() {
+                  setStateOverlordData(() {
                     fromLanguage = chosenOne;
                     fromLanguageValue = fromSelectLanguagesMap[chosenOne];
                   });
@@ -156,7 +154,7 @@ class GoogleFromLang extends StatelessWidget {
 
                       session.write(
                           'from_language', fromSelectLanguagesMap[chosenOne]);
-                      setStateOverlord(() {
+                      setStateOverlordData(() {
                         fromLanguage = chosenOne;
                         fromLanguageValue = fromSelectLanguagesMap[chosenOne];
                       });

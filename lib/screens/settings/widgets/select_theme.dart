@@ -5,9 +5,7 @@ import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.
 import '../../../data.dart';
 
 class SelectTheme extends StatelessWidget {
-  final setStateOverlord;
   const SelectTheme({
-    required this.setStateOverlord,
     Key? key,
   }) : super(key: key);
 
@@ -15,7 +13,7 @@ class SelectTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     _darkFunc(setState) {
       setState(() => themeRadio = AppTheme.dark);
-      setStateOverlord(() {
+      setStateOverlordData(() {
         session.write('theme', 'dark');
         themeValue = AppLocalizations.of(context)!.dark;
         theme = Brightness.dark;
@@ -25,7 +23,7 @@ class SelectTheme extends StatelessWidget {
 
     _lightFunc(setState) {
       setState(() => themeRadio = AppTheme.light);
-      setStateOverlord(() {
+      setStateOverlordData(() {
         session.write('theme', 'light');
         themeValue = AppLocalizations.of(context)!.light;
         theme = Brightness.light;
@@ -35,7 +33,7 @@ class SelectTheme extends StatelessWidget {
 
     _systemFunc(setState) {
       setState(() => themeRadio = AppTheme.system);
-      setStateOverlord(() {
+      setStateOverlordData(() {
         session.write('theme', 'system');
         themeValue = AppLocalizations.of(context)!.follow_system;
         theme = MediaQuery.of(context).platformBrightness;

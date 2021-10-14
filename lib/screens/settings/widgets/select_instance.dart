@@ -14,10 +14,7 @@ String _tmpInstance = '';
 var _tmpInput = '';
 
 class SelectInstance extends StatelessWidget {
-  const SelectInstance({required this.setStateOverlord, Key? key})
-      : super(key: key);
-
-  final setStateOverlord;
+  const SelectInstance({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +22,19 @@ class SelectInstance extends StatelessWidget {
       instanceIndex = instances.indexOf(x);
       setState(() => instance = x);
       Navigator.of(context).pop();
-      setStateOverlord(() => loading = true);
-      await checkInstance(setStateOverlord, instances[instanceIndex]);
-      setStateOverlord(() => loading = false);
+      setStateOverlordData(() => loading = true);
+      await checkInstance(setStateOverlordData, instances[instanceIndex]);
+      setStateOverlordData(() => loading = false);
       session.write('instance_mode', x);
     }
 
     randomFunc(setState) async {
       setState(() => instance = 'random');
       Navigator.of(context).pop();
-      setStateOverlord(() => loading = true);
+      setStateOverlordData(() => loading = true);
       instanceIndex = Random().nextInt(instances.length);
-      await checkInstance(setStateOverlord, instances[instanceIndex]);
-      setStateOverlord(() => loading = false);
+      await checkInstance(setStateOverlordData, instances[instanceIndex]);
+      setStateOverlordData(() => loading = false);
       session.write('instance_mode', 'random');
     }
 
@@ -58,7 +55,7 @@ class SelectInstance extends StatelessWidget {
         });
         if (responseBool == customInstanceValidation.True) {
           session.write('customInstance', customUrl);
-          setStateOverlord(() {
+          setStateOverlordData(() {
             customInstance = customUrl;
           });
           Navigator.of(context).pop();
@@ -71,7 +68,7 @@ class SelectInstance extends StatelessWidget {
       _tmpInput = customUrlController.text;
       instanceIndex = 0;
       Navigator.of(context).pop();
-      setStateOverlord(() {
+      setStateOverlordData(() {
         instance = 'custom';
         session.write('instance_mode', 'custom');
       });
@@ -162,7 +159,7 @@ class SelectInstance extends StatelessWidget {
       if (isCustomInstanceValid != customInstanceValidation.True) {
         if (_tmpInput != '') customUrlController.text = _tmpInput;
         print('tmp input is: $_tmpInput');
-        setStateOverlord(() => instance = _tmpInstance);
+        setStateOverlordData(() => instance = _tmpInstance);
         session.write('instance_mode', _tmpInstance);
       }
     }

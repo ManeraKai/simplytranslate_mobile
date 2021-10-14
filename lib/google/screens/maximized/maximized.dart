@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/google/widgets/translation_output/widgets/tts_output.dart';
+import './widgets/tts_output.dart';
 import '/data.dart';
 import '/google/widgets/translation_input/widgets/copy_button.dart';
 
@@ -65,7 +65,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                       }),
                       icon: Icon(Icons.remove),
                     ),
-                    TtsOutput(),
+                    MaximizedTtsOutput(),
                   ],
                 )
               ],

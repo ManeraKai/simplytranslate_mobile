@@ -3,13 +3,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 
 class TranslateButtonFloat extends StatelessWidget {
-  final setStateParent;
-  final contextParent;
-  const TranslateButtonFloat({
-    Key? key,
-    required this.setStateParent,
-    required this.contextParent,
-  }) : super(key: key);
+  const TranslateButtonFloat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +22,22 @@ class TranslateButtonFloat extends StatelessWidget {
                       ? () async {
                           FocusScope.of(context).unfocus();
                           isTranslationCanceled = false;
-                          setStateParent(() => loading = true);
+                          setStateOverlordData(() => loading = true);
                           try {
                             final translatedText = await translate(
                               input: translationInput,
                               fromLanguageValue: fromLanguageValue,
                               toLanguageValue: toLanguageValue,
-                              context: contextParent,
+                              context: contextOverlordData,
                             );
                             if (!isTranslationCanceled) {
-                              setStateParent(() {
+                              setStateOverlordData(() {
                                 googleTranslationOutput = translatedText;
                                 loading = false;
                               });
                             }
                           } catch (_) {
-                            setStateParent(() => loading = false);
+                            setStateOverlordData(() => loading = false);
                           }
                         }
                       : null,

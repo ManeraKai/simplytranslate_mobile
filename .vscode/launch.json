@@ -10,7 +10,7 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "development" //development or staging or production
+                "development", //development or staging or production
             ]
         },
         {

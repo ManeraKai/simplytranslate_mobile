@@ -17,6 +17,12 @@ const whiteColor = Color(0xfff5f6f7);
 const greenColor = Color(0xff3fb274);
 const lightThemeGreyColor = Color(0xffa9a9a9);
 
+bool callSharedText = false;
+var themeTranslation;
+
+late BuildContext contextOverlordData;
+late void Function(void Function() fn) setStateOverlordData;
+
 ThemeData materialAppDarkTheme(BuildContext context) {
   return ThemeData(
     colorScheme: ColorScheme(
@@ -342,6 +348,8 @@ Map<dynamic, dynamic> selectLanguagesMapGetter(BuildContext context) {
   };
 }
 
+var scaffoldKey = GlobalKey();
+
 showInstanceError(context) {
   showDialog(
     context: context,
@@ -458,6 +466,9 @@ bool ttsInputloading = false;
 
 bool ttsOutputloading = false;
 bool isTtsOutputCanceled = false;
+
+bool ttsMaximizedOutputloading = false;
+bool isMaximizedTtsOutputCanceled = false;
 
 var instances = [
   "https://simplytranslate.org",
