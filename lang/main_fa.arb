@@ -121,7 +121,7 @@
     "cancel": "لغو",
     "empty_clipboard": "کلیپ‌بورد خالیست",
     "input_limit": "ورودی ترجمه بالای ۵۰۰۰ نویسه است",
-    "input_calc": "Exceeded 5000 character limit by $lengthDifference",
+    "input_calc": "تعداد نویسه از محدودیت ۵۰۰۰تایی $lengthDifference بیشتر شده",
 
     "input_fraction_one": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
     "input_fraction_few": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
@@ -158,7 +158,7 @@
     "about": "درباره",
 
     "team": "تیم",
-    "team_summary": "برنامه نویس‌ها، مترجم‌ها و استفاده کنندگان",
+    "team_summary": "برنامه نویس‌ها، مترجم‌ها و امتحان کنندگان",
     "contribute": "مشارکت",
     "contribute_summary": "برای بهتر شدن این نرم‌افزار کمک کنید!",
     "version": "نسخه",
