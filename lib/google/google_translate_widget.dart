@@ -39,7 +39,6 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
             GoogleTranslationOutput(),
             const SizedBox(height: 10),
             Container(
-              height: 100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
