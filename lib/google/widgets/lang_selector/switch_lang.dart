@@ -3,12 +3,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 
 class GoogleSwitchLang extends StatelessWidget {
-  final setStateParent;
-
-  const GoogleSwitchLang({
-    required this.setStateParent,
-    Key? key,
-  }) : super(key: key);
+  const GoogleSwitchLang({Key? key}) : super(key: key);
 
   switchLangsWithCookies() {
     final tmp = fromLanguage;
@@ -32,7 +27,7 @@ class GoogleSwitchLang extends StatelessWidget {
           ),
           onPressed: () async {
             if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
-              setStateParent(() {
+              setStateOverlordData(() {
                 isTtsInputCanceled = true;
                 ttsOutputloading = false;
                 isTtsOutputCanceled = true;
@@ -40,10 +35,10 @@ class GoogleSwitchLang extends StatelessWidget {
               });
               if (googleTranslationInputController.text.isEmpty) {
                 switchLangsWithCookies();
-                setStateParent(() {});
+                setStateOverlordData(() {});
               } else if (googleTranslationInputController.text.length <= 5000) {
                 FocusScope.of(context).unfocus();
-                setStateParent(() => loading = true);
+                setStateOverlordData(() => loading = true);
                 try {
                   final translationInputTransTmp = translationInput;
                   final fromLanguageValueTransTmp = fromLanguageValue;
@@ -77,7 +72,7 @@ class GoogleSwitchLang extends StatelessWidget {
                       );
                       translatedText2 = '';
                     }
-                    setStateParent(() {
+                    setStateOverlordData(() {
                       loading = false;
                       translationInput = translatedText;
                       googleTranslationInputController.text = translatedText;
@@ -85,12 +80,12 @@ class GoogleSwitchLang extends StatelessWidget {
                     });
                   }
                 } catch (error) {
-                  setStateParent(() => loading = false);
+                  setStateOverlordData(() => loading = false);
                   print('translate error: $error');
                 }
               } else {
                 switchLangsWithCookies();
-                setStateParent(() {});
+                setStateOverlordData(() {});
               }
             }
           },

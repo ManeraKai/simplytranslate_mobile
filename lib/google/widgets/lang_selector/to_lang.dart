@@ -6,9 +6,7 @@ final ScrollController _rightTextviewScrollController = ScrollController();
 bool toIsFirstClick = false;
 
 class GoogleToLang extends StatelessWidget {
-  final setStateOverlord;
-  const GoogleToLang({required this.setStateOverlord, Key? key})
-      : super(key: key);
+  const GoogleToLang({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +72,7 @@ class GoogleToLang extends StatelessWidget {
                                           FocusScope.of(context).unfocus();
                                           session.write('to_language',
                                               selectLanguagesMap[option]);
-                                          setStateOverlord(() {
+                                          setStateOverlordData(() {
                                             toLanguage = option;
                                             toLanguageValue =
                                                 selectLanguagesMap[option];
@@ -123,7 +121,7 @@ class GoogleToLang extends StatelessWidget {
           changeText = () => fieldTextEditingController.text = toLanguage;
           return TextField(
             onTap: () {
-              // setStateOverlord(() => translationInputOpen = false);
+              // setStateOverlordData(() => translationInputOpen = false);
               toIsFirstClick = true;
               fieldTextEditingController.selection = TextSelection(
                 baseOffset: 0,
@@ -138,7 +136,7 @@ class GoogleToLang extends StatelessWidget {
                 if (chosenOne != fromLanguage) {
                   FocusScope.of(context).unfocus();
                   session.write('to_language', selectLanguagesMap[chosenOne]);
-                  setStateOverlord(() {
+                  setStateOverlordData(() {
                     toLanguage = chosenOne;
                     toLanguageValue = selectLanguagesMap[chosenOne];
                   });
@@ -155,7 +153,7 @@ class GoogleToLang extends StatelessWidget {
                       FocusScope.of(context).unfocus();
                       session.write(
                           'to_language', selectLanguagesMap[chosenOne]);
-                      setStateOverlord(() {
+                      setStateOverlordData(() {
                         toLanguage = chosenOne;
                         toLanguageValue = selectLanguagesMap[chosenOne];
                       });

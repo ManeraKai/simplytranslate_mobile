@@ -8,13 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'data.dart';
-import 'screens/about/about_screen.dart';
-import 'google/google_translate_widget.dart';
-import 'screens/settings/settings_screen.dart';
-import 'widgets/keyboard_visibility.dart';
-
-bool callSharedText = false;
-var themeTranslation;
+import 'home.dart';
 
 void main(List<String> args) async {
   await GetStorage.init();
@@ -79,6 +73,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
       }
     });
+    contextOverlordData = context;
+    setStateOverlordData = setState;
     super.initState();
   }
 
@@ -160,65 +156,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
       title: 'Simply Translate Mobile',
       home: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 80,
-                child: GestureDetector(
-                  onTap: () => FocusScope.of(context).unfocus(),
-                  child: AppBar(
-                    bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(2),
-                      child: Container(height: 2, color: greenColor),
-                    ),
-                    actions: [
-                      PopupMenuButton(
-                        icon: Icon(Icons.more_vert, color: Colors.white),
-                        itemBuilder: (BuildContext context) => [
-                          PopupMenuItem<String>(
-                            value: 'settings',
-                            child: Text(AppLocalizations.of(context)!.settings),
-                          ),
-                          PopupMenuItem<String>(
-                            value: 'about',
-                            child: Text(AppLocalizations.of(context)!.about),
-                          ),
-                        ],
-                        onSelected: (value) {
-                          if (value == 'settings')
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Settings(setState)),
-                            );
-                          else if (value == 'about')
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AboutScreen()),
-                            );
-                        },
-                      ),
-                    ],
-                    elevation: 3,
-                    iconTheme: IconThemeData(),
-                    title: const Text('Simply Translate Mobile'),
-                  ),
-                ),
-              ),
-              MainPageLocalization(),
-            ],
-          ),
-        ),
+        key: scaffoldKey,
+        body: MainPageLocalization(),
       ),
     );
   }
 }
 
-class MainPageLocalization extends StatelessWidget {
+class MainPageLocalization extends StatefulWidget {
   const MainPageLocalization({Key? key}) : super(key: key);
 
+  @override
+  State<MainPageLocalization> createState() => _MainPageLocalizationState();
+}
+
+class _MainPageLocalizationState extends State<MainPageLocalization> {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> themeTranslation = {
@@ -279,49 +231,6 @@ class MainPageLocalization extends StatelessWidget {
       }
       toLanguageValueShareDefault = sessionData;
     }
-
     return MainPage();
-  }
-}
-
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  @override
-  void initState() {
-    getSharedText(
-      setStateParent: setState,
-      context: context,
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    customUrlController.dispose();
-    super.dispose();
-  }
-
-  final rowWidth = 430;
-
-  @override
-  Widget build(BuildContext context) {
-    if (callSharedText) {
-      getSharedText(
-        setStateParent: setState,
-        context: context,
-      );
-    }
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: GoogleTranslate(
-        setStateParent: setState,
-      ),
-    );
   }
 }

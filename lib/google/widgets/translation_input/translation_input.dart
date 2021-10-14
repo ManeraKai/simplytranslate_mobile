@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/google/widgets/translate_button/translate_button_float.dart';
 import '/google/widgets/translation_input/widgets/tts_input.dart';
 import '/data.dart';
 import 'widgets/copy_button.dart';
 import 'widgets/delete_button.dart';
 import 'widgets/paste_button.dart';
 import 'widgets/character_limit.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
-  final setStateParent;
   const GoogleTranslationInput({
-    required this.setStateParent,
     Key? key,
   }) : super(key: key);
 
@@ -21,6 +21,37 @@ class GoogleTranslationInput extends StatefulWidget {
 }
 
 class _TranslationInputState extends State<GoogleTranslationInput> {
+  final FocusNode _nodeText2 = FocusNode();
+
+  /// Creates the [KeyboardActionsConfig] to hook up the fields
+  /// and their focus nodes to our [FormKeyboardActions].
+  KeyboardActionsConfig _buildConfig(BuildContext context) {
+    return KeyboardActionsConfig(
+      keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
+      keyboardBarColor: Colors.transparent,
+      nextFocus: true,
+      actions: [
+        KeyboardActionsItem(
+          focusNode: _nodeText2,
+          toolbarButtons: [
+            //button 2
+            (node) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () => node.unfocus(),
+                    child: TranslateButtonFloat(),
+                  ),
+                ],
+              );
+            }
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,305 +66,98 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
         ),
         borderRadius: BorderRadius.circular(2),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: TextField(
-              textDirection: googleTranslationInputController.text.length == 0
-                  ? intl.Bidi.detectRtlDirectionality(
-                      AppLocalizations.of(context)!.arabic,
-                    )
-                      ? TextDirection.rtl
-                      : TextDirection.ltr
-                  : intl.Bidi.detectRtlDirectionality(translationInput)
+      child: KeyboardActions(
+        disableScroll: true,
+        config: _buildConfig(context),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: TextField(
+                textDirection: googleTranslationInputController.text.length == 0
+                    ? intl.Bidi.detectRtlDirectionality(
+                        AppLocalizations.of(context)!.arabic,
+                      )
+                        ? TextDirection.rtl
+                        : TextDirection.ltr
+                    : intl.Bidi.detectRtlDirectionality(translationInput)
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                focusNode: _nodeText2,
+                minLines: 10,
+                maxLines: null,
+                controller: googleTranslationInputController,
+                keyboardType: TextInputType.multiline,
+                onTap: () =>
+                    setStateOverlordData(() => translationInputOpen = true),
+                onChanged: (String input) {
+                  if (googleTranslationInputController.text.length > 99999) {
+                    final tmpSelection;
+                    if (googleTranslationInputController.selection.baseOffset >=
+                        100000) {
+                      tmpSelection = TextSelection.collapsed(offset: 99999);
+                    } else {
+                      tmpSelection = TextSelection.collapsed(
+                          offset: googleTranslationInputController
+                              .selection.baseOffset);
+                    }
+
+                    googleTranslationInputController.text =
+                        googleTranslationInputController.text
+                            .substring(0, 99999);
+                    print(tmpSelection.baseOffset);
+
+                    googleTranslationInputController.selection = tmpSelection;
+                  } else if (googleTranslationInputController.text.length >
+                      5000) {
+                    if (!isSnackBarVisible) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(seconds: 1),
+                          width: 300,
+                          content: Text(
+                            AppLocalizations.of(context)!.input_limit,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                      isSnackBarVisible = true;
+                    }
+                  } else {
+                    if (isSnackBarVisible) isSnackBarVisible = false;
+                  }
+                  setStateOverlordData(() {
+                    translationInputOpen = true;
+                    translationInput = input;
+                  });
+                },
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  hintText: AppLocalizations.of(context)!.enter_text_here,
+                  hintTextDirection: intl.Bidi.detectRtlDirectionality(
+                          AppLocalizations.of(context)!.arabic)
                       ? TextDirection.rtl
                       : TextDirection.ltr,
-              // selectionControls: MyMaterialTextSelectionControls(),
-              focusNode: focus,
-              minLines: 10,
-              maxLines: null,
-              controller: googleTranslationInputController,
-              keyboardType: TextInputType.multiline,
-              onTap: () =>
-                  widget.setStateParent(() => translationInputOpen = true),
-              onChanged: (String input) {
-                if (googleTranslationInputController.text.length > 99999) {
-                  final tmpSelection;
-                  if (googleTranslationInputController.selection.baseOffset >=
-                      100000) {
-                    tmpSelection = TextSelection.collapsed(offset: 99999);
-                  } else {
-                    tmpSelection = TextSelection.collapsed(
-                        offset: googleTranslationInputController
-                            .selection.baseOffset);
-                  }
-
-                  googleTranslationInputController.text =
-                      googleTranslationInputController.text.substring(0, 99999);
-                  print(tmpSelection.baseOffset);
-
-                  googleTranslationInputController.selection = tmpSelection;
-                } else if (googleTranslationInputController.text.length >
-                    5000) {
-                  if (!isSnackBarVisible) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 1),
-                        width: 300,
-                        content: Text(
-                          AppLocalizations.of(context)!.input_limit,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    );
-                    isSnackBarVisible = true;
-                  }
-                } else {
-                  if (isSnackBarVisible) isSnackBarVisible = false;
-                }
-                widget.setStateParent(() {
-                  translationInputOpen = true;
-                  translationInput = input;
-                });
-              },
-              decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                hintText: AppLocalizations.of(context)!.enter_text_here,
-                hintTextDirection: intl.Bidi.detectRtlDirectionality(
-                        AppLocalizations.of(context)!.arabic)
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
+                ),
+                style: const TextStyle(fontSize: 20),
               ),
-              style: const TextStyle(fontSize: 20),
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              DeleteTranslationInputButton(
-                  setStateParentParent: widget.setStateParent),
-              CopyToClipboardButton(translationInput),
-              PasteClipboardButton(setStateParent: widget.setStateParent),
-              TtsInput(),
-              CharacterLimit(),
-            ],
-          )
-        ],
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                DeleteTranslationInputButton(),
+                CopyToClipboardButton(translationInput),
+                PasteClipboardButton(),
+                TtsInput(),
+                CharacterLimit(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
-
-// class MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
-//   // Padding between the toolbar and the anchor.
-//   static const double _kToolbarContentDistanceBelow = 20.0;
-//   static const double _kToolbarContentDistance = 8.0;
-
-//   /// Builder for material-style copy/paste text selection toolbar.
-//   @override
-//   Widget buildToolbar(
-//     BuildContext context,
-//     Rect globalEditableRegion,
-//     double textLineHeight,
-//     Offset selectionMidpoint,
-//     List<TextSelectionPoint> endpoints,
-//     TextSelectionDelegate delegate,
-//     ClipboardStatusNotifier clipboardStatus,
-//     Offset? lastSecondaryTapDownPosition,
-//   ) {
-//     final TextSelectionPoint startTextSelectionPoint = endpoints[0];
-//     final TextSelectionPoint endTextSelectionPoint =
-//         endpoints.length > 1 ? endpoints[1] : endpoints[0];
-//     final Offset anchorAbove =
-//         MediaQuery.of(context).orientation == Orientation.portrait
-//             ? startTextSelectionPoint.point.dy < 17
-//                 ? Offset(
-//                     Offset(
-//                             globalEditableRegion.left + selectionMidpoint.dx,
-//                             globalEditableRegion.top +
-//                                 startTextSelectionPoint.point.dy -
-//                                 textLineHeight -
-//                                 _kToolbarContentDistance)
-//                         .dx,
-//                     150)
-//                 : startTextSelectionPoint.point.dy > 265
-//                     ? Offset(
-//                         Offset(
-//                           globalEditableRegion.left + selectionMidpoint.dx,
-//                           globalEditableRegion.top +
-//                               endTextSelectionPoint.point.dy +
-//                               _kToolbarContentDistanceBelow,
-//                         ).dx,
-//                         400)
-//                     : Offset(
-//                         globalEditableRegion.left + selectionMidpoint.dx,
-//                         globalEditableRegion.top +
-//                             startTextSelectionPoint.point.dy -
-//                             textLineHeight -
-//                             _kToolbarContentDistance)
-//             : startTextSelectionPoint.point.dy < 17
-//                 ? Offset(
-//                     Offset(
-//                             globalEditableRegion.left + selectionMidpoint.dx,
-//                             globalEditableRegion.top +
-//                                 startTextSelectionPoint.point.dy -
-//                                 textLineHeight -
-//                                 _kToolbarContentDistance)
-//                         .dx,
-//                     120)
-//                 : startTextSelectionPoint.point.dy > 270
-//                     ? Offset(
-//                         Offset(
-//                           globalEditableRegion.left + selectionMidpoint.dx,
-//                           globalEditableRegion.top +
-//                               endTextSelectionPoint.point.dy +
-//                               _kToolbarContentDistanceBelow,
-//                         ).dx,
-//                         365)
-//                     : Offset(
-//                         globalEditableRegion.left + selectionMidpoint.dx,
-//                         globalEditableRegion.top +
-//                             startTextSelectionPoint.point.dy -
-//                             textLineHeight -
-//                             _kToolbarContentDistance);
-
-//     final Offset anchorBelow = Offset(
-//       globalEditableRegion.left + selectionMidpoint.dx,
-//       globalEditableRegion.top +
-//           endTextSelectionPoint.point.dy +
-//           _kToolbarContentDistanceBelow,
-//     );
-
-//     return MyTextSelectionToolbar(
-//       anchorAbove: anchorAbove,
-//       anchorBelow: anchorBelow,
-//       clipboardStatus: clipboardStatus,
-//       handleCopy: canCopy(delegate)
-//           ? () => handleCopy(delegate, clipboardStatus)
-//           : () {},
-//       handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
-//       handlePaste: canPaste(delegate) ? () => handlePaste(delegate) : () {},
-//       handleSelectAll:
-//           canSelectAll(delegate) ? () => handleSelectAll(delegate) : () {},
-//     );
-//   }
-// }
-
-// class _TextSelectionToolbarItemData {
-//   const _TextSelectionToolbarItemData({
-//     required this.label,
-//     required this.onPressed,
-//   });
-//   final String label;
-//   final VoidCallback onPressed;
-// }
-
-// class MyTextSelectionToolbar extends StatefulWidget {
-//   const MyTextSelectionToolbar({
-//     Key? key,
-//     required this.anchorAbove,
-//     required this.anchorBelow,
-//     required this.clipboardStatus,
-//     required this.handleCopy,
-//     required this.handleCut,
-//     required this.handlePaste,
-//     required this.handleSelectAll,
-//   }) : super(key: key);
-
-//   final Offset anchorAbove;
-//   final Offset anchorBelow;
-//   final ClipboardStatusNotifier clipboardStatus;
-//   final VoidCallback handleCopy;
-//   final VoidCallback handleCut;
-//   final VoidCallback handlePaste;
-//   final VoidCallback handleSelectAll;
-
-//   @override
-//   MyTextSelectionToolbarState createState() => MyTextSelectionToolbarState();
-// }
-
-// class MyTextSelectionToolbarState extends State<MyTextSelectionToolbar> {
-//   void _onChangedClipboardStatus() {
-//     setState(() {});
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     widget.clipboardStatus.addListener(_onChangedClipboardStatus);
-//     widget.clipboardStatus.update();
-//   }
-
-//   @override
-//   void didUpdateWidget(MyTextSelectionToolbar oldWidget) {
-//     super.didUpdateWidget(oldWidget);
-//     if (widget.clipboardStatus != oldWidget.clipboardStatus) {
-//       widget.clipboardStatus.addListener(_onChangedClipboardStatus);
-//       oldWidget.clipboardStatus.removeListener(_onChangedClipboardStatus);
-//     }
-//     widget.clipboardStatus.update();
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     if (!widget.clipboardStatus.disposed) {
-//       widget.clipboardStatus.removeListener(_onChangedClipboardStatus);
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     assert(debugCheckHasMaterialLocalizations(context));
-//     final MaterialLocalizations localizations =
-//         MaterialLocalizations.of(context);
-
-//     final List<_TextSelectionToolbarItemData> itemDatas =
-//         <_TextSelectionToolbarItemData>[
-//       _TextSelectionToolbarItemData(
-//         label: localizations.cutButtonLabel,
-//         onPressed: widget.handleCut,
-//       ),
-//       _TextSelectionToolbarItemData(
-//         label: localizations.copyButtonLabel,
-//         onPressed: widget.handleCopy,
-//       ),
-//       if (widget.clipboardStatus.value == ClipboardStatus.pasteable)
-//         _TextSelectionToolbarItemData(
-//           label: localizations.pasteButtonLabel,
-//           onPressed: widget.handlePaste,
-//         ),
-//       _TextSelectionToolbarItemData(
-//         label: localizations.selectAllButtonLabel,
-//         onPressed: widget.handleSelectAll,
-//       ),
-//     ];
-
-//     int childIndex = 0;
-//     return TextSelectionToolbar(
-//       anchorAbove: widget.anchorAbove,
-//       anchorBelow: widget.anchorBelow,
-//       toolbarBuilder: (BuildContext context, Widget child) {
-//         return Container(
-//           color: theme == Brightness.dark ? secondgreyColor : greenColor,
-//           child: child,
-//         );
-//       },
-//       children: itemDatas.map((_TextSelectionToolbarItemData itemData) {
-//         return TextSelectionToolbarTextButton(
-//           padding: TextSelectionToolbarTextButton.getPadding(
-//               childIndex++, itemDatas.length),
-//           onPressed: itemData.onPressed,
-//           child: Text(
-//             itemData.label,
-//             style: TextStyle(color: Colors.white),
-//           ),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }

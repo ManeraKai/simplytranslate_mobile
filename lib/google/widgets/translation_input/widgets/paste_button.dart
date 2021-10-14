@@ -6,9 +6,7 @@ import '/data.dart';
 
 class PasteClipboardButton extends StatefulWidget {
   final changeText;
-  final setStateParent;
   const PasteClipboardButton({
-    required this.setStateParent,
     this.changeText,
     Key? key,
   }) : super(key: key);
@@ -46,7 +44,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               await Future.delayed(
                                   const Duration(milliseconds: 1), () => "1");
                               FocusScope.of(context).requestFocus(focus);
-                              widget.setStateParent(() {
+                              setStateOverlordData(() {
                                 translationInput = valueString;
                                 googleTranslationInputController.text =
                                     valueString;
@@ -84,7 +82,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                                   const Duration(milliseconds: 1), () => "1");
                               FocusScope.of(context).requestFocus(focus);
 
-                              widget.setStateParent(() {
+                              setStateOverlordData(() {
                                 translationInput = newText;
                                 googleTranslationInputController.text = newText;
                                 if (isKeyboardVisible) {

@@ -8,8 +8,7 @@ import 'widgets/select_instance.dart';
 import 'widgets/select_theme.dart';
 
 class Settings extends StatefulWidget {
-  final setStateOverlord;
-  const Settings(this.setStateOverlord, {Key? key}) : super(key: key);
+  const Settings({Key? key}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -43,22 +42,22 @@ class _SettingsState extends State<Settings> {
                   style: textStyle,
                 ),
                 line,
-                SelectInstance(setStateOverlord: widget.setStateOverlord),
-                UpdateList(setStateOverlord: widget.setStateOverlord),
+                SelectInstance(),
+                UpdateList(),
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.appearance,
                   style: textStyle,
                 ),
                 line,
-                SelectTheme(setStateOverlord: widget.setStateOverlord),
+                SelectTheme(),
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.translation,
                   style: textStyle,
                 ),
                 line,
-                SelectDefaultLang(setStateOverlord: widget.setStateOverlord)
+                SelectDefaultLang()
               ],
             ),
           ),

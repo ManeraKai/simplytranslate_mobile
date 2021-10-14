@@ -6,12 +6,7 @@ import '/data.dart';
 // var translateButtonWidgetSize;
 
 class GoogleTranslateButton extends StatelessWidget {
-  final setStateParent;
-  final contextParent;
-
-  const GoogleTranslateButton(
-      {Key? key, required this.setStateParent, required this.contextParent})
-      : super(key: key);
+  const GoogleTranslateButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +17,22 @@ class GoogleTranslateButton extends StatelessWidget {
               ? () async {
                   FocusScope.of(context).unfocus();
                   isTranslationCanceled = false;
-                  setStateParent(() => loading = true);
+                  setStateOverlordData(() => loading = true);
                   try {
                     final translatedText = await translate(
                       input: translationInput,
                       fromLanguageValue: fromLanguageValue,
                       toLanguageValue: toLanguageValue,
-                      context: contextParent,
+                      context: contextOverlordData,
                     );
                     if (!isTranslationCanceled) {
-                      setStateParent(() {
+                      setStateOverlordData(() {
                         googleTranslationOutput = translatedText;
                         loading = false;
                       });
                     }
                   } catch (_) {
-                    setStateParent(() => loading = false);
+                    setStateOverlordData(() => loading = false);
                   }
                 }
               : null,

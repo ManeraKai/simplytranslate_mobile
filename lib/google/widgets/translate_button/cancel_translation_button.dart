@@ -3,10 +3,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 
 class GoogleCancelTranslationButton extends StatelessWidget {
-  final setStateParent;
-
-  const GoogleCancelTranslationButton({Key? key, required this.setStateParent})
-      : super(key: key);
+  const GoogleCancelTranslationButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +14,7 @@ class GoogleCancelTranslationButton extends StatelessWidget {
             ? null
             : googleTranslationInputController.text.length <= 5000
                 ? () {
-                    setStateParent(() {
+                    setStateOverlordData(() {
                       loading = false;
                       isTranslationCanceled = true;
                     });
