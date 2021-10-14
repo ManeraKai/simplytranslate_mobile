@@ -112,7 +112,9 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 18),
+                                    horizontal: 8,
+                                    vertical: 18,
+                                  ),
                                   child: Text(option),
                                 ),
                               ),
