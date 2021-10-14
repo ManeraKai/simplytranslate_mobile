@@ -13,9 +13,7 @@ import 'widgets/character_limit.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
-  const GoogleTranslationInput({
-    Key? key,
-  }) : super(key: key);
+  const GoogleTranslationInput({Key? key}) : super(key: key);
 
   @override
   _TranslationInputState createState() => _TranslationInputState();
@@ -35,7 +33,6 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
         KeyboardActionsItem(
           focusNode: _nodeText2,
           toolbarButtons: [
-            //button 2
             (node) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -56,7 +53,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: MediaQuery.of(context).orientation == Orientation.portrait
+          ? MediaQuery.of(context).size.height / 3
+          : 250,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
@@ -75,77 +74,81 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: TextField(
-                selectionControls: MyMaterialTextSelectionControls(),
-                textDirection: googleTranslationInputController.text.length == 0
-                    ? intl.Bidi.detectRtlDirectionality(
-                        AppLocalizations.of(context)!.arabic,
-                      )
-                        ? TextDirection.rtl
-                        : TextDirection.ltr
-                    : intl.Bidi.detectRtlDirectionality(translationInput)
+              child: Scrollbar(
+                child: TextField(
+                  selectionControls: MyMaterialTextSelectionControls(),
+                  textDirection:
+                      googleTranslationInputController.text.length == 0
+                          ? intl.Bidi.detectRtlDirectionality(
+                              AppLocalizations.of(context)!.arabic,
+                            )
+                              ? TextDirection.rtl
+                              : TextDirection.ltr
+                          : intl.Bidi.detectRtlDirectionality(translationInput)
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
+                  focusNode: _nodeText2,
+                  minLines: 10,
+                  maxLines: null,
+                  controller: googleTranslationInputController,
+                  keyboardType: TextInputType.multiline,
+                  onTap: () =>
+                      setStateOverlordData(() => translationInputOpen = true),
+                  onChanged: (String input) {
+                    if (googleTranslationInputController.text.length > 99999) {
+                      final tmpSelection;
+                      if (googleTranslationInputController
+                              .selection.baseOffset >=
+                          100000) {
+                        tmpSelection = TextSelection.collapsed(offset: 99999);
+                      } else {
+                        tmpSelection = TextSelection.collapsed(
+                            offset: googleTranslationInputController
+                                .selection.baseOffset);
+                      }
+
+                      googleTranslationInputController.text =
+                          googleTranslationInputController.text
+                              .substring(0, 99999);
+                      print(tmpSelection.baseOffset);
+
+                      googleTranslationInputController.selection = tmpSelection;
+                    } else if (googleTranslationInputController.text.length >
+                        5000) {
+                      if (!isSnackBarVisible) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: Duration(seconds: 1),
+                            width: 300,
+                            content: Text(
+                              AppLocalizations.of(context)!.input_limit,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                        isSnackBarVisible = true;
+                      }
+                    } else {
+                      if (isSnackBarVisible) isSnackBarVisible = false;
+                    }
+                    setStateOverlordData(() {
+                      translationInputOpen = true;
+                      translationInput = input;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    hintText: AppLocalizations.of(context)!.enter_text_here,
+                    hintTextDirection: intl.Bidi.detectRtlDirectionality(
+                            AppLocalizations.of(context)!.arabic)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                focusNode: _nodeText2,
-                minLines: 10,
-                maxLines: null,
-                controller: googleTranslationInputController,
-                keyboardType: TextInputType.multiline,
-                onTap: () =>
-                    setStateOverlordData(() => translationInputOpen = true),
-                onChanged: (String input) {
-                  if (googleTranslationInputController.text.length > 99999) {
-                    final tmpSelection;
-                    if (googleTranslationInputController.selection.baseOffset >=
-                        100000) {
-                      tmpSelection = TextSelection.collapsed(offset: 99999);
-                    } else {
-                      tmpSelection = TextSelection.collapsed(
-                          offset: googleTranslationInputController
-                              .selection.baseOffset);
-                    }
-
-                    googleTranslationInputController.text =
-                        googleTranslationInputController.text
-                            .substring(0, 99999);
-                    print(tmpSelection.baseOffset);
-
-                    googleTranslationInputController.selection = tmpSelection;
-                  } else if (googleTranslationInputController.text.length >
-                      5000) {
-                    if (!isSnackBarVisible) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: Duration(seconds: 1),
-                          width: 300,
-                          content: Text(
-                            AppLocalizations.of(context)!.input_limit,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                      isSnackBarVisible = true;
-                    }
-                  } else {
-                    if (isSnackBarVisible) isSnackBarVisible = false;
-                  }
-                  setStateOverlordData(() {
-                    translationInputOpen = true;
-                    translationInput = input;
-                  });
-                },
-                decoration: InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  hintText: AppLocalizations.of(context)!.enter_text_here,
-                  hintTextDirection: intl.Bidi.detectRtlDirectionality(
-                          AppLocalizations.of(context)!.arabic)
-                      ? TextDirection.rtl
-                      : TextDirection.ltr,
+                  ),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                style: const TextStyle(fontSize: 20),
               ),
             ),
             Column(
@@ -185,58 +188,40 @@ class MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     final TextSelectionPoint startTextSelectionPoint = endpoints[0];
     final TextSelectionPoint endTextSelectionPoint =
         endpoints.length > 1 ? endpoints[1] : endpoints[0];
-    final Offset anchorAbove =
-        MediaQuery.of(context).orientation == Orientation.portrait
-            ? startTextSelectionPoint.point.dy < 17
-                ? Offset(
-                    Offset(
-                            globalEditableRegion.left + selectionMidpoint.dx,
-                            globalEditableRegion.top +
-                                startTextSelectionPoint.point.dy -
-                                textLineHeight -
-                                _kToolbarContentDistance)
-                        .dx,
-                    150)
-                : startTextSelectionPoint.point.dy > 265 + 150
-                    ? Offset(
-                        Offset(
-                          globalEditableRegion.left + selectionMidpoint.dx,
-                          globalEditableRegion.top +
-                              endTextSelectionPoint.point.dy +
-                              _kToolbarContentDistanceBelow,
-                        ).dx,
-                        400 + 150)
-                    : Offset(
-                        globalEditableRegion.left + selectionMidpoint.dx,
-                        globalEditableRegion.top +
-                            startTextSelectionPoint.point.dy -
-                            textLineHeight -
-                            _kToolbarContentDistance)
-            : startTextSelectionPoint.point.dy < 17
-                ? Offset(
-                    Offset(
-                            globalEditableRegion.left + selectionMidpoint.dx,
-                            globalEditableRegion.top +
-                                startTextSelectionPoint.point.dy -
-                                textLineHeight -
-                                _kToolbarContentDistance)
-                        .dx,
-                    120)
-                : startTextSelectionPoint.point.dy > 270
-                    ? Offset(
-                        Offset(
-                          globalEditableRegion.left + selectionMidpoint.dx,
-                          globalEditableRegion.top +
-                              endTextSelectionPoint.point.dy +
-                              _kToolbarContentDistanceBelow,
-                        ).dx,
-                        365)
-                    : Offset(
-                        globalEditableRegion.left + selectionMidpoint.dx,
-                        globalEditableRegion.top +
-                            startTextSelectionPoint.point.dy -
-                            textLineHeight -
-                            _kToolbarContentDistance);
+    final Offset anchorAbove = () {
+      if (startTextSelectionPoint.point.dy < 10 &&
+          MediaQuery.of(context).orientation == Orientation.portrait) {
+        return Offset(
+          Offset(
+            globalEditableRegion.left + selectionMidpoint.dx,
+            globalEditableRegion.top +
+                startTextSelectionPoint.point.dy -
+                textLineHeight -
+                _kToolbarContentDistance,
+          ).dx,
+          140,
+        );
+      } else if (startTextSelectionPoint.point.dy >
+          70 + MediaQuery.of(context).size.height / 3) {
+        return Offset(
+          Offset(
+            globalEditableRegion.left + selectionMidpoint.dx,
+            globalEditableRegion.top +
+                endTextSelectionPoint.point.dy +
+                _kToolbarContentDistanceBelow,
+          ).dx,
+          200 + MediaQuery.of(context).size.height / 3,
+        );
+      } else {
+        return Offset(
+          globalEditableRegion.left + selectionMidpoint.dx,
+          globalEditableRegion.top +
+              startTextSelectionPoint.point.dy -
+              textLineHeight -
+              _kToolbarContentDistance,
+        );
+      }
+    }();
 
     final Offset anchorBelow = Offset(
       globalEditableRegion.left + selectionMidpoint.dx,
