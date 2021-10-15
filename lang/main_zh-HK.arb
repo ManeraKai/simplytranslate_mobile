@@ -152,7 +152,8 @@
     "dark": "暗",
     "follow_system": "跟隨系統",
 
-    "share_to_lang": "默認分享到語言",
+    "default_share_language": "Default share language",
+    "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
 
 
     "about": "關於",

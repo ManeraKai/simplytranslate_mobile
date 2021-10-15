@@ -152,8 +152,8 @@
     "dark": "Ciemny",
     "follow_system": "Zgodny z systemowym",
 
-    "share_to_lang": "Domyślny język przy udostępnianiu",
-
+    "default_share_language": "Default share language",
+    "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
 
     "about": "O aplikacji",
 

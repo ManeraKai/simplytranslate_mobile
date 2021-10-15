@@ -150,7 +150,9 @@
     "dark": "داكن",
     "follow_system": "حسب النظام",
 
-    "share_to_lang": "إلى-لغة المشاركة الإفتراضية",
+    "default_share_language": "لغة المشاركة الإفتراضية",
+    "default_share_language_summary": "يحدد لغة الترجمة للنص المُشارك من تطبيق آخر: $toLanguageShareDefault",
+    
 
     "about": "عن",
 

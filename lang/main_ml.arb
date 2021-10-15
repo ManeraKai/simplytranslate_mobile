@@ -150,7 +150,8 @@
   "dark": "ഡാർക്",
   "follow_system": "സിസ്റ്റം തീം പിന്തുടരുക",
   
-  "share_to_lang": "Default share to-language",
+  "default_share_language": "Default share language",
+  "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
   
   "about": "ആപ്പിനെ കുറിച്ച്",
   "team": "കൂട്ടായ്മ",
