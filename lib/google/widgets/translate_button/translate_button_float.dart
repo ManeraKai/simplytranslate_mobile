@@ -10,6 +10,7 @@ class TranslateButtonFloat extends StatelessWidget {
     return translationInputOpen
         ? Container(
             height: 50,
+            margin: EdgeInsets.zero,
             padding: const EdgeInsets.all(5),
             alignment: Alignment.topRight,
             child: ElevatedButton(
