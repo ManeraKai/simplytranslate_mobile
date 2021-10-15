@@ -21,10 +21,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).orientation == Orientation.portrait
-      //     ? MediaQuery.of(context).size.height / 3
-      //     : 250,
-      height: 250,
+      height: MediaQuery.of(context).orientation == Orientation.portrait
+          ? MediaQuery.of(context).size.height / 3
+          : 250,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
