@@ -20,7 +20,9 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
     String translatedText = googleTranslationOutput;
     return Container(
       height: MediaQuery.of(context).orientation == Orientation.portrait
-          ? MediaQuery.of(context).size.height / 3
+          ? MediaQuery.of(context).size.height / 3 < 250
+              ? 250
+              : MediaQuery.of(context).size.height / 3
           : 250,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,

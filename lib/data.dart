@@ -145,12 +145,9 @@ String toLanguageShareDefault = '';
 String instance = 'random';
 int instanceIndex = 0;
 
-String translationInput = '';
 String googleTranslationOutput = '';
 
 String customInstance = '';
-
-bool translationInputOpen = false;
 
 enum AppTheme { dark, light, system }
 
@@ -211,14 +208,15 @@ Future<void> getSharedText({
   try {
     var answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {
+      final _translationInput = answer.toString();
+
       setStateParent(() {
-        translationInput = answer.toString();
-        googleTranslationInputController.text = translationInput;
+        googleTranslationInputController.text = _translationInput;
         loading = true;
       });
 
       final translatedText = await translate(
-        input: translationInput,
+        input: _translationInput,
         fromLanguageValue: 'Autodetect',
         toLanguageValue: toLanguageValueShareDefault,
         context: context,

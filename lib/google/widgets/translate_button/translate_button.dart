@@ -20,7 +20,7 @@ class GoogleTranslateButton extends StatelessWidget {
                   setStateOverlordData(() => loading = true);
                   try {
                     final translatedText = await translate(
-                      input: translationInput,
+                      input: googleTranslationInputController.text,
                       fromLanguageValue: fromLanguageValue,
                       toLanguageValue: toLanguageValue,
                       context: contextOverlordData,

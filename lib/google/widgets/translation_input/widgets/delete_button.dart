@@ -22,7 +22,6 @@ class DeleteTranslationInputButton extends StatelessWidget {
                   ttsOutputloading = false;
                   isTtsOutputCanceled = true;
                   googleTranslationInputController.text = '';
-                  translationInput = '';
                   googleTranslationOutput = '';
                 });
 

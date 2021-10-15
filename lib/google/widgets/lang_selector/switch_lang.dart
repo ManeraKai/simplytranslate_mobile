@@ -40,7 +40,8 @@ class GoogleSwitchLang extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 setStateOverlordData(() => loading = true);
                 try {
-                  final translationInputTransTmp = translationInput;
+                  final translationInputTransTmp =
+                      googleTranslationInputController.text;
                   final fromLanguageValueTransTmp = fromLanguageValue;
                   final toLanguageValueTransTmp = toLanguageValue;
                   switchLangsWithCookies();
@@ -74,7 +75,6 @@ class GoogleSwitchLang extends StatelessWidget {
                     }
                     setStateOverlordData(() {
                       loading = false;
-                      translationInput = translatedText;
                       googleTranslationInputController.text = translatedText;
                       googleTranslationOutput = translatedText2;
                     });
