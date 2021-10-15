@@ -22,7 +22,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).orientation == Orientation.portrait
-          ? MediaQuery.of(context).size.height / 3
+          ? MediaQuery.of(context).size.height / 3 < 250
+              ? 250
+              : MediaQuery.of(context).size.height / 3
           : 250,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -48,7 +50,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                       )
                         ? TextDirection.rtl
                         : TextDirection.ltr
-                    : intl.Bidi.detectRtlDirectionality(translationInput)
+                    : intl.Bidi.detectRtlDirectionality(
+                            googleTranslationInputController.text)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
                 focusNode: focus,
@@ -56,49 +59,44 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 maxLines: null,
                 controller: googleTranslationInputController,
                 keyboardType: TextInputType.multiline,
-                onTap: () =>
-                    setStateOverlordData(() => translationInputOpen = true),
-                onChanged: (String input) {
-                  if (googleTranslationInputController.text.length > 99999) {
-                    final tmpSelection;
-                    if (googleTranslationInputController.selection.baseOffset >=
-                        100000) {
-                      tmpSelection = TextSelection.collapsed(offset: 99999);
-                    } else {
-                      tmpSelection = TextSelection.collapsed(
-                          offset: googleTranslationInputController
-                              .selection.baseOffset);
-                    }
+                // onChanged: (String input) {
+                //   if (googleTranslationInputController.text.length > 99999) {
+                //     final tmpSelection;
+                //     if (googleTranslationInputController.selection.baseOffset >=
+                //         100000) {
+                //       tmpSelection = TextSelection.collapsed(offset: 99999);
+                //     } else {
+                //       tmpSelection = TextSelection.collapsed(
+                //           offset: googleTranslationInputController
+                //               .selection.baseOffset);
+                //     }
 
-                    googleTranslationInputController.text =
-                        googleTranslationInputController.text
-                            .substring(0, 99999);
-                    print(tmpSelection.baseOffset);
+                //     googleTranslationInputController.text =
+                //         googleTranslationInputController.text
+                //             .substring(0, 99999);
+                //     print(tmpSelection.baseOffset);
 
-                    googleTranslationInputController.selection = tmpSelection;
-                  } else if (googleTranslationInputController.text.length >
-                      5000) {
-                    if (!isSnackBarVisible) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: Duration(seconds: 1),
-                          width: 300,
-                          content: Text(
-                            AppLocalizations.of(context)!.input_limit,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                      isSnackBarVisible = true;
-                    }
-                  } else {
-                    if (isSnackBarVisible) isSnackBarVisible = false;
-                  }
-                  setStateOverlordData(() {
-                    translationInputOpen = true;
-                    translationInput = input;
-                  });
-                },
+                //     googleTranslationInputController.selection = tmpSelection;
+                //   } else if (googleTranslationInputController.text.length >
+                //       5000) {
+                //     if (!isSnackBarVisible) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         SnackBar(
+                //           duration: Duration(seconds: 1),
+                //           width: 300,
+                //           content: Text(
+                //             AppLocalizations.of(context)!.input_limit,
+                //             textAlign: TextAlign.center,
+                //           ),
+                //         ),
+                //       );
+                //       isSnackBarVisible = true;
+                //     }
+                //   } else {
+                //     if (isSnackBarVisible) isSnackBarVisible = false;
+                //   }
+                //   setStateOverlordData(() {});
+                // },
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
@@ -118,7 +116,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DeleteTranslationInputButton(),
-              CopyToClipboardButton(translationInput),
+              CopyToClipboardButton(googleTranslationInputController.text),
               PasteClipboardButton(),
               TtsInput(),
               CharacterLimit(),

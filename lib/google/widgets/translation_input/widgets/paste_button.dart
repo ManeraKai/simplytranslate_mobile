@@ -45,10 +45,8 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                                   const Duration(milliseconds: 1), () => "1");
                               FocusScope.of(context).requestFocus(focus);
                               setStateOverlordData(() {
-                                translationInput = valueString;
                                 googleTranslationInputController.text =
                                     valueString;
-                                translationInputOpen = true;
                               });
                             } else if (googleTranslationInputController
                                     .text.length <
@@ -83,7 +81,6 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                               FocusScope.of(context).requestFocus(focus);
 
                               setStateOverlordData(() {
-                                translationInput = newText;
                                 googleTranslationInputController.text = newText;
                                 if (isKeyboardVisible) {
                                   if (beforePasteSelection +
