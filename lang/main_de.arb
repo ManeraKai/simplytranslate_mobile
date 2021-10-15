@@ -152,8 +152,8 @@
     "dark": "Dunkel",
     "follow_system": "System",
 
-    "share_to_lang": "Standard Zu-Sprache zum Teilen",
-
+    "default_share_language": "Default share language",
+    "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
 
     "about": "Über uns",
 

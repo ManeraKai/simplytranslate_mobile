@@ -22,9 +22,10 @@ class SelectDefaultLang extends StatelessWidget {
       ),
       icon: Icons.translate,
       iconColor: theme == Brightness.dark ? Colors.white : greenColor,
-      title: AppLocalizations.of(context)!.share_to_lang,
-      content:
-          'You can share a youtube video. You also can share a text for translation.\n\nThis setting specifies what language should it translate the text to. Autodetect will be set for the source language.\n\n$toLanguageShareDefault',
+      title: AppLocalizations.of(context)!.default_share_language,
+      content: AppLocalizations.of(context)!
+          .default_share_language_summary
+          .replaceFirst('\$toLanguageShareDefault', '$toLanguageShareDefault'),
     );
   }
 }

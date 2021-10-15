@@ -152,7 +152,8 @@
     "dark": "Dark",
     "follow_system": "Follow system",
 
-    "share_to_lang": "Default share to-language",
+    "default_share_language": "Default share language",
+    "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
 
 
     "about": "About",
