@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
+import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
 import 'home.dart';
 
@@ -157,6 +159,51 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       title: 'Simply Translate Mobile',
       home: Scaffold(
         key: scaffoldKey,
+        appBar: PreferredSize(
+          preferredSize: Size(0, 60),
+          child: Builder(builder: (context) {
+            return AppBar(
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(2),
+                child: Container(height: 2, color: greenColor),
+              ),
+              actions: [
+                PopupMenuButton(
+                  icon: Icon(Icons.more_vert, color: Colors.white),
+                  itemBuilder: (BuildContext context) => [
+                    PopupMenuItem<String>(
+                      value: 'settings',
+                      child: Text(AppLocalizations.of(context)!.settings),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'about',
+                      child: Text(AppLocalizations.of(context)!.about),
+                    ),
+                  ],
+                  onSelected: (value) {
+                    if (value == 'settings')
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Settings(),
+                        ),
+                      );
+                    else if (value == 'about')
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AboutScreen(),
+                        ),
+                      );
+                  },
+                ),
+              ],
+              elevation: 3,
+              iconTheme: IconThemeData(),
+              title: const Text('Simply Translate Mobile'),
+            );
+          }),
+        ),
         body: MainPageLocalization(),
       ),
     );
