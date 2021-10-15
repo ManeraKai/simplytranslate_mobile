@@ -36,9 +36,6 @@ class _MainPageState extends State<MainPage> {
         context: context,
       );
     }
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: GoogleTranslate(),
-    );
+    return GoogleTranslate();
   }
 }
