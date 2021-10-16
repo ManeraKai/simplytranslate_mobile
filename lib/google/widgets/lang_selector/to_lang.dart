@@ -10,9 +10,10 @@ class GoogleToLang extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     Function changeText = () {};
     return Container(
-      width: MediaQuery.of(context).size.width / 3 + 10,
+      width: size.width / 3 + 10,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> toSelectLanguagesIterable = Iterable.generate(
@@ -37,10 +38,9 @@ class GoogleToLang extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: Container(
-                width: MediaQuery.of(context).size.width / 3 + 10,
-                height: MediaQuery.of(context).size.height / 2 <=
-                        (options.length) * (36 + 25)
-                    ? MediaQuery.of(context).size.height / 2
+                width: size.width / 3 + 10,
+                height: size.height / 2 <= (options.length) * (36 + 25)
+                    ? size.height / 2
                     : null,
                 margin: const EdgeInsets.only(top: 10),
                 decoration: const BoxDecoration(
@@ -63,7 +63,7 @@ class GoogleToLang extends StatelessWidget {
                             Container(
                               color: theme == Brightness.dark
                                   ? greyColor
-                                  : whiteColor,
+                                  : Colors.white,
                               child: GestureDetector(
                                 onTap: option == fromLanguage
                                     ? null

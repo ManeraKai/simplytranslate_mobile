@@ -18,7 +18,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
 
   @override
   Widget build(BuildContext context) {
-    String translatedText = googleTranslationOutput;
+    String translatedText = googleOutput;
     return Container(
       height: textFieldHeight,
       decoration: BoxDecoration(

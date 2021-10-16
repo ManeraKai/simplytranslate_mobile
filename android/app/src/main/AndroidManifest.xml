@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.simplytranslate_mobile">
-  <application android:label="Simply Translate Mobile" android:icon="@mipmap/ic_launcher">
+  <application android:label="SimplyTranslate Mobile" android:icon="@mipmap/ic_launcher">
     <activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
       <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
@@ -18,7 +18,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".UppercaseActivity" android:label="Simply Translate Mobile">
+    <activity android:name=".UppercaseActivity" android:label="SimplyTranslate Mobile">
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -26,7 +26,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".SharedActivity" android:label="Simply Translate Mobile">
+    <activity android:name=".SharedActivity" android:label="SimplyTranslate Mobile">
       <intent-filter>
         <action android:name="android.intent.action.SEND" />
         <category android:name="android.intent.category.DEFAULT" />

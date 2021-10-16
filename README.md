@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://github.com/ManeraKai/simplytranslate_mobile">
-      <img alt="" title="Simply Translate Mobile" src="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
+      <img alt="" title="SimplyTranslate Mobile" src="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
   </a>
 </p>
 <h1 align="center">SimplyTranslate Mobile (Unofficial)</h1>

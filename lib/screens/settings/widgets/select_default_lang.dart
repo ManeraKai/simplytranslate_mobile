@@ -97,7 +97,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                             Container(
                               color: theme == Brightness.dark
                                   ? greyColor
-                                  : whiteColor,
+                                  : Colors.white,
                               child: GestureDetector(
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
@@ -150,45 +150,46 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
           return Container(
             width: MediaQuery.of(context).size.width - 100,
             child: TextField(
-                onTap: () {
-                  toIsFirstClick = true;
-                  fieldTextEditingControllerGlobal.selection = TextSelection(
-                    baseOffset: 0,
-                    extentOffset: fieldTextEditingControllerGlobal.text.length,
-                  );
-                },
-                onEditingComplete: () {
-                  try {
-                    var chosenOne = selectLanguages.firstWhere((word) => word
-                        .toLowerCase()
-                        .startsWith(
-                            fieldTextEditingController.text.toLowerCase()));
+              onTap: () {
+                toIsFirstClick = true;
+                fieldTextEditingControllerGlobal.selection = TextSelection(
+                  baseOffset: 0,
+                  extentOffset: fieldTextEditingControllerGlobal.text.length,
+                );
+              },
+              onEditingComplete: () {
+                try {
+                  var chosenOne = selectLanguages.firstWhere((word) => word
+                      .toLowerCase()
+                      .startsWith(
+                          fieldTextEditingController.text.toLowerCase()));
 
-                    FocusScope.of(context).unfocus();
-                    session.write('to_language_share_default',
-                        selectLanguagesMap[chosenOne]);
-                    setStateOverlordData(() {
-                      toLanguageShareDefault = chosenOne;
-                      toLanguageValueShareDefault =
-                          selectLanguagesMap[chosenOne];
-                    });
-                    fieldTextEditingController.text = chosenOne;
-                  } catch (_) {
-                    FocusScope.of(context).unfocus();
-                    fieldTextEditingController.text = toLanguageShareDefault;
-                  }
-                  Navigator.of(context).pop();
-                },
-                decoration: const InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  isDense: true,
-                ),
-                controller: fieldTextEditingController,
-                focusNode: fieldFocusNode,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: theme == Brightness.dark ? null : Colors.black)),
+                  FocusScope.of(context).unfocus();
+                  session.write('to_language_share_default',
+                      selectLanguagesMap[chosenOne]);
+                  setStateOverlordData(() {
+                    toLanguageShareDefault = chosenOne;
+                    toLanguageValueShareDefault = selectLanguagesMap[chosenOne];
+                  });
+                  fieldTextEditingController.text = chosenOne;
+                } catch (_) {
+                  FocusScope.of(context).unfocus();
+                  fieldTextEditingController.text = toLanguageShareDefault;
+                }
+                Navigator.of(context).pop();
+              },
+              decoration: const InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                isDense: true,
+              ),
+              controller: fieldTextEditingController,
+              focusNode: fieldFocusNode,
+              style: TextStyle(
+                fontSize: 18,
+                color: theme == Brightness.dark ? null : Colors.black,
+              ),
+            ),
           );
         },
       ),

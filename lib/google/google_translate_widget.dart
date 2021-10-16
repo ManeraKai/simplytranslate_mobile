@@ -66,7 +66,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       KeyboardVisibilityBuilder(
-                        builder: (context, child, isKeyboardVisible) => Column(
+                        builder: (context, _, isKeyboardVisible) => Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             loading
@@ -93,7 +93,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
           ),
         ),
         KeyboardVisibilityBuilder(
-          builder: (context, child, isKeyboardVisible) => isKeyboardVisible
+          builder: (context, _, isKeyboardVisible) => isKeyboardVisible
               ? Positioned(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                   right: intl.Bidi.detectRtlDirectionality(

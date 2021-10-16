@@ -9,13 +9,16 @@ class GoogleFromLang extends StatelessWidget {
   const GoogleFromLang({Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     Function changeText = () {};
     return Container(
-      width: MediaQuery.of(context).size.width / 3 + 10,
+      width: size.width / 3 + 10,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue textEditingValue) {
           Iterable<String> fromSelectLanguagesIterable = Iterable.generate(
-              selectLanguagesFrom.length, (i) => selectLanguagesFrom[i]);
+            selectLanguagesFrom.length,
+            (i) => selectLanguagesFrom[i],
+          );
           if (_fromIsFirstClick) {
             _fromIsFirstClick = false;
             return fromSelectLanguagesIterable;
@@ -26,20 +29,15 @@ class GoogleFromLang extends StatelessWidget {
                     .startsWith(textEditingValue.text.toLowerCase()))
                 .toList();
         },
-        optionsViewBuilder: (
-          BuildContext _context,
-          AutocompleteOnSelected<String> onSelected,
-          Iterable<String> options,
-        ) {
+        optionsViewBuilder: (_, __, Iterable<String> options) {
           return Align(
             alignment: Alignment.topLeft,
             child: Material(
               color: Colors.transparent,
               child: Container(
-                width: MediaQuery.of(context).size.width / 3 + 10,
-                height: MediaQuery.of(context).size.height / 2 <=
-                        (options.length) * (36 + 25)
-                    ? MediaQuery.of(context).size.height / 2
+                width: size.width / 3 + 10,
+                height: size.height / 2 <= (options.length) * (36 + 25)
+                    ? size.height / 2
                     : null,
                 margin: const EdgeInsets.only(top: 10),
                 decoration: const BoxDecoration(
@@ -63,7 +61,7 @@ class GoogleFromLang extends StatelessWidget {
                             Container(
                               color: theme == Brightness.dark
                                   ? greyColor
-                                  : whiteColor,
+                                  : Colors.white,
                               child: GestureDetector(
                                 onTap: option == toLanguage
                                     ? null

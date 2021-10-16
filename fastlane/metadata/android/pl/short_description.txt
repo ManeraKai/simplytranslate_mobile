@@ -1,1 +1,1 @@
-Nieoficjalna aplikacja kliencka do obsługi wielu instancji Simply Translate.
+Nieoficjalna aplikacja kliencka do obsługi wielu instancji SimplyTranslate.

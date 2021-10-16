@@ -75,7 +75,7 @@ class GoogleSwitchLang extends StatelessWidget {
                     setStateOverlordData(() {
                       loading = false;
                       googleInputController.text = translatedText;
-                      googleTranslationOutput = translatedText2;
+                      googleOutput = translatedText2;
                     });
                   }
                 } catch (error) {

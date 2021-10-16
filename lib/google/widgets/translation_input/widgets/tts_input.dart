@@ -13,9 +13,7 @@ bool _isSnackBarPressed = false;
 AudioPlayer _audioPlayer = AudioPlayer();
 
 class TtsInput extends StatefulWidget {
-  const TtsInput({
-    Key? key,
-  }) : super(key: key);
+  const TtsInput({Key? key}) : super(key: key);
 
   @override
   State<TtsInput> createState() => _TtsOutputState();
@@ -24,8 +22,9 @@ class TtsInput extends StatefulWidget {
 class _TtsOutputState extends State<TtsInput> {
   @override
   void initState() {
-    _audioPlayer.onPlayerCompletion
-        .listen((event) => setState(() => _listening = false));
+    _audioPlayer.onPlayerCompletion.listen(
+      (event) => setState(() => _listening = false),
+    );
     super.initState();
   }
 
@@ -59,8 +58,9 @@ class _TtsOutputState extends State<TtsInput> {
           ),
         );
         _isSnackBarPressed = true;
-        Future.delayed(Duration(seconds: 1))
-            .then((_) => _isSnackBarPressed = false);
+        Future.delayed(const Duration(seconds: 1)).then(
+          (_) => _isSnackBarPressed = false,
+        );
       }
     }
 
@@ -70,13 +70,16 @@ class _TtsOutputState extends State<TtsInput> {
       final _url;
       if (instance == 'custom')
         _url = Uri.parse(
-            '$customInstance/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input');
+          '$customInstance/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+        );
       else if (instance == 'random')
         _url = Uri.parse(
-            '${instances[_random]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input');
+          '${instances[_random]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+        );
       else
         _url = Uri.parse(
-            '$instance/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input');
+          '$instance/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+        );
       try {
         setState(() => ttsInputloading = true);
         final response = await http.get(_url);
@@ -92,7 +95,8 @@ class _TtsOutputState extends State<TtsInput> {
               excludedInstances.removeAt(_random);
               final randomExcluded = Random().nextInt(excludedInstances.length);
               final _urlExcluded = Uri.parse(
-                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input');
+                '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+              );
               try {
                 final response = await http.get(_urlExcluded);
                 if (!isTtsInputCanceled) {
@@ -134,7 +138,6 @@ class _TtsOutputState extends State<TtsInput> {
     return ttsInputloading
         ? InkWell(
             onTap: () {
-              print('rofrof');
               setState(() {
                 ttsInputloading = false;
                 isTtsInputCanceled = true;

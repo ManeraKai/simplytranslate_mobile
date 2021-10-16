@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../../data.dart';
 import './settings_button.dart';
 
-var isCustomInstanceValid = customInstanceValidation.NotChecked;
+var isCustomInstanceValid = instanceValidation.NotChecked;
 var loading = false;
 bool checkLoading = false;
 bool _isCanceled = false;
@@ -23,7 +23,7 @@ class SelectInstance extends StatelessWidget {
       setState(() => instance = x);
       Navigator.of(context).pop();
       setStateOverlordData(() => loading = true);
-      await checkInstance(setStateOverlordData, instances[instanceIndex]);
+      await checkInstance(instances[instanceIndex]);
       setStateOverlordData(() => loading = false);
       session.write('instance_mode', x);
     }
@@ -33,7 +33,7 @@ class SelectInstance extends StatelessWidget {
       Navigator.of(context).pop();
       setStateOverlordData(() => loading = true);
       instanceIndex = Random().nextInt(instances.length);
-      await checkInstance(setStateOverlordData, instances[instanceIndex]);
+      await checkInstance(instances[instanceIndex]);
       setStateOverlordData(() => loading = false);
       session.write('instance_mode', 'random');
     }
@@ -46,14 +46,14 @@ class SelectInstance extends StatelessWidget {
         _isCanceled = false;
         checkLoading = true;
       });
-      var responseBool = await checkInstance(setState, customUrl);
+      var responseBool = await checkInstance(customUrl);
       print(responseBool);
       if (!_isCanceled) {
         setState(() {
           checkLoading = false;
           isCustomInstanceValid = responseBool;
         });
-        if (responseBool == customInstanceValidation.True) {
+        if (responseBool == instanceValidation.True) {
           session.write('customInstance', customUrl);
           setStateOverlordData(() {
             customInstance = customUrl;
@@ -82,10 +82,8 @@ class SelectInstance extends StatelessWidget {
                   controller: customUrlController,
                   keyboardType: TextInputType.url,
                   onChanged: (String? value) {
-                    if (isCustomInstanceValid !=
-                        customInstanceValidation.NotChecked)
-                      isCustomInstanceValid =
-                          customInstanceValidation.NotChecked;
+                    if (isCustomInstanceValid != instanceValidation.NotChecked)
+                      isCustomInstanceValid = instanceValidation.NotChecked;
                   },
                   onEditingComplete: () => customCheck(setState),
                   decoration: InputDecoration(
@@ -93,10 +91,9 @@ class SelectInstance extends StatelessWidget {
                         borderSide: BorderSide(
                           width: 1.5,
                           color: isCustomInstanceValid ==
-                                  customInstanceValidation.NotChecked
+                                  instanceValidation.NotChecked
                               ? lightThemeGreyColor
-                              : isCustomInstanceValid ==
-                                      customInstanceValidation.True
+                              : isCustomInstanceValid == instanceValidation.True
                                   ? Colors.green
                                   : Colors.red,
                         ),
@@ -105,10 +102,9 @@ class SelectInstance extends StatelessWidget {
                         borderSide: BorderSide(
                           width: 1.5,
                           color: isCustomInstanceValid ==
-                                  customInstanceValidation.NotChecked
+                                  instanceValidation.NotChecked
                               ? lightThemeGreyColor
-                              : isCustomInstanceValid ==
-                                      customInstanceValidation.True
+                              : isCustomInstanceValid == instanceValidation.True
                                   ? Colors.green
                                   : Colors.red,
                         ),
@@ -117,10 +113,9 @@ class SelectInstance extends StatelessWidget {
                         borderSide: BorderSide(
                           width: 1.5,
                           color: isCustomInstanceValid ==
-                                  customInstanceValidation.NotChecked
+                                  instanceValidation.NotChecked
                               ? lightThemeGreyColor
-                              : isCustomInstanceValid ==
-                                      customInstanceValidation.True
+                              : isCustomInstanceValid == instanceValidation.True
                                   ? Colors.green
                                   : Colors.red,
                         ),
@@ -133,8 +128,7 @@ class SelectInstance extends StatelessWidget {
                     child: Text(AppLocalizations.of(context)!.cancel),
                     onPressed: () {
                       _isCanceled = true;
-                      isCustomInstanceValid =
-                          customInstanceValidation.NotChecked;
+                      isCustomInstanceValid = instanceValidation.NotChecked;
                       checkLoading = false;
                       Navigator.of(context).pop();
                     },
@@ -156,7 +150,7 @@ class SelectInstance extends StatelessWidget {
           ),
         ),
       );
-      if (isCustomInstanceValid != customInstanceValidation.True) {
+      if (isCustomInstanceValid != instanceValidation.True) {
         if (_tmpInput != '') customUrlController.text = _tmpInput;
         print('tmp input is: $_tmpInput');
         setStateOverlordData(() => instance = _tmpInstance);
@@ -254,7 +248,7 @@ class SelectInstance extends StatelessWidget {
               );
             }).then((value) {
           checkLoading = false;
-          isCustomInstanceValid = customInstanceValidation.NotChecked;
+          isCustomInstanceValid = instanceValidation.NotChecked;
         });
       },
       icon: Icons.dns,
