@@ -38,6 +38,7 @@ For the most up-to-date versions. Download the most recent **Artifact** from the
 1. Copy the [English translation file](https://github.com/ManeraKai/simplytranslate_mobile/blob/main/lang/main_en.arb).
 2. Translate it to your language.
 3. Add your new translated file to [this directory](https://github.com/ManeraKai/simplytranslate_mobile/blob/main/lang/) with name: **main_[$langCode](https://developers.google.com/admin-sdk/directory/v1/languages)**.arb
+4. Either email me: manerakai@protonmail.com, or a pull request. 
 
 We appreciate it!
 
