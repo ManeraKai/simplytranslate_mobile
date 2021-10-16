@@ -37,7 +37,7 @@ class _TtsOutputState extends State<TtsOutput> {
 
   @override
   Widget build(BuildContext context) {
-    final _input = googleTranslationOutput;
+    final _input = googleOutput;
     stopPlayer() async {
       final result = await _audioPlayer.stop();
       if (result == 1)
@@ -171,9 +171,8 @@ class _TtsOutputState extends State<TtsOutput> {
             }(),
             icon: Icon(
               _listening ? Icons.stop : Icons.volume_up,
-              color: googleTranslationOutput.length > 200 && !_listening
-                  ? Colors.grey
-                  : null,
+              color:
+                  googleOutput.length > 200 && !_listening ? Colors.grey : null,
             ),
           );
   }

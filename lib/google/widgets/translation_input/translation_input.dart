@@ -25,7 +25,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
       if (!tmp.isCollapsed && isFirst) {
         print('selection');
         googleInputController.selection = TextSelection.fromPosition(tmp.base);
-        await Future.delayed(Duration(milliseconds: 50));
+        await Future.delayed(const Duration(milliseconds: 50));
         googleInputController.selection = tmp;
         isFirst = false;
       }
@@ -50,10 +50,11 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
       height: textFieldHeight,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: theme == Brightness.dark ? Color(0xff131618) : null,
+        color: theme == Brightness.dark ? const Color(0xff131618) : null,
         border: Border.all(
-          color:
-              theme == Brightness.dark ? Color(0xff495057) : Color(0xffa9a9a9),
+          color: theme == Brightness.dark
+              ? const Color(0xff495057)
+              : lightThemeGreyColor,
           width: 1.5,
           style: BorderStyle.solid,
         ),
@@ -65,9 +66,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
           Expanded(
             child: Scrollbar(
               child: TextField(
-                onTap: () {
-                  isFirst = true;
-                },
+                onTap: () => isFirst = true,
                 selectionControls: _MyMaterialTextSelectionControls(),
                 textDirection: googleInputController.text.length == 0
                     ? intl.Bidi.detectRtlDirectionality(
@@ -89,7 +88,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                     if (!isSnackBarVisible) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          duration: Duration(seconds: 1),
+                          duration: const Duration(seconds: 1),
                           width: 300,
                           content: Text(
                             AppLocalizations.of(context)!.input_limit,
@@ -306,10 +305,7 @@ class _MyTextSelectionToolbarState extends State<_MyTextSelectionToolbar> {
           padding: TextSelectionToolbarTextButton.getPadding(
               childIndex++, itemDatas.length),
           onPressed: itemData.onPressed,
-          child: Text(
-            itemData.label,
-            style: TextStyle(color: Colors.white),
-          ),
+          child: Text(itemData.label, style: TextStyle(color: Colors.white)),
         );
       }).toList(),
     );

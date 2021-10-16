@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate_mobile/data.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'about_screen_button.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -28,7 +27,8 @@ class AboutScreen extends StatelessWidget {
                 title: AppLocalizations.of(context)!.team,
                 content: AppLocalizations.of(context)!.team_summary,
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate_mobile/graphs/contributors'),
+                  'https://github.com/ManeraKai/simplytranslate_mobile/graphs/contributors',
+                ),
               ),
               AboutButton(
                 icon: Icons.favorite,
@@ -36,7 +36,8 @@ class AboutScreen extends StatelessWidget {
                 title: AppLocalizations.of(context)!.contribute,
                 content: AppLocalizations.of(context)!.contribute_summary,
                 onTap: () => launch(
-                    'https://github.com/ManeraKai/simplytranslate_mobile'),
+                  'https://github.com/ManeraKai/simplytranslate_mobile',
+                ),
               ),
               AboutButton(
                 icon: Icons.info,

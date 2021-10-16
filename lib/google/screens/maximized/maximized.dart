@@ -41,14 +41,14 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                     child: SelectableText(
-                      googleTranslationOutput,
+                      googleOutput,
                       style: TextStyle(fontSize: outputFontSize),
                     ),
                   ),
                 ),
                 Column(
                   children: [
-                    CopyToClipboardButton(googleTranslationOutput),
+                    CopyToClipboardButton(googleOutput),
                     IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,

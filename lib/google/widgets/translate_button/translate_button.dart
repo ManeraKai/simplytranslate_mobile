@@ -25,12 +25,11 @@ class GoogleTranslateButton extends StatelessWidget {
                       toLanguageValue: toLanguageValue,
                       context: contextOverlordData,
                     );
-                    if (!isTranslationCanceled) {
+                    if (!isTranslationCanceled)
                       setStateOverlordData(() {
-                        googleTranslationOutput = translatedText;
+                        googleOutput = translatedText;
                         loading = false;
                       });
-                    }
                   } catch (_) {
                     setStateOverlordData(() => loading = false);
                   }

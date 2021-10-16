@@ -28,11 +28,11 @@ void main(List<String> args) async {
       ? session.read('instance_mode').toString()
       : instance;
 
-  final _sessionCustomInstance = session.read('customInstance') != null
+  final sessionCustomInstance = session.read('customInstance') != null
       ? session.read('customInstance').toString()
       : '';
-  customUrlController.text = _sessionCustomInstance;
-  customInstance = _sessionCustomInstance;
+  customUrlController.text = sessionCustomInstance;
+  customInstance = sessionCustomInstance;
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {
@@ -153,12 +153,113 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
-      theme: materialAppTheme(),
-      darkTheme: materialAppDarkTheme(context),
+      theme: ThemeData(
+        colorScheme: ColorScheme(
+          primary: greenColor,
+          primaryVariant: greenColor,
+          secondary: greenColor,
+          secondaryVariant: greenColor,
+          surface: Colors.white,
+          background: Colors.white,
+          error: Colors.red,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          brightness: Brightness.light,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: const Color(0xffa9a9a9), width: 1.5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: const Color(0xffa9a9a9), width: 1.5),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          side: BorderSide(width: 1.5, color: const Color(0xffa9a9a9)),
+        )),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          ),
+        ),
+        snackBarTheme: SnackBarThemeData(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          behavior: SnackBarBehavior.floating,
+        ),
+        toggleableActiveColor: greenColor,
+        iconTheme: IconThemeData(color: greenColor),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme(
+          primary: greenColor,
+          primaryVariant: greenColor,
+          secondary: greenColor,
+          secondaryVariant: greenColor,
+          surface: const Color(0xff131618),
+          background: const Color(0xff131618),
+          error: Colors.red,
+          onPrimary: Colors.white,
+          onSecondary: Colors.redAccent,
+          onSurface: Colors.white,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: const Color(0xff212529),
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: const Color(0xff131618),
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Color(0xff495057), width: 1.5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(2),
+            borderSide: BorderSide(color: Color(0xff495057), width: 1.5),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          backgroundColor: const Color(0xff131618),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          side: BorderSide(
+            width: 1.5,
+            color: const Color(0xff495057),
+          ),
+        )),
+        toggleableActiveColor: greenColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed))
+                  return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+                else if (states.contains(MaterialState.disabled))
+                  return Color(0xff495057);
+                return greenColor; // Use the component's default.
+              },
+            ),
+          ),
+        ),
+        snackBarTheme: SnackBarThemeData(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          behavior: SnackBarBehavior.floating,
+        ),
+      ),
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
-      title: 'Simply Translate Mobile',
+      title: 'SimplyTranslate Mobile',
       home: Scaffold(
-        key: scaffoldKey,
         appBar: PreferredSize(
           preferredSize: Size(0, 60),
           child: Builder(builder: (context) {
@@ -184,23 +285,19 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     if (value == 'settings')
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => Settings(),
-                        ),
+                        MaterialPageRoute(builder: (_) => Settings()),
                       );
                     else if (value == 'about')
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => AboutScreen(),
-                        ),
+                        MaterialPageRoute(builder: (_) => AboutScreen()),
                       );
                   },
                 ),
               ],
               elevation: 3,
               iconTheme: IconThemeData(),
-              title: const Text('Simply Translate Mobile'),
+              title: const Text('SimplyTranslate Mobile'),
             );
           }),
         ),
@@ -241,8 +338,9 @@ class _MainPageLocalizationState extends State<MainPageLocalization> {
     fromSelectLanguagesMap = selectLanguagesMap;
 
     selectLanguagesFrom = [];
-    selectLanguagesMap.keys
-        .forEach((element) => selectLanguagesFrom.add(element));
+    selectLanguagesMap.keys.forEach(
+      (element) => selectLanguagesFrom.add(element),
+    );
     selectLanguagesFrom.sort();
     fromSelectLanguagesMap[AppLocalizations.of(context)!.autodetect] =
         "Autodetect";

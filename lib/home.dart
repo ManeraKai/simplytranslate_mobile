@@ -13,17 +13,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
-    getSharedText(
-      setStateParent: setState,
-      context: context,
-    );
+    getSharedText();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    customUrlController.dispose();
-    super.dispose();
   }
 
   final rowWidth = 430;
@@ -31,10 +22,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     if (callSharedText) {
-      getSharedText(
-        setStateParent: setState,
-        context: context,
-      );
+      getSharedText();
     }
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),

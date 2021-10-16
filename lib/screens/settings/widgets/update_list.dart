@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 import '/data.dart';
 
-var isCustomInstanceValid = customInstanceValidation.NotChecked;
+var isCustomInstanceValid = instanceValidation.NotChecked;
 
 var loading = false;
 bool checkLoading = false;
