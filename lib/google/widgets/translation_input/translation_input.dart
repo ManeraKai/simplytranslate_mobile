@@ -19,6 +19,37 @@ class GoogleTranslationInput extends StatefulWidget {
 
 class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
+  void initState() {
+    bool first = true;
+    googleTranslationInputController.addListener(() async {
+      final tmp = googleTranslationInputController.selection;
+      print('tmpBase: ${tmp.baseOffset}');
+      print('tmpExtent: ${tmp.extentOffset}');
+
+      if (tmp.baseOffset != tmp.extentOffset && first) {
+        googleTranslationInputController.selection =
+            TextSelection.fromPosition(tmp.base);
+
+        await Future.delayed(Duration(milliseconds: 10));
+        googleTranslationInputController.selection = tmp;
+        first = false;
+        // _tmp = tmp;
+      } else if (tmp.isCollapsed) {
+        print('true');
+        first = true;
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    googleTranslationInputController.removeListener(() {});
+    // _scrollController.removeListener(() {});
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).orientation == Orientation.portrait
@@ -59,44 +90,44 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 maxLines: null,
                 controller: googleTranslationInputController,
                 keyboardType: TextInputType.multiline,
-                // onChanged: (String input) {
-                //   if (googleTranslationInputController.text.length > 99999) {
-                //     final tmpSelection;
-                //     if (googleTranslationInputController.selection.baseOffset >=
-                //         100000) {
-                //       tmpSelection = TextSelection.collapsed(offset: 99999);
-                //     } else {
-                //       tmpSelection = TextSelection.collapsed(
-                //           offset: googleTranslationInputController
-                //               .selection.baseOffset);
-                //     }
+                onChanged: (String input) {
+                  if (googleTranslationInputController.text.length > 99999) {
+                    final tmpSelection;
+                    if (googleTranslationInputController.selection.baseOffset >=
+                        100000) {
+                      tmpSelection = TextSelection.collapsed(offset: 99999);
+                    } else {
+                      tmpSelection = TextSelection.collapsed(
+                          offset: googleTranslationInputController
+                              .selection.baseOffset);
+                    }
 
-                //     googleTranslationInputController.text =
-                //         googleTranslationInputController.text
-                //             .substring(0, 99999);
-                //     print(tmpSelection.baseOffset);
+                    googleTranslationInputController.text =
+                        googleTranslationInputController.text
+                            .substring(0, 99999);
+                    print(tmpSelection.baseOffset);
 
-                //     googleTranslationInputController.selection = tmpSelection;
-                //   } else if (googleTranslationInputController.text.length >
-                //       5000) {
-                //     if (!isSnackBarVisible) {
-                //       ScaffoldMessenger.of(context).showSnackBar(
-                //         SnackBar(
-                //           duration: Duration(seconds: 1),
-                //           width: 300,
-                //           content: Text(
-                //             AppLocalizations.of(context)!.input_limit,
-                //             textAlign: TextAlign.center,
-                //           ),
-                //         ),
-                //       );
-                //       isSnackBarVisible = true;
-                //     }
-                //   } else {
-                //     if (isSnackBarVisible) isSnackBarVisible = false;
-                //   }
-                //   setStateOverlordData(() {});
-                // },
+                    googleTranslationInputController.selection = tmpSelection;
+                  } else if (googleTranslationInputController.text.length >
+                      5000) {
+                    if (!isSnackBarVisible) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(seconds: 1),
+                          width: 300,
+                          content: Text(
+                            AppLocalizations.of(context)!.input_limit,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                      isSnackBarVisible = true;
+                    }
+                  } else {
+                    if (isSnackBarVisible) isSnackBarVisible = false;
+                  }
+                  setStateOverlordData(() {});
+                },
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
