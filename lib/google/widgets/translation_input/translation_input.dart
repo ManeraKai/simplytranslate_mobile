@@ -17,21 +17,19 @@ class GoogleTranslationInput extends StatefulWidget {
   _TranslationInputState createState() => _TranslationInputState();
 }
 
-bool _isFirst = true;
-
 class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   void initState() {
     googleTranslationInputController.addListener(() async {
       final tmp = googleTranslationInputController.selection;
 
-      if (!tmp.isCollapsed && _isFirst) {
+      if (!tmp.isCollapsed && isFirst) {
         print('selection');
         googleTranslationInputController.selection =
             TextSelection.fromPosition(tmp.base);
         await Future.delayed(Duration(milliseconds: 100));
         googleTranslationInputController.selection = tmp;
-        _isFirst = false;
+        isFirst = false;
       }
     });
     super.initState();
@@ -70,7 +68,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
             child: Scrollbar(
               child: TextField(
                 onTap: () {
-                  _isFirst = true;
+                  isFirst = true;
                 },
                 selectionControls: MyMaterialTextSelectionControls(),
                 textDirection: googleTranslationInputController.text.length == 0

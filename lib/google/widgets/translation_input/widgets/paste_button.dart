@@ -101,6 +101,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                                 }
                               });
                             }
+                            isFirst = true;
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
