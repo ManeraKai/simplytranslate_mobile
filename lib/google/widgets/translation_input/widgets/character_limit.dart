@@ -9,7 +9,7 @@ class CharacterLimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _textLength = googleTranslationInputController.text.length;
+    final _textLength = googleInputController.text.length;
     final _color = _textLength > 5000
         ? Colors.red
         : theme == Brightness.dark
@@ -64,7 +64,7 @@ class CharacterLimit extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              _textLength.toString(),
+              _textLength > 99999 ? '∞' : _textLength.toString(),
               style: TextStyle(color: _color),
             ),
             Container(

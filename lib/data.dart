@@ -170,7 +170,7 @@ bool loading = false;
 bool isTranslationCanceled = false;
 
 final customUrlController = TextEditingController();
-final googleTranslationInputController = TextEditingController();
+final googleInputController = TextEditingController();
 
 final session = GetStorage();
 
@@ -211,7 +211,7 @@ Future<void> getSharedText({
       final _translationInput = answer.toString();
 
       setStateParent(() {
-        googleTranslationInputController.text = _translationInput;
+        googleInputController.text = _translationInput;
         loading = true;
       });
 

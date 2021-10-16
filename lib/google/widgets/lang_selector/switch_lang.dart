@@ -33,15 +33,14 @@ class GoogleSwitchLang extends StatelessWidget {
                 isTtsOutputCanceled = true;
                 ttsInputloading = false;
               });
-              if (googleTranslationInputController.text.isEmpty) {
+              if (googleInputController.text.isEmpty) {
                 switchLangsWithCookies();
                 setStateOverlordData(() {});
-              } else if (googleTranslationInputController.text.length <= 5000) {
+              } else if (googleInputController.text.length <= 5000) {
                 FocusScope.of(context).unfocus();
                 setStateOverlordData(() => loading = true);
                 try {
-                  final translationInputTransTmp =
-                      googleTranslationInputController.text;
+                  final translationInputTransTmp = googleInputController.text;
                   final fromLanguageValueTransTmp = fromLanguageValue;
                   final toLanguageValueTransTmp = toLanguageValue;
                   switchLangsWithCookies();
@@ -75,7 +74,7 @@ class GoogleSwitchLang extends StatelessWidget {
                     }
                     setStateOverlordData(() {
                       loading = false;
-                      googleTranslationInputController.text = translatedText;
+                      googleInputController.text = translatedText;
                       googleTranslationOutput = translatedText2;
                     });
                   }

@@ -11,16 +11,16 @@ class GoogleTranslateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: googleTranslationInputController.text == ''
+      onPressed: googleInputController.text == ''
           ? null
-          : googleTranslationInputController.text.length <= 5000
+          : googleInputController.text.length <= 5000
               ? () async {
                   FocusScope.of(context).unfocus();
                   isTranslationCanceled = false;
                   setStateOverlordData(() => loading = true);
                   try {
                     final translatedText = await translate(
-                      input: googleTranslationInputController.text,
+                      input: googleInputController.text,
                       fromLanguageValue: fromLanguageValue,
                       toLanguageValue: toLanguageValue,
                       context: contextOverlordData,
@@ -42,7 +42,7 @@ class GoogleTranslateButton extends StatelessWidget {
           fontSize: 18,
           color: theme == Brightness.dark
               ? null
-              : googleTranslationInputController.text == ''
+              : googleInputController.text == ''
                   ? lightThemeGreyColor
                   : Colors.white,
         ),

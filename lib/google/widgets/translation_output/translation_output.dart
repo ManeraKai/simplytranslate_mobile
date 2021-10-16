@@ -149,8 +149,8 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
       handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
       handlePaste: canPaste(delegate)
           ? () {
-              handlePaste(delegate);
               isFirst = true;
+              handlePaste(delegate);
             }
           : () {},
       handleSelectAll:
