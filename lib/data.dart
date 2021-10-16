@@ -468,6 +468,8 @@ bool isTtsOutputCanceled = false;
 bool ttsMaximizedOutputloading = false;
 bool isMaximizedTtsOutputCanceled = false;
 
+bool isFirst = true;
+
 var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
