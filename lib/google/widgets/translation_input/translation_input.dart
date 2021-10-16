@@ -20,14 +20,13 @@ class GoogleTranslationInput extends StatefulWidget {
 class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   void initState() {
-    googleTranslationInputController.addListener(() async {
-      final tmp = googleTranslationInputController.selection;
+    googleInputController.addListener(() async {
+      final tmp = googleInputController.selection;
       if (!tmp.isCollapsed && isFirst) {
         print('selection');
-        googleTranslationInputController.selection =
-            TextSelection.fromPosition(tmp.base);
-        await Future.delayed(Duration(milliseconds: 100));
-        googleTranslationInputController.selection = tmp;
+        googleInputController.selection = TextSelection.fromPosition(tmp.base);
+        await Future.delayed(Duration(milliseconds: 50));
+        googleInputController.selection = tmp;
         isFirst = false;
       }
     });
@@ -36,8 +35,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
 
   @override
   void dispose() {
-    googleTranslationInputController.removeListener(() {});
-    // _scrollController.removeListener(() {});
+    googleInputController.removeListener(() {});
     super.dispose();
   }
 
@@ -71,41 +69,23 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   isFirst = true;
                 },
                 selectionControls: _MyMaterialTextSelectionControls(),
-                textDirection: googleTranslationInputController.text.length == 0
+                textDirection: googleInputController.text.length == 0
                     ? intl.Bidi.detectRtlDirectionality(
                         AppLocalizations.of(context)!.arabic,
                       )
                         ? TextDirection.rtl
                         : TextDirection.ltr
                     : intl.Bidi.detectRtlDirectionality(
-                            googleTranslationInputController.text)
+                            googleInputController.text)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
                 focusNode: focus,
                 minLines: 10,
                 maxLines: null,
-                controller: googleTranslationInputController,
+                controller: googleInputController,
                 keyboardType: TextInputType.multiline,
                 onChanged: (String input) {
-                  if (googleTranslationInputController.text.length > 99999) {
-                    final tmpSelection;
-                    if (googleTranslationInputController.selection.baseOffset >=
-                        100000) {
-                      tmpSelection = TextSelection.collapsed(offset: 99999);
-                    } else {
-                      tmpSelection = TextSelection.collapsed(
-                          offset: googleTranslationInputController
-                              .selection.baseOffset);
-                    }
-
-                    googleTranslationInputController.text =
-                        googleTranslationInputController.text
-                            .substring(0, 99999);
-                    print(tmpSelection.baseOffset);
-
-                    googleTranslationInputController.selection = tmpSelection;
-                  } else if (googleTranslationInputController.text.length >
-                      5000) {
+                  if (googleInputController.text.length > 5000) {
                     if (!isSnackBarVisible) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -143,7 +123,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DeleteTranslationInputButton(),
-              CopyToClipboardButton(googleTranslationInputController.text),
+              CopyToClipboardButton(googleInputController.text),
               PasteClipboardButton(),
               TtsInput(),
               CharacterLimit(),
@@ -207,7 +187,12 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
           ? () => handleCopy(delegate, clipboardStatus)
           : () {},
       handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
-      handlePaste: canPaste(delegate) ? () => handlePaste(delegate) : () {},
+      handlePaste: canPaste(delegate)
+          ? () async {
+              isFirst = true;
+              handlePaste(delegate);
+            }
+          : () {},
       handleSelectAll:
           canSelectAll(delegate) ? () => handleSelectAll(delegate) : () {},
     );

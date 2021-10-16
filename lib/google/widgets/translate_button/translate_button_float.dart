@@ -16,16 +16,16 @@ class TranslateButtonFloat extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 10),
         ),
-        onPressed: googleTranslationInputController.text == ''
+        onPressed: googleInputController.text == ''
             ? null
-            : googleTranslationInputController.text.length <= 5000
+            : googleInputController.text.length <= 5000
                 ? () async {
                     FocusScope.of(context).unfocus();
                     isTranslationCanceled = false;
                     setStateOverlordData(() => loading = true);
                     try {
                       final translatedText = await translate(
-                        input: googleTranslationInputController.text,
+                        input: googleInputController.text,
                         fromLanguageValue: fromLanguageValue,
                         toLanguageValue: toLanguageValue,
                         context: contextOverlordData,
@@ -47,7 +47,7 @@ class TranslateButtonFloat extends StatelessWidget {
             fontSize: 18,
             color: theme == Brightness.dark
                 ? null
-                : googleTranslationInputController.text == ''
+                : googleInputController.text == ''
                     ? lightThemeGreyColor
                     : Colors.white,
           ),
