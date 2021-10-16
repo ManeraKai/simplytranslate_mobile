@@ -6,7 +6,7 @@
 </p>
 <h1 align="center">SimplyTranslate Mobile (Unofficial)</h1>
 
-<h4 align="center">An unofficial mobile client for <a href="https://simplytranslate.org/">SimplyTranslate</a>.</h4>
+<h4 align="center">An unofficial mobile client for <a href="https://simple-web.org/projects/simplytranslate.html">SimplyTranslate</a>.</h4>
 
 
 <p align="center">
