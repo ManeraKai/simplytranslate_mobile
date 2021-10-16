@@ -22,7 +22,6 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   void initState() {
     googleTranslationInputController.addListener(() async {
       final tmp = googleTranslationInputController.selection;
-
       if (!tmp.isCollapsed && isFirst) {
         print('selection');
         googleTranslationInputController.selection =
@@ -44,12 +43,13 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
 
   @override
   Widget build(BuildContext context) {
+    textFieldHeight = MediaQuery.of(context).orientation == Orientation.portrait
+        ? MediaQuery.of(context).size.height / 3 < 250
+            ? 250
+            : MediaQuery.of(context).size.height / 3
+        : 250;
     return Container(
-      height: MediaQuery.of(context).orientation == Orientation.portrait
-          ? MediaQuery.of(context).size.height / 3 < 250
-              ? 250
-              : MediaQuery.of(context).size.height / 3
-          : 250,
+      height: textFieldHeight,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
@@ -70,7 +70,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 onTap: () {
                   isFirst = true;
                 },
-                selectionControls: MyMaterialTextSelectionControls(),
+                selectionControls: _MyMaterialTextSelectionControls(),
                 textDirection: googleTranslationInputController.text.length == 0
                     ? intl.Bidi.detectRtlDirectionality(
                         AppLocalizations.of(context)!.arabic,
@@ -155,7 +155,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   }
 }
 
-class MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
+var _isVisible = true;
+
+class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
   // Padding between the toolbar and the anchor.
   static const double _kToolbarContentDistanceBelow = 20.0;
   static const double _kToolbarContentDistance = 8.0;
@@ -172,52 +174,32 @@ class MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     ClipboardStatusNotifier clipboardStatus,
     Offset? lastSecondaryTapDownPosition,
   ) {
-    final TextSelectionPoint startTextSelectionPoint = endpoints[0];
-    final TextSelectionPoint endTextSelectionPoint =
+    final TextSelectionPoint startSelectionPoint = endpoints[0];
+    final TextSelectionPoint endSelectionPoint =
         endpoints.length > 1 ? endpoints[1] : endpoints[0];
-    final Offset anchorAbove = () {
-      if (startTextSelectionPoint.point.dy < 10 &&
-          MediaQuery.of(context).orientation == Orientation.portrait) {
-        return Offset(
-          Offset(
-            globalEditableRegion.left + selectionMidpoint.dx,
-            globalEditableRegion.top +
-                startTextSelectionPoint.point.dy -
-                textLineHeight -
-                _kToolbarContentDistance,
-          ).dx,
-          140,
-        );
-      } else if (startTextSelectionPoint.point.dy >
-          70 + MediaQuery.of(context).size.height / 3) {
-        return Offset(
-          Offset(
-            globalEditableRegion.left + selectionMidpoint.dx,
-            globalEditableRegion.top +
-                endTextSelectionPoint.point.dy +
-                _kToolbarContentDistanceBelow,
-          ).dx,
-          200 + MediaQuery.of(context).size.height / 3,
-        );
-      } else {
-        return Offset(
-          globalEditableRegion.left + selectionMidpoint.dx,
-          globalEditableRegion.top +
-              startTextSelectionPoint.point.dy -
-              textLineHeight -
-              _kToolbarContentDistance,
-        );
-      }
-    }();
+
+    final Offset anchorAbove = Offset(
+      globalEditableRegion.left + selectionMidpoint.dx,
+      globalEditableRegion.top +
+          startSelectionPoint.point.dy -
+          textLineHeight -
+          _kToolbarContentDistance,
+    );
 
     final Offset anchorBelow = Offset(
       globalEditableRegion.left + selectionMidpoint.dx,
       globalEditableRegion.top +
-          endTextSelectionPoint.point.dy +
+          endSelectionPoint.point.dy +
           _kToolbarContentDistanceBelow,
     );
-
-    return MyTextSelectionToolbar(
+    _isVisible = () {
+      if (MediaQuery.of(context).orientation == Orientation.portrait) {
+        if (startSelectionPoint.point.dy < 20) return false;
+        if (startSelectionPoint.point.dy > textFieldHeight + 65) return false;
+      }
+      return true;
+    }();
+    return _MyTextSelectionToolbar(
       anchorAbove: anchorAbove,
       anchorBelow: anchorBelow,
       clipboardStatus: clipboardStatus,
@@ -241,8 +223,8 @@ class _TextSelectionToolbarItemData {
   final VoidCallback onPressed;
 }
 
-class MyTextSelectionToolbar extends StatefulWidget {
-  const MyTextSelectionToolbar({
+class _MyTextSelectionToolbar extends StatefulWidget {
+  const _MyTextSelectionToolbar({
     Key? key,
     required this.anchorAbove,
     required this.anchorBelow,
@@ -262,10 +244,10 @@ class MyTextSelectionToolbar extends StatefulWidget {
   final VoidCallback handleSelectAll;
 
   @override
-  MyTextSelectionToolbarState createState() => MyTextSelectionToolbarState();
+  _MyTextSelectionToolbarState createState() => _MyTextSelectionToolbarState();
 }
 
-class MyTextSelectionToolbarState extends State<MyTextSelectionToolbar> {
+class _MyTextSelectionToolbarState extends State<_MyTextSelectionToolbar> {
   void _onChangedClipboardStatus() {
     setState(() {});
   }
@@ -278,7 +260,7 @@ class MyTextSelectionToolbarState extends State<MyTextSelectionToolbar> {
   }
 
   @override
-  void didUpdateWidget(MyTextSelectionToolbar oldWidget) {
+  void didUpdateWidget(_MyTextSelectionToolbar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.clipboardStatus != oldWidget.clipboardStatus) {
       widget.clipboardStatus.addListener(_onChangedClipboardStatus);
@@ -327,10 +309,12 @@ class MyTextSelectionToolbarState extends State<MyTextSelectionToolbar> {
       anchorAbove: widget.anchorAbove,
       anchorBelow: widget.anchorBelow,
       toolbarBuilder: (BuildContext context, Widget child) {
-        return Container(
-          color: theme == Brightness.dark ? secondgreyColor : greenColor,
-          child: child,
-        );
+        if (_isVisible)
+          return Container(
+            color: theme == Brightness.dark ? secondgreyColor : greenColor,
+            child: child,
+          );
+        return SizedBox.shrink();
       },
       children: itemDatas.map((_TextSelectionToolbarItemData itemData) {
         return TextSelectionToolbarTextButton(

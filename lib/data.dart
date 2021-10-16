@@ -470,6 +470,8 @@ bool isMaximizedTtsOutputCanceled = false;
 
 bool isFirst = true;
 
+late double textFieldHeight;
+
 var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
