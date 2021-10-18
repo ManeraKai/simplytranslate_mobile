@@ -108,8 +108,6 @@
     "yiddish": "Jiddisch",
     "yoruba": "Yoruba",
     "zulu": "Zulu",
-
-
     "copied_to_clipboard": "In die Zwischenablage kopiert",
     "translate": "Übersetze",
     "enter_text_here": "Text hier eingeben",
@@ -122,22 +120,16 @@
     "empty_clipboard": "Zwischenablage ist leer",
     "input_limit": "Die Übersetzungseingabe ist länger als 5000 Zeichen",
     "input_calc": "5000 Zeichenlimit um $lengthDifference Zeichen überschritten",
-
     "input_fraction_one": "$length Zeichen 5000 möglichen eingegeben",
     "input_fraction_few": "$length Zeichen 5000 möglichen eingegeben",
     "input_fraction_many": "$length Zeichen 5000 möglichen eingegeben",
     "input_fraction_other": "$length Zeichen 5000 möglichen eingegeben",
-    
     "audio_limit": "Kann kein Audio führ mehr als 200 Zeichen laden",
     "not_available": "Service ist nicht verfügbar",
-
-
     "settings": "Einstellungen",
-
     "instances": "Instanzen",
     "appearance": "Aussehen",
     "translation": "Übersetzung",
-
     "instance": "Instanz",
     "random": "Zufällig",
     "custom": "Eigene",
@@ -146,24 +138,17 @@
     "update_list_summary": "Aktualisiert die Offiziele Instanzliste",
     "updated_successfully": "Aktualisieren erfolgreich",
     "error": "Es gab einen Fehler",
-
     "theme": "Thema",
     "light": "Hell",
     "dark": "Dunkel",
     "follow_system": "System",
-
     "default_share_language": "Default share language",
     "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
-
     "about": "Über uns",
-
     "team": "Team",
     "team_summary": "Programmierer, Übersetzer und Tester",
     "contribute": "Mithelfen",
     "contribute_summary": "Hilf uns es besser zu machen!",
     "version": "Version",
     "license": "Lizenz"
-    
-
-
 }
