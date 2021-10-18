@@ -28,7 +28,7 @@ class AboutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Help',
+                AppLocalizations.of(context)!.help,
                 style: textStyle,
               ),
               line,
@@ -44,8 +44,8 @@ class AboutScreen extends StatelessWidget {
               AboutButton(
                 icon: Icons.translate_rounded,
                 iconColor: Colors.blue,
-                title: 'Translate',
-                content: 'Spread it to the world!',
+                title: AppLocalizations.of(context)!.translate,
+                content: AppLocalizations.of(context)!.translate_summary,
                 onTap: () => launch(
                   'https://poeditor.com/join/project?hash=rV8CGr8NPj',
                 ),
@@ -53,8 +53,8 @@ class AboutScreen extends StatelessWidget {
               AboutButton(
                 icon: Icons.attach_money_rounded,
                 iconColor: Colors.greenAccent,
-                title: 'Donate',
-                content: 'We appreciate it!',
+                title: AppLocalizations.of(context)!.donate,
+                content: AppLocalizations.of(context)!.donate_summary,
                 onTap: () => launch(
                   'https://liberapay.com/simplytranslate_mobile',
                 ),
@@ -62,23 +62,22 @@ class AboutScreen extends StatelessWidget {
               AboutButton(
                 icon: Icons.report,
                 iconColor: Colors.red,
-                title: 'Report a bug',
-                content: 'Please let us know.',
+                title: AppLocalizations.of(context)!.report_bug,
+                content: AppLocalizations.of(context)!.report_bug_summary,
                 onTap: () => launch(
                   'https://github.com/ManeraKai/simplytranslate_mobile/issues',
                 ),
               ),
               const SizedBox(height: 20),
               Text(
-                'About',
+                AppLocalizations.of(context)!.about,
                 style: textStyle,
               ),
               line,
               AboutButton(
                 icon: Icons.web,
                 iconColor: Colors.amber,
-                title: 'Website',
-                content: 'As the title said',
+                title: AppLocalizations.of(context)!.website,
                 onTap: () => launch(
                   'https://manerakai.github.io/simplytranslate_mobile/',
                 ),
@@ -89,7 +88,7 @@ class AboutScreen extends StatelessWidget {
                 title: AppLocalizations.of(context)!.team,
                 content: AppLocalizations.of(context)!.team_summary,
                 onTap: () => launch(
-                  'https://github.com/ManeraKai/simplytranslate_mobile#contributers',
+                  'https://github.com/ManeraKai/simplytranslate_mobile/graphs/contributors',
                 ),
               ),
               AboutButton(
@@ -125,14 +124,14 @@ class AboutScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                'Contact',
+                AppLocalizations.of(context)!.contact,
                 style: textStyle,
               ),
               line,
               AboutButton(
                 icon: Icons.mail,
                 iconColor: Colors.blueGrey,
-                title: 'Email',
+                title: AppLocalizations.of(context)!.email,
                 content: 'manerakai@protonmail.com',
                 onTap: () {
                   Clipboard.setData(

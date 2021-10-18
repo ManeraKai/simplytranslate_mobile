@@ -5,13 +5,13 @@ class AboutButton extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final String title;
-  final String content;
+  final String? content;
   final void Function() onTap;
 
   const AboutButton({
     required this.icon,
     required this.title,
-    required this.content,
+    this.content,
     required this.onTap,
     required this.iconColor,
     Key? key,
@@ -43,15 +43,17 @@ class AboutButton extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title, style: const TextStyle(fontSize: 18)),
-                    Text(
-                      content,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: theme == Brightness.dark
-                            ? Colors.white54
-                            : Colors.black54,
-                      ),
-                    ),
+                    content != null
+                        ? Text(
+                            content!,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: theme == Brightness.dark
+                                  ? Colors.white54
+                                  : Colors.black54,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 ),
               ),
