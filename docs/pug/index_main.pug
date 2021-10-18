@@ -22,11 +22,11 @@ body
                             li.tab.col.s3
                                 a.main-font.white-text(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
                             li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="index.html")= translations['home']
+                                a.main-font.white-text(style="text-decoration: none" href="index.html")=translations['home']
                     else
                         ul.right.hide-on-med-and-down
                             li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="index.html")= translations['home']
+                                a.main-font.white-text(style="text-decoration: none" href="index.html")=translations['home']
                             li.tab.col.s3
                                 a.main-font.white-text(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
                             li.tab.col.s3
@@ -51,8 +51,12 @@ body
 
     div.container
         div.section
-            blockquote.block
-                h2.header.main-font.primary-color=translations['about']
+            if (isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['about']
+            else
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['about']
             //- - linkoo = a(href="https://simplytranslate.org/")
             p.flow-text.main-font.paragraph.text3.text-lighten-3=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
                 a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
@@ -60,9 +64,13 @@ body
             br
             div.divider.padding
 
-            blockquote.block
-                h2.header.main-font.primary-color=translations['screenshots']
-            
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['screenshots']
+            else
+                blockquote.block
+                        h2.header.main-font.primary-color=translations['screenshots']
+
             div.row
                 div.col.s6.m6.l3
                     img.center.responsive-img(src="./img/1.png")
@@ -76,36 +84,26 @@ body
             
 
             div.divider.padding
-
-            blockquote.block
-                h2.header.main-font.primary-color=translations['translation']
-
-            ol
-                li.general-text=translations['translation-text.1'].substring(0, translations['translation-text.1'].indexOf('<a>'))
-                    a(href="https://simplytranslate.org/")=translations['translation-text.1'].substring(translations['translation-text.1'].indexOf('<a>')+3, translations['translation-text.1'].indexOf('</a>'))
-                    =translations['translation-text.1'].substring(translations['translation-text.1'].indexOf('</a>')+4, translations['translation-text.1'].length)
-                
-                li.general-text=translations['translation-text.2']
-
-                li.general-text=translations['translation-text.3'].substring(0, translations['translation-text.3'].indexOf('<a1>'))
-                    a(href="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/lang/")=translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('<a1>')+4, translations['translation-text.3'].indexOf('</a1>'))
-                    =translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('</a1>')+5, translations['translation-text.3'].indexOf('<a2>'))
-                    a(href="https://developers.google.com/admin-sdk/directory/v1/languages")=translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('<a2>')+4, translations['translation-text.3'].indexOf('</a2>'))
-                    =translations['translation-text.3'].substring(translations['translation-text.3'].indexOf('</a2>')+5, translations['translation-text.3'].length)
-        
-
-                li.general-text=translations['translation-text.4'].substring(0, translations['translation-text.4'].indexOf('<mailto>'))
-                    a(href="mailto:manerakai@protonmail.com")=translations['translation-text.4'].substring(translations['translation-text.4'].indexOf('<mailto>')+8, translations['translation-text.4'].indexOf('</mailto>'))
-                    =translations['translation-text.4'].substring(translations['translation-text.4'].indexOf('</mailto>')+9, translations['translation-text.4'].length)
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['translation']
+            else
+                blockquote.block
+                        h2.header.main-font.primary-color=translations['translation']
+            p
+                a(href="https://poeditor.com/join/project?hash=rV8CGr8NPj") POEditor
             p=translations['we-appreciate-it']
 
             br
 
             div.divider.padding
 
-            blockquote.block
-                h2.header.main-font.primary-color=translations['want-to-donate']
-
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['want-to-donate']
+            else
+                blockquote.block
+                        h2.header.main-font.primary-color=translations['want-to-donate']
             p
                 a(href="https://liberapay.com/simplytranslate_mobile/") Liberapay
             p=translations['we-really-appreciate-it']
@@ -113,10 +111,12 @@ body
             br
 
             div.divider.padding
-
-            blockquote.block
-                h2.header.main-font.primary-color=translations['testers']
-
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['testers']
+            else
+                blockquote.block
+                        h2.header.main-font.primary-color=translations['testers']
             p
                 a(href="https://github.com/Valdnet") Valdnet
 
@@ -124,8 +124,13 @@ body
 
             div.divider.padding
 
-            blockquote.block
-                h2.header.main-font.primary-color=translations['translators']
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['translators']
+            else
+                blockquote.block
+                        h2.header.main-font.primary-color=translations['translators']
+            
 
             p 🇵🇱 
                 =translations['polish']
@@ -162,8 +167,12 @@ body
 
             div.divider.padding
 
-            blockquote.block
-                h2.header.main-font.primary-color=translations['icon']
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['icon']
+            else
+                blockquote.block
+                        h2.header.main-font.primary-color=translations['icon']
 
             p=translations['icon-text'].substring(0, translations['icon-text'].indexOf('<a>'))
                 a(href="https://simplytranslate.org/")=translations['icon-text'].substring(translations['icon-text'].indexOf('<a>')+3, translations['icon-text'].indexOf('</a>'))
@@ -173,7 +182,7 @@ body
 
             div.divider.padding
 
-            blockquote.block
+            blockquote.block-rtl
                 h2.header.main-font.primary-color=translations['license']
 
             p=translations["license-text.1"].substring(0, translations["license-text.1"].indexOf('<a>'))
@@ -192,4 +201,3 @@ body
                 =translations["license-text.4"].substring(translations["license-text.4"].indexOf('</a>')+4, translations["license-text.4"].length)
     footer.page-footer.card-theme-color
         div.container
-script(src="language.js")
