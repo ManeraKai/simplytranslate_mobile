@@ -108,7 +108,6 @@
     "yiddish": "الييدية",
     "yoruba": "اليورباية",
     "zulu": "الزولوية",
-
     "copied_to_clipboard": "نُسخ إلى الحافظة",
     "translate": "ترجم",
     "enter_text_here": "أدخل النص هنا",
@@ -121,21 +120,16 @@
     "empty_clipboard": "الحافظة فارغة",
     "input_limit": "عدد أحرف النص أكثر من 5000",
     "input_calc": "اُجتِيزَ حد الـ5000 حرف بـ$lengthDifference",
-    
     "input_fraction_one": "أُدخل $length حرف من أصل 5000 متاح",
     "input_fraction_few": "أُدخل $length أحرف من أصل 5000 متاحين",
     "input_fraction_many": "أُدخل $length حرف من أصل 5000 متاح",
     "input_fraction_other": "أُدخل $length حرف من أصل 5000 متاح",
-    
     "audio_limit": "لا يمكن جلب الصوت لأكثر من 200 حرف",
     "not_available": "غير متاح",
-
     "settings": "الإعدادات",
-
     "instances": "المُثلاء (السيرفرات)",
     "appearance": "المظهر",
     "translation": "الترجمة",
-
     "instance": "اختر المثيل (السيرفر)",
     "random": "عشوائي",
     "custom": "مخصص",
@@ -144,22 +138,17 @@
     "update_list_summary": "تحديث قائمة المُثلاء (السيرفرات)",
     "updated_successfully": "تم التحديث بنجاح",
     "error": "هناك خطأ ما",
-
     "theme": "السمة",
     "light": "فاتح",
     "dark": "داكن",
     "follow_system": "حسب النظام",
-
     "default_share_language": "لغة المشاركة الإفتراضية",
     "default_share_language_summary": "يحدد لغة الترجمة للنص المُشارك من تطبيق آخر: $toLanguageShareDefault",
-    
-
     "about": "عن",
-
     "team": "الفريق",
     "team_summary": "المبرمجون، المترجمون والمختبرون",
     "contribute": "المساهمة",
     "contribute_summary": "ساعد على تحسينه!",
     "version": "الإصدار",
-    "license": "الرخصة"    
+    "license": "الرخصة"
 }

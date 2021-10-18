@@ -108,8 +108,6 @@
     "yiddish": "ییدیش",
     "yoruba": "یوروبایی",
     "zulu": "زولو",
-
-
     "copied_to_clipboard": "ذخیره در کلیپ‌بورد ",
     "translate": "ترجمه",
     "enter_text_here": "متن را اینجا وارد کنید",
@@ -122,22 +120,16 @@
     "empty_clipboard": "کلیپ‌بورد خالیست",
     "input_limit": "ورودی ترجمه بالای ۵۰۰۰ نویسه است",
     "input_calc": "تعداد نویسه از محدودیت ۵۰۰۰تایی $lengthDifference بیشتر شده",
-
     "input_fraction_one": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
     "input_fraction_few": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
     "input_fraction_many": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
     "input_fraction_other": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
-    
     "audio_limit": "نمی توان برای بیش از ۲۰۰ نویسه صدا دریافت کرد",
     "not_available": "سرویس در دسترس نیست",
-
-
     "settings": "تنظیمات",
-
     "instances": "نمونه",
     "appearance": "ظاهر",
     "translation": "ترجمه",
-
     "instance": "نمونه",
     "random": "تصادفی",
     "custom": "سفارشی",
@@ -146,25 +138,17 @@
     "update_list_summary": "به روز رسانی لیست رسمی نمونه‌ها",
     "updated_successfully": "با موفقیت به روز شد",
     "error": "یک مشکل به وجود آمده",
-
     "theme": "تم",
     "light": "روشن",
     "dark": "تیره",
     "follow_system": "مطابق با تم دستگاه",
-
     "default_share_language": "Default share language",
     "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
-
-
     "about": "درباره",
-
     "team": "تیم",
     "team_summary": "برنامه نویس‌ها، مترجم‌ها و امتحان کنندگان",
     "contribute": "مشارکت",
     "contribute_summary": "برای بهتر شدن این نرم‌افزار کمک کنید!",
     "version": "نسخه",
     "license": "پروانه"
-    
-
-
 }

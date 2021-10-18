@@ -108,8 +108,6 @@
     "yiddish": "意第緒語",
     "yoruba": "約魯巴語",
     "zulu": "祖魯語",
-
-
     "copied_to_clipboard": "已複製到剪貼板",
     "translate": "翻譯",
     "enter_text_here": "在此處輸入文本",
@@ -122,22 +120,16 @@
     "empty_clipboard": "剪貼板是空的",
     "input_limit": "翻譯輸入5000以上",
     "input_calc": "$lengthDifference 超過 5000 個字符的限制",
-
     "input_fraction_one": "輸入了 $length/5000 個字符",
     "input_fraction_few": "輸入了 $length/5000 個字符",
     "input_fraction_many": "輸入了 $length/5000 個字符",
     "input_fraction_other": "輸入了 $length/5000 個字符",
-    
     "audio_limit": "無法獲取超過 200 個字符的音頻",
     "not_available": "服務不可用",
-
-
     "settings": "設置",
-
     "instances": "實例",
     "appearance": "外觀",
     "translation": "翻譯",
-
     "instance": "實例",
     "random": "隨機",
     "custom": "自定義",
@@ -146,24 +138,17 @@
     "update_list_summary": "更新官方實例列表",
     "updated_successfully": "更新成功",
     "error": "出現錯誤",
-
     "theme": "主題",
     "light": "光",
     "dark": "暗",
     "follow_system": "跟隨系統",
-
     "default_share_language": "共享給其他應用程式時的默認語言",
     "default_share_language_summary": "為來自另一個應用程式的共享文本設置翻譯語言：$toLanguageShareDefault",
-
-
     "about": "關於",
-
     "team": "團隊",
     "team_summary": "編碼員、翻譯員和測試員",
     "contribute": "貢獻",
     "contribute_summary": "幫助它變得更好！",
     "version": "版本",
     "license": "許可證"
-
-
 }
