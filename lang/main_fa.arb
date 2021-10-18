@@ -150,5 +150,14 @@
     "contribute": "مشارکت",
     "contribute_summary": "برای بهتر شدن این نرم‌افزار کمک کنید!",
     "version": "نسخه",
-    "license": "پروانه"
+    "license": "پروانه",
+    "help": "Help",
+    "donate": "Donate",
+    "report_bug": "Report a bug",
+    "website": "Website",
+    "contact": "Contact",
+    "email": "Email",
+    "translate_summary": "Spread it to the world!",
+    "donate_summary": "We appreciate it!",
+    "report_bug_summary": "Please let us know"
 }
