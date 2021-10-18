@@ -152,8 +152,8 @@
     "dark": "暗",
     "follow_system": "跟隨系統",
 
-    "default_share_language": "Default share language",
-    "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
+    "default_share_language": "共享給其他應用程式時的默認語言",
+    "default_share_language_summary": "為來自另一個應用程式的共享文本設置翻譯語言：$toLanguageShareDefault",
 
 
     "about": "關於",
