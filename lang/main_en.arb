@@ -108,8 +108,6 @@
     "yiddish": "Yiddish",
     "yoruba": "Yoruba",
     "zulu": "Zulu",
-
-
     "copied_to_clipboard": "Copied to clipboard",
     "translate": "Translate",
     "enter_text_here": "Enter text here",
@@ -122,22 +120,16 @@
     "empty_clipboard": "Clipboard is empty",
     "input_limit": "The translation input is above 5000",
     "input_calc": "Exceeded 5000 character limit by $lengthDifference",
-
     "input_fraction_one": "Entered $length character out of 5000 possible",
     "input_fraction_few": "Entered $length characters out of 5000 possible",
     "input_fraction_many": "Entered $length characters out of 5000 possible",
     "input_fraction_other": "Entered $length characters out of 5000 possible",
-    
     "audio_limit": "Cannot get audio for more than 200 characters",
     "not_available": "Service is not available",
-
-
     "settings": "Settings",
-
     "instances": "Instances",
     "appearance": "Appearance",
     "translation": "Translation",
-
     "instance": "Instance",
     "random": "Random",
     "custom": "Custom",
@@ -146,25 +138,17 @@
     "update_list_summary": "Updates the official list of instances",
     "updated_successfully": "Updated successfully",
     "error": "There was an error",
-
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
     "follow_system": "Follow system",
-
     "default_share_language": "Default share language",
     "default_share_language_summary": "Determines the translation language for shared text from another app: $toLanguageShareDefault",
-
-
     "about": "About",
-
     "team": "Team",
     "team_summary": "Coders, translators and testers",
     "contribute": "Contribute",
     "contribute_summary": "Help make it better!",
     "version": "Version",
     "license": "License"
-    
-
-
 }
