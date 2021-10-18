@@ -1,5 +1,9 @@
 {
     "autodetect": "تلقائي",
+    "@autodetect": {
+        "description": "Autodetect the language of text.",
+        "type": "text"
+    },
     "afrikaans": "الأفريقانية",
     "albanian": "الألبانية",
     "amharic": "الأمهرية",
@@ -114,12 +118,20 @@
     "something_went_wrong": "هناك خطأ ما",
     "check_instance": "(السيرفر) تحقق من المثيل",
     "check_instnace_tts": "تحقق من المثيل (السيرفر) ومن دعمه للـtts (كلام إلى نص)",
+    "@check_instnace_tts": {
+        "description": "Showed when the app doesn't receive tts audio from server. It can be an old version server or disabled on purpose.",
+        "type": "text"
+    },
     "no_internet": "لا يوجد انترنت",
     "ok": "حسناً",
     "cancel": "إلغاء",
     "empty_clipboard": "الحافظة فارغة",
     "input_limit": "عدد أحرف النص أكثر من 5000",
     "input_calc": "اُجتِيزَ حد الـ5000 حرف بـ$lengthDifference",
+    "@input_calc": {
+        "description": "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters. https://s3.eu-west-1.amazonaws.com/po-pub/i/vqQxOR50ZPTYP0r3dGf2y8K6.png",
+        "type": "text"
+    },
     "input_fraction_one": "أُدخل $length حرف من أصل 5000 متاح",
     "input_fraction_few": "أُدخل $length أحرف من أصل 5000 متاحين",
     "input_fraction_many": "أُدخل $length حرف من أصل 5000 متاح",
@@ -150,5 +162,22 @@
     "contribute": "المساهمة",
     "contribute_summary": "ساعد على تحسينه!",
     "version": "الإصدار",
-    "license": "الرخصة"
+    "license": "الرخصة",
+    "help": "المساعدة",
+    "@help": {
+        "description": "It's like helpation. It's a section title not a button.\nhttps://s3.eu-west-1.amazonaws.com/po-pub/i/1bDvexgUCqR2vm86wpkfkFZa.png",
+        "type": "text"
+    },
+    "donate": "تبرع",
+    "report_bug": "بلّغ عن خطأ",
+    "website": "الموقع",
+    "contact": "التواصل",
+    "@contact": {
+        "description": "This is a section title, not a button: https://s3.eu-west-1.amazonaws.com/po-pub/i/BOMZwn8sPvjrD0bDFSwanX1a.png",
+        "type": "text"
+    },
+    "email": "الإيميل",
+    "translate_summary": "انشره للعالم!",
+    "donate_summary": "الله يعطيك العافية",
+    "report_bug_summary": "رجائاً أبلغنا"
 }
