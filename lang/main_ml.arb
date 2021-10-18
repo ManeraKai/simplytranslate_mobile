@@ -150,5 +150,14 @@
     "contribute": "സഹായം",
     "contribute_summary": "മികച്ചതാക്കാൻ സഹായിക്കുക!",
     "version": "പതിപ്പ്",
-    "license": "ലൈസൻസ്"
+    "license": "ലൈസൻസ്",
+    "help": "Help",
+    "donate": "Donate",
+    "report_bug": "Report a bug",
+    "website": "Website",
+    "contact": "Contact",
+    "email": "Email",
+    "translate_summary": "Spread it to the world!",
+    "donate_summary": "We appreciate it!",
+    "report_bug_summary": "Please let us know"
 }
