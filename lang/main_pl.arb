@@ -108,8 +108,6 @@
     "yiddish": "jidysz",
     "yoruba": "joruba",
     "zulu": "zulu",
-
-
     "copied_to_clipboard": "Skopiowano do schowka",
     "translate": "Przetłumacz",
     "enter_text_here": "Wpisz tutaj tekst",
@@ -122,22 +120,16 @@
     "empty_clipboard": "Schowek jest pusty",
     "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
     "input_calc": "Przekroczono limit o $lengthDifference z 5000 znaków",
-
     "input_fraction_one": "Wpisano $length znak z 5000 możliwych",
     "input_fraction_few": "Wpisano $length znaki z 5000 możliwych",
     "input_fraction_many": "Wpisano $length znaków z 5000 możliwych",
     "input_fraction_other": "Wpisano $length znaków z 5000 możliwych",
-    
     "audio_limit": "Nie można uzyskać dźwięku powyżej 200 znaków",
     "not_available": "Usługa jest niedostępna",
-
-
     "settings": "Ustawienia",
-
     "instances": "Instancje",
     "appearance": "Wygląd",
     "translation": "Tłumaczenie",
-
     "instance": "Instancja",
     "random": "Losowa",
     "custom": "Własna",
@@ -146,22 +138,17 @@
     "update_list_summary": "Aktualizuje oficjalną listę instancji",
     "updated_successfully": "Zaktualizowano pomyślnie",
     "error": "Wystąpił błąd",
-
     "theme": "Motyw",
     "light": "Jasny",
     "dark": "Ciemny",
     "follow_system": "Zgodny z systemowym",
-
     "default_share_language": "Domyślny język udostępnień",
     "default_share_language_summary": "Określa język tłumaczenia dla tekstu udostępnionego z innej aplikacji: $toLanguageShareDefault",
-
     "about": "O aplikacji",
-
     "team": "Zespół",
     "team_summary": "Programiści, tłumacze i testerzy",
     "contribute": "Wnieś swój wkład",
     "contribute_summary": "Pomóż udoskonalić aplikację!",
     "version": "Wersja",
     "license": "Licencja"
-    
 }
