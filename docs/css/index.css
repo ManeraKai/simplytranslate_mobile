@@ -73,6 +73,15 @@ p{
     border-left: 5px solid #3ee08a;
 }
 
+.block-rtl {
+    margin: 20px 0;
+    padding-right: 1.5rem;
+    border-right: 5px solid #3ee08a;
+    padding-left: 0 !important;
+    border-left: none !important;
+}
+    
+
 .btn {
     width: 175px
 }
