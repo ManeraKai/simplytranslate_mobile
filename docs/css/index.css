@@ -7,6 +7,13 @@ body {
     background-color: #3ee08a !important
 }
 
+@media only screen and (max-width: 600px) {
+    .title{
+    font-size: 35px !important;
+    }
+  }
+
+
 .logo {
     display: block;
     margin-left: auto;
