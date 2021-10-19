@@ -193,7 +193,7 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
             }
           : () {},
       handleSelectAll:
-          canSelectAll(delegate) ? () => handleSelectAll(delegate) : () {},
+          canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
     );
   }
 }
@@ -225,7 +225,7 @@ class _MyTextSelectionToolbar extends StatefulWidget {
   final VoidCallback handleCopy;
   final VoidCallback handleCut;
   final VoidCallback handlePaste;
-  final VoidCallback handleSelectAll;
+  final VoidCallback? handleSelectAll;
 
   @override
   _MyTextSelectionToolbarState createState() => _MyTextSelectionToolbarState();
@@ -282,10 +282,11 @@ class _MyTextSelectionToolbarState extends State<_MyTextSelectionToolbar> {
           label: localizations.pasteButtonLabel,
           onPressed: widget.handlePaste,
         ),
-      _TextSelectionToolbarItemData(
-        label: localizations.selectAllButtonLabel,
-        onPressed: widget.handleSelectAll,
-      ),
+      if (widget.handleSelectAll != null)
+        _TextSelectionToolbarItemData(
+          label: localizations.selectAllButtonLabel,
+          onPressed: widget.handleSelectAll!,
+        ),
     ];
 
     int childIndex = 0;
