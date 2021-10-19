@@ -146,15 +146,8 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
       handleCopy: canCopy(delegate)
           ? () => handleCopy(delegate, clipboardStatus)
           : () {},
-      handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
-      handlePaste: canPaste(delegate)
-          ? () {
-              isFirst = true;
-              handlePaste(delegate);
-            }
-          : () {},
       handleSelectAll:
-          canSelectAll(delegate) ? () => handleSelectAll(delegate) : () {},
+          canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
     );
   }
 }
@@ -175,8 +168,6 @@ class _MyTextSelectionToolbar extends StatefulWidget {
     required this.anchorBelow,
     required this.clipboardStatus,
     required this.handleCopy,
-    required this.handleCut,
-    required this.handlePaste,
     required this.handleSelectAll,
   }) : super(key: key);
 
@@ -184,9 +175,7 @@ class _MyTextSelectionToolbar extends StatefulWidget {
   final Offset anchorBelow;
   final ClipboardStatusNotifier clipboardStatus;
   final VoidCallback handleCopy;
-  final VoidCallback handleCut;
-  final VoidCallback handlePaste;
-  final VoidCallback handleSelectAll;
+  final VoidCallback? handleSelectAll;
 
   @override
   __MyTextSelectionToolbarState createState() =>
@@ -232,22 +221,14 @@ class __MyTextSelectionToolbarState extends State<_MyTextSelectionToolbar> {
     final List<_TextSelectionToolbarItemData> itemDatas =
         <_TextSelectionToolbarItemData>[
       _TextSelectionToolbarItemData(
-        label: localizations.cutButtonLabel,
-        onPressed: widget.handleCut,
-      ),
-      _TextSelectionToolbarItemData(
         label: localizations.copyButtonLabel,
         onPressed: widget.handleCopy,
       ),
-      if (widget.clipboardStatus.value == ClipboardStatus.pasteable)
+      if (widget.handleSelectAll != null)
         _TextSelectionToolbarItemData(
-          label: localizations.pasteButtonLabel,
-          onPressed: widget.handlePaste,
+          label: localizations.selectAllButtonLabel,
+          onPressed: widget.handleSelectAll!,
         ),
-      _TextSelectionToolbarItemData(
-        label: localizations.selectAllButtonLabel,
-        onPressed: widget.handleSelectAll,
-      ),
     ];
 
     int childIndex = 0;
