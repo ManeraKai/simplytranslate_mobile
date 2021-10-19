@@ -58,7 +58,7 @@ We really appreciate it!
 - **🇨🇳 Chinese, Hong Kong:** [CafeTango](https://github.com/CafeTango)
 - **🇩🇪 German:** [metalune](https://metalune.xyz/)
 - **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
-
+- **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
 
 ## Icon
 The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
