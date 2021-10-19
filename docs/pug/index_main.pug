@@ -162,6 +162,11 @@ body
                 =translations['persian']
                 | : 
                 a(href="https://alefvanoon.xyz/") alefvanoon
+            
+            p 🇷🇺 
+                =translations['russian']
+                | : 
+                a(href="https://github.com/K3XRad") K3XRad
 
             br
 
@@ -182,8 +187,12 @@ body
 
             div.divider.padding
 
-            blockquote.block-rtl
-                h2.header.main-font.primary-color=translations['license']
+            if(isRtl)
+                blockquote.block-rtl
+                    h2.header.main-font.primary-color=translations['license']
+            else
+                blockquote.block
+                    h2.header.main-font.primary-color=translations['license']
 
             p=translations["license-text.1"].substring(0, translations["license-text.1"].indexOf('<a>'))
                 a(href="https://github.com/ManeraKai")=translations["license-text.1"].substring(translations["license-text.1"].indexOf('<a>')+3, translations["license-text.1"].indexOf('</a>'))
