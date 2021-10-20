@@ -25,7 +25,7 @@ W ten sposób GoogleTranslate nie pozna Twojej tożsamości. Automatyczny wybór
 
 <b>Cechy:</b>
 * Obsługuje 108 języków.
-* Zamiana tekstu na mowę (TTS).
+* Zamiana tekstu na mowę (TTS)
 * Może odbierać tekst udostępniany przez inne aplikacje
 * Przycisk do tłumaczenia w toolbarze przy zaznaczaniu tekstu
 * Automatyczny wybór losowej instancji z każdym żądaniem
