@@ -31,4 +31,4 @@ W ten sposób GoogleTranslate nie pozna Twojej tożsamości. Automatyczny wybór
 * Automatyczny wybór losowej instancji z każdym żądaniem
 * Aktualizacja oficjalnej listy instancji SimplyTranslate
 * Opcja ustawienia własnej instancji
-* Ciemny motyw.
+* Ciemny motyw
