@@ -1,20 +1,20 @@
 This app is an alternative front-end to Google Translate, but doesn't directly connect to it.
 It works as follows:
-1. Text is submitted from you the user and sent to a random SimplyTranslate instance (server).
+1. Text is submitted from you (the user) and sent to a random SimplyTranslate instance (server).
 2. This instance will request that data from Google Translate.
-3. Google Translate will send the result back to that instance.
-4. That instance will send the result back to you.
+3. Google Translate will send the translation back to that instance.
+4. That instance will send the translation back to you.
 <pre>
                    +-------------+
                    |             |
                    | instance #1 |
                    |             |     
                    +-------------+     
-+--------+         +-------------+         +-----------------+ 
-|        |         |             |         |                 |
-|  user  | ---+    | instance #2 |    +--> | Google Translate|
-|        |    |    |             |    |    |                 |
-+--------+    |    +-------------+    |    +-----------------+ 
++--------+         +-------------+         +------------------+ 
+|        |         |             |         |                  |
+|  user  | ---+    | instance #2 |    +--> | Google Translate |
+|        |    |    |             |    |    |                  |
++--------+    |    +-------------+    |    +------------------+ 
               |    +-------------+    |
               |    |             |    |
               +--> | instance #3 | ---+
