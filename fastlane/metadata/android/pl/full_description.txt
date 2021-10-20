@@ -24,7 +24,7 @@ Działa następująco:
 W ten sposób GoogleTranslate nie pozna Twojej tożsamości. Automatyczny wybór losowej instancji (tryb domyślny) z każdym żądaniem zaciemni i rozproszy Twoje dane między instancjami, więc nic nie będzie ze sobą powiązane, ponieważ nie jest to scentralizowana baza danych.
 
 <b>Cechy:</b>
-* Obsługuje 108 języków.
+* Obsługuje 108 języków
 * Zamiana tekstu na mowę (TTS)
 * Może odbierać tekst udostępniany przez inne aplikacje
 * Przycisk do tłumaczenia w toolbarze przy zaznaczaniu tekstu
