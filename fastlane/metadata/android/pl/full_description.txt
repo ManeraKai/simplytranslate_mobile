@@ -29,6 +29,6 @@ W ten sposób GoogleTranslate nie pozna Twojej tożsamości. Automatyczny wybór
 * Może odbierać tekst udostępniany przez inne aplikacje.
 * Przycisk do tłumaczenia w toolbarze przy zaznaczaniu tekstu.
 * Automatyczny wybór losowej instancji z każdym żądaniem.
-* Aktualizująca się, oficjalna lista instancji SimplyTranslate.
+* Aktualizacja oficjalnej listy instancji SimplyTranslate
 * Opcja ustawienia własnej instancji.
 * Ciemny motyw.
