@@ -1,1 +1,1 @@
-Nieoficjalna aplikacja kliencka do obsługi wielu instancji SimplyTranslate.
+Alternatywny front-end do Tłumacza Google
