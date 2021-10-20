@@ -2,7 +2,7 @@ Ta aplikacja to alternatywny front-end do GoogleTranslate, jednak nie łączy si
 Działa następująco:
 1. Tekst jest wysyłany od Ciebie jako użytkownika do losowej instancji SimplyTranslate (serwera).
 2. Instancja zapyta o te dane GoogleTranslate.
-3. GoogleTranslate zwróci wynik instancji.
+3. Google Translate zwróci tłumaczenie instancji.
 4. Instancja prześle wynik do Ciebie.
 <pre>
                    +-------------+
