@@ -1,7 +1,34 @@
-<p>Normalnie używa się Google Translate. Jednak problem polega na tym, że zostaniesz zalogowany na swoje konto Google z tego samego adresu IP, które posiada Twoje konto Google. Wtedy tłumaczenia mogą być powiązane z Twoją tożsamością. Czasami nie ma z tym problemu, innym razem mogą powstać. Dokładnie tak, jak z przeglądaniem Wikipedii. Twórcy będą wiedzieć, jakie masz choroby, poglądy polityczne, jaką wyznajesz religię, jakiej jesteś orientacji seksualnej itp. Trudniej się tłumaczy pod tym względem.</p>
+Ta aplikacja to alternatywny front-end do Tłumacza Google, jednak nie łączy się z nim bezpośrednio.
+Działa następująco:
+1. Tekst jest wysyłany od Ciebie jako użytkownika do losowej instancji SimplyTranslate (serwera).
+2. Instancja zapyta o te dane GoogleTranslate.
+3. Tłumacz Google zwróci tłumaczenie instancji.
+4. Instancja prześle tłumaczenie do Ciebie.
+<pre>
+                         +--------------+
+                         |              |
+                         | instancja #1 |
+                         |              |     
+                         +--------------+     
++--------------+         +-------------=+         +----------------+ 
+|              |         |              |         |                |
+|  użytkownik  | ---+    | instancja #2 |    +--> | Tłumacz Google |
+|              |    |    |              |    |    |                |
++--------------+    |    +--------------+    |    +----------------+ 
+                    |    +--------------+    |
+                    |    |              |    |
+                    +--> | instancja #3 | ---+
+                         |              |
+                         +--------------+
+</pre>
+W ten sposób Tłumacz Google nie pozna Twojej tożsamości. Automatyczny wybór losowej instancji (tryb domyślny) z każdym żądaniem zaciemni i rozproszy Twoje dane między instancjami, więc nic nie będzie ze sobą powiązane, ponieważ nie jest to scentralizowana baza danych.
 
-<p><a href="https://metalune.xyz/">Metalune</a> stworzył serwer proxy pod Google Translate. Możesz podłączyć się do jednej z tak zwanych instancji (serwerów) <a href="https://simple-web.org/projects/simplytranslate.html">SimplyTranslate</a>. Gdy zażądasz tłumaczenia wybranego tekstu, instancja przekaże to żądanie do Google Translate i zwróci Tobie odpowiedź. Zostanie ujawniona jedynie tożsamość instancji. Jeśli wiele osób korzysta z jednej instancji, informacje o Tobie zostaną zamaskowane. Korzystanie za każdym razem z innej instancji daje jeszcze lepszy efekt.</p>
-
-<p>Metalune stworzył <a href="https://simplytranslate.org">frontend webowy</a> dla SimplyTranslate, a ja stworzyłem nieoficjalną kliencką aplikację mobilną. Zaletą mojej aplikacji jest to, że możesz bez problemu połączyć się za każdym razem z inną instancją bez potrzeby odwiedzania innej strony internetowej. Wystarczy wybrać jedną z dostępnych instancji w selektorze lub pozwolić aplikacji wylosować jedną z nich. Można również wpisać własny adres internetowy. Wszystko to bez potrzeby wychodzenia z Twojej ulubionej aplikacji.</p>
-
-<p>Na razie bez natychmiastowego tłumaczenia z aparatu, tłumaczenia dokumentów lub tłumaczenia ze słuchu. Te powinny zostać najpierw zaimplementowane na serwerze proxy, a dopiero potem w aplikacji klienckiej. Postaram się w tym pomóc.</p>
+<b>Cechy:</b>
+* Obsługuje 108 języków
+* Zamiana tekstu na mowę (TTS)
+* Może odbierać tekst udostępniany przez inne aplikacje
+* Przycisk do tłumaczenia w toolbarze przy zaznaczaniu tekstu
+* Automatyczny wybór losowej instancji z każdym żądaniem
+* Aktualizacja oficjalnej listy instancji SimplyTranslate
+* Opcja ustawienia własnej instancji
+* Ciemny motyw
