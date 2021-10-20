@@ -5,21 +5,21 @@ Działa następująco:
 3. Tłumacz Google zwróci tłumaczenie instancji.
 4. Instancja prześle tłumaczenie do Ciebie.
 <pre>
-                   +-------------+
-                   |             |
-                   | instance #1 |
-                   |             |     
-                   +-------------+     
-+--------+         +-------------+         +------------------+ 
-|        |         |             |         |                  |
-|  user  | ---+    | instance #2 |    +--> | Google Translate |
-|        |    |    |             |    |    |                  |
-+--------+    |    +-------------+    |    +------------------+ 
-              |    +-------------+    |
-              |    |             |    |
-              +--> | instance #3 | ---+
-                   |             |
-                   +-------------+
+                         +--------------+
+                         |              |
+                         | instancja #1 |
+                         |              |     
+                         +--------------+     
++--------------+         +-------------=+         +----------------+ 
+|              |         |              |         |                |
+|  użytkownik  | ---+    | instancja #2 |    +--> | Tłumacz Google |
+|              |    |    |              |    |    |                |
++--------------+    |    +--------------+    |    +----------------+ 
+                    |    +--------------+    |
+                    |    |              |    |
+                    +--> | instancja #3 | ---+
+                         |              |
+                         +--------------+
 </pre>
 W ten sposób Tłumacz Google nie pozna Twojej tożsamości. Automatyczny wybór losowej instancji (tryb domyślny) z każdym żądaniem zaciemni i rozproszy Twoje dane między instancjami, więc nic nie będzie ze sobą powiązane, ponieważ nie jest to scentralizowana baza danych.
 
