@@ -142,7 +142,7 @@
     "light": "Светлая",
     "dark": "Тёмная",
     "follow_system": "Как в системе",
-    "default_share_language": "Стандартный язык функции "Поделиться"",
+    "default_share_language": "Стандартный язык функции \"Поделиться\"",
     "default_share_language_summary": "Определяет язык перевода для текста, полученного из другого приложения: $toLanguageShareDefault",
     "about": "О приложении",
     "team": "Команда",
