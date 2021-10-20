@@ -1,42 +1,34 @@
-<p>This app is an alternative front-end to GoogleTranslate, but doesn't directly connect to it.<br>
-    It works as follows:</p>
-<ol>
-    <li>Text is submitted from you the user and sent to a random SimplyTranslate instance (server).</li>
-    <li>This instance will request that data from GoogleTranslate.</li>
-    <li>GoogleTranslate will send the result back to that instance.</li>
-    <li>That instance will send the result back to you.</li>
-</ol>
-
+This app is an alternative front-end to GoogleTranslate, but doesn't directly connect to it.
+It works as follows:
+1. Text is submitted from you the user and sent to a random SimplyTranslate instance (server).
+2. This instance will request that data from GoogleTranslate.
+3. GoogleTranslate will send the result back to that instance.
+4. That instance will send the result back to you.
 <pre>
                    +-------------+
                    |             |
                    | instance #1 |
                    |             |     
                    +-------------+     
-+--------+         +-------------+        +-----------------+ 
-|        |         |             |        |                 |
-|  user  | ---+    | instance #2 |   +--> | GoogleTranslate |
-|        |    |    |             |   |    |                 |
-+--------+    |    +-------------+   |    +-----------------+ 
-              |    +-------------+   |
-              |    |             |   |
-              +--> | instance #3 | --+
++--------+         +-------------+         +-----------------+ 
+|        |         |             |         |                 |
+|  user  | ---+    | instance #2 |    +--> | GoogleTranslate |
+|        |    |    |             |    |    |                 |
++--------+    |    +-------------+    |    +-----------------+ 
+              |    +-------------+    |
+              |    |             |    |
+              +--> | instance #3 | ---+
                    |             |
                    +-------------+
 </pre>
+This way GoogleTranslate won't know your identity. Auto selecting a random instance (default mode) each request will obfuscate and spread your data more between instances so nothing will be linked easily as it's not in a centralized database.
 
-<p>This way GoogleTranslate won't know your identity. Auto selecting a random instance (default mode) each request
-    will obfuscate and spread your data more between instances so nothing will be linked easily as it's not in a centralized database.
-</p>
-
-<p>Features</p>
-<ul>
-    <li>Supports 108 languages.</li>
-    <li>Text-To-Speech (TTS).</li>
-    <li>Can receive shared text from other apps.</li>
-    <li>A translate button in the text selection toolbar.</li>
-    <li>Auto random instance selection each request.</li>
-    <li>An updatable official list of SimplyTranslate instances.</li>
-    <li>Custom instance option.</li>
-    <li>Dark theme.</li>
-</ul>
+<b>Features:</b>
+* Supports 108 languages.
+* Text-To-Speech (TTS).
+* Can receive shared text from other apps.
+* A translate button in the text selection toolbar.
+* Auto random instance selection each request.
+* An updatable official list of SimplyTranslate instances.
+* Custom instance option.
+* Dark theme.
