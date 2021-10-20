@@ -1,1 +1,1 @@
-Alternatywny front-end do GoogleTranslate
+Alternatywny front-end do Tłumacza Google
