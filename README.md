@@ -19,12 +19,12 @@
 
 ## Screenshots
 <div align=center>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/>&nbsp
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/>&nbsp
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/>&nbsp
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/>&nbsp
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" alt="drawing" width="200"/>&nbsp
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" alt="drawing" width="200"/>&nbsp
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" alt="drawing" width="200"/>&nbsp;
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" alt="drawing" width="200"/>
 </div>
 
@@ -33,17 +33,13 @@ Via F-Droid: [com.simplytranslate_mobile](https://f-droid.org/en/packages/com.si
 
 For the most up-to-date versions. Download the most recent **Artifact** from the [Actions](https://github.com/ManeraKai/simplytranslate_mobile/actions) page. They may be slow as they're in debug-mode. You should login before you'll be able to download.
 
+[![GithubAction](https://img.shields.io/github/workflow/status/manerakai/simplytranslate_mobile/Flutter%20build%20apk/main)](https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml)
 
 ## Translation
 - [POEditor](https://poeditor.com/join/project?hash=rV8CGr8NPj)
 
-We appreciate it!
-
 ## Donation
-
  - [Liberapay](https://liberapay.com/simplytranslate_mobile)
-
-We really appreciate it!
 
 ## Contributers
 
@@ -61,7 +57,13 @@ We really appreciate it!
 - **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
 
 ## Icon
-The favicon is not ours and we didn't make it. It's for the original [SimplyTranslate](https://simplytranslate.org/) project and I took a permission from it's creator to make the app more familiar to users. The designer of the favicon is [joelchrono12](https://joelchrono12.ml/).
+- [joelchrono12](https://joelchrono12.ml/)
+
+
+## Mirror Repos:
+* [Github](https://github.com/ManeraKai/simplytranslate_mobile/)
+* [Gitlab](https://gitlab.com/ManeraKai/simplytranslate_mobile)
+* [Codeberg](https://codeberg.org/ManeraKai/simplytranslate_mobile)
 
 ## License
 Copyright (C) 2021 [ManeraKai](https://github.com/ManeraKai)
