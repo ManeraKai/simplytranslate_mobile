@@ -102,7 +102,7 @@ class AboutScreen extends StatelessWidget {
                         .then(
                   (_) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      duration: Duration(seconds: 1),
+                      duration: Duration(seconds: 2),
                       width: 160,
                       content: Text(
                         AppLocalizations.of(context)!.copied_to_clipboard,
@@ -139,7 +139,7 @@ class AboutScreen extends StatelessWidget {
                       .then(
                     (_) => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        duration: Duration(seconds: 1),
+                        duration: Duration(seconds: 2),
                         width: 160,
                         content: Text(
                           AppLocalizations.of(context)!.copied_to_clipboard,

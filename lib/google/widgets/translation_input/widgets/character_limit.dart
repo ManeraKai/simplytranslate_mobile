@@ -23,7 +23,7 @@ class CharacterLimit extends StatelessWidget {
           if (!_isSnackBarVisible) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                duration: Duration(seconds: 1),
+                duration: Duration(seconds: 2),
                 width: 300,
                 content: Text(
                   () {

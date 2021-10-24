@@ -46,7 +46,7 @@ class UpdateList extends StatelessWidget {
         if (response) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              duration: const Duration(seconds: 1),
+              duration: const Duration(seconds: 2),
               width: 160,
               content: Text(
                 AppLocalizations.of(context)!.updated_successfully,
@@ -57,7 +57,7 @@ class UpdateList extends StatelessWidget {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              duration: const Duration(seconds: 1),
+              duration: const Duration(seconds: 2),
               width: 160,
               content: Text(
                 AppLocalizations.of(context)!.error,

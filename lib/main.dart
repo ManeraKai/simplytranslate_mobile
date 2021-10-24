@@ -173,10 +173,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           side: BorderSide(width: 1.5, color: const Color(0xffa9a9a9)),
         )),
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.symmetric(horizontal: 10)),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+            ),
           ),
         ),
         snackBarTheme: SnackBarThemeData(

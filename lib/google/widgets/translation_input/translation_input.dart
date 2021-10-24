@@ -88,7 +88,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                     if (!isSnackBarVisible) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          duration: const Duration(seconds: 1),
+                          duration: const Duration(seconds: 2),
                           width: 300,
                           content: Text(
                             AppLocalizations.of(context)!.input_limit,

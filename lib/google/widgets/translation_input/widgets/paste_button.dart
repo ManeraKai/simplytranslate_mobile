@@ -75,7 +75,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                     } else
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          duration: Duration(seconds: 1),
+                          duration: Duration(seconds: 2),
                           width: 160,
                           content: Text(
                             AppLocalizations.of(context)!.empty_clipboard,
@@ -87,7 +87,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                       if (!isSnackBarVisible) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            duration: Duration(seconds: 1),
+                            duration: Duration(seconds: 2),
                             width: 300,
                             content: Text(
                               AppLocalizations.of(context)!.input_limit,

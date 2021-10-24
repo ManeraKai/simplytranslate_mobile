@@ -16,7 +16,7 @@ class CopyToClipboardButton extends StatelessWidget {
           : () => Clipboard.setData(ClipboardData(text: text)).then(
                 (value) => ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    duration: Duration(seconds: 1),
+                    duration: Duration(seconds: 2),
                     width: 160,
                     content: Text(
                       AppLocalizations.of(context)!.copied_to_clipboard,

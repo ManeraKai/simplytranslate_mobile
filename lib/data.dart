@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 const greyColor = const Color(0xff131618);
 const secondgreyColor = const Color(0xff212529);
 const greenColor = const Color(0xff3fb274);
+const lightGreenColor = const Color(0xff62d195);
 const lightThemeGreyColor = const Color(0xffa9a9a9);
 
 bool callSharedText = false;

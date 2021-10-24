@@ -13,9 +13,6 @@ class TranslateButtonFloat extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       alignment: Alignment.topRight,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-        ),
         onPressed: googleInputController.text == ''
             ? null
             : googleInputController.text.length <= 5000

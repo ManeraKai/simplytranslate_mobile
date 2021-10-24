@@ -49,7 +49,7 @@ class _TtsOutputState extends State<TtsInput> {
       if (!_isSnackBarPressed) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             width: 300,
             content: Text(
               AppLocalizations.of(context)!.audio_limit,
@@ -198,7 +198,7 @@ class _TtsOutputState extends State<TtsInput> {
 //                 if (!_isSnackBarPressed) {
 //                   ScaffoldMessenger.of(context).showSnackBar(
 //                     SnackBar(
-//                       duration: Duration(seconds: 1),
+//                       duration: Duration(seconds: 2),
 //                       width: 300,
 //                       content: Text(
 //                         AppLocalizations.of(context)!.audio_limit,
