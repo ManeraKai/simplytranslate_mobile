@@ -18,9 +18,8 @@ void main(List<String> args) async {
   var sessionInstances = session.read('instances');
   if (sessionInstances != null) {
     List<String> sessionInstancesString = [];
-    for (var item in sessionInstances) {
+    for (var item in sessionInstances)
       sessionInstancesString.add(item.toString());
-    }
     instances = sessionInstancesString;
   }
 
@@ -71,9 +70,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
       if (_clipData.toString() == '' || _clipData == null) {
         if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
-      } else {
-        if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
-      }
+      } else if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
     });
     contextOverlordData = context;
     setStateOverlordData = setState;
@@ -90,16 +87,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       await Future.delayed(Duration(seconds: 1));
-      setState(() {
-        callSharedText = true;
-      });
+      setState(() => callSharedText = true);
 
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
-      if (_clipData.toString() == '' || _clipData == null) {
-        if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
-      } else {
-        if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
-      }
+      if (_clipData.toString() == '' ||
+          _clipData == null) if (!isClipboardEmpty)
+        setState(() => isClipboardEmpty = true);
+      else if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
     }
   }
 
@@ -108,25 +102,19 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
         List supportedLocalesCountryCode = [];
-        for (var item in supportedLocales) {
+        for (var item in supportedLocales)
           supportedLocalesCountryCode.add(item.countryCode);
-        }
 
         List supportedLocalesLanguageCode = [];
-        for (var item in supportedLocales) {
+        for (var item in supportedLocales)
           supportedLocalesLanguageCode.add(item.languageCode);
-        }
 
         locales!;
         List localesCountryCode = [];
-        for (var item in locales) {
-          localesCountryCode.add(item.countryCode);
-        }
+        for (var item in locales) localesCountryCode.add(item.countryCode);
 
         List localesLanguageCode = [];
-        for (var item in locales) {
-          localesLanguageCode.add(item.languageCode);
-        }
+        for (var item in locales) localesLanguageCode.add(item.languageCode);
 
         // print('Supported Locales CountryCode: $supportedLocalesCountryCode');
         // print('Supported Locales LanguageCode: $supportedLocalesLanguageCode');
@@ -192,8 +180,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           ),
         ),
         snackBarTheme: SnackBarThemeData(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
           behavior: SnackBarBehavior.floating,
         ),
         toggleableActiveColor: greenColor,
@@ -232,10 +221,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             style: OutlinedButton.styleFrom(
           backgroundColor: const Color(0xff131618),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-          side: BorderSide(
-            width: 1.5,
-            color: const Color(0xff495057),
-          ),
+          side: BorderSide(width: 1.5, color: const Color(0xff495057)),
         )),
         toggleableActiveColor: greenColor,
         elevatedButtonTheme: ElevatedButtonThemeData(

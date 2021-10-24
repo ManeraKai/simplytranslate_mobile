@@ -21,9 +21,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (callSharedText) {
-      getSharedText();
-    }
+    if (callSharedText) getSharedText();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: GoogleTranslate(),
