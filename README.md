@@ -36,7 +36,7 @@ For the most up-to-date versions. Download the most recent **Artifact** from the
 [![GithubAction](https://img.shields.io/github/workflow/status/manerakai/simplytranslate_mobile/Flutter%20build%20apk/main)](https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml)
 
 ## Contributing
-I use [VSCodium](https://vscodium.com/), its just [VSCode](https://code.visualstudio.com/) but without Microsoft's proprietary packages. I use the extensions [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). The Dart one has an auto-formatter. Please use this setup to prevent unnecesasry formatting changes.
+I use [VSCodium](https://vscodium.com/), its just [VSCode](https://code.visualstudio.com/) but without Microsoft's proprietary packages. I use the extensions [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). The Dart one has an auto-formatter. Please use this setup to prevent unnecessary formatting changes.
 
 ## Translation
 - [POEditor](https://poeditor.com/join/project?hash=rV8CGr8NPj)
