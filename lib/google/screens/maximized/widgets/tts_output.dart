@@ -13,9 +13,7 @@ bool _isSnackBarPressed = false;
 AudioPlayer _audioPlayer = AudioPlayer();
 
 class MaximizedTtsOutput extends StatefulWidget {
-  const MaximizedTtsOutput({
-    Key? key,
-  }) : super(key: key);
+  const MaximizedTtsOutput({Key? key}) : super(key: key);
 
   @override
   State<MaximizedTtsOutput> createState() => _TtsOutputState();
@@ -23,15 +21,11 @@ class MaximizedTtsOutput extends StatefulWidget {
 
 class _TtsOutputState extends State<MaximizedTtsOutput> {
   @override
-  void initState() {
-    _audioPlayer.onPlayerCompletion
-        .listen((event) => setState(() => _listening = false));
-    super.initState();
-  }
-
-  @override
   void dispose() {
-    _audioPlayer.dispose();
+    _audioPlayer.stop();
+    _listening = false;
+    isMaximizedTtsOutputCanceled = true;
+    ttsMaximizedOutputloading = false;
     super.dispose();
   }
 
@@ -65,6 +59,8 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
     }
 
     startPlayer() async {
+      _audioPlayer.onPlayerCompletion
+          .listen((event) => setState(() => _listening = false));
       isMaximizedTtsOutputCanceled = false;
       final _random = Random().nextInt(instances.length);
       final _url;

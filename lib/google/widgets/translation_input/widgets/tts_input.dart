@@ -21,20 +21,6 @@ class TtsInput extends StatefulWidget {
 
 class _TtsOutputState extends State<TtsInput> {
   @override
-  void initState() {
-    _audioPlayer.onPlayerCompletion.listen(
-      (event) => setState(() => _listening = false),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final _input = googleInputController.text;
     stopPlayer() async {
@@ -65,6 +51,9 @@ class _TtsOutputState extends State<TtsInput> {
     }
 
     startPlayer() async {
+      _audioPlayer.onPlayerCompletion.listen(
+        (event) => setState(() => _listening = false),
+      );
       isTtsInputCanceled = false;
       final _random = Random().nextInt(instances.length);
       final _url;

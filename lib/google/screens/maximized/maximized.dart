@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import './widgets/tts_output.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/data.dart';
 import '/google/widgets/translation_input/widgets/copy_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
-  const MaximizedScreen({
-    Key? key,
-  }) : super(key: key);
+  const MaximizedScreen({Key? key}) : super(key: key);
 
   @override
   _MaximizedScreenState createState() => _MaximizedScreenState();
@@ -48,6 +45,12 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
             Column(
               children: [
                 CopyToClipboardButton(googleOutput),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.fullscreen_exit),
+                ),
                 IconButton(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
