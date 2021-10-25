@@ -75,7 +75,7 @@ Future<instanceValidation> checkInstance(String urlValue) async {
   try {
     final response = await http.post(url);
     if (response.statusCode == 200) {
-      if ((parse(response.body).getElementsByTagName('h2')[0].innerHtml ==
+      if ((parse(response.body).getElementsByTagName('h1')[0].innerHtml ==
           'SimplyTranslate'))
         return instanceValidation.True;
       else
@@ -282,28 +282,25 @@ Future<String> translate({
   required BuildContext context,
 }) async {
   if (input.length <= 5000) {
+    final arguments =
+        'api/translate?engine=google&from=${fromLanguageValue.toLowerCase()}&to=${toLanguageValue.toLowerCase()}&text=$input';
     final url;
     if (instance == 'custom') {
-      url = Uri.parse(customInstance);
+      url = Uri.parse('$customInstance/$arguments');
     } else if (instance == 'random')
-      url = Uri.parse(instances[Random().nextInt(instances.length)]);
+      url = Uri.parse(
+          '${instances[Random().nextInt(instances.length)]}/$arguments');
     else
-      url = Uri.parse(instance);
+      url = Uri.parse('$instance/$arguments');
 
     try {
-      final response = await http.post(
-        url,
-        body: {
-          'from_language': fromLanguageValue,
-          'to_language': toLanguageValue,
-          'input': input,
-        },
-      );
+      final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        final x = parse(response.body)
-            .getElementsByClassName('translation')[0]
-            .innerHtml;
+        print('-------------------response---------------');
+        print(response.body);
+        print('-------------------------------------------');
+        final x = response.body;
         return x;
       } else
         await showInstanceError(context);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './widgets/tts_output.dart';
 import '/data.dart';
 import '/google/widgets/translation_input/widgets/copy_button.dart';
@@ -12,6 +13,12 @@ class MaximizedScreen extends StatefulWidget {
 
 class _MaximizedScreenState extends State<MaximizedScreen> {
   double outputFontSize = 20;
+
+  @override
+  void initState() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,12 +40,14 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                child: SelectableText(
-                  googleOutput,
-                  style: TextStyle(fontSize: outputFontSize),
+              child: Scrollbar(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  child: SelectableText(
+                    googleOutput,
+                    style: TextStyle(fontSize: outputFontSize),
+                  ),
                 ),
               ),
             ),
@@ -46,7 +55,8 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
               children: [
                 CopyToClipboardButton(googleOutput),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.fullscreen_exit),
