@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
@@ -73,16 +72,19 @@ Future<instanceValidation> checkInstance(String urlValue) async {
     return instanceValidation.False;
   }
   try {
-    final response = await http.post(url);
+    final response = await http.get(Uri.parse(
+        'https://almaleehserver.asuscomm.com:451/api/translate?from=en&to=es&text=hello'));
+
     if (response.statusCode == 200) {
-      if ((parse(response.body).getElementsByTagName('h1')[0].innerHtml ==
-          'SimplyTranslate'))
+      print(response.body);
+      if (response.body.toLowerCase() == 'hola')
         return instanceValidation.True;
       else
         return instanceValidation.False;
     } else
       return instanceValidation.False;
   } catch (err) {
+    print(err);
     return instanceValidation.False;
   }
 }
@@ -283,7 +285,7 @@ Future<String> translate({
 }) async {
   if (input.length <= 5000) {
     final arguments =
-        'api/translate?engine=google&from=${fromLanguageValue.toLowerCase()}&to=${toLanguageValue.toLowerCase()}&text=$input';
+        'api/translate?from=${supportedLanguages[fromLanguageValue]}&to=${supportedLanguages[toLanguageValue]}&text=$input';
     final url;
     if (instance == 'custom') {
       url = Uri.parse('$customInstance/$arguments');
@@ -297,11 +299,7 @@ Future<String> translate({
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        print('-------------------response---------------');
-        print(response.body);
-        print('-------------------------------------------');
-        final x = response.body;
-        return x;
+        return response.body;
       } else
         await showInstanceError(context);
       return 'Request failed with status: ${response.statusCode}.';
@@ -339,3 +337,114 @@ var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
 ];
+
+const supportedLanguages = {
+  "Afrikaans": "af",
+  "Albanian": "sq",
+  "Amharic": "am",
+  "Arabic": "ar",
+  "Armenian": "hy",
+  "Azerbaijani": "az",
+  "Basque": "eu",
+  "Belarusian": "be",
+  "Bengali": "bn",
+  "Bosnian": "bs",
+  "Bulgarian": "bg",
+  "Catalan": "ca",
+  "Cebuano": "ceb",
+  "Chichewa": "ny",
+  "Chinese": "zh-CN",
+  "Corsican": "co",
+  "Croatian": "hr",
+  "Czech": "cs",
+  "Danish": "da",
+  "Dutch": "nl",
+  "English": "en",
+  "Esperanto": "eo",
+  "Estonian": "et",
+  "Filipino": "tl",
+  "Finnish": "fi",
+  "French": "fr",
+  "Frisian": "fy",
+  "Galician": "gl",
+  "Georgian": "ka",
+  "German": "de",
+  "Greek": "el",
+  "Gujarati": "gu",
+  "Haitian Creole": "ht",
+  "Hausa": "ha",
+  "Hawaiian": "haw",
+  "Hebrew": "iw",
+  "Hindi": "hi",
+  "Hmong": "hmn",
+  "Hungarian": "hu",
+  "Icelandic": "is",
+  "Igbo": "ig",
+  "Indonesian": "id",
+  "Irish": "ga",
+  "Italian": "it",
+  "Japanese": "ja",
+  "Javanese": "jw",
+  "Kannada": "kn",
+  "Kazakh": "kk",
+  "Khmer": "km",
+  "Kinyarwanda": "rw",
+  "Korean": "ko",
+  "Kurdish (Kurmanji)": "ku",
+  "Kyrgyz": "ky",
+  "Lao": "lo",
+  "Latin": "la",
+  "Latvian": "lv",
+  "Lithuanian": "lt",
+  "Luxembourgish": "lb",
+  "Macedonian": "mk",
+  "Malagasy": "mg",
+  "Malay": "ms",
+  "Malayalam": "ml",
+  "Maltese": "mt",
+  "Maori": "mi",
+  "Marathi": "mr",
+  "Mongolian": "mn",
+  "Myanmar (Burmese)": "my",
+  "Nepali": "ne",
+  "Norwegian": "no",
+  "Odia (Oriya)": "or",
+  "Pashto": "ps",
+  "Persian": "fa",
+  "Polish": "pl",
+  "Portuguese": "pt",
+  "Punjabi": "pa",
+  "Romanian": "ro",
+  "Russian": "ru",
+  "Samoan": "sm",
+  "Scots Gaelic": "gd",
+  "Serbian": "sr",
+  "Sesotho": "st",
+  "Shona": "sn",
+  "Sindhi": "sd",
+  "Sinhala": "si",
+  "Slovak": "sk",
+  "Slovenian": "sl",
+  "Somali": "so",
+  "Spanish": "es",
+  "Sundanese": "su",
+  "Swahili": "sw",
+  "Swedish": "sv",
+  "Tajik": "tg",
+  "Tamil": "ta",
+  "Tatar": "tt",
+  "Telugu": "te",
+  "Thai": "th",
+  "Turkish": "tr",
+  "Turkmen": "tk",
+  "Ukrainian": "uk",
+  "Urdu": "ur",
+  "Uyghur": "ug",
+  "Uzbek": "uz",
+  "Vietnamese": "vi",
+  "Welsh": "cy",
+  "Xhosa": "xh",
+  "Yiddish": "yi",
+  "Yoruba": "yo",
+  "Zulu": "zu",
+};
