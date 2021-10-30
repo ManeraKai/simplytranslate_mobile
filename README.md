@@ -71,4 +71,4 @@ I use [VSCodium](https://vscodium.com/), its just [VSCode](https://code.visualst
 ## License
 Copyright (C) 2021 [ManeraKai](https://github.com/ManeraKai)
 
-[GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html)
+[GNU General Public License](./LICENSE)
