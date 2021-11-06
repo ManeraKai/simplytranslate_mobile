@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '../../../data.dart';
 import './settings_button.dart';
 
-final ScrollController _rightTextviewScrollController = ScrollController();
-bool toIsFirstClick = false;
+bool _isFirstClick = false;
+
 var selectLanguagesMapFlipped = {};
 
 class SelectDefaultLang extends StatelessWidget {
@@ -25,7 +25,8 @@ class SelectDefaultLang extends StatelessWidget {
       title: AppLocalizations.of(context)!.default_share_language,
       content: AppLocalizations.of(context)!
           .default_share_language_summary
-          .replaceFirst('\$toLanguageShareDefault', '$toLanguageShareDefault'),
+          .replaceFirst(
+              '\$toLanguageShareDefault', '${toSelLangMap[shareLangVal]}'),
     );
   }
 }
@@ -38,43 +39,35 @@ class SelectDefaultLangDialog extends StatefulWidget {
       _SelectDefaultLangDialogState();
 }
 
-var fieldTextEditingControllerGlobal;
+var txtEditingCtrlGlobal;
 
 class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     Function changeText = () {};
     return AlertDialog(
       insetPadding: const EdgeInsets.all(0),
       contentPadding: const EdgeInsets.all(20),
       content: Autocomplete(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          Iterable<String> toSelectLanguagesIterable = Iterable.generate(
-              selectLanguages.length, (i) => selectLanguages[i]);
-          if (toIsFirstClick) {
-            toIsFirstClick = false;
-            return toSelectLanguagesIterable;
+        optionsBuilder: (TextEditingValue txtEditingVal) {
+          Iterable<String> toSelLangsIterable = toSelLangMap.values;
+          if (_isFirstClick) {
+            _isFirstClick = false;
+            return toSelLangsIterable;
           } else
-            return toSelectLanguagesIterable
-                .where((word) => word
-                    .toLowerCase()
-                    .startsWith(textEditingValue.text.toLowerCase()))
-                .toList();
+            return toSelLangsIterable.where((word) =>
+                word.toLowerCase().contains(txtEditingVal.text.toLowerCase()));
         },
-        optionsViewBuilder: (
-          BuildContext context,
-          AutocompleteOnSelected<String> onSelected,
-          Iterable<String> options,
-        ) {
+        optionsViewBuilder: (_, __, Iterable<String> options) {
           return Align(
             alignment: Alignment.topLeft,
             child: Material(
               color: Colors.transparent,
               child: Container(
-                width: MediaQuery.of(context).size.width - 100,
-                height: MediaQuery.of(context).size.height / 2 <=
-                        (options.length) * (36 + 25)
-                    ? MediaQuery.of(context).size.height / 2
+                width: size.width / 3 + 10,
+                height: size.height / 2 <= (options.length) * (36 + 25)
+                    ? size.height / 2
                     : null,
                 margin: const EdgeInsets.only(top: 10),
                 decoration: const BoxDecoration(
@@ -84,45 +77,51 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                   ],
                 ),
                 child: Scrollbar(
-                  controller: _rightTextviewScrollController,
-                  isAlwaysShown: true,
                   child: SingleChildScrollView(
-                    controller: _rightTextviewScrollController,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: () {
                         List<Widget> widgetList = [];
-                        for (int index = 0; index < options.length; index++) {
-                          final option = options.elementAt(index);
+                        for (var option in options)
                           widgetList.add(
                             Container(
                               color: theme == Brightness.dark
                                   ? greyColor
                                   : Colors.white,
                               child: GestureDetector(
-                                onTap: () {
-                                  FocusScope.of(context).unfocus();
-                                  session.write('to_language_share_default',
-                                      selectLanguagesMap[option]);
-                                  setStateOverlordData(() {
-                                    toLanguageShareDefault = option;
-                                    toLanguageValueShareDefault =
-                                        selectLanguagesMap[option];
-                                  });
-                                  changeText();
-                                  Navigator.of(context).pop();
-                                },
+                                onTap: option == toSelLangMap[fromLangVal]
+                                    ? null
+                                    : () {
+                                        FocusScope.of(context).unfocus();
+                                        for (var i in toSelLangMap.keys)
+                                          if (option == toSelLangMap[i]) {
+                                            session.write('share_lang', i);
+                                            setState(() => shareLangVal = i);
+                                            setStateOverlordData(() {});
+                                            changeText();
+                                            break;
+                                          }
+                                      },
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8,
                                     vertical: 18,
                                   ),
-                                  child: Text(option),
+                                  child: Text(
+                                    option,
+                                    style:
+                                        (option == fromSelLangMap[fromLangVal])
+                                            ? const TextStyle(
+                                                fontSize: 18,
+                                                color: lightThemeGreyColor,
+                                              )
+                                            : const TextStyle(fontSize: 18),
+                                  ),
                                 ),
                               ),
                             ),
                           );
-                        }
                         return widgetList;
                       }(),
                     ),
@@ -132,64 +131,53 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
             ),
           );
         },
-        fieldViewBuilder: (
-          BuildContext context,
-          TextEditingController fieldTextEditingController,
-          FocusNode fieldFocusNode,
-          VoidCallback onFieldSubmitted,
-        ) {
-          print(toLanguageShareDefault);
-          print(fieldTextEditingController.text);
-          // _focus = fieldFocusNode;
-          fieldTextEditingControllerGlobal = fieldTextEditingController;
-          if (toLanguageShareDefault != fieldTextEditingController.text) {
-            fieldTextEditingController.text = toLanguageShareDefault;
-          }
-          changeText =
-              () => fieldTextEditingController.text = toLanguageShareDefault;
-          return Container(
-            width: MediaQuery.of(context).size.width - 100,
-            child: TextField(
-              onTap: () {
-                toIsFirstClick = true;
-                fieldTextEditingControllerGlobal.selection = TextSelection(
-                  baseOffset: 0,
-                  extentOffset: fieldTextEditingControllerGlobal.text.length,
-                );
-              },
-              onEditingComplete: () {
-                try {
-                  var chosenOne = selectLanguages.firstWhere((word) => word
-                      .toLowerCase()
-                      .startsWith(
-                          fieldTextEditingController.text.toLowerCase()));
+        fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
+          if (toSelLangMap[shareLangVal] != txtCtrl.text)
+            txtCtrl.text = toSelLangMap[shareLangVal]!;
+          changeText = () => txtCtrl.text = toSelLangMap[shareLangVal]!;
+          return TextField(
+            onTap: () {
+              _isFirstClick = true;
+              txtCtrl.selection = TextSelection(
+                baseOffset: 0,
+                extentOffset: txtCtrl.text.length,
+              );
+            },
+            onEditingComplete: () {
+              final input = txtCtrl.text.trim().toLowerCase();
+              writeData(data) {
+                FocusScope.of(context).unfocus();
+                session.write('share_lang', data);
+                setState(() => shareLangVal = data);
+                setStateOverlordData(() {});
+                txtCtrl.text = toSelLangMap[data]!;
+              }
 
-                  FocusScope.of(context).unfocus();
-                  session.write('to_language_share_default',
-                      selectLanguagesMap[chosenOne]);
-                  setStateOverlordData(() {
-                    toLanguageShareDefault = chosenOne;
-                    toLanguageValueShareDefault = selectLanguagesMap[chosenOne];
-                  });
-                  fieldTextEditingController.text = chosenOne;
-                } catch (_) {
-                  FocusScope.of(context).unfocus();
-                  fieldTextEditingController.text = toLanguageShareDefault;
+              resetData() {
+                FocusScope.of(context).unfocus();
+                txtCtrl.text = toSelLangMap[shareLangVal]!;
+              }
+
+              String? chosenOne;
+              for (var i in toSelLangMap.keys)
+                if (toSelLangMap[i]!.toLowerCase().contains(input)) {
+                  chosenOne = i;
+                  break;
                 }
-                Navigator.of(context).pop();
-              },
-              decoration: const InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                isDense: true,
-              ),
-              controller: fieldTextEditingController,
-              focusNode: fieldFocusNode,
-              style: TextStyle(
-                fontSize: 18,
-                color: theme == Brightness.dark ? null : Colors.black,
-              ),
+
+              if (chosenOne != null)
+                writeData(chosenOne);
+              else
+                resetData();
+            },
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              isDense: true,
             ),
+            controller: txtCtrl,
+            focusNode: fieldFocus,
+            style: const TextStyle(fontSize: 18),
           );
         },
       ),

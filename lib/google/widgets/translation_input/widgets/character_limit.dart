@@ -9,7 +9,7 @@ class CharacterLimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textLength = googleInputController.text.length;
+    final textLength = googleInCtrl.text.length;
     final color = textLength > 5000
         ? Colors.red
         : theme == Brightness.dark

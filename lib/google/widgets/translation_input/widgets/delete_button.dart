@@ -11,17 +11,17 @@ class DeleteTranslationInputButton extends StatelessWidget {
       child: IconButton(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        onPressed: googleInputController.text == ''
+        onPressed: googleInCtrl.text == ''
             ? null
             : () {
                 setStateOverlordData(() {
                   loading = false;
                   isTranslationCanceled = true;
                   ttsInputloading = false;
-                  isTtsInputCanceled = true;
-                  ttsOutputloading = false;
+                  isTtsInCanceled = true;
+                  ttsOutloading = false;
                   isTtsOutputCanceled = true;
-                  googleInputController.text = '';
+                  googleInCtrl.text = '';
                   googleOutput = '';
                 });
                 FocusScope.of(context).unfocus();

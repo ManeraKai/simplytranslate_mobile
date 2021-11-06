@@ -22,7 +22,7 @@ class TtsInput extends StatefulWidget {
 class _TtsOutputState extends State<TtsInput> {
   @override
   Widget build(BuildContext context) {
-    final _input = googleInputController.text;
+    final _input = googleInCtrl.text;
     stopPlayer() async {
       final result = await _audioPlayer.stop();
       if (result == 1)
@@ -54,25 +54,25 @@ class _TtsOutputState extends State<TtsInput> {
       _audioPlayer.onPlayerCompletion.listen(
         (event) => setState(() => _listening = false),
       );
-      isTtsInputCanceled = false;
+      isTtsInCanceled = false;
       final _random = Random().nextInt(instances.length);
       final _url;
       if (instance == 'custom')
         _url = Uri.parse(
-          '$customInstance/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+          '$customInstance/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
         );
       else if (instance == 'random')
         _url = Uri.parse(
-          '${instances[_random]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+          '${instances[_random]}/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
         );
       else
         _url = Uri.parse(
-          '$instance/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+          '$instance/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
         );
       try {
         setState(() => ttsInputloading = true);
         final response = await http.get(_url);
-        if (!isTtsInputCanceled) {
+        if (!isTtsInCanceled) {
           if (response.statusCode == 200) {
             final result = await _audioPlayer
                 .playBytes(response.bodyBytes)
@@ -84,11 +84,11 @@ class _TtsOutputState extends State<TtsInput> {
               excludedInstances.removeAt(_random);
               final randomExcluded = Random().nextInt(excludedInstances.length);
               final _urlExcluded = Uri.parse(
-                '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLanguageValue&text=$_input',
+                '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
               );
               try {
                 final response = await http.get(_urlExcluded);
-                if (!isTtsInputCanceled) {
+                if (!isTtsInCanceled) {
                   if (response.statusCode == 200) {
                     final result = await _audioPlayer
                         .playBytes(response.bodyBytes)
@@ -129,7 +129,7 @@ class _TtsOutputState extends State<TtsInput> {
             onTap: () {
               setState(() {
                 ttsInputloading = false;
-                isTtsInputCanceled = true;
+                isTtsInCanceled = true;
               });
             },
             child: Container(
@@ -163,7 +163,7 @@ class _TtsOutputState extends State<TtsInput> {
             }(),
             icon: Icon(
               _listening ? Icons.stop : Icons.volume_up,
-              color: googleInputController.text.length > 200 && !_listening
+              color: googleInCtrl.text.length > 200 && !_listening
                   ? Colors.grey
                   : null,
             ),
@@ -171,7 +171,7 @@ class _TtsOutputState extends State<TtsInput> {
   }
 }
 
-// googleInputController.text == ''
+// googleInCtrl.text == ''
 //     ? _listening
 //         ? () async {
 //             final result = await audioPlayer.stop();
@@ -182,7 +182,7 @@ class _TtsOutputState extends State<TtsInput> {
 //           }
 //         : null
 //     : !_listening
-//         ? googleInputController.text.length > 200
+//         ? googleInCtrl.text.length > 200
 //             ? () {
 //                 if (!_isSnackBarPressed) {
 //                   ScaffoldMessenger.of(context).showSnackBar(
@@ -204,13 +204,13 @@ class _TtsOutputState extends State<TtsInput> {
 //                 final _url;
 //                 if (instance == 'custom')
 //                   _url = Uri.parse(
-//                       '$customInstance/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleInputController.text}');
+//                       '$customInstance/api/tts/?engine=google&lang=$fromLangVal&text=${googleInCtrl.text}');
 //                 else if (instance == 'random')
 //                   _url = Uri.parse(
-//                       '${instances[Random().nextInt(instances.length)]}/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleInputController.text}');
+//                       '${instances[Random().nextInt(instances.length)]}/api/tts/?engine=google&lang=$fromLangVal&text=${googleInCtrl.text}');
 //                 else
 //                   _url = Uri.parse(
-//                       '$instance/api/tts/?engine=google&lang=$fromLanguageValue&text=${googleInputController.text}');
+//                       '$instance/api/tts/?engine=google&lang=$fromLangVal&text=${googleInCtrl.text}');
 //                 try {
 //                   final response = await http.get(_url);
 //                   if (response.statusCode == 200) {

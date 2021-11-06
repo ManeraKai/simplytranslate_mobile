@@ -24,20 +24,18 @@ var themeRadio = AppTheme.system;
 
 var focus = FocusNode();
 
-String fromLanguageValue = 'English';
-String toLanguageValue = 'Arabic';
-String toLanguageValueShareDefault = 'Arabic';
-
-String fromLanguage = '';
-String toLanguage = '';
-String toLanguageShareDefault = '';
+String fromLangVal = 'auto';
+String toLangVal = '';
+String shareLangVal = '';
 
 String instance = 'random';
-int instanceIndex = 0;
+
 
 String googleOutput = '';
 
 String customInstance = '';
+
+late Locale appLocale;
 
 enum AppTheme { dark, light, system }
 
@@ -49,16 +47,14 @@ enum instanceValidation { False, True, NotChecked }
 
 bool isClipboardEmpty = true;
 
-late Map selectLanguagesMap;
-Map fromSelectLanguagesMap = {};
-List selectLanguages = [];
-List selectLanguagesFrom = [];
+late Map<String, String> toSelLangMap;
+late Map<String, String> fromSelLangMap;
 
 bool loading = false;
 bool isTranslationCanceled = false;
 
-final customUrlController = TextEditingController();
-final googleInputController = TextEditingController();
+final customUrlCtrl = TextEditingController();
+final googleInCtrl = TextEditingController();
 
 final session = GetStorage();
 
@@ -72,8 +68,8 @@ Future<instanceValidation> checkInstance(String urlValue) async {
     return instanceValidation.False;
   }
   try {
-    final response = await http.get(Uri.parse(
-        'https://almaleehserver.asuscomm.com:451/api/translate?from=en&to=es&text=hello'));
+    final response = await http
+        .get(Uri.parse('$url/api/translate?from=en&to=es&text=hello'));
 
     if (response.statusCode == 200) {
       print(response.body);
@@ -97,14 +93,14 @@ Future<void> getSharedText() async {
       final _translationInput = answer.toString();
 
       setStateOverlordData(() {
-        googleInputController.text = _translationInput;
+        googleInCtrl.text = _translationInput;
         loading = true;
       });
 
       final translatedText = await translate(
         input: _translationInput,
-        fromLanguageValue: 'Autodetect',
-        toLanguageValue: toLanguageValueShareDefault,
+        fromLang: 'auto',
+        toLang: shareLangVal,
         context: contextOverlordData,
       );
       setStateOverlordData(() {
@@ -119,115 +115,115 @@ Future<void> getSharedText() async {
 
 bool isSnackBarVisible = false;
 
-Map<dynamic, dynamic> selectLanguagesMapGetter(BuildContext context) => {
-      AppLocalizations.of(context)!.afrikaans: "Afrikaans",
-      AppLocalizations.of(context)!.albanian: "Albanian",
-      AppLocalizations.of(context)!.amharic: "Amharic",
-      AppLocalizations.of(context)!.arabic: "Arabic",
-      AppLocalizations.of(context)!.armenian: "Armenian",
-      AppLocalizations.of(context)!.azerbaijani: "Azerbaijani",
-      AppLocalizations.of(context)!.basque: "Basque",
-      AppLocalizations.of(context)!.belarusian: "Belarusian",
-      AppLocalizations.of(context)!.bengali: "Bengali",
-      AppLocalizations.of(context)!.bosnian: "Bosnian",
-      AppLocalizations.of(context)!.bulgarian: "Bulgarian",
-      AppLocalizations.of(context)!.catalan: "Catalan",
-      AppLocalizations.of(context)!.cebuano: "Cebuano",
-      AppLocalizations.of(context)!.chichewa: "Chichewa",
-      AppLocalizations.of(context)!.chinese: "Chinese",
-      AppLocalizations.of(context)!.corsican: "Corsican",
-      AppLocalizations.of(context)!.croatian: "Croatian",
-      AppLocalizations.of(context)!.czech: "Czech",
-      AppLocalizations.of(context)!.danish: "Danish",
-      AppLocalizations.of(context)!.dutch: "Dutch",
-      AppLocalizations.of(context)!.english: "English",
-      AppLocalizations.of(context)!.esperanto: "Esperanto",
-      AppLocalizations.of(context)!.estonian: "Estonian",
-      AppLocalizations.of(context)!.filipino: "Filipino",
-      AppLocalizations.of(context)!.finnish: "Finnish",
-      AppLocalizations.of(context)!.french: "French",
-      AppLocalizations.of(context)!.frisian: "Frisian",
-      AppLocalizations.of(context)!.galician: "Galician",
-      AppLocalizations.of(context)!.georgian: "Georgian",
-      AppLocalizations.of(context)!.german: "German",
-      AppLocalizations.of(context)!.greek: "Greek",
-      AppLocalizations.of(context)!.gujarati: "Gujarati",
-      AppLocalizations.of(context)!.haitian_creole: "Haitian Creole",
-      AppLocalizations.of(context)!.hausa: "Hausa",
-      AppLocalizations.of(context)!.hawaiian: "Hawaiian",
-      AppLocalizations.of(context)!.hebrew: "Hebrew",
-      AppLocalizations.of(context)!.hindi: "Hindi",
-      AppLocalizations.of(context)!.hmong: "Hmong",
-      AppLocalizations.of(context)!.hungarian: "Hungarian",
-      AppLocalizations.of(context)!.icelandic: "Icelandic",
-      AppLocalizations.of(context)!.igbo: "Igbo",
-      AppLocalizations.of(context)!.indonesian: "Indonesian",
-      AppLocalizations.of(context)!.irish: "Irish",
-      AppLocalizations.of(context)!.italian: "Italian",
-      AppLocalizations.of(context)!.japanese: "Japanese",
-      AppLocalizations.of(context)!.javanese: "Javanese",
-      AppLocalizations.of(context)!.kannada: "Kannada",
-      AppLocalizations.of(context)!.kazakh: "Kazakh",
-      AppLocalizations.of(context)!.khmer: "Khmer",
-      AppLocalizations.of(context)!.kinyarwanda: "Kinyarwanda",
-      AppLocalizations.of(context)!.korean: "Korean",
-      AppLocalizations.of(context)!.kurdish_kurmanji: "Kurdish (Kurmanji)",
-      AppLocalizations.of(context)!.kyrgyz: "Kyrgyz",
-      AppLocalizations.of(context)!.lao: "Lao",
-      AppLocalizations.of(context)!.latin: "Latin",
-      AppLocalizations.of(context)!.latvian: "Latvian",
-      AppLocalizations.of(context)!.lithuanian: "Lithuanian",
-      AppLocalizations.of(context)!.luxembourgish: "Luxembourgish",
-      AppLocalizations.of(context)!.macedonian: "Macedonian",
-      AppLocalizations.of(context)!.malagasy: "Malagasy",
-      AppLocalizations.of(context)!.malay: "Malay",
-      AppLocalizations.of(context)!.malayalam: "Malayalam",
-      AppLocalizations.of(context)!.maltese: "Maltese",
-      AppLocalizations.of(context)!.maori: "Maori",
-      AppLocalizations.of(context)!.marathi: "Marathi",
-      AppLocalizations.of(context)!.mongolian: "Mongolian",
-      AppLocalizations.of(context)!.myanmar_burmese: "Myanmar (Burmese)",
-      AppLocalizations.of(context)!.nepali: "Nepali",
-      AppLocalizations.of(context)!.norwegian: "Norwegian",
-      AppLocalizations.of(context)!.odia_oriya: "Odia (Oriya)",
-      AppLocalizations.of(context)!.pashto: "Pashto",
-      AppLocalizations.of(context)!.persian: "Persian",
-      AppLocalizations.of(context)!.polish: "Polish",
-      AppLocalizations.of(context)!.portuguese: "Portuguese",
-      AppLocalizations.of(context)!.punjabi: "Punjabi",
-      AppLocalizations.of(context)!.romanian: "Romanian",
-      AppLocalizations.of(context)!.russian: "Russian",
-      AppLocalizations.of(context)!.samoan: "Samoan",
-      AppLocalizations.of(context)!.scots_gaelic: "Scots Gaelic",
-      AppLocalizations.of(context)!.serbian: "Serbian",
-      AppLocalizations.of(context)!.sesotho: "Sesotho",
-      AppLocalizations.of(context)!.shona: "Shona",
-      AppLocalizations.of(context)!.sindhi: "Sindhi",
-      AppLocalizations.of(context)!.sinhala: "Sinhala",
-      AppLocalizations.of(context)!.slovak: "Slovak",
-      AppLocalizations.of(context)!.slovenian: "Slovenian",
-      AppLocalizations.of(context)!.somali: "Somali",
-      AppLocalizations.of(context)!.spanish: "Spanish",
-      AppLocalizations.of(context)!.sundanese: "Sundanese",
-      AppLocalizations.of(context)!.swahili: "Swahili",
-      AppLocalizations.of(context)!.swedish: "Swedish",
-      AppLocalizations.of(context)!.tajik: "Tajik",
-      AppLocalizations.of(context)!.tamil: "Tamil",
-      AppLocalizations.of(context)!.tatar: "Tatar",
-      AppLocalizations.of(context)!.telugu: "Telugu",
-      AppLocalizations.of(context)!.thai: "Thai",
-      AppLocalizations.of(context)!.turkish: "Turkish",
-      AppLocalizations.of(context)!.turkmen: "Turkmen",
-      AppLocalizations.of(context)!.ukrainian: "Ukrainian",
-      AppLocalizations.of(context)!.urdu: "Urdu",
-      AppLocalizations.of(context)!.uyghur: "Uyghur",
-      AppLocalizations.of(context)!.uzbek: "Uzbek",
-      AppLocalizations.of(context)!.vietnamese: "Vietnamese",
-      AppLocalizations.of(context)!.welsh: "Welsh",
-      AppLocalizations.of(context)!.xhosa: "Xhosa",
-      AppLocalizations.of(context)!.yiddish: "Yiddish",
-      AppLocalizations.of(context)!.yoruba: "Yoruba",
-      AppLocalizations.of(context)!.zulu: "Zulu",
+Map<String, String> selectLanguagesMapGetter(BuildContext context) => {
+      "af": AppLocalizations.of(context)!.afrikaans,
+      "sq": AppLocalizations.of(context)!.albanian,
+      "am": AppLocalizations.of(context)!.amharic,
+      "ar": AppLocalizations.of(context)!.arabic,
+      "hy": AppLocalizations.of(context)!.armenian,
+      "az": AppLocalizations.of(context)!.azerbaijani,
+      "eu": AppLocalizations.of(context)!.basque,
+      "be": AppLocalizations.of(context)!.belarusian,
+      "bn": AppLocalizations.of(context)!.bengali,
+      "bs": AppLocalizations.of(context)!.bosnian,
+      "bg": AppLocalizations.of(context)!.bulgarian,
+      "ca": AppLocalizations.of(context)!.catalan,
+      "ceb": AppLocalizations.of(context)!.cebuano,
+      "ny": AppLocalizations.of(context)!.chichewa,
+      "zh-CN": AppLocalizations.of(context)!.chinese,
+      "co": AppLocalizations.of(context)!.corsican,
+      "hr": AppLocalizations.of(context)!.croatian,
+      "cs": AppLocalizations.of(context)!.czech,
+      "da": AppLocalizations.of(context)!.danish,
+      "nl": AppLocalizations.of(context)!.dutch,
+      "en": AppLocalizations.of(context)!.english,
+      "eo": AppLocalizations.of(context)!.esperanto,
+      "et": AppLocalizations.of(context)!.estonian,
+      "tl": AppLocalizations.of(context)!.filipino,
+      "fi": AppLocalizations.of(context)!.finnish,
+      "fr": AppLocalizations.of(context)!.french,
+      "fy": AppLocalizations.of(context)!.frisian,
+      "gl": AppLocalizations.of(context)!.galician,
+      "ka": AppLocalizations.of(context)!.georgian,
+      "de": AppLocalizations.of(context)!.german,
+      "el": AppLocalizations.of(context)!.greek,
+      "gu": AppLocalizations.of(context)!.gujarati,
+      "ht": AppLocalizations.of(context)!.haitian_creole,
+      "ha": AppLocalizations.of(context)!.hausa,
+      "haw": AppLocalizations.of(context)!.hawaiian,
+      "iw": AppLocalizations.of(context)!.hebrew,
+      "hi": AppLocalizations.of(context)!.hindi,
+      "hmn": AppLocalizations.of(context)!.hmong,
+      "hu": AppLocalizations.of(context)!.hungarian,
+      "is": AppLocalizations.of(context)!.icelandic,
+      "ig": AppLocalizations.of(context)!.igbo,
+      "id": AppLocalizations.of(context)!.indonesian,
+      "ga": AppLocalizations.of(context)!.irish,
+      "it": AppLocalizations.of(context)!.italian,
+      "ja": AppLocalizations.of(context)!.japanese,
+      "jw": AppLocalizations.of(context)!.javanese,
+      "kn": AppLocalizations.of(context)!.kannada,
+      "kk": AppLocalizations.of(context)!.kazakh,
+      "km": AppLocalizations.of(context)!.khmer,
+      "rw": AppLocalizations.of(context)!.kinyarwanda,
+      "ko": AppLocalizations.of(context)!.korean,
+      "ku": AppLocalizations.of(context)!.kurdish_kurmanji,
+      "ky": AppLocalizations.of(context)!.kyrgyz,
+      "lo": AppLocalizations.of(context)!.lao,
+      "la": AppLocalizations.of(context)!.latin,
+      "lv": AppLocalizations.of(context)!.latvian,
+      "lt": AppLocalizations.of(context)!.lithuanian,
+      "lb": AppLocalizations.of(context)!.luxembourgish,
+      "mk": AppLocalizations.of(context)!.macedonian,
+      "mg": AppLocalizations.of(context)!.malagasy,
+      "ms": AppLocalizations.of(context)!.malay,
+      "ml": AppLocalizations.of(context)!.malayalam,
+      "mt": AppLocalizations.of(context)!.maltese,
+      "mi": AppLocalizations.of(context)!.maori,
+      "mr": AppLocalizations.of(context)!.marathi,
+      "mn": AppLocalizations.of(context)!.mongolian,
+      "my": AppLocalizations.of(context)!.myanmar_burmese,
+      "ne": AppLocalizations.of(context)!.nepali,
+      "no": AppLocalizations.of(context)!.norwegian,
+      "or": AppLocalizations.of(context)!.odia_oriya,
+      "ps": AppLocalizations.of(context)!.pashto,
+      "fa": AppLocalizations.of(context)!.persian,
+      "pl": AppLocalizations.of(context)!.polish,
+      "pt": AppLocalizations.of(context)!.portuguese,
+      "pa": AppLocalizations.of(context)!.punjabi,
+      "ro": AppLocalizations.of(context)!.romanian,
+      "ru": AppLocalizations.of(context)!.russian,
+      "sm": AppLocalizations.of(context)!.samoan,
+      "gd": AppLocalizations.of(context)!.scots_gaelic,
+      "sr": AppLocalizations.of(context)!.serbian,
+      "st": AppLocalizations.of(context)!.sesotho,
+      "sn": AppLocalizations.of(context)!.shona,
+      "sd": AppLocalizations.of(context)!.sindhi,
+      "si": AppLocalizations.of(context)!.sinhala,
+      "sk": AppLocalizations.of(context)!.slovak,
+      "sl": AppLocalizations.of(context)!.slovenian,
+      "so": AppLocalizations.of(context)!.somali,
+      "es": AppLocalizations.of(context)!.spanish,
+      "su": AppLocalizations.of(context)!.sundanese,
+      "sw": AppLocalizations.of(context)!.swahili,
+      "sv": AppLocalizations.of(context)!.swedish,
+      "tg": AppLocalizations.of(context)!.tajik,
+      "ta": AppLocalizations.of(context)!.tamil,
+      "tt": AppLocalizations.of(context)!.tatar,
+      "te": AppLocalizations.of(context)!.telugu,
+      "th": AppLocalizations.of(context)!.thai,
+      "tr": AppLocalizations.of(context)!.turkish,
+      "tk": AppLocalizations.of(context)!.turkmen,
+      "uk": AppLocalizations.of(context)!.ukrainian,
+      "ur": AppLocalizations.of(context)!.urdu,
+      "ug": AppLocalizations.of(context)!.uyghur,
+      "uz": AppLocalizations.of(context)!.uzbek,
+      "vi": AppLocalizations.of(context)!.vietnamese,
+      "cy": AppLocalizations.of(context)!.welsh,
+      "xh": AppLocalizations.of(context)!.xhosa,
+      "yi": AppLocalizations.of(context)!.yiddish,
+      "yo": AppLocalizations.of(context)!.yoruba,
+      "zu": AppLocalizations.of(context)!.zulu,
     };
 
 showInstanceError(context) {
@@ -279,51 +275,54 @@ showInternetError(context) {
 
 Future<String> translate({
   required String input,
-  required String fromLanguageValue,
-  required String toLanguageValue,
+  required String fromLang,
+  required String toLang,
   required BuildContext context,
 }) async {
-  if (input.length <= 5000) {
-    final arguments =
-        'api/translate?from=${supportedLanguages[fromLanguageValue]}&to=${supportedLanguages[toLanguageValue]}&text=$input';
-    final url;
-    if (instance == 'custom') {
-      url = Uri.parse('$customInstance/$arguments');
-    } else if (instance == 'random')
-      url = Uri.parse(
-          '${instances[Random().nextInt(instances.length)]}/$arguments');
-    else
-      url = Uri.parse('$instance/$arguments');
+  final url;
+  if (instance == 'custom')
+    url = Uri.parse('$customInstance/api/translate');
+  else if (instance == 'random') {
+    final randomInstance = instances[Random().nextInt(instances.length)];
+    url = Uri.parse('$randomInstance/api/translate');
+  } else
+    url = Uri.parse('$instance/api/translate');
 
-    try {
-      final response = await http.get(url);
+  try {
+    final response = await http.post(
+      url,
+      body: {
+        "from": fromLang,
+        "to": toLang,
+        "text": input,
+      },
+    );
 
-      if (response.statusCode == 200) {
-        return response.body;
-      } else
-        await showInstanceError(context);
-      return 'Request failed with status: ${response.statusCode}.';
-    } catch (err) {
-      try {
-        final result = await InternetAddress.lookup('exmaple.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-          await showInstanceError(context);
-          throw ('Instnace not valid');
-        }
-      } on SocketException catch (_) {
-        await showInternetError(context);
-        throw ('No internet');
-      }
+    if (response.statusCode == 200)
+      return response.body;
+    else {
+      await showInstanceError(context);
       return '';
     }
-  } else
+  } catch (err) {
+    try {
+      final result = await InternetAddress.lookup('exmaple.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        await showInstanceError(context);
+        throw ('Instnace not valid');
+      }
+    } on SocketException catch (_) {
+      await showInternetError(context);
+      throw ('No internet');
+    }
     return '';
+  }
 }
 
-bool isTtsInputCanceled = false;
+bool isTtsInCanceled = false;
 bool ttsInputloading = false;
 
-bool ttsOutputloading = false;
+bool ttsOutloading = false;
 bool isTtsOutputCanceled = false;
 
 bool ttsMaximizedOutputloading = false;
@@ -336,115 +335,7 @@ late double textFieldHeight;
 var instances = [
   "https://simplytranslate.org",
   "https://st.alefvanoon.xyz",
+  "https://translate.josias.dev",
+  "https://translate.namazso.eu",
+  "https://translate.riverside.rocks"
 ];
-
-const supportedLanguages = {
-  "Afrikaans": "af",
-  "Albanian": "sq",
-  "Amharic": "am",
-  "Arabic": "ar",
-  "Armenian": "hy",
-  "Azerbaijani": "az",
-  "Basque": "eu",
-  "Belarusian": "be",
-  "Bengali": "bn",
-  "Bosnian": "bs",
-  "Bulgarian": "bg",
-  "Catalan": "ca",
-  "Cebuano": "ceb",
-  "Chichewa": "ny",
-  "Chinese": "zh-CN",
-  "Corsican": "co",
-  "Croatian": "hr",
-  "Czech": "cs",
-  "Danish": "da",
-  "Dutch": "nl",
-  "English": "en",
-  "Esperanto": "eo",
-  "Estonian": "et",
-  "Filipino": "tl",
-  "Finnish": "fi",
-  "French": "fr",
-  "Frisian": "fy",
-  "Galician": "gl",
-  "Georgian": "ka",
-  "German": "de",
-  "Greek": "el",
-  "Gujarati": "gu",
-  "Haitian Creole": "ht",
-  "Hausa": "ha",
-  "Hawaiian": "haw",
-  "Hebrew": "iw",
-  "Hindi": "hi",
-  "Hmong": "hmn",
-  "Hungarian": "hu",
-  "Icelandic": "is",
-  "Igbo": "ig",
-  "Indonesian": "id",
-  "Irish": "ga",
-  "Italian": "it",
-  "Japanese": "ja",
-  "Javanese": "jw",
-  "Kannada": "kn",
-  "Kazakh": "kk",
-  "Khmer": "km",
-  "Kinyarwanda": "rw",
-  "Korean": "ko",
-  "Kurdish (Kurmanji)": "ku",
-  "Kyrgyz": "ky",
-  "Lao": "lo",
-  "Latin": "la",
-  "Latvian": "lv",
-  "Lithuanian": "lt",
-  "Luxembourgish": "lb",
-  "Macedonian": "mk",
-  "Malagasy": "mg",
-  "Malay": "ms",
-  "Malayalam": "ml",
-  "Maltese": "mt",
-  "Maori": "mi",
-  "Marathi": "mr",
-  "Mongolian": "mn",
-  "Myanmar (Burmese)": "my",
-  "Nepali": "ne",
-  "Norwegian": "no",
-  "Odia (Oriya)": "or",
-  "Pashto": "ps",
-  "Persian": "fa",
-  "Polish": "pl",
-  "Portuguese": "pt",
-  "Punjabi": "pa",
-  "Romanian": "ro",
-  "Russian": "ru",
-  "Samoan": "sm",
-  "Scots Gaelic": "gd",
-  "Serbian": "sr",
-  "Sesotho": "st",
-  "Shona": "sn",
-  "Sindhi": "sd",
-  "Sinhala": "si",
-  "Slovak": "sk",
-  "Slovenian": "sl",
-  "Somali": "so",
-  "Spanish": "es",
-  "Sundanese": "su",
-  "Swahili": "sw",
-  "Swedish": "sv",
-  "Tajik": "tg",
-  "Tamil": "ta",
-  "Tatar": "tt",
-  "Telugu": "te",
-  "Thai": "th",
-  "Turkish": "tr",
-  "Turkmen": "tk",
-  "Ukrainian": "uk",
-  "Urdu": "ur",
-  "Uyghur": "ug",
-  "Uzbek": "uz",
-  "Vietnamese": "vi",
-  "Welsh": "cy",
-  "Xhosa": "xh",
-  "Yiddish": "yi",
-  "Yoruba": "yo",
-  "Zulu": "zu",
-};

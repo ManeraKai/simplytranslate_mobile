@@ -12,6 +12,7 @@ bool checkLoading = false;
 bool _isCanceled = false;
 String _tmpInstance = '';
 var _tmpInput = '';
+int _instanceIndex = 0;
 
 class SelectInstance extends StatelessWidget {
   const SelectInstance({Key? key}) : super(key: key);
@@ -19,11 +20,11 @@ class SelectInstance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     instanceFunc(setState, x) async {
-      instanceIndex = instances.indexOf(x);
+      _instanceIndex = instances.indexOf(x);
       setState(() => instance = x);
       Navigator.of(context).pop();
       setStateOverlordData(() => loading = true);
-      await checkInstance(instances[instanceIndex]);
+      await checkInstance(instances[_instanceIndex]);
       setStateOverlordData(() => loading = false);
       session.write('instance_mode', x);
     }
@@ -32,15 +33,15 @@ class SelectInstance extends StatelessWidget {
       setState(() => instance = 'random');
       Navigator.of(context).pop();
       setStateOverlordData(() => loading = true);
-      instanceIndex = Random().nextInt(instances.length);
-      await checkInstance(instances[instanceIndex]);
+      _instanceIndex = Random().nextInt(instances.length);
+      await checkInstance(instances[_instanceIndex]);
       setStateOverlordData(() => loading = false);
       session.write('instance_mode', 'random');
     }
 
     customCheck(setState) async {
       FocusScope.of(context).unfocus();
-      final customUrl = customUrlController.text;
+      final customUrl = customUrlCtrl.text;
 
       setState(() {
         _isCanceled = false;
@@ -65,8 +66,8 @@ class SelectInstance extends StatelessWidget {
 
     customFunc(setState) async {
       _tmpInstance = instance;
-      _tmpInput = customUrlController.text;
-      instanceIndex = 0;
+      _tmpInput = customUrlCtrl.text;
+      _instanceIndex = 0;
       Navigator.of(context).pop();
       setStateOverlordData(() {
         instance = 'custom';
@@ -79,7 +80,7 @@ class SelectInstance extends StatelessWidget {
             child: SingleChildScrollView(
               child: AlertDialog(
                 content: TextField(
-                  controller: customUrlController,
+                  controller: customUrlCtrl,
                   keyboardType: TextInputType.url,
                   onChanged: (String? value) {
                     if (isCustomInstanceValid != instanceValidation.NotChecked)
@@ -151,7 +152,7 @@ class SelectInstance extends StatelessWidget {
         ),
       );
       if (isCustomInstanceValid != instanceValidation.True) {
-        if (_tmpInput != '') customUrlController.text = _tmpInput;
+        if (_tmpInput != '') customUrlCtrl.text = _tmpInput;
         print('tmp input is: $_tmpInput');
         setStateOverlordData(() => instance = _tmpInstance);
         session.write('instance_mode', _tmpInstance);

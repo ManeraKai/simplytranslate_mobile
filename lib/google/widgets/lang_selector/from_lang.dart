@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '/data.dart';
 
-final ScrollController _leftTextviewScrollController = ScrollController();
-bool _fromIsFirstClick = false;
+bool _isFirstClick = false;
 
 class GoogleFromLang extends StatelessWidget {
   const GoogleFromLang({Key? key}) : super(key: key);
@@ -14,20 +12,14 @@ class GoogleFromLang extends StatelessWidget {
     return Container(
       width: size.width / 3 + 10,
       child: Autocomplete(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          Iterable<String> fromSelectLanguagesIterable = Iterable.generate(
-            selectLanguagesFrom.length,
-            (i) => selectLanguagesFrom[i],
-          );
-          if (_fromIsFirstClick) {
-            _fromIsFirstClick = false;
-            return fromSelectLanguagesIterable;
+        optionsBuilder: (TextEditingValue txtEditingVal) {
+          Iterable<String> fromSelLangsIterable = fromSelLangMap.values;
+          if (_isFirstClick) {
+            _isFirstClick = false;
+            return fromSelLangsIterable;
           } else
-            return fromSelectLanguagesIterable
-                .where((word) => word
-                    .toLowerCase()
-                    .startsWith(textEditingValue.text.toLowerCase()))
-                .toList();
+            return fromSelLangsIterable.where((word) =>
+                word.toLowerCase().contains(txtEditingVal.text.toLowerCase()));
         },
         optionsViewBuilder: (_, __, Iterable<String> options) {
           return Align(
@@ -47,36 +39,30 @@ class GoogleFromLang extends StatelessWidget {
                   ],
                 ),
                 child: Scrollbar(
-                  controller: _leftTextviewScrollController,
-                  isAlwaysShown: true,
                   child: SingleChildScrollView(
-                    controller: _leftTextviewScrollController,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: () {
                         List<Widget> widgetList = [];
-                        for (int index = 0; index < options.length; index++) {
-                          final option = options.elementAt(index);
+                        for (var option in options)
                           widgetList.add(
                             Container(
                               color: theme == Brightness.dark
                                   ? greyColor
                                   : Colors.white,
                               child: GestureDetector(
-                                onTap: option == toLanguage
+                                onTap: option == fromSelLangMap[toLangVal]
                                     ? null
                                     : () {
-                                        if (option != toLanguage) {
-                                          FocusScope.of(context).unfocus();
-                                          session.write(
-                                              'from_language', option);
-                                          setStateOverlordData(() {
-                                            fromLanguage = option;
-                                            fromLanguageValue =
-                                                fromSelectLanguagesMap[option];
-                                          });
-                                          changeText();
-                                        }
+                                        FocusScope.of(context).unfocus();
+                                        for (var i in fromSelLangMap.keys)
+                                          if (option == fromSelLangMap[i]) {
+                                            session.write('from_lang', i);
+                                            setStateOverlordData(
+                                                () => fromLangVal = i);
+                                            changeText();
+                                            break;
+                                          }
                                       },
                                 child: Container(
                                   width: double.infinity,
@@ -86,7 +72,7 @@ class GoogleFromLang extends StatelessWidget {
                                   ),
                                   child: Text(
                                     option,
-                                    style: (option == toLanguage)
+                                    style: (option == toSelLangMap[toLangVal])
                                         ? const TextStyle(
                                             fontSize: 18,
                                             color: lightThemeGreyColor,
@@ -97,7 +83,6 @@ class GoogleFromLang extends StatelessWidget {
                               ),
                             ),
                           );
-                        }
                         return widgetList;
                       }(),
                     ),
@@ -107,76 +92,67 @@ class GoogleFromLang extends StatelessWidget {
             ),
           );
         },
-        fieldViewBuilder: (
-          BuildContext context,
-          TextEditingController fieldTextEditingController,
-          FocusNode fieldFocusNode,
-          VoidCallback onFieldSubmitted,
-        ) {
-          if (fromLanguage != fieldTextEditingController.text) {
-            fieldTextEditingController.text = fromLanguage;
-          }
-          changeText = () => fieldTextEditingController.text = fromLanguage;
+        fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
+          if (fromSelLangMap[fromLangVal] != txtCtrl.text)
+            txtCtrl.text = fromSelLangMap[fromLangVal]!;
+
+          changeText = () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
           return TextField(
             onTap: () {
-              // setStateOverlordData(() => translationInputOpen = false);
-              _fromIsFirstClick = true;
-              fieldTextEditingController.selection = TextSelection(
+              _isFirstClick = true;
+              txtCtrl.selection = TextSelection(
                 baseOffset: 0,
-                extentOffset: fieldTextEditingController.text.length,
+                extentOffset: txtCtrl.text.length,
               );
             },
             onEditingComplete: () {
-              try {
-                var chosenOne = selectLanguagesFrom.firstWhere((word) => word
-                    .toLowerCase()
-                    .startsWith(fieldTextEditingController.text.toLowerCase()));
-                if (chosenOne != toLanguage) {
-                  FocusScope.of(context).unfocus();
-                  session.write(
-                      'from_language', fromSelectLanguagesMap[chosenOne]);
-                  setStateOverlordData(() {
-                    fromLanguage = chosenOne;
-                    fromLanguageValue = fromSelectLanguagesMap[chosenOne];
-                  });
-                  fieldTextEditingController.text = chosenOne;
-                } else {
-                  var dimmedSelectLanguagesFrom = selectLanguagesFrom.toList();
-                  dimmedSelectLanguagesFrom.remove(chosenOne);
-                  try {
-                    var chosenOne = dimmedSelectLanguagesFrom.firstWhere(
-                        (word) => word.toLowerCase().startsWith(
-                            fieldTextEditingController.text.toLowerCase()));
-                    if (chosenOne != toLanguage) {
-                      FocusScope.of(context).unfocus();
-
-                      session.write(
-                          'from_language', fromSelectLanguagesMap[chosenOne]);
-                      setStateOverlordData(() {
-                        fromLanguage = chosenOne;
-                        fromLanguageValue = fromSelectLanguagesMap[chosenOne];
-                      });
-                      fieldTextEditingController.text = chosenOne;
-                    }
-                  } catch (_) {
-                    FocusScope.of(context).unfocus();
-                    fieldTextEditingController.text = fromLanguage;
-                  }
-                }
-              } catch (_) {
+              final input = txtCtrl.text.trim().toLowerCase();
+              writeData(data) {
                 FocusScope.of(context).unfocus();
-                fieldTextEditingController.text = fromLanguage;
+                session.write('from_lang', data);
+                setStateOverlordData(() => fromLangVal = data);
+                txtCtrl.text = fromSelLangMap[data]!;
+              }
+
+              resetData() {
+                FocusScope.of(context).unfocus();
+                txtCtrl.text = fromSelLangMap[fromLangVal]!;
+              }
+
+              String? chosenOne;
+              for (var i in fromSelLangMap.keys)
+                if (fromSelLangMap[i]!.toLowerCase().contains(input)) {
+                  chosenOne = i;
+                  break;
+                }
+
+              if (chosenOne != toSelLangMap[toLangVal] && chosenOne != null)
+                writeData(chosenOne);
+              else {
+                var dimmedSelLangsFrom = fromSelLangMap;
+                dimmedSelLangsFrom.remove(chosenOne);
+
+                String? chosenOneTwo;
+                for (var i in dimmedSelLangsFrom.keys)
+                  if (dimmedSelLangsFrom[i]!.toLowerCase().contains(input)) {
+                    chosenOneTwo = i;
+                    break;
+                  }
+
+                if (chosenOneTwo != dimmedSelLangsFrom[fromLangVal] &&
+                    chosenOneTwo != null)
+                  writeData(chosenOneTwo);
+                else
+                  resetData();
               }
             },
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 10,
-              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               isDense: true,
             ),
-            controller: fieldTextEditingController,
-            focusNode: fieldFocusNode,
+            controller: txtCtrl,
+            focusNode: fieldFocus,
             style: const TextStyle(fontSize: 18),
           );
         },

@@ -66,13 +66,13 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
       final _url;
       if (instance == 'custom')
         _url = Uri.parse(
-            '$customInstance/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
+            '$customInstance/api/tts/?engine=google&lang=$toLangVal&text=$_input');
       else if (instance == 'random')
         _url = Uri.parse(
-            '${instances[_random]}/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
+            '${instances[_random]}/api/tts/?engine=google&lang=$toLangVal&text=$_input');
       else
         _url = Uri.parse(
-            '$instance/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
+            '$instance/api/tts/?engine=google&lang=$toLangVal&text=$_input');
       try {
         setState(() => ttsMaximizedOutputloading = true);
         final response = await http.get(_url);
@@ -88,7 +88,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
               excludedInstances.removeAt(_random);
               final randomExcluded = Random().nextInt(excludedInstances.length);
               final _urlExcluded = Uri.parse(
-                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLanguageValue&text=$_input');
+                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLangVal&text=$_input');
               try {
                 final response = await http.get(_urlExcluded);
                 if (!isMaximizedTtsOutputCanceled) {

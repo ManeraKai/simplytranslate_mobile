@@ -6,16 +6,12 @@ class GoogleSwitchLang extends StatelessWidget {
   const GoogleSwitchLang({Key? key}) : super(key: key);
 
   switchLangsWithCookies() {
-    final tmp = fromLanguage;
-    fromLanguage = toLanguage;
-    toLanguage = tmp;
+    final valuetmp = fromLangVal;
+    fromLangVal = toLangVal;
+    toLangVal = valuetmp;
 
-    final valuetmp = fromLanguageValue;
-    fromLanguageValue = toLanguageValue;
-    toLanguageValue = valuetmp;
-
-    session.write('to_language', toLanguageValue);
-    session.write('from_language', fromLanguageValue);
+    session.write('to_lang', toLangVal);
+    session.write('from_lang', fromLangVal);
   }
 
   @override
@@ -26,28 +22,28 @@ class GoogleSwitchLang extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           ),
           onPressed: () async {
-            if (fromLanguage != AppLocalizations.of(context)!.autodetect) {
+            if (fromLangVal != 'auto') {
               setStateOverlordData(() {
-                isTtsInputCanceled = true;
-                ttsOutputloading = false;
+                isTtsInCanceled = true;
+                ttsOutloading = false;
                 isTtsOutputCanceled = true;
                 ttsInputloading = false;
               });
-              if (googleInputController.text.isEmpty) {
+              if (googleInCtrl.text.isEmpty) {
                 switchLangsWithCookies();
                 setStateOverlordData(() {});
-              } else if (googleInputController.text.length <= 5000) {
+              } else if (googleInCtrl.text.length <= 5000) {
                 FocusScope.of(context).unfocus();
                 setStateOverlordData(() => loading = true);
                 try {
-                  final translationInputTransTmp = googleInputController.text;
-                  final fromLanguageValueTransTmp = fromLanguageValue;
-                  final toLanguageValueTransTmp = toLanguageValue;
+                  final transInTmp = googleInCtrl.text;
+                  final fromLangValTransTmp = fromLangVal;
+                  final toLangValTransTmp = toLangVal;
                   switchLangsWithCookies();
                   final translatedText = await translate(
-                    input: translationInputTransTmp,
-                    fromLanguageValue: fromLanguageValueTransTmp,
-                    toLanguageValue: toLanguageValueTransTmp,
+                    input: transInTmp,
+                    fromLang: fromLangValTransTmp,
+                    toLang: toLangValTransTmp,
                     context: context,
                   );
                   if (!isTranslationCanceled) {
@@ -55,8 +51,8 @@ class GoogleSwitchLang extends StatelessWidget {
                     if (translatedText.length <= 5000) {
                       translatedText2 = await translate(
                         input: translatedText,
-                        fromLanguageValue: fromLanguageValue,
-                        toLanguageValue: toLanguageValue,
+                        fromLang: fromLangVal,
+                        toLang: toLangVal,
                         context: context,
                       );
                     } else {
@@ -74,7 +70,7 @@ class GoogleSwitchLang extends StatelessWidget {
                     }
                     setStateOverlordData(() {
                       loading = false;
-                      googleInputController.text = translatedText;
+                      googleInCtrl.text = translatedText;
                       googleOutput = translatedText2;
                     });
                   }
@@ -89,7 +85,7 @@ class GoogleSwitchLang extends StatelessWidget {
             }
           },
           child: Text(
-            '<->',
+            '<-->',
             style: TextStyle(
               fontSize: 18,
               color: theme == Brightness.dark ? Colors.white : Colors.black,

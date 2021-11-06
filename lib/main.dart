@@ -30,7 +30,7 @@ void main(List<String> args) async {
   final sessionCustomInstance = session.read('customInstance') != null
       ? session.read('customInstance').toString()
       : '';
-  customUrlController.text = sessionCustomInstance;
+  customUrlCtrl.text = sessionCustomInstance;
   customInstance = sessionCustomInstance;
 
   var themeSession = session.read('theme').toString();
@@ -105,35 +105,26 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         for (var item in supportedLocales)
           supportedLocalesCountryCode.add(item.countryCode);
 
-        List supportedLocalesLanguageCode = [];
+        List supportedLocalesLangCode = [];
         for (var item in supportedLocales)
-          supportedLocalesLanguageCode.add(item.languageCode);
+          supportedLocalesLangCode.add(item.languageCode);
 
         locales!;
         List localesCountryCode = [];
         for (var item in locales) localesCountryCode.add(item.countryCode);
 
-        List localesLanguageCode = [];
-        for (var item in locales) localesLanguageCode.add(item.languageCode);
+        List localesLangCode = [];
+        for (var item in locales) localesLangCode.add(item.languageCode);
 
-        // print('Supported Locales CountryCode: $supportedLocalesCountryCode');
-        // print('Supported Locales LanguageCode: $supportedLocalesLanguageCode');
-
-        // print('Locales CountryCode: $localesCountryCode');
-        // print('Locales LanguageCode: $localesLanguageCode');
-
+        appLocale = locales[0];
         for (var i = 0; i < locales.length; i++) {
           if (supportedLocalesCountryCode.contains(localesCountryCode[i]) &&
-              supportedLocalesLanguageCode.contains(localesLanguageCode[i])) {
-            print(
-                'Yes country: ${localesCountryCode[i]}, ${localesLanguageCode[i]}');
-            return Locale(localesLanguageCode[i], localesCountryCode[i]);
-          } else if (supportedLocalesLanguageCode
-              .contains(localesLanguageCode[i])) {
-            print('Yes language: ${localesLanguageCode[i]}');
-            return Locale(localesLanguageCode[i]);
+              supportedLocalesLangCode.contains(localesLangCode[i])) {
+            return Locale(localesLangCode[i], localesCountryCode[i]);
+          } else if (supportedLocalesLangCode.contains(localesLangCode[i])) {
+            return Locale(localesLangCode[i]);
           } else {
-            print('Nothing');
+            return Locale('en');
           }
         }
         return Locale('en');
@@ -317,53 +308,24 @@ class _MainPageLocalizationState extends State<MainPageLocalization> {
     else
       themeValue = themeTranslation['system']!;
 
-    selectLanguagesMap = selectLanguagesMapGetter(context);
+    toSelLangMap = selectLanguagesMapGetter(context);
 
-    selectLanguages = [];
-    selectLanguagesMap.keys.forEach((element) => selectLanguages.add(element));
-    selectLanguages.sort();
+    fromSelLangMap = toSelLangMap;
+    fromSelLangMap['auto'] = AppLocalizations.of(context)!.autodetect;
 
-    fromSelectLanguagesMap = selectLanguagesMap;
+    if (session.read('from_lang').toString() != 'null')
+      fromLangVal = session.read('from_lang').toString();
 
-    selectLanguagesFrom = [];
-    selectLanguagesMap.keys.forEach(
-      (element) => selectLanguagesFrom.add(element),
-    );
-    selectLanguagesFrom.sort();
-    fromSelectLanguagesMap[AppLocalizations.of(context)!.autodetect] =
-        "Autodetect";
-    selectLanguagesFrom.insert(0, AppLocalizations.of(context)!.autodetect);
+    if (session.read('to_lang').toString() != 'null')
+      toLangVal = session.read('to_lang').toString();
+    else
+      toLangVal = appLocale.languageCode;
 
-    fromLanguage = AppLocalizations.of(context)!.english;
-    toLanguage = AppLocalizations.of(context)!.arabic;
-    toLanguageShareDefault = AppLocalizations.of(context)!.arabic;
+    if (session.read('share_lang').toString() != 'null')
+      shareLangVal = session.read('share_lang').toString();
+    else
+      shareLangVal = appLocale.languageCode;
 
-    if (session.read('from_language').toString() != 'null') {
-      var sessionData = session.read('from_language').toString();
-      fromLanguage = fromSelectLanguagesMap.entries
-          .firstWhere((element) => element.value == sessionData)
-          .key;
-      fromLanguageValue = sessionData;
-    }
-    if (session.read('to_language').toString() != 'null') {
-      var sessionData = session.read('to_language').toString();
-      toLanguage = selectLanguagesMap.entries
-          .firstWhere((element) => element.value == sessionData)
-          .key;
-      toLanguageValue = sessionData;
-    }
-
-    if (session.read('to_language_share_default').toString() != 'null') {
-      var sessionData = session.read('to_language_share_default').toString();
-      try {
-        toLanguageShareDefault = selectLanguagesMap.entries
-            .firstWhere((element) => element.value == sessionData)
-            .key;
-      } catch (e) {
-        print('There is some error here');
-      }
-      toLanguageValueShareDefault = sessionData;
-    }
     return MainPage();
   }
 }

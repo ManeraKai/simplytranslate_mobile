@@ -32,42 +32,42 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
 
                     if (value != null && value.text.toString() != '') {
                       var valueString = value.text.toString();
-                      if (googleInputController.text == '') {
+                      if (googleInCtrl.text == '') {
                         FocusScope.of(context).requestFocus(focus);
                         setStateOverlordData(
-                          () => googleInputController.text = valueString,
+                          () => googleInCtrl.text = valueString,
                         );
                       } else {
                         final beforePasteSelection =
-                            googleInputController.selection.baseOffset;
+                            googleInCtrl.selection.baseOffset;
                         var newText;
                         if (beforePasteSelection == -1)
-                          newText = googleInputController.text + valueString;
+                          newText = googleInCtrl.text + valueString;
                         else
-                          newText = googleInputController.text.substring(
+                          newText = googleInCtrl.text.substring(
                                 0,
                                 beforePasteSelection,
                               ) +
                               valueString +
-                              googleInputController.text.substring(
+                              googleInCtrl.text.substring(
                                 beforePasteSelection,
-                                googleInputController.text.length,
+                                googleInCtrl.text.length,
                               );
 
                         await Future.delayed(const Duration(milliseconds: 1));
                         FocusScope.of(context).requestFocus(focus);
 
                         setStateOverlordData(() {
-                          googleInputController.text = newText;
+                          googleInCtrl.text = newText;
                           if (isKeyboardVisible)
-                            googleInputController.selection =
+                            googleInCtrl.selection =
                                 TextSelection.collapsed(
                               offset: beforePasteSelection + valueString.length,
                             );
                           else
-                            googleInputController.selection =
+                            googleInCtrl.selection =
                                 TextSelection.collapsed(
-                              offset: googleInputController.text.length,
+                              offset: googleInCtrl.text.length,
                             );
                         });
                       }
@@ -83,7 +83,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                         ),
                       );
 
-                    if (googleInputController.text.length > 5000) {
+                    if (googleInCtrl.text.length > 5000) {
                       if (!isSnackBarVisible) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

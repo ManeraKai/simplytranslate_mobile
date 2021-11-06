@@ -20,13 +20,13 @@ class GoogleTranslationInput extends StatefulWidget {
 class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   void initState() {
-    googleInputController.addListener(() async {
-      final tmp = googleInputController.selection;
+    googleInCtrl.addListener(() async {
+      final tmp = googleInCtrl.selection;
       if (!tmp.isCollapsed && isFirst) {
         print('selection');
-        googleInputController.selection = TextSelection.fromPosition(tmp.base);
+        googleInCtrl.selection = TextSelection.fromPosition(tmp.base);
         await Future.delayed(const Duration(milliseconds: 50));
-        googleInputController.selection = tmp;
+        googleInCtrl.selection = tmp;
         isFirst = false;
       }
     });
@@ -35,7 +35,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
 
   @override
   void dispose() {
-    googleInputController.removeListener(() {});
+    googleInCtrl.removeListener(() {});
     super.dispose();
   }
 
@@ -68,23 +68,23 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
               child: TextField(
                 onTap: () => isFirst = true,
                 selectionControls: _MyMaterialTextSelectionControls(),
-                textDirection: googleInputController.text.length == 0
+                textDirection: googleInCtrl.text.length == 0
                     ? intl.Bidi.detectRtlDirectionality(
                         AppLocalizations.of(context)!.arabic,
                       )
                         ? TextDirection.rtl
                         : TextDirection.ltr
                     : intl.Bidi.detectRtlDirectionality(
-                            googleInputController.text)
+                            googleInCtrl.text)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
                 focusNode: focus,
                 minLines: 10,
                 maxLines: null,
-                controller: googleInputController,
+                controller: googleInCtrl,
                 keyboardType: TextInputType.multiline,
                 onChanged: (String input) {
-                  if (googleInputController.text.length > 5000) {
+                  if (googleInCtrl.text.length > 5000) {
                     if (!isSnackBarVisible) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -122,7 +122,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DeleteTranslationInputButton(),
-              CopyToClipboardButton(googleInputController.text),
+              CopyToClipboardButton(googleInCtrl.text),
               PasteClipboardButton(),
               TtsInput(),
               CharacterLimit(),

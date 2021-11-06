@@ -10,9 +10,9 @@ class GoogleCancelTranslationButton extends StatelessWidget {
     return Container(
       width: 100,
       child: GestureDetector(
-        onTap: googleInputController.text == ''
+        onTap: googleInCtrl.text == ''
             ? null
-            : googleInputController.text.length <= 5000
+            : googleInCtrl.text.length <= 5000
                 ? () {
                     setStateOverlordData(() {
                       loading = false;
