@@ -97,6 +97,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                       setState(() => shareLangVal = i);
                                       setStateOverlordData(() {});
                                       changeText();
+                                      Navigator.of(context).pop();
                                       break;
                                     }
                                 },
