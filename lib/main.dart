@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,11 @@ import 'data.dart';
 import 'home.dart';
 
 void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+
+  
   await GetStorage.init();
 
   var sessionInstances = session.read('instances');

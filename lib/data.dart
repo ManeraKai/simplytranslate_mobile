@@ -228,12 +228,13 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
 
   Map<String, String> mapTwo = {};
 
-  var Valuelist = [];
+  // ignore: non_constant_identifier_names
+  List<String> Valuelist = [];
 
   for (var i in mapOne.values) Valuelist.add(i);
   Valuelist.sort();
 
-  for (var i in Valuelist)
+  for (String i in Valuelist)
     for (var x in mapOne.keys) if (mapOne[x] == i) mapTwo[x] = i;
 
   return mapTwo;
@@ -314,6 +315,7 @@ Future<String> translate({
       return '';
     }
   } catch (err) {
+    print('something is wrong buddy: $err');
     try {
       final result = await InternetAddress.lookup('exmaple.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
