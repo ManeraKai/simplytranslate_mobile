@@ -58,6 +58,7 @@ I use [VSCodium](https://vscodium.com/), its just [VSCode](https://code.visualst
 - **🇩🇪 German:** [metalune](https://metalune.xyz/)
 - **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
 - **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
+- **🇹🇷 Turkish:** Anonymous
 
 ## Icon
 - [joelchrono12](https://joelchrono12.ml/)
