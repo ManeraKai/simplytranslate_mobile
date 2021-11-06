@@ -21,74 +21,78 @@ class GoogleSwitchLang extends StatelessWidget {
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           ),
-          onPressed: () async {
-            if (fromLangVal != 'auto') {
-              setStateOverlordData(() {
-                isTtsInCanceled = true;
-                ttsOutloading = false;
-                isTtsOutputCanceled = true;
-                ttsInputloading = false;
-              });
-              if (googleInCtrl.text.isEmpty) {
-                switchLangsWithCookies();
-                setStateOverlordData(() {});
-              } else if (googleInCtrl.text.length <= 5000) {
-                FocusScope.of(context).unfocus();
-                setStateOverlordData(() => loading = true);
-                try {
-                  final transInTmp = googleInCtrl.text;
-                  final fromLangValTransTmp = fromLangVal;
-                  final toLangValTransTmp = toLangVal;
-                  switchLangsWithCookies();
-                  final translatedText = await translate(
-                    input: transInTmp,
-                    fromLang: fromLangValTransTmp,
-                    toLang: toLangValTransTmp,
-                    context: context,
-                  );
-                  if (!isTranslationCanceled) {
-                    final translatedText2;
-                    if (translatedText.length <= 5000) {
-                      translatedText2 = await translate(
-                        input: translatedText,
-                        fromLang: fromLangVal,
-                        toLang: toLangVal,
+          onPressed: fromLangVal == 'auto'
+              ? null
+              : () async {
+                  setStateOverlordData(() {
+                    isTtsInCanceled = true;
+                    ttsOutloading = false;
+                    isTtsOutputCanceled = true;
+                    ttsInputloading = false;
+                  });
+                  if (googleInCtrl.text.isEmpty) {
+                    switchLangsWithCookies();
+                    setStateOverlordData(() {});
+                  } else if (googleInCtrl.text.length <= 5000) {
+                    FocusScope.of(context).unfocus();
+                    setStateOverlordData(() => loading = true);
+                    try {
+                      final transInTmp = googleInCtrl.text;
+                      final fromLangValTransTmp = fromLangVal;
+                      final toLangValTransTmp = toLangVal;
+                      switchLangsWithCookies();
+                      final translatedText = await translate(
+                        input: transInTmp,
+                        fromLang: fromLangValTransTmp,
+                        toLang: toLangValTransTmp,
                         context: context,
                       );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: Duration(seconds: 2),
-                          width: 160,
-                          content: Text(
-                            AppLocalizations.of(context)!.input_limit,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                      translatedText2 = '';
+                      if (!isTranslationCanceled) {
+                        final translatedText2;
+                        if (translatedText.length <= 5000) {
+                          translatedText2 = await translate(
+                            input: translatedText,
+                            fromLang: fromLangVal,
+                            toLang: toLangVal,
+                            context: context,
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 2),
+                              width: 160,
+                              content: Text(
+                                AppLocalizations.of(context)!.input_limit,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                          translatedText2 = '';
+                        }
+                        setStateOverlordData(() {
+                          loading = false;
+                          googleInCtrl.text = translatedText;
+                          googleOutput = translatedText2;
+                        });
+                      }
+                    } catch (error) {
+                      setStateOverlordData(() => loading = false);
+                      print('translate error: $error');
                     }
-                    setStateOverlordData(() {
-                      loading = false;
-                      googleInCtrl.text = translatedText;
-                      googleOutput = translatedText2;
-                    });
+                  } else {
+                    switchLangsWithCookies();
+                    setStateOverlordData(() {});
                   }
-                } catch (error) {
-                  setStateOverlordData(() => loading = false);
-                  print('translate error: $error');
-                }
-              } else {
-                switchLangsWithCookies();
-                setStateOverlordData(() {});
-              }
-            }
-          },
+                },
           child: Text(
             '<-->',
             style: TextStyle(
               fontSize: 18,
-              color: theme == Brightness.dark ? Colors.white : Colors.black,
+              color: fromLangVal != 'auto'
+                  ? theme == Brightness.dark
+                      ? Colors.white
+                      : Colors.black
+                  : lightThemeGreyColor,
             ),
           ),
         ),

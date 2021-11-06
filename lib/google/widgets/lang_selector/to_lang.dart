@@ -72,13 +72,12 @@ class GoogleToLang extends StatelessWidget {
                                   ),
                                   child: Text(
                                     option,
-                                    style:
-                                        (option == fromSelLangMap[fromLangVal])
-                                            ? const TextStyle(
-                                                fontSize: 18,
-                                                color: lightThemeGreyColor,
-                                              )
-                                            : const TextStyle(fontSize: 18),
+                                    style: option == toSelLangMap[fromLangVal]
+                                        ? const TextStyle(
+                                            fontSize: 18,
+                                            color: lightThemeGreyColor,
+                                          )
+                                        : const TextStyle(fontSize: 18),
                                   ),
                                 ),
                               ),
@@ -93,9 +92,8 @@ class GoogleToLang extends StatelessWidget {
             ),
           );
         },
+        initialValue: TextEditingValue(text: toSelLangMap[toLangVal]!),
         fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
-          if (toSelLangMap[toLangVal] != txtCtrl.text)
-            txtCtrl.text = toSelLangMap[toLangVal]!;
           changeText = () => txtCtrl.text = toSelLangMap[toLangVal]!;
           return TextField(
             onTap: () {
@@ -126,7 +124,7 @@ class GoogleToLang extends StatelessWidget {
                   break;
                 }
 
-              if (chosenOne != fromSelLangMap[fromLangVal] && chosenOne != null)
+              if (chosenOne != toSelLangMap[fromLangVal] && chosenOne != null)
                 writeData(chosenOne);
               else {
                 var dimmedSelLangsTo = toSelLangMap;

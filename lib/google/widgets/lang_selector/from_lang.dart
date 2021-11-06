@@ -92,10 +92,8 @@ class GoogleFromLang extends StatelessWidget {
             ),
           );
         },
+        initialValue: TextEditingValue(text: fromSelLangMap[fromLangVal]!),
         fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
-          if (fromSelLangMap[fromLangVal] != txtCtrl.text)
-            txtCtrl.text = fromSelLangMap[fromLangVal]!;
-
           changeText = () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
           return TextField(
             onTap: () {

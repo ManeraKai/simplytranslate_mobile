@@ -15,10 +15,11 @@ import 'home.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
 
-  
   await GetStorage.init();
 
   var sessionInstances = session.read('instances');
@@ -316,7 +317,7 @@ class _MainPageLocalizationState extends State<MainPageLocalization> {
 
     toSelLangMap = selectLanguagesMapGetter(context);
 
-    fromSelLangMap = toSelLangMap;
+    fromSelLangMap = selectLanguagesMapGetter(context);
     fromSelLangMap['auto'] = AppLocalizations.of(context)!.autodetect;
 
     if (session.read('from_lang').toString() != 'null')

@@ -89,19 +89,17 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                   ? greyColor
                                   : Colors.white,
                               child: GestureDetector(
-                                onTap: option == toSelLangMap[fromLangVal]
-                                    ? null
-                                    : () {
-                                        FocusScope.of(context).unfocus();
-                                        for (var i in toSelLangMap.keys)
-                                          if (option == toSelLangMap[i]) {
-                                            session.write('share_lang', i);
-                                            setState(() => shareLangVal = i);
-                                            setStateOverlordData(() {});
-                                            changeText();
-                                            break;
-                                          }
-                                      },
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  for (var i in toSelLangMap.keys)
+                                    if (option == toSelLangMap[i]) {
+                                      session.write('share_lang', i);
+                                      setState(() => shareLangVal = i);
+                                      setStateOverlordData(() {});
+                                      changeText();
+                                      break;
+                                    }
+                                },
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
@@ -110,13 +108,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                   ),
                                   child: Text(
                                     option,
-                                    style:
-                                        (option == fromSelLangMap[fromLangVal])
-                                            ? const TextStyle(
-                                                fontSize: 18,
-                                                color: lightThemeGreyColor,
-                                              )
-                                            : const TextStyle(fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ),
                               ),
@@ -151,11 +143,15 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                 setState(() => shareLangVal = data);
                 setStateOverlordData(() {});
                 txtCtrl.text = toSelLangMap[data]!;
+
+                Navigator.of(context).pop();
               }
 
               resetData() {
                 FocusScope.of(context).unfocus();
                 txtCtrl.text = toSelLangMap[shareLangVal]!;
+
+                Navigator.of(context).pop();
               }
 
               String? chosenOne;
