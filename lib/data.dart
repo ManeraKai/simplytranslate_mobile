@@ -280,22 +280,18 @@ Future<String> translate({
   required BuildContext context,
 }) async {
   final url;
+    final args = "from=$fromLang&to=$toLang&text=$input";
   if (instance == 'custom')
-    url = Uri.parse('$customInstance/api/translate');
+    url = Uri.parse('$customInstance/api/translate?$args');
   else if (instance == 'random') {
     final randomInstance = instances[Random().nextInt(instances.length)];
-    url = Uri.parse('$randomInstance/api/translate');
+    url = Uri.parse('$randomInstance/api/translate?$args');
   } else
-    url = Uri.parse('$instance/api/translate');
+    url = Uri.parse('$instance/api/translate?$args');
 
   try {
-    final response = await http.post(
+    final response = await http.get(
       url,
-      body: {
-        "from": fromLang,
-        "to": toLang,
-        "text": input,
-      },
     );
 
     if (response.statusCode == 200)
