@@ -1,5 +1,7 @@
 {
-    "autodetect": "Autowykrywanie",
+    "Autodetect the language of text.": {
+        "autodetect": "Autowykrywanie"
+    },
     "afrikaans": "afrikaans",
     "albanian": "albański",
     "amharic": "amharski",
@@ -119,14 +121,16 @@
     "cancel": "Anuluj",
     "empty_clipboard": "Schowek jest pusty",
     "input_limit": "Tekst źródłowy ma ponad 5000 znaków",
-    "input_calc": "Przekroczono limit o $lengthDifference z 5000 znaków",
+    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
+        "input_calc": "Przekroczono o $lengthDifference limit 5000 znaków"
+    },
     "input_fraction_one": "Wpisano $length znak z 5000 możliwych",
     "input_fraction_few": "Wpisano $length znaki z 5000 możliwych",
     "input_fraction_many": "Wpisano $length znaków z 5000 możliwych",
     "input_fraction_other": "Wpisano $length znaków z 5000 możliwych",
-    "audio_limit": "Nie można uzyskać dźwięku powyżej 200 znaków",
+    "audio_limit": "Nie można uzyskać dźwięku dla ponad 200 znaków",
     "@audio_limit": {
-        "description": "Moim zdaniem lepiej by brzmiało \"Nie można uzyskać dźwięku dla ponad 200 znaków\". Jednak wiem, że jest to toast, a więc im krócej, tym lepiej :)",
+        "description": "@Valdnet: I think it would be better to write \"Nie można uzyskać dźwięku dla ponad 200 znaków\". I know it is in the toast, so it has to be short, but this way it will be less confusing for the user.",
         "type": "text"
     },
     "not_available": "Usługa jest niedostępna",
@@ -155,13 +159,17 @@
     "contribute_summary": "Pomóż udoskonalić aplikację!",
     "version": "Wersja",
     "license": "Licencja",
-    "help": "Help",
-    "donate": "Donate",
-    "report_bug": "Report a bug",
-    "website": "Website",
-    "contact": "Contact",
-    "email": "Email",
-    "translate_summary": "Spread it to the world!",
-    "donate_summary": "We appreciate it!",
-    "report_bug_summary": "Please let us know"
+    "It's like helpation. It's a section title not a button": {
+        "help": "Pomoc"
+    },
+    "donate": "Wesprzyj",
+    "report_bug": "Zgłoś błąd",
+    "website": "Strona internetowa",
+    "This is a section title, not a button": {
+        "contact": "Kontakt"
+    },
+    "email": "E-mail",
+    "translate_summary": "Powiedz o tym całemu światu!",
+    "donate_summary": "Doceniamy to!",
+    "report_bug_summary": "Daj nam znać"
 }

@@ -1,5 +1,7 @@
 {
-    "autodetect": "شناسایی خودکار",
+    "Autodetect the language of text.": {
+        "autodetect": "شناسایی خودکار"
+    },
     "afrikaans": "آفریقایی",
     "albanian": "آلبانیایی",
     "amharic": "امهری",
@@ -119,7 +121,9 @@
     "cancel": "لغو",
     "empty_clipboard": "کلیپ‌بورد خالیست",
     "input_limit": "ورودی ترجمه بالای ۵۰۰۰ نویسه است",
-    "input_calc": "تعداد نویسه از محدودیت ۵۰۰۰تایی $lengthDifference بیشتر شده",
+    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
+        "input_calc": "تعداد نویسه از محدودیت ۵۰۰۰تایی $lengthDifference بیشتر شده"
+    },
     "input_fraction_one": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
     "input_fraction_few": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
     "input_fraction_many": "$length نویسه از ۵۰۰۰ نویسه ممکن وارد شده است",
@@ -151,11 +155,15 @@
     "contribute_summary": "برای بهتر شدن این نرم‌افزار کمک کنید!",
     "version": "نسخه",
     "license": "پروانه",
-    "help": "Help",
+    "It's like helpation. It's a section title not a button": {
+        "help": "Help"
+    },
     "donate": "Donate",
     "report_bug": "Report a bug",
     "website": "Website",
-    "contact": "Contact",
+    "This is a section title, not a button": {
+        "contact": "Contact"
+    },
     "email": "Email",
     "translate_summary": "Spread it to the world!",
     "donate_summary": "We appreciate it!",

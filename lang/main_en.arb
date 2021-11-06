@@ -1,5 +1,7 @@
 {
-    "autodetect": "Autodetect",
+    "Autodetect the language of text.": {
+        "autodetect": "Autodetect"
+    },
     "afrikaans": "Afrikaans",
     "albanian": "Albanian",
     "amharic": "Amharic",
@@ -119,7 +121,9 @@
     "cancel": "Cancel",
     "empty_clipboard": "Clipboard is empty",
     "input_limit": "The translation input is above 5000",
-    "input_calc": "Exceeded 5000 character limit by $lengthDifference",
+    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
+        "input_calc": "Exceeded 5000 character limit by $lengthDifference"
+    },
     "input_fraction_one": "Entered $length character out of 5000 possible",
     "input_fraction_few": "Entered $length characters out of 5000 possible",
     "input_fraction_many": "Entered $length characters out of 5000 possible",
@@ -151,11 +155,15 @@
     "contribute_summary": "Help make it better!",
     "version": "Version",
     "license": "License",
-    "help": "Help",
+    "It's like helpation. It's a section title not a button": {
+        "help": "Help"
+    },
     "donate": "Donate",
     "report_bug": "Report a bug",
     "website": "Website",
-    "contact": "Contact",
+    "This is a section title, not a button": {
+        "contact": "Contact"
+    },
     "email": "Email",
     "translate_summary": "Spread it to the world!",
     "donate_summary": "We appreciate it!",
