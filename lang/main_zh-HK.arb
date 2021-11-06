@@ -1,7 +1,5 @@
 {
-    "Autodetect the language of text.": {
-        "autodetect": "自動檢測"
-    },
+    "autodetect": "自動檢測",
     "afrikaans": "南非荷蘭語",
     "albanian": "阿爾巴尼亞語",
     "amharic": "阿姆哈拉語",
@@ -121,9 +119,7 @@
     "cancel": "取消",
     "empty_clipboard": "剪貼板是空的",
     "input_limit": "翻譯輸入超過5000個字符",
-    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
-        "input_calc": "$lengthDifference 超過 5000 個字符的上限"
-    },
+    "input_calc": "$lengthDifference 超過 5000 個字符的上限",
     "input_fraction_one": "輸入了 $length/5000 個字符",
     "input_fraction_few": "輸入了 $length/5000 個字符",
     "input_fraction_many": "輸入了 $length/5000 個字符",
@@ -155,15 +151,11 @@
     "contribute_summary": "幫助它變得更好！",
     "version": "版本",
     "license": "執照",
-    "It's like helpation. It's a section title not a button": {
-        "help": "Help"
-    },
+    "help": "Help",
     "donate": "Donate",
     "report_bug": "Report a bug",
     "website": "Website",
-    "This is a section title, not a button": {
-        "contact": "التواصل"
-    },
+    "contact": "التواصل",
     "email": "Email",
     "translate_summary": "Spread it to the world!",
     "donate_summary": "We appreciate it!",

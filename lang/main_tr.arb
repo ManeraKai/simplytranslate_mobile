@@ -1,7 +1,5 @@
 {
-    "Autodetect the language of text.": {
-        "autodetect": "Otomatik belirle"
-    },
+    "autodetect": "Otomatik belirle",
     "afrikaans": "Afrikaans",
     "albanian": "Arnavutça",
     "amharic": "Amharca",
@@ -121,9 +119,7 @@
     "cancel": "İptal et",
     "empty_clipboard": "Kopyalama panosu boş",
     "input_limit": "Tercüme girdisi 5000 karakterden fazla",
-    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
-        "input_calc": "5000 karakter olan limiti $lengthDifference karakter aştınız"
-    },
+    "input_calc": "5000 karakter olan limiti $lengthDifference karakter aştınız",
     "input_fraction_one": "5000 karakter olan limitin $length karakter kadarını kullandınız",
     "input_fraction_few": "5000 karakter olan limitin $length karakter kadarını kullandınız",
     "input_fraction_many": "5000 karakter olan limitin $length karakter kadarını kullandınız",
@@ -155,15 +151,11 @@
     "contribute_summary": "Daha iyi olmasına yardım et!",
     "version": "Versiyon",
     "license": "Lisans",
-    "It's like helpation. It's a section title not a button": {
-        "help": "Yardım"
-    },
+    "help": "Yardım",
     "donate": "Bağış yap",
     "report_bug": "Hata bildir",
     "website": "İnternet sitesi",
-    "This is a section title, not a button": {
-        "contact": "İletişim"
-    },
+    "contact": "İletişim",
     "email": "Email",
     "translate_summary": "Dünyayla paylaş!",
     "donate_summary": "Teşekkür ederiz!",

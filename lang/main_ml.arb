@@ -1,7 +1,5 @@
 {
-    "Autodetect the language of text.": {
-        "autodetect": "സ്വയം കണ്ടെത്തുക"
-    },
+    "autodetect": "സ്വയം കണ്ടെത്തുക",
     "afrikaans": "ആഫ്രിക്കൻസ്",
     "albanian": "അൽബേനിയൻ",
     "amharic": "Amharic",
@@ -121,9 +119,7 @@
     "cancel": "റദ്ദാക്കുക",
     "empty_clipboard": "ക്ലിപ്പ്ബോർഡ് ശൂന്യമാണ്",
     "input_limit": "5000-ന് മുകളിൽ വാക്കുകൾ നൽകിയിരിക്കുന്നു",
-    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
-        "input_calc": "5000-നേക്കാൾ  $lengthDifference വാക്കുകൾ കൂടുതൽ നൽകിയിരിക്കുന്നു"
-    },
+    "input_calc": "5000-നേക്കാൾ  $lengthDifference വാക്കുകൾ കൂടുതൽ നൽകിയിരിക്കുന്നു",
     "input_fraction_one": "സാധ്യമായ 5000-ത്തിൽ $length വാക്കു നൽകിയിരിക്കുന്നു",
     "input_fraction_few": "സാധ്യമായ 5000-ത്തിൽ $length വാക്കുകൾ നൽകിയിരിക്കുന്നു",
     "input_fraction_many": "സാധ്യമായ 5000-ത്തിൽ $length വാക്കുകൾ നൽകിയിരിക്കുന്നു",
@@ -155,15 +151,11 @@
     "contribute_summary": "മികച്ചതാക്കാൻ സഹായിക്കുക!",
     "version": "പതിപ്പ്",
     "license": "ലൈസൻസ്",
-    "It's like helpation. It's a section title not a button": {
-        "help": "Help"
-    },
+    "help": "Help",
     "donate": "Donate",
     "report_bug": "Report a bug",
     "website": "Website",
-    "This is a section title, not a button": {
-        "contact": "Contact"
-    },
+    "contact": "Contact",
     "email": "Email",
     "translate_summary": "Spread it to the world!",
     "donate_summary": "We appreciate it!",

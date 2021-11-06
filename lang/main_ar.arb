@@ -1,7 +1,5 @@
 {
-    "Autodetect the language of text.": {
-        "autodetect": "تلقائي"
-    },
+    "autodetect": "تلقائي",
     "afrikaans": "الأفريقانية",
     "albanian": "الألبانية",
     "amharic": "الأمهرية",
@@ -121,13 +119,7 @@
     "cancel": "إلغاء",
     "empty_clipboard": "الحافظة فارغة",
     "input_limit": "عدد أحرف النص أكثر من 5000",
-    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
-        "input_calc": "اُجتِيزَ حد الـ5000 حرف بـ$lengthDifference",
-        "@input_calc": {
-            "description": "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters. https://s3.eu-west-1.amazonaws.com/po-pub/i/vqQxOR50ZPTYP0r3dGf2y8K6.png",
-            "type": "text"
-        }
-    },
+    "input_calc": "اُجتِيزَ حد الـ5000 حرف بـ$lengthDifference",
     "input_fraction_one": "أُدخل $length حرف من أصل 5000 متاح",
     "input_fraction_few": "أُدخل $length أحرف من أصل 5000 متاحين",
     "input_fraction_many": "أُدخل $length حرف من أصل 5000 متاح",
@@ -159,23 +151,11 @@
     "contribute_summary": "ساعد على تحسينه!",
     "version": "الإصدار",
     "license": "الرخصة",
-    "It's like helpation. It's a section title not a button": {
-        "help": "المساعدة",
-        "@help": {
-            "description": "It's like helpation. It's a section title not a button.\nhttps://s3.eu-west-1.amazonaws.com/po-pub/i/1bDvexgUCqR2vm86wpkfkFZa.png",
-            "type": "text"
-        }
-    },
+    "help": "المساعدة",
     "donate": "تبرع",
     "report_bug": "بلّغ عن خطأ",
     "website": "الموقع",
-    "This is a section title, not a button": {
-        "contact": "التواصل",
-        "@contact": {
-            "description": "This is a section title, not a button: https://s3.eu-west-1.amazonaws.com/po-pub/i/BOMZwn8sPvjrD0bDFSwanX1a.png",
-            "type": "text"
-        }
-    },
+    "contact": "التواصل",
     "email": "الإيميل",
     "translate_summary": "انشره للعالم!",
     "donate_summary": "الله يعطيك العافية",
