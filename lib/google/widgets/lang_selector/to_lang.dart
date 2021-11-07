@@ -94,7 +94,11 @@ class GoogleToLang extends StatelessWidget {
         },
         initialValue: TextEditingValue(text: toSelLangMap[toLangVal]!),
         fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
-          changeText = () => txtCtrl.text = toSelLangMap[toLangVal]!;
+          fieldFocus.addListener(() {
+            if (!fieldFocus.hasPrimaryFocus) toCancel();
+          });
+          toCancel = () => txtCtrl.text = toSelLangMap[toLangVal]!;
+          changeToTxt = (String val) => txtCtrl.text = val;
           return TextField(
             onTap: () {
               _isFirstClick = true;

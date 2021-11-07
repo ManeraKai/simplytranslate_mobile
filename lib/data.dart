@@ -59,6 +59,12 @@ final session = GetStorage();
 
 late final PackageInfo packageInfo;
 
+Function() fromCancel = () {};
+Function toCancel = () {};
+
+Function(String) changeFromTxt = (val) {};
+Function(String) changeToTxt = (val) {};
+
 Future<instanceValidation> checkInstance(String urlValue) async {
   var url;
   try {

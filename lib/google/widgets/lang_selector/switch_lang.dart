@@ -5,7 +5,10 @@ import '/data.dart';
 class GoogleSwitchLang extends StatelessWidget {
   const GoogleSwitchLang({Key? key}) : super(key: key);
 
-  switchLangsWithCookies() {
+  switchVals() {
+    changeFromTxt(toSelLangMap[toLangVal]!);
+    changeToTxt(fromSelLangMap[fromLangVal]!);
+
     final valuetmp = fromLangVal;
     fromLangVal = toLangVal;
     toLangVal = valuetmp;
@@ -31,7 +34,7 @@ class GoogleSwitchLang extends StatelessWidget {
                     ttsInputloading = false;
                   });
                   if (googleInCtrl.text.isEmpty) {
-                    switchLangsWithCookies();
+                    switchVals();
                     setStateOverlordData(() {});
                   } else if (googleInCtrl.text.length <= 5000) {
                     FocusScope.of(context).unfocus();
@@ -40,7 +43,7 @@ class GoogleSwitchLang extends StatelessWidget {
                       final transInTmp = googleInCtrl.text;
                       final fromLangValTransTmp = fromLangVal;
                       final toLangValTransTmp = toLangVal;
-                      switchLangsWithCookies();
+                      switchVals();
                       final translatedText = await translate(
                         input: transInTmp,
                         fromLang: fromLangValTransTmp,
@@ -80,7 +83,7 @@ class GoogleSwitchLang extends StatelessWidget {
                       print('translate error: $error');
                     }
                   } else {
-                    switchLangsWithCookies();
+                    switchVals();
                     setStateOverlordData(() {});
                   }
                 },

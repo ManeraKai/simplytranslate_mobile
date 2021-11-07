@@ -8,7 +8,6 @@ class GoogleFromLang extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    Function changeText = () {};
     return Container(
       width: size.width / 3 + 10,
       child: Autocomplete(
@@ -60,7 +59,7 @@ class GoogleFromLang extends StatelessWidget {
                                             session.write('from_lang', i);
                                             setStateOverlordData(
                                                 () => fromLangVal = i);
-                                            changeText();
+                                            changeFromTxt(fromSelLangMap[i]!);
                                             break;
                                           }
                                       },
@@ -94,7 +93,11 @@ class GoogleFromLang extends StatelessWidget {
         },
         initialValue: TextEditingValue(text: fromSelLangMap[fromLangVal]!),
         fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
-          changeText = () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
+          fieldFocus.addListener(() {
+            if (!fieldFocus.hasPrimaryFocus) fromCancel();
+          });
+          fromCancel = () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
+          changeFromTxt = (String val) => txtCtrl.text = val;
           return TextField(
             onTap: () {
               _isFirstClick = true;
