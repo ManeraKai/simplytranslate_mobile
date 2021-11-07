@@ -5,9 +5,15 @@ import 'package:simplytranslate_mobile/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'about_screen_button.dart';
 
-class AboutScreen extends StatelessWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  String dropdownValue = 'Buy me a coffee';
   @override
   Widget build(BuildContext context) {
     Widget line = Container(
@@ -16,6 +22,7 @@ class AboutScreen extends StatelessWidget {
       color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
     );
     const textStyle = const TextStyle(fontSize: 20);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -55,8 +62,71 @@ class AboutScreen extends StatelessWidget {
                 iconColor: Colors.greenAccent,
                 title: AppLocalizations.of(context)!.donate,
                 content: AppLocalizations.of(context)!.donate_summary,
-                onTap: () => launch(
-                  'https://liberapay.com/simplytranslate_mobile',
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      actionsAlignment: MainAxisAlignment.center,
+                      actions: [
+                        InkWell(
+                          onTap: () =>
+                              launch("https://www.buymeacoffee.com/manerakai"),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 64,
+                                child: Image.asset(
+                                  theme == Brightness.dark
+                                      ? "assets/about/bmc_dark.png"
+                                      : "assets/about/bmc.png",
+                                  scale: 2,
+                                ),
+                              ),
+                              Container(
+                                width: 200,
+                                child: Text(
+                                  'Buy me a coffee',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    letterSpacing: 1.25,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => launch(
+                              "https://liberapay.com/simplytranslate_mobile"),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 64,
+                                child: Image.asset(
+                                   theme == Brightness.dark
+                                      ? "assets/about/liberapay_dark.png"
+                                      : "assets/about/liberapay.png",
+                                  scale: 2,
+                                ),
+                              ),
+                              Container(
+                                width: 200,
+                                child: Text(
+                                  'Liberapay',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    letterSpacing: 1.25,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
               AboutButton(
