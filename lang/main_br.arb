@@ -1,7 +1,5 @@
 {
-    "Autodetect the language of text.": {
-        "autodetect": "Autodetectar"
-    },
+    "autodetect": "Autodetectar",
     "afrikaans": "Africâner",
     "albanian": "Albanês",
     "amharic": "Amárico",
@@ -121,9 +119,7 @@
     "cancel": "Cancelar",
     "empty_clipboard": "Área de transferência está vazia",
     "input_limit": "O texto para traduzir excede 5000 caracteres",
-    "Ex: 5009 characters are entered out of 5000. In other words 5009/5000. If you click on the character limiter, it'll inform you that you've exceeded text limit by 9 characters.": {
-        "input_calc": "Excedeu o limite de 5000 caracteres em $lengthDifference"
-    },
+    "input_calc": "Excedeu o limite de 5000 caracteres em $lengthDifference",
     "input_fraction_one": "$length caractere inserido de 5000 possíveis",
     "input_fraction_few": "$length caracteres inserido de 5000 possíveis",
     "input_fraction_many": "$length caracteres inserido de 5000 possíveis",
@@ -155,15 +151,11 @@
     "contribute_summary": "Ajude a melhorar!",
     "version": "Versão",
     "license": "Licença",
-    "It's like helpation. It's a section title not a button": {
-        "help": "Ajuda"
-    },
+    "help": "Ajuda",
     "donate": "Doar",
     "report_bug": "Reportar um bug",
     "website": "Site",
-    "This is a section title, not a button": {
-        "contact": "Contato"
-    },
+    "contact": "Contato",
     "email": "Email",
     "translate_summary": "Compartilhe com o mundo!",
     "donate_summary": "Nós apreciamos!",

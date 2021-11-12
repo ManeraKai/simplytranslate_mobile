@@ -22,21 +22,16 @@ void main(List<String> args) async {
 
   await GetStorage.init();
 
-  var sessionInstances = session.read('instances');
+  final sessionInstances = session.read('instances');
   if (sessionInstances != null) {
-    List<String> sessionInstancesString = [];
-    for (var item in sessionInstances)
-      sessionInstancesString.add(item.toString());
-    instances = sessionInstancesString;
+    List<String> tmp = [];
+    for (var item in sessionInstances) tmp.add(item.toString());
+    instances = tmp;
   }
 
-  instance = session.read('instance_mode').toString() != 'null'
-      ? session.read('instance_mode').toString()
-      : instance;
+  instance = session.read('instance_mode') ?? instance;
 
-  final sessionCustomInstance = session.read('customInstance') != null
-      ? session.read('customInstance').toString()
-      : '';
+  final sessionCustomInstance = session.read('customInstance') ?? '';
   customUrlCtrl.text = sessionCustomInstance;
   customInstance = sessionCustomInstance;
 
@@ -54,10 +49,8 @@ void main(List<String> args) async {
     }
   }
   var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
-  if (_clipData.toString() == '' || _clipData == null)
-    isClipboardEmpty = true;
-  else
-    isClipboardEmpty = false;
+
+  isClipboardEmpty = _clipData.toString() == '' || _clipData == null;
 
   packageInfo = await PackageInfo.fromPlatform();
 
@@ -126,13 +119,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         appLocale = locales[0];
         for (var i = 0; i < locales.length; i++) {
           if (supportedLocalesCountryCode.contains(localesCountryCode[i]) &&
-              supportedLocalesLangCode.contains(localesLangCode[i])) {
+              supportedLocalesLangCode.contains(localesLangCode[i]))
             return Locale(localesLangCode[i], localesCountryCode[i]);
-          } else if (supportedLocalesLangCode.contains(localesLangCode[i])) {
+          else if (supportedLocalesLangCode.contains(localesLangCode[i]))
             return Locale(localesLangCode[i]);
-          } else {
+          else
             return Locale('en');
-          }
         }
         return Locale('en');
       },
@@ -309,29 +301,15 @@ class _MainPageLocalizationState extends State<MainPageLocalization> {
       'system': AppLocalizations.of(context)!.follow_system,
     };
 
-    final themeSession = session.read('theme').toString();
-    if (themeSession != 'null')
-      themeValue = themeTranslation[themeSession]!;
-    else
-      themeValue = themeTranslation['system']!;
+    themeValue = themeTranslation[session.read('theme') ?? 'system']!;
 
     toSelLangMap = selectLanguagesMapGetter(context);
-
     fromSelLangMap = selectLanguagesMapGetter(context);
     fromSelLangMap['auto'] = AppLocalizations.of(context)!.autodetect;
 
-    if (session.read('from_lang').toString() != 'null')
-      fromLangVal = session.read('from_lang').toString();
-
-    if (session.read('to_lang').toString() != 'null')
-      toLangVal = session.read('to_lang').toString();
-    else
-      toLangVal = appLocale.languageCode;
-
-    if (session.read('share_lang').toString() != 'null')
-      shareLangVal = session.read('share_lang').toString();
-    else
-      shareLangVal = appLocale.languageCode;
+    fromLangVal = session.read('from_lang') ?? 'auto';
+    toLangVal = session.read('to_lang') ?? appLocale.languageCode;
+    shareLangVal = session.read('share_lang') ?? appLocale.languageCode;
 
     return MainPage();
   }

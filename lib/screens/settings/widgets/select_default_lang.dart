@@ -16,9 +16,7 @@ class SelectDefaultLang extends StatelessWidget {
     return SettingsButton(
       onTap: () => showDialog(
         context: context,
-        builder: (context) => StatefulBuilder(
-          builder: (context, setState) => SelectDefaultLangDialog(),
-        ),
+        builder: (_) => SelectDefaultLangDialog(),
       ),
       icon: Icons.translate,
       iconColor: Colors.blue,

@@ -56,9 +56,7 @@ class SelectInstance extends StatelessWidget {
         });
         if (responseBool == instanceValidation.True) {
           session.write('customInstance', customUrl);
-          setStateOverlordData(() {
-            customInstance = customUrl;
-          });
+          setStateOverlordData(() => customInstance = customUrl);
           Navigator.of(context).pop();
         }
       }
@@ -189,10 +187,10 @@ class SelectInstance extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Radio<String>(
-                                      value: x,
-                                      groupValue: instance,
-                                      onChanged: (_) =>
-                                          instanceFunc(setState, x)),
+                                    value: x,
+                                    groupValue: instance,
+                                    onChanged: (_) => instanceFunc(setState, x),
+                                  ),
                                   Expanded(
                                     child: Padding(
                                       padding: _padding,

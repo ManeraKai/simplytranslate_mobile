@@ -60,7 +60,7 @@ final session = GetStorage();
 late final PackageInfo packageInfo;
 
 Function() fromCancel = () {};
-Function toCancel = () {};
+Function() toCancel = () {};
 
 Function(String) changeFromTxt = (val) {};
 Function(String) changeToTxt = (val) {};

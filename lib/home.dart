@@ -17,8 +17,6 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
-  final rowWidth = 430;
-
   @override
   Widget build(BuildContext context) {
     if (callSharedText) getSharedText();

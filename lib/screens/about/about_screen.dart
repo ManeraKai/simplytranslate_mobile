@@ -105,7 +105,7 @@ class _AboutScreenState extends State<AboutScreen> {
                               Container(
                                 width: 64,
                                 child: Image.asset(
-                                   theme == Brightness.dark
+                                  theme == Brightness.dark
                                       ? "assets/about/liberapay_dark.png"
                                       : "assets/about/liberapay.png",
                                   scale: 2,
@@ -145,23 +145,6 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               line,
               AboutButton(
-                icon: Icons.web,
-                iconColor: Colors.amber,
-                title: AppLocalizations.of(context)!.website,
-                onTap: () => launch(
-                  'https://manerakai.github.io/simplytranslate_mobile/',
-                ),
-              ),
-              AboutButton(
-                icon: Icons.groups,
-                iconColor: Colors.indigoAccent,
-                title: AppLocalizations.of(context)!.team,
-                content: AppLocalizations.of(context)!.team_summary,
-                onTap: () => launch(
-                  'https://github.com/ManeraKai/simplytranslate_mobile/graphs/contributors',
-                ),
-              ),
-              AboutButton(
                 icon: Icons.info_outline,
                 iconColor:
                     theme == Brightness.dark ? Colors.white : Colors.black,
@@ -191,34 +174,6 @@ class _AboutScreenState extends State<AboutScreen> {
                 onTap: () => launch(
                   'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE',
                 ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                AppLocalizations.of(context)!.contact,
-                style: textStyle,
-              ),
-              line,
-              AboutButton(
-                icon: Icons.mail,
-                iconColor: Colors.blueGrey,
-                title: AppLocalizations.of(context)!.email,
-                content: 'manerakai@protonmail.com',
-                onTap: () {
-                  Clipboard.setData(
-                          ClipboardData(text: 'manerakai@protonmail.com'))
-                      .then(
-                    (_) => ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 2),
-                        width: 160,
-                        content: Text(
-                          AppLocalizations.of(context)!.copied_to_clipboard,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  );
-                },
               ),
             ],
           ),
