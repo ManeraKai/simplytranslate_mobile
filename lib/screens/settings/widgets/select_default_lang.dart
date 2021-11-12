@@ -21,7 +21,7 @@ class SelectDefaultLang extends StatelessWidget {
         ),
       ),
       icon: Icons.translate,
-      iconColor: theme == Brightness.dark ? Colors.white : greenColor,
+      iconColor: Colors.blue,
       title: AppLocalizations.of(context)!.default_share_language,
       content: AppLocalizations.of(context)!
           .default_share_language_summary

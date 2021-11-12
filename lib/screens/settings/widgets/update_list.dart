@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
@@ -68,7 +67,7 @@ class UpdateList extends StatelessWidget {
         }
       },
       icon: Icons.download,
-      iconColor: theme == Brightness.dark ? Colors.white : greenColor,
+      iconColor: greenColor,
       title: AppLocalizations.of(context)!.update_list,
       content: AppLocalizations.of(context)!.update_list_summary,
       loading: loading,

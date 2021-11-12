@@ -1,15 +1,14 @@
 
-<p align="center">
+<p align=center>
   <a href="https://github.com/ManeraKai/simplytranslate_mobile">
       <img alt="" title="SimplyTranslate Mobile" src="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
   </a>
 </p>
-<h1 align="center">SimplyTranslate Mobile (Unofficial)</h1>
+<h1 align=center>SimplyTranslate Mobile (Unofficial)</h1>
 
-<h4 align="center">An alternative front-end to GoogleTranslate</h4>
+<h4 align=center>An alternative front-end to GoogleTranslate</h4>
 
-
-<p align="center">
+<p align=center>
   <a href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">
     <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
        alt="Get it on F-Droid"
@@ -48,7 +47,6 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 - [Valdnet](https://github.com/Valdnet)
 
 ### Translators
-
 - **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
 - **🇸🇦 Arabic**: [ManeraKai](https://github.com/ManeraKai)
 - **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
@@ -64,11 +62,9 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 
 
 ## Mirror Repos:
-
 [![GitHub](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/github.svg)](https://github.com/ManeraKai/simplytranslate_mobile/)&nbsp;&nbsp;
 [![Codeberg](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/codeberg.svg)](https://codeberg.org/ManeraKai/simplytranslate_mobile)&nbsp;&nbsp;
 [![GitLab](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/gitlab.svg)](https://gitlab.com/ManeraKai/simplytranslate_mobile)
-
 
 ## License
 Copyright (C) 2021 [ManeraKai](https://github.com/ManeraKai)

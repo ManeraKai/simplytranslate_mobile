@@ -24,16 +24,7 @@ class AboutButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
         child: Row(
           children: [
-            Container(
-              child: loading
-                  ? Container(
-                      height: 45,
-                      width: 45,
-                      padding: const EdgeInsets.all(5),
-                      child: const CircularProgressIndicator(),
-                    )
-                  : Icon(icon, color: iconColor, size: 45),
-            ),
+            Icon(icon, color: iconColor, size: 45),
             const SizedBox(width: 10),
             Expanded(
               child: Container(
