@@ -144,6 +144,14 @@ class _AboutScreenState extends State<AboutScreen> {
                 style: textStyle,
               ),
               line,
+               AboutButton(
+                icon: Icons.web,
+                iconColor: Colors.amber,
+                title: AppLocalizations.of(context)!.website,
+                onTap: () => launch(
+                  'https://manerakai.github.io/simplytranslate_mobile/',
+                ),
+              ),
               AboutButton(
                 icon: Icons.info_outline,
                 iconColor:

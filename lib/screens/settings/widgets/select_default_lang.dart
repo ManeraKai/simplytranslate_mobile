@@ -122,9 +122,8 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
             ),
           );
         },
+        initialValue: TextEditingValue(text: toSelLangMap[shareLangVal]!),
         fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
-          if (toSelLangMap[shareLangVal] != txtCtrl.text)
-            txtCtrl.text = toSelLangMap[shareLangVal]!;
           changeText = () => txtCtrl.text = toSelLangMap[shareLangVal]!;
           return TextField(
             onTap: () {

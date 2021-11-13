@@ -45,75 +45,79 @@ class SelectTheme extends StatelessWidget {
       onTap: () {
         showDialog(
           context: context,
-          builder: (context) {
-            return StatefulBuilder(
-              builder: (context, setState) => AlertDialog(
-                contentPadding: EdgeInsets.all(5),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () => _darkFunc(setState),
-                        child: Row(
-                          children: [
-                            Radio<AppTheme>(
-                              value: AppTheme.dark,
-                              groupValue: themeRadio,
-                              onChanged: (_) => _darkFunc(setState),
-                            ),
-                            Padding(
+          builder: (context) => StatefulBuilder(
+            builder: (context, setState) => AlertDialog(
+              contentTextStyle: TextStyle(color: Colors.black, fontSize: 20),
+              contentPadding: EdgeInsets.all(5),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                      onTap: () => _darkFunc(setState),
+                      child: Row(
+                        children: [
+                          Radio<AppTheme>(
+                            value: AppTheme.dark,
+                            groupValue: themeRadio,
+                            onChanged: (_) => _darkFunc(setState),
+                          ),
+                          Expanded(
+                            child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 20),
                               child: Text(AppLocalizations.of(context)!.dark),
                             ),
-                          ],
-                        )),
-                    InkWell(
-                      onTap: () => _lightFunc(setState),
-                      child: Row(
-                        children: [
-                          Radio<AppTheme>(
-                            value: AppTheme.light,
-                            groupValue: themeRadio,
-                            onChanged: (_) => _lightFunc(setState),
                           ),
-                          Padding(
+                        ],
+                      )),
+                  InkWell(
+                    onTap: () => _lightFunc(setState),
+                    child: Row(
+                      children: [
+                        Radio<AppTheme>(
+                          value: AppTheme.light,
+                          groupValue: themeRadio,
+                          onChanged: (_) => _lightFunc(setState),
+                        ),
+                        Expanded(
+                          child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                             child: Text(AppLocalizations.of(context)!.light),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    InkWell(
-                        onTap: () => _systemFunc(setState),
-                        child: Row(
-                          children: [
-                            Radio<AppTheme>(
-                                value: AppTheme.system,
-                                groupValue: themeRadio,
-                                onChanged: (_) => _systemFunc(setState)),
-                            Padding(
+                  ),
+                  InkWell(
+                      onTap: () => _systemFunc(setState),
+                      child: Row(
+                        children: [
+                          Radio<AppTheme>(
+                            value: AppTheme.system,
+                            groupValue: themeRadio,
+                            onChanged: (_) => _systemFunc(setState),
+                          ),
+                          Expanded(
+                            child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 20),
                               child: Text(
                                   AppLocalizations.of(context)!.follow_system),
                             ),
-                          ],
-                        ))
-                  ],
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(
-                      AppLocalizations.of(context)!.cancel,
-                    ),
-                  )
+                          ),
+                        ],
+                      ))
                 ],
               ),
-            );
-          },
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(AppLocalizations.of(context)!.cancel),
+                )
+              ],
+            ),
+          ),
         );
       },
       icon: theme == Brightness.dark ? Icons.dark_mode : Icons.light_mode,
