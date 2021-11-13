@@ -121,7 +121,7 @@ class SelectTheme extends StatelessWidget {
         );
       },
       icon: theme == Brightness.dark ? Icons.dark_mode : Icons.light_mode,
-      iconColor: theme == Brightness.dark ? Colors.white : Colors.black,
+      iconColor: theme == Brightness.dark ? Colors.white : Colors.yellow[800]!,
       title: AppLocalizations.of(context)!.theme,
       content: themeValue,
     );

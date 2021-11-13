@@ -251,7 +251,7 @@ class SelectInstance extends StatelessWidget {
         });
       },
       icon: Icons.dns,
-      iconColor: Colors.amber,
+      iconColor: Colors.blue,
       title: AppLocalizations.of(context)!.instance,
       content: instance == 'custom'
           ? '${AppLocalizations.of(context)!.custom}: $customInstance'
