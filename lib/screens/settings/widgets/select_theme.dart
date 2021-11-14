@@ -47,7 +47,9 @@ class SelectTheme extends StatelessWidget {
           context: context,
           builder: (context) => StatefulBuilder(
             builder: (context, setState) => AlertDialog(
-              contentTextStyle: TextStyle(color: Colors.black, fontSize: 20),
+              contentTextStyle: TextStyle(
+                  color: theme == Brightness.dark ? Colors.white : Colors.black,
+                  fontSize: 20),
               contentPadding: EdgeInsets.all(5),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
