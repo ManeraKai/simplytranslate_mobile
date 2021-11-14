@@ -47,15 +47,16 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 - [Valdnet](https://github.com/Valdnet)
 
 ### Translators
-- **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
 - **🇸🇦 Arabic**: [ManeraKai](https://github.com/ManeraKai)
-- **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
 - **🇨🇳 Chinese, Hong Kong:** [CafeTango](https://github.com/CafeTango)
 - **🇩🇪 German:** [metalune](https://metalune.xyz/)
+- **🇬🇷 Greek:** [getimiskon](https://github.com/getimiskon)
+- **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
+- **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
 - **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
 - **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
 - **🇹🇷 Turkish:** Anonymous
-- **🇬🇷 Greek:** [getimiskon](https://github.com/getimiskon)
+
 
 ### Icon
 - [joelchrono12](https://joelchrono12.ml/)
