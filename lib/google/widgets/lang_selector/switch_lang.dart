@@ -27,7 +27,7 @@ class GoogleSwitchLang extends StatelessWidget {
           onPressed: fromLangVal == 'auto'
               ? null
               : () async {
-                  setStateOverlordData(() {
+                  setStateOverlord(() {
                     isTtsInCanceled = true;
                     ttsOutloading = false;
                     isTtsOutputCanceled = true;
@@ -35,10 +35,10 @@ class GoogleSwitchLang extends StatelessWidget {
                   });
                   if (googleInCtrl.text.isEmpty) {
                     switchVals();
-                    setStateOverlordData(() {});
+                    setStateOverlord(() {});
                   } else if (googleInCtrl.text.length <= 5000) {
                     FocusScope.of(context).unfocus();
-                    setStateOverlordData(() => loading = true);
+                    setStateOverlord(() => loading = true);
                     try {
                       final transInTmp = googleInCtrl.text;
                       final fromLangValTransTmp = fromLangVal;
@@ -72,19 +72,19 @@ class GoogleSwitchLang extends StatelessWidget {
                           );
                           translatedText2 = '';
                         }
-                        setStateOverlordData(() {
+                        setStateOverlord(() {
                           loading = false;
                           googleInCtrl.text = translatedText;
                           googleOutput = translatedText2;
                         });
                       }
                     } catch (error) {
-                      setStateOverlordData(() => loading = false);
+                      setStateOverlord(() => loading = false);
                       print('translate error: $error');
                     }
                   } else {
                     switchVals();
-                    setStateOverlordData(() {});
+                    setStateOverlord(() {});
                   }
                 },
           child: Text(

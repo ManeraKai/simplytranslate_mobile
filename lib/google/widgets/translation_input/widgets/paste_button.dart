@@ -34,7 +34,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                       var valueString = value.text.toString();
                       if (googleInCtrl.text == '') {
                         FocusScope.of(context).requestFocus(focus);
-                        setStateOverlordData(
+                        setStateOverlord(
                           () => googleInCtrl.text = valueString,
                         );
                       } else {
@@ -57,7 +57,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                         await Future.delayed(const Duration(milliseconds: 1));
                         FocusScope.of(context).requestFocus(focus);
 
-                        setStateOverlordData(() {
+                        setStateOverlord(() {
                           googleInCtrl.text = newText;
                           if (isKeyboardVisible)
                             googleInCtrl.selection =

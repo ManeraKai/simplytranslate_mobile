@@ -14,7 +14,7 @@ class DeleteTranslationInputButton extends StatelessWidget {
         onPressed: googleInCtrl.text == ''
             ? null
             : () {
-                setStateOverlordData(() {
+                setStateOverlord(() {
                   loading = false;
                   isTranslationCanceled = true;
                   ttsInputloading = false;

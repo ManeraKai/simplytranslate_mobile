@@ -9,16 +9,14 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 
+// const lightGreenColor = const Color(0xff62d195);
 const greyColor = const Color(0xff131618);
 const secondgreyColor = const Color(0xff212529);
 const greenColor = const Color(0xff3fb274);
-const lightGreenColor = const Color(0xff62d195);
 const lightThemeGreyColor = const Color(0xffa9a9a9);
 
-bool callSharedText = false;
-
 late BuildContext contextOverlordData;
-late void Function(void Function() fn) setStateOverlordData;
+late void Function(void Function() fn) setStateOverlord;
 
 var themeRadio = AppTheme.system;
 
@@ -62,14 +60,15 @@ late final PackageInfo packageInfo;
 Function() fromCancel = () {};
 Function() toCancel = () {};
 
-Function(String) changeFromTxt = (val) {};
-Function(String) changeToTxt = (val) {};
+late Function(String) changeFromTxt;
+late Function(String) changeToTxt;
 
 Future<instanceValidation> checkInstance(String urlValue) async {
   var url;
   try {
     url = Uri.parse(urlValue);
-  } catch (_) {
+  } catch (err) {
+    print(err);
     return instanceValidation.False;
   }
   try {
@@ -97,7 +96,7 @@ Future<void> getSharedText() async {
     if (answer != '') {
       final _translationInput = answer.toString();
 
-      setStateOverlordData(() {
+      setStateOverlord(() {
         googleInCtrl.text = _translationInput;
         loading = true;
       });
@@ -108,13 +107,13 @@ Future<void> getSharedText() async {
         toLang: shareLangVal,
         context: contextOverlordData,
       );
-      setStateOverlordData(() {
+      setStateOverlord(() {
         googleOutput = translatedText;
         loading = false;
       });
     }
   } catch (_) {
-    setStateOverlordData(() => loading = false);
+    setStateOverlord(() => loading = false);
   }
 }
 

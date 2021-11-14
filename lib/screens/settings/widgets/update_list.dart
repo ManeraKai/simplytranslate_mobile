@@ -39,9 +39,9 @@ class UpdateList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsButton(
       onTap: () async {
-        setStateOverlordData(() => loading = true);
+        setStateOverlord(() => loading = true);
         var response = await updateList();
-        setStateOverlordData(() => loading = false);
+        setStateOverlord(() => loading = false);
         if (response) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

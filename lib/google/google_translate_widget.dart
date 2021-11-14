@@ -28,9 +28,9 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+    if (MediaQuery.of(context).orientation == Orientation.landscape)
       _isBefore = true;
-    } else if (MediaQuery.of(context).orientation == Orientation.portrait &&
+    else if (MediaQuery.of(context).orientation == Orientation.portrait &&
         _isBefore) {
       _scrollController.jumpTo(0);
       _isBefore = false;
@@ -44,7 +44,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
         SingleChildScrollView(
           controller: _scrollController,
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: const EdgeInsets.all(10),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -69,13 +69,11 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                         builder: (context, _, isKeyboardVisible) => Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            loading
-                                ? Container(
-                                    width:
-                                        MediaQuery.of(context).size.width - 20,
-                                    child: LinearProgressIndicator(),
-                                  )
-                                : const SizedBox.shrink(),
+                            if (loading)
+                              Container(
+                                width: MediaQuery.of(context).size.width - 20,
+                                child: LinearProgressIndicator(),
+                              ),
                             loading
                                 ? GoogleCancelTranslationButton()
                                 : !isKeyboardVisible

@@ -112,7 +112,7 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     List<TextSelectionPoint> endpoints,
     TextSelectionDelegate delegate,
     ClipboardStatusNotifier clipboardStatus,
-    Offset? lastSecondaryTapDownPosition,
+    _,
   ) {
     final TextSelectionPoint startSelectionPoint = endpoints[0];
     final TextSelectionPoint endSelectionPoint =
@@ -246,7 +246,9 @@ class __MyTextSelectionToolbarState extends State<_MyTextSelectionToolbar> {
       children: itemDatas.map((_TextSelectionToolbarItemData itemData) {
         return TextSelectionToolbarTextButton(
           padding: TextSelectionToolbarTextButton.getPadding(
-              childIndex++, itemDatas.length),
+            childIndex++,
+            itemDatas.length,
+          ),
           onPressed: itemData.onPressed,
           child: Text(
             itemData.label,

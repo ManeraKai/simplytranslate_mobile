@@ -19,7 +19,7 @@ class TranslateButtonFloat extends StatelessWidget {
                 ? () async {
                     FocusScope.of(context).unfocus();
                     isTranslationCanceled = false;
-                    setStateOverlordData(() => loading = true);
+                    setStateOverlord(() => loading = true);
                     try {
                       final translatedText = await translate(
                         input: googleInCtrl.text,
@@ -28,12 +28,12 @@ class TranslateButtonFloat extends StatelessWidget {
                         context: contextOverlordData,
                       );
                       if (!isTranslationCanceled)
-                        setStateOverlordData(() {
+                        setStateOverlord(() {
                           googleOutput = translatedText;
                           loading = false;
                         });
                     } catch (_) {
-                      setStateOverlordData(() => loading = false);
+                      setStateOverlord(() => loading = false);
                     }
                   }
                 : null,

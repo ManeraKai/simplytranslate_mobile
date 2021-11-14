@@ -57,7 +57,7 @@ class GoogleFromLang extends StatelessWidget {
                                         for (var i in fromSelLangMap.keys)
                                           if (option == fromSelLangMap[i]) {
                                             session.write('from_lang', i);
-                                            setStateOverlordData(
+                                            setStateOverlord(
                                                 () => fromLangVal = i);
                                             changeFromTxt(fromSelLangMap[i]!);
                                             break;
@@ -111,7 +111,7 @@ class GoogleFromLang extends StatelessWidget {
               writeData(data) {
                 FocusScope.of(context).unfocus();
                 session.write('from_lang', data);
-                setStateOverlordData(() => fromLangVal = data);
+                setStateOverlord(() => fromLangVal = data);
                 txtCtrl.text = fromSelLangMap[data]!;
               }
 

@@ -101,7 +101,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   } else {
                     if (isSnackBarVisible) isSnackBarVisible = false;
                   }
-                  setStateOverlordData(() {});
+                  setStateOverlord(() {});
                 },
                 decoration: InputDecoration(
                   contentPadding:

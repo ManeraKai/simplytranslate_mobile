@@ -34,17 +34,16 @@ class AboutButton extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title, style: const TextStyle(fontSize: 18)),
-                    content != null
-                        ? Text(
-                            content!,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: theme == Brightness.dark
-                                  ? Colors.white54
-                                  : Colors.black54,
-                            ),
-                          )
-                        : const SizedBox.shrink(),
+                    if (content != null)
+                      Text(
+                        content!,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: theme == Brightness.dark
+                              ? Colors.white54
+                              : Colors.black54,
+                        ),
+                      ),
                   ],
                 ),
               ),

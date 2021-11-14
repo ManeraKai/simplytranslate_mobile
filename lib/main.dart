@@ -11,7 +11,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
-import 'home.dart';
+import 'google/google_translate_widget.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       } else if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
     });
     contextOverlordData = context;
-    setStateOverlordData = setState;
+    setStateOverlord = setState;
     super.initState();
   }
 
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       await Future.delayed(Duration(seconds: 1));
-      setState(() => callSharedText = true);
+      getSharedText();
 
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
       if (_clipData.toString() == '' ||
@@ -102,30 +102,27 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
         List supportedLocalesCountryCode = [];
-        for (var item in supportedLocales)
+        for (Locale item in supportedLocales)
           supportedLocalesCountryCode.add(item.countryCode);
 
         List supportedLocalesLangCode = [];
-        for (var item in supportedLocales)
+        for (Locale item in supportedLocales)
           supportedLocalesLangCode.add(item.languageCode);
 
         locales!;
         List localesCountryCode = [];
-        for (var item in locales) localesCountryCode.add(item.countryCode);
+        for (Locale item in locales) localesCountryCode.add(item.countryCode);
 
         List localesLangCode = [];
-        for (var item in locales) localesLangCode.add(item.languageCode);
+        for (Locale item in locales) localesLangCode.add(item.languageCode);
 
         appLocale = locales[0];
-        for (var i = 0; i < locales.length; i++) {
+        for (var i = 0; i < locales.length; i++)
           if (supportedLocalesCountryCode.contains(localesCountryCode[i]) &&
               supportedLocalesLangCode.contains(localesLangCode[i]))
             return Locale(localesLangCode[i], localesCountryCode[i]);
           else if (supportedLocalesLangCode.contains(localesLangCode[i]))
             return Locale(localesLangCode[i]);
-          else
-            return Locale('en');
-        }
         return Locale('en');
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -285,14 +282,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 }
 
-class MainPageLocalization extends StatefulWidget {
+class MainPageLocalization extends StatelessWidget {
   const MainPageLocalization({Key? key}) : super(key: key);
-
-  @override
-  State<MainPageLocalization> createState() => _MainPageLocalizationState();
-}
-
-class _MainPageLocalizationState extends State<MainPageLocalization> {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> themeTranslation = {
@@ -312,5 +303,28 @@ class _MainPageLocalizationState extends State<MainPageLocalization> {
     shareLangVal = session.read('share_lang') ?? appLocale.languageCode;
 
     return MainPage();
+  }
+}
+
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    getSharedText();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: GoogleTranslate(),
+    );
   }
 }

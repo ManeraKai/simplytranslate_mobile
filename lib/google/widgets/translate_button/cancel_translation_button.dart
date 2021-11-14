@@ -14,7 +14,7 @@ class GoogleCancelTranslationButton extends StatelessWidget {
             ? null
             : googleInCtrl.text.length <= 5000
                 ? () {
-                    setStateOverlordData(() {
+                    setStateOverlord(() {
                       loading = false;
                       isTranslationCanceled = true;
                     });

@@ -23,19 +23,19 @@ class SelectInstance extends StatelessWidget {
       _instanceIndex = instances.indexOf(x);
       setState(() => instance = x);
       Navigator.of(context).pop();
-      setStateOverlordData(() => loading = true);
+      setStateOverlord(() => loading = true);
       await checkInstance(instances[_instanceIndex]);
-      setStateOverlordData(() => loading = false);
+      setStateOverlord(() => loading = false);
       session.write('instance_mode', x);
     }
 
     randomFunc(setState) async {
       setState(() => instance = 'random');
       Navigator.of(context).pop();
-      setStateOverlordData(() => loading = true);
+      setStateOverlord(() => loading = true);
       _instanceIndex = Random().nextInt(instances.length);
       await checkInstance(instances[_instanceIndex]);
-      setStateOverlordData(() => loading = false);
+      setStateOverlord(() => loading = false);
       session.write('instance_mode', 'random');
     }
 
@@ -56,7 +56,7 @@ class SelectInstance extends StatelessWidget {
         });
         if (responseBool == instanceValidation.True) {
           session.write('customInstance', customUrl);
-          setStateOverlordData(() => customInstance = customUrl);
+          setStateOverlord(() => customInstance = customUrl);
           Navigator.of(context).pop();
         }
       }
@@ -67,7 +67,7 @@ class SelectInstance extends StatelessWidget {
       _tmpInput = customUrlCtrl.text;
       _instanceIndex = 0;
       Navigator.of(context).pop();
-      setStateOverlordData(() {
+      setStateOverlord(() {
         instance = 'custom';
         session.write('instance_mode', 'custom');
       });
@@ -152,7 +152,7 @@ class SelectInstance extends StatelessWidget {
       if (isCustomInstanceValid != instanceValidation.True) {
         if (_tmpInput != '') customUrlCtrl.text = _tmpInput;
         print('tmp input is: $_tmpInput');
-        setStateOverlordData(() => instance = _tmpInstance);
+        setStateOverlord(() => instance = _tmpInstance);
         session.write('instance_mode', _tmpInstance);
       }
     }

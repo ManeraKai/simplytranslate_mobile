@@ -93,7 +93,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                                     if (option == toSelLangMap[i]) {
                                       session.write('share_lang', i);
                                       setState(() => shareLangVal = i);
-                                      setStateOverlordData(() {});
+                                      setStateOverlord(() {});
                                       changeText();
                                       Navigator.of(context).pop();
                                       break;
@@ -139,16 +139,14 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
                 FocusScope.of(context).unfocus();
                 session.write('share_lang', data);
                 setState(() => shareLangVal = data);
-                setStateOverlordData(() {});
+                setStateOverlord(() {});
                 txtCtrl.text = toSelLangMap[data]!;
-
                 Navigator.of(context).pop();
               }
 
               resetData() {
                 FocusScope.of(context).unfocus();
                 txtCtrl.text = toSelLangMap[shareLangVal]!;
-
                 Navigator.of(context).pop();
               }
 
