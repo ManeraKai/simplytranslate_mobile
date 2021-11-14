@@ -114,7 +114,7 @@ class _AboutScreenState extends State<AboutScreen> {
                               Container(
                                 width: 200,
                                 child: Text(
-                                  'Liberapay',
+                                  AppLocalizations.of(context)!.liberapay,
                                   style: TextStyle(
                                     fontSize: 18,
                                     letterSpacing: 1.25,
@@ -144,7 +144,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 style: textStyle,
               ),
               line,
-               AboutButton(
+              AboutButton(
                 icon: Icons.web,
                 iconColor: Colors.amber,
                 title: AppLocalizations.of(context)!.website,
