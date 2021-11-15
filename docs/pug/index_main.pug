@@ -1,209 +1,177 @@
-head    
+head
     meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" )
     meta(name="theme-color" content="#141414" )
     link(rel="shortcut icon" type="image/png" href="./img/favicon.png" )
-    meta(name="description" content="a mobile client for SimplyTranslate")
-    title SimplyTranslate Mobile
-
-    link( href="./css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection")
+    meta(name="description" content="An alternative front-end to GoogleTranslate")
     link(href="./css/index.css" type="text/css" rel="stylesheet" media="screen,projection" )
+    title SimplyTranslate Mobile
 body
-    div.navbar-fixed
-        nav.nav-background.black-text.z-depth-0.hide-on-med-and-down
-            div.nav-wrapper.container
-                div.nav-wrapper
-                    if (isRtl)
-                        ul.left.hide-on-med-and-down
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="https://liberapay.com/simplytranslate_mobile/")= translations['donate']
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="https://github.com/ManeraKai/simplytranslate_mobile")= translations['source']
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="index.html")=translations['home']
-                    else
-                        ul.right.hide-on-med-and-down
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="index.html")=translations['home']
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="https://github.com/ManeraKai/simplytranslate_mobile")= translations['source']
-                            li.tab.col.s3
-                                a.main-font.white-text(style="text-decoration: none" href="https://liberapay.com/simplytranslate_mobile/")= translations['donate']
-                                
-    div.main-box
-        div.section.no-pad-bot#banner
-            div.container
-                div.center
-                    br
-                    img.main_logo(src="./img/logo.svg")
-                    h2.textt.main-font.center.white-text.title SimplyTranslate Mobile
+    div.toolbar
+        a(style="text-decoration: none" href="index.html")=translations['home']
+        a(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
+        a(style="text-decoration: none" href="https://github.com/ManeraKai/simplytranslate_mobile")= translations['source']
+        a(style="text-decoration: none" href="https://liberapay.com/simplytranslate_mobile/")= translations['donate']
 
-                    br
+    header
+        img.main_logo(src="./img/logo.svg")
+        h1 SimplyTranslate Mobile
+        a(href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")=translations['download']
 
-                    a.waves-effect.hoverable.waves-white.white.btn.z-depth-3.hd-btn2(href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")=translations['source']
 
-                    br
-                    br
+    div.section
+        if (isRtl)
+            blockquote.block-rtl
+                h2.header.main-font.primary-color=translations['about']
+        else
+            blockquote.block
+                h2.header.main-font.primary-color=translations['about']
 
-    div.container
-        div.section
-            if (isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['about']
-            else
-                blockquote.block
-                    h2.header.main-font.primary-color=translations['about']
-            //- - linkoo = a(href="https://simplytranslate.org/")
-            p.flow-text.main-font.paragraph.text3.text-lighten-3=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
-                a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
-                =translations['about-text'].substring(translations['about-text'].indexOf('</a>')+4, translations['about-text'].length)
+        p.flow-text.main-font=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
+            a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
+            =translations['about-text'].substring(translations['about-text'].indexOf('</a>')+4, translations['about-text'].length)
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.header.main-font.primary-color=translations['screenshots']
+        else
+            blockquote.block
+                h2.header.main-font.primary-color=translations['screenshots']
+
+        div.screenshots
+            img.center.responsive-img(src="./img/1.webp")
+            img.center.responsive-img(src="./img/2.webp")
+            img.center.responsive-img(src="./img/3.webp")
+            img.center.responsive-img(src="./img/4.webp")
+
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.main-font.primary-color=translations['translation']
+        else
+            blockquote.block
+                h2.main-font.primary-color=translations['translation']
+        p
+            a(href="https://poeditor.com/join/project?hash=rV8CGr8NPj") POEditor
+
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.header.main-font.primary-color=translations['want-to-donate']
+        else
+            blockquote.block
+                h2.header.main-font.primary-color=translations['want-to-donate']
+        p
+            a(href="https://liberapay.com/simplytranslate_mobile/") Liberapay
+
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.header.primary-color=translations['testers']
+        else
+            blockquote.block
+                h2.header.main-font.primary-color=translations['testers']
+        p
+            a(href="https://github.com/Valdnet") Valdnet
+
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.header.main-font.primary-color=translations['translators']
+        else
+            blockquote.block
+                h2.header.main-font.primary-color=translations['translators']
+
+        p 🇸🇦 
+            =translations['arabic']
+            | : 
+            a(href="https://github.com/ManeraKai") ManeraKai
+
+        p 🇨🇳 
+            =translations['chinese-hong-kong']
+            | : 
+            a(href="https://github.com/CafeTango") CafeTango
+
+        p 🇩🇪 
+            =translations['german']
+            | : 
+            a(href="https://metalune.xyz/") metalune
+
+        p 🇬🇷 
+            =translations['greek']
+            | : 
+            a(href="https://getimiskon.xyz/") getimiskon
+
+        p 🇮🇳 
+            =translations['malayalam']
+            | : 
+            a(href="https://github.com/sunilpaulmathew") sunilpaulmathew
+
+        p 🇵🇱 
+            =translations['polish']
+            | : 
+            a(href="https://github.com/Aga-C") Aga-C
+            | , 
+            a(href="https://github.com/Valdnet") Valdnet
+
+        p 🇮🇷 
+            =translations['persian']
+            | : 
+            a(href="https://alefvanoon.xyz/") alefvanoon
+
+        p 🇷🇺 
+            =translations['russian']
+            | : 
+            a(href="https://github.com/K3XRad") K3XRad
+
+        p 🇹🇷 
+            =translations['turkish']
+            | : 👻
+
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.main-font.primary-color=translations['icon']
+        else
+            blockquote.block
+                h2.main-font.primary-color=translations['icon']
+
+        p
+            a(href="https://joelchrono12.ml/") joelchrono12
+
+        br
+        hr
+
+        if(isRtl)
+            blockquote.block-rtl
+                h2.main-font.primary-color=translations['license']
+        else
+            blockquote.block
+                h2.main-font.primary-color=translations['license']
+
+        p=translations["license-text.1"].substring(0, translations["license-text.1"].indexOf('<a>'))
+            a(href="https://github.com/ManeraKai")=translations["license-text.1"].substring(translations["license-text.1"].indexOf('<a>')+3, translations["license-text.1"].indexOf('</a>'))
+            =translations["license-text.1"].substring(translations["license-text.1"].indexOf('</a>')+4, translations["license-text.1"].length)
             br
-            div.divider.padding
-
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['screenshots']
-            else
-                blockquote.block
-                        h2.header.main-font.primary-color=translations['screenshots']
-
-            div.row
-                div.col.s6.m6.l3
-                    img.center.responsive-img(src="./img/1.png")
-                div.col.s6.m6.l3
-                    img.center.responsive-img(src="./img/2.png")
-                div.col.s6.m6.l3
-                    img.center.responsive-img(src="./img/3.png")
-                div.col.s6.m6.l3
-                    img.center.responsive-img(src="./img/4.png")
             br
-            
-
-            div.divider.padding
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['translation']
-            else
-                blockquote.block
-                        h2.header.main-font.primary-color=translations['translation']
-            p
-                a(href="https://poeditor.com/join/project?hash=rV8CGr8NPj") POEditor
-
+            =translations["license-text.2"]
             br
-
-            div.divider.padding
-
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['want-to-donate']
-            else
-                blockquote.block
-                        h2.header.main-font.primary-color=translations['want-to-donate']
-            p
-                a(href="https://liberapay.com/simplytranslate_mobile/") Liberapay
-            
             br
-
-            div.divider.padding
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['testers']
-            else
-                blockquote.block
-                        h2.header.main-font.primary-color=translations['testers']
-            p
-                a(href="https://github.com/Valdnet") Valdnet
-
+            =translations["license-text.3"]
             br
-
-            div.divider.padding
-
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['translators']
-            else
-                blockquote.block
-                        h2.header.main-font.primary-color=translations['translators']
-            
-
-            p 🇵🇱 
-                =translations['polish']
-                | : 
-                a(href="https://github.com/Aga-C") Aga-C
-                | , 
-                a(href="https://github.com/Valdnet") Valdnet
-
-            p 🇸🇦 
-                =translations['arabic']
-                | : 
-                a(href="https://github.com/ManeraKai") ManeraKai
-            
-            p 🇮🇳 
-                =translations['malayalam']
-                | : 
-                a(href="https://github.com/sunilpaulmathew") sunilpaulmathew
-            
-            p 🇨🇳 
-                =translations['chinese-hong-kong']
-                | : 
-                a(href="https://github.com/CafeTango") CafeTango
-            
-            p 🇩🇪 
-                =translations['german']
-                | : 
-                a(href="https://metalune.xyz/") metalune
-            p 🇮🇷 
-                =translations['persian']
-                | : 
-                a(href="https://alefvanoon.xyz/") alefvanoon
-            
-            p 🇷🇺 
-                =translations['russian']
-                | : 
-                a(href="https://github.com/K3XRad") K3XRad
-
             br
-
-            div.divider.padding
-
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['icon']
-            else
-                blockquote.block
-                        h2.header.main-font.primary-color=translations['icon']
-
-            p
-                a(href="https://joelchrono12.ml/") joelchrono12
-            
-            br
-
-            div.divider.padding
-
-            if(isRtl)
-                blockquote.block-rtl
-                    h2.header.main-font.primary-color=translations['license']
-            else
-                blockquote.block
-                    h2.header.main-font.primary-color=translations['license']
-
-            p=translations["license-text.1"].substring(0, translations["license-text.1"].indexOf('<a>'))
-                a(href="https://github.com/ManeraKai")=translations["license-text.1"].substring(translations["license-text.1"].indexOf('<a>')+3, translations["license-text.1"].indexOf('</a>'))
-                =translations["license-text.1"].substring(translations["license-text.1"].indexOf('</a>')+4, translations["license-text.1"].length)
-                br
-                br
-                =translations["license-text.2"]
-                br
-                br
-                =translations["license-text.3"]
-                br
-                br
-                =translations["license-text.4"].substring(0, translations["license-text.4"].indexOf('<a>'))
-                a(href="https://www.gnu.org/licenses/") GNU General Public License
-                =translations["license-text.4"].substring(translations["license-text.4"].indexOf('</a>')+4, translations["license-text.4"].length)
-    footer.page-footer.card-theme-color
-        div.container
+            =translations["license-text.4"].substring(0, translations["license-text.4"].indexOf('<a>'))
+            a(href="https://www.gnu.org/licenses/") GNU General Public License
+            =translations["license-text.4"].substring(translations["license-text.4"].indexOf('</a>')+4, translations["license-text.4"].length)
