@@ -13,7 +13,7 @@ body
         a(style="text-decoration: none" href="index.html")=translations['home']
         a(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
         a(style="text-decoration: none" href="https://github.com/ManeraKai/simplytranslate_mobile")= translations['source']
-        a(style="text-decoration: none" href="https://liberapay.com/simplytranslate_mobile/")= translations['donate']
+        a(style="text-decoration: none" href="#donate")= translations['donate']
 
     header
         img.main_logo(src="./img/logo.svg")
@@ -24,16 +24,16 @@ body
     div.section
         if (isRtl)
             blockquote.block-rtl
-                h2.header.main-font.primary-color=translations['about']
+                h2#about.header.main-font.primary-color=translations['about']
         else
             blockquote.block
-                h2.header.main-font.primary-color=translations['about']
+                h2#about.header.main-font.primary-color=translations['about']
 
         p.flow-text.main-font=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
             a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
             =translations['about-text'].substring(translations['about-text'].indexOf('</a>')+4, translations['about-text'].length)
         br
-        hr
+        hr#screenshots
 
         if(isRtl)
             blockquote.block-rtl
@@ -49,7 +49,7 @@ body
             img.center.responsive-img(src="./img/4.webp")
 
         br
-        hr
+        hr#translation
 
         if(isRtl)
             blockquote.block-rtl
@@ -58,10 +58,11 @@ body
             blockquote.block
                 h2.main-font.primary-color=translations['translation']
         p
-            a(href="https://poeditor.com/join/project?hash=rV8CGr8NPj") POEditor
+            a(href="https://poeditor.com/join/project?hash=rV8CGr8NPj")
+                img(src="https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/poeditor.svg")
 
         br
-        hr
+        hr#donate
 
         if(isRtl)
             blockquote.block-rtl
@@ -69,11 +70,16 @@ body
         else
             blockquote.block
                 h2.header.main-font.primary-color=translations['want-to-donate']
-        p
-            a(href="https://liberapay.com/simplytranslate_mobile/") Liberapay
+
+        div.donate
+            a.image(href="https://liberapay.com/simplytranslate_mobile/")
+                img(src="https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/bmc.svg")
+                
+            a.image(href="https://www.buymeacoffee.com/manerakai")
+                img(src="https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/liberapay.svg")
 
         br
-        hr
+        hr#testers
 
         if(isRtl)
             blockquote.block-rtl
@@ -85,7 +91,7 @@ body
             a(href="https://github.com/Valdnet") Valdnet
 
         br
-        hr
+        hr#translators
 
         if(isRtl)
             blockquote.block-rtl
@@ -141,7 +147,7 @@ body
             | : 👻
 
         br
-        hr
+        hr#icon
 
         if(isRtl)
             blockquote.block-rtl
@@ -154,7 +160,7 @@ body
             a(href="https://joelchrono12.ml/") joelchrono12
 
         br
-        hr
+        hr#license
 
         if(isRtl)
             blockquote.block-rtl
