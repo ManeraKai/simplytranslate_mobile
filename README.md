@@ -50,7 +50,7 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 - **🇸🇦 Arabic**: [ManeraKai](https://github.com/ManeraKai)
 - **🇨🇳 Chinese, Hong Kong:** [CafeTango](https://github.com/CafeTango)
 - **🇩🇪 German:** [metalune](https://metalune.xyz/)
-- **🇬🇷 Greek:** [getimiskon](https://github.com/getimiskon)
+- **🇬🇷 Greek:** [getimiskon](https://getimiskon.xyz/)
 - **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
 - **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
 - **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
