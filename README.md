@@ -36,7 +36,7 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 ## Translation
 [![POEditor](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/poeditor.svg)](https://poeditor.com/join/project?hash=rV8CGr8NPj)
 
-## Donation
+## Donate
  [![Buy me a coffee](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/bmc.svg)](https://www.buymeacoffee.com/manerakai)&nbsp;&nbsp;
  [![Liberapay](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/liberapay.svg)](https://liberapay.com/simplytranslate_mobile)
 
