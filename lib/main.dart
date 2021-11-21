@@ -90,10 +90,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       getSharedText();
 
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
-      if (_clipData.toString() == '' ||
-          _clipData == null) if (!isClipboardEmpty)
-        setState(() => isClipboardEmpty = true);
-      else if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
+      if (_clipData.toString() == '' || _clipData == null) {
+        if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
+      } else {
+        if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
+        print(_clipData);
+      }
     }
   }
 
