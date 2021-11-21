@@ -55,6 +55,7 @@ html {
 
 div.screenshots {
     justify-content: space-evenly;
+    align-items: center;
     width: 60vw;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -62,7 +63,12 @@ div.screenshots {
 }
 
 div.screenshots img {
-    width: 250px;
+    width: 260px;
+    margin-bottom: 50px;
+}
+
+div.screenshots img.last {
+    margin-bottom: 0;
 }
 
 div.donate a{
