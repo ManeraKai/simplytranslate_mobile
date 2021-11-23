@@ -4,23 +4,7 @@ It works as follows:
 2. This instance will request that data from Google Translate.
 3. Google Translate will send the translation back to that instance.
 4. That instance will send the translation back to you.
-<pre>
-                   +-------------+
-                   |             |
-                   | instance #1 |
-                   |             |     
-                   +-------------+     
-+--------+         +-------------+         +------------------+ 
-|        |         |             |         |                  |
-|  user  | ---+    | instance #2 |    +--> | Google Translate |
-|        |    |    |             |    |    |                  |
-+--------+    |    +-------------+    |    +------------------+ 
-              |    +-------------+    |
-              |    |             |    |
-              +--> | instance #3 | ---+
-                   |             |
-                   +-------------+
-</pre>
+
 This way Google Translate won't know your identity. Auto selecting a random instance (default mode) each request will obfuscate and spread your data more between instances so nothing will be linked easily as it's not in a centralized database.
 
 <b>Features:</b>
