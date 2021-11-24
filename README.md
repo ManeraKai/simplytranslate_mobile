@@ -40,6 +40,11 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
  [![Buy me a coffee](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/bmc.svg)](https://www.buymeacoffee.com/manerakai)&nbsp;&nbsp;
  [![Liberapay](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/liberapay.svg)](https://liberapay.com/simplytranslate_mobile)
 
+ ### Bitcoin
+ ![Bitcoin](./docs/img/bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj.png)
+
+ bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj
+
 ## Contributers
 
 ### Testers
