@@ -55,6 +55,8 @@ final googleInCtrl = TextEditingController();
 
 final session = GetStorage();
 
+late final cameras;
+
 late final PackageInfo packageInfo;
 
 Function() fromCancel = () {};

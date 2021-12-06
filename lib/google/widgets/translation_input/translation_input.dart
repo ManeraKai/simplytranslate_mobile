@@ -5,6 +5,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/google/widgets/translation_input/widgets/tts_input.dart';
 import '/data.dart';
+import 'widgets/camera.dart';
 import 'widgets/copy_button.dart';
 import 'widgets/delete_button.dart';
 import 'widgets/paste_button.dart';
@@ -42,10 +43,10 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   Widget build(BuildContext context) {
     textFieldHeight = MediaQuery.of(context).orientation == Orientation.portrait
-        ? MediaQuery.of(context).size.height / 3 < 250
-            ? 250
+        ? MediaQuery.of(context).size.height / 3 < 300
+            ? 300
             : MediaQuery.of(context).size.height / 3
-        : 250;
+        : 300;
     return Container(
       height: textFieldHeight,
       width: MediaQuery.of(context).size.width,
@@ -123,6 +124,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
             children: [
               DeleteTranslationInputButton(),
               CopyToClipboardButton(googleInCtrl.text),
+              Camera(),
               PasteClipboardButton(),
               TtsInput(),
               CharacterLimit(),
