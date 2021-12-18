@@ -20,7 +20,6 @@ import java.lang.reflect.Method
 import android.content.Intent.getIntent
 import android.os.Parcelable
 
-
 class MainActivity: FlutterActivity() {
 
     private val TRANSLATE_CHANNEL_NAME = "com.simplytranslate_mobile/translate"

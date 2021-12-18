@@ -27,6 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 31
+    buildToolsVersion "30.0.2"
 
     lintOptions {
         disable 'InvalidPackage'
@@ -51,38 +52,20 @@ android {
         versionName '1.1.3'
     }
 
-    signingConfigs {
-        github {
-            def keystorePropertiesFile = rootProject.file('key.properties')
-            def keystoreProperties = new Properties()
-
-            if (!keystorePropertiesFile.exists()) return
-
-            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
-        }
-    }
 
     flavorDimensions 'deploy'
 
     productFlavors {
         development {
             dimension 'deploy'
-            signingConfig null
         }
         github {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             dimension 'deploy'
-            signingConfig signingConfigs.github
         }
         fdroid {
             dimension 'deploy'
-            signingConfig null
         }
     }
 
