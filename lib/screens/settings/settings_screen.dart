@@ -22,43 +22,41 @@ class _SettingsState extends State<Settings> {
       color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
     );
     const textStyle = const TextStyle(fontSize: 20);
-    return Material(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.settings),
-          elevation: 3,
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                Text(
-                  AppLocalizations.of(context)!.instances,
-                  style: textStyle,
-                ),
-                line,
-                SelectInstance(),
-                UpdateList(),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context)!.appearance,
-                  style: textStyle,
-                ),
-                line,
-                SelectTheme(),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context)!.translation,
-                  style: textStyle,
-                ),
-                line,
-                SelectDefaultLang()
-              ],
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.settings),
+        elevation: 3,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 10),
+              Text(
+                AppLocalizations.of(context)!.instances,
+                style: textStyle,
+              ),
+              line,
+              SelectInstance(),
+              UpdateList(),
+              const SizedBox(height: 20),
+              Text(
+                AppLocalizations.of(context)!.appearance,
+                style: textStyle,
+              ),
+              line,
+              SelectTheme(),
+              const SizedBox(height: 20),
+              Text(
+                AppLocalizations.of(context)!.translation,
+                style: textStyle,
+              ),
+              line,
+              SelectDefaultLang()
+            ],
           ),
         ),
       ),
