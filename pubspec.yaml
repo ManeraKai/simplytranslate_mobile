@@ -35,8 +35,8 @@ dependencies:
   image_picker: ^0.8.4+4
   path_provider:
   path: ^1.8.0
-  opencv_4: ^1.0.0
-
+  opencv_4:
+    path: ./opencv_4/
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,3 +49,4 @@ flutter:
     - assets/ca/
     - assets/about/
   generate: true
+

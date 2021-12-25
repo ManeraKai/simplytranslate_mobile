@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import '/google/widgets/translation_input/widgets/tts_input.dart';
@@ -75,8 +74,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                       )
                         ? TextDirection.rtl
                         : TextDirection.ltr
-                    : intl.Bidi.detectRtlDirectionality(
-                            googleInCtrl.text)
+                    : intl.Bidi.detectRtlDirectionality(googleInCtrl.text)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
                 focusNode: focus,
@@ -187,7 +185,8 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
       handleCopy: canCopy(delegate)
           ? () => handleCopy(delegate, clipboardStatus)
           : () {},
-      handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
+      handleCut:
+          canCut(delegate) ? () => handleCut(delegate, clipboardStatus) : () {},
       handlePaste: canPaste(delegate)
           ? () async {
               isFirst = true;

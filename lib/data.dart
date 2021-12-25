@@ -65,6 +65,10 @@ Function() toCancel = () {};
 late Function(String) changeFromTxt;
 late Function(String) changeToTxt;
 
+List<String> textList = [];
+
+String newText = "";
+
 Future<instanceValidation> checkInstance(String urlValue) async {
   var url;
   try {

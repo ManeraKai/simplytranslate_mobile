@@ -140,7 +140,7 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
       handleCopy: canCopy(delegate)
           ? () => handleCopy(delegate, clipboardStatus)
           : () {},
-      handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
+      handleCut: canCut(delegate) ? () => handleCut(delegate, clipboardStatus) : () {},
       handlePaste: canPaste(delegate)
           ? () async {
               isFirst = true;
