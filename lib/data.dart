@@ -1,13 +1,16 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:opencv_4/opencv_4.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:path_provider/path_provider.dart';
 
 // const lightGreenColor = const Color(0xff62d195);
 const greyColor = const Color(0xff131618);
@@ -38,6 +41,66 @@ enum AppTheme { dark, light, system }
 
 var themeValue = '';
 
+Future<File> byte2File(Uint8List byte) async {
+  final tempDir = await getTemporaryDirectory();
+  final random = Random().nextInt(10000000);
+  final file = await new File('${tempDir.path}/$random.jpg').create();
+  file.writeAsBytesSync(byte);
+  return file;
+}
+
+Future<File> prepareOCR(File croppedImg) async {
+  final Uint8List? preparedByte = await Cv2.prepareOCR(
+    pathString: croppedImg.path,
+  );
+
+  final prepared = await byte2File(preparedByte!);
+
+  return prepared;
+
+  // final Uint8List? grayByte = await Cv2.cvtColor(
+  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
+  //   pathString: croppedImg.path,
+  //   outputType: Cv2.COLOR_RGB2GRAY,
+  // );
+  // final gray = await byte2File(grayByte!);
+
+  // final Uint8List? dilateByte = await Cv2.dilate(
+  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
+  //   pathString: gray.path,
+  //   kernelSize: [1, 1],
+  // );
+
+  // final dilate = await byte2File(dilateByte!);
+
+  // final Uint8List? contrastByte = await Cv2.contrast(
+  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
+  //   pathString: dilate.path,
+  //   alpha: 2,
+  // );
+
+  // final thresh1 = await byte2File(contrastByte!);
+
+  // final thresh1Byte = await Cv2.adaptiveThreshold(
+  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
+  //   pathString: dilate.path,
+  //   maxValue: 255,
+  //   adaptiveMethod: Cv2.ADAPTIVE_THRESH_MEAN_C,
+  //   thresholdType: Cv2.THRESH_BINARY,
+  //   blockSize: 15,
+  //   constantValue: 40);
+
+  // final Uint8List? thresh1Byte = await Cv2.threshold(
+  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
+  //   pathString: dilate.path,
+  //   thresholdValue: 0,
+  //   maxThresholdValue: 255,
+  //   thresholdType: Cv2.THRESH_TOZERO,
+  // );
+
+  // final thresh1 = await byte2File(thresh1Byte!);
+}
+
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum instanceValidation { False, True, NotChecked }
@@ -64,8 +127,6 @@ Function() toCancel = () {};
 
 late Function(String) changeFromTxt;
 late Function(String) changeToTxt;
-
-List<String> textList = [];
 
 String newText = "";
 

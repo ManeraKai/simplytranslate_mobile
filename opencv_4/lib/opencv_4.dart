@@ -22,8 +22,10 @@ import 'package:opencv_4/factory/miscellaneoustransform/adaptivethreshold_factor
 import 'package:opencv_4/factory/miscellaneoustransform/distancetransform_factory.dart';
 import 'package:opencv_4/factory/miscellaneoustransform/threshold_factory.dart';
 import 'package:opencv_4/factory/pathfrom.dart';
+import 'package:opencv_4/factory/prepare_ocr/prepare_ocr_factory.dart';
 
 import 'factory/contour/contour_factory.dart';
+import 'factory/contrast/contrast_factory.dart';
 
 /// class that contains the implementation of OpenCV modules
 class Cv2 {
@@ -689,6 +691,30 @@ class Cv2 {
     vals.forEach((x) => resultList.add(Map<String, int>.from(x)));
 
     return resultList;
+  }
+
+  /// [contour] function of Module: Color Space Conversions
+  static Future<Uint8List?> contrast({
+    CVPathFrom pathFrom = CVPathFrom.ASSETS,
+    required String pathString,
+    required double alpha,
+  }) async {
+    final Uint8List? result = await ContrastFactory.contrast(
+      pathFrom: pathFrom,
+      pathString: pathString,
+      alpha: alpha,
+    );
+    return result;
+  }
+
+  static Future<Uint8List?> prepareOCR({
+    CVPathFrom pathFrom = CVPathFrom.ASSETS,
+    required String pathString,
+  }) async {
+    final Uint8List? result = await PrepareOCRFactory.prepareOCR(
+      pathString: pathString,
+    );
+    return result;
   }
 
   /// [applyColorMap] function of Module: Color Maps

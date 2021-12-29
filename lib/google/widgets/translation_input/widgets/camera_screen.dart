@@ -8,19 +8,21 @@ class CameraScreen extends StatefulWidget {
   CameraScreen({
     required this.image,
     required this.contourVals,
+    required this.croppedImgs,
+    required this.textList,
     Key? key,
   }) : super(key: key);
   final File image;
   final List<Map<String, int>> contourVals;
+  final List<File> croppedImgs;
+  final List<String> textList;
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
 
-Offset position = Offset(0, 0);
-
+Offset pos = Offset(0, 0);
 List<int> highlightedList = [];
-
 late Function(void Function()) highlightSetState;
 
 double imageHeight = 0;
@@ -29,6 +31,7 @@ List<Offset> drawList = [];
 class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
+    var image;
     List<Map<String, int>> cnts = widget.contourVals;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -39,8 +42,9 @@ class _CameraScreenState extends State<CameraScreen> {
         children: [
           FutureBuilder(
             future: () async {
+              image = await prepareOCR(widget.image);
               var decodedImage =
-                  await decodeImageFromList(widget.image.readAsBytesSync());
+                  await decodeImageFromList(image.readAsBytesSync());
               imageHeight =
                   decodedImage.height * (screenWidth / decodedImage.width);
               return screenWidth / decodedImage.width;
@@ -50,27 +54,40 @@ class _CameraScreenState extends State<CameraScreen> {
                 double dilate = double.parse(state.data.toString());
                 return GestureDetector(
                   onPanUpdate: (details) {
-                    position = details.localPosition;
-                    drawList.add(position);
+                    pos = details.localPosition;
+                    drawList.add(pos);
                     highlightSetState(() {});
                   },
                   onPanEnd: (details) async {
                     List<String> newList = [];
                     highlightedList.sort();
                     highlightedList = highlightedList.reversed.toList();
-                    for (var i in highlightedList) newList.add(textList[i - 1]);
+                    for (var i in highlightedList)
+                      newList.add(widget.textList[i]);
                     newText = newList.join(" ");
-                    highlightedList = [];
+
                     if (newText.trim() != "") {
                       await showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text(newText),
+                          content: Container(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Text(newText),
+                                  ...highlightedList
+                                      .map((e) =>
+                                          Image.file(widget.croppedImgs[e]))
+                                      .toList()
+                                ],
+                              ),
+                            ),
+                          ),
                           actions: [
                             TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
+                              onPressed: () => Navigator.of(context).pop(),
                               child: Text(AppLocalizations.of(context)!.cancel),
                             ),
                             TextButton(
@@ -89,7 +106,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     highlightSetState(() {
                       highlightedList = [];
                       drawList = [];
-                      position = Offset.zero;
+                      pos = Offset.zero;
                     });
                   },
                   child: StatefulBuilder(
@@ -102,20 +119,18 @@ class _CameraScreenState extends State<CameraScreen> {
                             Container(
                               alignment: Alignment.center,
                               child: Image.file(
-                                widget.image,
+                                image,
                                 width: screenWidth,
                               ),
                             ),
                             Container(
                               width: screenWidth,
                               height: imageHeight,
-                              child: CustomPaint(
-                                painter: OpenPainter(),
-                              ),
+                              child: CustomPaint(painter: OpenPainter()),
                             ),
                             Positioned(
-                              left: position.dx - 25,
-                              top: position.dy - 25,
+                              left: pos.dx - 25,
+                              top: pos.dy - 25,
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
@@ -137,10 +152,10 @@ class _CameraScreenState extends State<CameraScreen> {
                                 var color = () {
                                   if (highlightedList.contains(i))
                                     return Colors.blue;
-                                  if ((x < position.dx &&
-                                          position.dx < x + width) &&
-                                      (y < position.dy &&
-                                          position.dy < y + height)) {
+                                  if (x < pos.dx &&
+                                      pos.dx < x + width &&
+                                      y < pos.dy &&
+                                      pos.dy < y + height) {
                                     highlightedList.add(i);
                                     return Colors.blue;
                                   }
@@ -188,8 +203,8 @@ class OpenPainter extends CustomPainter {
     var paint1 = Paint()
       ..color = Color(0xFF0000ff)
       ..style = PaintingStyle.fill;
-    drawList.forEach((pos) {
-      canvas.drawCircle(pos - Offset(25 / 2, 25 / 2), 25 / 2, paint1);
+    drawList.forEach((posy) {
+      canvas.drawCircle(posy - Offset(25 / 2, 25 / 2), 25 / 2, paint1);
     });
   }
 

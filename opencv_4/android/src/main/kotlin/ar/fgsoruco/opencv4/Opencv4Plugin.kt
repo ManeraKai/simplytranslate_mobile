@@ -1,9 +1,11 @@
 package ar.fgsoruco.opencv4
 
 import androidx.annotation.NonNull
+import ar.fgsoruco.opencv4.factory.PrepareOCR.PrepareOCR
 import ar.fgsoruco.opencv4.factory.colormaps.ApplyColorMapFactory
 import ar.fgsoruco.opencv4.factory.colorspace.CvtColorFactory
 import ar.fgsoruco.opencv4.factory.contour.Contour
+import ar.fgsoruco.opencv4.factory.contrast.Contrast
 import ar.fgsoruco.opencv4.factory.imagefilter.*
 import ar.fgsoruco.opencv4.factory.miscellaneous.AdaptiveThresholdFactory
 import ar.fgsoruco.opencv4.factory.miscellaneous.DistanceTransformFactory
@@ -285,7 +287,6 @@ class Opencv4Plugin : FlutterPlugin, MethodCallHandler {
             "contour" -> {
                 try {
                     Contour.processBytes(
-                        call.argument<Int>("pathType") as Int,
                         call.argument<String>("pathString") as String,
                         result
                     )
@@ -296,6 +297,27 @@ class Opencv4Plugin : FlutterPlugin, MethodCallHandler {
             "contourVals" -> {
                 try {
                     Contour.processVals(result)
+                } catch (e: Exception) {
+                    result.error("OpenCV-Error", "Android: " + e.message, e)
+                }
+            }
+            "contrast" -> {
+                try {
+                    Contrast.process(
+                        call.argument<String>("pathString") as String,
+                        call.argument<Double>("alpha") as Double,
+                        result
+                    )
+                } catch (e: Exception) {
+                    result.error("OpenCV-Error", "Android: " + e.message, e)
+                }
+            }
+            "prepareOCR" -> {
+                try {
+                    PrepareOCR.process(
+                        call.argument<String>("pathString") as String,
+                        result
+                    )
                 } catch (e: Exception) {
                     result.error("OpenCV-Error", "Android: " + e.message, e)
                 }

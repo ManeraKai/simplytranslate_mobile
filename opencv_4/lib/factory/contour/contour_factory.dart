@@ -26,9 +26,7 @@ class ContourFactory {
         var testResult = await platform.invokeMethod(
           'contour',
           {
-            "pathType": 1,
             "pathString": pathString,
-            "data": Uint8List(0),
           },
         );
 
