@@ -24,7 +24,6 @@ import 'package:opencv_4/factory/miscellaneoustransform/threshold_factory.dart';
 import 'package:opencv_4/factory/pathfrom.dart';
 import 'package:opencv_4/factory/prepare_ocr/prepare_ocr_factory.dart';
 
-import 'factory/contour/contour_factory.dart';
 import 'factory/contrast/contrast_factory.dart';
 
 /// class that contains the implementation of OpenCV modules
@@ -677,15 +676,15 @@ class Cv2 {
     CVPathFrom pathFrom = CVPathFrom.ASSETS,
     required String pathString,
   }) async {
-    final List<Uint8List?> result = await ContourFactory.contour(
-      pathFrom: pathFrom,
-      pathString: pathString,
+    var result = await platform.invokeMethod(
+      'contour',
+      {"pathString": pathString},
     );
-    return result;
+    return List<Uint8List?>.from(result);
   }
 
   static Future<List<Map<String, int>>> contourVals() async {
-    final List vals = await ContourFactory.contourVals();
+    final List vals = await platform.invokeMethod('contourVals');
 
     List<Map<String, int>> resultList = [];
     vals.forEach((x) => resultList.add(Map<String, int>.from(x)));

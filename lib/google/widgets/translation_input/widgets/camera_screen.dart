@@ -21,11 +21,11 @@ class CameraScreen extends StatefulWidget {
   _CameraScreenState createState() => _CameraScreenState();
 }
 
-Offset pos = Offset(0, 0);
+var pos = Offset(0, 0);
 List<int> highlightedList = [];
 late Function(void Function()) highlightSetState;
 
-double imageHeight = 0;
+var imageHeight = 0.0;
 List<Offset> drawList = [];
 
 class _CameraScreenState extends State<CameraScreen> {
@@ -34,6 +34,7 @@ class _CameraScreenState extends State<CameraScreen> {
     var image;
     List<Map<String, int>> cnts = widget.contourVals;
     double screenWidth = MediaQuery.of(context).size.width;
+    var dilate = 0.0;
     return Scaffold(
       appBar: AppBar(title: Text("Camera")),
       body: Column(
@@ -45,13 +46,12 @@ class _CameraScreenState extends State<CameraScreen> {
               image = await prepareOCR(widget.image);
               var decodedImage =
                   await decodeImageFromList(image.readAsBytesSync());
-              imageHeight =
-                  decodedImage.height * (screenWidth / decodedImage.width);
-              return screenWidth / decodedImage.width;
+              dilate = screenWidth / decodedImage.width;
+              imageHeight = decodedImage.height * dilate;
+              return;
             }(),
             builder: (context, state) {
               if (state.connectionState == ConnectionState.done) {
-                double dilate = double.parse(state.data.toString());
                 return GestureDetector(
                   onPanUpdate: (details) {
                     pos = details.localPosition;
@@ -141,7 +141,7 @@ class _CameraScreenState extends State<CameraScreen> {
                               ),
                             ),
                             ...() {
-                              List<Widget> myList = [];
+                              List<Widget> boxes = [];
                               for (var i = 0; i < cnts.length; i++) {
                                 var x = cnts[i]["x"]!.toDouble() * dilate;
                                 var y = cnts[i]["y"]!.toDouble() * dilate;
@@ -149,20 +149,19 @@ class _CameraScreenState extends State<CameraScreen> {
                                     cnts[i]["width"]!.toDouble() * dilate;
                                 var height =
                                     cnts[i]["height"]!.toDouble() * dilate;
+
                                 var color = () {
                                   if (highlightedList.contains(i))
                                     return Colors.blue;
-                                  if (x < pos.dx &&
-                                      pos.dx < x + width &&
-                                      y < pos.dy &&
-                                      pos.dy < y + height) {
+                                  if ((x < pos.dx && pos.dx < x + width) &&
+                                      (y < pos.dy && pos.dy < y + height)) {
                                     highlightedList.add(i);
                                     return Colors.blue;
                                   }
                                   return Colors.green;
                                 }();
 
-                                myList.add(
+                                boxes.add(
                                   Positioned(
                                     left: x,
                                     top: y,
@@ -179,7 +178,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                   ),
                                 );
                               }
-                              return myList;
+                              return boxes;
                             }(),
                           ],
                         ),
@@ -203,9 +202,8 @@ class OpenPainter extends CustomPainter {
     var paint1 = Paint()
       ..color = Color(0xFF0000ff)
       ..style = PaintingStyle.fill;
-    drawList.forEach((posy) {
-      canvas.drawCircle(posy - Offset(25 / 2, 25 / 2), 25 / 2, paint1);
-    });
+    drawList.forEach((posy) =>
+        canvas.drawCircle(posy - Offset(25 / 2, 25 / 2), 25 / 2, paint1));
   }
 
   @override

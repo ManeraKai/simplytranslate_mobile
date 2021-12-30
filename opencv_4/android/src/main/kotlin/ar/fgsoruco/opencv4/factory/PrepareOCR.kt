@@ -22,15 +22,6 @@ class PrepareOCR {
             Imgproc.morphologyEx(src, bg, Imgproc.MORPH_DILATE, se)
             var wewe = Mat()
             Core.divide(src, bg, wewe, 255.0)
-//            Imgproc.adaptiveThreshold(
-//                wewe,
-//                wewe,
-//                255.0,
-//                Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
-//                Imgproc.THRESH_BINARY,
-//                15,
-//                40.0
-//            );
             Imgproc.threshold(wewe, wewe, 0.0, 255.0, Imgproc.THRESH_OTSU)
             Imgproc.dilate(
                 wewe, wewe, Imgproc.getStructuringElement(

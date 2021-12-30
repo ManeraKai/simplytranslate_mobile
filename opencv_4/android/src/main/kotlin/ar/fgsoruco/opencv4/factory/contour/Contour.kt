@@ -45,7 +45,7 @@ class Contour {
             Imgproc.dilate(
                 processed,
                 processed,
-                Imgproc.getStructuringElement(Imgproc.MORPH_RECT, Size(18.0, 18.0)),
+                Imgproc.getStructuringElement(Imgproc.MORPH_RECT, Size(10.0, 10.0)),
                 Point(-1.0, -1.0)
             )
             val contours: MutableList<MatOfPoint> = ArrayList<MatOfPoint>()

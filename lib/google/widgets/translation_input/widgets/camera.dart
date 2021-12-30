@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,7 +28,7 @@ class _CameraState extends State<Camera> {
             await ImagePicker().pickImage(source: ImageSource.camera);
         if (pickedImageX != null) {
           var img = File(pickedImageX.path);
-          final List<Uint8List?> croppedImgs = await Cv2.contour(
+          final croppedImgs = await Cv2.contour(
             pathFrom: CVPathFrom.GALLERY_CAMERA,
             pathString: img.path,
           );
