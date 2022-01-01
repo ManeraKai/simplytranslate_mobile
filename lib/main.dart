@@ -4,6 +4,7 @@ import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -47,6 +48,25 @@ void main(List<String> args) async {
       theme = Brightness.dark;
     }
   }
+  flutterTesseractOcrTessdataPath = await FlutterTesseractOcr.getTessdataPath();
+  print(flutterTesseractOcrTessdataPath);
+
+  two2three.forEach((key, value) {
+    var dir = Directory(flutterTesseractOcrTessdataPath);
+
+    if (!dir.existsSync()) dir.create();
+
+    var dirList = dir.listSync();
+    dirList.forEach((element) {
+      String name = element.path.split('/').last;
+      if (name == '$value.traineddata') downloadedList.add(key);
+    });
+  });
+
+  if (downloadedList.length >= two2three.length) downloadedList.add("install");
+
+  print(downloadedList);
+
   var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
 
   isClipboardEmpty = _clipData.toString() == '' || _clipData == null;

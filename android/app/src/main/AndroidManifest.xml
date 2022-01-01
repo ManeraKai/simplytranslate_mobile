@@ -7,7 +7,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".UppercaseActivity" android:label="SimplyTranslate Mobile" android:exported="true" >
+    <activity android:name=".UppercaseActivity" android:label="SimplyTranslate Mobile" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -15,7 +15,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".SharedActivity" android:label="SimplyTranslate Mobile" android:exported="true" >
+    <activity android:name=".SharedActivity" android:label="SimplyTranslate Mobile" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.SEND" />
         <category android:name="android.intent.category.DEFAULT" />

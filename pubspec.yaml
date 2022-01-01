@@ -24,6 +24,7 @@ dependencies:
   http: ^0.13.3
   html: ^0.15.0
   get_storage: ^2.0.3
+  permission_handler: ^8.3.0
   clipboard_listener: ^2.0.0
   package_info_plus: ^1.0.6
   url_launcher: ^6.0.12

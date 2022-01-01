@@ -2,9 +2,11 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:opencv_4/opencv_4.dart';
@@ -101,6 +103,31 @@ Future<File> prepareOCR(File croppedImg) async {
   // final thresh1 = await byte2File(thresh1Byte!);
 }
 
+Future<bool> downloadOCRLanguage(lang) async {
+  Directory dir = Directory(await FlutterTesseractOcr.getTessdataPath());
+  if (!dir.existsSync()) {
+    dir.create();
+  }
+  bool isInstalled = false;
+  dir.listSync().forEach((element) {
+    String name = element.path.split('/').last;
+    isInstalled |= name == '$lang.traineddata';
+  });
+  if (!isInstalled) {
+    HttpClient httpClient = HttpClient();
+    HttpClientRequest request = await httpClient.getUrl(Uri.parse(
+        'https://github.com/tesseract-ocr/tessdata/raw/main/$lang.traineddata'));
+    HttpClientResponse response = await request.close();
+    Uint8List bytes = await consolidateHttpClientResponseBytes(response);
+    String dir = await FlutterTesseractOcr.getTessdataPath();
+    print('$dir/$lang.traineddata');
+    File file = File('$dir/$lang.traineddata');
+    await file.writeAsBytes(bytes);
+    return true;
+  }
+  return false;
+}
+
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
 enum instanceValidation { False, True, NotChecked }
@@ -185,6 +212,8 @@ Future<void> getSharedText() async {
 }
 
 bool isSnackBarVisible = false;
+
+List<String> downloadedList = [];
 
 Map<String, String> selectLanguagesMapGetter(BuildContext context) {
   Map<String, String> mapOne = {
@@ -422,3 +451,101 @@ var instances = [
   "https://translate.namazso.eu",
   "https://translate.riverside.rocks"
 ];
+
+late final String flutterTesseractOcrTessdataPath;
+
+Map<String, String> two2three = {
+  "af": "afr",
+  "am": "amh",
+  "ar": "ara",
+  "as": "asm",
+  "az": "aze",
+  "be": "bel",
+  "bn": "ben",
+  "bs": "bos",
+  "bg": "bul",
+  "ca": "cat",
+  "cs": "ces",
+  "zh": "chi_tra",
+  "": "syr",
+  "co": "cos",
+  "cy": "cym",
+  "da": "dan",
+  "de": "deu",
+  "el": "ell",
+  "en": "eng",
+  "eo": "epo",
+  "et": "est",
+  "eu": "eus",
+  "fa": "fas",
+  "fi": "fin",
+  "fr": "fra",
+  "fy": "fry",
+  "gd": "gla",
+  "ga": "gle",
+  "gl": "glg",
+  "gu": "guj",
+  "ht": "hat",
+  "hi": "hin",
+  "hr": "hrv",
+  "hu": "hun",
+  "hy": "hye",
+  "id": "ind",
+  "is": "isl",
+  "it": "ita",
+  "ja": "jpn",
+  "kn": "kan",
+  "ka": "kat",
+  "kk": "kaz",
+  "km": "khm",
+  "ky": "kir",
+  "ko": "kor",
+  "lo": "lao",
+  "la": "lat",
+  "lv": "lav",
+  "lt": "lit",
+  "lb": "ltz",
+  "ml": "mal",
+  "mr": "mar",
+  "mk": "mkd",
+  "mt": "mlt",
+  "mn": "mon",
+  "mi": "mri",
+  "ms": "msa",
+  "my": "mya",
+  "ne": "nep",
+  "nl": "nld",
+  "no": "nor",
+  "or": "ori",
+  "pa": "pan",
+  "pl": "pol",
+  "pt": "por",
+  "ps": "pus",
+  "ro": "ron",
+  "ru": "rus",
+  "si": "sin",
+  "sk": "slk",
+  "sl": "slv",
+  "sd": "snd",
+  "es": "spa",
+  "sq": "sqi",
+  "sr": "srp",
+  "su": "sun",
+  "sw": "swa",
+  "sv": "swe",
+  "ta": "tam",
+  "tt": "tat",
+  "te": "tel",
+  "tg": "tgk",
+  "tl": "tgl",
+  "th": "tha",
+  "to": "ton",
+  "tr": "tur",
+  "ug": "uig",
+  "uk": "ukr",
+  "ur": "urd",
+  "uz": "uzb",
+  "vi": "vie",
+  "yi": "yid",
+  "yo": "yor",
+};

@@ -1,11 +1,5 @@
 {
   "files": [
-    "eng.traineddata",
-    "tur.traineddata",
-    "OCRB.traineddata",
-    "pdf.ttf",
-    "financial.traineddata",
-    "kor.traineddata",
-    "kor_vert.traineddata"
+    "eng.traineddata"
   ]
 }
