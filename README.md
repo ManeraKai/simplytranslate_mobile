@@ -67,7 +67,7 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 - [joelchrono12](https://joelchrono12.ml/)
 
 
-## Mirror Repos:
+## Mirror Repos
 [![GitHub](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/github.svg)](https://github.com/ManeraKai/simplytranslate_mobile/)&nbsp;&nbsp;
 [![Codeberg](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/codeberg.svg)](https://codeberg.org/ManeraKai/simplytranslate_mobile)&nbsp;&nbsp;
 [![GitLab](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/gitlab.svg)](https://gitlab.com/ManeraKai/simplytranslate_mobile)
