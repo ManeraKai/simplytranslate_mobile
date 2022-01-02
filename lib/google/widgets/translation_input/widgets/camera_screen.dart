@@ -86,18 +86,10 @@ class _CameraScreenState extends State<CameraScreen> {
                     await showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        content: Container(
-                          width: double.infinity,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Text(newText),
-                                ...highlightedList
-                                    .map((e) =>
-                                        Image.file(widget.croppedImgs[e]))
-                                    .toList()
-                              ],
-                            ),
+                        content: SingleChildScrollView(
+                          child: Text(
+                            newText,
+                            style: TextStyle(fontSize: 18),
                           ),
                         ),
                         actions: [
@@ -228,8 +220,7 @@ class OpenPainter extends CustomPainter {
     var paint1 = Paint()
       ..color = Color(0xFF0000ff)
       ..style = PaintingStyle.fill;
-    drawList.forEach((posy) =>
-        canvas.drawCircle(posy, 7, paint1));
+    drawList.forEach((posy) => canvas.drawCircle(posy, 7, paint1));
   }
 
   @override
