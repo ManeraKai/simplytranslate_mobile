@@ -51,6 +51,11 @@ Future<File> byte2File(Uint8List byte) async {
   return file;
 }
 
+Widget line = Container(
+      margin: const EdgeInsets.only(top: 10, bottom: 5),
+      height: 1.5,
+      color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
+    );
 Future<File> prepareOCR(File croppedImg) async {
   final Uint8List? preparedByte = await Cv2.prepareOCR(
     pathString: croppedImg.path,

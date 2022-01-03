@@ -52,14 +52,12 @@ class _CameraScreenState extends State<CameraScreen> {
             image = await prepareOCR(widget.image);
             var decodedImage =
                 await decodeImageFromList(image.readAsBytesSync());
-            dilate = screenSize.width / decodedImage.width;
-
-            if (screenSize.height - 50.0 < decodedImage.height * dilate) {
-              dilate = (screenSize.height - 50.0) / decodedImage.height;
-              print("height");
-            } else {
-              print("width");
-            }
+            dilate = () {
+              if (screenSize.height - 50.0 < decodedImage.height * dilate)
+                return (screenSize.height - 50.0) / decodedImage.height;
+              else
+                return screenSize.width / decodedImage.width;
+            }();
 
             imageWidth = decodedImage.width * dilate;
             imageHeight = decodedImage.height * dilate;
@@ -81,16 +79,48 @@ class _CameraScreenState extends State<CameraScreen> {
                   for (var i in highlightedList)
                     newList.add(widget.textList[i]);
                   newText = newList.join(" ");
-
                   if (newText.trim() != "") {
+                    String translatedText = "";
                     await showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        content: SingleChildScrollView(
-                          child: Text(
-                            newText,
-                            style: TextStyle(fontSize: 18),
-                          ),
+                        content: FutureBuilder(
+                          future: () async {
+                            translatedText = await translate(
+                              input: newText,
+                              fromLang: fromLangVal,
+                              toLang: toLangVal,
+                              context: context,
+                            );
+                            return;
+                          }(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting)
+                              return Container(
+                                height: 100,
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            else
+                              return SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      newText,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    SizedBox(height: 10),
+                                    line,
+                                    SizedBox(height: 10),
+                                    Text(
+                                      translatedText,
+                                      style: TextStyle(fontSize: 18),
+                                    )
+                                  ],
+                                ),
+                              );
+                          },
                         ),
                         actions: [
                           TextButton(
@@ -101,8 +131,10 @@ class _CameraScreenState extends State<CameraScreen> {
                             onPressed: () {
                               Navigator.of(context).pop();
                               Navigator.of(context).pop();
-                              setStateOverlord(
-                                  () => googleInCtrl.text = newText);
+                              setStateOverlord(() {
+                                googleOutput = translatedText;
+                                googleInCtrl.text = newText;
+                              });
                             },
                             child: Text(AppLocalizations.of(context)!.ok),
                           )
@@ -120,13 +152,6 @@ class _CameraScreenState extends State<CameraScreen> {
                   builder: (context, localSetState) {
                     highlightSetState = localSetState;
                     return Container(
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     color: Colors.red,
-                      //     style: BorderStyle.solid,
-                      //     width: 2,
-                      //   ),
-                      // ),
                       width: imageWidth,
                       height: imageHeight,
                       child: Stack(

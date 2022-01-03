@@ -29,26 +29,23 @@ class _CameraState extends State<Camera> {
           pathFrom: CVPathFrom.GALLERY_CAMERA,
           pathString: img.path,
         );
-
         final contourVals = await Cv2.contourVals();
-
         List<String> textList = [];
-        List<File> croppedImgsProcessed = [];
-        List<Map<String, int>> filteredContourVals = [];
+        List<File> croppedImgsProcessedList = [];
+        List<Map<String, int>> filteredContourValsList = [];
 
         for (var i = 0; i < croppedImgs.length; i++) {
           final contour = contourVals[i];
           final croppedImg = await byte2File(croppedImgs[i]!);
           final preparedImg = await prepareOCR(croppedImg);
-
-          var text = await FlutterTesseractOcr.extractText(
+          final String text = await FlutterTesseractOcr.extractText(
             preparedImg.path,
             language: two2three[fromLangVal],
           );
           if (text.trim() != "") {
             textList.add(text);
-            croppedImgsProcessed.add(preparedImg);
-            filteredContourVals.add(contour);
+            croppedImgsProcessedList.add(preparedImg);
+            filteredContourValsList.add(contour);
           }
         }
         try {
@@ -60,27 +57,12 @@ class _CameraState extends State<Camera> {
           MaterialPageRoute(
             builder: (_) => CameraScreen(
               image: img,
-              contourVals: filteredContourVals,
-              croppedImgs: croppedImgsProcessed,
+              contourVals: filteredContourValsList,
+              croppedImgs: croppedImgsProcessedList,
               textList: textList,
             ),
           ),
         );
-        // SystemChrome.setEnabledSystemUIMode(
-        //   SystemUiMode.manual,
-        //   overlays: SystemUiOverlay.values,
-        // );
-        setStateOverlord(() => loading = true);
-        final translatedText = await translate(
-          input: googleInCtrl.text,
-          fromLang: fromLangVal,
-          toLang: toLangVal,
-          context: context,
-        );
-        setStateOverlord(() {
-          googleOutput = translatedText;
-          loading = false;
-        });
       }
     }
 
@@ -92,11 +74,11 @@ class _CameraState extends State<Camera> {
           : !downloadedList.contains(fromLangVal)
               ? () {
                   showDialog(
-                      context: context,
-                      builder: (contextDialog) {
-                        var downloadLoading = false;
-                        return StatefulBuilder(
-                            builder: (context, setStateAlert) {
+                    context: context,
+                    builder: (contextDialog) {
+                      var downloadLoading = false;
+                      return StatefulBuilder(
+                        builder: (context, setStateAlert) {
                           return AlertDialog(
                             title: Text(
                                 "${fromSelLangMap[fromLangVal]!} Text Recognition"),
@@ -135,8 +117,10 @@ class _CameraState extends State<Camera> {
                               ),
                             ],
                           );
-                        });
-                      });
+                        },
+                      );
+                    },
+                  );
                 }
               : () => cameraFunc(),
       icon: Icon(Icons.camera_alt),

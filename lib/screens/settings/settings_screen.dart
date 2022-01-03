@@ -17,11 +17,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    Widget line = Container(
-      margin: const EdgeInsets.only(top: 10, bottom: 5),
-      height: 1.5,
-      color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
-    );
+    
     const textStyle = const TextStyle(fontSize: 20);
     return Scaffold(
       appBar: AppBar(
