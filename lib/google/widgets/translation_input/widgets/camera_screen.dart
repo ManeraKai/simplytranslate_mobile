@@ -1,253 +1,227 @@
-import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'dart:async';
 
-import '/data.dart';
+import 'package:simplytranslate_mobile/data.dart';
+
+List<CameraDescription> cameras = [];
+
+List<FlashMode> modes = [
+  FlashMode.off,
+  FlashMode.torch,
+];
+var currentMode = modes[0];
 
 class CameraScreen extends StatefulWidget {
-  CameraScreen({
-    required this.image,
-    required this.contourVals,
-    required this.croppedImgs,
-    required this.textList,
-    Key? key,
-  }) : super(key: key);
-  final File image;
-  final List<Map<String, int>> contourVals;
-  final List<File> croppedImgs;
-  final List<String> textList;
-
   @override
-  _CameraScreenState createState() => _CameraScreenState();
+  _CameraScreenState createState() {
+    return _CameraScreenState();
+  }
 }
 
-var pos = Offset(0, 0);
-List<int> highlightedList = [];
-late Function(void Function()) highlightSetState;
+void logError(String code, String? message) {
+  if (message != null)
+    print('Error: $code\nError Message: $message');
+  else
+    print('Error: $code');
+}
 
-var imageWidth = 0.0;
-var imageHeight = 0.0;
-List<Offset> drawList = [];
+class _CameraScreenState extends State<CameraScreen>
+    with WidgetsBindingObserver, TickerProviderStateMixin {
+  CameraController? controller;
+  XFile? imageFile;
+  late AnimationController _flashModeControlRowAnimationController;
 
-class _CameraScreenState extends State<CameraScreen> {
   @override
-  Widget build(BuildContext context) {
-    var image;
-    List<Map<String, int>> cnts = widget.contourVals;
-    Size screenSize = MediaQuery.of(context).size;
+  void initState() {
+    super.initState();
+    onNewCameraSelected();
+    _ambiguate(WidgetsBinding.instance)?.addObserver(this);
 
-    var dilate = 0.0;
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive, overlays: []);
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(title: Text("Camera")),
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        height: screenSize.height,
-        width: screenSize.width,
-        child: FutureBuilder(
-          future: () async {
-            image = await prepareOCR(widget.image);
-            var decodedImage =
-                await decodeImageFromList(image.readAsBytesSync());
-            dilate = () {
-              if (screenSize.height - 50.0 < decodedImage.height * dilate)
-                return (screenSize.height - 50.0) / decodedImage.height;
-              else
-                return screenSize.width / decodedImage.width;
-            }();
-
-            imageWidth = decodedImage.width * dilate;
-            imageHeight = decodedImage.height * dilate;
-
-            return;
-          }(),
-          builder: (context, state) {
-            if (state.connectionState == ConnectionState.done) {
-              return GestureDetector(
-                onPanUpdate: (details) {
-                  pos = details.localPosition;
-                  drawList.add(pos);
-                  highlightSetState(() {});
-                },
-                onPanEnd: (details) async {
-                  List<String> newList = [];
-                  highlightedList.sort();
-                  highlightedList = highlightedList.reversed.toList();
-                  for (var i in highlightedList)
-                    newList.add(widget.textList[i]);
-                  newText = newList.join(" ");
-                  if (newText.trim() != "") {
-                    String translatedText = "";
-                    await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        content: FutureBuilder(
-                          future: () async {
-                            translatedText = await translate(
-                              input: newText,
-                              fromLang: fromLangVal,
-                              toLang: toLangVal,
-                              context: context,
-                            );
-                            return;
-                          }(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting)
-                              return Container(
-                                height: 100,
-                                child:
-                                    Center(child: CircularProgressIndicator()),
-                              );
-                            else
-                              return SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      newText,
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    line,
-                                    SizedBox(height: 10),
-                                    Text(
-                                      translatedText,
-                                      style: TextStyle(fontSize: 18),
-                                    )
-                                  ],
-                                ),
-                              );
-                          },
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: Text(AppLocalizations.of(context)!.cancel),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pop();
-                              setStateOverlord(() {
-                                googleOutput = translatedText;
-                                googleInCtrl.text = newText;
-                              });
-                            },
-                            child: Text(AppLocalizations.of(context)!.ok),
-                          )
-                        ],
-                      ),
-                    );
-                  }
-                  highlightSetState(() {
-                    highlightedList = [];
-                    drawList = [];
-                    pos = Offset.zero;
-                  });
-                },
-                child: StatefulBuilder(
-                  builder: (context, localSetState) {
-                    highlightSetState = localSetState;
-                    return Container(
-                      width: imageWidth,
-                      height: imageHeight,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            child: Image.file(
-                              image,
-                              width: imageWidth,
-                              height: imageHeight,
-                            ),
-                          ),
-                          Container(
-                            width: imageWidth,
-                            height: imageHeight,
-                            child: CustomPaint(
-                              painter: OpenPainter(),
-                            ),
-                          ),
-                          Positioned(
-                            left: pos.dx - 7,
-                            top: pos.dy - 7,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.blue,
-                                shape: BoxShape.circle,
-                              ),
-                              width: 14,
-                              height: 14,
-                            ),
-                          ),
-                          ...() {
-                            List<Widget> boxes = [];
-                            for (var i = 0; i < cnts.length; i++) {
-                              var x = cnts[i]["x"]!.toDouble() * dilate;
-                              var y = cnts[i]["y"]!.toDouble() * dilate;
-                              var width = cnts[i]["width"]!.toDouble() * dilate;
-                              var height =
-                                  cnts[i]["height"]!.toDouble() * dilate;
-
-                              var color = () {
-                                if (highlightedList.contains(i))
-                                  return Colors.blue;
-                                if ((x < pos.dx && pos.dx < x + width) &&
-                                    (y < pos.dy && pos.dy < y + height)) {
-                                  highlightedList.add(i);
-                                  return Colors.blue;
-                                }
-                                return Colors.green;
-                              }();
-
-                              boxes.add(
-                                Positioned(
-                                  left: x,
-                                  top: y,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: color,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    width: width,
-                                    height: height,
-                                  ),
-                                ),
-                              );
-                            }
-                            return boxes;
-                          }(),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              );
-            }
-            return const SizedBox.shrink();
-          },
-        ),
-      ),
+    _flashModeControlRowAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
     );
   }
-}
 
-class OpenPainter extends CustomPainter {
   @override
-  void paint(Canvas canvas, Size size) {
-    var paint1 = Paint()
-      ..color = Color(0xFF0000ff)
-      ..style = PaintingStyle.fill;
-    drawList.forEach((posy) => canvas.drawCircle(posy, 7, paint1));
+  void dispose() {
+    _ambiguate(WidgetsBinding.instance)?.removeObserver(this);
+    _flashModeControlRowAnimationController.dispose();
+    super.dispose();
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = controller;
+
+    // App state changed before we got the chance to initialize.
+    if (cameraController == null || !cameraController.value.isInitialized)
+      return;
+
+    if (state == AppLifecycleState.inactive)
+      cameraController.dispose();
+    else if (state == AppLifecycleState.resumed) onNewCameraSelected();
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    late IconData flashIcon;
+    switch (currentMode) {
+      case FlashMode.off:
+        flashIcon = Icons.flash_off;
+        break;
+      case FlashMode.torch:
+        flashIcon = Icons.flash_on;
+        break;
+      default:
+        flashIcon = Icons.flash_off;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(flashIcon),
+            onPressed: controller != null ? onSetFlashModeButtonPressed : null,
+          ),
+        ],
+      ),
+      key: _scaffoldKey,
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Center(child: _cameraPreviewWidget()),
+              decoration: BoxDecoration(color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _captureControlRowWidget(),
+    );
+  }
+
+  /// Display the preview from the camera (or a message if the preview is not available).
+  Widget _cameraPreviewWidget() {
+    return CameraPreview(
+      controller!,
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTapDown: (details) => onViewFinderTap(details, constraints),
+        );
+      }),
+    );
+  }
+
+  /// Display the control bar with buttons to take pictures and record videos.
+  Widget _captureControlRowWidget() {
+    final CameraController? cameraController = controller;
+
+    return FloatingActionButton(
+      child: Icon(
+        Icons.camera_alt,
+        color: theme == Brightness.dark ? Colors.white : Colors.black,
+      ),
+      onPressed: cameraController != null &&
+              cameraController.value.isInitialized &&
+              !cameraController.value.isRecordingVideo
+          ? () async {
+              final CameraController? cameraController = controller;
+              if (cameraController == null ||
+                  !cameraController.value.isInitialized) {
+                showInSnackBar('Error: select a camera first.');
+                return;
+              }
+
+              if (cameraController.value.isTakingPicture) return;
+
+              try {
+                XFile file = await cameraController.takePicture();
+                Navigator.pop(context, file);
+              } on CameraException catch (e) {
+                _showCameraException(e);
+                return;
+              }
+            }
+          : null,
+    );
+  }
+
+  /// Display a row of toggle to select the camera (or a message if no camera is available).
+
+  void showInSnackBar(String message) {
+    // ignore: deprecated_member_use
+    _scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+    if (controller == null) return;
+
+    final CameraController cameraController = controller!;
+
+    final offset = Offset(
+      details.localPosition.dx / constraints.maxWidth,
+      details.localPosition.dy / constraints.maxHeight,
+    );
+    cameraController.setExposurePoint(offset);
+    cameraController.setFocusPoint(offset);
+  }
+
+  void onNewCameraSelected() async {
+    final CameraController cameraController = CameraController(
+      cameras[0],
+      ResolutionPreset.max,
+      imageFormatGroup: ImageFormatGroup.jpeg,
+    );
+
+    controller = cameraController;
+
+    // If the controller is updated then update the UI.
+    cameraController.addListener(() {
+      if (mounted) setState(() {});
+      if (cameraController.value.hasError)
+        showInSnackBar(
+            'Camera error ${cameraController.value.errorDescription}');
+    });
+
+    try {
+      if (!cameraController.value.isInitialized)
+        await cameraController.initialize();
+    } on CameraException catch (e) {
+      _showCameraException(e);
+    }
+    if (mounted) setState(() {});
+  }
+
+  void onSetFlashModeButtonPressed() {
+    int i = modes.indexOf(currentMode);
+    currentMode = modes[(i + 1) % (modes.length)];
+    setFlashMode().then((_) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  Future<void> setFlashMode() async {
+    if (controller == null) return;
+
+    try {
+      await controller!.setFlashMode(currentMode);
+    } on CameraException catch (e) {
+      _showCameraException(e);
+      rethrow;
+    }
+  }
+
+  void _showCameraException(CameraException e) {
+    logError(e.code, e.description);
+    showInSnackBar('Error: ${e.code}\n${e.description}');
+  }
 }
+
+// TODO(ianh): Remove this once we roll stable in late 2021.
+T? _ambiguate<T>(T? value) => value;

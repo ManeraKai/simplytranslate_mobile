@@ -1,12 +1,13 @@
 import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:opencv_4/factory/pathfrom.dart';
 import 'package:opencv_4/opencv_4.dart';
+import 'package:simplytranslate_mobile/google/widgets/translation_input/widgets/camera_screen.dart';
 
 import '/data.dart';
-import '/google/widgets/translation_input/widgets/camera_screen.dart';
+import 'text_recognition_screen.dart';
 
 class Camera extends StatefulWidget {
   const Camera({Key? key}) : super(key: key);
@@ -21,8 +22,13 @@ class _CameraState extends State<Camera> {
     cameraFunc() async {
       setStateOverlord(() => loading = true);
       isTranslationCanceled = false;
-      final pickedImageX =
-          await ImagePicker().pickImage(source: ImageSource.camera);
+      XFile? pickedImageX = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => CameraScreen(),
+        ),
+      );
+      setStateOverlord(() => loading = false);
       if (pickedImageX != null) {
         var img = File(pickedImageX.path);
         final croppedImgs = await Cv2.contour(
@@ -55,7 +61,7 @@ class _CameraState extends State<Camera> {
         await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => CameraScreen(
+            builder: (_) => TextRecognitionScreen(
               image: img,
               contourVals: filteredContourValsList,
               croppedImgs: croppedImgsProcessedList,

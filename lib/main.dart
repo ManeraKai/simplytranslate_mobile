@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -12,9 +13,18 @@ import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
 import 'google/google_translate_widget.dart';
+import 'google/widgets/translation_input/widgets/camera_screen.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+    print("Getting available cameras: $cameras");
+  } on CameraException catch (e) {
+    logError(e.code, e.description);
+  }
   ByteData data =
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   SecurityContext.defaultContext
