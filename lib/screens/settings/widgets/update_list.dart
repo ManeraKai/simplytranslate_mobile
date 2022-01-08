@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
@@ -19,14 +18,10 @@ class UpdateList extends StatelessWidget {
       final response = await http
           .get(Uri.parse('https://simple-web.org/instances/simplytranslate'));
       List<String> newInstances = [];
-      parse(response.body)
-          .body!
-          .innerHtml
+      response.body
           .trim()
           .split('\n')
-          .forEach((element) {
-        newInstances.add('https://$element');
-      });
+          .forEach((element) => newInstances.add('https://$element'));
       session.write('instances', newInstances);
       instances = newInstances;
       return true;
