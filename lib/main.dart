@@ -23,7 +23,7 @@ void main(List<String> args) async {
     cameras = await availableCameras();
     print("Getting available cameras: $cameras");
   } on CameraException catch (e) {
-    logError(e.code, e.description);
+    print(e);
   }
   ByteData data =
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
@@ -123,7 +123,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
       } else {
         if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
-        print(_clipData);
       }
     }
   }
@@ -133,19 +132,25 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
         List supportedLocalesCountryCode = [];
-        for (Locale item in supportedLocales)
-          supportedLocalesCountryCode.add(item.countryCode);
+        supportedLocales.forEach(
+          (item) => supportedLocalesCountryCode.add(item.countryCode),
+        );
 
         List supportedLocalesLangCode = [];
-        for (Locale item in supportedLocales)
-          supportedLocalesLangCode.add(item.languageCode);
+        supportedLocales.forEach(
+          (item) => supportedLocalesLangCode.add(item.languageCode),
+        );
 
         locales!;
         List localesCountryCode = [];
-        for (Locale item in locales) localesCountryCode.add(item.countryCode);
+        locales.forEach(
+          (item) => localesCountryCode.add(item.countryCode),
+        );
 
         List localesLangCode = [];
-        for (Locale item in locales) localesLangCode.add(item.languageCode);
+        locales.forEach(
+          (item) => localesLangCode.add(item.languageCode),
+        );
 
         appLocale = locales[0];
         for (var i = 0; i < locales.length; i++)
