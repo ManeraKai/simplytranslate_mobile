@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
+// import 'package:simplytranslate_mobile/screens/overlay/overlay_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
 import 'google/google_translate_widget.dart';
@@ -271,10 +272,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
       title: 'SimplyTranslate Mobile',
       home: Scaffold(
+        // floatingActionButton: FloatingActionButton(
+        //   child: Text("Alert Overlay"),
+        //   onPressed: showSystemWindow,
+        // ),
         appBar: PreferredSize(
           preferredSize: Size(0, 60),
-          child: Builder(builder: (context) {
-            return AppBar(
+          child: Builder(
+            builder: (context) => AppBar(
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(2),
                 child: Container(height: 2, color: greenColor),
@@ -309,8 +314,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               elevation: 3,
               iconTheme: IconThemeData(),
               title: const Text('SimplyTranslate Mobile'),
-            );
-          }),
+            ),
+          ),
         ),
         body: MainPageLocalization(),
       ),

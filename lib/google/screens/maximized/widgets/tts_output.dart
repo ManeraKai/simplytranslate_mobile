@@ -120,10 +120,8 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
       } catch (err) {
         try {
           final result = await InternetAddress.lookup('exmaple.com');
-          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-            print('Last chance ------------------------');
+          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
             showInstanceTtsError(context);
-          }
         } on SocketException catch (_) {
           showInternetError(context);
         }

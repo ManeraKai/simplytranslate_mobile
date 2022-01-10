@@ -39,6 +39,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
 
   @override
   Widget build(BuildContext context) {
+    const space = SizedBox(height: 10);
     return Stack(
       children: [
         SingleChildScrollView(
@@ -57,11 +58,11 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       GoogleToLang(),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  space,
                   GoogleTranslationInput(),
-                  const SizedBox(height: 10),
+                  space,
                   GoogleTranslationOutput(),
-                  const SizedBox(height: 10),
+                  space,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

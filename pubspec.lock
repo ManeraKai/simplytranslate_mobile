@@ -418,6 +418,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  system_alert_window:
+    dependency: "direct main"
+    description:
+      path: system_alert_window
+      relative: true
+    source: path
+    version: "0.5.0+1"
   term_glyph:
     dependency: transitive
     description:

@@ -1,15 +1,16 @@
-import 'package:camera/camera.dart';
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// Note: This code has been heavily modified.
+
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:camera/camera.dart';
 
-import 'package:simplytranslate_mobile/data.dart';
+import '/data.dart';
 
 List<CameraDescription> cameras = [];
 
-List<FlashMode> modes = [
-  FlashMode.off,
-  FlashMode.torch,
-];
+List<FlashMode> modes = [FlashMode.off, FlashMode.torch];
 var currentMode = modes[0];
 
 class CameraScreen extends StatefulWidget {
@@ -87,18 +88,17 @@ class _CameraScreenState extends State<CameraScreen>
               Expanded(
                 child: Container(
                   alignment: Alignment.center,
+                  decoration: BoxDecoration(color: Colors.black),
                   child: CameraPreview(
                     controller!,
-                    child: LayoutBuilder(builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      return GestureDetector(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) => GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTapDown: (details) =>
                             onViewFinderTap(details, constraints),
-                      );
-                    }),
+                      ),
+                    ),
                   ),
-                  decoration: BoxDecoration(color: Colors.black),
                 ),
               ),
             ],
@@ -107,8 +107,10 @@ class _CameraScreenState extends State<CameraScreen>
             var or = MediaQuery.of(context).orientation;
             var sz = MediaQuery.of(context).size;
             return Positioned(
-              bottom: or == Orientation.portrait ? 20 : sz.height / 2 - 60 / 2,
-              left: or == Orientation.portrait ? sz.width / 2 - 60 / 2 : null,
+              bottom:
+                  or == Orientation.portrait ? 20 : (sz.height / 2) - (60 / 2),
+              left:
+                  or == Orientation.portrait ? (sz.width / 2) - (60 / 2) : null,
               right: or == Orientation.landscape ? 20 : null,
               child: _captureControlRowWidget(),
             );
@@ -151,8 +153,11 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   void showInSnackBar(String message) =>
-      ScaffoldMessenger.of(_scaffoldKey.currentContext!)
-          .showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
 
   void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
     if (controller == null) return;
@@ -166,7 +171,7 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   void onNewCameraSelected() async {
-    final CameraController cameraController = CameraController(
+    final cameraController = CameraController(
       cameras[0],
       ResolutionPreset.max,
       imageFormatGroup: ImageFormatGroup.jpeg,

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:opencv_4/factory/pathfrom.dart';
 import 'package:opencv_4/opencv_4.dart';
-import 'package:simplytranslate_mobile/google/widgets/translation_input/widgets/camera_screen.dart';
 
 import '/data.dart';
+import '/google/widgets/translation_input/widgets/camera_screen.dart';
 import 'text_recognition_screen.dart';
 
 class Camera extends StatefulWidget {
@@ -24,9 +24,7 @@ class _CameraState extends State<Camera> {
       isTranslationCanceled = false;
       XFile? pickedImageX = await Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => CameraScreen(),
-        ),
+        MaterialPageRoute(builder: (_) => CameraScreen()),
       );
       setStateOverlord(() => loading = false);
       if (pickedImageX != null) {
@@ -56,7 +54,7 @@ class _CameraState extends State<Camera> {
         }
         try {
           FocusScope.of(context).unfocus();
-        } catch (err) {}
+        } catch (_) {}
         if (!isTranslationCanceled) setStateOverlord(() => loading = false);
         await Navigator.push(
           context,
