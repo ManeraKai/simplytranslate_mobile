@@ -19,8 +19,8 @@ class TextRecognition extends StatelessWidget {
       },
       icon: Icons.text_fields,
       iconColor: Colors.yellow[800]!,
-      title: "Text Recognition",
-      content: "Download trained data files",
+      title: AppLocalizations.of(context)!.text_recognition,
+      content: AppLocalizations.of(context)!.download_trained_data_files,
     );
   }
 }

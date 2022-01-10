@@ -160,5 +160,10 @@
     "email": "Электронная почта",
     "translate_summary": "Распространяйте это приложение по миру!",
     "donate_summary": "Мы ценим это!",
-    "report_bug_summary": "Пожалуйста, сообщите нам"
+    "report_bug_summary": "Пожалуйста, сообщите нам",
+    "text_recognition": "Text Recognition",
+    "download_trained_data_files": "Download trained data files",
+    "language_text_recognition": "$language Text Recognition",
+    "trained_data_files_not_installed": "Trained data files aren't installed.",
+    "install": "Install"
 }

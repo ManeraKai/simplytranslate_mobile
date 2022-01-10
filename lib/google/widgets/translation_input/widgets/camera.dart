@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:opencv_4/factory/pathfrom.dart';
 import 'package:opencv_4/opencv_4.dart';
+import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 
 import '/data.dart';
 import '/google/widgets/translation_input/widgets/camera_screen.dart';
@@ -85,11 +86,20 @@ class _CameraState extends State<Camera> {
                         builder: (context, setStateAlert) {
                           return AlertDialog(
                             title: Text(
-                                "${fromSelLangMap[fromLangVal]!} Text Recognition"),
+                              AppLocalizations.of(context)!
+                                  .language_text_recognition
+                                  .replaceFirst(
+                                    '\$language',
+                                    fromSelLangMap[fromLangVal]!,
+                                  ),
+                            ),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("Trained data files aren't installed."),
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .trained_data_files_not_installed,
+                                ),
                                 SizedBox(height: downloadLoading ? 20 : 24),
                                 if (downloadLoading)
                                   const LinearProgressIndicator(),
@@ -98,7 +108,8 @@ class _CameraState extends State<Camera> {
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.of(context).pop(),
-                                child: Text("Cancel"),
+                                child:
+                                    Text(AppLocalizations.of(context)!.cancel),
                               ),
                               TextButton(
                                 onPressed: downloadLoading
@@ -117,7 +128,8 @@ class _CameraState extends State<Camera> {
                                           cameraFunc();
                                         }
                                       },
-                                child: Text("Install"),
+                                child:
+                                    Text(AppLocalizations.of(context)!.install),
                               ),
                             ],
                           );

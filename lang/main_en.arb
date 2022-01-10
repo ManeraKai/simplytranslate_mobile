@@ -160,5 +160,10 @@
     "email": "Email",
     "translate_summary": "Spread it to the world!",
     "donate_summary": "We appreciate it!",
-    "report_bug_summary": "Please let us know"
+    "report_bug_summary": "Please let us know",
+    "text_recognition": "Text Recognition",
+    "download_trained_data_files": "Download trained data files",
+    "language_text_recognition": "$language Text Recognition",
+    "trained_data_files_not_installed": "Trained data files aren't installed.",
+    "install": "Install"
 }

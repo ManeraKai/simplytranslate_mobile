@@ -35,8 +35,8 @@ dependencies:
   path_provider: ^2.0.8
   opencv_4:
     path: ./opencv_4/
-  system_alert_window:
-    path: ./system_alert_window/
+  # system_alert_window:
+  #   path: ./system_alert_window/
 
 dev_dependencies:
   flutter_test:
