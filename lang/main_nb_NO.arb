@@ -108,5 +108,13 @@
   "install": "Installer",
   "@install": {},
   "trained_data_files_not_installed": "Filer inneholdende treningsdata er ikke installert.",
-  "@trained_data_files_not_installed": {}
+  "@trained_data_files_not_installed": {},
+  "language_text_recognition": "Tekstgjenkjenning av $language",
+  "@language_text_recognition": {},
+  "text_recognition": "Tekstgjenkjenning",
+  "@text_recognition": {},
+  "contribute_summary": "Hjelp til.",
+  "@contribute_summary": {},
+  "download_trained_data_files": "Last ned treningsdatafiler",
+  "@download_trained_data_files": {}
 }
