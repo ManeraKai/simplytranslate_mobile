@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
-import '/google/widgets/translation_input/widgets/tts_input.dart';
+import '/google/widgets/translation_input/buttons/tts_input.dart';
 import '/data.dart';
-import 'widgets/camera.dart';
-import 'widgets/copy_button.dart';
-import 'widgets/delete_button.dart';
-import 'widgets/paste_button.dart';
-import 'widgets/character_limit.dart';
+import 'buttons/camera/camera.dart';
+import 'buttons/copy_button.dart';
+import 'buttons/delete_button.dart';
+import 'buttons/paste_button.dart';
+import 'buttons/character_limit.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
   const GoogleTranslationInput({Key? key}) : super(key: key);

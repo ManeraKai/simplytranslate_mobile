@@ -692,7 +692,7 @@ class Cv2 {
     return resultList;
   }
 
-  /// [contour] function of Module: Color Space Conversions
+  /// [contrast] Change Contrast
   static Future<Uint8List?> contrast({
     CVPathFrom pathFrom = CVPathFrom.ASSETS,
     required String pathString,

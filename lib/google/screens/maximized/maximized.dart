@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import './widgets/tts_output.dart';
 import '/data.dart';
-import '/google/widgets/translation_input/widgets/copy_button.dart';
+import '/google/widgets/translation_input/buttons/copy_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
   const MaximizedScreen({Key? key}) : super(key: key);
@@ -20,6 +20,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
           ),
           borderRadius: BorderRadius.circular(2),
         ),
-        margin: const EdgeInsets.symmetric(vertical: 40,horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -58,7 +59,9 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                 CopyToClipboardButton(googleOutput),
                 IconButton(
                   onPressed: () async {
-                    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+                    await SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.manual,
+                        overlays: SystemUiOverlay.values);
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.fullscreen_exit),
@@ -140,7 +143,8 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
       handleCopy: canCopy(delegate)
           ? () => handleCopy(delegate, clipboardStatus)
           : () {},
-      handleCut: canCut(delegate) ? () => handleCut(delegate, clipboardStatus) : () {},
+      handleCut:
+          canCut(delegate) ? () => handleCut(delegate, clipboardStatus) : () {},
       handlePaste: canPaste(delegate)
           ? () async {
               isFirst = true;

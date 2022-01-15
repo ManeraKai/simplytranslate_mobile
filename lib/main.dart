@@ -14,14 +14,12 @@ import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
 import 'google/google_translate_widget.dart';
-import 'google/widgets/translation_input/widgets/camera_screen.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    cameras = await availableCameras();
   } on CameraException catch (e) {
     print(e);
   }

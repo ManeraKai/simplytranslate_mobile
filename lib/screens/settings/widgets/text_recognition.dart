@@ -4,9 +4,7 @@ import 'package:simplytranslate_mobile/screens/settings/screens/text_recognition
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 
 class TextRecognition extends StatelessWidget {
-  const TextRecognition({
-    Key? key,
-  }) : super(key: key);
+  const TextRecognition({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

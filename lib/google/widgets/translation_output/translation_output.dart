@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' as intl;
 import '/data.dart';
 import '/google/screens/maximized/maximized.dart';
-import '/google/widgets/translation_input/widgets/copy_button.dart';
+import '/google/widgets/translation_input/buttons/copy_button.dart';
 import 'widgets/tts_output.dart';
 
 class GoogleTranslationOutput extends StatefulWidget {

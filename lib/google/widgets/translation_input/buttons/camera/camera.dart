@@ -1,11 +1,10 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/google/widgets/translation_input/buttons/camera/data.dart';
 
 import '/data.dart';
-import '/google/widgets/translation_input/widgets/camera_screen.dart';
-
-bool _isNotCanceled = false;
+import 'camera_screen.dart';
 
 class Camera extends StatefulWidget {
   const Camera({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     cameraFunc() async {
-      setStateOverlord(() => loading = true);
+      cameras = await availableCameras();
       isTranslationCanceled = false;
       await Navigator.push(
         context,
@@ -33,11 +32,11 @@ class _CameraState extends State<Camera> {
           ? null
           : downloadingList[fromLangVal] == TrainedDataState.notDownloaded
               ? () async {
-                  _isNotCanceled = false;
+                  var _isNotCanceled = false;
                   await showDialog(
                     context: context,
                     builder: (contextDialog) {
-                      var downloadLoading = false;
+                      var _langInstalling = false;
                       return StatefulBuilder(
                         builder: (context, setStateAlert) {
                           return AlertDialog(
@@ -54,8 +53,8 @@ class _CameraState extends State<Camera> {
                                   AppLocalizations.of(context)!
                                       .trained_data_files_not_installed,
                                 ),
-                                SizedBox(height: downloadLoading ? 20 : 24),
-                                if (downloadLoading)
+                                SizedBox(height: _langInstalling ? 20 : 24),
+                                if (_langInstalling)
                                   const LinearProgressIndicator(),
                               ],
                             ),
@@ -66,12 +65,12 @@ class _CameraState extends State<Camera> {
                                     Text(AppLocalizations.of(context)!.cancel),
                               ),
                               TextButton(
-                                onPressed: downloadLoading
+                                onPressed: _langInstalling
                                     ? null
                                     : () async {
                                         setStateAlert(
-                                            () => downloadLoading = true);
-                                        print("downloadLoading: $fromLangVal");
+                                            () => _langInstalling = true);
+                                        print("_langInstalling: $fromLangVal");
                                         var result = await downloadOCRLanguage(
                                             fromLangVal);
                                         if (result && _isNotCanceled) {
@@ -90,7 +89,7 @@ class _CameraState extends State<Camera> {
                   );
                   _isNotCanceled = false;
                 }
-              : () => cameraFunc(),
+              : cameraFunc,
       icon: Icon(Icons.camera_alt),
     );
   }
