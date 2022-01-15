@@ -163,7 +163,7 @@
     "report_bug_summary": "Daj nam znać",
     "text_recognition": "Text Recognition",
     "download_trained_data_files": "Download trained data files",
-    "language_text_recognition": "$language Text Recognition",
-    "trained_data_files_not_installed": "Trained data files aren't installed.",
+    "language_text_recognition": "Text Recognition - $language",
+    "trained_data_files_not_installed": "Trained data files are not installed.",
     "install": "Install"
 }

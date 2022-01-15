@@ -1,14 +1,11 @@
-import 'dart:io';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
-import 'package:opencv_4/factory/pathfrom.dart';
-import 'package:opencv_4/opencv_4.dart';
+
 import 'package:flutter_gen/gen_l10n/main_localizations.dart';
 
 import '/data.dart';
 import '/google/widgets/translation_input/widgets/camera_screen.dart';
-import 'text_recognition_screen.dart';
+
+bool _isNotCanceled = false;
 
 class Camera extends StatefulWidget {
   const Camera({Key? key}) : super(key: key);
@@ -23,52 +20,10 @@ class _CameraState extends State<Camera> {
     cameraFunc() async {
       setStateOverlord(() => loading = true);
       isTranslationCanceled = false;
-      XFile? pickedImageX = await Navigator.push(
+      await Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => CameraScreen()),
       );
-      setStateOverlord(() => loading = false);
-      if (pickedImageX != null) {
-        var img = File(pickedImageX.path);
-        final croppedImgs = await Cv2.contour(
-          pathFrom: CVPathFrom.GALLERY_CAMERA,
-          pathString: img.path,
-        );
-        final contourVals = await Cv2.contourVals();
-        List<String> textList = [];
-        List<File> croppedImgsProcessedList = [];
-        List<Map<String, int>> filteredContourValsList = [];
-
-        for (var i = 0; i < croppedImgs.length; i++) {
-          final contour = contourVals[i];
-          final croppedImg = await byte2File(croppedImgs[i]!);
-          final preparedImg = await prepareOCR(croppedImg);
-          final String text = await FlutterTesseractOcr.extractText(
-            preparedImg.path,
-            language: two2three[fromLangVal],
-          );
-          if (text.trim() != "") {
-            textList.add(text);
-            croppedImgsProcessedList.add(preparedImg);
-            filteredContourValsList.add(contour);
-          }
-        }
-        try {
-          FocusScope.of(context).unfocus();
-        } catch (_) {}
-        if (!isTranslationCanceled) setStateOverlord(() => loading = false);
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => TextRecognitionScreen(
-              image: img,
-              contourVals: filteredContourValsList,
-              croppedImgs: croppedImgsProcessedList,
-              textList: textList,
-            ),
-          ),
-        );
-      }
     }
 
     return IconButton(
@@ -76,9 +31,10 @@ class _CameraState extends State<Camera> {
       highlightColor: Colors.transparent,
       onPressed: fromLangVal == 'auto'
           ? null
-          : !downloadedList.contains(fromLangVal)
-              ? () {
-                  showDialog(
+          : downloadingList[fromLangVal] == TrainedDataState.notDownloaded
+              ? () async {
+                  _isNotCanceled = false;
+                  await showDialog(
                     context: context,
                     builder: (contextDialog) {
                       var downloadLoading = false;
@@ -88,10 +44,8 @@ class _CameraState extends State<Camera> {
                             title: Text(
                               AppLocalizations.of(context)!
                                   .language_text_recognition
-                                  .replaceFirst(
-                                    '\$language',
-                                    fromSelLangMap[fromLangVal]!,
-                                  ),
+                                  .replaceFirst('\$language',
+                                      fromSelLangMap[fromLangVal]!),
                             ),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -115,15 +69,12 @@ class _CameraState extends State<Camera> {
                                 onPressed: downloadLoading
                                     ? null
                                     : () async {
-                                        downloadedList.add(fromLangVal);
                                         setStateAlert(
                                             () => downloadLoading = true);
-                                        bool result = await downloadOCRLanguage(
-                                            two2three[fromLangVal]);
-                                        if (result) {
-                                          setStateAlert(
-                                              () => downloadLoading = false);
-                                          setStateOverlord(() {});
+                                        print("downloadLoading: $fromLangVal");
+                                        var result = await downloadOCRLanguage(
+                                            fromLangVal);
+                                        if (result && _isNotCanceled) {
                                           Navigator.of(context).pop();
                                           cameraFunc();
                                         }
@@ -137,6 +88,7 @@ class _CameraState extends State<Camera> {
                       );
                     },
                   );
+                  _isNotCanceled = false;
                 }
               : () => cameraFunc(),
       icon: Icon(Icons.camera_alt),

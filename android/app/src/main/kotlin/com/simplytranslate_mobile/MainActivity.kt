@@ -20,10 +20,10 @@ import java.lang.reflect.Method
 import android.content.Intent.getIntent
 import android.os.Parcelable
 
-import `in`.jvapps.system_alert_window.SystemAlertWindowPlugin
-import io.flutter.app.FlutterApplication
-import io.flutter.plugin.common.PluginRegistry
-import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
+// import `in`.jvapps.system_alert_window.SystemAlertWindowPlugin
+// import io.flutter.app.FlutterApplication
+// import io.flutter.plugin.common.PluginRegistry
+// import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
 
 class MainActivity: FlutterActivity() {
 
@@ -90,13 +90,13 @@ class SharedActivity : Activity() {
 }
 
   
-class Application : FlutterApplication(), PluginRegistrantCallback {
-    override fun onCreate() {
-        super.onCreate()
-        SystemAlertWindowPlugin.setPluginRegistrant(this)
-    }
+// class Application : FlutterApplication(), PluginRegistrantCallback {
+//     override fun onCreate() {
+//         super.onCreate()
+//         SystemAlertWindowPlugin.setPluginRegistrant(this)
+//     }
 
-    override fun registerWith(registry: PluginRegistry) {
-    SystemAlertWindowPlugin.registerWith(registry.registrarFor("in.jvapps.system_alert_window"));
-    }
-}
+//     override fun registerWith(registry: PluginRegistry) {
+//     SystemAlertWindowPlugin.registerWith(registry.registrarFor("in.jvapps.system_alert_window"));
+//     }
+// }

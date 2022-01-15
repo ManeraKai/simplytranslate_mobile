@@ -109,6 +109,9 @@ Future<File> prepareOCR(File croppedImg) async {
 }
 
 Future<bool> downloadOCRLanguage(lang) async {
+  setStateOverlord(() => downloadingList[lang] = TrainedDataState.Downloading);
+
+  String langThree = two2three[lang]!;
   Directory dir = Directory(await FlutterTesseractOcr.getTessdataPath());
   if (!dir.existsSync()) {
     dir.create();
@@ -116,22 +119,27 @@ Future<bool> downloadOCRLanguage(lang) async {
   bool isInstalled = false;
   dir.listSync().forEach((element) {
     String name = element.path.split('/').last;
-    isInstalled |= name == '$lang.traineddata';
+    isInstalled |= name == '$langThree.traineddata';
   });
   if (!isInstalled) {
     HttpClient httpClient = HttpClient();
     HttpClientRequest request = await httpClient.getUrl(Uri.parse(
-        'https://github.com/tesseract-ocr/tessdata/raw/main/$lang.traineddata'));
+        'https://github.com/tesseract-ocr/tessdata/raw/main/$langThree.traineddata'));
     HttpClientResponse response = await request.close();
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     String dir = await FlutterTesseractOcr.getTessdataPath();
-    print('$dir/$lang.traineddata');
-    File file = File('$dir/$lang.traineddata');
+    String fullDir = '$dir/$langThree.traineddata';
+    print(fullDir);
+    File file = File(fullDir);
     await file.writeAsBytes(bytes);
+    setStateOverlord(() => downloadingList[lang] = TrainedDataState.Downloaded);
     return true;
   }
+  downloadingList[lang] = TrainedDataState.notDownloaded;
   return false;
 }
+
+late File img;
 
 Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
 
@@ -216,7 +224,7 @@ Future<void> getSharedText() async {
 
 bool isSnackBarVisible = false;
 
-List<String> downloadedList = [];
+enum TrainedDataState { notDownloaded, Downloading, Downloaded }
 
 Map<String, String> selectLanguagesMapGetter(BuildContext context) {
   Map<String, String> mapOne = {
@@ -444,6 +452,101 @@ bool ttsMaximizedOutputloading = false;
 bool isMaximizedTtsOutputCanceled = false;
 
 bool isFirst = true;
+
+Map<String, TrainedDataState> downloadingList = {
+  "af": TrainedDataState.notDownloaded,
+  "am": TrainedDataState.notDownloaded,
+  "ar": TrainedDataState.notDownloaded,
+  "as": TrainedDataState.notDownloaded,
+  "az": TrainedDataState.notDownloaded,
+  "be": TrainedDataState.notDownloaded,
+  "bn": TrainedDataState.notDownloaded,
+  "bs": TrainedDataState.notDownloaded,
+  "bg": TrainedDataState.notDownloaded,
+  "ca": TrainedDataState.notDownloaded,
+  "cs": TrainedDataState.notDownloaded,
+  "zh": TrainedDataState.notDownloaded,
+  "co": TrainedDataState.notDownloaded,
+  "cy": TrainedDataState.notDownloaded,
+  "da": TrainedDataState.notDownloaded,
+  "de": TrainedDataState.notDownloaded,
+  "el": TrainedDataState.notDownloaded,
+  "en": TrainedDataState.notDownloaded,
+  "eo": TrainedDataState.notDownloaded,
+  "et": TrainedDataState.notDownloaded,
+  "eu": TrainedDataState.notDownloaded,
+  "fa": TrainedDataState.notDownloaded,
+  "fi": TrainedDataState.notDownloaded,
+  "fr": TrainedDataState.notDownloaded,
+  "fy": TrainedDataState.notDownloaded,
+  "gd": TrainedDataState.notDownloaded,
+  "ga": TrainedDataState.notDownloaded,
+  "gl": TrainedDataState.notDownloaded,
+  "gu": TrainedDataState.notDownloaded,
+  "ht": TrainedDataState.notDownloaded,
+  "hi": TrainedDataState.notDownloaded,
+  "hr": TrainedDataState.notDownloaded,
+  "hu": TrainedDataState.notDownloaded,
+  "hy": TrainedDataState.notDownloaded,
+  "id": TrainedDataState.notDownloaded,
+  "is": TrainedDataState.notDownloaded,
+  "it": TrainedDataState.notDownloaded,
+  "ja": TrainedDataState.notDownloaded,
+  "kn": TrainedDataState.notDownloaded,
+  "ka": TrainedDataState.notDownloaded,
+  "kk": TrainedDataState.notDownloaded,
+  "km": TrainedDataState.notDownloaded,
+  "ky": TrainedDataState.notDownloaded,
+  "ko": TrainedDataState.notDownloaded,
+  "lo": TrainedDataState.notDownloaded,
+  "la": TrainedDataState.notDownloaded,
+  "lv": TrainedDataState.notDownloaded,
+  "lt": TrainedDataState.notDownloaded,
+  "lb": TrainedDataState.notDownloaded,
+  "ml": TrainedDataState.notDownloaded,
+  "mr": TrainedDataState.notDownloaded,
+  "mk": TrainedDataState.notDownloaded,
+  "mt": TrainedDataState.notDownloaded,
+  "mn": TrainedDataState.notDownloaded,
+  "mi": TrainedDataState.notDownloaded,
+  "ms": TrainedDataState.notDownloaded,
+  "my": TrainedDataState.notDownloaded,
+  "ne": TrainedDataState.notDownloaded,
+  "nl": TrainedDataState.notDownloaded,
+  "no": TrainedDataState.notDownloaded,
+  "or": TrainedDataState.notDownloaded,
+  "pa": TrainedDataState.notDownloaded,
+  "pl": TrainedDataState.notDownloaded,
+  "pt": TrainedDataState.notDownloaded,
+  "ps": TrainedDataState.notDownloaded,
+  "ro": TrainedDataState.notDownloaded,
+  "ru": TrainedDataState.notDownloaded,
+  "si": TrainedDataState.notDownloaded,
+  "sk": TrainedDataState.notDownloaded,
+  "sl": TrainedDataState.notDownloaded,
+  "sd": TrainedDataState.notDownloaded,
+  "es": TrainedDataState.notDownloaded,
+  "sq": TrainedDataState.notDownloaded,
+  "sr": TrainedDataState.notDownloaded,
+  "su": TrainedDataState.notDownloaded,
+  "sw": TrainedDataState.notDownloaded,
+  "sv": TrainedDataState.notDownloaded,
+  "ta": TrainedDataState.notDownloaded,
+  "tt": TrainedDataState.notDownloaded,
+  "te": TrainedDataState.notDownloaded,
+  "tg": TrainedDataState.notDownloaded,
+  "tl": TrainedDataState.notDownloaded,
+  "th": TrainedDataState.notDownloaded,
+  "to": TrainedDataState.notDownloaded,
+  "tr": TrainedDataState.notDownloaded,
+  "ug": TrainedDataState.notDownloaded,
+  "uk": TrainedDataState.notDownloaded,
+  "ur": TrainedDataState.notDownloaded,
+  "uz": TrainedDataState.notDownloaded,
+  "vi": TrainedDataState.notDownloaded,
+  "yi": TrainedDataState.notDownloaded,
+  "yo": TrainedDataState.notDownloaded,
+};
 
 late double textFieldHeight;
 

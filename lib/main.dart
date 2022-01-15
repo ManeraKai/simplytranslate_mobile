@@ -22,7 +22,6 @@ void main(List<String> args) async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
-    print("Getting available cameras: $cameras");
   } on CameraException catch (e) {
     print(e);
   }
@@ -60,7 +59,6 @@ void main(List<String> args) async {
     }
   }
   flutterTesseractOcrTessdataPath = await FlutterTesseractOcr.getTessdataPath();
-  print(flutterTesseractOcrTessdataPath);
 
   two2three.forEach((key, value) {
     var dir = Directory(flutterTesseractOcrTessdataPath);
@@ -70,13 +68,10 @@ void main(List<String> args) async {
     var dirList = dir.listSync();
     dirList.forEach((element) {
       String name = element.path.split('/').last;
-      if (name == '$value.traineddata') downloadedList.add(key);
+      if (name == '$value.traineddata')
+        downloadingList[key] = TrainedDataState.Downloaded;
     });
   });
-
-  if (downloadedList.length >= two2three.length) downloadedList.add("install");
-
-  print(downloadedList);
 
   var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
 
@@ -272,10 +267,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
       title: 'SimplyTranslate Mobile',
       home: Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   child: Text("Alert Overlay"),
-        //   onPressed: showSystemWindow,
-        // ),
         appBar: PreferredSize(
           preferredSize: Size(0, 60),
           child: Builder(

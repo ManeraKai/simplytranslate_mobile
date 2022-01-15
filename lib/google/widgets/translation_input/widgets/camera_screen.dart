@@ -2,13 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // Note: This code has been heavily modified.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:camera/camera.dart';
+import 'text_recognition_screen.dart';
 
 import '/data.dart';
 
 List<CameraDescription> cameras = [];
+
+bool cameraMode = true;
 
 List<FlashMode> modes = [FlashMode.off, FlashMode.torch];
 var currentMode = modes[0];
@@ -71,51 +75,64 @@ class _CameraScreenState extends State<CameraScreen>
       default:
         flashIcon = Icons.flash_off;
     }
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(flashIcon),
-            onPressed: controller != null ? onSetFlashModeButtonPressed : null,
-          ),
-        ],
-      ),
-      key: _scaffoldKey,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: CameraPreview(
-                    controller!,
-                    child: LayoutBuilder(
-                      builder: (context, constraints) => GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTapDown: (details) =>
-                            onViewFinderTap(details, constraints),
+    return WillPopScope(
+      onWillPop: () async {
+        if (cameraMode) return true;
+        setState(() => cameraMode = true);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(flashIcon),
+              onPressed:
+                  controller != null ? onSetFlashModeButtonPressed : null,
+            ),
+          ],
+        ),
+        key: _scaffoldKey,
+        body: cameraMode
+            ? Stack(
+                children: [
+                  Column(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(color: Colors.black),
+                          child: CameraPreview(
+                            controller!,
+                            child: LayoutBuilder(
+                              builder: (context, constraints) =>
+                                  GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTapDown: (details) =>
+                                    onViewFinderTap(details, constraints),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ),
-            ],
-          ),
-          () {
-            var or = MediaQuery.of(context).orientation;
-            var sz = MediaQuery.of(context).size;
-            return Positioned(
-              bottom:
-                  or == Orientation.portrait ? 20 : (sz.height / 2) - (60 / 2),
-              left:
-                  or == Orientation.portrait ? (sz.width / 2) - (60 / 2) : null,
-              right: or == Orientation.landscape ? 20 : null,
-              child: _captureControlRowWidget(),
-            );
-          }(),
-        ],
+                  () {
+                    var or = MediaQuery.of(context).orientation;
+                    var sz = MediaQuery.of(context).size;
+                    return Positioned(
+                      bottom: or == Orientation.portrait
+                          ? 20
+                          : (sz.height / 2) - (60 / 2),
+                      left: or == Orientation.portrait
+                          ? (sz.width / 2) - (60 / 2)
+                          : null,
+                      right: or == Orientation.landscape ? 20 : null,
+                      child: _captureControlRowWidget(),
+                    );
+                  }(),
+                ],
+              )
+            : TextRecognitionScreen(),
       ),
     );
   }
@@ -133,19 +150,17 @@ class _CameraScreenState extends State<CameraScreen>
               ? () async {
                   final CameraController? cameraController = controller;
                   if (cameraController == null ||
-                      !cameraController.value.isInitialized) {
-                    showInSnackBar('Error: select a camera first.');
-                    return;
-                  }
-
-                  if (cameraController.value.isTakingPicture) return;
-
+                      !cameraController.value.isInitialized ||
+                      cameraController.value.isTakingPicture) return;
                   try {
-                    XFile file = await cameraController.takePicture();
-                    Navigator.pop(context, file);
+                    XFile pickedImageX = await cameraController.takePicture();
+                    currentMode = modes[0];
+                    await controller!.setFlashMode(currentMode);
+                    setStateOverlord(() => loading = false);
+                    img = File(pickedImageX.path);
+                    setState(() => cameraMode = false);
                   } on CameraException catch (e) {
                     _showCameraException(e);
-                    return;
                   }
                 }
               : null,
@@ -154,9 +169,7 @@ class _CameraScreenState extends State<CameraScreen>
 
   void showInSnackBar(String message) =>
       ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-        SnackBar(
-          content: Text(message),
-        ),
+        SnackBar(content: Text(message)),
       );
 
   void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
@@ -196,23 +209,17 @@ class _CameraScreenState extends State<CameraScreen>
     if (mounted) setState(() {});
   }
 
-  void onSetFlashModeButtonPressed() {
+  void onSetFlashModeButtonPressed() async {
     int i = modes.indexOf(currentMode);
     currentMode = modes[(i + 1) % (modes.length)];
-    setFlashMode().then((_) {
-      if (mounted) setState(() {});
-    });
-  }
-
-  Future<void> setFlashMode() async {
     if (controller == null) return;
-
     try {
       await controller!.setFlashMode(currentMode);
     } on CameraException catch (e) {
       _showCameraException(e);
       rethrow;
     }
+    if (mounted) setState(() {});
   }
 
   void _showCameraException(CameraException e) {
