@@ -329,8 +329,8 @@
   "@download_trained_data_files": {},
   "language_text_recognition": "Rozpoznawanie tekstu - $language",
   "@language_text_recognition": {},
-  "trained_data_files_not_installed": "Trained data files are not installed.",
+  "trained_data_files_not_installed": "Pliki z wytrenowanymi danymi nie są zainstalowane.",
   "@trained_data_files_not_installed": {},
-  "install": "Install",
+  "install": "Zainstaluj",
   "@install": {}
 }
