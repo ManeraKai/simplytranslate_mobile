@@ -22,8 +22,10 @@ class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
           child: Column(
             children: () {
               List<Widget> myList = [];
-              toSelLangMap.forEach(
-                (key, value) => myList.add(
+              for (var key in toSelLangMap.keys) {
+                if (downloadingList[key] == null) continue;
+                var value = toSelLangMap[key]!;
+                myList.add(
                   InkWell(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -44,7 +46,13 @@ class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
                             ),
                           ),
                           () {
-                            switch (downloadingList[key]) {
+                            switch (downloadingList[key]!) {
+                              case TrainedDataState.Downloaded:
+                                return Icon(
+                                  Icons.check,
+                                  color: greenColor,
+                                  size: 45,
+                                );
                               case TrainedDataState.Downloading:
                                 return Container(
                                   height: 45,
@@ -52,13 +60,7 @@ class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
                                   padding: const EdgeInsets.all(5),
                                   child: const CircularProgressIndicator(),
                                 );
-                              case TrainedDataState.Downloaded:
-                                return Icon(
-                                  Icons.check,
-                                  color: greenColor,
-                                  size: 45,
-                                );
-                              default:
+                              case TrainedDataState.notDownloaded:
                                 return Icon(
                                   Icons.download,
                                   color: greenColor,
@@ -73,8 +75,8 @@ class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
                         ? null
                         : () => downloadOCRLanguage(key),
                   ),
-                ),
-              );
+                );
+              }
               return myList;
             }(),
           ),

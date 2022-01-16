@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -109,6 +107,8 @@ Future<File> prepareOCR(File croppedImg) async {
 }
 
 Future<bool> downloadOCRLanguage(lang) async {
+  String fullName = fromSelLangMap[lang]!;
+  print("Downloading ocr: $fullName");
   setStateOverlord(() => downloadingList[lang] = TrainedDataState.Downloading);
 
   String langThree = two2three[lang]!;
@@ -122,20 +122,19 @@ Future<bool> downloadOCRLanguage(lang) async {
     isInstalled |= name == '$langThree.traineddata';
   });
   if (!isInstalled) {
-    HttpClient httpClient = HttpClient();
-    HttpClientRequest request = await httpClient.getUrl(Uri.parse(
-        'https://github.com/tesseract-ocr/tessdata/raw/main/$langThree.traineddata'));
-    HttpClientResponse response = await request.close();
-    Uint8List bytes = await consolidateHttpClientResponseBytes(response);
+    var url = Uri.parse(
+        'https://github.com/tesseract-ocr/tessdata/raw/main/$langThree.traineddata');
+    var response = await http.get(url);
+    Uint8List bytes = response.bodyBytes;
     String dir = await FlutterTesseractOcr.getTessdataPath();
-    String fullDir = '$dir/$langThree.traineddata';
-    print(fullDir);
-    File file = File(fullDir);
+    File file = File('$dir/$langThree.traineddata');
     await file.writeAsBytes(bytes);
     setStateOverlord(() => downloadingList[lang] = TrainedDataState.Downloaded);
+    print("Successfully Downloaded ocr: $fullName");
     return true;
   }
   downloadingList[lang] = TrainedDataState.notDownloaded;
+  print("Failed to Downloaded ocr: $fullName");
   return false;
 }
 
@@ -573,7 +572,6 @@ Map<String, String> two2three = {
   "ca": "cat",
   "cs": "ces",
   "zh": "chi_tra",
-  "": "syr",
   "co": "cos",
   "cy": "cym",
   "da": "dan",

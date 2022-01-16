@@ -32,11 +32,11 @@ class _CameraState extends State<Camera> {
           ? null
           : downloadingList[fromLangVal] == TrainedDataState.notDownloaded
               ? () async {
-                  var _isNotCanceled = false;
+                  var _isNotCanceled = true;
+                  var _isLangInstalling = false;
                   await showDialog(
                     context: context,
                     builder: (contextDialog) {
-                      var _langInstalling = false;
                       return StatefulBuilder(
                         builder: (context, setStateAlert) {
                           return AlertDialog(
@@ -53,8 +53,8 @@ class _CameraState extends State<Camera> {
                                   AppLocalizations.of(context)!
                                       .trained_data_files_not_installed,
                                 ),
-                                SizedBox(height: _langInstalling ? 20 : 24),
-                                if (_langInstalling)
+                                SizedBox(height: _isLangInstalling ? 20 : 24),
+                                if (_isLangInstalling)
                                   const LinearProgressIndicator(),
                               ],
                             ),
@@ -65,12 +65,11 @@ class _CameraState extends State<Camera> {
                                     Text(AppLocalizations.of(context)!.cancel),
                               ),
                               TextButton(
-                                onPressed: _langInstalling
+                                onPressed: _isLangInstalling
                                     ? null
                                     : () async {
                                         setStateAlert(
-                                            () => _langInstalling = true);
-                                        print("_langInstalling: $fromLangVal");
+                                            () => _isLangInstalling = true);
                                         var result = await downloadOCRLanguage(
                                             fromLangVal);
                                         if (result && _isNotCanceled) {

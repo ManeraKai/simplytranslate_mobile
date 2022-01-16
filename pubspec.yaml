@@ -30,9 +30,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
-  flutter_tesseract_ocr: ^0.4.18
-  camera: ^0.9.4+5
   path_provider: ^2.0.8
+  camera: ^0.9.4+5
+  flutter_tesseract_ocr: ^0.4.18
   opencv_4:
     path: ./opencv_4/
   # system_alert_window:
