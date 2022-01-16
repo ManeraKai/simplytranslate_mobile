@@ -60,7 +60,10 @@ class _CameraState extends State<Camera> {
                             ),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.of(context).pop(),
+                                onPressed: () {
+                                  cancelDownloadOCRLanguage(fromLangVal);
+                                  Navigator.of(context).pop();
+                                },
                                 child:
                                     Text(AppLocalizations.of(context)!.cancel),
                               ),

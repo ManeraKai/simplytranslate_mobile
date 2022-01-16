@@ -106,6 +106,16 @@ Future<File> prepareOCR(File croppedImg) async {
   // final thresh1 = await byte2File(thresh1Byte!);
 }
 
+cancelDownloadOCRLanguage(lang) {
+  String fullName = fromSelLangMap[lang]!;
+  print("Canceled ocr: $fullName");
+  _downloadOCRLanguageCancel = true;
+  setStateOverlord(
+      () => downloadingList[lang] = TrainedDataState.notDownloaded);
+}
+
+var _downloadOCRLanguageCancel = false;
+
 Future<bool> downloadOCRLanguage(lang) async {
   String fullName = fromSelLangMap[lang]!;
   print("Downloading ocr: $fullName");
@@ -113,9 +123,8 @@ Future<bool> downloadOCRLanguage(lang) async {
 
   String langThree = two2three[lang]!;
   Directory dir = Directory(await FlutterTesseractOcr.getTessdataPath());
-  if (!dir.existsSync()) {
-    dir.create();
-  }
+  if (!dir.existsSync()) dir.create();
+
   bool isInstalled = false;
   dir.listSync().forEach((element) {
     String name = element.path.split('/').last;
@@ -125,15 +134,21 @@ Future<bool> downloadOCRLanguage(lang) async {
     var url = Uri.parse(
         'https://github.com/tesseract-ocr/tessdata/raw/main/$langThree.traineddata');
     var response = await http.get(url);
-    Uint8List bytes = response.bodyBytes;
-    String dir = await FlutterTesseractOcr.getTessdataPath();
-    File file = File('$dir/$langThree.traineddata');
-    await file.writeAsBytes(bytes);
-    setStateOverlord(() => downloadingList[lang] = TrainedDataState.Downloaded);
-    print("Successfully Downloaded ocr: $fullName");
-    return true;
+    if (!_downloadOCRLanguageCancel) {
+      print(_downloadOCRLanguageCancel);
+      Uint8List bytes = response.bodyBytes;
+      String dir = await FlutterTesseractOcr.getTessdataPath();
+      File file = File('$dir/$langThree.traineddata');
+      await file.writeAsBytes(bytes);
+      setStateOverlord(
+          () => downloadingList[lang] = TrainedDataState.Downloaded);
+      print("Successfully Downloaded ocr: $fullName");
+      return true;
+    }
   }
-  downloadingList[lang] = TrainedDataState.notDownloaded;
+  _downloadOCRLanguageCancel = false;
+  setStateOverlord(
+      () => downloadingList[lang] = TrainedDataState.notDownloaded);
   print("Failed to Downloaded ocr: $fullName");
   return false;
 }
