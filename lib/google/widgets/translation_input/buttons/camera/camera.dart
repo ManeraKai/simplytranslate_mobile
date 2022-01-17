@@ -34,7 +34,7 @@ class _CameraState extends State<Camera> {
               ? () async {
                   var _isNotCanceled = true;
                   var _isLangInstalling = false;
-                  await showDialog(
+                  bool? result = await showDialog(
                     context: context,
                     builder: (contextDialog) {
                       return StatefulBuilder(
@@ -76,7 +76,7 @@ class _CameraState extends State<Camera> {
                                         var result = await downloadOCRLanguage(
                                             fromLangVal);
                                         if (result && _isNotCanceled) {
-                                          Navigator.of(context).pop();
+                                          Navigator.of(context).pop(true);
                                           cameraFunc();
                                         }
                                       },
@@ -89,8 +89,10 @@ class _CameraState extends State<Camera> {
                       );
                     },
                   );
-                  cancelDownloadOCRLanguage(fromLangVal);
-                  _isNotCanceled = false;
+                  if (result != true) {
+                    cancelDownloadOCRLanguage(fromLangVal);
+                    _isNotCanceled = false;
+                  }
                 }
               : cameraFunc,
       icon: Icon(Icons.camera_alt),
