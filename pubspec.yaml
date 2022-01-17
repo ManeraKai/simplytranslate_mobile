@@ -34,9 +34,9 @@ dependencies:
   camera: ^0.9.4+5
   flutter_tesseract_ocr: ^0.4.18
   opencv_4:
-    path: ./opencv_4/
+    path: ./custom_pubs/opencv_4/
   # system_alert_window:
-  #   path: ./system_alert_window/
+  #   path: ./custom_pubs/system_alert_window/
 
 dev_dependencies:
   flutter_test:

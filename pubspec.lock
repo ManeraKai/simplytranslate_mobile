@@ -213,7 +213,7 @@ packages:
   opencv_4:
     dependency: "direct main"
     description:
-      path: opencv_4
+      path: "custom_pubs/opencv_4"
       relative: true
     source: path
     version: "1.0.0"
