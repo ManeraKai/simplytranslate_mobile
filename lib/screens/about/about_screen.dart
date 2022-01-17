@@ -54,7 +54,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 title: AppLocalizations.of(context)!.translate,
                 content: AppLocalizations.of(context)!.translate_summary,
                 onTap: () => launch(
-                  'https://poeditor.com/join/project?hash=rV8CGr8NPj',
+                  'https://hosted.weblate.org/projects/simplytranslate-mobile/',
                 ),
               ),
               AboutButton(
