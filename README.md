@@ -61,7 +61,10 @@ I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visuals
 - **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
 - **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
 - **🇹🇷 Turkish:** Anonymous
-
+- **🇵🇹 Portuguese (Brazil):** [Murilogs1910](https://github.com/Murilogs1910)
+- **🇳🇴 Norwegian Bokmål:** [comradekingu](https://github.com/comradekingu)
+- **🇪🇸 Spanish:** [programmer-pony](https://github.com/programmer-pony)
+- **🇫🇷 French:** [Edanas](https://hosted.weblate.org/user/Edanas/)
 
 ### Icon
 - [joelchrono12](https://joelchrono12.ml/)
