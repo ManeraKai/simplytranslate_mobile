@@ -71,9 +71,10 @@ class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
                         ],
                       ),
                     ),
-                    onTap: downloadingList[key] == TrainedDataState.Downloaded
-                        ? null
-                        : () => downloadOCRLanguage(key),
+                    onTap:
+                        downloadingList[key] != TrainedDataState.notDownloaded
+                            ? null
+                            : () => downloadOCRLanguage(key),
                   ),
                 );
               }

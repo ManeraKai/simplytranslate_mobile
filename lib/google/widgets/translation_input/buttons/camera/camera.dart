@@ -30,7 +30,7 @@ class _CameraState extends State<Camera> {
       highlightColor: Colors.transparent,
       onPressed: fromLangVal == 'auto'
           ? null
-          : downloadingList[fromLangVal] == TrainedDataState.notDownloaded
+          : downloadingList[fromLangVal] != TrainedDataState.Downloaded
               ? () async {
                   var _isNotCanceled = true;
                   var _isLangInstalling = false;
@@ -89,6 +89,7 @@ class _CameraState extends State<Camera> {
                       );
                     },
                   );
+                  cancelDownloadOCRLanguage(fromLangVal);
                   _isNotCanceled = false;
                 }
               : cameraFunc,

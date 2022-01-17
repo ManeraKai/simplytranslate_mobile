@@ -109,9 +109,10 @@ Future<File> prepareOCR(File croppedImg) async {
 cancelDownloadOCRLanguage(lang) {
   String fullName = fromSelLangMap[lang]!;
   print("Canceled ocr: $fullName");
-  _downloadOCRLanguageCancel = true;
-  setStateOverlord(
-      () => downloadingList[lang] = TrainedDataState.notDownloaded);
+  setStateOverlord(() {
+    _downloadOCRLanguageCancel = true;
+    downloadingList[lang] = TrainedDataState.notDownloaded;
+  });
 }
 
 var _downloadOCRLanguageCancel = false;
@@ -135,7 +136,6 @@ Future<bool> downloadOCRLanguage(lang) async {
         'https://github.com/tesseract-ocr/tessdata/raw/main/$langThree.traineddata');
     var response = await http.get(url);
     if (!_downloadOCRLanguageCancel) {
-      print(_downloadOCRLanguageCancel);
       Uint8List bytes = response.bodyBytes;
       String dir = await FlutterTesseractOcr.getTessdataPath();
       File file = File('$dir/$langThree.traineddata');
