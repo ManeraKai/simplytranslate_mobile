@@ -1719,6 +1719,16 @@ class L10n {
       args: [],
     );
   }
+
+  /// `Camera is not accessible`
+  String get camera_is_not_accessible {
+    return Intl.message(
+      'Camera is not accessible',
+      name: 'camera_is_not_accessible',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

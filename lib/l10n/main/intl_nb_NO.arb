@@ -114,5 +114,6 @@
   "contribute_summary": "Hjelp til.",
   "@contribute_summary": {},
   "download_trained_data_files": "Last ned treningsdatafiler",
-  "@download_trained_data_files": {}
+  "@download_trained_data_files": {},
+  "camera_is_not_accessible": "Camera is not accessible"
 }

@@ -114,5 +114,6 @@
   "download_trained_data_files": "Descargar archivos de datos entrenados",
   "@download_trained_data_files": {},
   "language_text_recognition": "Reconocimiento de texto - $language",
-  "@language_text_recognition": {}
+  "@language_text_recognition": {},
+  "camera_is_not_accessible": "Camera is not accessible"
 }

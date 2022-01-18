@@ -322,5 +322,6 @@
     "check_instance": "Vérifiez l'instance.",
     "@check_instance": {},
     "empty_clipboard": "Le presse-papiers est vide",
-    "@empty_clipboard": {}
+    "@empty_clipboard": {},
+    "camera_is_not_accessible": "Camera is not accessible"
 }

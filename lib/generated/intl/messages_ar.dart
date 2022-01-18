@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bengali": MessageLookupByLibrary.simpleMessage("البنغالية"),
         "bosnian": MessageLookupByLibrary.simpleMessage("البوسنية"),
         "bulgarian": MessageLookupByLibrary.simpleMessage("البلغارية"),
+        "camera_is_not_accessible":
+            MessageLookupByLibrary.simpleMessage("لا يمكن الوصول إلى الكاميرا"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "catalan": MessageLookupByLibrary.simpleMessage("القطلونية"),
         "cebuano": MessageLookupByLibrary.simpleMessage("السيبيوانية"),

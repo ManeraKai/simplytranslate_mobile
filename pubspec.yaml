@@ -33,6 +33,7 @@ dependencies:
   path_provider: ^2.0.8
   camera: ^0.9.4+5
   flutter_tesseract_ocr: ^0.4.18
+  permission_handler: ^8.3.0
   opencv_4:
     path: ./custom_pubs/opencv_4/
   # system_alert_window:

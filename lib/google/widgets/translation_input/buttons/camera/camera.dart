@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/google/widgets/translation_input/buttons/camera/data.dart';
 
@@ -17,12 +18,30 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     cameraFunc() async {
-      cameras = await availableCameras();
-      isTranslationCanceled = false;
-      await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => CameraScreen()),
-      );
+      print("Checking");
+
+      var cameraStatus = await Permission.camera.request();
+      if (cameraStatus.isGranted) {
+        print("Granted");
+        cameras = await availableCameras();
+        print(cameras);
+        isTranslationCanceled = false;
+        await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => CameraScreen()),
+        );
+      } else if (cameraStatus.isPermanentlyDenied) {
+        print("NotGranted");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(L10n.of(context).camera_is_not_accessible),
+            action: SnackBarAction(
+              label: "Open in Settings",
+              onPressed: openAppSettings,
+            ),
+          ),
+        );
+      }
     }
 
     return IconButton(
@@ -64,8 +83,7 @@ class _CameraState extends State<Camera> {
                                   cancelDownloadOCRLanguage(fromLangVal);
                                   Navigator.of(context).pop();
                                 },
-                                child:
-                                    Text(L10n.of(context).cancel),
+                                child: Text(L10n.of(context).cancel),
                               ),
                               TextButton(
                                 onPressed: _isLangInstalling
@@ -80,8 +98,7 @@ class _CameraState extends State<Camera> {
                                           cameraFunc();
                                         }
                                       },
-                                child:
-                                    Text(L10n.of(context).install),
+                                child: Text(L10n.of(context).install),
                               ),
                             ],
                           );

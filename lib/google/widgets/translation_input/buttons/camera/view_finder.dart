@@ -48,24 +48,23 @@ class _ViewFinderState extends State<ViewFinder>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (controller == null || !controller!.value.isInitialized) return;
 
-    if (state == AppLifecycleState.inactive)
-      controller!.dispose();
+    if (state == AppLifecycleState.inactive) controller!.dispose();
     else if (state == AppLifecycleState.resumed) onNewCameraSelected();
   }
 
   @override
   Widget build(BuildContext context) {
-    late IconData flashIcon;
-    switch (currentMode) {
-      case FlashMode.off:
-        flashIcon = Icons.flash_off;
-        break;
-      case FlashMode.torch:
-        flashIcon = Icons.flash_on;
-        break;
-      default:
-        flashIcon = Icons.flash_off;
-    }
+    IconData flashIcon = () {
+      switch (currentMode) {
+        case FlashMode.off:
+          return Icons.flash_off;
+        case FlashMode.torch:
+          return Icons.flash_on;
+        default:
+          return Icons.flash_off;
+      }
+    }();
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -124,8 +123,9 @@ class _ViewFinderState extends State<ViewFinder>
   void onNewCameraSelected() async {
     controller = CameraController(
       cameras[0],
-      ResolutionPreset.max,
+      ResolutionPreset.ultraHigh,
       imageFormatGroup: ImageFormatGroup.jpeg,
+      enableAudio: false,
     );
     controller!.addListener(() {
       if (mounted) setState(() {});

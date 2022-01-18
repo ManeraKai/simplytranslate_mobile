@@ -114,5 +114,6 @@
   "report_bug": "Reportar um bug",
   "@report_bug": {},
   "translate_summary": "Compartilhe com o mundo!",
-  "@translate_summary": {}
+  "@translate_summary": {},
+  "camera_is_not_accessible": "Camera is not accessible"
 }
