@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 bool _isSnackBarVisible = false;
@@ -28,25 +28,25 @@ class CharacterLimit extends StatelessWidget {
                 content: Text(
                   () {
                     if (textLength > 5000) {
-                      return AppLocalizations.of(context)!
+                      return L10n.of(context)
                           .input_calc
                           .replaceFirst(
                               '\$lengthDifference', '${textLength - 5000}');
                     } else {
                       if (textLength == 1)
-                        return AppLocalizations.of(context)!
+                        return L10n.of(context)
                             .input_fraction_one
                             .replaceFirst('\$length', '$textLength');
                       else if (textLength > 1 && textLength < 5)
-                        return AppLocalizations.of(context)!
+                        return L10n.of(context)
                             .input_fraction_few
                             .replaceFirst('\$length', '$textLength');
                       else if (textLength >= 5)
-                        return AppLocalizations.of(context)!
+                        return L10n.of(context)
                             .input_fraction_many
                             .replaceFirst('\$length', '$textLength');
                       else
-                        return AppLocalizations.of(context)!
+                        return L10n.of(context)
                             .input_fraction_other
                             .replaceFirst('\$length', '$textLength');
                     }

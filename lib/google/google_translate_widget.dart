@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 import '/google/widgets/translate_button/cancel_translation_button.dart';
 import '/widgets/keyboard_visibility.dart';
@@ -96,12 +96,12 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
               ? Positioned(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                   right: intl.Bidi.detectRtlDirectionality(
-                    AppLocalizations.of(context)!.arabic,
+                    L10n.of(context).arabic,
                   )
                       ? null
                       : 0,
                   left: intl.Bidi.detectRtlDirectionality(
-                    AppLocalizations.of(context)!.arabic,
+                    L10n.of(context).arabic,
                   )
                       ? 0
                       : null,

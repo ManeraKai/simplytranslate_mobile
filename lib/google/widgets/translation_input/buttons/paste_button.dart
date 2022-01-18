@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/widgets/keyboard_visibility.dart';
 import '/data.dart';
 
@@ -78,7 +78,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                           duration: Duration(seconds: 2),
                           width: 160,
                           content: Text(
-                            AppLocalizations.of(context)!.empty_clipboard,
+                            L10n.of(context).empty_clipboard,
                           ),
                         ),
                       );
@@ -90,7 +90,7 @@ class _PasteClipboardButtonState extends State<PasteClipboardButton> {
                             duration: Duration(seconds: 2),
                             width: 300,
                             content: Text(
-                              AppLocalizations.of(context)!.input_limit,
+                              L10n.of(context).input_limit,
                               textAlign: TextAlign.center,
                             ),
                           ),

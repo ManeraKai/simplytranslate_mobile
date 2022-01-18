@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/select_default_lang.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/text_recognition.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/update_list.dart';
@@ -21,7 +21,7 @@ class _SettingsState extends State<Settings> {
     const textStyle = const TextStyle(fontSize: 20);
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.settings),
+        title: Text(L10n.of(context).settings),
         elevation: 3,
       ),
       body: SingleChildScrollView(
@@ -33,7 +33,7 @@ class _SettingsState extends State<Settings> {
             children: [
               const SizedBox(height: 10),
               Text(
-                AppLocalizations.of(context)!.instances,
+                L10n.of(context).instances,
                 style: textStyle,
               ),
               line,
@@ -41,14 +41,14 @@ class _SettingsState extends State<Settings> {
               UpdateList(),
               const SizedBox(height: 20),
               Text(
-                AppLocalizations.of(context)!.appearance,
+                L10n.of(context).appearance,
                 style: textStyle,
               ),
               line,
               SelectTheme(),
               const SizedBox(height: 20),
               Text(
-                AppLocalizations.of(context)!.translation,
+                L10n.of(context).translation,
                 style: textStyle,
               ),
               line,

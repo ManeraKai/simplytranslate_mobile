@@ -1,4 +1,0 @@
-arb-dir: lang/
-template-arb-file: main_en.arb
-output-localization-file: main_localizations.dart
-untranslated-messages-file: desiredFileName.txt

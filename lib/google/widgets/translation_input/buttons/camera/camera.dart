@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/google/widgets/translation_input/buttons/camera/data.dart';
 
 import '/data.dart';
@@ -41,7 +41,7 @@ class _CameraState extends State<Camera> {
                         builder: (context, setStateAlert) {
                           return AlertDialog(
                             title: Text(
-                              AppLocalizations.of(context)!
+                              L10n.of(context)
                                   .language_text_recognition
                                   .replaceFirst('\$language',
                                       fromSelLangMap[fromLangVal]!),
@@ -50,7 +50,7 @@ class _CameraState extends State<Camera> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!
+                                  L10n.of(context)
                                       .trained_data_files_not_installed,
                                 ),
                                 SizedBox(height: _isLangInstalling ? 20 : 24),
@@ -65,7 +65,7 @@ class _CameraState extends State<Camera> {
                                   Navigator.of(context).pop();
                                 },
                                 child:
-                                    Text(AppLocalizations.of(context)!.cancel),
+                                    Text(L10n.of(context).cancel),
                               ),
                               TextButton(
                                 onPressed: _isLangInstalling
@@ -81,7 +81,7 @@ class _CameraState extends State<Camera> {
                                         }
                                       },
                                 child:
-                                    Text(AppLocalizations.of(context)!.install),
+                                    Text(L10n.of(context).install),
                               ),
                             ],
                           );

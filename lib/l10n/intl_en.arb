@@ -108,6 +108,7 @@
     "yiddish": "Yiddish",
     "yoruba": "Yoruba",
     "zulu": "Zulu",
+    "@@locale": "en",
     "copied_to_clipboard": "Copied to clipboard",
     "translate": "Translate",
     "enter_text_here": "Enter text here",

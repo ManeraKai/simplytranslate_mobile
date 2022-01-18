@@ -5,9 +5,10 @@ import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 // import 'package:simplytranslate_mobile/screens/overlay/overlay_screen.dart';
@@ -155,8 +156,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             return Locale(localesLangCode[i]);
         return Locale('en');
       },
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+       localizationsDelegates: [
+        L10n.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: L10n.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme(
@@ -279,11 +285,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem<String>(
                       value: 'settings',
-                      child: Text(AppLocalizations.of(context)!.settings),
+                      child: Text(L10n.of(context).settings),
                     ),
                     PopupMenuItem<String>(
                       value: 'about',
-                      child: Text(AppLocalizations.of(context)!.about),
+                      child: Text(L10n.of(context).about),
                     ),
                   ],
                   onSelected: (value) {
@@ -317,16 +323,16 @@ class MainPageLocalization extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> themeTranslation = {
-      'dark': AppLocalizations.of(context)!.dark,
-      'light': AppLocalizations.of(context)!.light,
-      'system': AppLocalizations.of(context)!.follow_system,
+      'dark': L10n.of(context).dark,
+      'light': L10n.of(context).light,
+      'system': L10n.of(context).follow_system,
     };
 
     themeValue = themeTranslation[session.read('theme') ?? 'system']!;
 
     toSelLangMap = selectLanguagesMapGetter(context);
     fromSelLangMap = selectLanguagesMapGetter(context);
-    fromSelLangMap['auto'] = AppLocalizations.of(context)!.autodetect;
+    fromSelLangMap['auto'] = L10n.of(context).autodetect;
 
     fromLangVal = session.read('from_lang') ?? 'auto';
     toLangVal = session.read('to_lang') ?? appLocale.languageCode;

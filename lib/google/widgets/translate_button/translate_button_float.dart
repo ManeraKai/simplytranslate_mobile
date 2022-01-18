@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class TranslateButtonFloat extends StatelessWidget {
@@ -38,7 +38,7 @@ class TranslateButtonFloat extends StatelessWidget {
                   }
                 : null,
         child: Text(
-          AppLocalizations.of(context)!.translate,
+          L10n.of(context).translate,
           style: TextStyle(
             fontSize: 18,
             color: theme == Brightness.dark

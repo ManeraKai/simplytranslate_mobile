@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/google/widgets/translation_input/buttons/tts_input.dart';
 import '/data.dart';
 import 'buttons/camera/camera.dart';
@@ -70,7 +70,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 selectionControls: _MyMaterialTextSelectionControls(),
                 textDirection: googleInCtrl.text.length == 0
                     ? intl.Bidi.detectRtlDirectionality(
-                        AppLocalizations.of(context)!.arabic,
+                        L10n.of(context).arabic,
                       )
                         ? TextDirection.rtl
                         : TextDirection.ltr
@@ -90,7 +90,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                           duration: const Duration(seconds: 2),
                           width: 300,
                           content: Text(
-                            AppLocalizations.of(context)!.input_limit,
+                            L10n.of(context).input_limit,
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -107,9 +107,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
-                  hintText: AppLocalizations.of(context)!.enter_text_here,
+                  hintText: L10n.of(context).enter_text_here,
                   hintTextDirection: intl.Bidi.detectRtlDirectionality(
-                          AppLocalizations.of(context)!.arabic)
+                          L10n.of(context).arabic)
                       ? TextDirection.rtl
                       : TextDirection.ltr,
                 ),

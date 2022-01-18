@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class TextRecognitionScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class _TextRecognitionScreenState extends State<TextRecognitionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.text_recognition),
+        title: Text(L10n.of(context).text_recognition),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),

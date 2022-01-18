@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class GoogleSwitchLang extends StatelessWidget {
@@ -65,7 +65,7 @@ class GoogleSwitchLang extends StatelessWidget {
                               duration: Duration(seconds: 2),
                               width: 160,
                               content: Text(
-                                AppLocalizations.of(context)!.input_limit,
+                                L10n.of(context).input_limit,
                                 textAlign: TextAlign.center,
                               ),
                             ),

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:opencv_4/factory/pathfrom.dart';
 import 'package:opencv_4/opencv_4.dart';
@@ -36,7 +36,7 @@ class _OCRState extends State<OCR> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: AppBar(
-          title: Text(AppLocalizations.of(context)!.text_recognition),
+          title: Text(L10n.of(context).text_recognition),
         ),
       ),
       body: Container(
@@ -145,7 +145,7 @@ class _OCRState extends State<OCR> {
                                 TextButton(
                                   onPressed: () => Navigator.of(context).pop(),
                                   child: Text(
-                                      AppLocalizations.of(context)!.cancel),
+                                      L10n.of(context).cancel),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -155,7 +155,7 @@ class _OCRState extends State<OCR> {
                                       googleInCtrl.text = newText;
                                     });
                                   },
-                                  child: Text(AppLocalizations.of(context)!.ok),
+                                  child: Text(L10n.of(context).ok),
                                 )
                               ],
                             ),

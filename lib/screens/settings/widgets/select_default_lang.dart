@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '../../../data.dart';
 import './settings_button.dart';
 
@@ -19,8 +19,8 @@ class SelectDefaultLang extends StatelessWidget {
       ),
       icon: Icons.translate,
       iconColor: Colors.blue,
-      title: AppLocalizations.of(context)!.default_share_language,
-      content: AppLocalizations.of(context)!
+      title: L10n.of(context).default_share_language,
+      content: L10n.of(context)
           .default_share_language_summary
           .replaceFirst(
               '\$toLanguageShareDefault', '${toSelLangMap[shareLangVal]}'),
@@ -175,7 +175,7 @@ class _SelectDefaultLangDialogState extends State<SelectDefaultLangDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(AppLocalizations.of(context)!.cancel),
+          child: Text(L10n.of(context).cancel),
         )
       ],
     );

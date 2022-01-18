@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '../../../data.dart';
 import './settings_button.dart';
 
@@ -123,7 +123,7 @@ class SelectInstance extends StatelessWidget {
                 ),
                 actions: [
                   TextButton(
-                    child: Text(AppLocalizations.of(context)!.cancel),
+                    child: Text(L10n.of(context).cancel),
                     onPressed: () {
                       _isCanceled = true;
                       isCustomInstanceValid = instanceValidation.NotChecked;
@@ -140,7 +140,7 @@ class SelectInstance extends StatelessWidget {
                         )
                       : TextButton(
                           onPressed: () => customCheck(setState),
-                          child: Text(AppLocalizations.of(context)!.check),
+                          child: Text(L10n.of(context).check),
                         ),
                 ],
               ),
@@ -170,7 +170,7 @@ class SelectInstance extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(AppLocalizations.of(context)!.cancel),
+                      child: Text(L10n.of(context).cancel),
                     )
                   ],
                   insetPadding: const EdgeInsets.all(0),
@@ -215,7 +215,7 @@ class SelectInstance extends StatelessWidget {
                           Padding(
                             padding: _padding,
                             child: Text(
-                              AppLocalizations.of(context)!.random,
+                              L10n.of(context).random,
                               style: _textStyle,
                             ),
                           ),
@@ -234,7 +234,7 @@ class SelectInstance extends StatelessWidget {
                           Padding(
                             padding: _padding,
                             child: Text(
-                              AppLocalizations.of(context)!.custom,
+                              L10n.of(context).custom,
                               style: _textStyle,
                             ),
                           ),
@@ -251,11 +251,11 @@ class SelectInstance extends StatelessWidget {
       },
       icon: Icons.dns,
       iconColor: Colors.blue,
-      title: AppLocalizations.of(context)!.instance,
+      title: L10n.of(context).instance,
       content: instance == 'custom'
-          ? '${AppLocalizations.of(context)!.custom}: $customInstance'
+          ? '${L10n.of(context).custom}: $customInstance'
           : instance == 'random'
-              ? AppLocalizations.of(context)!.random
+              ? L10n.of(context).random
               : instance,
       loading: loading,
     );

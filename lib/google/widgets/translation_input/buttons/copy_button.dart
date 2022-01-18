@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
   final text;
@@ -19,7 +19,7 @@ class CopyToClipboardButton extends StatelessWidget {
                     duration: Duration(seconds: 2),
                     width: 160,
                     content: Text(
-                      AppLocalizations.of(context)!.copied_to_clipboard,
+                      L10n.of(context).copied_to_clipboard,
                       textAlign: TextAlign.center,
                     ),
                   ),

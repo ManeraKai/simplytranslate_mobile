@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'about_screen_button.dart';
@@ -26,7 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(AppLocalizations.of(context)!.about),
+        title: Text(L10n.of(context).about),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -35,15 +35,15 @@ class _AboutScreenState extends State<AboutScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocalizations.of(context)!.help,
+                L10n.of(context).help,
                 style: textStyle,
               ),
               line,
               AboutButton(
                 icon: Icons.favorite,
                 iconColor: Colors.redAccent,
-                title: AppLocalizations.of(context)!.contribute,
-                content: AppLocalizations.of(context)!.contribute_summary,
+                title: L10n.of(context).contribute,
+                content: L10n.of(context).contribute_summary,
                 onTap: () => launch(
                   'https://github.com/ManeraKai/simplytranslate_mobile',
                 ),
@@ -51,8 +51,8 @@ class _AboutScreenState extends State<AboutScreen> {
               AboutButton(
                 icon: Icons.translate_rounded,
                 iconColor: Colors.blue,
-                title: AppLocalizations.of(context)!.translate,
-                content: AppLocalizations.of(context)!.translate_summary,
+                title: L10n.of(context).translate,
+                content: L10n.of(context).translate_summary,
                 onTap: () => launch(
                   'https://hosted.weblate.org/projects/simplytranslate-mobile/',
                 ),
@@ -60,8 +60,8 @@ class _AboutScreenState extends State<AboutScreen> {
               AboutButton(
                 icon: Icons.attach_money_rounded,
                 iconColor: Colors.greenAccent,
-                title: AppLocalizations.of(context)!.donate,
-                content: AppLocalizations.of(context)!.donate_summary,
+                title: L10n.of(context).donate,
+                content: L10n.of(context).donate_summary,
                 onTap: () => showDialog(
                   context: context,
                   builder: (context) {
@@ -114,7 +114,7 @@ class _AboutScreenState extends State<AboutScreen> {
                               Container(
                                 width: 200,
                                 child: Text(
-                                  AppLocalizations.of(context)!.liberapay,
+                                  L10n.of(context).liberapay,
                                   style: TextStyle(
                                     fontSize: 18,
                                     letterSpacing: 1.25,
@@ -132,22 +132,22 @@ class _AboutScreenState extends State<AboutScreen> {
               AboutButton(
                 icon: Icons.report,
                 iconColor: Colors.red,
-                title: AppLocalizations.of(context)!.report_bug,
-                content: AppLocalizations.of(context)!.report_bug_summary,
+                title: L10n.of(context).report_bug,
+                content: L10n.of(context).report_bug_summary,
                 onTap: () => launch(
                   'https://github.com/ManeraKai/simplytranslate_mobile/issues',
                 ),
               ),
               const SizedBox(height: 20),
               Text(
-                AppLocalizations.of(context)!.about,
+                L10n.of(context).about,
                 style: textStyle,
               ),
               line,
               AboutButton(
                 icon: Icons.web,
                 iconColor: Colors.amber,
-                title: AppLocalizations.of(context)!.website,
+                title: L10n.of(context).website,
                 onTap: () => launch(
                   'https://manerakai.github.io/simplytranslate_mobile/',
                 ),
@@ -156,7 +156,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 icon: Icons.info_outline,
                 iconColor:
                     theme == Brightness.dark ? Colors.white : Colors.black,
-                title: AppLocalizations.of(context)!.version,
+                title: L10n.of(context).version,
                 content: packageInfo.version,
                 onTap: () =>
                     Clipboard.setData(ClipboardData(text: packageInfo.version))
@@ -166,7 +166,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       duration: Duration(seconds: 2),
                       width: 160,
                       content: Text(
-                        AppLocalizations.of(context)!.copied_to_clipboard,
+                        L10n.of(context).copied_to_clipboard,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -177,7 +177,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 icon: Icons.copyright,
                 iconColor:
                     theme == Brightness.dark ? Colors.white : Colors.black,
-                title: AppLocalizations.of(context)!.license,
+                title: L10n.of(context).license,
                 content: 'GPL-3.0 License',
                 onTap: () => launch(
                   'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE',

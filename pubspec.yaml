@@ -38,6 +38,7 @@ dependencies:
   # system_alert_window:
   #   path: ./custom_pubs/system_alert_window/
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,3 +52,7 @@ flutter:
     - assets/about/
   generate: true
 
+flutter_intl:
+  enabled: true
+  class_name: L10n
+  

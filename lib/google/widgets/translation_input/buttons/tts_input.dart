@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 bool _listening = false;
@@ -38,7 +38,7 @@ class _TtsOutputState extends State<TtsInput> {
             duration: Duration(seconds: 2),
             width: 300,
             content: Text(
-              AppLocalizations.of(context)!.audio_limit,
+              L10n.of(context).audio_limit,
               textAlign: TextAlign.center,
             ),
           ),
@@ -190,7 +190,7 @@ class _TtsOutputState extends State<TtsInput> {
 //                       duration: Duration(seconds: 2),
 //                       width: 300,
 //                       content: Text(
-//                         AppLocalizations.of(context)!.audio_limit,
+//                         L10n.of(context).audio_limit,
 //                         textAlign: TextAlign.center,
 //                       ),
 //                     ),
