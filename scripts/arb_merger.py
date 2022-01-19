@@ -1,3 +1,5 @@
+# This script merges the arb files in `lib/l10n/langs/` and `lib/l10n/main/` to single files in `lib/l10n/`
+
 import os
 import json
 

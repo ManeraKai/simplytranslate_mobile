@@ -33,6 +33,8 @@ For the most up-to-date versions. Download the most recent **Artifact** from the
 ## Contributing
 I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visualstudio.com/) but without Microsoft's proprietary packages. I use the extensions [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). The Dart one has an auto-formatter. Please use this setup to prevent unnecessary formatting changes.
 
+If you've inherited this project, keep in mind that there are some python scripts in `scripts/` that process translated strings for both website and app.
+
 ## Translation
 [![Weblate](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/weblate.svg)](https://hosted.weblate.org/projects/simplytranslate-mobile/)
 <!-- [![POEditor](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/poeditor.svg)](https://poeditor.com/join/project?hash=rV8CGr8NPj) -->
