@@ -1,11 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
+import 'package:opencv_4/factory/pathfrom.dart';
+import 'package:opencv_4/opencv_4.dart';
 import 'package:simplytranslate_mobile/google/widgets/translation_input/buttons/camera/data.dart';
 import '/data.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-bool cameraMode = true;
+
+enum CameraModeStates { ViewFinder, Loading, OCR }
+var cameraMode = CameraModeStates.ViewFinder;
 List<FlashMode> modes = [FlashMode.off, FlashMode.torch];
 var currentMode = modes[0];
 
@@ -48,7 +53,8 @@ class _ViewFinderState extends State<ViewFinder>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (controller == null || !controller!.value.isInitialized) return;
 
-    if (state == AppLifecycleState.inactive) controller!.dispose();
+    if (state == AppLifecycleState.inactive)
+      controller!.dispose();
     else if (state == AppLifecycleState.resumed) onNewCameraSelected();
   }
 
@@ -169,7 +175,31 @@ class _ViewFinderState extends State<ViewFinder>
                 await controller!.setFlashMode(currentMode);
                 setStateOverlord(() => loading = false);
                 img = File(pickedImageX.path);
-                setState(() => cameraMode = false);
+                image = await prepareOCR(img);
+                decodedImage =
+                    await decodeImageFromList(image.readAsBytesSync());
+                setStateCamera(() => cameraMode = CameraModeStates.Loading);
+                final croppedImgs = await Cv2.contour(
+                  pathFrom: CVPathFrom.GALLERY_CAMERA,
+                  pathString: img.path,
+                );
+                final contourVals = await Cv2.contourVals();
+                for (var i = 0; i < croppedImgs.length; i++) {
+                  final contour = contourVals[i];
+                  final croppedImg = await byte2File(croppedImgs[i]!);
+                  final preparedImg = await prepareOCR(croppedImg);
+                  final String text = await FlutterTesseractOcr.extractText(
+                    preparedImg.path,
+                    language: two2three[fromLangVal],
+                  );
+                  if (text.trim() != "") {
+                    textList.add(text);
+                    croppedImgsProcessedList.add(preparedImg);
+                    filteredContourValsList.add(contour);
+                  }
+                }
+                print("Finished");
+                setStateCamera(() => cameraMode = CameraModeStates.OCR);
               } on CameraException catch (e) {
                 showCameraException(e);
               }
