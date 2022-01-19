@@ -1,1 +1,1 @@
-pug -w ./pug/lang -o ./ -P
+pug -w docs/pug/lang -o docs/ -P
