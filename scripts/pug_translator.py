@@ -1,18 +1,18 @@
 # this file converts translated json files in `docs/lang_json` to pug files in `docs/lang_pug` for the website
-
 import os
 import json
 
-langsDirList = os.listdir("docs/lang_json/")
-for item in langsDirList:
-    itemName = item.replace(".json", "")
-    file1 = open("docs/lang_json/"+item)
-    dataJson = json.load(file1)
-    file1.close()
 
-    langsFile = open("lib/l10n/langs/intl_"+itemName+".arb")
-    langsData = json.load(langsFile)
-    langsFile.close()
+for item in os.listdir("docs/lang_json/"):
+    itemName = item.replace(".json", "")
+
+    dataJson = {}
+    with open("docs/lang_json/"+item) as file:
+        dataJson = json.load(file)
+
+    langsData = {}
+    with open("lib/l10n/langs/intl_"+itemName+".arb") as file:
+        langsData = json.load(file)
 
     dataJson.update(langsData)
 
@@ -33,8 +33,7 @@ for item in langsDirList:
         newData.append(row)
     newData.insert(0, "-\n    translations = {\n")
 
-    file2 = open("docs/lang_pug/"+itemName+".pug", "w")
-    file2.writelines(newData)
-    file2.close
+    with open("docs/lang_pug/"+itemName+".pug", "w") as file:
+        file.writelines(newData)
 
     print("Wrote: docs/lang_pug/"+itemName+".pug")
