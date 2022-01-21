@@ -16,3 +16,4 @@ This way Google Translate won't know your identity. Auto selecting a random inst
 * An updatable official list of SimplyTranslate instances
 * Custom instance option
 * Dark theme
+* Camera Text Recognition
