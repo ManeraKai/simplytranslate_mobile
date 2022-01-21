@@ -38,8 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bengali": MessageLookupByLibrary.simpleMessage("bengali"),
         "bosnian": MessageLookupByLibrary.simpleMessage("bosnien"),
         "bulgarian": MessageLookupByLibrary.simpleMessage("bulgare"),
-        "camera_is_not_accessible":
-            MessageLookupByLibrary.simpleMessage("Camera is not accessible"),
+        "camera_is_not_accessible": MessageLookupByLibrary.simpleMessage(
+            "La caméra n\'est pas accessible"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
         "catalan": MessageLookupByLibrary.simpleMessage("catalan"),
         "cebuano": MessageLookupByLibrary.simpleMessage("cebuano"),
@@ -69,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate": MessageLookupByLibrary.simpleMessage("Faire un don"),
         "donate_summary": MessageLookupByLibrary.simpleMessage(
             "Nous en sommes reconnaissants !"),
+        "download_trained_data_files": MessageLookupByLibrary.simpleMessage(
+            "Télécharger les fichiers de données formés"),
         "dutch": MessageLookupByLibrary.simpleMessage("néerlandais"),
         "email": MessageLookupByLibrary.simpleMessage("Courriel"),
         "empty_clipboard":
@@ -114,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "\$length caractères saisis sur 5000 possibles"),
         "input_limit": MessageLookupByLibrary.simpleMessage(
             "Le texte saisi de la traduction est supérieur à 5000"),
+        "install": MessageLookupByLibrary.simpleMessage("Installer"),
         "instance": MessageLookupByLibrary.simpleMessage("Instance"),
         "instances": MessageLookupByLibrary.simpleMessage("Instances"),
         "irish": MessageLookupByLibrary.simpleMessage("irlandais"),
@@ -128,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "kurdish_kurmanji":
             MessageLookupByLibrary.simpleMessage("kurde (kurmanji)"),
         "kyrgyz": MessageLookupByLibrary.simpleMessage("kirghize"),
+        "language_text_recognition": MessageLookupByLibrary.simpleMessage(
+            "Reconnaissance de texte – \$language"),
         "lao": MessageLookupByLibrary.simpleMessage("laotien"),
         "latin": MessageLookupByLibrary.simpleMessage("latin"),
         "latvian": MessageLookupByLibrary.simpleMessage("letton"),
@@ -190,8 +195,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "team_summary": MessageLookupByLibrary.simpleMessage(
             "Codeurs, traducteurs et testeurs"),
         "telugu": MessageLookupByLibrary.simpleMessage("télougou"),
+        "text_recognition":
+            MessageLookupByLibrary.simpleMessage("Reconnaissance du texte"),
         "thai": MessageLookupByLibrary.simpleMessage("thaï"),
         "theme": MessageLookupByLibrary.simpleMessage("Thème"),
+        "trained_data_files_not_installed":
+            MessageLookupByLibrary.simpleMessage(
+                "Les fichiers de données formés ne sont pas installés."),
         "translate": MessageLookupByLibrary.simpleMessage("Traduire"),
         "translate_summary":
             MessageLookupByLibrary.simpleMessage("Parlez-en autour de vous !"),

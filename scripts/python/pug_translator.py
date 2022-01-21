@@ -37,3 +37,4 @@ for item in os.listdir("docs/lang_json/"):
         file.writelines(newData)
 
     print("Wrote: docs/lang_pug/"+itemName+".pug")
+print()

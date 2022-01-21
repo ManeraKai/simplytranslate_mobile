@@ -22,3 +22,4 @@ for item in langsDirList:
     with open("lib/l10n/"+item, "w") as outfile:
         outfile.write(json_object)
     print("Wrote: lib/l10n/"+item)
+print()

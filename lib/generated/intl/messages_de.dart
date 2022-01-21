@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "about": MessageLookupByLibrary.simpleMessage("Über uns"),
+        "about": MessageLookupByLibrary.simpleMessage("Über"),
         "afrikaans": MessageLookupByLibrary.simpleMessage("Afrikaans"),
         "albanian": MessageLookupByLibrary.simpleMessage("Albanisch"),
         "amharic": MessageLookupByLibrary.simpleMessage("Amharisch"),
@@ -40,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bosnian": MessageLookupByLibrary.simpleMessage("Bosnisch"),
         "bulgarian": MessageLookupByLibrary.simpleMessage("Bulgarisch"),
         "camera_is_not_accessible":
-            MessageLookupByLibrary.simpleMessage("Camera is not accessible"),
+            MessageLookupByLibrary.simpleMessage("Kamera ist nicht zugänglich"),
         "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
         "catalan": MessageLookupByLibrary.simpleMessage("Katalanisch"),
         "cebuano": MessageLookupByLibrary.simpleMessage("Cebuano"),
@@ -71,8 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate": MessageLookupByLibrary.simpleMessage("Spenden"),
         "donate_summary":
             MessageLookupByLibrary.simpleMessage("Dafür sind wir dankbar!"),
-        "download_trained_data_files":
-            MessageLookupByLibrary.simpleMessage("Download trained data files"),
+        "download_trained_data_files": MessageLookupByLibrary.simpleMessage(
+            "Trainierte Datendateien herunterladen"),
         "dutch": MessageLookupByLibrary.simpleMessage("Niederländisch"),
         "email": MessageLookupByLibrary.simpleMessage("E-Mail"),
         "empty_clipboard":
@@ -131,8 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "kurdish_kurmanji":
             MessageLookupByLibrary.simpleMessage("Kurdisch (Kurmandschi)"),
         "kyrgyz": MessageLookupByLibrary.simpleMessage("Kirgisisch"),
-        "language_text_recognition": MessageLookupByLibrary.simpleMessage(
-            "Text Recognition - \$language"),
+        "language_text_recognition":
+            MessageLookupByLibrary.simpleMessage("Texterkennung – \$language"),
         "lao": MessageLookupByLibrary.simpleMessage("Lao"),
         "latin": MessageLookupByLibrary.simpleMessage("Lateinisch"),
         "latvian": MessageLookupByLibrary.simpleMessage("Lettisch"),
@@ -195,12 +195,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Programmierer, Übersetzer und Tester"),
         "telugu": MessageLookupByLibrary.simpleMessage("Telugu"),
         "text_recognition":
-            MessageLookupByLibrary.simpleMessage("Text Recognition"),
+            MessageLookupByLibrary.simpleMessage("Texterkennung"),
         "thai": MessageLookupByLibrary.simpleMessage("Thailändisch"),
         "theme": MessageLookupByLibrary.simpleMessage("Thema"),
         "trained_data_files_not_installed":
             MessageLookupByLibrary.simpleMessage(
-                "Trained data files are not installed."),
+                "Die trainierten Datendateien sind nicht installiert."),
         "translate": MessageLookupByLibrary.simpleMessage("Übersetze"),
         "translate_summary":
             MessageLookupByLibrary.simpleMessage("Verbreite es in der Welt!"),
