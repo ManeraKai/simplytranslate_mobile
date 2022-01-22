@@ -1,1 +1,20 @@
-{}
+{
+  "donate": "Lahjoita",
+  "@donate": {},
+  "about": "Tietoja",
+  "@about": {},
+  "translation": "Käännös",
+  "@translation": {},
+  "license": "Lisenssi",
+  "@license": {},
+  "copied_to_clipboard": "Tallennettu leikepöydälle",
+  "@copied_to_clipboard": {},
+  "translate": "Käännä",
+  "@translate": {},
+  "something_went_wrong": "Jokin meni pieleen",
+  "@something_went_wrong": {},
+  "check_instance": "Tarkista esimerkiksi.",
+  "@check_instance": {},
+  "check_instnace_tts": "Tarkista instanssi ja sen puhesynteesi-tuki.",
+  "@check_instnace_tts": {}
+}
