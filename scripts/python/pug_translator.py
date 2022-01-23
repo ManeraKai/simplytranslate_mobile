@@ -10,31 +10,40 @@ for item in os.listdir("docs/lang_json/"):
     with open("docs/lang_json/"+item) as file:
         dataJson = json.load(file)
 
-    langsData = {}
-    with open("lib/l10n/langs/intl_"+itemName+".arb") as file:
-        langsData = json.load(file)
+    if dataJson != {}:
 
-    dataJson.update(langsData)
+        langsData = {}
+        with open("lib/l10n/langs/intl_"+itemName+".arb") as file:
+            langsData = json.load(file)
 
-    newJson = {}
-    for i in dataJson:
-        if not i.startswith("@"):
-            newJson[i] = dataJson[i]
+        dataJson.update(langsData)
 
-    data = json.dumps(newJson, ensure_ascii=False, indent=4).split('\n')
+        newJson = {}
+        for i in dataJson:
+            if not i.startswith("@"):
+                newJson[i] = dataJson[i]
 
-    for i in range(0, len(data)):
-        data[i] += "\n"
+        # Take missing strings from main.arb
+        mainData = {}
+        with open("lib/l10n/main/intl_"+itemName+".arb") as file:
+            mainData = json.load(file)
 
-    data.pop(0)
-    newData = []
-    for row in data:
-        row = '    ' + row
-        newData.append(row)
-    newData.insert(0, "-\n    translations = {\n")
+        newJson.update(mainData)
 
-    with open("docs/lang_pug/"+itemName+".pug", "w") as file:
-        file.writelines(newData)
+        data = json.dumps(newJson, ensure_ascii=False, indent=4).split('\n')
 
-    print("Wrote: docs/lang_pug/"+itemName+".pug")
+        for i in range(0, len(data)):
+            data[i] += "\n"
+
+        data.pop(0)
+        newData = []
+        for row in data:
+            row = '    ' + row
+            newData.append(row)
+        newData.insert(0, "-\n    translations = {\n")
+
+        with open("docs/lang_pug/"+itemName+".pug", "w") as file:
+            file.writelines(newData)
+
+        print("Wrote: docs/lang_pug/"+itemName+".pug")
 print()

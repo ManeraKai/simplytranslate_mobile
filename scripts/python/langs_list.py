@@ -2,6 +2,8 @@
 import os
 import json
 
+print("langs_list.py")
+
 lang_list = []
 for item in os.listdir("docs/lang_json/"):
     item_name = item.replace(".json", "")

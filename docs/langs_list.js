@@ -1,1 +1,1 @@
-const langs_list = ['ar', 'de', 'en', 'fr', 'nb_NO', 'pl']
+const langs_list = ['ar', 'de', 'el', 'en', 'es', 'fa', 'fi', 'fr', 'it', 'ml', 'nb_NO', 'pl', 'pt_BR', 'ru', 'tr', 'zh_Hant_HK']

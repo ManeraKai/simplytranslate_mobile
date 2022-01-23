@@ -2,6 +2,8 @@
 import os
 import json
 
+print("Pug Lang Adder")
+
 rtl_langs = ["ar", "iw", "ku", "fa", "ur"]
 
 template = ""
