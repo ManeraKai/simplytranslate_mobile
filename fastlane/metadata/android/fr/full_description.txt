@@ -1,0 +1,19 @@
+Cette application est une alternative frontale à Google Translate, mais ne s'y connecte pas directement.
+Elle fonctionne comme suit :
+1. Le texte est soumis par vous (l'utilisateur) et envoyé à une instance aléatoire de SimplyTranslate (serveur).
+2. Cette instance va demander ces données à Google Translate.
+3. Google Translate renvoie la traduction à cette instance.
+4. Cette instance vous renverra la traduction.
+
+De cette façon, Google Translate ne connaîtra pas votre identité. La sélection automatique d'une instance aléatoire (mode par défaut) à chaque demande obscurcit et répartit vos données entre les instances, de sorte que rien ne peut être relié facilement puisqu'elles ne se trouvent pas dans une base de données centralisée.
+
+<b>Caractéristiques :</b>
+* Prise en charge de 108 langues
+* Synthèse vocale
+* Peut recevoir du texte partagé d'autres applis
+* Un bouton de traduction dans la barre d'outils de sélection de texte.
+* Sélection automatique et aléatoire d'une instance à chaque demande
+* Une liste officielle actualisable des instances de SimplyTranslate
+* Option d'instance personnalisée
+* Thème sombre
+* Reconnaissance de texte par caméra

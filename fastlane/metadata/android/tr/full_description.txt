@@ -1,0 +1,19 @@
+Bu uygulama, Google Çeviri için alternatif bir ön yüzdür, ancak doğrudan ona bağlanmaz.
+Şu şekilde çalışır:
+1. Siz (kullanıcı) metni girersiniz ve bu rastgele bir SimplyTranslate örneğine (sunucusuna) gönderilir.
+2. O örnek, Google Çeviri'den verileri ister.
+3. Google Çeviri, çeviriyi o örneğe geri gönderir.
+4. O örnek çeviriyi size geri gönderir.
+
+Bu şekilde Google Çeviri kimliğinizi bilmeyecektir. Rastgele bir örneği otomatik olarak seçerek (öntanımlı mod), her istekte verileriniz örnekler arasında daha fazla karıştırılır ve yayılır, böylece merkezi bir veri tabanında olmadığı için hiçbir şey kolayca birbiriyle ilişkilendirilemeyecektir.
+
+<b>Özellikler:</b>
+* 108 dili destekler
+* Metin Okuma (Text-To-Speech (TTS))
+* Diğer uygulamalardan paylaşılan metin alabilir
+* Metin seçimi araç çubuğunda bir çevir düğmesi
+* Her istek için otomatik rastgele örnek seçimi
+* SimplyTranslate örneklerinin güncellenebilir resmi listesi
+* Özel örnek seçeneği
+* Koyu tema
+* Kameradan Metin Tanıma
