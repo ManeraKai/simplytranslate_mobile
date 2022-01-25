@@ -82,5 +82,15 @@
   "camera_is_not_accessible": "Kamera ei ole käytettävissä",
   "@camera_is_not_accessible": {},
   "text_recognition": "Tekstintunnistus",
-  "@text_recognition": {}
+  "@text_recognition": {},
+  "input_limit": "Käännöksen syöttö on yli 5000",
+  "@input_limit": {},
+  "audio_limit": "Ääntä ei voi saada yli 200 merkille",
+  "@audio_limit": {},
+  "instance": "Instanssi",
+  "@instance": {},
+  "random": "Satunnainen",
+  "@random": {},
+  "custom": "Mukautettu",
+  "@custom": {}
 }
