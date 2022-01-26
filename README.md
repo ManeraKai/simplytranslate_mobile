@@ -56,17 +56,20 @@ If you've inherited this project, keep in mind that there are some python script
 ### Translators
 - **🇸🇦 Arabic**: [ManeraKai](https://github.com/ManeraKai)
 - **🇨🇳 Chinese, Hong Kong:** [CafeTango](https://github.com/CafeTango)
+- **🇫🇮 Finnish:** [Edanas](https://hosted.weblate.org/user/Edanas/)
+- **🇫🇷 French:** [Edanas](https://hosted.weblate.org/user/Edanas/)
 - **🇩🇪 German:** [metalune](https://metalune.xyz/), [Edanas](https://hosted.weblate.org/user/Edanas/)
 - **🇬🇷 Greek:** [getimiskon](https://getimiskon.xyz/)
+- **🇮🇹 Italian:** [Edanas](https://hosted.weblate.org/user/Edanas/)
 - **🇮🇳 Malayalam:** [sunilpaulmathew](https://github.com/sunilpaulmathew)
-- **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
-- **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
-- **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
-- **🇹🇷 Turkish:** Anonymous, [ersen](https://hosted.weblate.org/user/ersen/)
-- **🇵🇹 Portuguese (Brazil):** [Murilogs1910](https://github.com/Murilogs1910)
 - **🇳🇴 Norwegian Bokmål:** [comradekingu](https://github.com/comradekingu)
+- **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
+- **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
+- **🇵🇹 Portuguese (Brazil):** [Murilogs1910](https://github.com/Murilogs1910)
+- **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
 - **🇪🇸 Spanish:** [programmer-pony](https://github.com/programmer-pony)
-- **🇫🇷 French:** [Edanas](https://hosted.weblate.org/user/Edanas/)
+- **🇹🇷 Turkish:** anonymous, [ersen](https://hosted.weblate.org/user/ersen/)
+
 
 ### Icon
 - [joelchrono12](https://joelchrono12.ml/)
