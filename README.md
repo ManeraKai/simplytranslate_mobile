@@ -62,7 +62,7 @@ If you've inherited this project, keep in mind that there are some python script
 - **🇵🇱 Polish:** [Aga-C](https://github.com/Aga-C), [Valdnet](https://github.com/Valdnet)
 - **🇮🇷 Persian:** [alefvanoon](https://alefvanoon.xyz/)
 - **🇷🇺 Russian:** [K3XRad](https://github.com/K3XRad)
-- **🇹🇷 Turkish:** Anonymous
+- **🇹🇷 Turkish:** Anonymous, [ersen](https://hosted.weblate.org/user/ersen/)
 - **🇵🇹 Portuguese (Brazil):** [Murilogs1910](https://github.com/Murilogs1910)
 - **🇳🇴 Norwegian Bokmål:** [comradekingu](https://github.com/comradekingu)
 - **🇪🇸 Spanish:** [programmer-pony](https://github.com/programmer-pony)
