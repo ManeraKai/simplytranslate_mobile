@@ -6,7 +6,7 @@
 </p>
 <h1 align=center>SimplyTranslate Mobile (Unofficial)</h1>
 
-<h4 align=center>An alternative front-end to GoogleTranslate</h4>
+<h4 align=center>An alternative front-end to Google Translate</h4>
 
 <p align=center>
   <a href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">
@@ -48,7 +48,7 @@ If you've inherited this project, keep in mind that there are some python script
 
  bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj
 
-## Contributers
+## Contributors
 
 ### Testers
 - [Valdnet](https://github.com/Valdnet)
