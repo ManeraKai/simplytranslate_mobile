@@ -80,6 +80,7 @@ class OCR extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                         setStateOverlord(() {
                           googleOutput = translatedText;
                           googleInCtrl.text = newText;

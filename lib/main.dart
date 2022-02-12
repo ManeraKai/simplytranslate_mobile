@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             return Locale(localesLangCode[i]);
         return Locale('en');
       },
-       localizationsDelegates: [
+      localizationsDelegates: [
         L10n.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -167,9 +167,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       theme: ThemeData(
         colorScheme: ColorScheme(
           primary: greenColor,
-          primaryVariant: greenColor,
+          // primaryVariant: greenColor,
           secondary: greenColor,
-          secondaryVariant: greenColor,
+          // secondaryVariant: greenColor,
           surface: Colors.white,
           background: Colors.white,
           error: Colors.red,
@@ -216,9 +216,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       darkTheme: ThemeData(
         colorScheme: ColorScheme(
           primary: greenColor,
-          primaryVariant: greenColor,
+          // primaryVariant: greenColor,
           secondary: greenColor,
-          secondaryVariant: greenColor,
+          // secondaryVariant: greenColor,
           surface: const Color(0xff131618),
           background: const Color(0xff131618),
           error: Colors.red,
