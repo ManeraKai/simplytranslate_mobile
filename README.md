@@ -4,7 +4,7 @@
       <img alt="" title="SimplyTranslate Mobile" src="https://github.com/ManeraKai/simplytranslate_mobile/blob/main/fastlane/metadata/android/en-US/images/icon.png" width="144">
   </a>
 </p>
-<h1 align=center>SimplyTranslate Mobile (Unofficial)</h1>
+<h1 align=center>SimplyTranslate Mobile</h1>
 
 <h4 align=center>An alternative front-end to Google Translate</h4>
 
