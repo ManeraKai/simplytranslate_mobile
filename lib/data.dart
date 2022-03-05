@@ -420,23 +420,29 @@ Future<String> translate({
   required BuildContext context,
 }) async {
   final url;
-  final args = "from=$fromLang&to=$toLang&text=$input";
+  // final args = "from=$fromLang&to=$toLang&text=$input";
   if (instance == 'custom')
-    url = Uri.parse('$customInstance/api/translate?$args');
+    url = Uri.parse('$customInstance/api/translate');
   else if (instance == 'random') {
     final randomInstance = instances[Random().nextInt(instances.length)];
-    url = Uri.parse('$randomInstance/api/translate?$args');
+    url = Uri.parse('$randomInstance/api/translate');
   } else
-    url = Uri.parse('$instance/api/translate?$args');
+    url = Uri.parse('$instance/api/translate');
 
   try {
-    final response = await http.get(
+    final response = await http.post(
       url,
+      body: {
+        'from': fromLang,
+        'to': toLang,
+        'text': input,
+      },
     );
 
-    if (response.statusCode == 200)
+    if (response.statusCode == 200) {
+      print(response.body);
       return response.body;
-    else {
+    } else {
       await showInstanceError(context);
       return '';
     }
@@ -569,7 +575,12 @@ var instances = [
   "https://st.alefvanoon.xyz",
   "https://translate.josias.dev",
   "https://translate.namazso.eu",
-  "https://translate.riverside.rocks"
+  "https://translate.riverside.rocks",
+  "https://manerakai.asuscomm.com:447",
+  "https://translate.bus-hit.me",
+  "https://simplytranslate.pussthecat.org",
+  "https://translate.northboot.xyz",
+  "https://translate.tiekoetter.com",
 ];
 
 late final String flutterTesseractOcrTessdataPath;
