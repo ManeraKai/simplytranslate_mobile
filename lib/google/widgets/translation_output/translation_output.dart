@@ -20,7 +20,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
   Widget build(BuildContext context) {
     String translatedText = googleOutput;
     return Container(
-      height: textFieldHeight,
+      height: textFieldHeight / 1.5,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -65,26 +65,6 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MaximizedScreen())),
-              ),
-              IconButton(
-                icon: Icon(Icons.add),
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: translatedText == ''
-                    ? null
-                    : () => setState(() {
-                          if (_outputFontSize + 3 <= 90) _outputFontSize += 3;
-                        }),
-              ),
-              IconButton(
-                icon: Icon(Icons.remove),
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: translatedText == ''
-                    ? null
-                    : () => setState(() {
-                          if (_outputFontSize - 3 >= 8) _outputFontSize -= 3;
-                        }),
               ),
               TtsOutput(),
             ],
