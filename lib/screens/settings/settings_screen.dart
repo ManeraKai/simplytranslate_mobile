@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
+import 'package:simplytranslate_mobile/screens/settings/widgets/customize_buttons.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/select_default_lang.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/text_recognition.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/update_list.dart';
@@ -17,7 +18,6 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    
     const textStyle = const TextStyle(fontSize: 20);
     return Scaffold(
       appBar: AppBar(
@@ -53,6 +53,7 @@ class _SettingsState extends State<Settings> {
               ),
               line,
               TextRecognition(),
+              CustomizeButtons(),
               SelectDefaultLang(),
             ],
           ),

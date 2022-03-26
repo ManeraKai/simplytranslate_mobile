@@ -6,7 +6,7 @@ class SettingsButton extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final String title;
-  final String content;
+  final String? content;
   final bool loading;
 
   const SettingsButton({
@@ -14,7 +14,7 @@ class SettingsButton extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.title,
-    required this.content,
+    this.content,
     this.loading = false,
     Key? key,
   }) : super(key: key);
@@ -48,15 +48,16 @@ class SettingsButton extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(title, style: TextStyle(fontSize: 18)),
-                        Text(
-                          content,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: theme == Brightness.dark
-                                ? Colors.white54
-                                : Colors.black54,
+                        if (content != null)
+                          Text(
+                            content!,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: theme == Brightness.dark
+                                  ? Colors.white54
+                                  : Colors.black54,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

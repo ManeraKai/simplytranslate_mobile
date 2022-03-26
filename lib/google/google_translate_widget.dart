@@ -85,7 +85,6 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),

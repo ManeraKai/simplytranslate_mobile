@@ -17,6 +17,8 @@ class GoogleTranslationInput extends StatefulWidget {
   _TranslationInputState createState() => _TranslationInputState();
 }
 
+double _listLength = 10;
+
 class _TranslationInputState extends State<GoogleTranslationInput> {
   @override
   void initState() {
@@ -41,13 +43,18 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
 
   @override
   Widget build(BuildContext context) {
-    textFieldHeight = MediaQuery.of(context).orientation == Orientation.portrait
-        ? MediaQuery.of(context).size.height / 3 < 300
-            ? 300
-            : MediaQuery.of(context).size.height / 3
-        : 300;
+    _listLength = 10;
+    for (var k in inList.keys)
+      if (inList[k] == true) {
+        if (k != "counter")
+          _listLength += 48;
+        else
+          _listLength += 50;
+      }
+    if (_listLength < 100) _listLength = 100;
+    print("_listLength " + _listLength.toString());
     return Container(
-      height: textFieldHeight,
+      height: _listLength,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? const Color(0xff131618) : null,
@@ -108,10 +115,10 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   hintText: L10n.of(context).enter_text_here,
-                  hintTextDirection: intl.Bidi.detectRtlDirectionality(
-                          L10n.of(context).arabic)
-                      ? TextDirection.rtl
-                      : TextDirection.ltr,
+                  hintTextDirection:
+                      intl.Bidi.detectRtlDirectionality(L10n.of(context).arabic)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
                 ),
                 style: const TextStyle(fontSize: 20),
               ),
@@ -120,12 +127,13 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              DeleteTranslationInputButton(),
-              CopyToClipboardButton(googleInCtrl.text),
-              Camera(),
-              PasteClipboardButton(),
-              TtsInput(),
-              CharacterLimit(),
+              if (inList['remove'] == true) DeleteTranslationInputButton(),
+              if (inList['copy'] == true)
+                CopyToClipboardButton(googleInCtrl.text),
+              if (inList['camera'] == true) Camera(),
+              if (inList['paste'] == true) PasteClipboardButton(),
+              if (inList['text-to-speech'] == true) TtsInput(),
+              if (inList['counter'] == true) CharacterLimit(),
             ],
           )
         ],
@@ -174,7 +182,7 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     _isVisible = () {
       if (MediaQuery.of(context).orientation == Orientation.portrait) {
         if (startSelectionPoint.point.dy < 20) return false;
-        if (startSelectionPoint.point.dy > textFieldHeight + 65) return false;
+        if (startSelectionPoint.point.dy > _listLength + 65) return false;
       }
       return true;
     }();

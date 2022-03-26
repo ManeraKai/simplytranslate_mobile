@@ -679,3 +679,17 @@ Map<String, String> two2three = {
   "yi": "yid",
   "yo": "yor",
 };
+
+Map<String, bool> inList = {
+  "remove": true,
+  "copy": false,
+  "camera": true,
+  "paste": true,
+  "text-to-speech": true,
+  "counter": true,
+};
+Map<String, bool> outList = {
+  "copy": true,
+  "maximize": true,
+  "text-to-speech": true,
+};

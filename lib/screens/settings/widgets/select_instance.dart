@@ -174,74 +174,77 @@ class SelectInstance extends StatelessWidget {
                     )
                   ],
                   insetPadding: const EdgeInsets.all(0),
-                  content: Column(mainAxisSize: MainAxisSize.min, children: [
-                    ...() {
-                      var list = <Widget>[];
-                      for (String x in instances)
-                        list.add(
-                          Container(
-                            width: double.infinity,
-                            child: InkWell(
-                              onTap: () => instanceFunc(setState, x),
-                              child: Row(
-                                children: [
-                                  Radio<String>(
-                                    value: x,
-                                    groupValue: instance,
-                                    onChanged: (_) => instanceFunc(setState, x),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: _padding,
-                                      child: Text(x, style: _textStyle),
+                  content: SingleChildScrollView(
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      ...() {
+                        var list = <Widget>[];
+                        for (String x in instances)
+                          list.add(
+                            Container(
+                              width: double.infinity,
+                              child: InkWell(
+                                onTap: () => instanceFunc(setState, x),
+                                child: Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: x,
+                                      groupValue: instance,
+                                      onChanged: (_) =>
+                                          instanceFunc(setState, x),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: Padding(
+                                        padding: _padding,
+                                        child: Text(x, style: _textStyle),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      return list;
-                    }(),
-                    InkWell(
-                      onTap: () => randomFunc(setState),
-                      child: Row(
-                        children: [
-                          Radio<String>(
-                            value: 'random',
-                            groupValue: instance,
-                            onChanged: (_) => randomFunc(setState),
-                          ),
-                          Padding(
-                            padding: _padding,
-                            child: Text(
-                              L10n.of(context).random,
-                              style: _textStyle,
+                          );
+                        return list;
+                      }(),
+                      InkWell(
+                        onTap: () => randomFunc(setState),
+                        child: Row(
+                          children: [
+                            Radio<String>(
+                              value: 'random',
+                              groupValue: instance,
+                              onChanged: (_) => randomFunc(setState),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => customFunc(setState),
-                      child: Row(
-                        children: [
-                          Radio<String>(
-                            value: 'custom',
-                            groupValue: instance,
-                            onChanged: (_) => customFunc(setState),
-                          ),
-                          Padding(
-                            padding: _padding,
-                            child: Text(
-                              L10n.of(context).custom,
-                              style: _textStyle,
+                            Padding(
+                              padding: _padding,
+                              child: Text(
+                                L10n.of(context).random,
+                                style: _textStyle,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ]),
+                      InkWell(
+                        onTap: () => customFunc(setState),
+                        child: Row(
+                          children: [
+                            Radio<String>(
+                              value: 'custom',
+                              groupValue: instance,
+                              onChanged: (_) => customFunc(setState),
+                            ),
+                            Padding(
+                              padding: _padding,
+                              child: Text(
+                                L10n.of(context).custom,
+                                style: _textStyle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
               );
             }).then((value) {

@@ -13,14 +13,26 @@ class GoogleTranslationOutput extends StatefulWidget {
   _TranslationOutputState createState() => _TranslationOutputState();
 }
 
+double _listLength = 10;
+
 class _TranslationOutputState extends State<GoogleTranslationOutput> {
   double _outputFontSize = 20;
 
   @override
   Widget build(BuildContext context) {
+    _listLength = 10;
+    for (var k in outList.keys)
+      if (outList[k] == true) {
+        if (k != "counter")
+          _listLength += 48;
+        else
+          _listLength += 50;
+      }
+    if (_listLength < 100) _listLength = 100;
+    textFieldHeight = 400;
     String translatedText = googleOutput;
     return Container(
-      height: textFieldHeight / 1.5,
+      height: _listLength,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -54,19 +66,21 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           ),
           Column(
             children: [
-              CopyToClipboardButton(translatedText),
-              IconButton(
-                icon: Icon(Icons.fullscreen),
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: translatedText == ''
-                    ? null
-                    : () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MaximizedScreen())),
-              ),
-              TtsOutput(),
+              if (outList['copy'] == true)
+                CopyToClipboardButton(translatedText),
+              if (outList['maximize'] == true)
+                IconButton(
+                  icon: Icon(Icons.fullscreen),
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onPressed: translatedText == ''
+                      ? null
+                      : () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MaximizedScreen())),
+                ),
+              if (outList['text-to-speech'] == true) TtsOutput(),
             ],
           ),
         ],

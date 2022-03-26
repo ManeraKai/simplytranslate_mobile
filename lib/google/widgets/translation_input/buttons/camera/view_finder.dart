@@ -166,6 +166,9 @@ class _ViewFinderState extends State<ViewFinder>
       ),
       onPressed: controller != null && controller!.value.isInitialized
           ? () async {
+              textList = [];
+              croppedImgsProcessedList = [];
+              filteredContourValsList = [];
               if (controller == null ||
                   !controller!.value.isInitialized ||
                   controller!.value.isTakingPicture) return;
