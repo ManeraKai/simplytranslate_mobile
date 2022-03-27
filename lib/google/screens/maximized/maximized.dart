@@ -132,7 +132,8 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     _isVisible = () {
       if (MediaQuery.of(context).orientation == Orientation.portrait) {
         if (startSelectionPoint.point.dy < 20) return false;
-        if (startSelectionPoint.point.dy > textFieldHeight + 65) return false;
+        if (startSelectionPoint.point.dy > outTextFieldHeight + 65)
+          return false;
       }
       return true;
     }();

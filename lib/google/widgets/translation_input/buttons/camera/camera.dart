@@ -48,7 +48,23 @@ class _CameraState extends State<Camera> {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: fromLangVal == 'auto'
-          ? null
+          ? () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Autodetect not supported"),
+                    content: Text("Please select another language"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text(L10n.of(context).ok),
+                      )
+                    ],
+                  );
+                },
+              );
+            }
           : downloadingList[fromLangVal] != TrainedDataState.Downloaded
               ? () async {
                   var _isNotCanceled = true;
@@ -113,6 +129,11 @@ class _CameraState extends State<Camera> {
                 }
               : cameraFunc,
       icon: Icon(Icons.camera_alt),
+      color: fromLangVal == 'auto'
+          ? theme == Brightness.dark
+              ? darkThemedisabledColor
+              : lightThemedisabledColor
+          : Colors.white,
     );
   }
 }

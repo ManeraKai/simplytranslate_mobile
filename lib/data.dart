@@ -17,6 +17,8 @@ const greyColor = const Color(0xff131618);
 const secondgreyColor = const Color(0xff212529);
 const greenColor = const Color(0xff3fb274);
 const lightThemeGreyColor = const Color(0xffa9a9a9);
+const darkThemedisabledColor = const Color(0xff6e7071);
+const lightThemedisabledColor = const Color(0xff9b9b9b);
 
 late BuildContext contextOverlordData;
 late void Function(void Function() fn) setStateOverlord;
@@ -568,7 +570,8 @@ Map<String, TrainedDataState> downloadingList = {
   "yo": TrainedDataState.notDownloaded,
 };
 
-late double textFieldHeight;
+late double inTextFieldHeight;
+late double outTextFieldHeight;
 
 var instances = [
   "https://simplytranslate.org",
