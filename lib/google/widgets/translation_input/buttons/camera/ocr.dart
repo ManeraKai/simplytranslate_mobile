@@ -14,7 +14,7 @@ class OCR extends StatelessWidget {
   Widget build(BuildContext context) {
     checkWidth(context);
     return Scaffold(
-      appBar: globalAppBar,
+      appBar: globalAppBar(context),
       body: Container(
         alignment: Alignment.center,
         height: screenSize.height,

@@ -19,10 +19,27 @@ late Size screenSize;
 
 var dilate = 0.0;
 
-var globalAppBar = PreferredSize(
-  preferredSize: Size.fromHeight(50),
-  child: AppBar(title: Text(L10n.current.text_recognition)),
-);
+globalAppBar(context) => PreferredSize(
+      preferredSize: Size.fromHeight(50),
+      child: AppBar(
+        title: Text(L10n.current.text_recognition),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: Text(
+                    "Paint the green boxes with your finger. The parts where the paint touch are registered",
+                  ),
+                ),
+              );
+            },
+          )
+        ],
+      ),
+    );
 
 late var heightRatio;
 late var widthRatio;

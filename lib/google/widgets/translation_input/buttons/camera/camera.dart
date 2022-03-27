@@ -54,7 +54,7 @@ class _CameraState extends State<Camera> {
                 builder: (context) {
                   return AlertDialog(
                     title: Text("Autodetect not supported"),
-                    content: Text("Please select another language"),
+                    content: Text("Please select a specific language."),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(),
@@ -133,7 +133,7 @@ class _CameraState extends State<Camera> {
           ? theme == Brightness.dark
               ? darkThemedisabledColor
               : lightThemedisabledColor
-          : Colors.white,
+          : null,
     );
   }
 }

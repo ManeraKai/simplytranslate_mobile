@@ -8,7 +8,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     checkWidth(context);
     return Scaffold(
-      appBar: globalAppBar,
+      appBar: globalAppBar(context),
       body: Container(
         width: imageWidth,
         height: imageHeight,
