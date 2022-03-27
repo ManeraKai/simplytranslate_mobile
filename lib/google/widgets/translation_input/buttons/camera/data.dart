@@ -33,6 +33,12 @@ globalAppBar(context) => PreferredSize(
                   content: Text(
                     "Select text to translate by drawing on the screen.",
                   ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(L10n.of(context).ok),
+                    )
+                  ],
                 ),
               );
             },
