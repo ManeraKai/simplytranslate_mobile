@@ -31,7 +31,7 @@ globalAppBar(context) => PreferredSize(
                 context: context,
                 builder: (context) => AlertDialog(
                   content: Text(
-                    "Paint the green boxes with your finger. The parts where the paint touch are registered",
+                    "Select text to translate by drawing on the screen.",
                   ),
                 ),
               );
