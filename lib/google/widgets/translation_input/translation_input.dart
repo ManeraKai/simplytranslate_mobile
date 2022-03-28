@@ -44,7 +44,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
     inTextFieldHeight = 10;
     for (var k in inList.keys)
       if (inList[k] == true) {
-        if (k != "counter")
+        if (k != "Counter")
           inTextFieldHeight += 48;
         else
           inTextFieldHeight += 50;
@@ -121,13 +121,13 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (inList['remove'] == true) DeleteTranslationInputButton(),
-              if (inList['copy'] == true)
+              if (inList['Remove'] == true) DeleteTranslationInputButton(),
+              if (inList['Copy'] == true)
                 CopyToClipboardButton(googleInCtrl.text),
-              if (inList['camera'] == true) Camera(),
-              if (inList['paste'] == true) PasteClipboardButton(),
-              if (inList['text-to-speech'] == true) TtsInput(),
-              if (inList['counter'] == true) CharacterLimit(),
+              if (inList['Camera'] == true) Camera(),
+              if (inList['Paste'] == true) PasteClipboardButton(),
+              if (inList['Text-To-Speech'] == true) TtsInput(),
+              if (inList['Counter'] == true) CharacterLimit(),
             ],
           )
         ],

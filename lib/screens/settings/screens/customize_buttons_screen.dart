@@ -10,12 +10,12 @@ class CustomizeButtonsScreen extends StatefulWidget {
 }
 
 Map<String, IconData> icons = {
-  "remove": Icons.close,
-  "copy": Icons.copy,
-  "camera": Icons.camera_alt,
-  "paste": Icons.paste,
-  "text-to-speech": Icons.volume_up,
-  "maximize": Icons.fullscreen,
+  "Remove": Icons.close,
+  "Copy": Icons.copy,
+  "Camera": Icons.camera_alt,
+  "Paste": Icons.paste,
+  "Text-To-Speech": Icons.volume_up,
+  "Maximize": Icons.fullscreen,
 };
 
 class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
@@ -62,6 +62,7 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
                   ),
                 );
               return [
+                const SizedBox(height: 10),
                 Text("Input", style: textStyle),
                 line,
                 ...inListWidgets,

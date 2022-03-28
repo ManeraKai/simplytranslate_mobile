@@ -21,7 +21,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
     outTextFieldHeight = 10;
     for (var k in outList.keys)
       if (outList[k] == true) {
-        if (k != "counter")
+        if (k != "Counter")
           outTextFieldHeight += 48;
         else
           outTextFieldHeight += 50;
@@ -63,9 +63,9 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           ),
           Column(
             children: [
-              if (outList['copy'] == true)
+              if (outList['Copy'] == true)
                 CopyToClipboardButton(translatedText),
-              if (outList['maximize'] == true)
+              if (outList['Maximize'] == true)
                 IconButton(
                   icon: Icon(Icons.fullscreen),
                   splashColor: Colors.transparent,
@@ -77,7 +77,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                           MaterialPageRoute(
                               builder: (context) => MaximizedScreen())),
                 ),
-              if (outList['text-to-speech'] == true) TtsOutput(),
+              if (outList['Text-To-Speech'] == true) TtsOutput(),
             ],
           ),
         ],

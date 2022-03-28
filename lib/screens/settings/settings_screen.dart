@@ -46,6 +46,7 @@ class _SettingsState extends State<Settings> {
               ),
               line,
               SelectTheme(),
+              CustomizeButtons(),
               const SizedBox(height: 20),
               Text(
                 L10n.of(context).translation,
@@ -53,7 +54,6 @@ class _SettingsState extends State<Settings> {
               ),
               line,
               TextRecognition(),
-              CustomizeButtons(),
               SelectDefaultLang(),
             ],
           ),
