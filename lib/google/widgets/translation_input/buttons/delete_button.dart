@@ -22,7 +22,7 @@ class DeleteTranslationInputButton extends StatelessWidget {
                   ttsOutloading = false;
                   isTtsOutputCanceled = true;
                   googleInCtrl.text = '';
-                  googleOutput = '';
+                  googleOutput = {};
                 });
                 FocusScope.of(context).unfocus();
                 if (isSnackBarVisible) isSnackBarVisible = false;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/generated/l10n.dart';
+import 'package:simplytranslate_mobile/google/widgets/translation_output/widgets/definitions.dart';
+import 'package:simplytranslate_mobile/google/widgets/translation_output/widgets/translations.dart';
 import '/data.dart';
 import '/google/widgets/translate_button/cancel_translation_button.dart';
 import '/widgets/keyboard_visibility.dart';
@@ -85,6 +87,8 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       ),
                     ],
                   ),
+                  Definitions(googleOutput),
+                  Translations(googleOutput),
                 ],
               ),
             ),

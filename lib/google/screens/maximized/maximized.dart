@@ -47,7 +47,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                   child: SelectableText(
-                    googleOutput,
+                    googleOutput['translated-text'],
                     selectionControls: _MyMaterialTextSelectionControls(),
                     style: TextStyle(fontSize: outputFontSize),
                   ),

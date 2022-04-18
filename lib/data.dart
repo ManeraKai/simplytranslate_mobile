@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -33,7 +34,13 @@ String shareLangVal = '';
 
 String instance = 'random';
 
-String googleOutput = '';
+Map googleOutput = {};
+
+extension CapitalizeString on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+  }
+}
 
 String customInstance = '';
 
@@ -415,7 +422,7 @@ showInternetError(context) {
   );
 }
 
-Future<String> translate({
+Future<Map> translate({
   required String input,
   required String fromLang,
   required String toLang,
@@ -442,11 +449,12 @@ Future<String> translate({
     );
 
     if (response.statusCode == 200) {
-      print(response.body);
-      return response.body;
+      Map decoded = json.decode(response.body);
+      print(decoded);
+      return decoded;
     } else {
       await showInstanceError(context);
-      return '';
+      return {};
     }
   } catch (err) {
     print('something is wrong buddy: $err');
@@ -460,7 +468,7 @@ Future<String> translate({
       await showInternetError(context);
       throw ('No internet');
     }
-    return '';
+    return {};
   }
 }
 

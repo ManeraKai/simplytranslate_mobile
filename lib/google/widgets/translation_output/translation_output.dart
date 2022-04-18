@@ -5,6 +5,7 @@ import '/data.dart';
 import '/google/screens/maximized/maximized.dart';
 import '/google/widgets/translation_input/buttons/copy_button.dart';
 import 'widgets/tts_output.dart';
+import 'widgets/definitions.dart';
 
 class GoogleTranslationOutput extends StatefulWidget {
   const GoogleTranslationOutput({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           outTextFieldHeight += 50;
       }
     if (outTextFieldHeight < 100) outTextFieldHeight = 100;
-    String translatedText = googleOutput;
+    Map translatedText = googleOutput;
     return Container(
       height: outTextFieldHeight,
       decoration: BoxDecoration(
@@ -48,12 +49,16 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
               child: Scrollbar(
                 child: Directionality(
-                  textDirection:
-                      intl.Bidi.detectRtlDirectionality(translatedText)
+                  textDirection: translatedText.containsKey('translated-text')
+                      ? intl.Bidi.detectRtlDirectionality(
+                              translatedText['translated-text'])
                           ? TextDirection.rtl
-                          : TextDirection.ltr,
+                          : TextDirection.ltr
+                      : TextDirection.rtl,
                   child: SelectableText(
-                    translatedText,
+                    translatedText.containsKey('translated-text')
+                        ? translatedText['translated-text']
+                        : '',
                     // selectionControls: _MyMaterialTextSelectionControls(),
                     style: TextStyle(fontSize: _outputFontSize),
                   ),

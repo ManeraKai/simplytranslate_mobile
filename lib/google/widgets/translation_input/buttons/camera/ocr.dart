@@ -32,7 +32,7 @@ class OCR extends StatelessWidget {
             for (var i in highlightedList) newList.add(textList[i]);
             newText = newList.join(" ");
             if (newText.trim() != "") {
-              String translatedText = "";
+              Map translatedText = {};
               await showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -64,7 +64,7 @@ class OCR extends StatelessWidget {
                               line,
                               SizedBox(height: 10),
                               Text(
-                                translatedText,
+                                translatedText['translated-text'],
                                 style: TextStyle(fontSize: 18),
                               )
                             ],
