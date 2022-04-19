@@ -34,7 +34,7 @@ class Translations extends StatelessWidget {
                   type.capitalize(),
                   style: TextStyle(
                     fontSize: 20,
-                    color: theme == AppTheme.dark
+                    color: theme == Brightness.dark
                         ? Colors.cyanAccent
                         : Color(0xff007979),
                   ),
@@ -67,7 +67,7 @@ class Translations extends StatelessWidget {
                                     text: "● $word: ",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: theme == AppTheme.dark
+                                      color: theme == Brightness.dark
                                           ? Colors.cyanAccent
                                           : Color(0xff007979),
                                     ),
@@ -77,7 +77,7 @@ class Translations extends StatelessWidget {
                                                 [type][word]['words']
                                             .join(', '),
                                         style: TextStyle(
-                                          color: theme == AppTheme.dark
+                                          color: theme == Brightness.dark
                                               ? Color(0xffdeb887)
                                               : Color(0xff804700),
                                         ),
@@ -102,7 +102,7 @@ class Translations extends StatelessWidget {
                                                       [type][word]['frequency']
                                                   [0]) >
                                           i
-                                      ? theme == AppTheme.dark
+                                      ? theme == Brightness.dark
                                           ? Colors.cyanAccent
                                           : Color(0xff007979)
                                       : Color(0xff007979).withAlpha(60),

@@ -30,7 +30,7 @@ class Definitions extends StatelessWidget {
                 type.capitalize(),
                 style: TextStyle(
                   fontSize: 20,
-                  color: theme == AppTheme.dark
+                  color: theme == Brightness.dark
                       ? Colors.cyanAccent
                       : Color(0xff007979),
                 ),
@@ -60,7 +60,7 @@ class Definitions extends StatelessWidget {
                               '"${translatedText['definitions'][type][i]['use-in-sentence']}"',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: theme == AppTheme.dark
+                                color: theme == Brightness.dark
                                     ? Colors.yellow
                                     : Color(0xff009902),
                               ),
@@ -79,7 +79,7 @@ class Definitions extends StatelessWidget {
                                       text: '$x: ',
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: theme == AppTheme.dark
+                                        color: theme == Brightness.dark
                                             ? Colors.cyanAccent
                                             : Color(0xff007979),
                                       ),
@@ -90,7 +90,7 @@ class Definitions extends StatelessWidget {
                                           .join(', '),
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: theme == AppTheme.dark
+                                        color: theme == Brightness.dark
                                             ? Color(0xffdeb887)
                                             : Color(0xff804700),
                                       ),
