@@ -17,7 +17,8 @@ class Definitions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (translatedText.containsKey('definitions')) ...[
+          if (translatedText.containsKey('definitions') &&
+              translatedText['definitions'].isNotEmpty) ...[
             SizedBox(height: 20),
             Text(
               'Definitions',
@@ -29,7 +30,9 @@ class Definitions extends StatelessWidget {
                 type.capitalize(),
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.cyan,
+                  color: theme == AppTheme.dark
+                      ? Colors.cyanAccent
+                      : Color(0xff007979),
                 ),
               ),
               SizedBox(height: 8),
@@ -57,7 +60,9 @@ class Definitions extends StatelessWidget {
                               '"${translatedText['definitions'][type][i]['use-in-sentence']}"',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.yellow,
+                                color: theme == AppTheme.dark
+                                    ? Colors.yellow
+                                    : Color(0xff009902),
                               ),
                             ),
                           ],
@@ -68,19 +73,30 @@ class Definitions extends StatelessWidget {
                                 .keys) ...[
                               SizedBox(height: 5),
                               if (x != "")
-                                Text(
-                                  x,
-                                  style: TextStyle(color: Colors.cyan),
-                                ),
-                              Text(
-                                translatedText['definitions'][type][i]['synonyms']
-                                        [x]
-                                    .join(', '),
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xffdeb887),
-                                ),
-                              )
+                                RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                      text: '$x: ',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: theme == AppTheme.dark
+                                            ? Colors.cyanAccent
+                                            : Color(0xff007979),
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: translatedText['definitions'][type]
+                                              [i]['synonyms'][x]
+                                          .join(', '),
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: theme == AppTheme.dark
+                                            ? Color(0xffdeb887)
+                                            : Color(0xff804700),
+                                      ),
+                                    )
+                                  ]),
+                                )
                             ],
                           SizedBox(height: 20),
                         ],

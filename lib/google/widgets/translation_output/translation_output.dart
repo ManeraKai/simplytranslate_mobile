@@ -5,7 +5,6 @@ import '/data.dart';
 import '/google/screens/maximized/maximized.dart';
 import '/google/widgets/translation_input/buttons/copy_button.dart';
 import 'widgets/tts_output.dart';
-import 'widgets/definitions.dart';
 
 class GoogleTranslationOutput extends StatefulWidget {
   const GoogleTranslationOutput({Key? key}) : super(key: key);
@@ -75,7 +74,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                   icon: Icon(Icons.fullscreen),
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onPressed: translatedText == ''
+                  onPressed: translatedText['translated-text'] == ''
                       ? null
                       : () => Navigator.push(
                           context,

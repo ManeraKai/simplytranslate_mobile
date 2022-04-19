@@ -145,7 +145,7 @@ class _TtsOutputState extends State<TtsOutput> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
-              if (_input == '') {
+              if (_input['translated-text'] == '') {
                 if (_listening)
                   return stopPlayer;
                 else

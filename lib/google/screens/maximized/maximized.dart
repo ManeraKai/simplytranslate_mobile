@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart' as intl;
 import './widgets/tts_output.dart';
 import '/data.dart';
 import '/google/widgets/translation_input/buttons/copy_button.dart';
@@ -46,10 +47,18 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: SelectableText(
-                    googleOutput['translated-text'],
-                    selectionControls: _MyMaterialTextSelectionControls(),
-                    style: TextStyle(fontSize: outputFontSize),
+                  child: Directionality(
+                      textDirection: googleOutput.containsKey('translated-text')
+                      ? intl.Bidi.detectRtlDirectionality(
+                              googleOutput['translated-text'])
+                          ? TextDirection.rtl
+                          : TextDirection.ltr
+                      : TextDirection.rtl,
+                    child: SelectableText(
+                      googleOutput['translated-text'],
+                      selectionControls: _MyMaterialTextSelectionControls(),
+                      style: TextStyle(fontSize: outputFontSize),
+                    ),
                   ),
                 ),
               ),
