@@ -72,9 +72,9 @@ class Definitions extends StatelessWidget {
                                     [i]['synonyms']
                                 .keys) ...[
                               SizedBox(height: 5),
-                              if (x != "")
-                                RichText(
-                                  text: TextSpan(children: [
+                              RichText(
+                                text: TextSpan(children: [
+                                  if (x != "")
                                     TextSpan(
                                       text: '$x: ',
                                       style: TextStyle(
@@ -84,19 +84,19 @@ class Definitions extends StatelessWidget {
                                             : Color(0xff007979),
                                       ),
                                     ),
-                                    TextSpan(
-                                      text: translatedText['definitions'][type]
-                                              [i]['synonyms'][x]
-                                          .join(', '),
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: theme == Brightness.dark
-                                            ? Color(0xffdeb887)
-                                            : Color(0xff804700),
-                                      ),
-                                    )
-                                  ]),
-                                )
+                                  TextSpan(
+                                    text: translatedText['definitions'][type][i]
+                                            ['synonyms'][x]
+                                        .join(', '),
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: theme == Brightness.dark
+                                          ? Color(0xffdeb887)
+                                          : Color(0xff804700),
+                                    ),
+                                  )
+                                ]),
+                              )
                             ],
                           SizedBox(height: 20),
                         ],
