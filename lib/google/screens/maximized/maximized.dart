@@ -65,7 +65,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
             ),
             Column(
               children: [
-                CopyToClipboardButton(googleOutput),
+                CopyToClipboardButton(googleOutput['translated-text']),
                 IconButton(
                   onPressed: () async {
                     await SystemChrome.setEnabledSystemUIMode(

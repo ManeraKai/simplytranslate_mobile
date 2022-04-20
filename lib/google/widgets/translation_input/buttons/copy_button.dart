@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
-  final text;
+  final String text;
   const CopyToClipboardButton(this.text, {Key? key}) : super(key: key);
 
   @override
