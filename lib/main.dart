@@ -368,6 +368,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    translateContext = context;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: GoogleTranslate(),

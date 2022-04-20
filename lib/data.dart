@@ -375,6 +375,8 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
   return mapTwo;
 }
 
+BuildContext? translateContext;
+
 showInstanceError(context) {
   showDialog(
     context: context,
@@ -449,9 +451,7 @@ Future<Map> translate({
     );
 
     if (response.statusCode == 200) {
-      Map decoded = json.decode(response.body);
-      print(decoded);
-      return decoded;
+      return json.decode(response.body);
     } else {
       await showInstanceError(context);
       return {};

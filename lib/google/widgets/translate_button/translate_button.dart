@@ -23,7 +23,7 @@ class GoogleTranslateButton extends StatelessWidget {
                       input: googleInCtrl.text,
                       fromLang: fromLangVal,
                       toLang: toLangVal,
-                      context: contextOverlordData,
+                      context: translateContext!,
                     );
                     if (!isTranslationCanceled)
                       setStateOverlord(() {

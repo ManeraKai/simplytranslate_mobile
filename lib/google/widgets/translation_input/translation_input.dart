@@ -50,7 +50,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
           inTextFieldHeight += 50;
       }
     if (inTextFieldHeight < 100) inTextFieldHeight = 100;
-    print("inTextFieldHeight " + inTextFieldHeight.toString());
+    // print("inTextFieldHeight " + inTextFieldHeight.toString());
     return Container(
       height: inTextFieldHeight,
       width: MediaQuery.of(context).size.width,
