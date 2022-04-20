@@ -36,9 +36,21 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
                 inListWidgets.add(
                   CheckboxListTile(
                     value: inList[k],
-                    onChanged: (v) => setState(() => inList[k] = v!),
+                    onChanged: (v) {
+                      setState(() {
+                        inList[k] = v!;
+                        session.write('inListWidgets', inList);
+                      });
+                    },
                     title: Row(
                       children: [
+                        if (k == 'Counter') 
+                        Image.asset(
+                          theme == Brightness.dark
+                              ? "assets/settings/counter-dark.png"
+                              : "assets/settings/counter-light.png",
+                          scale: 2,
+                        ),
                         if (icons[k] != null) Icon(icons[k]),
                         SizedBox(width: 10),
                         Text(k),
@@ -51,7 +63,12 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
                 outListWidgets.add(
                   CheckboxListTile(
                     value: outList[k],
-                    onChanged: (v) => setState(() => outList[k] = v!),
+                    onChanged: (v) {
+                      setState(() {
+                        outList[k] = v!;
+                        session.write('outListWidgets', outList);
+                      });
+                    },
                     title: Row(
                       children: [
                         if (icons[k] != null) Icon(icons[k]),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:clipboard_listener/clipboard_listener.dart';
@@ -57,6 +58,15 @@ void main(List<String> args) async {
       theme = Brightness.dark;
     }
   }
+
+  print('checking inList');
+  if (session.read('inListWidgets') != null) {
+    inList = Map.from(session.read('inListWidgets'));
+  }
+  if (session.read('outListWidgets') != null) {
+    outList = Map.from(session.read('outListWidgets'));
+  }
+
   flutterTesseractOcrTessdataPath = await FlutterTesseractOcr.getTessdataPath();
 
   two2three.forEach((key, value) {
