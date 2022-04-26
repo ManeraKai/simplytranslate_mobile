@@ -68,16 +68,13 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           Column(
             children: [
               if (outList['Copy'] == true)
-                CopyToClipboardButton(
-                    translatedText.containsKey('translated-text')
-                        ? translatedText['translated-text']
-                        : ''),
+                CopyToClipboardButton(translatedText['translated-text'] ?? ''),
               if (outList['Maximize'] == true)
                 IconButton(
                   icon: Icon(Icons.fullscreen),
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onPressed: translatedText['translated-text'] == ''
+                  onPressed: translatedText['translated-text'] == null
                       ? null
                       : () => Navigator.push(
                           context,

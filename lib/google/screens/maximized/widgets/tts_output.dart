@@ -31,7 +31,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
 
   @override
   Widget build(BuildContext context) {
-    final _input = googleOutput;
+    final _input = googleOutput['translated-text'];
     stopPlayer() async {
       final result = await _audioPlayer.stop();
       if (result == 1)
@@ -154,7 +154,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
-              if (_input['translated-text'] == '') {
+              if (_input == null) {
                 if (_listening)
                   return stopPlayer;
                 else

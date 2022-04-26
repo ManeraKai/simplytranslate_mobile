@@ -50,12 +50,12 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                   child: Directionality(
                       textDirection: googleOutput.containsKey('translated-text')
                       ? intl.Bidi.detectRtlDirectionality(
-                              googleOutput['translated-text'])
+                              googleOutput['translated-text'] ?? '')
                           ? TextDirection.rtl
                           : TextDirection.ltr
                       : TextDirection.rtl,
                     child: SelectableText(
-                      googleOutput['translated-text'],
+                      googleOutput['translated-text'] ?? '',
                       selectionControls: _MyMaterialTextSelectionControls(),
                       style: TextStyle(fontSize: outputFontSize),
                     ),
@@ -65,7 +65,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
             ),
             Column(
               children: [
-                CopyToClipboardButton(googleOutput['translated-text']),
+                CopyToClipboardButton(googleOutput['translated-text'] ?? ''),
                 IconButton(
                   onPressed: () async {
                     await SystemChrome.setEnabledSystemUIMode(

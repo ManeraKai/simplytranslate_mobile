@@ -24,7 +24,7 @@ class TtsOutput extends StatefulWidget {
 class _TtsOutputState extends State<TtsOutput> {
   @override
   Widget build(BuildContext context) {
-    final _input = googleOutput;
+    final _input = googleOutput['translated-text'] ?? '';
     stopPlayer() async {
       final result = await _audioPlayer.stop();
       if (result == 1)
@@ -59,13 +59,13 @@ class _TtsOutputState extends State<TtsOutput> {
       final _url;
       if (instance == 'custom')
         _url = Uri.parse(
-            '$customInstance/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
+            '$customInstance/api/tts/?engine=google&lang=$toLangVal&text=$_input');
       else if (instance == 'random')
         _url = Uri.parse(
-            '${instances[_random]}/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
+            '${instances[_random]}/api/tts/?engine=google&lang=$toLangVal&text=$_input');
       else
         _url = Uri.parse(
-            '$instance/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
+            '$instance/api/tts/?engine=google&lang=$toLangVal&text=$_input');
       try {
         setState(() => ttsOutloading = true);
         final response = await http.get(_url);
@@ -81,7 +81,7 @@ class _TtsOutputState extends State<TtsOutput> {
               excludedInstances.removeAt(_random);
               final randomExcluded = Random().nextInt(excludedInstances.length);
               final _urlExcluded = Uri.parse(
-                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
+                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLangVal&text=$_input');
               try {
                 final response = await http.get(_urlExcluded);
                 if (!isTtsOutputCanceled) {
@@ -145,14 +145,13 @@ class _TtsOutputState extends State<TtsOutput> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
-              if (_input['translated-text'] == '') {
+              if (_input == '') {
                 if (_listening)
                   return stopPlayer;
                 else
                   return null;
               } else if (!_listening) {
-                if (_input['translated-text'] != null &&
-                    _input['translated-text'].length > 200)
+                if (_input.length > 200)
                   return audioLimit;
                 else
                   return startPlayer;
