@@ -582,16 +582,18 @@ late double inTextFieldHeight;
 late double outTextFieldHeight;
 
 var instances = [
-  "https://simplytranslate.org",
-  "https://st.alefvanoon.xyz",
-  "https://translate.josias.dev",
-  "https://translate.namazso.eu",
-  "https://translate.riverside.rocks",
-  "https://manerakai.asuscomm.com:447",
-  "https://translate.bus-hit.me",
-  "https://simplytranslate.pussthecat.org",
-  "https://translate.northboot.xyz",
-  "https://translate.tiekoetter.com",
+"https://simplytranslate.org",
+"https://st.alefvanoon.xyz",
+"https://translate.josias.dev",
+"https://translate.namazso.eu",
+"https://translate.riverside.rocks",
+"https://st.manerakai.com",
+"https://translate.bus-hit.me",
+"https://simplytranslate.pussthecat.org",
+"https://translate.northboot.xyz",
+"https://translate.tiekoetter.com",
+"https://simplytranslate.esmailelbob.xyz",
+"https://translate.syncpundit.com",
 ];
 
 late final String flutterTesseractOcrTessdataPath;

@@ -59,13 +59,13 @@ class _TtsOutputState extends State<TtsOutput> {
       final _url;
       if (instance == 'custom')
         _url = Uri.parse(
-            '$customInstance/api/tts/?engine=google&lang=$toLangVal&text=$_input');
+            '$customInstance/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
       else if (instance == 'random')
         _url = Uri.parse(
-            '${instances[_random]}/api/tts/?engine=google&lang=$toLangVal&text=$_input');
+            '${instances[_random]}/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
       else
         _url = Uri.parse(
-            '$instance/api/tts/?engine=google&lang=$toLangVal&text=$_input');
+            '$instance/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
       try {
         setState(() => ttsOutloading = true);
         final response = await http.get(_url);
@@ -81,7 +81,7 @@ class _TtsOutputState extends State<TtsOutput> {
               excludedInstances.removeAt(_random);
               final randomExcluded = Random().nextInt(excludedInstances.length);
               final _urlExcluded = Uri.parse(
-                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLangVal&text=$_input');
+                  '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$toLangVal&text=${_input['translated-text']}');
               try {
                 final response = await http.get(_urlExcluded);
                 if (!isTtsOutputCanceled) {
@@ -151,7 +151,8 @@ class _TtsOutputState extends State<TtsOutput> {
                 else
                   return null;
               } else if (!_listening) {
-                if (_input.length > 200)
+                if (_input['translated-text'] != null &&
+                    _input['translated-text'].length > 200)
                   return audioLimit;
                 else
                   return startPlayer;
