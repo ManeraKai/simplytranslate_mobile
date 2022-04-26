@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="8.3612242mm"
+   height="8.6990328mm"
+   viewBox="0 0 8.3612243 8.6990329"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/esmail/Desktop/counter-light.png"
+   inkscape:export-xdpi="148.36"
+   inkscape:export-ydpi="148.36"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="counter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="6.4907799"
+     inkscape:cx="-6.3166523"
+     inkscape:cy="25.651771"
+     inkscape:window-width="1888"
+     inkscape:window-height="1060"
+     inkscape:window-x="32"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-102.25978,-94.250814)">
+    <g
+       id="path869"
+       style="fill:#3fb274;fill-opacity:1">
+      <path
+         style="color:#000000;fill:#3fb274;stroke-width:0.5;-inkscape-stroke:none;fill-opacity:1"
+         d="m 102.25989,98.527232 h 8.361"
+         id="path6969" />
+      <path
+         style="color:#000000;fill:#3fb274;-inkscape-stroke:none;fill-opacity:1"
+         d="m 102.25977,98.277344 v 0.5 h 8.36132 v -0.5 z"
+         id="path6971" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.48186px;line-height:1.25;font-family:sans-serif;fill:#3fb274;fill-opacity:1;stroke:none;stroke-width:0.0870469"
+       x="101.99116"
+       y="102.90054"
+       id="text5793"><tspan
+         sodipodi:role="line"
+         id="tspan5791"
+         style="fill:#3fb274;fill-opacity:1;stroke-width:0.0870469"
+         x="101.99116"
+         y="102.90054">5000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.48186px;line-height:1.25;font-family:sans-serif;fill:#3fb274;fill-opacity:1;stroke:none;stroke-width:0.0870469"
+       x="105.3336"
+       y="96.835007"
+       id="text6129"><tspan
+         sodipodi:role="line"
+         id="tspan6127"
+         style="fill:#3fb274;fill-opacity:1;stroke-width:0.0870469"
+         x="105.3336"
+         y="96.835007">0</tspan></text>
+  </g>
+</svg>

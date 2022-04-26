@@ -2,51 +2,36 @@ head
     meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" )
     meta(name="theme-color" content="#141414" )
-    link(rel="shortcut icon" type="image/png" href="./img/favicon.png" )
+    link(rel="shortcut icon" type="image/png" href="./assets/favicon.png" )
     meta(name="description" content="An alternative front-end to GoogleTranslate")
-    link(itemprop="image" href="./img/favicon.png")
+    link(itemprop="image" href="./assets/favicon.png")
     link(href="./css/index.css" type="text/css" rel="stylesheet" media="screen,projection" )
-    meta(content="https://manerakai.github.io/simplytranslate_mobile/img/preview.png" property="og:image")
+    meta(content="https://manerakai.github.io/simplytranslate_mobile/assets/preview.png" property="og:image")
     title SimplyTranslate Mobile
 body
     div.toolbar
-        a(style="text-decoration: none" href="index.html")=translations['home']
-        a(style="text-decoration: none" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")= translations['download']
         a(style="text-decoration: none" href="https://github.com/ManeraKai/simplytranslate_mobile")= translations['source']
-        a(style="text-decoration: none" href="#donate")= translations['donate']
 
     header
-        img.main_logo(src="./img/logo.svg")
+        img.main_logo(src="./assets/logo.svg")
         h1 SimplyTranslate Mobile
-        a(href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")=translations['download']
-
 
     div.section
-        if (isRtl)
-            blockquote.block-rtl
-                h2#about.header.main-font.primary-color=translations['about']
-        else
-            blockquote.block
-                h2#about.header.main-font.primary-color=translations['about']
+        .badge
+            p.flow-text.main-font=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
+                a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
+                =translations['about-text'].substring(translations['about-text'].indexOf('</a>')+4, translations['about-text'].length)
+        
+            a(href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")
+                img(src="./assets/f-droid.png" alt="Get it on F-Droid" height="80")
 
-        p.flow-text.main-font=translations['about-text'].substring(0, translations['about-text'].indexOf('<a>'))
-            a(href="https://simplytranslate.org/")=translations['about-text'].substring(translations['about-text'].indexOf('<a>')+3, translations['about-text'].indexOf('</a>'))
-            =translations['about-text'].substring(translations['about-text'].indexOf('</a>')+4, translations['about-text'].length)
         br
-        hr#screenshots
-
-        if(isRtl)
-            blockquote.block-rtl
-                h2.header.main-font.primary-color=translations['screenshots']
-        else
-            blockquote.block
-                h2.header.main-font.primary-color=translations['screenshots']
 
         div.screenshots
-            img.center(src="./img/1.webp")
-            img.center(src="./img/2.webp")
-            img.center(src="./img/3.webp")
-            img.center(src="./img/4.webp")
+            img.center(src="./assets/1.webp")
+            img.center(src="./assets/2.webp")
+            img.center(src="./assets/3.webp")
+            img.center(src="./assets/4.webp")
 
         br
         hr#translation
@@ -74,7 +59,7 @@ body
         div.donate
             a.image(href="https://liberapay.com/simplytranslate_mobile/")
                 img(src="https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/liberapay.svg")
-                
+
             a.image(href="https://www.buymeacoffee.com/manerakai")
                 img(src="https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/bmc.svg")
 
@@ -109,12 +94,12 @@ body
             =translations['chinese-hong-kong']
             | : 
             a(href="https://github.com/CafeTango") CafeTango
-        
+
         p 🇫🇮 
             =translations['finnish']
             | : 
             a(href="https://hosted.weblate.org/user/Edanas/") Edanas
-        
+
         p 🇫🇷 
             =translations['french']
             | : 
@@ -136,7 +121,7 @@ body
             =translations['italian']
             | : 
             a(href="https://hosted.weblate.org/user/Edanas/") Edanas
-        
+
         p 🇮🇳 
             =translations['malayalam']
             | : 
@@ -168,7 +153,7 @@ body
             =translations['russian']
             | : 
             a(href="https://github.com/K3XRad") K3XRad
-        
+
         p 🇪🇸 
             =translations['spanish']
             | : 

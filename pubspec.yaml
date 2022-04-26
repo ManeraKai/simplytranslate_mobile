@@ -51,6 +51,7 @@ flutter:
     - assets/tessdata/
     - assets/ca/
     - assets/about/
+    - assets/settings/
   generate: true
 
 flutter_intl:
