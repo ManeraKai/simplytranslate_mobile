@@ -187,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
         "samoan": MessageLookupByLibrary.simpleMessage("Samoan"),
         "scots_gaelic": MessageLookupByLibrary.simpleMessage("Scots Gaelic"),
+        "select_text_by_drawing": MessageLookupByLibrary.simpleMessage(
+            "Select text to translate by drawing on the screen."),
         "serbian": MessageLookupByLibrary.simpleMessage("Serbian"),
         "sesotho": MessageLookupByLibrary.simpleMessage("Sesotho"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),

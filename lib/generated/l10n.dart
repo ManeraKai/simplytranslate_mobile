@@ -1869,6 +1869,16 @@ class L10n {
       args: [],
     );
   }
+
+  /// `Select text to translate by drawing on the screen.`
+  String get select_text_by_drawing {
+    return Intl.message(
+      'Select text to translate by drawing on the screen.',
+      name: 'select_text_by_drawing',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

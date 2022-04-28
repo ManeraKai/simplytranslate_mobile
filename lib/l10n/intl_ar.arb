@@ -347,5 +347,6 @@
     "counter": "العداد",
     "maximize": "تكبير",
     "definitions": "المفردات",
-    "translations": "الترجمات"
+    "translations": "الترجمات",
+    "select_text_by_drawing": "حدد النص الذي تريد ترجمته بالرسم على الشاشة."
 }

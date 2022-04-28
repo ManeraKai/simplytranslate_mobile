@@ -72,5 +72,6 @@
     "counter": "Counter",
     "maximize": "Maximize",
     "definitions": "Definitions",
-    "translations": "Translations"
+    "translations": "Translations",
+    "select_text_by_drawing": "Select text to translate by drawing on the screen."
 }

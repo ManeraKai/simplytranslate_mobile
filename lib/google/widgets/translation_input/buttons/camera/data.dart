@@ -30,9 +30,7 @@ globalAppBar(context) => PreferredSize(
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  content: Text(
-                    "Select text to translate by drawing on the screen.",
-                  ),
+                  content: Text(L10n.of(context).select_text_by_drawing),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
