@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bengali": MessageLookupByLibrary.simpleMessage("البنغالية"),
         "bosnian": MessageLookupByLibrary.simpleMessage("البوسنية"),
         "bulgarian": MessageLookupByLibrary.simpleMessage("البلغارية"),
+        "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
         "camera_is_not_accessible":
             MessageLookupByLibrary.simpleMessage("لا يمكن الوصول إلى الكاميرا"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -58,7 +59,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ساعد على تحسينه!"),
         "copied_to_clipboard":
             MessageLookupByLibrary.simpleMessage("نُسخ إلى الحافظة"),
+        "copy": MessageLookupByLibrary.simpleMessage("النسخ"),
         "corsican": MessageLookupByLibrary.simpleMessage("الكورسيكي"),
+        "counter": MessageLookupByLibrary.simpleMessage("العداد"),
         "croatian": MessageLookupByLibrary.simpleMessage("الكرواتية"),
         "custom": MessageLookupByLibrary.simpleMessage("مخصص"),
         "customize_buttons":
@@ -154,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maltese": MessageLookupByLibrary.simpleMessage("المالطية"),
         "maori": MessageLookupByLibrary.simpleMessage("الماوري"),
         "marathi": MessageLookupByLibrary.simpleMessage("المراثية"),
+        "maximize": MessageLookupByLibrary.simpleMessage("تكبير"),
         "mongolian": MessageLookupByLibrary.simpleMessage("المنغولية"),
         "myanmar_burmese": MessageLookupByLibrary.simpleMessage("البورمية"),
         "nepali": MessageLookupByLibrary.simpleMessage("النيبالية"),
@@ -164,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
         "output": MessageLookupByLibrary.simpleMessage("النتيجة"),
         "pashto": MessageLookupByLibrary.simpleMessage("الباشتوية"),
+        "paste": MessageLookupByLibrary.simpleMessage("اللصق"),
         "persian": MessageLookupByLibrary.simpleMessage("الفارسية"),
         "please_select_a_specific_language":
             MessageLookupByLibrary.simpleMessage("استخدم لغة محددة"),
@@ -171,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portuguese": MessageLookupByLibrary.simpleMessage("البرتغالية"),
         "punjabi": MessageLookupByLibrary.simpleMessage("البنجابية"),
         "random": MessageLookupByLibrary.simpleMessage("عشوائي"),
+        "remove": MessageLookupByLibrary.simpleMessage("الحذف"),
         "report_bug": MessageLookupByLibrary.simpleMessage("بلّغ عن خطأ"),
         "report_bug_summary":
             MessageLookupByLibrary.simpleMessage("رجائاً أبلغنا"),
@@ -203,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "telugu": MessageLookupByLibrary.simpleMessage("التيلوجو"),
         "text_recognition":
             MessageLookupByLibrary.simpleMessage("التعرف على النص"),
+        "text_to_speech": MessageLookupByLibrary.simpleMessage("نص-إلى-صوت"),
         "thai": MessageLookupByLibrary.simpleMessage("التايلاندية"),
         "theme": MessageLookupByLibrary.simpleMessage("السمة"),
         "trained_data_files_not_installed":

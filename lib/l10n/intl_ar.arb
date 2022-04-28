@@ -339,6 +339,13 @@
     "customize_buttons": "تخصيص الأزرار",
     "input": "الإدخال",
     "output": "النتيجة",
+    "remove": "الحذف",
+    "copy": "النسخ",
+    "camera": "الكاميرا",
+    "paste": "اللصق",
+    "text_to_speech": "نص-إلى-صوت",
+    "counter": "العداد",
+    "maximize": "تكبير",
     "definitions": "المفردات",
     "translations": "الترجمات"
 }

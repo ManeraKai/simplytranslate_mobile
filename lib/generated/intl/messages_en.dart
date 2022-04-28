@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bengali": MessageLookupByLibrary.simpleMessage("Bengali"),
         "bosnian": MessageLookupByLibrary.simpleMessage("Bosnian"),
         "bulgarian": MessageLookupByLibrary.simpleMessage("Bulgarian"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "camera_is_not_accessible":
             MessageLookupByLibrary.simpleMessage("Camera is not accessible"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -58,7 +59,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Help make it better!"),
         "copied_to_clipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
+        "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "corsican": MessageLookupByLibrary.simpleMessage("Corsican"),
+        "counter": MessageLookupByLibrary.simpleMessage("Counter"),
         "croatian": MessageLookupByLibrary.simpleMessage("Croatian"),
         "custom": MessageLookupByLibrary.simpleMessage("Custom"),
         "customize_buttons":
@@ -153,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maltese": MessageLookupByLibrary.simpleMessage("Maltese"),
         "maori": MessageLookupByLibrary.simpleMessage("Maori"),
         "marathi": MessageLookupByLibrary.simpleMessage("Marathi"),
+        "maximize": MessageLookupByLibrary.simpleMessage("Maximize"),
         "mongolian": MessageLookupByLibrary.simpleMessage("Mongolian"),
         "myanmar_burmese":
             MessageLookupByLibrary.simpleMessage("Myanmar (Burmese)"),
@@ -166,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "output": MessageLookupByLibrary.simpleMessage("Output"),
         "pashto": MessageLookupByLibrary.simpleMessage("Pashto"),
+        "paste": MessageLookupByLibrary.simpleMessage("Paste"),
         "persian": MessageLookupByLibrary.simpleMessage("Persian"),
         "please_select_a_specific_language":
             MessageLookupByLibrary.simpleMessage(
@@ -174,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portuguese": MessageLookupByLibrary.simpleMessage("Portuguese"),
         "punjabi": MessageLookupByLibrary.simpleMessage("Punjabi"),
         "random": MessageLookupByLibrary.simpleMessage("Random"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "report_bug": MessageLookupByLibrary.simpleMessage("Report a bug"),
         "report_bug_summary":
             MessageLookupByLibrary.simpleMessage("Please let us know"),
@@ -205,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "telugu": MessageLookupByLibrary.simpleMessage("Telugu"),
         "text_recognition":
             MessageLookupByLibrary.simpleMessage("Text Recognition"),
+        "text_to_speech":
+            MessageLookupByLibrary.simpleMessage("Text-To-Speech"),
         "thai": MessageLookupByLibrary.simpleMessage("Thai"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "trained_data_files_not_installed":

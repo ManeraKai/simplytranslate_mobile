@@ -71,48 +71,6 @@ Future<File> prepareOCR(File croppedImg) async {
   final prepared = await byte2File(preparedByte!);
 
   return prepared;
-
-  // final Uint8List? grayByte = await Cv2.cvtColor(
-  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
-  //   pathString: croppedImg.path,
-  //   outputType: Cv2.COLOR_RGB2GRAY,
-  // );
-  // final gray = await byte2File(grayByte!);
-
-  // final Uint8List? dilateByte = await Cv2.dilate(
-  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
-  //   pathString: gray.path,
-  //   kernelSize: [1, 1],
-  // );
-
-  // final dilate = await byte2File(dilateByte!);
-
-  // final Uint8List? contrastByte = await Cv2.contrast(
-  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
-  //   pathString: dilate.path,
-  //   alpha: 2,
-  // );
-
-  // final thresh1 = await byte2File(contrastByte!);
-
-  // final thresh1Byte = await Cv2.adaptiveThreshold(
-  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
-  //   pathString: dilate.path,
-  //   maxValue: 255,
-  //   adaptiveMethod: Cv2.ADAPTIVE_THRESH_MEAN_C,
-  //   thresholdType: Cv2.THRESH_BINARY,
-  //   blockSize: 15,
-  //   constantValue: 40);
-
-  // final Uint8List? thresh1Byte = await Cv2.threshold(
-  //   pathFrom: CVPathFrom.GALLERY_CAMERA,
-  //   pathString: dilate.path,
-  //   thresholdValue: 0,
-  //   maxThresholdValue: 255,
-  //   thresholdType: Cv2.THRESH_TOZERO,
-  // );
-
-  // final thresh1 = await byte2File(thresh1Byte!);
 }
 
 cancelDownloadOCRLanguage(lang) {
@@ -582,18 +540,18 @@ late double inTextFieldHeight;
 late double outTextFieldHeight;
 
 var instances = [
-"https://simplytranslate.org",
-"https://st.alefvanoon.xyz",
-"https://translate.josias.dev",
-"https://translate.namazso.eu",
-"https://translate.riverside.rocks",
-"https://st.manerakai.com",
-"https://translate.bus-hit.me",
-"https://simplytranslate.pussthecat.org",
-"https://translate.northboot.xyz",
-"https://translate.tiekoetter.com",
-"https://simplytranslate.esmailelbob.xyz",
-"https://translate.syncpundit.com",
+  "https://simplytranslate.org",
+  "https://st.alefvanoon.xyz",
+  "https://translate.josias.dev",
+  "https://translate.namazso.eu",
+  "https://translate.riverside.rocks",
+  "https://st.manerakai.com",
+  "https://translate.bus-hit.me",
+  "https://simplytranslate.pussthecat.org",
+  "https://translate.northboot.xyz",
+  "https://translate.tiekoetter.com",
+  "https://simplytranslate.esmailelbob.xyz",
+  "https://translate.syncpundit.com",
 ];
 
 late final String flutterTesseractOcrTessdataPath;
@@ -706,3 +664,18 @@ Map<String, bool> outList = {
   "Maximize": true,
   "Text-To-Speech": true,
 };
+
+Map<String, String> getInListTranslation(BuildContext context) => {
+      "Remove": L10n.of(context).remove,
+      "Copy": L10n.of(context).copy,
+      "Camera": L10n.of(context).camera,
+      "Paste": L10n.of(context).paste,
+      "Text-To-Speech": L10n.of(context).text_to_speech,
+      "Counter": L10n.of(context).counter,
+    };
+
+Map<String, String> getOutListTranslation(BuildContext context) => {
+      "Copy": L10n.of(context).copy,
+      "Maximize": L10n.of(context).maximize,
+      "Text-To-Speech": L10n.of(context).text_to_speech,
+    };

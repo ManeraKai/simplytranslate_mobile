@@ -173,6 +173,13 @@
     "customize_buttons": "Customize Buttons",
     "input": "Input",
     "output": "Output",
+    "remove": "Remove",
+    "copy": "Copy",
+    "camera": "Camera",
+    "paste": "Paste",
+    "text_to_speech": "Text-To-Speech",
+    "counter": "Counter",
+    "maximize": "Maximize",
     "definitions": "Definitions",
     "translations": "Translations"
 }

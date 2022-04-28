@@ -1780,6 +1780,76 @@ class L10n {
     );
   }
 
+  /// `Remove`
+  String get remove {
+    return Intl.message(
+      'Remove',
+      name: 'remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy`
+  String get copy {
+    return Intl.message(
+      'Copy',
+      name: 'copy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste`
+  String get paste {
+    return Intl.message(
+      'Paste',
+      name: 'paste',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text-To-Speech`
+  String get text_to_speech {
+    return Intl.message(
+      'Text-To-Speech',
+      name: 'text_to_speech',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Counter`
+  String get counter {
+    return Intl.message(
+      'Counter',
+      name: 'counter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximize`
+  String get maximize {
+    return Intl.message(
+      'Maximize',
+      name: 'maximize',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Definitions`
   String get definitions {
     return Intl.message(

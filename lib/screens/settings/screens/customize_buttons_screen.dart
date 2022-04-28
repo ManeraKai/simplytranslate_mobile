@@ -31,6 +31,8 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: () {
+              var outListTranslation = getOutListTranslation(context);
+              var inListTranslation = getInListTranslation(context);
               List<Widget> inListWidgets = [];
               for (var k in inList.keys)
                 inListWidgets.add(
@@ -44,16 +46,16 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
                     },
                     title: Row(
                       children: [
-                        if (k == 'Counter') 
-                        Image.asset(
-                          theme == Brightness.dark
-                              ? "assets/settings/counter-dark.png"
-                              : "assets/settings/counter-light.png",
-                          scale: 2,
-                        ),
+                        if (k == 'Counter')
+                          Image.asset(
+                            theme == Brightness.dark
+                                ? "assets/settings/counter-dark.png"
+                                : "assets/settings/counter-light.png",
+                            scale: 2,
+                          ),
                         if (icons[k] != null) Icon(icons[k]),
                         SizedBox(width: 10),
-                        Text(k),
+                        Text(inListTranslation[k]!),
                       ],
                     ),
                   ),
@@ -73,7 +75,7 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
                       children: [
                         if (icons[k] != null) Icon(icons[k]),
                         SizedBox(width: 10),
-                        Text(k),
+                        Text(outListTranslation[k]!),
                       ],
                     ),
                   ),
