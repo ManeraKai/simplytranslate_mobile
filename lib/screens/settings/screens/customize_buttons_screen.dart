@@ -80,10 +80,10 @@ class _CustomizeButtonsScreenState extends State<CustomizeButtonsScreen> {
                 );
               return [
                 const SizedBox(height: 10),
-                Text("Input", style: textStyle),
+                Text(L10n.of(context).input, style: textStyle),
                 line,
                 ...inListWidgets,
-                Text("Output", style: textStyle),
+                Text(L10n.of(context).output, style: textStyle),
                 line,
                 ...outListWidgets,
               ];

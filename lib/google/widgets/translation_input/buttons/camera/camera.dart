@@ -53,8 +53,8 @@ class _CameraState extends State<Camera> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text("Autodetect not supported"),
-                    content: Text("Please select a specific language."),
+                    title: Text(L10n.of(context).autodetect_not_supported),
+                    content: Text(L10n.of(context).please_select_a_specific_language),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(),

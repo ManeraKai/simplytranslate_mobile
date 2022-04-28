@@ -18,7 +18,7 @@ class CustomizeButtons extends StatelessWidget {
       ).then((_) => setStateOverlord(() {})),
       icon: Icons.edit,
       iconColor: Colors.green,
-      title: "Customize Buttons",
+      title: L10n.of(context).customize_buttons,
     );
   }
 }

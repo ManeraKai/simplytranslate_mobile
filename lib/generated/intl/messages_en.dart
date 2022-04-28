@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "audio_limit": MessageLookupByLibrary.simpleMessage(
             "Cannot get audio for more than 200 characters"),
         "autodetect": MessageLookupByLibrary.simpleMessage("Autodetect"),
+        "autodetect_not_supported":
+            MessageLookupByLibrary.simpleMessage("Autodetect not supported"),
         "azerbaijani": MessageLookupByLibrary.simpleMessage("Azerbaijani"),
         "basque": MessageLookupByLibrary.simpleMessage("Basque"),
         "belarusian": MessageLookupByLibrary.simpleMessage("Belarusian"),
@@ -59,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "corsican": MessageLookupByLibrary.simpleMessage("Corsican"),
         "croatian": MessageLookupByLibrary.simpleMessage("Croatian"),
         "custom": MessageLookupByLibrary.simpleMessage("Custom"),
+        "customize_buttons":
+            MessageLookupByLibrary.simpleMessage("Customize Buttons"),
         "czech": MessageLookupByLibrary.simpleMessage("Czech"),
         "danish": MessageLookupByLibrary.simpleMessage("Danish"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
@@ -66,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Default share language"),
         "default_share_language_summary": MessageLookupByLibrary.simpleMessage(
             "Determines the translation language for shared text from another app: \$toLanguageShareDefault"),
+        "definitions": MessageLookupByLibrary.simpleMessage("Definitions"),
         "donate": MessageLookupByLibrary.simpleMessage("Donate"),
         "donate_summary":
             MessageLookupByLibrary.simpleMessage("We appreciate it!"),
@@ -103,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "icelandic": MessageLookupByLibrary.simpleMessage("Icelandic"),
         "igbo": MessageLookupByLibrary.simpleMessage("Igbo"),
         "indonesian": MessageLookupByLibrary.simpleMessage("Indonesian"),
+        "input": MessageLookupByLibrary.simpleMessage("Input"),
         "input_calc": MessageLookupByLibrary.simpleMessage(
             "Exceeded 5000 character limit by \$lengthDifference"),
         "input_fraction_few": MessageLookupByLibrary.simpleMessage(
@@ -158,8 +164,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Service is not available"),
         "odia_oriya": MessageLookupByLibrary.simpleMessage("Odia (Oriya)"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "output": MessageLookupByLibrary.simpleMessage("Output"),
         "pashto": MessageLookupByLibrary.simpleMessage("Pashto"),
         "persian": MessageLookupByLibrary.simpleMessage("Persian"),
+        "please_select_a_specific_language":
+            MessageLookupByLibrary.simpleMessage(
+                "Please select a specific language."),
         "polish": MessageLookupByLibrary.simpleMessage("Polish"),
         "portuguese": MessageLookupByLibrary.simpleMessage("Portuguese"),
         "punjabi": MessageLookupByLibrary.simpleMessage("Punjabi"),
@@ -204,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "translate_summary":
             MessageLookupByLibrary.simpleMessage("Spread it to the world!"),
         "translation": MessageLookupByLibrary.simpleMessage("Translation"),
+        "translations": MessageLookupByLibrary.simpleMessage("Translations"),
         "turkish": MessageLookupByLibrary.simpleMessage("Turkish"),
         "turkmen": MessageLookupByLibrary.simpleMessage("Turkmen"),
         "ukrainian": MessageLookupByLibrary.simpleMessage("Ukrainian"),

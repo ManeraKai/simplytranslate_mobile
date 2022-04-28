@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "audio_limit": MessageLookupByLibrary.simpleMessage(
             "لا يمكن جلب الصوت لأكثر من 200 حرف"),
         "autodetect": MessageLookupByLibrary.simpleMessage("تلقائي"),
+        "autodetect_not_supported":
+            MessageLookupByLibrary.simpleMessage("التلقائي غير مدعوم"),
         "azerbaijani": MessageLookupByLibrary.simpleMessage("الأذرية"),
         "basque": MessageLookupByLibrary.simpleMessage("الباسكية"),
         "belarusian": MessageLookupByLibrary.simpleMessage("البيلاروسية"),
@@ -59,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "corsican": MessageLookupByLibrary.simpleMessage("الكورسيكي"),
         "croatian": MessageLookupByLibrary.simpleMessage("الكرواتية"),
         "custom": MessageLookupByLibrary.simpleMessage("مخصص"),
+        "customize_buttons":
+            MessageLookupByLibrary.simpleMessage("تخصيص الأزرار"),
         "czech": MessageLookupByLibrary.simpleMessage("التشيكية"),
         "danish": MessageLookupByLibrary.simpleMessage("الدانماركية"),
         "dark": MessageLookupByLibrary.simpleMessage("داكن"),
@@ -66,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لغة المشاركة الإفتراضية"),
         "default_share_language_summary": MessageLookupByLibrary.simpleMessage(
             "يحدد لغة الترجمة للنص المُشارك من تطبيق آخر: \$toLanguageShareDefault"),
+        "definitions": MessageLookupByLibrary.simpleMessage("المفردات"),
         "donate": MessageLookupByLibrary.simpleMessage("تبرع"),
         "donate_summary":
             MessageLookupByLibrary.simpleMessage("الله يعطيك العافية!"),
@@ -103,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "icelandic": MessageLookupByLibrary.simpleMessage("الآيسلندية"),
         "igbo": MessageLookupByLibrary.simpleMessage("الإيغبو"),
         "indonesian": MessageLookupByLibrary.simpleMessage("الإندونيسية"),
+        "input": MessageLookupByLibrary.simpleMessage("الإدخال"),
         "input_calc": MessageLookupByLibrary.simpleMessage(
             "اُجتِيزَ حد الـ5000 حرف بـ\$lengthDifference"),
         "input_fraction_few": MessageLookupByLibrary.simpleMessage(
@@ -156,8 +162,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_available": MessageLookupByLibrary.simpleMessage("غير متاح"),
         "odia_oriya": MessageLookupByLibrary.simpleMessage("الأوديا (الأوريا)"),
         "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
+        "output": MessageLookupByLibrary.simpleMessage("النتيجة"),
         "pashto": MessageLookupByLibrary.simpleMessage("الباشتوية"),
         "persian": MessageLookupByLibrary.simpleMessage("الفارسية"),
+        "please_select_a_specific_language":
+            MessageLookupByLibrary.simpleMessage("استخدم لغة محددة"),
         "polish": MessageLookupByLibrary.simpleMessage("البولندية"),
         "portuguese": MessageLookupByLibrary.simpleMessage("البرتغالية"),
         "punjabi": MessageLookupByLibrary.simpleMessage("البنجابية"),
@@ -202,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "translate_summary":
             MessageLookupByLibrary.simpleMessage("انشره للعالم!"),
         "translation": MessageLookupByLibrary.simpleMessage("الترجمة"),
+        "translations": MessageLookupByLibrary.simpleMessage("الترجمات"),
         "turkish": MessageLookupByLibrary.simpleMessage("التركية"),
         "turkmen": MessageLookupByLibrary.simpleMessage("التركمانية"),
         "ukrainian": MessageLookupByLibrary.simpleMessage("الأوكرانية"),

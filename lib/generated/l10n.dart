@@ -1729,6 +1729,76 @@ class L10n {
       args: [],
     );
   }
+
+  /// `Autodetect not supported`
+  String get autodetect_not_supported {
+    return Intl.message(
+      'Autodetect not supported',
+      name: 'autodetect_not_supported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a specific language.`
+  String get please_select_a_specific_language {
+    return Intl.message(
+      'Please select a specific language.',
+      name: 'please_select_a_specific_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customize Buttons`
+  String get customize_buttons {
+    return Intl.message(
+      'Customize Buttons',
+      name: 'customize_buttons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input`
+  String get input {
+    return Intl.message(
+      'Input',
+      name: 'input',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Output`
+  String get output {
+    return Intl.message(
+      'Output',
+      name: 'output',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Definitions`
+  String get definitions {
+    return Intl.message(
+      'Definitions',
+      name: 'definitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translations`
+  String get translations {
+    return Intl.message(
+      'Translations',
+      name: 'translations',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

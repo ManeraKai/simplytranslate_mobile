@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:clipboard_listener/clipboard_listener.dart';

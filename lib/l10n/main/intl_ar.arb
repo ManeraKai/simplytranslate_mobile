@@ -115,5 +115,13 @@
   "@trained_data_files_not_installed": {},
   "install": "Install",
   "@install": {},
-  "camera_is_not_accessible": "لا يمكن الوصول إلى الكاميرا"
+  "camera_is_not_accessible": "لا يمكن الوصول إلى الكاميرا",
+  "autodetect_not_supported": "التلقائي غير مدعوم",
+  "please_select_a_specific_language": "استخدم لغة محددة",
+  "customize_buttons": "تخصيص الأزرار",
+  "input": "الإدخال",
+  "output": "النتيجة",
+  "definitions": "المفردات",
+  "translations": "الترجمات"
+
 }
