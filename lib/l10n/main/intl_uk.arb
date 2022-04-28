@@ -116,5 +116,19 @@
   "input_fraction_few": "Введено $length символів із 5000 можливих",
   "@input_fraction_few": {},
   "input_fraction_many": "Введено $length символів із 5000 можливих",
-  "@input_fraction_many": {}
+  "@input_fraction_many": {},
+  "autodetect_not_supported": "",
+  "@autodetect_not_supported": {},
+  "translations": "",
+  "@translations": {},
+  "output": "",
+  "@output": {},
+  "input": "",
+  "@input": {},
+  "please_select_a_specific_language": "",
+  "@please_select_a_specific_language": {},
+  "definitions": "",
+  "@definitions": {},
+  "customize_buttons": "",
+  "@customize_buttons": {}
 }
