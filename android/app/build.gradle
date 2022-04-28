@@ -13,12 +13,12 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '5'
+    flutterVersionCode = '8'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.2.0'
+    flutterVersionName = '1.3.0'
 }
 
 apply plugin: 'com.android.application'
@@ -48,8 +48,8 @@ android {
         applicationId 'com.simplytranslate_mobile'
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 7
-        versionName '1.2.0'
+        versionCode 8
+        versionName '1.3.0'
     }
 
 
