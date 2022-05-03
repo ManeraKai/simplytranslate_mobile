@@ -1,0 +1,19 @@
+Diese App ist ein alternatives Front-End zu Google Translate, verbindet sich aber nicht direkt mit diesem.
+Sie funktioniert wie folgt:
+1. Der Text wird von Ihnen (dem Benutzer) eingegeben und an eine zufällige SimplyTranslate-Instanz (Server) gesendet.
+2. Diese Instanz wird die Daten von Google Translate anfordern.
+3. Google Translate sendet die Übersetzung zurück an diese Instanz.
+4. Diese Instanz sendet die Übersetzung an Sie zurück.
+
+Auf diese Weise wird Google Translate Ihre Identität nicht kennen. Durch die automatische Auswahl einer zufälligen Instanz (Standardmodus) bei jeder Anfrage werden Ihre Daten verschleiert und zwischen den Instanzen verteilt, so dass nichts leicht verknüpft werden kann, da es sich nicht in einer zentralen Datenbank befindet.
+
+<b>Features:</b>
+* Unterstützt 108 Sprachen
+* Text-To-Speech (TTS)
+* Kann freigegebenen Text von anderen Anwendungen empfangen
+* Eine Schaltfläche zum Übersetzen in der Textauswahl-Symbolleiste
+* Automatische Zufallsauswahl der Instanz bei jeder Anfrage
+* Eine aktualisierbare offizielle Liste von SimplyTranslate-Instanzen
+* Option für benutzerdefinierte Instanzen
+* Dunkles Thema
+* Kamera-Text-Erkennung
