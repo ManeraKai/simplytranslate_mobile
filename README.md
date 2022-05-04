@@ -39,9 +39,12 @@ If you've inherited this project, keep in mind that there are some python script
 weblate: https://hosted.weblate.org/projects/simplytranslate-mobile/
 
 ## Donate
-Buy me a coffee: [buymeacoffee.com/manerakai](https://www.buymeacoffee.com/manerakai)\
-Liberapay: [liberapay.com/simplytranslate_mobile](https://liberapay.com/simplytranslate_mobile)\
-btc: bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj\
+Buy me a coffee: [buymeacoffee.com/manerakai](https://www.buymeacoffee.com/manerakai)
+
+Liberapay: [liberapay.com/simplytranslate_mobile](https://liberapay.com/simplytranslate_mobile)
+
+btc: bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj
+
 Thank you!
 
 ## Contributors
