@@ -24,29 +24,25 @@
 </div>
 
 ## Download
-Via F-Droid: [com.simplytranslate_mobile](https://f-droid.org/en/packages/com.simplytranslate_mobile/).
+F-Droid: [com.simplytranslate_mobile](https://f-droid.org/en/packages/com.simplytranslate_mobile/)
 
 For the most up-to-date versions. Download the most recent **Artifact** from the [Actions](https://github.com/ManeraKai/simplytranslate_mobile/actions) page. They may be slow as they're in debug-mode. You should be logged in before you're able to download.
 
 [![GithubAction](https://badges.alefvanoon.xyz/github/workflow/status/manerakai/simplytranslate_mobile/Flutter%20build%20apk/main)](https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml)
 
 ## Contributing
-I use [VSCodium](https://vscodium.com/), it's just [VSCode](https://code.visualstudio.com/) but without Microsoft's proprietary packages. I use the extensions [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). The Dart one has an auto-formatter. Please use this setup to prevent unnecessary formatting changes.
+I use [VSCodium](https://vscodium.com/). I use the extensions [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) and [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). The Dart one has an auto-formatter. Please use this setup to prevent unnecessary formatting changes.
 
 If you've inherited this project, keep in mind that there are some python scripts in `scripts/` that process translated strings for both website and app.
 
 ## Translation
-[![Weblate](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/weblate.svg)](https://hosted.weblate.org/projects/simplytranslate-mobile/)
-<!-- [![POEditor](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/poeditor.svg)](https://poeditor.com/join/project?hash=rV8CGr8NPj) -->
+weblate: https://hosted.weblate.org/projects/simplytranslate-mobile/
 
 ## Donate
- [![Buy me a coffee](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/bmc.svg)](https://www.buymeacoffee.com/manerakai)&nbsp;&nbsp;
- [![Liberapay](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/liberapay.svg)](https://liberapay.com/simplytranslate_mobile)
-
- ### Bitcoin
- ![Bitcoin](./docs/img/bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj.png)
-
- bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj
+Buy me a coffee: [buymeacoffee.com/manerakai](https://www.buymeacoffee.com/manerakai)\
+Liberapay: [liberapay.com/simplytranslate_mobile](https://liberapay.com/simplytranslate_mobile)\
+btc: bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj\
+Thank you!
 
 ## Contributors
 
@@ -77,8 +73,7 @@ If you've inherited this project, keep in mind that there are some python script
 
 ## Mirror Repos
 [![GitHub](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/github.svg)](https://github.com/ManeraKai/simplytranslate_mobile/)&nbsp;&nbsp;
-[![Codeberg](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/codeberg.svg)](https://codeberg.org/ManeraKai/simplytranslate_mobile)&nbsp;&nbsp;
-[![GitLab](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/gitlab.svg)](https://gitlab.com/ManeraKai/simplytranslate_mobile)
+[![Codeberg](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/codeberg.svg)](https://codeberg.org/ManeraKai/simplytranslate_mobile)
 
 ## License
 Copyright (C) 2021 [ManeraKai](https://github.com/ManeraKai)
