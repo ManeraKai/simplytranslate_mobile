@@ -38,14 +38,13 @@ If you've inherited this project, keep in mind that there are some python script
 ## Translation
 weblate: https://hosted.weblate.org/projects/simplytranslate-mobile/
 
-## Donate
-Buy me a coffee: [buymeacoffee.com/manerakai](https://www.buymeacoffee.com/manerakai)
 
-Liberapay: [liberapay.com/simplytranslate_mobile](https://liberapay.com/simplytranslate_mobile)
+## Donate, Thank you!
+ [![Buy me a coffee](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/bmc.svg)](https://www.buymeacoffee.com/manerakai)&nbsp;&nbsp;
+ [![Liberapay](https://raw.githubusercontent.com/ManeraKai/manerakai/main/icons/liberapay.svg)](https://liberapay.com/simplytranslate_mobile)
 
-btc: bc1q0mk9eynz9waufjmk2eslt36cqxtgnqkhfmj9yj
+btc: **bc1qrhue0frps6p2vkg978u9ayethnwprtmfug827q**
 
-Thank you!
 
 ## Contributors
 
