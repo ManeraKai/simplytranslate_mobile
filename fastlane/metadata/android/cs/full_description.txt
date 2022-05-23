@@ -1,0 +1,19 @@
+Tato aplikace je alternativním klientem pro Google Translate, ale přímo se k němu nepřipojuje.
+Funguje následovně:
+1. Text je odeslán od vás (uživatele) náhodné instanci SimplyTranslate (serveru).
+2. Tato instance si vyžádá překlad od Google Translate.
+3. Google Translate pošle překlad dané instanci, která:
+4. Jej předá zase vám.
+
+To znamená, že Google Translate nebude znát vaši totožnost. Zanesení vašich dat do centralizované databáze zabraňuje tím, že každý požadavek bude vykonán jinou náhodnou instancí (výchozí nastavení), budou tedy vaše data rozprostřeny mezi různými instancemi, tak, že bude mnohem těžší je mezi sebou pospojovat, efektivně je skrývajíc.
+
+<b>Funkce:</b>
+* Podporuje 108 jazyků
+* Předčítání (TTS)
+* Zpracuje i sdílený text z jiných aplikací
+* Tlačítko překladu v nástrojové liště vybraného textu
+* Náhodný výběr instance pro každý požadavek
+* Aktualizovatelný oficiální seznam SimplyTranslate instancí
+* Možnost výběru vlastní instance
+* Temný mód
+* Rozpoznání textu z obrázku (OCR)
