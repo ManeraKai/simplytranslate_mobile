@@ -162,8 +162,9 @@ Future<instanceValidation> checkInstance(String urlValue) async {
         .get(Uri.parse('$url/api/translate?from=en&to=es&text=hello'));
 
     if (response.statusCode == 200) {
-      print(response.body);
-      if (response.body.toLowerCase() == 'hola')
+      final data = json.decode(response.body);
+      print(data);
+      if (data['translated-text'].toLowerCase() == 'hola')
         return instanceValidation.True;
       else
         return instanceValidation.False;
