@@ -4,7 +4,7 @@ import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 import '/data.dart';
 
-var isCustomInstanceValid = instanceValidation.NotChecked;
+var isCustomInstanceValid = InstanceValidation.NotChecked;
 
 var loading = false;
 bool checkLoading = false;

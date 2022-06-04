@@ -48,7 +48,7 @@ void main(List<String> args) async {
   if (themeSession != 'null') {
     if (themeSession == 'system') {
       themeRadio = AppTheme.system;
-      theme = SchedulerBinding.instance!.window.platformBrightness;
+      theme = SchedulerBinding.instance.window.platformBrightness;
     } else if (themeSession == 'light') {
       themeRadio = AppTheme.light;
       theme = Brightness.light;
@@ -98,7 +98,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     ClipboardListener.addListener(() async {
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
       if (_clipData.toString() == '' || _clipData == null) {
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
     ClipboardListener.removeListener(() {});
   }

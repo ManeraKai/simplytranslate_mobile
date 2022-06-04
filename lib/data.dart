@@ -122,9 +122,9 @@ Future<bool> downloadOCRLanguage(lang) async {
 
 late File img;
 
-Brightness theme = SchedulerBinding.instance!.window.platformBrightness;
+Brightness theme = SchedulerBinding.instance.window.platformBrightness;
 
-enum instanceValidation { False, True, NotChecked }
+enum InstanceValidation { False, True, NotChecked }
 
 bool isClipboardEmpty = true;
 
@@ -149,13 +149,13 @@ late Function(String) changeToTxt;
 
 String newText = "";
 
-Future<instanceValidation> checkInstance(String urlValue) async {
+Future<InstanceValidation> checkInstance(String urlValue) async {
   var url;
   try {
     url = Uri.parse(urlValue);
   } catch (err) {
     print(err);
-    return instanceValidation.False;
+    return InstanceValidation.False;
   }
   try {
     final response = await http
@@ -165,14 +165,14 @@ Future<instanceValidation> checkInstance(String urlValue) async {
       final data = json.decode(response.body);
       print(data);
       if (data['translated-text'].toLowerCase() == 'hola')
-        return instanceValidation.True;
+        return InstanceValidation.True;
       else
-        return instanceValidation.False;
+        return InstanceValidation.False;
     } else
-      return instanceValidation.False;
+      return InstanceValidation.False;
   } catch (err) {
     print(err);
-    return instanceValidation.False;
+    return InstanceValidation.False;
   }
 }
 
