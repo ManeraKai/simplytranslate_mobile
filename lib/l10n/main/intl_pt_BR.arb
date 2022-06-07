@@ -53,11 +53,11 @@
   "@website": {},
   "contact": "Contato",
   "@contact": {},
-  "email": "Email",
+  "email": "E-mail",
   "@email": {},
   "donate_summary": "Nós apreciamos!",
   "@donate_summary": {},
-  "report_bug_summary": "Por favor nos informe",
+  "report_bug_summary": "Por favor, nos informe",
   "@report_bug_summary": {},
   "language_text_recognition": "Text Recognition - $language",
   "@language_text_recognition": {},
@@ -115,5 +115,6 @@
   "@report_bug": {},
   "translate_summary": "Compartilhe com o mundo!",
   "@translate_summary": {},
-  "camera_is_not_accessible": "Camera is not accessible"
+  "camera_is_not_accessible": "Camera is not accessible",
+  "@camera_is_not_accessible": {}
 }
