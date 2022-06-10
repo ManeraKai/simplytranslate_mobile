@@ -136,5 +136,15 @@
   "counter": "Nombrilo",
   "@counter": {},
   "input_fraction_other": "Tajpis $length signojn el 5000 maksimume",
-  "@input_fraction_other": {}
+  "@input_fraction_other": {},
+  "input_calc": "$lengthDifference signojn pli longa ol la limo de 5000 signoj",
+  "@input_calc": {},
+  "translate_summary": "Disvastigu ĝin al la mondo!",
+  "@translate_summary": {},
+  "default_share_language_summary": "Determini la traduklingvon de teksto kunhavigita el alia programo: $toLanguageShareDefault",
+  "@default_share_language_summary": {},
+  "input_limit": "La tradukotaĵo estas pli longa ol 5000 signoj",
+  "@input_limit": {},
+  "check_instnace_tts": "Kontrolu la servilon kaj ĉu ĝi subtenas prononcilon.",
+  "@check_instnace_tts": {}
 }
