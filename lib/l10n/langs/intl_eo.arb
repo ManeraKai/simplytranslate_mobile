@@ -198,5 +198,19 @@
   "frisian": "Frisa",
   "@frisian": {},
   "malayalam": "Malajala",
-  "@malayalam": {}
+  "@malayalam": {},
+  "chichewa": "Malavia",
+  "@chichewa": {},
+  "cebuano": "Cebua",
+  "@cebuano": {},
+  "hausa": "Haŭsa",
+  "@hausa": {},
+  "shona": "Zimbabva",
+  "@shona": {},
+  "xhosa": "Kosa",
+  "@xhosa": {},
+  "yoruba": "Joruba",
+  "@yoruba": {},
+  "marathi": "Maharaŝtra",
+  "@marathi": {}
 }
