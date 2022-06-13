@@ -1,1 +1,0 @@
-# SimplyTranslate Mobile Website
