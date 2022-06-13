@@ -130,5 +130,21 @@
   "definitions": "",
   "@definitions": {},
   "customize_buttons": "",
-  "@customize_buttons": {}
+  "@customize_buttons": {},
+  "camera": "",
+  "@camera": {},
+  "select_text_by_drawing": "",
+  "@select_text_by_drawing": {},
+  "maximize": "",
+  "@maximize": {},
+  "text_to_speech": "",
+  "@text_to_speech": {},
+  "copy": "",
+  "@copy": {},
+  "remove": "",
+  "@remove": {},
+  "paste": "",
+  "@paste": {},
+  "counter": "",
+  "@counter": {}
 }
