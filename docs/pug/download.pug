@@ -1,0 +1,28 @@
+include ./widgets.pug
+head
+    +head
+    title SimplyTranslate Mobile
+body
+    +navbar('download', t)
+
+    
+
+    div.section
+        br
+        .section_title
+            br
+            br
+            br
+            h1.section_title!=download
+        
+        p!=fdroid
+            |: <a class="break" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">https://f-droid.org/en/packages/com.simplytranslate_mobile</a>
+        p!=github_artifacts
+            |: <a class="break" href="https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml">https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml</a>
+
+    br
+    br
+    br
+    br
+
+    +footer

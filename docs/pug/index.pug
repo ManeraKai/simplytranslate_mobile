@@ -1,0 +1,40 @@
+include ./widgets.pug
+head
+    +head
+    title SimplyTranslate Mobile
+body
+    +navbar('home', t)
+
+    header
+        img.main_logo(src="../assets/logo.svg")
+        h1 SimplyTranslate Mobile
+
+    div.section
+        .badge
+            p.main-font!=short_description
+            a(href="https://f-droid.org/en/packages/com.simplytranslate_mobile/")
+                img(src="../assets/f-droid.png" alt="Get it on F-Droid" height="80")
+
+        br
+
+        div.screenshots
+            img.center(src="../assets/1.webp")
+            img.center(src="../assets/2.webp")
+            img.center(src="../assets/3.webp")
+            img.center(src="../assets/4.webp")
+
+        h2!=what_is_simplytranslate
+        p!=what_is_simplytranslate_answer
+
+        h2!=what_is_simplytranslate_mobile
+        p!=what_is_simplytranslate_mobile_answer
+        ul
+            li!=random_instance_each_request
+            li!=custom_instance_option
+            li!=text_to_speech
+            li!=offline_camera_text_recognition
+        br
+
+        +footer
+
+        br

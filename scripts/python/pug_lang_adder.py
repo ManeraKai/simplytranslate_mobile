@@ -7,20 +7,25 @@ print("Pug Lang Adder")
 rtl_langs = ["ar", "iw", "ku", "fa", "ur"]
 
 template = ""
-with open("docs/pug/lang/en.pug") as file:
+with open("docs/pug/lang/en/index.pug") as file:
     template = file.read()
 
-for item in os.listdir("docs/lang_pug/"):
-    itemName = item.replace(".pug", "")
-    tmp = template.replace("\"en\"", "\""+itemName+"\"")
-    tmp = tmp.replace("en.pug", item)
+for lang in os.listdir("docs/lang_pug/"):
+    lang = lang.replace("index.en.pug", "")
+    lang_name = lang.replace('.pug', '')
+    tmp = template.replace("\"en\"", "\""+lang_name+"\"")
+    tmp = tmp.replace("en.pug", lang)
 
-    if itemName in rtl_langs:
+    if lang in rtl_langs:
         tmp = tmp.replace("\"ltr\"", "\"rtl\"")
         tmp = tmp.replace("- var isRtl = false", "- var isRtl = true")
 
-    with open("docs/pug/lang/"+item, "w") as file:
+    dir_path = "docs/pug/lang/" + lang.replace('.pug','')
+
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
+    
+    with open(f"{dir_path}/index.{lang}", "w+") as file:
         file.writelines(tmp)
 
-    print("Wrote: docs/pug/lang/"+item)
-print()
+    print("Wrote: docs/pug/lang/"+lang)

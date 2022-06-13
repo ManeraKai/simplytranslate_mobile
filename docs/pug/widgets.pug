@@ -1,0 +1,24 @@
+mixin head
+    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" )
+    meta(name="theme-color" content="#141414" )
+    link(rel="shortcut icon" type="image/png" href="./assets/favicon.png" )
+    meta(name="description" content="An alternative front-end to GoogleTranslate")
+    link(itemprop="image" href="./assets/favicon.png")
+    link(href="../css/index.css" type="text/css" rel="stylesheet" media="screen,projection" )
+    meta(content="https://manerakai.github.io/simplytranslate_mobile/assets/preview.png" property="og:image")
+
+mixin navbar(page, t)
+    div.navbar
+        a(href="./index.html" class=page == 'home' ? "selected" : "")!=home
+        a(href="./download.html" class=page == 'download' ? "selected" : "")!=download
+        a(href="./source.html" class=page == 'source' ? "selected" : "")!=source_code
+        a(href="./contributors.html" class=page == 'contributors' ? "selected" : "")!=contributors
+        a(href="./donate.html" class=page == 'donate' ? "selected" : "")!=donate
+
+
+mixin footer
+    footer
+        a(href="https://simple-web.org/projects/simplytranslate.html") SimplyTranslate
+        |&nbsp;|&nbsp;
+        a(href="https://simple-web.org/") Simple Web Project
