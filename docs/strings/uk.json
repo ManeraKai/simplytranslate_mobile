@@ -1,1 +1,19 @@
-{}
+{
+    "home": "Головна",
+    "source_code": "Вихідний код",
+    "donate": "Пожертви",
+    "donate_thanks": "<span class='dimmed'>Дякую!</span>",
+    "short_description": "Клієнт android для <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "what_is_simplytranslate": "Що таке SimplyTranslate?",
+    "text_to_speech": "Текст-у-голос (TTS)",
+    "fdroid": "F-Droid",
+    "github": "GitHub",
+    "testers": "Тестувальники",
+    "translators": "Перекладачі",
+    "contributors": "Співрозробники",
+    "download": "Завантажити",
+    "developers": "Розробники",
+    "what_is_simplytranslate_mobile": "Що таке SimplyTranslate Mobile?",
+    "codeberg": "Codeberg",
+    "icon": "Значок"
+}
