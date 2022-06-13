@@ -1,1 +1,19 @@
-{}
+{
+    "source_code": "Quellcode",
+    "download": "Herunterladen",
+    "developers": "Entwickler",
+    "donate": "Spenden",
+    "what_is_simplytranslate_mobile": "Was ist SimplyTranslate Mobile?",
+    "github": "GitHub",
+    "donate_thanks": "<span class='dimmed'>Danke!</span>",
+    "short_description": "Ein Android-Client für <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "home": "Startseite",
+    "testers": "Prüfer",
+    "translators": "Übersetzer",
+    "icon": "Symbol",
+    "text_to_speech": "Text-zu-Sprache (TzS)",
+    "codeberg": "Codeberg",
+    "contributors": "Mitwirkende",
+    "what_is_simplytranslate": "Was ist SimplyTranslate?",
+    "what_is_simplytranslate_mobile_answer": "Anstatt die Web-Schnittstelle von SimplyTranslate auf Ihrem Telefon zu verwenden, haben wir ein komplettes mobiles Interface für SimplyTranslate + einige zusätzliche Funktionen entwickelt:"
+}
