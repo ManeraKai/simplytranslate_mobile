@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
+import 'package:simplytranslate_mobile/google/widgets/translation_output/widgets/definitions.dart';
+import 'package:simplytranslate_mobile/google/widgets/translation_output/widgets/translations.dart';
 import '/data.dart';
 import '/google/widgets/translate_button/cancel_translation_button.dart';
 import '/widgets/keyboard_visibility.dart';
@@ -39,6 +41,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
 
   @override
   Widget build(BuildContext context) {
+    const space = SizedBox(height: 10);
     return Stack(
       children: [
         SingleChildScrollView(
@@ -57,11 +60,11 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       GoogleToLang(),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  space,
                   GoogleTranslationInput(),
-                  const SizedBox(height: 10),
+                  space,
                   GoogleTranslationOutput(),
-                  const SizedBox(height: 10),
+                  space,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -84,7 +87,8 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  Definitions(googleOutput),
+                  Translations(googleOutput),
                 ],
               ),
             ),
@@ -95,12 +99,12 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
               ? Positioned(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                   right: intl.Bidi.detectRtlDirectionality(
-                    AppLocalizations.of(context)!.arabic,
+                    L10n.of(context).arabic,
                   )
                       ? null
                       : 0,
                   left: intl.Bidi.detectRtlDirectionality(
-                    AppLocalizations.of(context)!.arabic,
+                    L10n.of(context).arabic,
                   )
                       ? 0
                       : null,

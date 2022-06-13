@@ -7,7 +7,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".UppercaseActivity" android:label="SimplyTranslate Mobile" android:exported="true" >
+    <activity android:name=".UppercaseActivity" android:label="SimplyTranslate Mobile" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -15,7 +15,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".SharedActivity" android:label="SimplyTranslate Mobile" android:exported="true" >
+    <activity android:name=".SharedActivity" android:label="SimplyTranslate Mobile" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.SEND" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -27,6 +27,9 @@
     <meta-data android:name="flutterEmbedding" android:value="2" />
   </application>
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE " />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
   <queries>
     <!-- If your app opens https URLs -->
     <intent>

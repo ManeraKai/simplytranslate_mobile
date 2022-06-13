@@ -16,3 +16,4 @@ W ten sposób Tłumacz Google nie pozna Twojej tożsamości. Automatyczny wybór
 * Aktualizacja oficjalnej listy instancji SimplyTranslate
 * Opcja ustawienia własnej instancji
 * Ciemny motyw
+* Rozpoznawanie tekstu z aparatu

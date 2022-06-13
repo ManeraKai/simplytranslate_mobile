@@ -1,20 +1,29 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:clipboard_listener/clipboard_listener.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
+// import 'package:simplytranslate_mobile/screens/overlay/overlay_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
 import 'google/google_translate_widget.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+  } on CameraException catch (e) {
+    print(e);
+  }
   ByteData data =
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   SecurityContext.defaultContext
@@ -39,7 +48,7 @@ void main(List<String> args) async {
   if (themeSession != 'null') {
     if (themeSession == 'system') {
       themeRadio = AppTheme.system;
-      theme = SchedulerBinding.instance!.window.platformBrightness;
+      theme = SchedulerBinding.instance.window.platformBrightness;
     } else if (themeSession == 'light') {
       themeRadio = AppTheme.light;
       theme = Brightness.light;
@@ -48,6 +57,30 @@ void main(List<String> args) async {
       theme = Brightness.dark;
     }
   }
+
+  print('checking inList');
+  if (session.read('inListWidgets') != null) {
+    inList = Map.from(session.read('inListWidgets'));
+  }
+  if (session.read('outListWidgets') != null) {
+    outList = Map.from(session.read('outListWidgets'));
+  }
+
+  flutterTesseractOcrTessdataPath = await FlutterTesseractOcr.getTessdataPath();
+
+  two2three.forEach((key, value) {
+    var dir = Directory(flutterTesseractOcrTessdataPath);
+
+    if (!dir.existsSync()) dir.create();
+
+    var dirList = dir.listSync();
+    dirList.forEach((element) {
+      String name = element.path.split('/').last;
+      if (name == '$value.traineddata')
+        downloadingList[key] = TrainedDataState.Downloaded;
+    });
+  });
+
   var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
 
   isClipboardEmpty = _clipData.toString() == '' || _clipData == null;
@@ -65,7 +98,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     ClipboardListener.addListener(() async {
       var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
       if (_clipData.toString() == '' || _clipData == null) {
@@ -79,7 +112,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
     ClipboardListener.removeListener(() {});
   }
@@ -94,7 +127,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
       } else {
         if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
-        print(_clipData);
       }
     }
   }
@@ -104,19 +136,25 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return MaterialApp(
       localeListResolutionCallback: (locales, supportedLocales) {
         List supportedLocalesCountryCode = [];
-        for (Locale item in supportedLocales)
-          supportedLocalesCountryCode.add(item.countryCode);
+        supportedLocales.forEach(
+          (item) => supportedLocalesCountryCode.add(item.countryCode),
+        );
 
         List supportedLocalesLangCode = [];
-        for (Locale item in supportedLocales)
-          supportedLocalesLangCode.add(item.languageCode);
+        supportedLocales.forEach(
+          (item) => supportedLocalesLangCode.add(item.languageCode),
+        );
 
         locales!;
         List localesCountryCode = [];
-        for (Locale item in locales) localesCountryCode.add(item.countryCode);
+        locales.forEach(
+          (item) => localesCountryCode.add(item.countryCode),
+        );
 
         List localesLangCode = [];
-        for (Locale item in locales) localesLangCode.add(item.languageCode);
+        locales.forEach(
+          (item) => localesLangCode.add(item.languageCode),
+        );
 
         appLocale = locales[0];
         for (var i = 0; i < locales.length; i++)
@@ -127,15 +165,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             return Locale(localesLangCode[i]);
         return Locale('en');
       },
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: [
+        L10n.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: L10n.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme(
           primary: greenColor,
-          primaryVariant: greenColor,
+          // primaryVariant: greenColor,
           secondary: greenColor,
-          secondaryVariant: greenColor,
+          // secondaryVariant: greenColor,
           surface: Colors.white,
           background: Colors.white,
           error: Colors.red,
@@ -182,9 +225,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       darkTheme: ThemeData(
         colorScheme: ColorScheme(
           primary: greenColor,
-          primaryVariant: greenColor,
+          // primaryVariant: greenColor,
           secondary: greenColor,
-          secondaryVariant: greenColor,
+          // secondaryVariant: greenColor,
           surface: const Color(0xff131618),
           background: const Color(0xff131618),
           error: Colors.red,
@@ -239,8 +282,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       home: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(0, 60),
-          child: Builder(builder: (context) {
-            return AppBar(
+          child: Builder(
+            builder: (context) => AppBar(
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(2),
                 child: Container(height: 2, color: greenColor),
@@ -251,11 +294,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem<String>(
                       value: 'settings',
-                      child: Text(AppLocalizations.of(context)!.settings),
+                      child: Text(L10n.of(context).settings),
                     ),
                     PopupMenuItem<String>(
                       value: 'about',
-                      child: Text(AppLocalizations.of(context)!.about),
+                      child: Text(L10n.of(context).about),
                     ),
                   ],
                   onSelected: (value) {
@@ -275,8 +318,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               elevation: 3,
               iconTheme: IconThemeData(),
               title: const Text('SimplyTranslate Mobile'),
-            );
-          }),
+            ),
+          ),
         ),
         body: MainPageLocalization(),
       ),
@@ -289,16 +332,16 @@ class MainPageLocalization extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> themeTranslation = {
-      'dark': AppLocalizations.of(context)!.dark,
-      'light': AppLocalizations.of(context)!.light,
-      'system': AppLocalizations.of(context)!.follow_system,
+      'dark': L10n.of(context).dark,
+      'light': L10n.of(context).light,
+      'system': L10n.of(context).follow_system,
     };
 
     themeValue = themeTranslation[session.read('theme') ?? 'system']!;
 
     toSelLangMap = selectLanguagesMapGetter(context);
     fromSelLangMap = selectLanguagesMapGetter(context);
-    fromSelLangMap['auto'] = AppLocalizations.of(context)!.autodetect;
+    fromSelLangMap['auto'] = L10n.of(context).autodetect;
 
     fromLangVal = session.read('from_lang') ?? 'auto';
     toLangVal = session.read('to_lang') ?? appLocale.languageCode;
@@ -324,6 +367,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    translateContext = context;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: GoogleTranslate(),

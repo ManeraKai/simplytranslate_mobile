@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 import '/data.dart';
 
-var isCustomInstanceValid = instanceValidation.NotChecked;
+var isCustomInstanceValid = InstanceValidation.NotChecked;
 
 var loading = false;
 bool checkLoading = false;
@@ -19,14 +18,10 @@ class UpdateList extends StatelessWidget {
       final response = await http
           .get(Uri.parse('https://simple-web.org/instances/simplytranslate'));
       List<String> newInstances = [];
-      parse(response.body)
-          .body!
-          .innerHtml
+      response.body
           .trim()
           .split('\n')
-          .forEach((element) {
-        newInstances.add('https://$element');
-      });
+          .forEach((element) => newInstances.add('https://$element'));
       session.write('instances', newInstances);
       instances = newInstances;
       return true;
@@ -48,7 +43,7 @@ class UpdateList extends StatelessWidget {
               duration: const Duration(seconds: 2),
               width: 160,
               content: Text(
-                AppLocalizations.of(context)!.updated_successfully,
+                L10n.of(context).updated_successfully,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -59,7 +54,7 @@ class UpdateList extends StatelessWidget {
               duration: const Duration(seconds: 2),
               width: 160,
               content: Text(
-                AppLocalizations.of(context)!.error,
+                L10n.of(context).error,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -68,8 +63,8 @@ class UpdateList extends StatelessWidget {
       },
       icon: Icons.download,
       iconColor: greenColor,
-      title: AppLocalizations.of(context)!.update_list,
-      content: AppLocalizations.of(context)!.update_list_summary,
+      title: L10n.of(context).update_list,
+      content: L10n.of(context).update_list_summary,
       loading: loading,
     );
   }

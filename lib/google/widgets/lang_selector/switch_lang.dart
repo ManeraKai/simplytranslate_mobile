@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class GoogleSwitchLang extends StatelessWidget {
@@ -54,7 +54,7 @@ class GoogleSwitchLang extends StatelessWidget {
                         final translatedText2;
                         if (translatedText.length <= 5000) {
                           translatedText2 = await translate(
-                            input: translatedText,
+                            input: translatedText['translated-text'],
                             fromLang: fromLangVal,
                             toLang: toLangVal,
                             context: context,
@@ -65,7 +65,7 @@ class GoogleSwitchLang extends StatelessWidget {
                               duration: Duration(seconds: 2),
                               width: 160,
                               content: Text(
-                                AppLocalizations.of(context)!.input_limit,
+                                L10n.of(context).input_limit,
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -74,7 +74,7 @@ class GoogleSwitchLang extends StatelessWidget {
                         }
                         setStateOverlord(() {
                           loading = false;
-                          googleInCtrl.text = translatedText;
+                          googleInCtrl.text = translatedText['translated-text'];
                           googleOutput = translatedText2;
                         });
                       }

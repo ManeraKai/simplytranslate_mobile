@@ -1,1 +1,0 @@
-pug -w ./pug/lang -o ./ -P

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart' as intl;
 import './widgets/tts_output.dart';
 import '/data.dart';
-import '/google/widgets/translation_input/widgets/copy_button.dart';
+import '/google/widgets/translation_input/buttons/copy_button.dart';
 
 class MaximizedScreen extends StatefulWidget {
   const MaximizedScreen({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
           ),
           borderRadius: BorderRadius.circular(2),
         ),
-        margin: const EdgeInsets.symmetric(vertical: 40,horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,20 +47,30 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: SelectableText(
-                    googleOutput,
-                    selectionControls: _MyMaterialTextSelectionControls(),
-                    style: TextStyle(fontSize: outputFontSize),
+                  child: Directionality(
+                      textDirection: googleOutput.containsKey('translated-text')
+                      ? intl.Bidi.detectRtlDirectionality(
+                              googleOutput['translated-text'] ?? '')
+                          ? TextDirection.rtl
+                          : TextDirection.ltr
+                      : TextDirection.rtl,
+                    child: SelectableText(
+                      googleOutput['translated-text'] ?? '',
+                      selectionControls: _MyMaterialTextSelectionControls(),
+                      style: TextStyle(fontSize: outputFontSize),
+                    ),
                   ),
                 ),
               ),
             ),
             Column(
               children: [
-                CopyToClipboardButton(googleOutput),
+                CopyToClipboardButton(googleOutput['translated-text'] ?? ''),
                 IconButton(
                   onPressed: () async {
-                    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+                    await SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.manual,
+                        overlays: SystemUiOverlay.values);
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.fullscreen_exit),
@@ -105,7 +117,7 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     Offset selectionMidpoint,
     List<TextSelectionPoint> endpoints,
     TextSelectionDelegate delegate,
-    ClipboardStatusNotifier clipboardStatus,
+    ClipboardStatusNotifier? clipboardStatus,
     Offset? lastSecondaryTapDownPosition,
   ) {
     final TextSelectionPoint startSelectionPoint = endpoints[0];
@@ -129,18 +141,20 @@ class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
     _isVisible = () {
       if (MediaQuery.of(context).orientation == Orientation.portrait) {
         if (startSelectionPoint.point.dy < 20) return false;
-        if (startSelectionPoint.point.dy > textFieldHeight + 65) return false;
+        if (startSelectionPoint.point.dy > outTextFieldHeight + 65)
+          return false;
       }
       return true;
     }();
     return _MyTextSelectionToolbar(
       anchorAbove: anchorAbove,
       anchorBelow: anchorBelow,
-      clipboardStatus: clipboardStatus,
+      clipboardStatus: clipboardStatus!,
       handleCopy: canCopy(delegate)
           ? () => handleCopy(delegate, clipboardStatus)
           : () {},
-      handleCut: canCut(delegate) ? () => handleCut(delegate) : () {},
+      handleCut:
+          canCut(delegate) ? () => handleCut(delegate, clipboardStatus) : () {},
       handlePaste: canPaste(delegate)
           ? () async {
               isFirst = true;

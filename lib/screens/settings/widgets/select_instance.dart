@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:math';
 
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '../../../data.dart';
 import './settings_button.dart';
 
-var isCustomInstanceValid = instanceValidation.NotChecked;
+var isCustomInstanceValid = InstanceValidation.NotChecked;
 var loading = false;
 bool checkLoading = false;
 bool _isCanceled = false;
@@ -54,7 +53,7 @@ class SelectInstance extends StatelessWidget {
           checkLoading = false;
           isCustomInstanceValid = responseBool;
         });
-        if (responseBool == instanceValidation.True) {
+        if (responseBool == InstanceValidation.True) {
           session.write('customInstance', customUrl);
           setStateOverlord(() => customInstance = customUrl);
           Navigator.of(context).pop();
@@ -81,8 +80,8 @@ class SelectInstance extends StatelessWidget {
                   controller: customUrlCtrl,
                   keyboardType: TextInputType.url,
                   onChanged: (String? value) {
-                    if (isCustomInstanceValid != instanceValidation.NotChecked)
-                      isCustomInstanceValid = instanceValidation.NotChecked;
+                    if (isCustomInstanceValid != InstanceValidation.NotChecked)
+                      isCustomInstanceValid = InstanceValidation.NotChecked;
                   },
                   onEditingComplete: () => customCheck(setState),
                   decoration: InputDecoration(
@@ -90,9 +89,9 @@ class SelectInstance extends StatelessWidget {
                         borderSide: BorderSide(
                           width: 1.5,
                           color: isCustomInstanceValid ==
-                                  instanceValidation.NotChecked
+                                  InstanceValidation.NotChecked
                               ? lightThemeGreyColor
-                              : isCustomInstanceValid == instanceValidation.True
+                              : isCustomInstanceValid == InstanceValidation.True
                                   ? Colors.green
                                   : Colors.red,
                         ),
@@ -101,9 +100,9 @@ class SelectInstance extends StatelessWidget {
                         borderSide: BorderSide(
                           width: 1.5,
                           color: isCustomInstanceValid ==
-                                  instanceValidation.NotChecked
+                                  InstanceValidation.NotChecked
                               ? lightThemeGreyColor
-                              : isCustomInstanceValid == instanceValidation.True
+                              : isCustomInstanceValid == InstanceValidation.True
                                   ? Colors.green
                                   : Colors.red,
                         ),
@@ -112,9 +111,9 @@ class SelectInstance extends StatelessWidget {
                         borderSide: BorderSide(
                           width: 1.5,
                           color: isCustomInstanceValid ==
-                                  instanceValidation.NotChecked
+                                  InstanceValidation.NotChecked
                               ? lightThemeGreyColor
-                              : isCustomInstanceValid == instanceValidation.True
+                              : isCustomInstanceValid == InstanceValidation.True
                                   ? Colors.green
                                   : Colors.red,
                         ),
@@ -124,10 +123,10 @@ class SelectInstance extends StatelessWidget {
                 ),
                 actions: [
                   TextButton(
-                    child: Text(AppLocalizations.of(context)!.cancel),
+                    child: Text(L10n.of(context).cancel),
                     onPressed: () {
                       _isCanceled = true;
-                      isCustomInstanceValid = instanceValidation.NotChecked;
+                      isCustomInstanceValid = InstanceValidation.NotChecked;
                       checkLoading = false;
                       Navigator.of(context).pop();
                     },
@@ -141,7 +140,7 @@ class SelectInstance extends StatelessWidget {
                         )
                       : TextButton(
                           onPressed: () => customCheck(setState),
-                          child: Text(AppLocalizations.of(context)!.check),
+                          child: Text(L10n.of(context).check),
                         ),
                 ],
               ),
@@ -149,7 +148,7 @@ class SelectInstance extends StatelessWidget {
           ),
         ),
       );
-      if (isCustomInstanceValid != instanceValidation.True) {
+      if (isCustomInstanceValid != InstanceValidation.True) {
         if (_tmpInput != '') customUrlCtrl.text = _tmpInput;
         print('tmp input is: $_tmpInput');
         setStateOverlord(() => instance = _tmpInstance);
@@ -171,92 +170,95 @@ class SelectInstance extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(AppLocalizations.of(context)!.cancel),
+                      child: Text(L10n.of(context).cancel),
                     )
                   ],
                   insetPadding: const EdgeInsets.all(0),
-                  content: Column(mainAxisSize: MainAxisSize.min, children: [
-                    ...() {
-                      var list = <Widget>[];
-                      for (String x in instances)
-                        list.add(
-                          Container(
-                            width: double.infinity,
-                            child: InkWell(
-                              onTap: () => instanceFunc(setState, x),
-                              child: Row(
-                                children: [
-                                  Radio<String>(
-                                    value: x,
-                                    groupValue: instance,
-                                    onChanged: (_) => instanceFunc(setState, x),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: _padding,
-                                      child: Text(x, style: _textStyle),
+                  content: SingleChildScrollView(
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      ...() {
+                        var list = <Widget>[];
+                        for (String x in instances)
+                          list.add(
+                            Container(
+                              width: double.infinity,
+                              child: InkWell(
+                                onTap: () => instanceFunc(setState, x),
+                                child: Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: x,
+                                      groupValue: instance,
+                                      onChanged: (_) =>
+                                          instanceFunc(setState, x),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: Padding(
+                                        padding: _padding,
+                                        child: Text(x, style: _textStyle),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      return list;
-                    }(),
-                    InkWell(
-                      onTap: () => randomFunc(setState),
-                      child: Row(
-                        children: [
-                          Radio<String>(
-                            value: 'random',
-                            groupValue: instance,
-                            onChanged: (_) => randomFunc(setState),
-                          ),
-                          Padding(
-                            padding: _padding,
-                            child: Text(
-                              AppLocalizations.of(context)!.random,
-                              style: _textStyle,
+                          );
+                        return list;
+                      }(),
+                      InkWell(
+                        onTap: () => randomFunc(setState),
+                        child: Row(
+                          children: [
+                            Radio<String>(
+                              value: 'random',
+                              groupValue: instance,
+                              onChanged: (_) => randomFunc(setState),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => customFunc(setState),
-                      child: Row(
-                        children: [
-                          Radio<String>(
-                            value: 'custom',
-                            groupValue: instance,
-                            onChanged: (_) => customFunc(setState),
-                          ),
-                          Padding(
-                            padding: _padding,
-                            child: Text(
-                              AppLocalizations.of(context)!.custom,
-                              style: _textStyle,
+                            Padding(
+                              padding: _padding,
+                              child: Text(
+                                L10n.of(context).random,
+                                style: _textStyle,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ]),
+                      InkWell(
+                        onTap: () => customFunc(setState),
+                        child: Row(
+                          children: [
+                            Radio<String>(
+                              value: 'custom',
+                              groupValue: instance,
+                              onChanged: (_) => customFunc(setState),
+                            ),
+                            Padding(
+                              padding: _padding,
+                              child: Text(
+                                L10n.of(context).custom,
+                                style: _textStyle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
               );
             }).then((value) {
           checkLoading = false;
-          isCustomInstanceValid = instanceValidation.NotChecked;
+          isCustomInstanceValid = InstanceValidation.NotChecked;
         });
       },
       icon: Icons.dns,
       iconColor: Colors.blue,
-      title: AppLocalizations.of(context)!.instance,
+      title: L10n.of(context).instance,
       content: instance == 'custom'
-          ? '${AppLocalizations.of(context)!.custom}: $customInstance'
+          ? '${L10n.of(context).custom}: $customInstance'
           : instance == 'random'
-              ? AppLocalizations.of(context)!.random
+              ? L10n.of(context).random
               : instance,
       loading: loading,
     );

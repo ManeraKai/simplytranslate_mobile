@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/main_localizations.dart';
+import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,7 +31,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
 
   @override
   Widget build(BuildContext context) {
-    final _input = googleOutput;
+    final _input = googleOutput['translated-text'];
     stopPlayer() async {
       final result = await _audioPlayer.stop();
       if (result == 1)
@@ -47,7 +47,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
             duration: Duration(seconds: 2),
             width: 300,
             content: Text(
-              AppLocalizations.of(context)!.audio_limit,
+              L10n.of(context).audio_limit,
               textAlign: TextAlign.center,
             ),
           ),
@@ -120,10 +120,8 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
       } catch (err) {
         try {
           final result = await InternetAddress.lookup('exmaple.com');
-          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-            print('Last chance ------------------------');
+          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
             showInstanceTtsError(context);
-          }
         } on SocketException catch (_) {
           showInternetError(context);
         }
@@ -156,7 +154,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
-              if (_input == '') {
+              if (_input == null) {
                 if (_listening)
                   return stopPlayer;
                 else
