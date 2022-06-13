@@ -3,5 +3,8 @@
     "download": "Pobierz",
     "source_code": "Kod źródłowy",
     "contributors": "Współtwórcy",
-    "developers": "Programiści"
+    "developers": "Programiści",
+    "donate_thanks": "<span class='dimmed'>Dziękuję!</span>",
+    "donate": "Wesprzyj",
+    "short_description": "Klient androidowy dla <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>."
 }
