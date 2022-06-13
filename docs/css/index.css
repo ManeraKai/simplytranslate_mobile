@@ -158,7 +158,6 @@ html[dir=rtl] .block {
     border-left: none;
 }
 
-
 a.img {
     text-decoration: none;
 }
@@ -169,20 +168,38 @@ a.img img {
 }
 
 div.list {
-margin-left: 20px;
+    margin-left: 20px;
 }
 
-div.translators_div div{
+div.translators_div div {
     direction: ltr;
     display: flex;
     margin-bottom: 4px;
+    flex-wrap: wrap;
 }
 
 div.translators_div div p:first-child {
     width: 210px;
 }
 
+a.break {
+    word-wrap: break-word;
+}
+
 @media only screen and (max-width: 1220px) {
+    div.translators_div div p:first-child {
+        width: auto;
+    }
+
+    div.translators_div div p:first-child::after {
+        content: ':';
+        margin-right: 3px;
+    }
+
+    .section_title {
+        display: none;
+    }
+
     header h1 {
         font-size: 40px;
     }

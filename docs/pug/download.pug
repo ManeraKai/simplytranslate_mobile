@@ -5,17 +5,20 @@ head
 body
     +navbar('download', t)
 
-    br
-    br
-    br
-    br
+    
 
     div.section
-        h1!=download
+        br
+        .section_title
+            br
+            br
+            br
+            h1.section_title!=download
+        
         p!=fdroid
-            |: <a href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">https://f-droid.org/en/packages/com.simplytranslate_mobile</a>
+            |: <a class="break" href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">https://f-droid.org/en/packages/com.simplytranslate_mobile</a>
         p!=github_artifacts
-            |: <a href="https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml">https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml</a>
+            |: <a class="break" href="https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml">https://github.com/ManeraKai/simplytranslate_mobile/actions/workflows/main.yml</a>
 
     br
     br
