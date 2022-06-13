@@ -75,7 +75,7 @@
   "@random": {},
   "input_fraction_other": "Введено $length символів із 5000 можливих",
   "@input_fraction_other": {},
-  "donate": "Пожертвувати",
+  "donate": "Пожертви",
   "@donate": {},
   "copied_to_clipboard": "Скопійовано до буфера обміну",
   "@copied_to_clipboard": {},
