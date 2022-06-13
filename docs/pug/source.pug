@@ -1,0 +1,25 @@
+include ./widgets.pug
+head
+    +head
+    title SimplyTranslate Mobile
+body
+    +navbar('source', t)
+
+    br
+    br
+    br
+    br
+
+    div.section
+        h1!=source_code
+        p!=github
+            |: <a href="https://github.com/ManeraKai/simplytranslate_mobile">https://github.com/ManeraKai/simplytranslate_mobile</a>
+        p!=codeberg
+            |: <a href="https://codeberg.org/ManeraKai/simplytranslate_mobile">https://codeberg.org/ManeraKai/simplytranslate_mobile</a>
+
+    br
+    br
+    br
+    br
+
+    +footer

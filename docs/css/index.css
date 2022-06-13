@@ -1,15 +1,20 @@
 @font-face {
     font-family: 'Inter';
-    src: url('./assets/fonts/Inter-VariableFont_slnt,wght.ttf');
+    src: url('./fonts/Inter-VariableFont_slnt,wght.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('./assets/fonts/Vazirmatn-VariableFont_wght.ttf');
+    src: url('./fonts/Vazirmatn-VariableFont_wght.ttf');
     font-weight: normal;
     font-style: normal;
+}
+
+html {
+    line-height: 1.5;
+    font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 html[dir=rtl] {
@@ -21,8 +26,23 @@ body {
     color: #f0f0f0;
 }
 
-div.toolbar {
+h2 {
+    margin: 25px 0 5px 0;
+}
+
+p {
+    margin: 5px 0;
+}
+
+
+ul {
+    margin: 5px 0;
+    font-size: 1.2rem;
+}
+
+div.navbar {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     top: 0;
     margin: 0 auto;
@@ -30,15 +50,24 @@ div.toolbar {
     background-color: #141414;
 }
 
-.toolbar a {
+.navbar a {
     margin: 0 5px;
     padding: 15px;
     color: white;
+    font-size: 1.1rem;
+    text-decoration: none;
 }
 
-.toolbar a:hover {
-    transition: 500ms;
-    background-color: #0f0f0f;
+.navbar a.selected {
+    color: #3ee08a;
+}
+
+footer {
+    text-align: center;
+}
+
+span.dimmed {
+    color: rgb(155, 155, 155);
 }
 
 header {
@@ -53,32 +82,25 @@ header h1 {
 }
 
 header a {
-    /* background-color: white; */
     padding: 10px 60px;
     color: black;
     font-weight: 600;
-    /* border-radius: 50px; */
     text-decoration: none;
 }
 
 div.section {
-    width: 60vw;
+    width: 1200px;
     margin: 0 auto;
 }
 
-div.badge{
+div.badge {
     text-align: center;
-}
-
-html {
-    line-height: 1.5;
-    font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 div.screenshots {
     justify-content: space-evenly;
     align-items: center;
-    width: 60vw;
+    width: 100%;
     margin: 0 auto;
     flex-wrap: wrap;
     display: flex;
@@ -128,7 +150,7 @@ p {
     border-left: 5px solid #3ee08a;
 }
 
-.block-rtl {
+html[dir=rtl] .block {
     margin: 20px 0;
     padding-right: 1.5rem;
     border-right: 5px solid #3ee08a;
@@ -136,16 +158,40 @@ p {
     border-left: none;
 }
 
-.html, .body {
-    height: 100%;
+
+a.img {
+    text-decoration: none;
 }
 
-@media only screen and (max-width: 600px) {
+a.img img {
+    height: 48px;
+    width: auto;
+}
+
+div.list {
+margin-left: 20px;
+}
+
+div.translators_div div{
+    direction: ltr;
+    display: flex;
+    margin-bottom: 4px;
+}
+
+div.translators_div div p:first-child {
+    width: 210px;
+}
+
+@media only screen and (max-width: 1220px) {
     header h1 {
         font-size: 40px;
     }
 
     div.section {
+        width: 90vw;
+    }
+
+    div.navbar {
         width: 90vw;
     }
 
@@ -157,14 +203,14 @@ p {
         font-size: 35px !important;
     }
 
-    div.toolbar {
+    div.navbar {
         justify-content: center;
         position: static !important;
         padding: 0 !important;
         background-color: #141414;
     }
 
-    div.toolbar a {
+    div.navbar a {
         margin: 0;
         padding: 15px 10px;
     }

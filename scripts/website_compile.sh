@@ -1,4 +1,2 @@
-python3 scripts/python/pug_translator.py
-python3 scripts/python/pug_lang_adder.py
-python3 scripts/python/langs_list.py
-pug docs/pug/lang -o docs/ -P
+pug ./docs/pug/ar/ -O ./docs/strings/ar.json -o ./docs/ar/ -P
+pug ./docs/pug/en/ -O ./docs/strings/en.json -o ./docs/en/ -P
