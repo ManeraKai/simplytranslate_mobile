@@ -1,28 +1,28 @@
-include ./widgets.pug
-head
-    +head
-    title SimplyTranslate Mobile
-body
-    +navbar('source', t)
+include ./widgets/widgets.pug
+doctype html
+html(lang="ar" dir=dir)
+    head
+        +head
+        title SimplyTranslate Mobile
+    body
+        +navbar('source')
 
+        div.section
+            br
+            .section_title
+                br
+                br
+                br
+                h1!=source_code
 
+            p!=github
+                |: <a href="https://github.com/ManeraKai/simplytranslate_mobile">https://github.com/ManeraKai/simplytranslate_mobile</a>
+            p!=codeberg
+                |: <a href="https://codeberg.org/ManeraKai/simplytranslate_mobile">https://codeberg.org/ManeraKai/simplytranslate_mobile</a>
 
-    div.section
         br
-        .section_title
-            br
-            br
-            br
-            h1!=source_code
+        br
+        br
+        br
 
-        p!=github
-            |: <a href="https://github.com/ManeraKai/simplytranslate_mobile">https://github.com/ManeraKai/simplytranslate_mobile</a>
-        p!=codeberg
-            |: <a href="https://codeberg.org/ManeraKai/simplytranslate_mobile">https://codeberg.org/ManeraKai/simplytranslate_mobile</a>
-
-    br
-    br
-    br
-    br
-
-    +footer
+        +footer

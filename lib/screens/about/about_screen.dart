@@ -44,8 +44,10 @@ class _AboutScreenState extends State<AboutScreen> {
                 iconColor: Colors.redAccent,
                 title: L10n.of(context).contribute,
                 content: L10n.of(context).contribute_summary,
-                onTap: () => launch(
-                  'https://github.com/ManeraKai/simplytranslate_mobile',
+                onTap: () => launchUrl(
+                  Uri.parse(
+                    'https://github.com/ManeraKai/simplytranslate_mobile',
+                  ),
                 ),
               ),
               AboutButton(
@@ -53,8 +55,10 @@ class _AboutScreenState extends State<AboutScreen> {
                 iconColor: Colors.blue,
                 title: L10n.of(context).translate,
                 content: L10n.of(context).translate_summary,
-                onTap: () => launch(
-                  'https://hosted.weblate.org/projects/simplytranslate-mobile/',
+                onTap: () => launchUrl(
+                  Uri.parse(
+                    'https://hosted.weblate.org/projects/simplytranslate-mobile/',
+                  ),
                 ),
               ),
               AboutButton(
@@ -69,8 +73,11 @@ class _AboutScreenState extends State<AboutScreen> {
                       actionsAlignment: MainAxisAlignment.center,
                       actions: [
                         InkWell(
-                          onTap: () =>
-                              launch("https://www.buymeacoffee.com/manerakai"),
+                          onTap: () => launchUrl(
+                            Uri.parse(
+                              "https://www.buymeacoffee.com/manerakai",
+                            ),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -97,8 +104,11 @@ class _AboutScreenState extends State<AboutScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () => launch(
-                              "https://liberapay.com/simplytranslate_mobile"),
+                          onTap: () => launchUrl(
+                            Uri.parse(
+                              "https://liberapay.com/simplytranslate_mobile",
+                            ),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -134,8 +144,9 @@ class _AboutScreenState extends State<AboutScreen> {
                 iconColor: Colors.red,
                 title: L10n.of(context).report_bug,
                 content: L10n.of(context).report_bug_summary,
-                onTap: () => launch(
-                  'https://github.com/ManeraKai/simplytranslate_mobile/issues',
+                onTap: () => launchUrl(
+                  Uri.parse(
+                      'https://github.com/ManeraKai/simplytranslate_mobile/issues'),
                 ),
               ),
               const SizedBox(height: 20),
@@ -148,8 +159,10 @@ class _AboutScreenState extends State<AboutScreen> {
                 icon: Icons.web,
                 iconColor: Colors.amber,
                 title: L10n.of(context).website,
-                onTap: () => launch(
-                  'https://manerakai.github.io/simplytranslate_mobile/',
+                onTap: () => launchUrl(
+                  Uri.parse(
+                    'https://manerakai.github.io/simplytranslate_mobile/',
+                  ),
                 ),
               ),
               AboutButton(
@@ -179,8 +192,10 @@ class _AboutScreenState extends State<AboutScreen> {
                     theme == Brightness.dark ? Colors.white : Colors.black,
                 title: L10n.of(context).license,
                 content: 'GPL-3.0 License',
-                onTap: () => launch(
-                  'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE',
+                onTap: () => launchUrl(
+                  Uri.parse(
+                    'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE',
+                  ),
                 ),
               ),
             ],

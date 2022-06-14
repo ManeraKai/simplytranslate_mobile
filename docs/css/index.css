@@ -40,7 +40,7 @@ ul {
     font-size: 1.2rem;
 }
 
-div.navbar {
+.navbar {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -50,7 +50,7 @@ div.navbar {
     background-color: #141414;
 }
 
-.navbar a {
+.navbar > a {
     margin: 0 5px;
     padding: 15px;
     color: white;
@@ -58,8 +58,20 @@ div.navbar {
     text-decoration: none;
 }
 
-.navbar a.selected {
+.navbar > a.selected {
     color: #3ee08a;
+}
+
+.langs {
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    display: flex;
+    margin: 0 10px;
+}
+
+.langs a {
+    padding: 15px 5px;
 }
 
 footer {
@@ -208,8 +220,15 @@ a.break {
         width: 90vw;
     }
 
-    div.navbar {
+    .navbar {
         width: 90vw;
+    }
+
+    .langs {
+        position: static;
+        float: right;
+        display: flex;
+        margin: 0 10px;
     }
 
     div.screenshots {
@@ -220,14 +239,14 @@ a.break {
         font-size: 35px !important;
     }
 
-    div.navbar {
+    .navbar {
         justify-content: center;
         position: static !important;
         padding: 0 !important;
         background-color: #141414;
     }
 
-    div.navbar a {
+    .navbar > a {
         margin: 0;
         padding: 15px 10px;
     }

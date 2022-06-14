@@ -5,16 +5,25 @@ mixin head
     link(rel="shortcut icon" type="image/png" href="./assets/favicon.png" )
     meta(name="description" content="An alternative front-end to GoogleTranslate")
     link(itemprop="image" href="./assets/favicon.png")
-    link(href="../css/index.css" type="text/css" rel="stylesheet" media="screen,projection" )
+    link(href="/css/index.css" type="text/css" rel="stylesheet" media="screen,projection" )
     meta(content="https://manerakai.github.io/simplytranslate_mobile/assets/preview.png" property="og:image")
 
-mixin navbar(page, t)
-    div.navbar
+mixin navbar(page)
+    .navbar
         a(href="./index.html" class=page == 'home' ? "selected" : "")!=home
         a(href="./download.html" class=page == 'download' ? "selected" : "")!=download
         a(href="./source.html" class=page == 'source' ? "selected" : "")!=source_code
         a(href="./contributors.html" class=page == 'contributors' ? "selected" : "")!=contributors
         a(href="./donate.html" class=page == 'donate' ? "selected" : "")!=donate
+
+        if page == 'home'
+            .langs(dir="ltr")
+                a(href="/en/index.html") EN
+                a(href="/ar/index.html") AR
+                a(href="/fr/index.html") FR
+                a(href="/nb_NO/index.html") NB NO
+                a(href="/pl/index.html") PL
+                a(href="/tr/index.html") TR
 
 
 mixin footer
