@@ -1,111 +1,111 @@
-include ./widgets.pug
-head
-    +head
-    title SimplyTranslate Mobile
-body
-    +navbar('contributors', t)
+include ./widgets/widgets.pug
+doctype html
+html(lang="ar" dir=dir)
+    head
+        +head
+        title SimplyTranslate Mobile
+    body
+        +navbar('contributors')
 
+        div.section
+            .section_title
+                br
+                br
+                br
+                h1!=contributors
 
+            h2!=developers
+            .list
+                p <a href="https://manerakai.com">ManeraKai</a>
 
-    div.section
-        .section_title
+            h2!=testers
+            .list
+                p <a href="https://github.com/Valdnet">Valdnet</a>
+
+            h2!=icon
+            .list
+                p <a href="https://github.com/joelchrono12">joelchrono12</a>
+
+            h2!=translators
+            .translators_div.list
+                div
+                    p 🇸🇦 Arabic
+                    p <a href="https://github.com/ManeraKai">ManeraKai</a>
+
+                div
+                    p 🇨🇳 Chinese Hong Kong
+                    p <a href="https://github.com/CafeTango">CafeTango</a>
+
+                div
+                    p 🇨🇿 Czech
+                    p <a href="https://hosted.weblate.org/user/TadaFireworks/">Tadeáš Erban</a>, <a href="https://www.shimonh.eu/">Shimon</a>
+
+                div
+                    p 🟩‍⭐ Esperanto
+                    p <a href="https://hosted.weblate.org/user/phlostically/">phlostically</a>
+
+                div
+                    p 🇫🇮 Finnish
+                    p <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>
+
+                div
+                    p 🇫🇷 French
+                    p <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>
+
+                div
+                    p 🇩🇪 German
+                    p <a href="https://metalune.xyz/">metalune</a>, <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>, <a href="">Jean-Luc Tibaux</a>
+
+                div
+                    p 🇬🇷 Greek
+                    p <a href="https://getimiskon.xyz/">getimiskon</a>
+
+                div
+                    p 🇮🇹 Italian
+                    p <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>
+
+                div
+                    p 🇯🇵 Japanese
+                    p <a href="https://hosted.weblate.org/user/lx3k/">lx3k</a>
+
+                div
+                    p 🇮🇳 Malayalam
+                    p <a href="https://github.com/sunilpaulmathew">sunilpaulmathew</a>
+
+                div
+                    p 🇳🇴 Norwegian-Bokmal
+                    p <a href="https://github.com/comradekingu">Allan Nordhøy</a>
+
+                div
+                    p 🇮🇷 Persian
+                    p <a href="https://alefvanoon.xyz/">alefvanoon</a>
+
+                div
+                    p 🇵🇱 Polish
+                    p <a href="https://github.com/Aga-C">Aga-C</a>, <a href="https://github.com/Valdnet">Valdnet</a>
+
+                div
+                    p 🇵🇹 Portuguese Brazil
+                    p <a href="https://github.com/Murilogs1910">Murilogs1910</a>
+
+                div
+                    p 🇷🇺 Russian
+                    p <a href="https://github.com/K3XRad">K3XRad</a>, <a href="https://hosted.weblate.org/user/S3aBreeze/">S3aBreeze</a>
+
+                div
+                    p 🇪🇸 Spanish
+                    p <a href="https://github.com/programmer-pony">Luna 🌙</a>
+
+                div
+                    p 🇹🇷 Turkish
+                    p 👻, <a href="https://hosted.weblate.org/user/ersen/">Oğuz Ersen</a>
+
+                div
+                    p 🇺🇦 Ukrainian
+                    p <a href="https://hosted.weblate.org/user/andm/">Andrij Mizyk</a>
+
             br
+
+            +footer
+
             br
-            br
-            h1!=contributors
-
-        h2!=developers
-        .list
-            p <a href="https://manerakai.com">ManeraKai</a>
-
-        h2!=testers
-        .list
-            p <a href="https://github.com/Valdnet">Valdnet</a>
-
-        h2!=icon
-        .list
-            p <a href="https://github.com/joelchrono12">joelchrono12</a>
-
-        h2!=translators
-        .translators_div.list
-            div
-                p 🇸🇦 Arabic
-                p <a href="https://github.com/ManeraKai">ManeraKai</a>
-
-            div
-                p 🇨🇳 Chinese Hong Kong
-                p <a href="https://github.com/CafeTango">CafeTango</a>
-
-            div
-                p 🇨🇿 Czech
-                p <a href="https://hosted.weblate.org/user/TadaFireworks/">Tadeáš Erban</a>, <a href="https://www.shimonh.eu/">Shimon</a>
-
-            div
-                p 🟩‍⭐ Esperanto
-                p <a href="https://hosted.weblate.org/user/phlostically/">phlostically</a>
-
-            div
-                p 🇫🇮 Finnish
-                p <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>
-
-            div
-                p 🇫🇷 French
-                p <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>
-
-            div
-                p 🇩🇪 German
-                p <a href="https://metalune.xyz/">metalune</a>, <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>, <a href="">Jean-Luc Tibaux</a>
-
-            div
-                p 🇬🇷 Greek
-                p <a href="https://getimiskon.xyz/">getimiskon</a>
-
-            div
-                p 🇮🇹 Italian
-                p <a href="https://hosted.weblate.org/user/Edanas/">J. Lavoie</a>
-
-            div
-                p 🇯🇵 Japanese
-                p <a href="https://hosted.weblate.org/user/lx3k/">lx3k</a>
-
-            div
-                p 🇮🇳 Malayalam
-                p <a href="https://github.com/sunilpaulmathew">sunilpaulmathew</a>
-
-            div
-                p 🇳🇴 Norwegian-Bokmal
-                p <a href="https://github.com/comradekingu">Allan Nordhøy</a>
-
-            div
-                p 🇮🇷 Persian
-                p <a href="https://alefvanoon.xyz/">alefvanoon</a>
-
-            div
-                p 🇵🇱 Polish
-                p <a href="https://github.com/Aga-C">Aga-C</a>, <a href="https://github.com/Valdnet">Valdnet</a>
-
-            div
-                p 🇵🇹 Portuguese Brazil
-                p <a href="https://github.com/Murilogs1910">Murilogs1910</a>
-
-            div
-                p 🇷🇺 Russian
-                p <a href="https://github.com/K3XRad">K3XRad</a>, <a href="https://hosted.weblate.org/user/S3aBreeze/">S3aBreeze</a>
-
-            div
-                p 🇪🇸 Spanish
-                p <a href="https://github.com/programmer-pony">Luna 🌙</a>
-
-            div
-                p 🇹🇷 Turkish
-                p 👻, <a href="https://hosted.weblate.org/user/ersen/">Oğuz Ersen</a>
-
-            div
-                p 🇺🇦 Ukrainian
-                p <a href="https://hosted.weblate.org/user/andm/">Andrij Mizyk</a>
-
-        br
-
-        +footer
-
-        br
