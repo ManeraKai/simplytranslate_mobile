@@ -20,4 +20,5 @@ generate_pug 'nb_NO' 'ltr'
 generate_pug 'pl' 'ltr'
 generate_pug 'tr' 'ltr'
 
-# sudo cp -r docs/* /var/www/simplytranslate_mobile/
+sudo rm -rf /var/www/simplytranslate_mobile/simplytranslate_mobile/*
+sudo cp -r docs/* /var/www/simplytranslate_mobile/simplytranslate_mobile/
