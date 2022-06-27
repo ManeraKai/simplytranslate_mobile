@@ -1,1 +1,25 @@
-{}
+{
+    "what_is_simplytranslate_answer": "<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> — это серверное приложение с открытым исходным кодом, которое собирает данные переводов с популярных онлайн-переводчиков, таких как Google Translate, ICIBA, Reverso, LibreTranslate и т.д... И предоставляет их вам в простом веб-интерфейсе, без какой-либо рекламы или отслеживающих скриптов. Вы даже можете использовать его с Tor и выключенным JavaScript, и он всё ещё будет работать как надо.<br> SimplyTranslate — это не просто одна инстанция (сервер), это множественные инстанции, расположенные по всему миру и запущенные добровольцами. Вы даже можете запустить вашу <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>собственную приватную инстанцию</a>. Здесь есть <a href='https://simple-web.org/projects/simplytranslate.html'>официальный список</a> известных публичных инстанций.",
+    "home": "Домой",
+    "download": "Загрузить",
+    "source_code": "Исходный код",
+    "contributors": "Помощники",
+    "developers": "Разработчики",
+    "donate": "Пожертвовать",
+    "donate_thanks": "<span class='dimmed'>Спасибо!</span>",
+    "short_description": "Android клиент для <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "what_is_simplytranslate": "Что такое SimplyTranslate?",
+    "what_is_simplytranslate_mobile": "Что такое SimplyTranslate Mobile?",
+    "what_is_simplytranslate_mobile_answer": "Вместо использования \"веб-интерфейса\" SimplyTranslate на вашем устройстве, здесь есть полноценный мобильный интерфейс, а также некоторые дополнительные функции:",
+    "random_instance_each_request": "Случайная инстанция на каждый запрос, <span class='dimmed'>чтобы предотвратить получение одной инстанцией полного текста вашего перевода</span>",
+    "custom_instance_option": "Опция добавления пользовательской инстанции",
+    "text_to_speech": "Текст-в-Речь (TTS)",
+    "offline_camera_text_recognition": "Распознавание текста камерой без интернета <span class='dimmed'>с не самым лучшим качеством, но оно не отправляет какие-либо фотографии на инстанции</span>",
+    "fdroid": "F-Droid",
+    "github_artifacts": "GitHub Артефакты <span style='color:orange;'>(бета сборки)</span>",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "testers": "Тестировщики",
+    "translators": "Переводчики",
+    "icon": "Значок"
+}
