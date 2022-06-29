@@ -1,0 +1,19 @@
+Questa applicazione è un front-end alternativo a Google Traduttore, ma non si collega direttamente ad esso.
+Funziona come segue:
+1. Il testo viene inviato da voi (l'utente) e inviato a un'istanza casuale di SimplyTranslate (server).
+2. Questa istanza richiederà quei dati da Google Traduttore.
+3. Google Traduttore invierà la traduzione indietro a quell'istanza.
+4. L'istanza rimanderà la traduzione a te.
+
+In questo modo Google Traduttore non conoscerà la tua identità. La selezione automatica di un'istanza casuale (modalità predefinita) ad ogni richiesta offuscherà e diffonderà di più i vostri dati tra le istanze in modo che nulla sarà collegato facilmente in quanto non è in un database centralizzato.
+
+<b> Caratteristiche:</b>
+* Supporta 108 lingue
+* Text-To-Speech (TTS)
+* Può ricevere testo condiviso da altre applicazioni
+* Un pulsante di traduzione nella barra degli strumenti di selezione del testo
+* Selezione automatica di istanze casuali ad ogni richiesta
+* Un elenco ufficiale aggiornabile di istanze SimplyTranslate
+* Opzione di istanza personalizzata
+* Tema scuro
+* Riconoscimento del testo della fotocamera
