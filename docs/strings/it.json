@@ -1,1 +1,25 @@
-{}
+{
+    "what_is_simplytranslate_answer": "<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> è un'applicazione server open source che raccoglie i dati di traduzione da siti web di traduzione popolari come Google Translate, ICIBA, Reverso, LibreTranslate ecc... e te lo presenta in una semplice interfaccia web senza pubblicità né script di tracciamento. Puoi anche usarlo con Tor + JavaScript disabilitato e funzionerà comunque correttamente. <br> SimplyTranslate non è solo una istanza (server), sono più istanze in tutto il mondo gestite da volontari, puoi anche eseguire la <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>tua istanza privata</a>. Qui la <a href='https://simple-web.org/projects/simplytranslate.html'>lista ufficiale</a> delle istanze pubbliche conosciute.",
+    "home": "Home",
+    "download": "Scarica",
+    "source_code": "Codice Sorgente",
+    "contributors": "Collaboratori",
+    "developers": "Sviluppatori",
+    "donate": "Dona",
+    "donate_thanks": "<span class='dimmed'>Grazie!</span>",
+    "short_description": "Un client Android per <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "what_is_simplytranslate": "Cos'è SimplyTranslate?",
+    "what_is_simplytranslate_mobile": "Cos'è SimplyTranslate Mobile?",
+    "what_is_simplytranslate_mobile_answer": "Piuttosto che utilizzare l' \"interfaccia web\" di SimplyTranslate sul tuo dispositivo, ora c'è un'intera interfaccia mobile, oltre ad alcune funzionalità aggiuntive:",
+    "random_instance_each_request": "Istanza casuale ad ogni richiesta <span class='dimmed'>per evitare di dare il contesto completo della tua traduzione ad un'istanza</span>",
+    "custom_instance_option": "Opzione per un'istanza personalizzata",
+    "text_to_speech": "Sintesi vocale (TTS)",
+    "offline_camera_text_recognition": "Riconoscimento del testo dalla fotocamera offline <span class='dimmed'>non il migliore, ma non invia alcuna foto alle istanze</span>",
+    "fdroid": "F-Droid",
+    "github_artifacts": "Artifatti GitHub <span style='color:orange;'> (build beta)</span>",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "testers": "Collaudatori",
+    "translators": "Traduttori",
+    "icon": "Icona"
+}
