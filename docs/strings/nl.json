@@ -1,1 +1,25 @@
-{}
+{
+    "home": "Voorblad",
+    "download": "Opslaan",
+    "contributors": "Medewerkers",
+    "developers": "Ontwikkelaars",
+    "donate_thanks": "<span class='dimmed'>Dankuwel!</span>",
+    "short_description": "Een Android cliënt voor <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "what_is_simplytranslate": "Wat is SimplyTranslate?",
+    "what_is_simplytranslate_mobile": "Wat is SimplyTranslate Mobiel?",
+    "what_is_simplytranslate_mobile_answer": "Beter dan een \"web-aansluiting\" van SimplyTranslate op jouw mobiel, bieden wij een hele mobiele app aan, met nog wat aanvullende functionaliteiten:",
+    "random_instance_each_request": "Willekeurige server bij elk verzoek <span class='dimmed'>om te voorkomen dat één server de hele invoer van uw vertaling ziet</span>",
+    "custom_instance_option": "Aangepaste server mogelijkheid",
+    "text_to_speech": "Tekst-naar-spraak (TTS)",
+    "fdroid": "F-Droid",
+    "translators": "Vertalers",
+    "icon": "Teken",
+    "donate": "Doneren",
+    "github_artifacts": "GitHub Artifacten <span style='color:orange;'>(beta-builds)</span>",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "testers": "Testers",
+    "source_code": "Broncode",
+    "what_is_simplytranslate_answer": "<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> is een openbron server app die de vertalingen van Google Translate, ICIBA, Reverso, LibreTranslate, enz. pakt en jou aanbiedt zonder enige reclames of privacyschendende scripts. U kunt het zelfs met Tor +JavaScript uitgeschakeld gebruiken en het werkt uitstekend.<br> SimplyTranslate is niet slechts één instantie (server); het zijn meerdere servers over de wereld beheerd door vrijwilligers. U kunt zelfs uw <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>eigen privé server</a> beheren. Hier is de <a href='https://simple-web.org/projects/simplytranslate.html'>officiële lijst</a> van de erkende servers.",
+    "offline_camera_text_recognition": "Offline Camera Tekst Herkenning <span class='dimmed'>niet vlekkeloos, maar zo verzendt u geen afbeeldingen naar servers</span>"
+}
