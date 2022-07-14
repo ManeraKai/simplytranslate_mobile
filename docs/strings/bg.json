@@ -5,5 +5,12 @@
     "download": "Изтегляне",
     "developers": "Разработчици",
     "donate": "Дари",
-    "donate_thanks": "<span class='dimmed'>Благодаря!</span>"
+    "donate_thanks": "<span class='dimmed'>Благодаря!</span>",
+    "what_is_simplytranslate": "Какво е SimplyTranslate?",
+    "what_is_simplytranslate_mobile": "Какво е SimplyTranslate Mobile?",
+    "translators": "Преводачи",
+    "icon": "Иконка",
+    "fdroid": "F-Droid",
+    "github": "GitHub",
+    "codeberg": "Codeberg"
 }
