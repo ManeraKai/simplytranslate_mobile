@@ -1,1 +1,9 @@
-{}
+{
+    "home": "Начало",
+    "source_code": "Изходен код",
+    "contributors": "Доброволци",
+    "download": "Изтегляне",
+    "developers": "Разработчици",
+    "donate": "Дари",
+    "donate_thanks": "<span class='dimmed'>Благодаря!</span>"
+}
