@@ -1,0 +1,19 @@
+Deze toepassing is een andere voorzijde van Google Translate, maar het maakt er geen rechtstreekse verbinding mee.
+Het werkt als volgt:
+1. De tekst is ingevoerd door u (de gebruiker) en wordt verzonden naar een willekeurige SimplyTranslate instantie (server.
+2. Deze instantie zal de gegevens opvragen van Google Translate.
+3. Google Translate zal deze vertaling geven aan de instantie.
+4. De instantie zal de vertaling doorgeven aan u.
+
+Op deze wijze zal Google Translate uw identiteit niet weten. Het willekeurig kiezen van een instantie (de standaard instelling) zal uw gegevens verdoezelen en verspreiden over meerdere instanties, zodat niets eenvoudig gekoppeld kan worden. Er is immers geen grote gegevensbank in het midden.
+
+<b>Mogelijkheden:</b>
+* Ondersteunt 108 talen
+* Tekst-naar-spraak (TTS)
+* Kan tekst gedeeld uit andere apps ontvangen
+* Een vertaalknop bij het selecteren van tekst op welke app dan ook
+* Willekeurig kiezen van een SimplyTranslate instantie
+* Een tegenwoordige lijst van SimplyTranslate instanties
+* Aangepaste instantie mogelijkheid
+* Donker uiterlijk
+* Tekstherkenning met camera
