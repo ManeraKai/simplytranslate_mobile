@@ -1,0 +1,19 @@
+Ĉi tiu programo estas alternativa fasado por Google Translate, sed ne rekte ligas al ĝi.
+Ĝi funkcias jene:
+1. Teksto estas sendita de vi (la uzanto) al hazarda servilo de SimplyTranslate.
+2. Ĉi tiu servilo petos tradukaĵon de Google Translate.
+3. Google Translate sendos la tradukaĵon al la servilo.
+4. La servilo sendos la tradukaĵon al vi.
+
+Tiel Google Translate ne scios vian identecon. Aŭtomate elektante hazardan servilon (laŭ la apriora reĝimo), ĉiu peto kaŝos kaj tramiksos viajn datenojn inter serviloj; do nenio estos facile ligebla, ĉar ĝi ne estas en centralizita datenbanko.
+
+<b>Trajtoj:</b>
+* Subtenas 108 lingvojn
+* Prononcilo
+* Povas ricevi tekston el aliaj programoj
+* Butono «traduki» en la ilobreto de tekstoelekto
+* Aŭtomata hazarda elekto de servilo por ĉiu peto
+* Ĝisdatigebla oficiala listo de SimplyTranslate-serviloj
+* Opcio uzi propran servilon
+* Malhela etoso
+* Fota tekstlegilo

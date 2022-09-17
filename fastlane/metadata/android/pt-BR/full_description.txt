@@ -1,0 +1,35 @@
+Este app ē um front-end alternativo para Google Tradutor, mas não se conecta directamente a ele.
+
+Funciona da seguinte maneira:
+
+1. O texto é enviado a uma instância (servidor) aleatória de SimplyTranslate.
+
+2. A instância enviará os dados ao Google Tradutor.
+
+3. O Google Tradutor retornará a tradução à essa instância.
+
+4. A instância enviará a tradução de volta para ti.
+
+
+Dessa forma Google não conhece sua identidade. Selecionando automaticamente uma instância aleatória (que é o que se faz por padrão) cada pedido se ofuscará e a informação se dissipará mais entre instâncias para que nada possa ser vinculado a você facilmente já que não estará em uma base de dados centralizada.
+
+
+<b>Características:</b>
+
+* Suporta 108 idiomas
+
+* Texto em voz (TTS)
+
+* Pode receber texto compartilhado por outros apps
+
+* Um botão de traduzir no menu de selecionar texto
+
+* Seleção automática de instância aleatória em cada pedido
+
+* Una lista oficial atualizável de instâncias de SimplyTranslate
+
+* Opção de usar uma instância personalizada
+
+* Tema escuro
+
+* Reconhecimento de texto com a câmera

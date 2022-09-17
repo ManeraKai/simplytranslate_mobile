@@ -15,5 +15,11 @@
     "codeberg": "Codeberg",
     "contributors": "Mitwirkende",
     "what_is_simplytranslate": "Was ist SimplyTranslate?",
-    "what_is_simplytranslate_mobile_answer": "Anstatt die Web-Schnittstelle von SimplyTranslate auf Ihrem Telefon zu verwenden, haben wir ein komplettes mobiles Interface für SimplyTranslate + einige zusätzliche Funktionen entwickelt:"
+    "what_is_simplytranslate_mobile_answer": "Anstatt die Web-Schnittstelle von SimplyTranslate auf Ihrem Telefon zu verwenden, haben wir ein komplettes mobiles Interface für SimplyTranslate und einige zusätzliche Funktionen entwickelt:",
+    "custom_instance_option": "Option \"Benutzerdefinierte Instanz\"",
+    "random_instance_each_request": "Zufällige Instanz bei jeder Anfrage <span class='dimmed'> um zu verhindern, dass der gesamte Kontext Ihrer Übersetzung an eine Instanz weitergegeben wird</span>",
+    "offline_camera_text_recognition": "Offline Kamera Texterkennung <span class='dimmed'>nicht die perfekteste, aber sie sendet keine Fotos an die Instanzen</span>",
+    "fdroid": "F-Droid",
+    "github_artifacts": "GitHub Artefakte <span style='color:orange;'>(Beta-Builds)</span>",
+    "what_is_simplytranslate_answer": "SimplyTranslate<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> ist eine Open-Source-Server-Applikation, die Übersetzungsdaten von beliebten Übersetzungswebseiten wie Google Translate, ICIBA, Reverso, LibreTranslate etc... abruft und sie dir in einer einfachen Weboberfläche ohne Werbung oder Tracking-Scripts präsentiert. Du kannst es sogar mit deaktiviertem Tor + JavaScript benutzen und es funktioniert immer noch einwandfrei.<br> SimplyTranslate ist'nicht nur eine Instanz (Server), sondern'mehrere Instanzen rund um die Welt, die von Freiwilligen betrieben werden, du kannst sogar deine <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>eigene private Instanz</a> betreiben. Hier ist die <a href='https://simple-web.org/projects/simplytranslate.html'>offizielle Liste</a> der bekannten öffentlichen Instanzen."
 }

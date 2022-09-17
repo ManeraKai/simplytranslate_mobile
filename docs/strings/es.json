@@ -1,1 +1,25 @@
-{}
+{
+    "what_is_simplytranslate_answer": "<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> es una aplicación de código abierto de servidor que extrae datos de traducción de traductores web populares como Google Translate, ICIBA, Reverso, LibreTranslate, etc... y te los presenta en una interfaz web sencilla sin publicidad ni scripts de rastreo. Se puede usar incluso a través de Tor y con JavaScript deshabilitado y seguirá funcionando correctamente. SimplyTranslate no es solo una instancia (servidor), sino múltiples instancias alrededor del mundo manejadas por voluntarios; incluso puedes alojar <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>tu propia instancia privada</a>. Aquí tienes la <a href='https://simple-web.org/projects/simplytranslate.html'>lista oficial</a> de todas las instancias públicas conocidas.",
+    "home": "Inicio",
+    "download": "Descargar",
+    "source_code": "Código fuente",
+    "donate": "Donar",
+    "contributors": "Contribuyentes",
+    "developers": "Desarrolladores",
+    "donate_thanks": "<span class='dimmed'>¡Gracias!</span>",
+    "short_description": "Un cliente de Android para <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "what_is_simplytranslate": "¿Qué es SimplyTranslate?",
+    "what_is_simplytranslate_mobile_answer": "En lugar de usar la interfaz web de SimplyTranslate en tu dispositivo, ahora hay una interfaz móvil, con unas cuantas funciones nuevas:",
+    "what_is_simplytranslate_mobile": "¿Qué es SimplyTranslate Mobile?",
+    "random_instance_each_request": "Cada solicitud se manda a una instancia aleatoria <span class='dimmed'>para evitar dar el contexto completo de tu traducción a una instancia</span>",
+    "text_to_speech": "Texto a voz (TTS)",
+    "offline_camera_text_recognition": "El reconocimiento de texto offline a través de la cámara <span class='dimmed'>no es el mejor del mundo pero al menos no envía fotos a ninguna instancia</span>",
+    "custom_instance_option": "Opción de usar una instancia personalizada",
+    "fdroid": "F-Droid",
+    "github_artifacts": "Artefactos de GitHub <span style='color:orange;'>(builds en beta)</span>",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "testers": "Testers",
+    "translators": "Traductores",
+    "icon": "Icono"
+}

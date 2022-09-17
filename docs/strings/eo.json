@@ -1,1 +1,25 @@
-{}
+{
+    "home": "Ĉefpaĝo",
+    "download": "Elŝuti",
+    "source_code": "Fontokodo",
+    "contributors": "Kontribuantoj",
+    "developers": "Programistoj",
+    "donate": "Donaci",
+    "donate_thanks": "<span class='dimmed'>Dankon!</span>",
+    "fdroid": "F-Droid",
+    "what_is_simplytranslate": "Kio estas SimplyTranslate?",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "translators": "Tradukantoj",
+    "icon": "Piktogramo",
+    "what_is_simplytranslate_answer": "<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> estas malfermitfonta servila programo, kiu prenas tradukaĵojn el popularaj tradukaj retejoj kiel Google Translate, ICIBA, Reverso, LibreTranslate ktp… kaj prezentas ĝin al vi sur simpla retfasado sen reklamoj aŭ spuriloj. Vi eĉ povas uzi ĝin per Tor aŭ sen JavaScript.<br> SimplyTranslate ne estas nur unu servilo; ĝi konsistas el pluraj serviloj tra la mondo prizorgataj de volontuloj. Vi eĉ povas funkciigi vian <a href. ='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>propran servilon</a>. Jen la <a href='https://simple-web.org/projects/simplytranslate.html'>oficiala listo</a> de la konataj publikaj serviloj.",
+    "github_artifacts": "GitHub-Artefaktoj <span style='color:orange;'>(beta-versioj)</span>",
+    "custom_instance_option": "Opcio uzi propran servilon",
+    "text_to_speech": "Prononcilo",
+    "testers": "Elprovantoj",
+    "what_is_simplytranslate_mobile_answer": "Anstataŭ uzo de la «retfasado» de SimplyTranslate per via aparato, nun ekzistas plena poŝaparata fasado kun pliaj funkcioj:",
+    "random_instance_each_request": "Hazarda servilo por ĉiu peto <span class='dimmed'>por malhelpi sciigi unu servilon pri la plena kunteksto de via tradukado</span>",
+    "offline_camera_text_recognition": "Senreta fotila tekstlegilo <span class='dimmed'>ne plene perfekta, sed tio ne sendas fotojn al la serviloj</span>",
+    "short_description": "Kliento por <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> sur Android.",
+    "what_is_simplytranslate_mobile": "Kio estas SimplyTranslate Mobile?"
+}
