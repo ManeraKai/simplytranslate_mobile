@@ -33,11 +33,8 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
   Widget build(BuildContext context) {
     final _input = googleOutput['translated-text'];
     stopPlayer() async {
-      final result = await _audioPlayer.stop();
-      if (result == 1)
-        setState(() => _listening = false);
-      else
-        print('something is wrong');
+      await _audioPlayer.stop();
+      setState(() => _listening = false);
     }
 
     audioLimit() {
@@ -59,8 +56,6 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
     }
 
     startPlayer() async {
-      _audioPlayer.onPlayerCompletion
-          .listen((event) => setState(() => _listening = false));
       isMaximizedTtsOutputCanceled = false;
       final _random = Random().nextInt(instances.length);
       final _url;
@@ -78,10 +73,11 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
         final response = await http.get(_url);
         if (!isMaximizedTtsOutputCanceled) {
           if (response.statusCode == 200) {
-            final result = await _audioPlayer
-                .playBytes(response.bodyBytes)
-                .whenComplete(() => null);
-            if (result == 1) setState(() => _listening = true);
+            await _audioPlayer.setSourceBytes(response.bodyBytes);
+            await _audioPlayer.resume().whenComplete(
+                  () => setState(() => _listening = false),
+                );
+            setState(() => _listening = true);
           } else {
             if (instance == 'random') {
               final List excludedInstances = instances.toList();
@@ -93,10 +89,9 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
                 final response = await http.get(_urlExcluded);
                 if (!isMaximizedTtsOutputCanceled) {
                   if (response.statusCode == 200) {
-                    final result = await _audioPlayer
-                        .playBytes(response.bodyBytes)
-                        .whenComplete(() => null);
-                    if (result == 1) setState(() => _listening = true);
+                    await _audioPlayer.setSourceBytes(response.bodyBytes);
+                    await _audioPlayer.resume().whenComplete(() => null);
+                    setState(() => _listening = true);
                   } else {
                     showInstanceTtsError(context);
                   }

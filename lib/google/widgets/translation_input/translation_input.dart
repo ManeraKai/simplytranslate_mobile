@@ -4,7 +4,6 @@ import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/google/widgets/translation_input/buttons/tts_input.dart';
 import '/data.dart';
-import 'buttons/camera/camera.dart';
 import 'buttons/copy_button.dart';
 import 'buttons/delete_button.dart';
 import 'buttons/paste_button.dart';
@@ -124,7 +123,6 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
               if (inList['Remove'] == true) DeleteTranslationInputButton(),
               if (inList['Copy'] == true)
                 CopyToClipboardButton(googleInCtrl.text),
-              if (inList['Camera'] == true) Camera(),
               if (inList['Paste'] == true) PasteClipboardButton(),
               if (inList['Text-To-Speech'] == true) TtsInput(),
               if (inList['Counter'] == true) CharacterLimit(),

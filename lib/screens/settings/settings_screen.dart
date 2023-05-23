@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/customize_buttons.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/select_default_lang.dart';
-import 'package:simplytranslate_mobile/screens/settings/widgets/text_recognition.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/update_list.dart';
 import '/data.dart';
 import 'widgets/select_instance.dart';
@@ -53,7 +52,6 @@ class _SettingsState extends State<Settings> {
                 style: textStyle,
               ),
               line,
-              TextRecognition(),
               SelectDefaultLang(),
             ],
           ),
