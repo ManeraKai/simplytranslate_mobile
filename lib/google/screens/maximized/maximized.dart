@@ -47,14 +47,14 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                   child: Directionality(
-                      textDirection: googleOutput.containsKey('translated-text')
+                      textDirection: googleOutput.containsKey('text')
                       ? intl.Bidi.detectRtlDirectionality(
-                              googleOutput['translated-text'] ?? '')
+                              googleOutput['text'] ?? '')
                           ? TextDirection.rtl
                           : TextDirection.ltr
                       : TextDirection.rtl,
                     child: SelectableText(
-                      googleOutput['translated-text'] ?? '',
+                      googleOutput['text'] ?? '',
                       style: TextStyle(fontSize: outputFontSize),
                     ),
                   ),
@@ -63,7 +63,7 @@ class _MaximizedScreenState extends State<MaximizedScreen> {
             ),
             Column(
               children: [
-                CopyToClipboardButton(googleOutput['translated-text'] ?? ''),
+                CopyToClipboardButton(googleOutput['text'] ?? ''),
                 IconButton(
                   onPressed: () async {
                     await SystemChrome.setEnabledSystemUIMode(

@@ -23,18 +23,6 @@ void main(List<String> args) async {
 
   await GetStorage.init();
 
-  final sessionInstances = session.read('instances');
-  if (sessionInstances != null) {
-    List<String> tmp = [];
-    for (var item in sessionInstances) tmp.add(item.toString());
-    instances = tmp;
-  }
-
-  instance = session.read('instance_mode') ?? instance;
-
-  final sessionCustomInstance = session.read('customInstance') ?? '';
-  customUrlCtrl.text = sessionCustomInstance;
-  customInstance = sessionCustomInstance;
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {

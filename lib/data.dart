@@ -1,14 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simplytranslate/simplytranslate.dart' as simplytranslate;
 
 // const lightGreenColor = const Color(0xff62d195);
 const greyColor = const Color(0xff131618);
@@ -29,8 +28,6 @@ String fromLangVal = 'auto';
 String toLangVal = '';
 String shareLangVal = '';
 
-String instance = 'random';
-
 Map googleOutput = {};
 
 extension CapitalizeString on String {
@@ -38,8 +35,6 @@ extension CapitalizeString on String {
     return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }
-
-String customInstance = '';
 
 late Locale appLocale;
 
@@ -63,9 +58,8 @@ Widget line = Container(
 
 late File img;
 
-Brightness theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-
-enum InstanceValidation { False, True, NotChecked }
+Brightness theme =
+    SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
 bool isClipboardEmpty = true;
 
@@ -89,33 +83,6 @@ late Function(String) changeFromTxt;
 late Function(String) changeToTxt;
 
 String newText = "";
-
-Future<InstanceValidation> checkInstance(String urlValue) async {
-  var url;
-  try {
-    url = Uri.parse(urlValue);
-  } catch (err) {
-    print(err);
-    return InstanceValidation.False;
-  }
-  try {
-    final response = await http
-        .get(Uri.parse('$url/api/translate?from=en&to=es&text=hello'));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      print(data);
-      if (data['translated-text'].toLowerCase() == 'hola')
-        return InstanceValidation.True;
-      else
-        return InstanceValidation.False;
-    } else
-      return InstanceValidation.False;
-  } catch (err) {
-    print(err);
-    return InstanceValidation.False;
-  }
-}
 
 Future<void> getSharedText() async {
   const methodChannel = MethodChannel('com.simplytranslate_mobile/translate');
@@ -277,52 +244,6 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
 
 BuildContext? translateContext;
 
-showInstanceError(context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text(L10n.of(context).something_went_wrong),
-      content: Text(L10n.of(context).check_instance),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(L10n.of(context).ok),
-        )
-      ],
-    ),
-  );
-}
-
-showInstanceTtsError(context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text(L10n.of(context).something_went_wrong),
-      content: Text(L10n.of(context).check_instnace_tts),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(L10n.of(context).ok),
-        )
-      ],
-    ),
-  );
-}
-
-showInternetError(context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text(L10n.of(context).no_internet),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(L10n.of(context).ok),
-        )
-      ],
-    ),
-  );
-}
 
 Future<Map> translate({
   required String input,
@@ -330,45 +251,7 @@ Future<Map> translate({
   required String toLang,
   required BuildContext context,
 }) async {
-  final url;
-  if (instance == 'custom')
-    url = Uri.parse('$customInstance/api/translate');
-  else if (instance == 'random') {
-    final randomInstance = instances[Random().nextInt(instances.length)];
-    url = Uri.parse('$randomInstance/api/translate');
-  } else
-    url = Uri.parse('$instance/api/translate');
-
-  try {
-    final response = await http.post(
-      url,
-      body: {
-        'from': fromLang,
-        'to': toLang,
-        'text': input,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      await showInstanceError(context);
-      return {};
-    }
-  } catch (err) {
-    print('something is wrong buddy: $err');
-    try {
-      final result = await InternetAddress.lookup('exmaple.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        await showInstanceError(context);
-        throw ('Instnace not valid');
-      }
-    } on SocketException catch (_) {
-      await showInternetError(context);
-      throw ('No internet');
-    }
-    return {};
-  }
+  return await simplytranslate.translate(input, fromLang, toLang);
 }
 
 bool isTtsInCanceled = false;
@@ -384,21 +267,6 @@ bool isFirst = true;
 
 late double inTextFieldHeight;
 late double outTextFieldHeight;
-
-var instances = [
-  "https://simplytranslate.org",
-  "https://st.alefvanoon.xyz",
-  "https://translate.josias.dev",
-  "https://translate.namazso.eu",
-  "https://translate.riverside.rocks",
-  "https://st.manerakai.com",
-  "https://translate.bus-hit.me",
-  "https://simplytranslate.pussthecat.org",
-  "https://translate.northboot.xyz",
-  "https://translate.tiekoetter.com",
-  "https://simplytranslate.esmailelbob.xyz",
-  "https://translate.syncpundit.com",
-];
 
 Map<String, bool> inList = {
   "Remove": true,

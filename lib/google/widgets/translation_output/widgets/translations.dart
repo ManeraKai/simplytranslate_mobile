@@ -13,9 +13,9 @@ class Translations extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Directionality(
-        textDirection: translatedText.containsKey('translated-text')
+        textDirection: translatedText.containsKey('text')
             ? intl.Bidi.detectRtlDirectionality(
-                    translatedText['translated-text'])
+                    translatedText['text'])
                 ? TextDirection.rtl
                 : TextDirection.ltr
             : TextDirection.rtl,

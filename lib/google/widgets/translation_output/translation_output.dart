@@ -48,15 +48,15 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
               child: Scrollbar(
                 child: Directionality(
-                  textDirection: translatedText.containsKey('translated-text')
+                  textDirection: translatedText.containsKey('text')
                       ? intl.Bidi.detectRtlDirectionality(
-                              translatedText['translated-text'])
+                              translatedText['text'])
                           ? TextDirection.rtl
                           : TextDirection.ltr
                       : TextDirection.rtl,
                   child: SelectableText(
-                    translatedText.containsKey('translated-text')
-                        ? translatedText['translated-text']
+                    translatedText.containsKey('text')
+                        ? translatedText['text']
                         : '',
                     style: TextStyle(fontSize: _outputFontSize),
                   ),
@@ -67,13 +67,13 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           Column(
             children: [
               if (outList['Copy'] == true)
-                CopyToClipboardButton(translatedText['translated-text'] ?? ''),
+                CopyToClipboardButton(translatedText['text'] ?? ''),
               if (outList['Maximize'] == true)
                 IconButton(
                   icon: Icon(Icons.fullscreen),
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onPressed: translatedText['translated-text'] == null
+                  onPressed: translatedText['text'] == null
                       ? null
                       : () => Navigator.push(
                           context,

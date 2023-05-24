@@ -21,7 +21,7 @@ class TtsOutput extends StatefulWidget {
 class _TtsOutputState extends State<TtsOutput> {
   @override
   Widget build(BuildContext context) {
-    final _input = googleOutput['translated-text'] ?? '';
+    final _input = googleOutput['text'] ?? '';
     stopPlayer() async {
       await _audioPlayer.stop();
       setState(() => _listening = false);
