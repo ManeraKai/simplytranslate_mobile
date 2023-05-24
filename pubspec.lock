@@ -357,6 +357,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  simplytranslate:
+    dependency: "direct main"
+    description:
+      path: "custom_pubs/simplytranslate"
+      relative: true
+    source: path
+    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter

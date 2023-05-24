@@ -1,11 +1,8 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
+import 'package:simplytranslate/simplytranslate.dart' as simplytranslate;
 
 bool _listening = false;
 bool _isSnackBarPressed = false;
@@ -49,75 +46,18 @@ class _TtsOutputState extends State<TtsInput> {
 
     startPlayer() async {
       isTtsInCanceled = false;
-      final _random = Random().nextInt(instances.length);
-      final _url;
-      if (instance == 'custom')
-        _url = Uri.parse(
-          '$customInstance/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
-        );
-      else if (instance == 'random')
-        _url = Uri.parse(
-          '${instances[_random]}/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
-        );
-      else
-        _url = Uri.parse(
-          '$instance/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
-        );
-      try {
-        setState(() => ttsInputloading = true);
-        final response = await http.get(_url);
-        if (!isTtsInCanceled) {
-          if (response.statusCode == 200) {
-            await _audioPlayer.setSourceBytes(response.bodyBytes);
-            await _audioPlayer
-                .resume()
-                .whenComplete(() => setState(() => _listening = false));
-            setState(() => _listening = true);
-          } else {
-            if (instance == 'random') {
-              final List excludedInstances = instances.toList();
-              excludedInstances.removeAt(_random);
-              final randomExcluded = Random().nextInt(excludedInstances.length);
-              final _urlExcluded = Uri.parse(
-                '${excludedInstances[randomExcluded]}/api/tts/?engine=google&lang=$fromLangVal&text=$_input',
-              );
-              try {
-                final response = await http.get(_urlExcluded);
-                if (!isTtsInCanceled) {
-                  if (response.statusCode == 200) {
-                    await _audioPlayer.setSourceBytes(response.bodyBytes);
-                    await _audioPlayer.resume().whenComplete(
-                          () => setState(() => _listening = false),
-                        );
-                    setState(() => _listening = true);
-                  } else {
-                    showInstanceTtsError(context);
-                  }
-                }
-              } catch (err) {
-                try {
-                  final result = await InternetAddress.lookup('exmaple.com');
-                  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
-                    showInstanceTtsError(context);
-                } on SocketException catch (_) {
-                  showInternetError(context);
-                }
-              }
-            } else
-              showInstanceTtsError(context);
-          }
-          setState(() => ttsInputloading = false);
-        }
-      } catch (err) {
-        try {
-          final result = await InternetAddress.lookup('exmaple.com');
-          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty)
-            showInstanceTtsError(context);
-        } on SocketException catch (_) {
-          showInternetError(context);
-        }
-        setState(() => ttsInputloading = false);
-      }
+      setState(() => ttsInputloading = true);
+      await _audioPlayer
+          .setSourceBytes(await simplytranslate.tts(_input, toLangVal));
+      if (isTtsInCanceled) return;
+      setState(() {
+        _listening = true;
+        ttsInputloading = false;
+      });
+      await _audioPlayer.resume();
+      _audioPlayer.onPlayerComplete.listen((event) {
+        setState(() => _listening = false);
+      });
     }
 
     return ttsInputloading
