@@ -31,9 +31,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/tessdata/
     - assets/ca/
-    - assets/about/
     - assets/settings/
   generate: true
 

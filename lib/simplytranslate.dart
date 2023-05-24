@@ -1,6 +1,5 @@
 // Thanks to ChatGPT for helping me convert the python code to Dart:
 // https://codeberg.org/SimpleWeb/SimplyTranslate-Engines/src/branch/master/simplytranslate_engines/googletranslate.py
-// That python code (definitions and translations) was previously reversed engineered by me ManeraKai.
 
 library simplytranslate;
 
@@ -110,9 +109,7 @@ Future<Map<String, dynamic>> translate(
         } catch (e) {}
       }
     }
-  } catch (e) {
-    print(e);
-  }
+  } catch (e) {}
 
   try {
     var translationBox = data[3][5][0];
@@ -145,9 +142,7 @@ Future<Map<String, dynamic>> translate(
         }
       } catch (e) {}
     }
-  } catch (e) {
-    print(e);
-  }
+  } catch (e) {}
 
   var document = html.parse((await http.get(
     Uri.parse(

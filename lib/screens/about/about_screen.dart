@@ -13,7 +13,6 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  String dropdownValue = 'Buy me a coffee';
   @override
   Widget build(BuildContext context) {
     Widget line = Container(
@@ -43,7 +42,6 @@ class _AboutScreenState extends State<AboutScreen> {
                 icon: Icons.favorite,
                 iconColor: Colors.redAccent,
                 title: L10n.of(context).contribute,
-                content: L10n.of(context).contribute_summary,
                 onTap: () => launchUrl(
                   Uri.parse(
                     'https://github.com/ManeraKai/simplytranslate_mobile',
@@ -51,99 +49,19 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
               ),
               AboutButton(
-                icon: Icons.translate_rounded,
-                iconColor: Colors.blue,
-                title: L10n.of(context).translate,
-                content: L10n.of(context).translate_summary,
-                onTap: () => launchUrl(
-                  Uri.parse(
-                    'https://hosted.weblate.org/projects/simplytranslate-mobile/',
-                  ),
-                ),
-              ),
-              AboutButton(
                 icon: Icons.attach_money_rounded,
                 iconColor: Colors.greenAccent,
                 title: L10n.of(context).donate,
-                content: L10n.of(context).donate_summary,
-                onTap: () => showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      actionsAlignment: MainAxisAlignment.center,
-                      actions: [
-                        InkWell(
-                          onTap: () => launchUrl(
-                            Uri.parse(
-                              "https://www.buymeacoffee.com/manerakai",
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 64,
-                                child: Image.asset(
-                                  theme == Brightness.dark
-                                      ? "assets/about/bmc_dark.png"
-                                      : "assets/about/bmc.png",
-                                  scale: 2,
-                                ),
-                              ),
-                              Container(
-                                width: 200,
-                                child: Text(
-                                  'Buy me a coffee',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 1.25,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => launchUrl(
-                            Uri.parse(
-                              "https://liberapay.com/simplytranslate_mobile",
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 64,
-                                child: Image.asset(
-                                  theme == Brightness.dark
-                                      ? "assets/about/liberapay_dark.png"
-                                      : "assets/about/liberapay.png",
-                                  scale: 2,
-                                ),
-                              ),
-                              Container(
-                                width: 200,
-                                child: Text(
-                                  L10n.of(context).liberapay,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    letterSpacing: 1.25,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                onTap: () => launchUrl(
+                  Uri.parse(
+                    'https://manerakai.github.io/simplytranslate_mobile/donate.html',
+                  ),
                 ),
               ),
               AboutButton(
                 icon: Icons.report,
                 iconColor: Colors.red,
                 title: L10n.of(context).report_bug,
-                content: L10n.of(context).report_bug_summary,
                 onTap: () => launchUrl(
                   Uri.parse(
                       'https://github.com/ManeraKai/simplytranslate_mobile/issues'),
