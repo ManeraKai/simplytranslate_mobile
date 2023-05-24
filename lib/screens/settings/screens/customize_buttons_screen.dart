@@ -12,7 +12,6 @@ class CustomizeButtonsScreen extends StatefulWidget {
 Map<String, IconData> icons = {
   "Remove": Icons.close,
   "Copy": Icons.copy,
-  "Camera": Icons.camera_alt,
   "Paste": Icons.paste,
   "Text-To-Speech": Icons.volume_up,
   "Maximize": Icons.fullscreen,

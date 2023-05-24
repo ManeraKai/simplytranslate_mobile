@@ -63,7 +63,7 @@ Widget line = Container(
 
 late File img;
 
-Brightness theme = SchedulerBinding.instance.window.platformBrightness;
+Brightness theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
 enum InstanceValidation { False, True, NotChecked }
 
@@ -403,7 +403,6 @@ var instances = [
 Map<String, bool> inList = {
   "Remove": true,
   "Copy": false,
-  "Camera": true,
   "Paste": true,
   "Text-To-Speech": true,
   "Counter": true,
@@ -417,7 +416,6 @@ Map<String, bool> outList = {
 Map<String, String> getInListTranslation(BuildContext context) => {
       "Remove": L10n.of(context).remove,
       "Copy": L10n.of(context).copy,
-      "Camera": L10n.of(context).camera,
       "Paste": L10n.of(context).paste,
       "Text-To-Speech": L10n.of(context).text_to_speech,
       "Counter": L10n.of(context).counter,

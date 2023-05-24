@@ -40,7 +40,7 @@ void main(List<String> args) async {
   if (themeSession != 'null') {
     if (themeSession == 'system') {
       themeRadio = AppTheme.system;
-      theme = SchedulerBinding.instance.window.platformBrightness;
+      theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     } else if (themeSession == 'light') {
       themeRadio = AppTheme.light;
       theme = Brightness.light;
