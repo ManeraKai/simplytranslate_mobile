@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simplytranslate/simplytranslate.dart' as simplytranslate;
+import '/simplytranslate.dart' as simplytranslate;
 
 // const lightGreenColor = const Color(0xff62d195);
 const greyColor = const Color(0xff131618);

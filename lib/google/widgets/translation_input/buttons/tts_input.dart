@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
-import 'package:simplytranslate/simplytranslate.dart' as simplytranslate;
+import '/simplytranslate.dart' as simplytranslate;
 
 bool _listening = false;
 bool _isSnackBarPressed = false;
