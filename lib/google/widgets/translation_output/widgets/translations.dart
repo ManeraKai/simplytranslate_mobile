@@ -14,8 +14,7 @@ class Translations extends StatelessWidget {
       width: double.infinity,
       child: Directionality(
         textDirection: translatedText.containsKey('text')
-            ? intl.Bidi.detectRtlDirectionality(
-                    translatedText['text'])
+            ? intl.Bidi.detectRtlDirectionality(translatedText['text'])
                 ? TextDirection.rtl
                 : TextDirection.ltr
             : TextDirection.rtl,
@@ -62,8 +61,8 @@ class Translations extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: RichText(
-                                  text: TextSpan(
+                                child: SelectableText.rich(
+                                  TextSpan(
                                     text: "● $word: ",
                                     style: TextStyle(
                                       fontSize: 16,

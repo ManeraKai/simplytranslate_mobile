@@ -50,13 +50,13 @@ class Definitions extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                             "${translatedText['definitions'][type][i]['definition']}",
                             style: TextStyle(fontSize: 16),
                           ),
                           if (translatedText['definitions'][type][i]
                               .containsKey('use-in-sentence')) ...[
-                            Text(
+                            SelectableText(
                               '"${translatedText['definitions'][type][i]['use-in-sentence']}"',
                               style: TextStyle(
                                 fontSize: 16,
@@ -72,8 +72,8 @@ class Definitions extends StatelessWidget {
                                     [i]['synonyms']
                                 .keys) ...[
                               SizedBox(height: 5),
-                              RichText(
-                                text: TextSpan(children: [
+                              SelectableText.rich(
+                                TextSpan(children: [
                                   if (x != "")
                                     TextSpan(
                                       text: '$x: ',

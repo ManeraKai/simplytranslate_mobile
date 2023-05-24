@@ -38,14 +38,12 @@ void main(List<String> args) async {
     }
   }
 
-  print('checking inList');
   if (session.read('inListWidgets') != null) {
     inList = Map.from(session.read('inListWidgets'));
   }
   if (session.read('outListWidgets') != null) {
     outList = Map.from(session.read('outListWidgets'));
   }
-
 
   var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
 
