@@ -54,7 +54,7 @@ class GoogleSwitchLang extends StatelessWidget {
                         final translatedText2;
                         if (translatedText.length <= 5000) {
                           translatedText2 = await translate(
-                            input: translatedText['translated-text'],
+                            input: translatedText['text'],
                             fromLang: fromLangVal,
                             toLang: toLangVal,
                             context: context,
@@ -74,7 +74,7 @@ class GoogleSwitchLang extends StatelessWidget {
                         }
                         setStateOverlord(() {
                           loading = false;
-                          googleInCtrl.text = translatedText['translated-text'];
+                          googleInCtrl.text = translatedText['text'];
                           googleOutput = translatedText2;
                         });
                       }

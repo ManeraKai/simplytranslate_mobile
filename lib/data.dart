@@ -1,17 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart' as http;
-import 'package:opencv_4/opencv_4.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:path_provider/path_provider.dart';
+import '/simplytranslate.dart' as simplytranslate;
 
 // const lightGreenColor = const Color(0xff62d195);
 const greyColor = const Color(0xff131618);
@@ -32,8 +28,6 @@ String fromLangVal = 'auto';
 String toLangVal = '';
 String shareLangVal = '';
 
-String instance = 'random';
-
 Map googleOutput = {};
 
 extension CapitalizeString on String {
@@ -41,8 +35,6 @@ extension CapitalizeString on String {
     return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }
-
-String customInstance = '';
 
 late Locale appLocale;
 
@@ -63,68 +55,11 @@ Widget line = Container(
   height: 1.5,
   color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
 );
-Future<File> prepareOCR(File croppedImg) async {
-  final Uint8List? preparedByte = await Cv2.prepareOCR(
-    pathString: croppedImg.path,
-  );
-
-  final prepared = await byte2File(preparedByte!);
-
-  return prepared;
-}
-
-cancelDownloadOCRLanguage(lang) {
-  String fullName = fromSelLangMap[lang]!;
-  print("Canceled ocr: $fullName");
-  setStateOverlord(() {
-    _downloadOCRLanguageCancel = true;
-    downloadingList[lang] = TrainedDataState.notDownloaded;
-  });
-}
-
-var _downloadOCRLanguageCancel = false;
-
-Future<bool> downloadOCRLanguage(lang) async {
-  String fullName = fromSelLangMap[lang]!;
-  print("Downloading ocr: $fullName");
-  setStateOverlord(() => downloadingList[lang] = TrainedDataState.Downloading);
-
-  String langThree = two2three[lang]!;
-  Directory dir = Directory(await FlutterTesseractOcr.getTessdataPath());
-  if (!dir.existsSync()) dir.create();
-
-  bool isInstalled = false;
-  dir.listSync().forEach((element) {
-    String name = element.path.split('/').last;
-    isInstalled |= name == '$langThree.traineddata';
-  });
-  if (!isInstalled) {
-    var url = Uri.parse(
-        'https://github.com/tesseract-ocr/tessdata/raw/main/$langThree.traineddata');
-    var response = await http.get(url);
-    if (!_downloadOCRLanguageCancel) {
-      Uint8List bytes = response.bodyBytes;
-      String dir = await FlutterTesseractOcr.getTessdataPath();
-      File file = File('$dir/$langThree.traineddata');
-      await file.writeAsBytes(bytes);
-      setStateOverlord(
-          () => downloadingList[lang] = TrainedDataState.Downloaded);
-      print("Successfully Downloaded ocr: $fullName");
-      return true;
-    }
-  }
-  _downloadOCRLanguageCancel = false;
-  setStateOverlord(
-      () => downloadingList[lang] = TrainedDataState.notDownloaded);
-  print("Failed to Downloaded ocr: $fullName");
-  return false;
-}
 
 late File img;
 
-Brightness theme = SchedulerBinding.instance.window.platformBrightness;
-
-enum InstanceValidation { False, True, NotChecked }
+Brightness theme =
+    SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
 bool isClipboardEmpty = true;
 
@@ -148,33 +83,6 @@ late Function(String) changeFromTxt;
 late Function(String) changeToTxt;
 
 String newText = "";
-
-Future<InstanceValidation> checkInstance(String urlValue) async {
-  var url;
-  try {
-    url = Uri.parse(urlValue);
-  } catch (err) {
-    print(err);
-    return InstanceValidation.False;
-  }
-  try {
-    final response = await http
-        .get(Uri.parse('$url/api/translate?from=en&to=es&text=hello'));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      print(data);
-      if (data['translated-text'].toLowerCase() == 'hola')
-        return InstanceValidation.True;
-      else
-        return InstanceValidation.False;
-    } else
-      return InstanceValidation.False;
-  } catch (err) {
-    print(err);
-    return InstanceValidation.False;
-  }
-}
 
 Future<void> getSharedText() async {
   const methodChannel = MethodChannel('com.simplytranslate_mobile/translate');
@@ -336,52 +244,6 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
 
 BuildContext? translateContext;
 
-showInstanceError(context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text(L10n.of(context).something_went_wrong),
-      content: Text(L10n.of(context).check_instance),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(L10n.of(context).ok),
-        )
-      ],
-    ),
-  );
-}
-
-showInstanceTtsError(context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text(L10n.of(context).something_went_wrong),
-      content: Text(L10n.of(context).check_instnace_tts),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(L10n.of(context).ok),
-        )
-      ],
-    ),
-  );
-}
-
-showInternetError(context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text(L10n.of(context).no_internet),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(L10n.of(context).ok),
-        )
-      ],
-    ),
-  );
-}
 
 Future<Map> translate({
   required String input,
@@ -389,46 +251,7 @@ Future<Map> translate({
   required String toLang,
   required BuildContext context,
 }) async {
-  final url;
-  // final args = "from=$fromLang&to=$toLang&text=$input";
-  if (instance == 'custom')
-    url = Uri.parse('$customInstance/api/translate');
-  else if (instance == 'random') {
-    final randomInstance = instances[Random().nextInt(instances.length)];
-    url = Uri.parse('$randomInstance/api/translate');
-  } else
-    url = Uri.parse('$instance/api/translate');
-
-  try {
-    final response = await http.post(
-      url,
-      body: {
-        'from': fromLang,
-        'to': toLang,
-        'text': input,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      await showInstanceError(context);
-      return {};
-    }
-  } catch (err) {
-    print('something is wrong buddy: $err');
-    try {
-      final result = await InternetAddress.lookup('exmaple.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        await showInstanceError(context);
-        throw ('Instnace not valid');
-      }
-    } on SocketException catch (_) {
-      await showInternetError(context);
-      throw ('No internet');
-    }
-    return {};
-  }
+  return await simplytranslate.translate(input, fromLang, toLang);
 }
 
 bool isTtsInCanceled = false;
@@ -442,220 +265,12 @@ bool isMaximizedTtsOutputCanceled = false;
 
 bool isFirst = true;
 
-Map<String, TrainedDataState> downloadingList = {
-  "af": TrainedDataState.notDownloaded,
-  "am": TrainedDataState.notDownloaded,
-  "ar": TrainedDataState.notDownloaded,
-  "as": TrainedDataState.notDownloaded,
-  "az": TrainedDataState.notDownloaded,
-  "be": TrainedDataState.notDownloaded,
-  "bn": TrainedDataState.notDownloaded,
-  "bs": TrainedDataState.notDownloaded,
-  "bg": TrainedDataState.notDownloaded,
-  "ca": TrainedDataState.notDownloaded,
-  "cs": TrainedDataState.notDownloaded,
-  "zh": TrainedDataState.notDownloaded,
-  "co": TrainedDataState.notDownloaded,
-  "cy": TrainedDataState.notDownloaded,
-  "da": TrainedDataState.notDownloaded,
-  "de": TrainedDataState.notDownloaded,
-  "el": TrainedDataState.notDownloaded,
-  "en": TrainedDataState.notDownloaded,
-  "eo": TrainedDataState.notDownloaded,
-  "et": TrainedDataState.notDownloaded,
-  "eu": TrainedDataState.notDownloaded,
-  "fa": TrainedDataState.notDownloaded,
-  "fi": TrainedDataState.notDownloaded,
-  "fr": TrainedDataState.notDownloaded,
-  "fy": TrainedDataState.notDownloaded,
-  "gd": TrainedDataState.notDownloaded,
-  "ga": TrainedDataState.notDownloaded,
-  "gl": TrainedDataState.notDownloaded,
-  "gu": TrainedDataState.notDownloaded,
-  "ht": TrainedDataState.notDownloaded,
-  "hi": TrainedDataState.notDownloaded,
-  "hr": TrainedDataState.notDownloaded,
-  "hu": TrainedDataState.notDownloaded,
-  "hy": TrainedDataState.notDownloaded,
-  "id": TrainedDataState.notDownloaded,
-  "is": TrainedDataState.notDownloaded,
-  "it": TrainedDataState.notDownloaded,
-  "ja": TrainedDataState.notDownloaded,
-  "kn": TrainedDataState.notDownloaded,
-  "ka": TrainedDataState.notDownloaded,
-  "kk": TrainedDataState.notDownloaded,
-  "km": TrainedDataState.notDownloaded,
-  "ky": TrainedDataState.notDownloaded,
-  "ko": TrainedDataState.notDownloaded,
-  "lo": TrainedDataState.notDownloaded,
-  "la": TrainedDataState.notDownloaded,
-  "lv": TrainedDataState.notDownloaded,
-  "lt": TrainedDataState.notDownloaded,
-  "lb": TrainedDataState.notDownloaded,
-  "ml": TrainedDataState.notDownloaded,
-  "mr": TrainedDataState.notDownloaded,
-  "mk": TrainedDataState.notDownloaded,
-  "mt": TrainedDataState.notDownloaded,
-  "mn": TrainedDataState.notDownloaded,
-  "mi": TrainedDataState.notDownloaded,
-  "ms": TrainedDataState.notDownloaded,
-  "my": TrainedDataState.notDownloaded,
-  "ne": TrainedDataState.notDownloaded,
-  "nl": TrainedDataState.notDownloaded,
-  "no": TrainedDataState.notDownloaded,
-  "or": TrainedDataState.notDownloaded,
-  "pa": TrainedDataState.notDownloaded,
-  "pl": TrainedDataState.notDownloaded,
-  "pt": TrainedDataState.notDownloaded,
-  "ps": TrainedDataState.notDownloaded,
-  "ro": TrainedDataState.notDownloaded,
-  "ru": TrainedDataState.notDownloaded,
-  "si": TrainedDataState.notDownloaded,
-  "sk": TrainedDataState.notDownloaded,
-  "sl": TrainedDataState.notDownloaded,
-  "sd": TrainedDataState.notDownloaded,
-  "es": TrainedDataState.notDownloaded,
-  "sq": TrainedDataState.notDownloaded,
-  "sr": TrainedDataState.notDownloaded,
-  "su": TrainedDataState.notDownloaded,
-  "sw": TrainedDataState.notDownloaded,
-  "sv": TrainedDataState.notDownloaded,
-  "ta": TrainedDataState.notDownloaded,
-  "tt": TrainedDataState.notDownloaded,
-  "te": TrainedDataState.notDownloaded,
-  "tg": TrainedDataState.notDownloaded,
-  "tl": TrainedDataState.notDownloaded,
-  "th": TrainedDataState.notDownloaded,
-  "to": TrainedDataState.notDownloaded,
-  "tr": TrainedDataState.notDownloaded,
-  "ug": TrainedDataState.notDownloaded,
-  "uk": TrainedDataState.notDownloaded,
-  "ur": TrainedDataState.notDownloaded,
-  "uz": TrainedDataState.notDownloaded,
-  "vi": TrainedDataState.notDownloaded,
-  "yi": TrainedDataState.notDownloaded,
-  "yo": TrainedDataState.notDownloaded,
-};
-
 late double inTextFieldHeight;
 late double outTextFieldHeight;
-
-var instances = [
-  "https://simplytranslate.org",
-  "https://st.alefvanoon.xyz",
-  "https://translate.josias.dev",
-  "https://translate.namazso.eu",
-  "https://translate.riverside.rocks",
-  "https://st.manerakai.com",
-  "https://translate.bus-hit.me",
-  "https://simplytranslate.pussthecat.org",
-  "https://translate.northboot.xyz",
-  "https://translate.tiekoetter.com",
-  "https://simplytranslate.esmailelbob.xyz",
-  "https://translate.syncpundit.com",
-];
-
-late final String flutterTesseractOcrTessdataPath;
-
-Map<String, String> two2three = {
-  "af": "afr",
-  "am": "amh",
-  "ar": "ara",
-  "as": "asm",
-  "az": "aze",
-  "be": "bel",
-  "bn": "ben",
-  "bs": "bos",
-  "bg": "bul",
-  "ca": "cat",
-  "cs": "ces",
-  "zh": "chi_tra",
-  "co": "cos",
-  "cy": "cym",
-  "da": "dan",
-  "de": "deu",
-  "el": "ell",
-  "en": "eng",
-  "eo": "epo",
-  "et": "est",
-  "eu": "eus",
-  "fa": "fas",
-  "fi": "fin",
-  "fr": "fra",
-  "fy": "fry",
-  "gd": "gla",
-  "ga": "gle",
-  "gl": "glg",
-  "gu": "guj",
-  "ht": "hat",
-  "hi": "hin",
-  "hr": "hrv",
-  "hu": "hun",
-  "hy": "hye",
-  "id": "ind",
-  "is": "isl",
-  "it": "ita",
-  "ja": "jpn",
-  "kn": "kan",
-  "ka": "kat",
-  "kk": "kaz",
-  "km": "khm",
-  "ky": "kir",
-  "ko": "kor",
-  "lo": "lao",
-  "la": "lat",
-  "lv": "lav",
-  "lt": "lit",
-  "lb": "ltz",
-  "ml": "mal",
-  "mr": "mar",
-  "mk": "mkd",
-  "mt": "mlt",
-  "mn": "mon",
-  "mi": "mri",
-  "ms": "msa",
-  "my": "mya",
-  "ne": "nep",
-  "nl": "nld",
-  "no": "nor",
-  "or": "ori",
-  "pa": "pan",
-  "pl": "pol",
-  "pt": "por",
-  "ps": "pus",
-  "ro": "ron",
-  "ru": "rus",
-  "si": "sin",
-  "sk": "slk",
-  "sl": "slv",
-  "sd": "snd",
-  "es": "spa",
-  "sq": "sqi",
-  "sr": "srp",
-  "su": "sun",
-  "sw": "swa",
-  "sv": "swe",
-  "ta": "tam",
-  "tt": "tat",
-  "te": "tel",
-  "tg": "tgk",
-  "tl": "tgl",
-  "th": "tha",
-  "to": "ton",
-  "tr": "tur",
-  "ug": "uig",
-  "uk": "ukr",
-  "ur": "urd",
-  "uz": "uzb",
-  "vi": "vie",
-  "yi": "yid",
-  "yo": "yor",
-};
 
 Map<String, bool> inList = {
   "Remove": true,
   "Copy": false,
-  "Camera": true,
   "Paste": true,
   "Text-To-Speech": true,
   "Counter": true,
@@ -669,7 +284,6 @@ Map<String, bool> outList = {
 Map<String, String> getInListTranslation(BuildContext context) => {
       "Remove": L10n.of(context).remove,
       "Copy": L10n.of(context).copy,
-      "Camera": L10n.of(context).camera,
       "Paste": L10n.of(context).paste,
       "Text-To-Speech": L10n.of(context).text_to_speech,
       "Counter": L10n.of(context).counter,

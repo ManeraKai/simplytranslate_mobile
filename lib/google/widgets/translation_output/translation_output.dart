@@ -48,17 +48,16 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
               child: Scrollbar(
                 child: Directionality(
-                  textDirection: translatedText.containsKey('translated-text')
+                  textDirection: translatedText.containsKey('text')
                       ? intl.Bidi.detectRtlDirectionality(
-                              translatedText['translated-text'])
+                              translatedText['text'])
                           ? TextDirection.rtl
                           : TextDirection.ltr
                       : TextDirection.rtl,
                   child: SelectableText(
-                    translatedText.containsKey('translated-text')
-                        ? translatedText['translated-text']
+                    translatedText.containsKey('text')
+                        ? translatedText['text']
                         : '',
-                    // selectionControls: _MyMaterialTextSelectionControls(),
                     style: TextStyle(fontSize: _outputFontSize),
                   ),
                 ),
@@ -68,13 +67,13 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           Column(
             children: [
               if (outList['Copy'] == true)
-                CopyToClipboardButton(translatedText['translated-text'] ?? ''),
+                CopyToClipboardButton(translatedText['text'] ?? ''),
               if (outList['Maximize'] == true)
                 IconButton(
                   icon: Icon(Icons.fullscreen),
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onPressed: translatedText['translated-text'] == null
+                  onPressed: translatedText['text'] == null
                       ? null
                       : () => Navigator.push(
                           context,
@@ -89,169 +88,3 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
     );
   }
 }
-
-// var _isVisible = true;
-
-// class _MyMaterialTextSelectionControls extends MaterialTextSelectionControls {
-//   // Padding between the toolbar and the anchor.
-//   static const double _kToolbarContentDistanceBelow = 20.0;
-//   static const double _kToolbarContentDistance = 8.0;
-
-//   /// Builder for material-style copy/paste text selection toolbar.
-//   @override
-//   Widget buildToolbar(
-//     BuildContext context,
-//     Rect globalEditableRegion,
-//     double textLineHeight,
-//     Offset selectionMidpoint,
-//     List<TextSelectionPoint> endpoints,
-//     TextSelectionDelegate delegate,
-//     ClipboardStatusNotifier clipboardStatus,
-//     _,
-//   ) {
-//     final TextSelectionPoint startSelectionPoint = endpoints[0];
-//     final TextSelectionPoint endSelectionPoint =
-//         endpoints.length > 1 ? endpoints[1] : endpoints[0];
-//     final Offset anchorAbove = Offset(
-//       globalEditableRegion.left + selectionMidpoint.dx,
-//       globalEditableRegion.top +
-//           startSelectionPoint.point.dy -
-//           textLineHeight -
-//           _kToolbarContentDistance,
-//     );
-
-//     final Offset anchorBelow = Offset(
-//       globalEditableRegion.left + selectionMidpoint.dx,
-//       globalEditableRegion.top +
-//           endSelectionPoint.point.dy +
-//           _kToolbarContentDistanceBelow,
-//     );
-//     _isVisible = () {
-//       if (MediaQuery.of(context).orientation == Orientation.portrait) {
-//         if (startSelectionPoint.point.dy < 20) return false;
-//         if (startSelectionPoint.point.dy > outTextFieldHeight + 65)
-//           return false;
-//       }
-//       return true;
-//     }();
-
-//     return _MyTextSelectionToolbar(
-//       anchorAbove: anchorAbove,
-//       anchorBelow: anchorBelow,
-//       clipboardStatus: clipboardStatus,
-//       handleCopy: canCopy(delegate)
-//           ? () => handleCopy(delegate, clipboardStatus)
-//           : () {},
-//       handleSelectAll:
-//           canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
-//     );
-//   }
-// }
-
-// class _TextSelectionToolbarItemData {
-//   const _TextSelectionToolbarItemData({
-//     required this.label,
-//     required this.onPressed,
-//   });
-//   final String label;
-//   final VoidCallback onPressed;
-// }
-
-// class _MyTextSelectionToolbar extends StatefulWidget {
-//   const _MyTextSelectionToolbar({
-//     Key? key,
-//     required this.anchorAbove,
-//     required this.anchorBelow,
-//     required this.clipboardStatus,
-//     required this.handleCopy,
-//     required this.handleSelectAll,
-//   }) : super(key: key);
-
-//   final Offset anchorAbove;
-//   final Offset anchorBelow;
-//   final ClipboardStatusNotifier clipboardStatus;
-//   final VoidCallback handleCopy;
-//   final VoidCallback? handleSelectAll;
-
-//   @override
-//   __MyTextSelectionToolbarState createState() =>
-//       __MyTextSelectionToolbarState();
-// }
-
-// class __MyTextSelectionToolbarState extends State<_MyTextSelectionToolbar> {
-//   void _onChangedClipboardStatus() {
-//     setState(() {});
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     widget.clipboardStatus.addListener(_onChangedClipboardStatus);
-//     widget.clipboardStatus.update();
-//   }
-
-//   @override
-//   void didUpdateWidget(_MyTextSelectionToolbar oldWidget) {
-//     super.didUpdateWidget(oldWidget);
-//     if (widget.clipboardStatus != oldWidget.clipboardStatus) {
-//       widget.clipboardStatus.addListener(_onChangedClipboardStatus);
-//       oldWidget.clipboardStatus.removeListener(_onChangedClipboardStatus);
-//     }
-//     widget.clipboardStatus.update();
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     if (!widget.clipboardStatus.disposed) {
-//       widget.clipboardStatus.removeListener(_onChangedClipboardStatus);
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     assert(debugCheckHasMaterialLocalizations(context));
-//     final MaterialLocalizations localizations =
-//         MaterialLocalizations.of(context);
-
-//     final List<_TextSelectionToolbarItemData> itemDatas =
-//         <_TextSelectionToolbarItemData>[
-//       _TextSelectionToolbarItemData(
-//         label: localizations.copyButtonLabel,
-//         onPressed: widget.handleCopy,
-//       ),
-//       if (widget.handleSelectAll != null)
-//         _TextSelectionToolbarItemData(
-//           label: localizations.selectAllButtonLabel,
-//           onPressed: widget.handleSelectAll!,
-//         ),
-//     ];
-
-//     int childIndex = 0;
-//     return TextSelectionToolbar(
-//       anchorAbove: widget.anchorAbove,
-//       anchorBelow: widget.anchorBelow,
-//       toolbarBuilder: (BuildContext context, Widget child) {
-//         if (_isVisible)
-//           return Container(
-//             color: theme == Brightness.dark ? secondgreyColor : greenColor,
-//             child: child,
-//           );
-//         return SizedBox.shrink();
-//       },
-//       children: itemDatas.map((_TextSelectionToolbarItemData itemData) {
-//         return TextSelectionToolbarTextButton(
-//           padding: TextSelectionToolbarTextButton.getPadding(
-//             childIndex++,
-//             itemDatas.length,
-//           ),
-//           onPressed: itemData.onPressed,
-//           child: Text(
-//             itemData.label,
-//             style: TextStyle(color: Colors.white),
-//           ),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }

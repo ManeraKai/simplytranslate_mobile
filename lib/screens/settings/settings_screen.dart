@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/customize_buttons.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/select_default_lang.dart';
-import 'package:simplytranslate_mobile/screens/settings/widgets/text_recognition.dart';
-import 'package:simplytranslate_mobile/screens/settings/widgets/update_list.dart';
 import '/data.dart';
-import 'widgets/select_instance.dart';
 import 'widgets/select_theme.dart';
 
 class Settings extends StatefulWidget {
@@ -33,14 +30,6 @@ class _SettingsState extends State<Settings> {
             children: [
               const SizedBox(height: 10),
               Text(
-                L10n.of(context).instances,
-                style: textStyle,
-              ),
-              line,
-              SelectInstance(),
-              UpdateList(),
-              const SizedBox(height: 20),
-              Text(
                 L10n.of(context).appearance,
                 style: textStyle,
               ),
@@ -53,7 +42,6 @@ class _SettingsState extends State<Settings> {
                 style: textStyle,
               ),
               line,
-              TextRecognition(),
               SelectDefaultLang(),
             ],
           ),

@@ -1,43 +1,26 @@
 name: simplytranslate_mobile
-description: An app client that connects to multiple SimplyTranslate instances.
+description: An alternative frontend to Google Translate
 
 publish_to: 'none'
-
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.3.0+1
+version: 1.4.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=3.0.1 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
   get_storage: ^2.0.3
-  clipboard_listener: ^2.0.0
-  audioplayers: ^0.20.1
-  package_info_plus: ^1.0.6
+  audioplayers: ^4.0.1
+  package_info_plus: ^4.0.1
   url_launcher: ^6.0.12
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.18.0
   path_provider: ^2.0.8
-  camera: ^0.9.4+5
-  flutter_tesseract_ocr: ^0.4.18
-  permission_handler: ^8.3.0
-  opencv_4:
-    path: ./custom_pubs/opencv_4/
-  # system_alert_window:
-  #   path: ./custom_pubs/system_alert_window/
+  permission_handler: ^10.2.0
+  html: ^0.15.3
 
 
 dev_dependencies:
@@ -48,9 +31,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/tessdata/
     - assets/ca/
-    - assets/about/
     - assets/settings/
   generate: true
 

@@ -10,7 +10,7 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "development", //development or staging or production
+                "development"
             ]
         },
         {
@@ -19,7 +19,7 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "github" //development or staging or production
+                "github"
             ]
         }
     ]
