@@ -1,19 +1,7 @@
-Ta aplikacja to alternatywny front-end do Tłumacza Google, jednak nie łączy się z nim bezpośrednio.
-Działa następująco:
-1. Tekst jest wysyłany od Ciebie jako użytkownika do losowej instancji SimplyTranslate (serwera).
-2. Instancja zapyta o te dane Tłumacza Google.
-3. Tłumacz Google zwróci tłumaczenie instancji.
-4. Instancja prześle tłumaczenie do Ciebie.
-
-W ten sposób Tłumacz Google nie pozna Twojej tożsamości. Automatyczny wybór losowej instancji (tryb domyślny) z każdym żądaniem zaciemni i rozproszy Twoje dane między instancjami, więc nic nie będzie ze sobą powiązane, ponieważ nie jest to scentralizowana baza danych.
+Ta aplikacja jest alternatywnym front-endem do Tłumacza Google.
 
 <b>Cechy:</b>
 * Obsługuje 108 języków
 * Zamiana tekstu na mowę (TTS)
 * Może odbierać tekst udostępniany przez inne aplikacje
-* Przycisk do tłumaczenia w toolbarze przy zaznaczaniu tekstu
-* Automatyczny wybór losowej instancji z każdym żądaniem
-* Aktualizacja oficjalnej listy instancji SimplyTranslate
-* Opcja ustawienia własnej instancji
-* Ciemny motyw
-* Rozpoznawanie tekstu z aparatu
+* Przycisk do tłumaczenia na pasku narzędzi przy zaznaczaniu tekstu
