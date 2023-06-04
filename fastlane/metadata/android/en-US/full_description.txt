@@ -1,9 +1,7 @@
-This app is an alternative front-end to Google Translate.
+This app is an alternative frontend to Google Translate.
 
 <b>Features:</b>
 * Supports 108 languages
 * Text-To-Speech (TTS)
 * Can receive shared text from other apps
 * A translate button in the text selection toolbar
-* Dark theme
-* Camera Text Recognition
