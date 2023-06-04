@@ -1,0 +1,7 @@
+Þetta forrit er annað viðmót fyrir Google Translate.
+
+<b>Eiginleikar:</b>
+* Styður 108 tungumál
+* Texti-í-tal (TTS)
+* Tekur við deildum texta frá öðrum forritum
+* Þýðingahnappur í verkfærastiku fyrir val texta
