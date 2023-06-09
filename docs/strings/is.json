@@ -1,1 +1,25 @@
-{}
+{
+    "download": "Sækja",
+    "home": "Upphaf",
+    "source_code": "Grunnkóði",
+    "contributors": "Framlög frá",
+    "what_is_simplytranslate": "Hvaða er SimplyTranslate?",
+    "fdroid": "F-Droid",
+    "custom_instance_option": "Val um að sérsníða netþjónstilvik",
+    "donate": "Styrkja",
+    "developers": "Forritarar",
+    "donate_thanks": "<span class='dimmed'>Þakka þér fyrir!</span>",
+    "short_description": "Android-forrit fyrir <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a>.",
+    "what_is_simplytranslate_mobile": "Hvaða er SimplyTranslate Mobile?",
+    "text_to_speech": "Texti-í-tal (TTS)",
+    "github_artifacts": "GitHub Artifacts <span style='color:orange;'>(beta-byggingarútgáfur)</span>",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "testers": "Prófarar",
+    "translators": "Þýðendur",
+    "icon": "Táknmynd",
+    "what_is_simplytranslate_answer": "<a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> er netþjónsforrit með opnum grunnkóða sem skrapar þýðingagögn frá vinsælum þýðingavefjum á borð við Google Translate, ICIBA, Reverso, LibreTranslate o.s.frv… og setur þau fram fyrir þig í einföldu vefviðmóti án nokkurra rakningaskriftunar. Þú getur meira að segja notað þetta í gegnum Tor ásamt því að gera JavaScript óvirkt og það mun samt virka rétt properly.<br> SimplyTranslate er ekki bara eitt tilvik (netþjónn), heldur euru þetta mörg tilvik rekin af sjálfboðaliðum úti um víða veröld, þú getur meira að segja keyrt <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>þitt eigið einkatilvik</a>. Hér er <a href='https://simple-web.org/projects/simplytranslate.html'>opinber listi</a> yfir þekkt aðgengileg tilvik.",
+    "what_is_simplytranslate_mobile_answer": "Frekar en að nota \"vefviðmótið\" á SimplyTranslate á tækinu þínu, þá er komið forrit fyrir snjalltæki sem innifelur ýmsa viðbótareiginleika:",
+    "random_instance_each_request": "Handahófskennt tilvik fyrir hverja beiðni <span class='dimmed'>til að koma í veg fyrir að allt samhengi þýðingarinnar fari til eins og sama tilviksins</span>",
+    "offline_camera_text_recognition": "Ónettengd textagreining með myndavél <span class='dimmed'>er ekki það allra fullkomnasta en sendir ekki neinar myndir á netþjónana</span>"
+}
