@@ -244,7 +244,6 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
 
 BuildContext? translateContext;
 
-
 Future<Map> translate({
   required String input,
   required String fromLang,

@@ -46,6 +46,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Uri.parse(
                     'https://github.com/ManeraKai/simplytranslate_mobile',
                   ),
+                  mode: LaunchMode.externalApplication,
                 ),
               ),
               AboutButton(
@@ -56,6 +57,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Uri.parse(
                     'https://manerakai.github.io/simplytranslate_mobile/donate.html',
                   ),
+                  mode: LaunchMode.externalApplication,
                 ),
               ),
               AboutButton(
@@ -65,6 +67,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 onTap: () => launchUrl(
                   Uri.parse(
                       'https://github.com/ManeraKai/simplytranslate_mobile/issues'),
+                  mode: LaunchMode.externalApplication,
                 ),
               ),
               const SizedBox(height: 20),
@@ -81,6 +84,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Uri.parse(
                     'https://manerakai.github.io/simplytranslate_mobile/',
                   ),
+                  mode: LaunchMode.externalApplication,
                 ),
               ),
               AboutButton(
@@ -114,6 +118,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Uri.parse(
                     'https://github.com/ManeraKai/simplytranslate_mobile/blob/main/LICENSE',
                   ),
+                  mode: LaunchMode.externalApplication,
                 ),
               ),
             ],

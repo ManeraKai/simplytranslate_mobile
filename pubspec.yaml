@@ -22,18 +22,13 @@ dependencies:
   permission_handler: ^10.2.0
   html: ^0.15.3
 
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/
     - assets/ca/
     - assets/settings/
-  generate: true
 
 flutter_intl:
   enabled: true
