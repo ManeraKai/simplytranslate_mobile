@@ -48,7 +48,7 @@ class _TtsOutputState extends State<TtsInput> {
       isTtsInCanceled = false;
       setState(() => ttsInputloading = true);
       await _audioPlayer
-          .setSourceBytes(await simplytranslate.tts(_input, toLangVal));
+          .setSourceBytes(await simplytranslate.tts(_input, fromLangVal));
       if (isTtsInCanceled) return;
       setState(() {
         _listening = true;
