@@ -6,7 +6,7 @@
 </p>
 <h1 align=center>SimplyTranslate Mobile</h1>
 
-<h4 align=center>An alternative frontend to Google Translate</h4>
+<h4 align=center>A privacy friendly frontend to Google Translate</h4>
 
 <p align=center>
   <a href="https://f-droid.org/en/packages/com.simplytranslate_mobile/">
