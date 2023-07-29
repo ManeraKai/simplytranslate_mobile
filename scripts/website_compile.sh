@@ -13,12 +13,12 @@ generate_pug() {
     rm docs/strings/"${lang}".tmp.json
 }
 
-generate_pug 'ar' 'rtl'
 generate_pug 'en' 'ltr'
-generate_pug 'fr' 'ltr'
-generate_pug 'nb_NO' 'ltr'
-generate_pug 'pl' 'ltr'
-generate_pug 'tr' 'ltr'
+# generate_pug 'ar' 'rtl'
+# generate_pug 'fr' 'ltr'
+# generate_pug 'nb_NO' 'ltr'
+# generate_pug 'pl' 'ltr'
+# generate_pug 'tr' 'ltr'
 
 sudo rm -rf /var/www/simplytranslate_mobile/simplytranslate_mobile/*
 sudo cp -r docs/* /var/www/simplytranslate_mobile/simplytranslate_mobile/

@@ -1,1 +1,1 @@
-Alternative frontend to Google Translate
+An privacy friendly frontend to Google Translate
