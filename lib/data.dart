@@ -224,3 +224,15 @@ bool ttsOutloading = false;
 bool isTtsOutputCanceled = false;
 
 bool isFirst = true;
+
+switchVals() {
+  changeFromTxt(toSelLangMap[toLangVal]!);
+  changeToTxt(fromSelLangMap[fromLangVal]!);
+
+  final tmp = fromLangVal;
+  fromLangVal = toLangVal;
+  toLangVal = tmp;
+
+  session.write('to_lang', toLangVal);
+  session.write('from_lang', fromLangVal);
+}

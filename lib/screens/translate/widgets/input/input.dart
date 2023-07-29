@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'tts_button.dart';
@@ -55,42 +54,39 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Scrollbar(
-              child: TextField(
-                onTap: () => isFirst = true,
-                textDirection: googleInCtrl.text.length == 0
-                    ? intl.Bidi.detectRtlDirectionality(
-                        L10n.of(context).arabic,
-                      )
-                        ? TextDirection.rtl
-                        : TextDirection.ltr
-                    : intl.Bidi.detectRtlDirectionality(googleInCtrl.text)
+            child: TextField(
+              onTap: () => isFirst = true,
+              textDirection: googleInCtrl.text.length == 0
+                  ? intl.Bidi.detectRtlDirectionality(
+                      L10n.of(context).arabic,
+                    )
+                      ? TextDirection.rtl
+                      : TextDirection.ltr
+                  : intl.Bidi.detectRtlDirectionality(googleInCtrl.text)
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+              minLines: 7,
+              maxLines: null,
+              controller: googleInCtrl,
+              keyboardType: TextInputType.multiline,
+              onChanged: (String input) {
+                setStateOverlord(() {});
+              },
+              decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                hintText: L10n.of(context).enter_text_here,
+                hintTextDirection:
+                    intl.Bidi.detectRtlDirectionality(L10n.of(context).arabic)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                minLines: 7,
-                maxLines: null,
-                controller: googleInCtrl,
-                keyboardType: TextInputType.multiline,
-                onChanged: (String input) {
-                  setStateOverlord(() {});
-                },
-                decoration: InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  hintText: L10n.of(context).enter_text_here,
-                  hintTextDirection:
-                      intl.Bidi.detectRtlDirectionality(L10n.of(context).arabic)
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
-                ),
-                style: const TextStyle(fontSize: 20),
               ),
+              style: const TextStyle(fontSize: 20),
             ),
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DeleteTranslationInputButton(),
               TtsInput(),

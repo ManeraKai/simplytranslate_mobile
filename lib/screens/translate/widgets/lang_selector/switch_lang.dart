@@ -5,19 +5,6 @@ import '/simplytranslate.dart' as simplytranslate;
 
 class GoogleSwitchLang extends StatelessWidget {
   const GoogleSwitchLang({Key? key}) : super(key: key);
-
-  switchVals() {
-    changeFromTxt(toSelLangMap[toLangVal]!);
-    changeToTxt(fromSelLangMap[fromLangVal]!);
-
-    final valuetmp = fromLangVal;
-    fromLangVal = toLangVal;
-    toLangVal = valuetmp;
-
-    session.write('to_lang', toLangVal);
-    session.write('from_lang', fromLangVal);
-  }
-
   @override
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width / 3 - 60,

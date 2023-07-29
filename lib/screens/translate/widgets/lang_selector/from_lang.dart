@@ -53,23 +53,19 @@ class GoogleFromLang extends StatelessWidget {
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
                                   if (option == fromSelLangMap[toLangVal]) {
-                                    session.write('from_lang', toLangVal);
-                                    session.write('to_lang', fromLangVal);
-                                    final tmp = fromLangVal;
-                                    fromLangVal = toLangVal;
-                                    toLangVal = tmp;
+                                    switchVals();
                                   } else {
                                     for (var i in fromSelLangMap.keys) {
                                       if (option == fromSelLangMap[i]) {
                                         session.write('from_lang', i);
                                         fromLangVal = i;
+                                        changeFromTxt(
+                                            fromSelLangMap[fromLangVal]!);
                                         break;
                                       }
                                     }
                                   }
                                   setStateOverlord(() {});
-                                  changeFromTxt(fromSelLangMap[fromLangVal]!);
-                                  changeToTxt(toSelLangMap[toLangVal]!);
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -111,45 +107,24 @@ class GoogleFromLang extends StatelessWidget {
             },
             onEditingComplete: () {
               final input = txtCtrl.text.trim().toLowerCase();
-              writeData(data) {
-                FocusScope.of(context).unfocus();
-                session.write('from_lang', data);
-                setStateOverlord(() => fromLangVal = data);
-                txtCtrl.text = fromSelLangMap[data]!;
-              }
-
-              resetData() {
-                FocusScope.of(context).unfocus();
-                txtCtrl.text = fromSelLangMap[fromLangVal]!;
-              }
-
               String? chosenOne;
-              for (var i in fromSelLangMap.keys)
+              for (var i in fromSelLangMap.keys) {
                 if (fromSelLangMap[i]!.toLowerCase().contains(input)) {
                   chosenOne = i;
                   break;
                 }
-
-              if (chosenOne != toSelLangMap[toLangVal] && chosenOne != null) {
-                writeData(chosenOne);
+              }
+              if (chosenOne == null) {
+                FocusScope.of(context).unfocus();
+                txtCtrl.text = fromSelLangMap[fromLangVal]!;
+              } else if (chosenOne != toLangVal) {
+                FocusScope.of(context).unfocus();
+                session.write('from_lang', chosenOne);
+                setStateOverlord(() => fromLangVal = chosenOne!);
+                txtCtrl.text = fromSelLangMap[chosenOne]!;
               } else {
-                var dimmedSelLangsFrom = fromSelLangMap;
-                dimmedSelLangsFrom.remove(chosenOne);
-
-                String? chosenOneTwo;
-                for (var i in dimmedSelLangsFrom.keys) {
-                  if (dimmedSelLangsFrom[i]!.toLowerCase().contains(input)) {
-                    chosenOneTwo = i;
-                    break;
-                  }
-                }
-
-                if (chosenOneTwo != dimmedSelLangsFrom[fromLangVal] &&
-                    chosenOneTwo != null) {
-                  writeData(chosenOneTwo);
-                } else {
-                  resetData();
-                }
+                switchVals();
+                FocusScope.of(context).unfocus();
               }
             },
             decoration: InputDecoration(

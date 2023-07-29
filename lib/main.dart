@@ -51,12 +51,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
-    // ClipboardListener.addListener(() async {
-    //   var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
-    //   if (_clipData.toString() == '' || _clipData == null) {
-    //     if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
-    //   } else if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
-    // });
     contextOverlordData = context;
     setStateOverlord = setState;
     super.initState();
@@ -66,7 +60,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-    // ClipboardListener.removeListener(() {});
   }
 
   void didChangeAppLifecycleState(AppLifecycleState state) async {
@@ -121,9 +114,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       theme: ThemeData(
         colorScheme: ColorScheme(
           primary: greenColor,
-          // primaryVariant: greenColor,
           secondary: greenColor,
-          // secondaryVariant: greenColor,
           surface: Colors.white,
           background: Colors.white,
           error: Colors.red,
@@ -327,11 +318,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 PopupMenuButton(
                   icon: Icon(Icons.more_vert, color: Colors.white),
                   itemBuilder: (BuildContext context) => [
-                    PopupMenuItem<String>(
+                    PopupMenuItem(
                       value: 'settings',
                       child: Text(L10n.of(context).settings),
                     ),
-                    PopupMenuItem<String>(
+                    PopupMenuItem(
                       value: 'about',
                       child: Text(L10n.of(context).about),
                     ),

@@ -8,7 +8,6 @@ class GoogleToLang extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    Function changeText = () {};
     return Container(
       width: size.width / 3 + 10,
       child: Autocomplete(
@@ -54,23 +53,18 @@ class GoogleToLang extends StatelessWidget {
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
                                   if (option == toSelLangMap[fromLangVal]) {
-                                    session.write('to_lang', fromLangVal);
-                                    session.write('from_lang', toLangVal);
-                                    final tmp = toLangVal;
-                                    toLangVal = fromLangVal;
-                                    fromLangVal = tmp;
+                                    switchVals();
                                   } else {
                                     for (var i in toSelLangMap.keys) {
                                       if (option == toSelLangMap[i]) {
                                         session.write('to_lang', i);
                                         toLangVal = i;
+                                        changeToTxt(toSelLangMap[toLangVal]!);
                                         break;
                                       }
                                     }
                                   }
                                   setStateOverlord(() {});
-                                  changeToTxt(toSelLangMap[toLangVal]!);
-                                  changeFromTxt(fromSelLangMap[fromLangVal]!);
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -112,43 +106,24 @@ class GoogleToLang extends StatelessWidget {
             },
             onEditingComplete: () {
               final input = txtCtrl.text.trim().toLowerCase();
-              writeData(data) {
-                FocusScope.of(context).unfocus();
-                session.write('to_lang', data);
-                setStateOverlord(() => toLangVal = data);
-                txtCtrl.text = toSelLangMap[data]!;
-              }
-
-              resetData() {
-                FocusScope.of(context).unfocus();
-                txtCtrl.text = toSelLangMap[toLangVal]!;
-              }
-
               String? chosenOne;
-              for (var i in toSelLangMap.keys)
+              for (var i in toSelLangMap.keys) {
                 if (toSelLangMap[i]!.toLowerCase().contains(input)) {
                   chosenOne = i;
                   break;
                 }
-
-              if (chosenOne != toSelLangMap[fromLangVal] && chosenOne != null)
-                writeData(chosenOne);
-              else {
-                var dimmedSelLangsTo = toSelLangMap;
-                dimmedSelLangsTo.remove(chosenOne);
-
-                String? chosenOneTwo;
-                for (var i in dimmedSelLangsTo.keys)
-                  if (dimmedSelLangsTo[i]!.toLowerCase().contains(input)) {
-                    chosenOneTwo = i;
-                    break;
-                  }
-
-                if (chosenOneTwo != dimmedSelLangsTo[toLangVal] &&
-                    chosenOneTwo != null)
-                  writeData(chosenOneTwo);
-                else
-                  resetData();
+              }
+              if (chosenOne == null) {
+                FocusScope.of(context).unfocus();
+                txtCtrl.text = toSelLangMap[toLangVal]!;
+              } else if (chosenOne != fromLangVal) {
+                FocusScope.of(context).unfocus();
+                session.write('to_lang', chosenOne);
+                setStateOverlord(() => toLangVal = chosenOne!);
+                txtCtrl.text = toSelLangMap[chosenOne]!;
+              } else {
+                switchVals();
+                FocusScope.of(context).unfocus();
               }
             },
             decoration: InputDecoration(
