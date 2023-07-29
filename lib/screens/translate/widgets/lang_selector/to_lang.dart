@@ -51,19 +51,27 @@ class GoogleToLang extends StatelessWidget {
                                   ? greyColor
                                   : Colors.white,
                               child: GestureDetector(
-                                onTap: option == toSelLangMap[fromLangVal]
-                                    ? null
-                                    : () {
-                                        FocusScope.of(context).unfocus();
-                                        for (var i in toSelLangMap.keys)
-                                          if (option == toSelLangMap[i]) {
-                                            session.write('to_lang', i);
-                                            setStateOverlord(
-                                                () => toLangVal = i);
-                                            changeText();
-                                            break;
-                                          }
-                                      },
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  if (option == toSelLangMap[fromLangVal]) {
+                                    session.write('to_lang', fromLangVal);
+                                    session.write('from_lang', toLangVal);
+                                    final tmp = toLangVal;
+                                    toLangVal = fromLangVal;
+                                    fromLangVal = tmp;
+                                  } else {
+                                    for (var i in toSelLangMap.keys) {
+                                      if (option == toSelLangMap[i]) {
+                                        session.write('to_lang', i);
+                                        toLangVal = i;
+                                        break;
+                                      }
+                                    }
+                                  }
+                                  setStateOverlord(() {});
+                                  changeToTxt(toSelLangMap[toLangVal]!);
+                                  changeFromTxt(fromSelLangMap[fromLangVal]!);
+                                },
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
@@ -72,12 +80,7 @@ class GoogleToLang extends StatelessWidget {
                                   ),
                                   child: Text(
                                     option,
-                                    style: option == toSelLangMap[fromLangVal]
-                                        ? const TextStyle(
-                                            fontSize: 18,
-                                            color: lightThemeGreyColor,
-                                          )
-                                        : const TextStyle(fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ),
                               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
+import '/simplytranslate.dart' as simplytranslate;
 
 class GoogleSwitchLang extends StatelessWidget {
   const GoogleSwitchLang({Key? key}) : super(key: key);
@@ -44,20 +45,18 @@ class GoogleSwitchLang extends StatelessWidget {
                       final fromLangValTransTmp = fromLangVal;
                       final toLangValTransTmp = toLangVal;
                       switchVals();
-                      final translatedText = await translate(
-                        input: transInTmp,
-                        fromLang: fromLangValTransTmp,
-                        toLang: toLangValTransTmp,
-                        context: context,
+                      final translatedText = await simplytranslate.translate(
+                        transInTmp,
+                        fromLangValTransTmp,
+                        toLangValTransTmp,
                       );
                       if (!isTranslationCanceled) {
                         final translatedText2;
                         if (translatedText.length <= 5000) {
-                          translatedText2 = await translate(
-                            input: translatedText['text'],
-                            fromLang: fromLangVal,
-                            toLang: toLangVal,
-                            context: context,
+                          translatedText2 = await simplytranslate.translate(
+                            translatedText['text'],
+                            fromLangVal,
+                            toLangVal,
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

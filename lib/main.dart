@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-// import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +10,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
-import 'google/google_translate_widget.dart';
+import 'screens/translate/translate.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,17 +36,6 @@ void main(List<String> args) async {
       theme = Brightness.dark;
     }
   }
-
-  if (session.read('inListWidgets') != null) {
-    inList = Map.from(session.read('inListWidgets'));
-  }
-  if (session.read('outListWidgets') != null) {
-    outList = Map.from(session.read('outListWidgets'));
-  }
-
-  var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
-
-  isClipboardEmpty = _clipData.toString() == '' || _clipData == null;
 
   packageInfo = await PackageInfo.fromPlatform();
 
@@ -85,13 +73,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       await Future.delayed(Duration(seconds: 1));
       getSharedText();
-
-      var _clipData = (await Clipboard.getData(Clipboard.kTextPlain))?.text;
-      if (_clipData.toString() == '' || _clipData == null) {
-        if (!isClipboardEmpty) setState(() => isClipboardEmpty = true);
-      } else {
-        if (isClipboardEmpty) setState(() => isClipboardEmpty = false);
-      }
     }
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
-import 'package:simplytranslate_mobile/screens/settings/widgets/customize_buttons.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/select_default_lang.dart';
 import '/data.dart';
 import 'widgets/select_theme.dart';
@@ -35,7 +34,6 @@ class _SettingsState extends State<Settings> {
               ),
               line,
               SelectTheme(),
-              CustomizeButtons(),
               const SizedBox(height: 20),
               Text(
                 L10n.of(context).translation,

@@ -9,26 +9,17 @@ bool _isSnackBarPressed = false;
 
 AudioPlayer _audioPlayer = AudioPlayer();
 
-class MaximizedTtsOutput extends StatefulWidget {
-  const MaximizedTtsOutput({Key? key}) : super(key: key);
+class TtsInput extends StatefulWidget {
+  const TtsInput({Key? key}) : super(key: key);
 
   @override
-  State<MaximizedTtsOutput> createState() => _TtsOutputState();
+  State<TtsInput> createState() => _TtsOutputState();
 }
 
-class _TtsOutputState extends State<MaximizedTtsOutput> {
-  @override
-  void dispose() {
-    _audioPlayer.stop();
-    _listening = false;
-    isMaximizedTtsOutputCanceled = true;
-    ttsMaximizedOutputloading = false;
-    super.dispose();
-  }
-
+class _TtsOutputState extends State<TtsInput> {
   @override
   Widget build(BuildContext context) {
-    final _input = googleOutput['text'];
+    final _input = googleInCtrl.text;
     stopPlayer() async {
       await _audioPlayer.stop();
       setState(() => _listening = false);
@@ -47,8 +38,9 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
           ),
         );
         _isSnackBarPressed = true;
-        Future.delayed(Duration(seconds: 1))
-            .then((_) => _isSnackBarPressed = false);
+        Future.delayed(const Duration(seconds: 1)).then(
+          (_) => _isSnackBarPressed = false,
+        );
       }
     }
 
@@ -56,7 +48,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
       isTtsInCanceled = false;
       setState(() => ttsInputloading = true);
       await _audioPlayer
-          .setSourceBytes(await simplytranslate.tts(_input, toLangVal));
+          .setSourceBytes(await simplytranslate.tts(_input, fromLangVal));
       if (isTtsInCanceled) return;
       setState(() {
         _listening = true;
@@ -68,13 +60,12 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
       });
     }
 
-    return ttsMaximizedOutputloading
+    return ttsInputloading
         ? InkWell(
             onTap: () {
-              print('rofrof');
               setState(() {
-                ttsMaximizedOutputloading = false;
-                isMaximizedTtsOutputCanceled = true;
+                ttsInputloading = false;
+                isTtsInCanceled = true;
               });
             },
             child: Container(
@@ -93,7 +84,7 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
-              if (_input == null) {
+              if (_input == '') {
                 if (_listening)
                   return stopPlayer;
                 else
@@ -108,8 +99,9 @@ class _TtsOutputState extends State<MaximizedTtsOutput> {
             }(),
             icon: Icon(
               _listening ? Icons.stop : Icons.volume_up,
-              color:
-                  googleOutput.length > 200 && !_listening ? Colors.grey : null,
+              color: googleInCtrl.text.length > 200 && !_listening
+                  ? Colors.grey
+                  : null,
             ),
           );
   }

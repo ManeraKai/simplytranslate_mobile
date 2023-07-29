@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
+import '/simplytranslate.dart' as simplytranslate;
 
 class TranslateButtonFloat extends StatelessWidget {
   const TranslateButtonFloat({Key? key}) : super(key: key);
@@ -21,11 +22,10 @@ class TranslateButtonFloat extends StatelessWidget {
                     isTranslationCanceled = false;
                     setStateOverlord(() => loading = true);
                     try {
-                      final translatedText = await translate(
-                        input: googleInCtrl.text,
-                        fromLang: fromLangVal,
-                        toLang: toLangVal,
-                        context: translateContext!,
+                      final translatedText = await simplytranslate.translate(
+                        googleInCtrl.text,
+                        fromLangVal,
+                        toLangVal,
                       );
                       if (!isTranslationCanceled)
                         setStateOverlord(() {

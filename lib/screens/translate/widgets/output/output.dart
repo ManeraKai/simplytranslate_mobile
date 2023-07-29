@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' as intl;
 import '/data.dart';
-import '/google/screens/maximized/maximized.dart';
-import '/google/widgets/translation_input/buttons/copy_button.dart';
-import 'widgets/tts_output.dart';
+import 'copy_button.dart';
+import 'tts_button.dart';
 
 class GoogleTranslationOutput extends StatefulWidget {
   const GoogleTranslationOutput({Key? key}) : super(key: key);
@@ -18,18 +16,8 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
 
   @override
   Widget build(BuildContext context) {
-    outTextFieldHeight = 10;
-    for (var k in outList.keys)
-      if (outList[k] == true) {
-        if (k != "Counter")
-          outTextFieldHeight += 48;
-        else
-          outTextFieldHeight += 50;
-      }
-    if (outTextFieldHeight < 100) outTextFieldHeight = 100;
     Map translatedText = googleOutput;
     return Container(
-      height: outTextFieldHeight,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
@@ -59,6 +47,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
                         ? translatedText['text']
                         : '',
                     style: TextStyle(fontSize: _outputFontSize),
+                    minLines: 7,
                   ),
                 ),
               ),
@@ -66,21 +55,8 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
           ),
           Column(
             children: [
-              if (outList['Copy'] == true)
-                CopyToClipboardButton(translatedText['text'] ?? ''),
-              if (outList['Maximize'] == true)
-                IconButton(
-                  icon: Icon(Icons.fullscreen),
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: translatedText['text'] == null
-                      ? null
-                      : () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MaximizedScreen())),
-                ),
-              if (outList['Text-To-Speech'] == true) TtsOutput(),
+              CopyToClipboardButton(translatedText['text'] ?? ''),
+              TtsOutput(),
             ],
           ),
         ],

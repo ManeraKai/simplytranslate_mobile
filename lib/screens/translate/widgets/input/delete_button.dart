@@ -25,7 +25,6 @@ class DeleteTranslationInputButton extends StatelessWidget {
                   googleOutput = {};
                 });
                 FocusScope.of(context).unfocus();
-                if (isSnackBarVisible) isSnackBarVisible = false;
               },
         icon: Icon(Icons.close),
       ),

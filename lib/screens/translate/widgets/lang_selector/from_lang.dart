@@ -50,19 +50,27 @@ class GoogleFromLang extends StatelessWidget {
                                   ? greyColor
                                   : Colors.white,
                               child: GestureDetector(
-                                onTap: option == fromSelLangMap[toLangVal]
-                                    ? null
-                                    : () {
-                                        FocusScope.of(context).unfocus();
-                                        for (var i in fromSelLangMap.keys)
-                                          if (option == fromSelLangMap[i]) {
-                                            session.write('from_lang', i);
-                                            setStateOverlord(
-                                                () => fromLangVal = i);
-                                            changeFromTxt(fromSelLangMap[i]!);
-                                            break;
-                                          }
-                                      },
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  if (option == fromSelLangMap[toLangVal]) {
+                                    session.write('from_lang', toLangVal);
+                                    session.write('to_lang', fromLangVal);
+                                    final tmp = fromLangVal;
+                                    fromLangVal = toLangVal;
+                                    toLangVal = tmp;
+                                  } else {
+                                    for (var i in fromSelLangMap.keys) {
+                                      if (option == fromSelLangMap[i]) {
+                                        session.write('from_lang', i);
+                                        fromLangVal = i;
+                                        break;
+                                      }
+                                    }
+                                  }
+                                  setStateOverlord(() {});
+                                  changeFromTxt(fromSelLangMap[fromLangVal]!);
+                                  changeToTxt(toSelLangMap[toLangVal]!);
+                                },
                                 child: Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(
@@ -71,12 +79,7 @@ class GoogleFromLang extends StatelessWidget {
                                   ),
                                   child: Text(
                                     option,
-                                    style: (option == toSelLangMap[toLangVal])
-                                        ? const TextStyle(
-                                            fontSize: 18,
-                                            color: lightThemeGreyColor,
-                                          )
-                                        : const TextStyle(fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ),
                               ),
@@ -127,24 +130,26 @@ class GoogleFromLang extends StatelessWidget {
                   break;
                 }
 
-              if (chosenOne != toSelLangMap[toLangVal] && chosenOne != null)
+              if (chosenOne != toSelLangMap[toLangVal] && chosenOne != null) {
                 writeData(chosenOne);
-              else {
+              } else {
                 var dimmedSelLangsFrom = fromSelLangMap;
                 dimmedSelLangsFrom.remove(chosenOne);
 
                 String? chosenOneTwo;
-                for (var i in dimmedSelLangsFrom.keys)
+                for (var i in dimmedSelLangsFrom.keys) {
                   if (dimmedSelLangsFrom[i]!.toLowerCase().contains(input)) {
                     chosenOneTwo = i;
                     break;
                   }
+                }
 
                 if (chosenOneTwo != dimmedSelLangsFrom[fromLangVal] &&
-                    chosenOneTwo != null)
+                    chosenOneTwo != null) {
                   writeData(chosenOneTwo);
-                else
+                } else {
                   resetData();
+                }
               }
             },
             decoration: InputDecoration(

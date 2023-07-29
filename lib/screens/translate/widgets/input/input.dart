@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/generated/l10n.dart';
-import '/google/widgets/translation_input/buttons/tts_input.dart';
+import 'tts_button.dart';
 import '/data.dart';
-import 'buttons/copy_button.dart';
-import 'buttons/delete_button.dart';
-import 'buttons/paste_button.dart';
-import 'buttons/character_limit.dart';
+import 'delete_button.dart';
+import 'character_limit.dart';
 
 class GoogleTranslationInput extends StatefulWidget {
   const GoogleTranslationInput({Key? key}) : super(key: key);
@@ -40,18 +38,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
 
   @override
   Widget build(BuildContext context) {
-    inTextFieldHeight = 10;
-    for (var k in inList.keys)
-      if (inList[k] == true) {
-        if (k != "Counter")
-          inTextFieldHeight += 48;
-        else
-          inTextFieldHeight += 50;
-      }
-    if (inTextFieldHeight < 100) inTextFieldHeight = 100;
-    // print("inTextFieldHeight " + inTextFieldHeight.toString());
     return Container(
-      height: inTextFieldHeight,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? const Color(0xff131618) : null,
@@ -80,25 +67,11 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                     : intl.Bidi.detectRtlDirectionality(googleInCtrl.text)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                focusNode: focus,
-                minLines: 10,
+                minLines: 7,
                 maxLines: null,
                 controller: googleInCtrl,
                 keyboardType: TextInputType.multiline,
                 onChanged: (String input) {
-                  if (googleInCtrl.text.length > 5000 && !isSnackBarVisible) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: const Duration(seconds: 2),
-                        width: 300,
-                        content: Text(
-                          L10n.of(context).input_limit,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    );
-                    isSnackBarVisible = true;
-                  } else if (isSnackBarVisible) isSnackBarVisible = false;
                   setStateOverlord(() {});
                 },
                 decoration: InputDecoration(
@@ -119,12 +92,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (inList['Remove'] == true) DeleteTranslationInputButton(),
-              if (inList['Copy'] == true)
-                CopyToClipboardButton(googleInCtrl.text),
-              if (inList['Paste'] == true) PasteClipboardButton(),
-              if (inList['Text-To-Speech'] == true) TtsInput(),
-              if (inList['Counter'] == true) CharacterLimit(),
+              DeleteTranslationInputButton(),
+              TtsInput(),
+              CharacterLimit(),
             ],
           )
         ],

@@ -1,5 +1,5 @@
-/// Calls `builder` on keyboard close/open.
-/// https://stackoverflow.com/a/63241409/1321917
+// Calls `builder` on keyboard close/open.
+// https://stackoverflow.com/a/63241409/1321917
 import 'package:flutter/material.dart';
 
 class KeyboardVisibilityBuilder extends StatefulWidget {

@@ -1,28 +1,19 @@
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
-import 'package:path_provider/path_provider.dart';
 import '/simplytranslate.dart' as simplytranslate;
 
-// const lightGreenColor = const Color(0xff62d195);
 const greyColor = const Color(0xff131618);
-const secondgreyColor = const Color(0xff212529);
 const greenColor = const Color(0xff3fb274);
 const lightThemeGreyColor = const Color(0xffa9a9a9);
-const darkThemedisabledColor = const Color(0xff6e7071);
-const lightThemedisabledColor = const Color(0xff9b9b9b);
 
 late BuildContext contextOverlordData;
 late void Function(void Function() fn) setStateOverlord;
 
 var themeRadio = AppTheme.system;
-
-var focus = FocusNode();
 
 String fromLangVal = 'auto';
 String toLangVal = '';
@@ -42,26 +33,14 @@ enum AppTheme { dark, light, system }
 
 var themeValue = '';
 
-Future<File> byte2File(Uint8List byte) async {
-  final tempDir = await getTemporaryDirectory();
-  final random = Random().nextInt(10000000);
-  final file = await new File('${tempDir.path}/$random.jpg').create();
-  file.writeAsBytesSync(byte);
-  return file;
-}
-
 Widget line = Container(
   margin: const EdgeInsets.only(top: 10, bottom: 5),
   height: 1.5,
   color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
 );
 
-late File img;
-
 Brightness theme =
     SchedulerBinding.instance.platformDispatcher.platformBrightness;
-
-bool isClipboardEmpty = true;
 
 late Map<String, String> toSelLangMap;
 late Map<String, String> fromSelLangMap;
@@ -69,7 +48,6 @@ late Map<String, String> fromSelLangMap;
 bool loading = false;
 bool isTranslationCanceled = false;
 
-final customUrlCtrl = TextEditingController();
 final googleInCtrl = TextEditingController();
 
 final session = GetStorage();
@@ -96,11 +74,10 @@ Future<void> getSharedText() async {
         loading = true;
       });
 
-      final translatedText = await translate(
-        input: _translationInput,
-        fromLang: 'auto',
-        toLang: shareLangVal,
-        context: contextOverlordData,
+      final translatedText = await simplytranslate.translate(
+        _translationInput,
+        'auto',
+        shareLangVal,
       );
       setStateOverlord(() {
         googleOutput = translatedText;
@@ -111,10 +88,6 @@ Future<void> getSharedText() async {
     setStateOverlord(() => loading = false);
   }
 }
-
-bool isSnackBarVisible = false;
-
-enum TrainedDataState { notDownloaded, Downloading, Downloaded }
 
 Map<String, String> selectLanguagesMapGetter(BuildContext context) {
   Map<String, String> mapOne = {
@@ -244,52 +217,10 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
 
 BuildContext? translateContext;
 
-Future<Map> translate({
-  required String input,
-  required String fromLang,
-  required String toLang,
-  required BuildContext context,
-}) async {
-  return await simplytranslate.translate(input, fromLang, toLang);
-}
-
 bool isTtsInCanceled = false;
 bool ttsInputloading = false;
 
 bool ttsOutloading = false;
 bool isTtsOutputCanceled = false;
 
-bool ttsMaximizedOutputloading = false;
-bool isMaximizedTtsOutputCanceled = false;
-
 bool isFirst = true;
-
-late double inTextFieldHeight;
-late double outTextFieldHeight;
-
-Map<String, bool> inList = {
-  "Remove": true,
-  "Copy": false,
-  "Paste": true,
-  "Text-To-Speech": true,
-  "Counter": true,
-};
-Map<String, bool> outList = {
-  "Copy": true,
-  "Maximize": true,
-  "Text-To-Speech": true,
-};
-
-Map<String, String> getInListTranslation(BuildContext context) => {
-      "Remove": L10n.of(context).remove,
-      "Copy": L10n.of(context).copy,
-      "Paste": L10n.of(context).paste,
-      "Text-To-Speech": L10n.of(context).text_to_speech,
-      "Counter": L10n.of(context).counter,
-    };
-
-Map<String, String> getOutListTranslation(BuildContext context) => {
-      "Copy": L10n.of(context).copy,
-      "Maximize": L10n.of(context).maximize,
-      "Text-To-Speech": L10n.of(context).text_to_speech,
-    };
