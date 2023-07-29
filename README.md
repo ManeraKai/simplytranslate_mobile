@@ -17,10 +17,10 @@
 </p>
 
 <div align=center>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="drawing" width="200"/>&nbsp;
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="drawing" width="200"/>&nbsp;
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" alt="drawing" width="200"/>&nbsp;
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" alt="drawing" width="200"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.webp" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.webp" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.webp" alt="drawing" width="200"/>&nbsp;
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.webp" alt="drawing" width="200"/>
 </div>
 
 ## Download beta debug versions
