@@ -1,1 +1,1 @@
-Interfaz alternativa al Traductor de Google
+Una interfaz amigable con la privacidad para Google Translate
