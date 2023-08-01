@@ -1,1 +1,1 @@
-Alternatywny front-end do Tłumacza Google
+Przyjazny dla prywatności interfejs Tłumacza Google
