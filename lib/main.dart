@@ -371,7 +371,6 @@ class MainPageLocalization extends StatelessWidget {
 
     fromLangVal = session.read('from_lang') ?? 'auto';
     toLangVal = session.read('to_lang') ?? appLocale.languageCode;
-    shareLangVal = session.read('share_lang') ?? appLocale.languageCode;
 
     return MainPage();
   }

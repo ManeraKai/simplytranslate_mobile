@@ -17,7 +17,6 @@ var themeRadio = AppTheme.system;
 
 String fromLangVal = 'auto';
 String toLangVal = '';
-String shareLangVal = '';
 
 Map googleOutput = {};
 
@@ -77,7 +76,7 @@ Future<void> getSharedText() async {
       final translatedText = await simplytranslate.translate(
         _translationInput,
         'auto',
-        shareLangVal,
+        toLangVal,
       );
       setStateOverlord(() {
         googleOutput = translatedText;
