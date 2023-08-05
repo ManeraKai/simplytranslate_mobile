@@ -1,0 +1,7 @@
+Ez az alkalmazás egy alternatív frontend a Google Fordítóhoz.
+
+<b>Jellemzői:</b>
+* 108 nyelvet támogat
+Text-To-Speech (TTS)
+* Megosztott szöveget kaphat más alkalmazásokból
+* Fordítógomb a szövegkiválasztó eszköztárban
