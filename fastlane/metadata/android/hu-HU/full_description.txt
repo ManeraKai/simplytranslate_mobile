@@ -1,4 +1,4 @@
-Ez az alkalmazás egy alternatív frontend a Google Fordítóhoz.
+Ez az alkalmazás egy alternatív frontend a Google Fordítójához.
 
 <b>Jellemzői:</b>
 * 108 nyelvet támogat

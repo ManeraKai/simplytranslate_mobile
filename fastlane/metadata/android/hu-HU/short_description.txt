@@ -1,1 +1,1 @@
-Egy magánéletbarát frontend a Google Fordítóhoz
+Egy magánéletbarát frontend a Google Fordítójához
