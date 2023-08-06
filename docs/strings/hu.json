@@ -1,1 +1,25 @@
-{}
+{
+    "short_description": "Az android kliens a <a href='https://simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> számára.",
+    "home": "Kezdő képernyő",
+    "download": "Letöltés",
+    "source_code": "Forráskód",
+    "contributors": "Közreműködők",
+    "donate_thanks": "<span class='dimmed'>Köszönöm!</span>",
+    "what_is_simplytranslate_answer": "A <a href='https/simple-web.org/projects/simplytranslate.html'>SimplyTranslate</a> egy nyílt forráskódú kiszolgáló alkalmazás, amely begyüjti a fordítási adatokat a népszerű fordítási weboldalakról, mint a Google Fordító, ICIBA, Reverso, LibreTranslate stb., és egy egyszerű webes felületen bemutatja, hirdetések és szkriptek nyomon követése nélkül. Használhatja a Tor + JavaScript nélkül, akkor is megfelelően működik.<br> A SimplyTranslate nem csak egy példány(szerver), hanem több példány is van a világon, amelyet önkéntesek működtetnek, sőt <a href='https://codeberg.org/SimpleWeb/SimplyTranslate-Web#how-to-install-use'>saját magán példányt</a> futtathat. Itt található az ismert nyilvános példányok <a href='https://simple-web.org/projects/simplytranslate.html'>hivatalos listája</a>.",
+    "donate": "Támogatás",
+    "developers": "Fejlesztők",
+    "what_is_simplytranslate": "Mi az a SimplyTranslate?",
+    "fdroid": "F-Droid",
+    "what_is_simplytranslate_mobile": "Mi az a SimplyTranslate Mobil?",
+    "what_is_simplytranslate_mobile_answer": "Ahelyett, hogy a SimplyTranslate „webes felületét” használná az eszközén, most egy teljes mobilfelülete van, valamint néhány további funkció is elérhető:",
+    "random_instance_each_request": "Véletlenszerű példány minden kérelem, <span class='dimmed'>hogy ne adja át a fordítás teljes kontextusát egy példánynak</span>",
+    "text_to_speech": "Text-To-Speech (TTS)",
+    "offline_camera_text_recognition": "Offline kamera szövegfelismerése <span class='dimmed'>nem a legtökéletesebb, de nem küld fényképeket a példányoknak</span>",
+    "custom_instance_option": "Egyénipéldány-opció",
+    "github_artifacts": "GitHub Artifacts <span style='color:orange;'>(béta kiadás)</span>",
+    "github": "GitHub",
+    "codeberg": "Codeberg",
+    "testers": "Tesztelők",
+    "translators": "Fordítók",
+    "icon": "Ikon"
+}
