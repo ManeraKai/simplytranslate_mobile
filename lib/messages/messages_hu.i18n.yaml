@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Afrikai
+  albanian: Albán
+  amharic: Amhara
+  arabic: Arab
+  armenian: Örmény
+  autodetect: Automatikus felismerés
+  azerbaijani: Azerbajdzsán
+  basque: Baszk
+  belarusian: Fehérorosz
+  bengali: Bengáli
+  bosnian: Bosnyák
+  bulgarian: Bolgár
+  catalan: Katalán
+  cebuano: Szebuano
+  chichewa: Chichewa
+  chinese: Kínai
+  corsican: Korzikai
+  croatian: Horvát
+  czech: Cseh
+  danish: Dán
+  dutch: Holland
+  english: Angol
+  esperanto: Eszperantó
+  estonian: Észt
+  filipino: Fülöp-szigeteki
+  finnish: Finn
+  french: Francia
+  frisian: Fríz
+  galician: Galiciai
+  georgian: Grúz
+  german: Német
+  greek: Görög
+  gujarati: Gudzsaráti
+  haitian_creole: Haiti kreol
+  hausa: Hausza
+  hawaiian: Hawaii
+  hebrew: Héber
+  hindi: Hindu
+  hmong: Hmong
+  hungarian: Magyar
+  icelandic: Izlandi
+  igbo: Igbó
+  indonesian: Indonéz
+  irish: Ír
+  italian: Olasz
+  japanese: Japán
+  javanese: Jávai
+  kannada: Kannada
+  kazakh: Kazah
+  khmer: Khmer
+  kinyarwanda: Kinyarvanda
+  korean: Koreai
+  kurdish_kurmanji: Kurd (Kurmanji)
+  kyrgyz: Kirgiz
+  lao: Laoszi (lao)
+  latin: Latin
+  latvian: Lett
+  lithuanian: Litván
+  luxembourgish: Luxemburgi
+  macedonian: Macedón
+  malagasy: Malgas
+  malay: Maláj
+  malayalam: Malajálam
+  maltese: Máltai
+  maori: Maori
+  marathi: Maráthi
+  mongolian: Mongol
+  myanmar_burmese: Mianmar (Burmai)
+  nepali: Nepáli
+  norwegian: Norvég
+  odia_oriya: Odia (Oriya)
+  pashto: Pastu
+  persian: Perzsa
+  polish: Lengyel
+  portuguese: Portugál
+  punjabi: Pandzsábi
+  romanian: Román
+  russian: Orosz
+  samoan: Szamoai
+  scots_gaelic: Skót gall
+  serbian: Szerb
+  sesotho: Sesothói
+  shona: Sona
+  sindhi: Szindhi
+  sinhala: Szingaléz
+  slovak: Szlovák
+  slovenian: Szlovén
+  somali: Szomáli
+  spanish: Spanyol
+  sundanese: Szundanéz
+  swahili: Szuahéli
+  swedish: Svéd
+  tajik: Tádzsik
+  tamil: Tamil
+  tatar: Tatár
+  telugu: Telugu
+  thai: Thaiföldi
+  traditional_chinese: Traditional Chinese
+  turkish: Török
+  turkmen: Türkmén
+  ukrainian: Ukrán
+  urdu: Urdu
+  uyghur: Ujgur
+  uzbek: Üzbég
+  vietnamese: Vietnámi
+  welsh: Walesi
+  xhosa: Xhosza
+  yiddish: Jiddis
+  yoruba: Joruba
+  zulu: Zulu
+main:
+  about: Névjegy
+  appearance: Kinézet
+  audio_limit: 200 karakter felett nem tud hangot lejátszani
+  autodetect_not_supported: Az automatikus felismerés nem támogatott
+  cancel: Mégse
+  contribute: Közreműködés
+  copied_to_clipboard: Vágólapra másolva
+  dark: Sötét
+  definitions: Meghatározások
+  donate: Támogatás
+  enter_text_here: Írd be a szöveget
+  error: Hiba történt
+  follow_system: A rendszer témája
+  help: Segítség
+  input_limit: A fordítási bemenet több mint 5000
+  install: Telepítés
+  license: Licenc
+  light: Világos
+  no_internet: Nincs internetkapcsolat
+  ok: OK
+  report_bug: Hibajelentés
+  settings: Beállíŧások
+  something_went_wrong: Valami rosszul sült el
+  text_recognition: Szövegfelismerés
+  text_to_speech: Text-To-Speech
+  theme: Téma
+  translate: Fordítás
+  translation: Fordítás
+  translations: Fordítások
+  version: Verzió
+  website: Weboldal

@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Afrikaans
+  albanian: Albansk
+  amharic: Amharisk
+  arabic: Arabisk
+  armenian: Armensk
+  autodetect: Oppdag automatisk
+  azerbaijani: Aserbajdsjansk
+  basque: Baskisk
+  belarusian: Hviterussisk
+  bengali: Bengali
+  bosnian: Bosnisk
+  bulgarian: Bulgarsk
+  catalan: Katalansk
+  cebuano: Sugboanon
+  chichewa: Chichewa
+  chinese: Kinesisk
+  corsican: Korsikansk
+  croatian: Kroatisk
+  czech: Tjekkisk
+  danish: Dansk
+  dutch: Nederlandsk
+  english: Engelsk
+  esperanto: Esperanto
+  estonian: Estisk
+  filipino: Filippinsk
+  finnish: Finsk
+  french: Fransk
+  frisian: Frisisk
+  galician: Galisisk
+  georgian: Georgisk
+  german: Tysk
+  greek: Gresk
+  gujarati: Gujarati
+  haitian_creole: Haitian Creole
+  hausa: Hausa
+  hawaiian: Hawaiisk
+  hebrew: Hebraisk
+  hindi: Hindi
+  hmong: hmong
+  hungarian: Ungarsk
+  icelandic: Islandsk
+  igbo: Ibo
+  indonesian: Indonesisk
+  irish: Irsk
+  italian: Italiensk
+  japanese: Japansk
+  javanese: Javanesisk
+  kannada: Kannada/kannaresisk
+  kazakh: Kasakhisk
+  khmer: Khmer
+  kinyarwanda: Kinyarwanda
+  korean: Koreansk
+  kurdish_kurmanji: Kurdish (Kurmanji)
+  kyrgyz: Kyrgyz
+  lao: Laotisk
+  latin: Latinsk
+  latvian: Latvisk
+  lithuanian: Litauisk
+  luxembourgish: Luxembourgsk
+  macedonian: Makedonsk
+  malagasy: Madagassisk/gassisk
+  malay: Malayisk
+  malayalam: Malayalam
+  maltese: Maltesisk
+  maori: Maori
+  marathi: Marathi
+  mongolian: Mongolsk
+  myanmar_burmese: Myanmar (Burmese)
+  nepali: Nepali/gorkhali
+  norwegian: Norwegian
+  odia_oriya: Odia (Oriya)
+  pashto: Pashto/afghansk
+  persian: Persisk
+  polish: Polsk
+  portuguese: Portugisisk
+  punjabi: Punjabi
+  romanian: Rumensk
+  russian: Russisk
+  samoan: Samoansk
+  scots_gaelic: Scots Gaelic
+  serbian: Serbisk
+  sesotho: Sesotho
+  shona: Shona
+  sindhi: Sindhi
+  sinhala: Singalesisk
+  slovak: Slovakisk
+  slovenian: Slovensk
+  somali: Somali
+  spanish: Spansk
+  sundanese: Sundanesisk
+  swahili: Swahili
+  swedish: Svensk
+  tajik: Tadsjikisk
+  tamil: Tamilsk
+  tatar: Tartarisk
+  telugu: Telugu
+  thai: Thai
+  traditional_chinese: Traditional Chinese
+  turkish: Tyrkisk
+  turkmen: Turkmensk
+  ukrainian: Ukrainsk
+  urdu: Urdu
+  uyghur: Uigurisk
+  uzbek: Usbekisk
+  vietnamese: Vietnamesisk
+  welsh: Walisisk
+  xhosa: Xhosa
+  yiddish: Jiddisk
+  yoruba: Joruba
+  zulu: Zulu
+main:
+  about: Om
+  appearance: Utseende
+  audio_limit: Kan ikke hente lyd for mer enn 200 tegn
+  autodetect_not_supported: Autodetect not supported
+  cancel: Avbryt
+  contribute: Bidra
+  copied_to_clipboard: Kopiert til utklippstavle
+  dark: Mørk
+  definitions: Definitions
+  donate: Doner
+  enter_text_here: Skriv inn tekst her
+  error: En feil oppstod
+  follow_system: System
+  help: Hjelp
+  input_limit: Du har brukt mer enn 5000 tegn
+  install: Installer
+  license: Lisens
+  light: Lys
+  no_internet: Mangler tilkobling til Internett
+  ok: OK
+  report_bug: Innrapporter en feil
+  settings: Innstillinger
+  something_went_wrong: Noe gikk galt
+  text_recognition: Tekstgjenkjenning
+  text_to_speech: Text-To-Speech
+  theme: Drakt
+  translate: Oversett
+  translation: Oversettelse
+  translations: Translation
+  version: Versjon
+  website: Nettside

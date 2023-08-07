@@ -1,8 +1,9 @@
 // GENERATED FILE, do not edit!
 // ignore_for_file: annotate_overrides, non_constant_identifier_names, prefer_single_quotes, unused_element, unused_field
 import 'package:i18n/i18n.dart' as i18n;
+import 'messages.i18n.dart';
 
-String get _languageCode => 'en';
+String get _languageCode => 'cs';
 String _plural(int count,
         {String? zero,
         String? one,
@@ -49,33 +50,33 @@ String _cardinal(
       other: other,
     );
 
-class Messages {
-  const Messages();
-  String get locale => "en";
-  String get languageCode => "en";
-  LangsMessages get langs => LangsMessages(this);
-  MainMessages get main => MainMessages(this);
+class MessagesCs extends Messages {
+  const MessagesCs();
+  String get locale => "cs";
+  String get languageCode => "cs";
+  LangsMessagesCs get langs => LangsMessagesCs(this);
+  MainMessagesCs get main => MainMessagesCs(this);
 }
 
-class LangsMessages {
-  final Messages _parent;
-  const LangsMessages(this._parent);
-  String get afrikaans => """Afrikaans""";
-  String get albanian => """Albanian""";
-  String get amharic => """Amharic""";
-  String get arabic => """Arabic""";
-  String get armenian => """Armenian""";
-  String get autodetect => """Autodetect""";
-  String get azerbaijani => """Azerbaijani""";
-  String get basque => """Basque""";
-  String get belarusian => """Belarusian""";
-  String get bengali => """Bengali""";
-  String get bosnian => """Bosnian""";
-  String get bulgarian => """Bulgarian""";
-  String get catalan => """Catalan""";
-  String get cebuano => """Cebuano""";
+class LangsMessagesCs extends LangsMessages {
+  final MessagesCs _parent;
+  const LangsMessagesCs(this._parent) : super(_parent);
+  String get afrikaans => """afrikánština""";
+  String get albanian => """albánština""";
+  String get amharic => """amharština""";
+  String get arabic => """arabština""";
+  String get armenian => """arménština""";
+  String get autodetect => """Detekovat automaticky""";
+  String get azerbaijani => """ázerbájdžánština""";
+  String get basque => """baskičtina""";
+  String get belarusian => """běloruština""";
+  String get bengali => """bengálština""";
+  String get bosnian => """bosenština""";
+  String get bulgarian => """bulharština""";
+  String get catalan => """katalánština""";
+  String get cebuano => """cebuánština""";
   String get chichewa => """Chichewa""";
-  String get chinese => """Chinese""";
+  String get chinese => """čínština""";
   String get corsican => """Corsican""";
   String get croatian => """Croatian""";
   String get czech => """Czech""";
@@ -172,59 +173,60 @@ class LangsMessages {
   String get zulu => """Zul""";
 }
 
-class MainMessages {
-  final Messages _parent;
-  const MainMessages(this._parent);
-  String get about => """About""";
-  String get appearance => """Appearance""";
-  String get audio_limit => """Cannot get audio for more than 200 characters""";
-  String get autodetect_not_supported => """Autodetect not supported""";
-  String get cancel => """Cancel""";
-  String get contribute => """Contribute""";
-  String get copied_to_clipboard => """Copied to clipboard""";
-  String get dark => """Dark""";
-  String get definitions => """Definitions""";
-  String get donate => """Donate""";
-  String get enter_text_here => """Enter text here""";
-  String get error => """There was an error""";
-  String get follow_system => """Follow system""";
-  String get help => """Help""";
-  String get input_limit => """The translation input is above 5000""";
-  String get install => """Install""";
-  String get license => """License""";
-  String get light => """Light""";
-  String get no_internet => """No internet connection""";
+class MainMessagesCs extends MainMessages {
+  final MessagesCs _parent;
+  const MainMessagesCs(this._parent) : super(_parent);
+  String get about => """O aplikaci""";
+  String get appearance => """Vzhled""";
+  String get audio_limit => """Nelze získat zvuk pro více než 200 znaků""";
+  String get autodetect_not_supported =>
+      """Automatická detekce není podporována""";
+  String get cancel => """Zrušit""";
+  String get contribute => """Přispějte""";
+  String get copied_to_clipboard => """Zkopírováno do schránky""";
+  String get dark => """Tmavý""";
+  String get definitions => """Definice""";
+  String get donate => """Darovat""";
+  String get enter_text_here => """Zde zadejte text""";
+  String get error => """Něco se nepovedlo""";
+  String get follow_system => """Systémový""";
+  String get help => """Nápověda""";
+  String get input_limit => """Chcete přeložit více než 5000 znaků""";
+  String get install => """Nainstalovat""";
+  String get license => """Licence""";
+  String get light => """Světlý""";
+  String get no_internet => """Jste bez internetu""";
   String get ok => """OK""";
-  String get report_bug => """Report a bug""";
-  String get settings => """Settings""";
-  String get something_went_wrong => """Something went wrong""";
-  String get text_recognition => """Text Recognition""";
-  String get text_to_speech => """Text-To-Speech""";
-  String get theme => """Theme""";
-  String get translate => """Translate""";
-  String get translation => """Translation""";
-  String get translations => """Translation""";
-  String get version => """Version""";
-  String get website => """Website""";
+  String get report_bug => """Nahlásit chybu""";
+  String get settings => """Nastavení""";
+  String get something_went_wrong => """Něco se pokazilo""";
+  String get text_recognition => """Rozpoznávání textu""";
+  String get text_to_speech => """Převod textu na řeč""";
+  String get theme => """Motiv""";
+  String get translate => """Přeložit""";
+  String get translation => """Překlad""";
+  String get translations => """Překlady""";
+  String get version => """Verze""";
+  String get website => """Webové stránky""";
 }
 
-Map<String, String> get messagesMap => {
-      """langs.afrikaans""": """Afrikaans""",
-      """langs.albanian""": """Albanian""",
-      """langs.amharic""": """Amharic""",
-      """langs.arabic""": """Arabic""",
-      """langs.armenian""": """Armenian""",
-      """langs.autodetect""": """Autodetect""",
-      """langs.azerbaijani""": """Azerbaijani""",
-      """langs.basque""": """Basque""",
-      """langs.belarusian""": """Belarusian""",
-      """langs.bengali""": """Bengali""",
-      """langs.bosnian""": """Bosnian""",
-      """langs.bulgarian""": """Bulgarian""",
-      """langs.catalan""": """Catalan""",
-      """langs.cebuano""": """Cebuano""",
+Map<String, String> get messagesCsMap => {
+      """langs.afrikaans""": """afrikánština""",
+      """langs.albanian""": """albánština""",
+      """langs.amharic""": """amharština""",
+      """langs.arabic""": """arabština""",
+      """langs.armenian""": """arménština""",
+      """langs.autodetect""": """Detekovat automaticky""",
+      """langs.azerbaijani""": """ázerbájdžánština""",
+      """langs.basque""": """baskičtina""",
+      """langs.belarusian""": """běloruština""",
+      """langs.bengali""": """bengálština""",
+      """langs.bosnian""": """bosenština""",
+      """langs.bulgarian""": """bulharština""",
+      """langs.catalan""": """katalánština""",
+      """langs.cebuano""": """cebuánština""",
       """langs.chichewa""": """Chichewa""",
-      """langs.chinese""": """Chinese""",
+      """langs.chinese""": """čínština""",
       """langs.corsican""": """Corsican""",
       """langs.croatian""": """Croatian""",
       """langs.czech""": """Czech""",
@@ -319,36 +321,36 @@ Map<String, String> get messagesMap => {
       """langs.yiddish""": """Yiddish""",
       """langs.yoruba""": """Yoruba""",
       """langs.zulu""": """Zul""",
-      """main.about""": """About""",
-      """main.appearance""": """Appearance""",
-      """main.audio_limit""":
-          """Cannot get audio for more than 200 characters""",
-      """main.autodetect_not_supported""": """Autodetect not supported""",
-      """main.cancel""": """Cancel""",
-      """main.contribute""": """Contribute""",
-      """main.copied_to_clipboard""": """Copied to clipboard""",
-      """main.dark""": """Dark""",
-      """main.definitions""": """Definitions""",
-      """main.donate""": """Donate""",
-      """main.enter_text_here""": """Enter text here""",
-      """main.error""": """There was an error""",
-      """main.follow_system""": """Follow system""",
-      """main.help""": """Help""",
-      """main.input_limit""": """The translation input is above 5000""",
-      """main.install""": """Install""",
-      """main.license""": """License""",
-      """main.light""": """Light""",
-      """main.no_internet""": """No internet connection""",
+      """main.about""": """O aplikaci""",
+      """main.appearance""": """Vzhled""",
+      """main.audio_limit""": """Nelze získat zvuk pro více než 200 znaků""",
+      """main.autodetect_not_supported""":
+          """Automatická detekce není podporována""",
+      """main.cancel""": """Zrušit""",
+      """main.contribute""": """Přispějte""",
+      """main.copied_to_clipboard""": """Zkopírováno do schránky""",
+      """main.dark""": """Tmavý""",
+      """main.definitions""": """Definice""",
+      """main.donate""": """Darovat""",
+      """main.enter_text_here""": """Zde zadejte text""",
+      """main.error""": """Něco se nepovedlo""",
+      """main.follow_system""": """Systémový""",
+      """main.help""": """Nápověda""",
+      """main.input_limit""": """Chcete přeložit více než 5000 znaků""",
+      """main.install""": """Nainstalovat""",
+      """main.license""": """Licence""",
+      """main.light""": """Světlý""",
+      """main.no_internet""": """Jste bez internetu""",
       """main.ok""": """OK""",
-      """main.report_bug""": """Report a bug""",
-      """main.settings""": """Settings""",
-      """main.something_went_wrong""": """Something went wrong""",
-      """main.text_recognition""": """Text Recognition""",
-      """main.text_to_speech""": """Text-To-Speech""",
-      """main.theme""": """Theme""",
-      """main.translate""": """Translate""",
-      """main.translation""": """Translation""",
-      """main.translations""": """Translation""",
-      """main.version""": """Version""",
-      """main.website""": """Website""",
+      """main.report_bug""": """Nahlásit chybu""",
+      """main.settings""": """Nastavení""",
+      """main.something_went_wrong""": """Něco se pokazilo""",
+      """main.text_recognition""": """Rozpoznávání textu""",
+      """main.text_to_speech""": """Převod textu na řeč""",
+      """main.theme""": """Motiv""",
+      """main.translate""": """Přeložit""",
+      """main.translation""": """Překlad""",
+      """main.translations""": """Překlady""",
+      """main.version""": """Verze""",
+      """main.website""": """Webové stránky""",
     };

@@ -1,0 +1,143 @@
+langs:
+  afrikaans: afrikaans
+  albanian: albański
+  amharic: amharski
+  arabic: arabski
+  armenian: ormiański
+  autodetect: Autowykrywanie
+  azerbaijani: azerski
+  basque: baskijski
+  belarusian: białoruski
+  bengali: bengalski
+  bosnian: bośniacki
+  bulgarian: bułgarski
+  catalan: kataloński
+  cebuano: cebuański
+  chichewa: cziczewa
+  chinese: chiński
+  corsican: korsykański
+  croatian: chorwacki
+  czech: czeski
+  danish: duński
+  dutch: niderlandzki
+  english: angielski
+  esperanto: esperanto
+  estonian: estoński
+  filipino: filipiński
+  finnish: fiński
+  french: francuski
+  frisian: fryzyjski
+  galician: galicyjski
+  georgian: gruziński
+  german: niemiecki
+  greek: grecki
+  gujarati: gudżarati
+  haitian_creole: kreolski (Haiti)
+  hausa: hausa
+  hawaiian: hawajski
+  hebrew: hebrajski
+  hindi: hindi
+  hmong: hmong
+  hungarian: węgierski
+  icelandic: islandzki
+  igbo: igbo
+  indonesian: indonezyjski
+  irish: irlandzki
+  italian: włoski
+  japanese: japoński
+  javanese: jawajski
+  kannada: kannada
+  kazakh: kazachski
+  khmer: khmerski
+  kinyarwanda: ruanda-rundi
+  korean: koreański
+  kurdish_kurmanji: kurdyjski
+  kyrgyz: kirgiski
+  lao: laotański
+  latin: łaciński
+  latvian: łotewski
+  lithuanian: litewski
+  luxembourgish: luksemburski
+  macedonian: macedoński
+  malagasy: malgaski
+  malay: malajski
+  malayalam: malajalam
+  maltese: maltański
+  maori: maori
+  marathi: marathi
+  mongolian: mongolski
+  myanmar_burmese: birmański
+  nepali: nepalski
+  norwegian: norweski
+  odia_oriya: orija
+  pashto: paszto
+  persian: perski
+  polish: polski
+  portuguese: portugalski
+  punjabi: pendżabski
+  romanian: rumuński
+  russian: rosyjski
+  samoan: samoański
+  scots_gaelic: szkocki gaelicki
+  serbian: serbski
+  sesotho: sotho
+  shona: shona
+  sindhi: sindhi
+  sinhala: syngaleski
+  slovak: słowacki
+  slovenian: słoweński
+  somali: somalijski
+  spanish: hiszpański
+  sundanese: sundajski
+  swahili: suahili
+  swedish: szwedzki
+  tajik: tadżycki
+  tamil: tamilski
+  tatar: tatarski
+  telugu: telugu
+  thai: tajski
+  traditional_chinese: Traditional Chinese
+  turkish: turecki
+  turkmen: turkmeński
+  ukrainian: ukraiński
+  urdu: urdu
+  uyghur: ujgurski
+  uzbek: uzbecki
+  vietnamese: wietnamski
+  welsh: walijski
+  xhosa: xhosa
+  yiddish: jidysz
+  yoruba: joruba
+  zulu: zulu
+main:
+  about: O aplikacji
+  appearance: Wygląd
+  audio_limit: Nie można uzyskać dźwięku dla ponad 200 znaków
+  autodetect_not_supported: Autowykrywanie nie jest obsługiwane
+  cancel: Anuluj
+  contribute: Wnieś swój wkład
+  copied_to_clipboard: Skopiowano do schowka
+  dark: Ciemny
+  definitions: Definicje
+  donate: Wesprzyj
+  enter_text_here: Wpisz tutaj tekst
+  error: Wystąpił błąd
+  follow_system: Zgodny z systemowym
+  help: Pomoc
+  input_limit: Tekst źródłowy ma ponad 5000 znaków
+  install: Zainstaluj
+  license: Licencja
+  light: Jasny
+  no_internet: Brak połączenia z Internetem
+  ok: OK
+  report_bug: Zgłoś błąd
+  settings: Ustawienia
+  something_went_wrong: Coś poszło nie tak
+  text_recognition: Rozpoznawanie tekstu
+  text_to_speech: Zamiana tekstu na mowę
+  theme: Motyw
+  translate: Przetłumacz
+  translation: Tłumaczenie
+  translations: Tłumaczenia
+  version: Wersja
+  website: Strona internetowa

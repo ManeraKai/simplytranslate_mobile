@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Afrikanca
+  albanian: Arnavutça
+  amharic: Amharca
+  arabic: Arapça
+  armenian: Ermenice
+  autodetect: Otomatik belirle
+  azerbaijani: Azerice
+  basque: Baskça
+  belarusian: Belarusça
+  bengali: Bengalce
+  bosnian: Boşnakça
+  bulgarian: Bulgarca
+  catalan: Katalanca
+  cebuano: Cebuano
+  chichewa: Chichewa
+  chinese: Çince
+  corsican: Korsikaca
+  croatian: Hırvatça
+  czech: Çekce
+  danish: Danca
+  dutch: Felemenkçe
+  english: İngilizce
+  esperanto: Esperanto Dili
+  estonian: Estonyaca
+  filipino: Filipince
+  finnish: Fince
+  french: Fransızca
+  frisian: Frizye Dili
+  galician: Galca
+  georgian: Gürcüce
+  german: Almanca
+  greek: Yunanca
+  gujarati: Gujarat Dili
+  haitian_creole: Haiti Creole Dili
+  hausa: Hausa Dili
+  hawaiian: Hawai Dili
+  hebrew: İbranice
+  hindi: Hintçe
+  hmong: Hmong Dili
+  hungarian: Macarca
+  icelandic: İzlandaca
+  igbo: Igbo Dili
+  indonesian: Endonezya Dili
+  irish: İrlandaca
+  italian: İtalyanca
+  japanese: Japonca
+  javanese: Java Dili
+  kannada: Kannada Dili
+  kazakh: Kazakça
+  khmer: Khmer Dili
+  kinyarwanda: Kinyarwanda Dili
+  korean: Korece
+  kurdish_kurmanji: Kürtçe (Kurmani)
+  kyrgyz: Kırgızca
+  lao: Lao Dili
+  latin: Latince
+  latvian: Letonyaca
+  lithuanian: Litvanyaca
+  luxembourgish: Lüksemburg Dili
+  macedonian: Makedonca
+  malagasy: Malagasy Dili
+  malay: Malayca
+  malayalam: Malayalamca
+  maltese: Maltaca
+  maori: Maori Dili
+  marathi: Marathi Dili
+  mongolian: Moğolca
+  myanmar_burmese: Burmaca
+  nepali: Nepalce
+  norwegian: Norveççe
+  odia_oriya: Odia Dili (Oriya)
+  pashto: Peştuca
+  persian: Farsça
+  polish: Lehçe
+  portuguese: Portekizce
+  punjabi: Pencapça
+  romanian: Rumence
+  russian: Rusça
+  samoan: Samoa Dili
+  scots_gaelic: İskoç Galcesi
+  serbian: Sırpça
+  sesotho: Sesoto
+  shona: Şona
+  sindhi: Sindhi Dili
+  sinhala: Sinhala Dili
+  slovak: Slovakça
+  slovenian: Slovence
+  somali: Somali Dili
+  spanish: İspanyolca
+  sundanese: Sudanca
+  swahili: Swahili Dili
+  swedish: İsveççe
+  tajik: Tacikçe
+  tamil: Tamilce
+  tatar: Tatarca
+  telugu: Telugu
+  thai: Tayca
+  traditional_chinese: Traditional Chinese
+  turkish: Türkçe
+  turkmen: Türkmence
+  ukrainian: Ukraynaca
+  urdu: Urduca
+  uyghur: Uygurca
+  uzbek: Özbekçe
+  vietnamese: Vietnamca
+  welsh: Galce
+  xhosa: Xhosa Dili
+  yiddish: Yidiş
+  yoruba: Yoruba Dili
+  zulu: Zulu Dili
+main:
+  about: Hakkında
+  appearance: Görünüm
+  audio_limit: 200 karakterden fazlası için ses dosyası alınamıyor
+  autodetect_not_supported: Otomatik belirleme desteklenmiyor
+  cancel: İptal
+  contribute: Katkıda bulun
+  copied_to_clipboard: Panoya kopyalandı
+  dark: Koyu
+  definitions: Tanımlar
+  donate: Bağış Yap
+  enter_text_here: Metni buraya girin
+  error: Bir hata oluştu
+  follow_system: Sistem teması
+  help: Yardım
+  input_limit: Çeviri girdisi 5000 karakterden fazla
+  install: Kur
+  license: Lisans
+  light: Açık
+  no_internet: İnternet bağlantısı yok
+  ok: Tamam
+  report_bug: Hata bildir
+  settings: Ayarlar
+  something_went_wrong: Bir şeyler yanlış gitti
+  text_recognition: Metin Tanıma
+  text_to_speech: Metin Okuma
+  theme: Tema
+  translate: Çevir
+  translation: Çeviri
+  translations: Çeviriler
+  version: Sürüm
+  website: İnternet sitesi

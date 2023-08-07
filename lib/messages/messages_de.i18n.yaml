@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Afrikaans
+  albanian: Albanisch
+  amharic: Amharisch
+  arabic: Arabisch
+  armenian: Armenisch
+  autodetect: Automatisch
+  azerbaijani: Asberbaidschanisch
+  basque: Baskisch
+  belarusian: Belarussisch
+  bengali: Bengalisch
+  bosnian: Bosnisch
+  bulgarian: Bulgarisch
+  catalan: Katalanisch
+  cebuano: Cebuano
+  chichewa: Chichewa
+  chinese: Chinesisch (traditionell)
+  corsican: Korsisch
+  croatian: Kroatisch
+  czech: Tschechisch
+  danish: Dänisch
+  dutch: Niederländisch
+  english: Englisch
+  esperanto: Esperanto
+  estonian: Estnisch
+  filipino: Filipino
+  finnish: Finnisch
+  french: Französisch
+  frisian: Friesisch
+  galician: Galizisch
+  georgian: Georgisch
+  german: Deutsch
+  greek: Griechisch
+  gujarati: Gujarati
+  haitian_creole: Haitianisch
+  hausa: Hausa
+  hawaiian: Hawaiisch
+  hebrew: Hebräisch
+  hindi: Hindi
+  hmong: Hmong
+  hungarian: Ungarisch
+  icelandic: Isländisch
+  igbo: Igbo
+  indonesian: Indonesisch
+  irish: Irisch
+  italian: Italienisch
+  japanese: Japanisch
+  javanese: Javanisch
+  kannada: Kannada
+  kazakh: Kasachisch
+  khmer: Khmer
+  kinyarwanda: Kinyarwanda
+  korean: Koreanisch
+  kurdish_kurmanji: Kurdisch (Kurmandschi)
+  kyrgyz: Kirgisisch
+  lao: Lao
+  latin: Lateinisch
+  latvian: Lettisch
+  lithuanian: Litauisch
+  luxembourgish: Luxemburgisch
+  macedonian: Mazedonisch
+  malagasy: Malagasy
+  malay: Malaysisch
+  malayalam: Malayalam
+  maltese: Maltesisch
+  maori: Maori
+  marathi: Marathi
+  mongolian: Mongolisch
+  myanmar_burmese: Birmanisch
+  nepali: Nepalesisch
+  norwegian: Norwegisch
+  odia_oriya: Odia (Oriya)
+  pashto: Paschtu
+  persian: Persisch
+  polish: Polnisch
+  portuguese: Portugiesisch
+  punjabi: Punjabi
+  romanian: Rumänisch
+  russian: Russisch
+  samoan: Somoanisch
+  scots_gaelic: Schottisch-Gälisch
+  serbian: Serbisch
+  sesotho: Sesotho
+  shona: Shona
+  sindhi: Sindhi
+  sinhala: Singhalesisch
+  slovak: Slowakenisch
+  slovenian: Slowenisch
+  somali: Somali
+  spanish: Spanisch
+  sundanese: Sundanesisch
+  swahili: Suaheli
+  swedish: Schwedisch
+  tajik: Tadschikisch
+  tamil: Tamil
+  tatar: Tatarisch
+  telugu: Telugu
+  thai: Thailändisch
+  traditional_chinese: Traditional Chinese
+  turkish: Türkisch
+  turkmen: Turkmenisch
+  ukrainian: Ukrainisch
+  urdu: Urdu
+  uyghur: Uyghur
+  uzbek: Usbekisch
+  vietnamese: Vietnamesisch
+  welsh: Walisisch
+  xhosa: Xhosa
+  yiddish: Jiddisch
+  yoruba: Yoruba
+  zulu: Zulu
+main:
+  about: Über
+  appearance: Aussehen
+  audio_limit: Kann kein Audio führ mehr als 200 Zeichen laden
+  autodetect_not_supported: Automatische Erkennung wird nicht unterstützt
+  cancel: Abbrechen
+  contribute: Mithelfen
+  copied_to_clipboard: In die Zwischenablage kopiert
+  dark: Dunkel
+  definitions: Definitionen
+  donate: Spenden
+  enter_text_here: Text hier eingeben
+  error: Es gab einen Fehler
+  follow_system: System
+  help: Hilfe
+  input_limit: Die Übersetzungseingabe ist länger als 5000 Zeichen
+  install: Install
+  license: Lizenz
+  light: Hell
+  no_internet: Keine Internetverbindung
+  ok: OK
+  report_bug: Fehler melden
+  settings: Einstellungen
+  something_went_wrong: Etwas ist schiefgegangen
+  text_recognition: Texterkennung
+  text_to_speech: Text zu Sprache
+  theme: Thema
+  translate: Übersetze
+  translation: Übersetzung
+  translations: Übersetzungen
+  version: Version
+  website: Website

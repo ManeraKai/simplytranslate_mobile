@@ -1,0 +1,143 @@
+langs:
+  afrikaans: afrikaans
+  albanian: albanese
+  amharic: amarico
+  arabic: arabo
+  armenian: armeno
+  autodetect: Automatico
+  azerbaijani: azerbaigiano
+  basque: basco
+  belarusian: bielorusso
+  bengali: bengalese
+  bosnian: bosniaco
+  bulgarian: bulgaro
+  catalan: catalano
+  cebuano: cebuano
+  chichewa: chichewa
+  chinese: cinese
+  corsican: corso
+  croatian: croato
+  czech: ceco
+  danish: danese
+  dutch: olandese
+  english: inglese
+  esperanto: esperanto
+  estonian: estone
+  filipino: filippino
+  finnish: finlandese
+  french: francese
+  frisian: frisone
+  galician: galiziano
+  georgian: georgiano
+  german: tedesco
+  greek: greco
+  gujarati: gujarati
+  haitian_creole: creolo haitiano
+  hausa: hausa
+  hawaiian: hawaiano
+  hebrew: ebraico
+  hindi: hindi
+  hmong: hmong
+  hungarian: ungherese
+  icelandic: islandese
+  igbo: igbo
+  indonesian: indonesiano
+  irish: irlandese
+  italian: italiano
+  japanese: giapponese
+  javanese: giavanese
+  kannada: kannada
+  kazakh: kazako
+  khmer: khmer
+  kinyarwanda: kinyarwanda
+  korean: coreano
+  kurdish_kurmanji: curdo (kurmanji)
+  kyrgyz: kirghiso
+  lao: lao
+  latin: latino
+  latvian: lettone
+  lithuanian: lituano
+  luxembourgish: lussemburghese
+  macedonian: macedone
+  malagasy: malgascio
+  malay: malese
+  malayalam: malayalam
+  maltese: maltese
+  maori: maori
+  marathi: marathi
+  mongolian: mongolo
+  myanmar_burmese: birmano
+  nepali: nepalese
+  norwegian: norvegese
+  odia_oriya: odia (oriya)
+  pashto: pashtu
+  persian: persiano
+  polish: polacco
+  portuguese: portoghese
+  punjabi: punjabi
+  romanian: rumeno
+  russian: russo
+  samoan: samoano
+  scots_gaelic: gaelico scozzese
+  serbian: serbo
+  sesotho: sesotho
+  shona: shona
+  sindhi: sindhi
+  sinhala: singalese
+  slovak: slovacco
+  slovenian: sloveno
+  somali: somalo
+  spanish: spagnolo
+  sundanese: sundanese
+  swahili: swahili
+  swedish: svedese
+  tajik: tagico
+  tamil: tamil
+  tatar: tataro
+  telugu: telugu
+  thai: thailandese
+  traditional_chinese: Traditional Chinese
+  turkish: turco
+  turkmen: turkmeno
+  ukrainian: ucraino
+  urdu: urdu
+  uyghur: uiguro
+  uzbek: uzbeco
+  vietnamese: vietnamita
+  welsh: gallese
+  xhosa: xhosa
+  yiddish: yiddish
+  yoruba: yoruba
+  zulu: zulu
+main:
+  about: Informazioni
+  appearance: Aspetto
+  audio_limit: Impossibile ottenere l'audio per più di 200 caratteri
+  autodetect_not_supported: Rilevamento automatico non supportato
+  cancel: Annulla
+  contribute: Contribuisci
+  copied_to_clipboard: Copiato negli appunti
+  dark: Scuro
+  definitions: Definizioni
+  donate: Dona
+  enter_text_here: Inserisci il testo qui
+  error: Si è verificato un errore
+  follow_system: Segui il sistema
+  help: Aiuto
+  input_limit: Il testo di traduzione inserito è superiore a 5000
+  install: Installa
+  license: Licenza
+  light: Chiaro
+  no_internet: Nessuna connessione internet
+  ok: OK
+  report_bug: Segnala un errore
+  settings: Impostazioni
+  something_went_wrong: Qualcosa è andato storto
+  text_recognition: Riconoscimento del testo
+  text_to_speech: Sintesi vocale
+  theme: Tema
+  translate: Traduci
+  translation: Traduzione
+  translations: Traduzioni
+  version: Versione
+  website: Sito web

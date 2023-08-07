@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Африкаанс
+  albanian: Албанский
+  amharic: Амхарский
+  arabic: Арабский
+  armenian: Армянский
+  autodetect: Определить язык
+  azerbaijani: Азербайджанский
+  basque: Баскский
+  belarusian: Белорусский
+  bengali: Бенгальский
+  bosnian: Боснийский
+  bulgarian: Болгарский
+  catalan: Каталанский
+  cebuano: Себуанский
+  chichewa: Чичева
+  chinese: Китайский
+  corsican: Корсиканский
+  croatian: Хорватский
+  czech: Чешский
+  danish: Датский
+  dutch: Нидерландский
+  english: Английский
+  esperanto: Эсперанто
+  estonian: Эстонский
+  filipino: Филиппинский
+  finnish: Финский
+  french: Французский
+  frisian: Фризский
+  galician: Галисийский
+  georgian: Грузинский
+  german: Немецкий
+  greek: Греческий
+  gujarati: Гуджарати
+  haitian_creole: Креольский (Гаити)
+  hausa: Хауса
+  hawaiian: Гавайский
+  hebrew: Иврит
+  hindi: Хинди
+  hmong: Хмонг
+  hungarian: Венгерский
+  icelandic: Исландский
+  igbo: Игбо
+  indonesian: Индонезийский
+  irish: Ирландский
+  italian: Итальянский
+  japanese: Японский
+  javanese: Яванский
+  kannada: Каннада
+  kazakh: Казахский
+  khmer: Кхмерский
+  kinyarwanda: Киньяруанда
+  korean: Корейский
+  kurdish_kurmanji: Курдский (Курманджи)
+  kyrgyz: Киргизский
+  lao: Лаосский
+  latin: Латинский
+  latvian: Латвийский
+  lithuanian: Литовский
+  luxembourgish: Люксембургский
+  macedonian: Македонский
+  malagasy: Малагасийский
+  malay: Малайский
+  malayalam: Малаялам
+  maltese: Мальтийский
+  maori: Маори
+  marathi: Маратхи
+  mongolian: Монгольский
+  myanmar_burmese: Бирманский (Мьянма)
+  nepali: Непальский
+  norwegian: Норвежский
+  odia_oriya: Одиа (Ория)
+  pashto: Пушту
+  persian: Персидский
+  polish: Польский
+  portuguese: Португальский
+  punjabi: Панджаби
+  romanian: Румынский
+  russian: Русский
+  samoan: Самоанский
+  scots_gaelic: Шотландский (Гэльский)
+  serbian: Сербский
+  sesotho: Сесото
+  shona: Шона
+  sindhi: Синдхи
+  sinhala: Синхала
+  slovak: Словацкий
+  slovenian: Словенский
+  somali: Сомалийский
+  spanish: Испанский
+  sundanese: Суданский
+  swahili: Суахили
+  swedish: Шведский
+  tajik: Таджикский
+  tamil: Тамильский
+  tatar: Татарский
+  telugu: Телугу
+  thai: Тайский
+  traditional_chinese: Traditional Chinese
+  turkish: Турецкий
+  turkmen: Туркменский
+  ukrainian: Украинский
+  urdu: Урду
+  uyghur: Уйгурский
+  uzbek: Узбекский
+  vietnamese: Вьетнамский
+  welsh: Валлийский
+  xhosa: Кхоса
+  yiddish: Идиш
+  yoruba: Йоруба
+  zulu: Зулу
+main:
+  about: О приложении
+  appearance: Внешний вид
+  audio_limit: Невозможно воспроизвести аудио более чем для 200 символов
+  autodetect_not_supported: Автоматическое определение не поддерживается
+  cancel: Отмена
+  contribute: Сделать вклад
+  copied_to_clipboard: Скопировано в буфер обмена
+  dark: Тёмная
+  definitions: Определения
+  donate: Пожертвовать
+  enter_text_here: Введите текст в это поле
+  error: Произошла ошибка
+  follow_system: Как в системе
+  help: Помощь
+  input_limit: Введённый текст больше 5000 символов
+  install: Установить
+  license: Лицензия
+  light: Светлая
+  no_internet: Нет подключения к интернету
+  ok: OK
+  report_bug: Сообщить о проблеме
+  settings: Настройки
+  something_went_wrong: Что-то пошло не так
+  text_recognition: Распознавание текста
+  text_to_speech: Текст-в-Речь (TTS)
+  theme: Тема
+  translate: Перевести
+  translation: Перевод
+  translations: Переводы
+  version: Версия
+  website: Веб-сайт

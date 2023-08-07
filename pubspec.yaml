@@ -23,15 +23,10 @@ dependencies:
 
 flutter:
   uses-material-design: true
-  generate: true
   assets:
     - assets/
     - assets/ca/
     - assets/settings/
-
-flutter_intl:
-  enabled: true
-  class_name: L10n
   
 dev_dependencies:
   build_runner: any

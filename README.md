@@ -31,5 +31,7 @@ I use [VSCodium](https://vscodium.com/). I use the extensions [Dart](https://mar
 
 If you've inherited this project, keep in mind that there are some python scripts in `scripts/` that process translated strings for both website and app.
 
+To compile translations run `dart run build_runner build`
+
 ## Translation
 Weblate: https://hosted.weblate.org/projects/simplytranslate-mobile/

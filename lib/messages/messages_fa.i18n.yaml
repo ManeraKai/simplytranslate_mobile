@@ -1,0 +1,143 @@
+langs:
+  afrikaans: آفریقایی
+  albanian: آلبانیایی
+  amharic: امهری
+  arabic: عربی
+  armenian: ارمنی
+  autodetect: شناسایی خودکار
+  azerbaijani: آذربایجانی
+  basque: باسْکی
+  belarusian: بلاروسی
+  bengali: بنگالی
+  bosnian: بوسنیایی
+  bulgarian: بلغاری
+  catalan: کاتالانی
+  cebuano: سِبوانویی
+  chichewa: چوایی
+  chinese: چینی
+  corsican: کرسی
+  croatian: کرواتی
+  czech: چکی
+  danish: دانمارکی
+  dutch: هلندی
+  english: انگلیسی
+  esperanto: اسپرانتو
+  estonian: استونیایی
+  filipino: فیلیپینی
+  finnish: فنلاندی
+  french: فرانسوی
+  frisian: فریسی
+  galician: گالیسیایی
+  georgian: گرجی
+  german: آلمانی
+  greek: یونانی
+  gujarati: گجراتی
+  haitian_creole: کِریول آییسیِنی
+  hausa: هوسایی
+  hawaiian: هاوایی
+  hebrew: عبری
+  hindi: هندی
+  hmong: همونگ
+  hungarian: مجارستانی
+  icelandic: ایسلندی
+  igbo: ایگبو
+  indonesian: اندونزیایی
+  irish: ایرلندی
+  italian: ایتالیایی
+  japanese: ژاپنی
+  javanese: جاوه‌ای
+  kannada: کانارا
+  kazakh: قزاقی
+  khmer: خمر
+  kinyarwanda: رواندایی
+  korean: کره‌ای
+  kurdish_kurmanji: کردی
+  kyrgyz: قرقیزی
+  lao: لائو
+  latin: لاتین
+  latvian: لتونیایی
+  lithuanian: لیتوانیایی
+  luxembourgish: لوکزامبورگی
+  macedonian: مقدونی
+  malagasy: مالاگاسی
+  malay: مالایی
+  malayalam: مالایالم
+  maltese: مالتی
+  maori: مائوری
+  marathi: مراتی
+  mongolian: مغولی
+  myanmar_burmese: برمه‌ای
+  nepali: نپالی
+  norwegian: نروژی
+  odia_oriya: اودیه (اوریه)
+  pashto: پشتو
+  persian: پارسی
+  polish: لهستانی
+  portuguese: پرتقالی
+  punjabi: پنجابی
+  romanian: رومانیایی
+  russian: روسی
+  samoan: ساموآیی
+  scots_gaelic: گیلیک اسکاتلندی
+  serbian: صربی
+  sesotho: سوتو
+  shona: شونا
+  sindhi: سندی
+  sinhala: سینهالی
+  slovak: اسلواکی
+  slovenian: اسلوونیایی
+  somali: سومالیایی
+  spanish: اسپانیایی
+  sundanese: سوندایی
+  swahili: سواحِلی
+  swedish: سوئدی
+  tajik: تاجیکی
+  tamil: تامیلی
+  tatar: تاتاری
+  telugu: تلوگو
+  thai: تایلندی
+  traditional_chinese: Traditional Chinese
+  turkish: ترکی
+  turkmen: ترکمن
+  ukrainian: اوکراینی
+  urdu: اردو
+  uyghur: اویغوری
+  uzbek: ازبکی
+  vietnamese: ویتنامی
+  welsh: ولزی
+  xhosa: خوسایی
+  yiddish: ییدیش
+  yoruba: یوروبایی
+  zulu: زولو
+main:
+  about: درباره
+  appearance: ظاهر
+  audio_limit: نمی توان برای بیش از ۲۰۰ نویسه صدا دریافت کرد
+  autodetect_not_supported: Autodetect not supported
+  cancel: لغو
+  contribute: مشارکت
+  copied_to_clipboard: ذخیره در کلیپ‌بورد
+  dark: تیره
+  definitions: Definitions
+  donate: Donate
+  enter_text_here: متن را اینجا وارد کنید
+  error: یک مشکل به وجود آمده
+  follow_system: مطابق با تم دستگاه
+  help: Help
+  input_limit: ورودی ترجمه بالای ۵۰۰۰ نویسه است
+  install: Install
+  license: پروانه
+  light: روشن
+  no_internet: اتصال به اینترنت برقرار نیست
+  ok: خُب
+  report_bug: Report a bug
+  settings: تنظیمات
+  something_went_wrong: مشکلی پیش آمده
+  text_recognition: Text Recognition
+  text_to_speech: Text-To-Speech
+  theme: تم
+  translate: ترجمه
+  translation: ترجمه
+  translations: Translation
+  version: نسخه
+  website: Website

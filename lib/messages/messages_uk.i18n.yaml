@@ -1,0 +1,143 @@
+langs:
+  afrikaans: африкаанс
+  albanian: албанська
+  amharic: амгарська
+  arabic: арабська
+  armenian: вірменська
+  autodetect: Автовизначення
+  azerbaijani: азербайджанська
+  basque: баська
+  belarusian: білоруська
+  bengali: бенґальська
+  bosnian: боснійська
+  bulgarian: болгарська
+  catalan: каталонська
+  cebuano: себуанська
+  chichewa: Chichewa
+  chinese: китайська
+  corsican: корсиканська
+  croatian: Croatian
+  czech: чеська
+  danish: данська
+  dutch: Dutch
+  english: англійська
+  esperanto: есперанто
+  estonian: естонська
+  filipino: Філіпінська
+  finnish: фінська
+  french: французька
+  frisian: фризька
+  galician: галісійська
+  georgian: Georgian
+  german: німецька
+  greek: грецька
+  gujarati: Gujarati
+  haitian_creole: Haitian Creole
+  hausa: Hausa
+  hawaiian: гавайська
+  hebrew: Hebrew
+  hindi: гінді
+  hmong: Hmong
+  hungarian: угорська
+  icelandic: Icelandic
+  igbo: Igbo
+  indonesian: індонезійська
+  irish: Irish
+  italian: італійська
+  japanese: японська
+  javanese: Javanese
+  kannada: Kannada
+  kazakh: казахська
+  khmer: Khmer
+  kinyarwanda: Kinyarwanda
+  korean: кореанська
+  kurdish_kurmanji: Kurdish (Kurmanji)
+  kyrgyz: Kyrgyz
+  lao: Lao
+  latin: латинська
+  latvian: латвійська
+  lithuanian: литовська
+  luxembourgish: люксембурзька
+  macedonian: македонська
+  malagasy: Malagasy
+  malay: Malay
+  malayalam: Malayalam
+  maltese: Maltese
+  maori: Maori
+  marathi: Marathi
+  mongolian: монгольська
+  myanmar_burmese: Myanmar (Burmese)
+  nepali: непальська
+  norwegian: норвезька
+  odia_oriya: Odia (Oriya)
+  pashto: Pashto
+  persian: перська
+  polish: польська
+  portuguese: португальська
+  punjabi: Punjabi
+  romanian: ромунська
+  russian: російська
+  samoan: Samoan
+  scots_gaelic: Scots Gaelic
+  serbian: сербська
+  sesotho: Sesotho
+  shona: Shona
+  sindhi: Sindhi
+  sinhala: Sinhala
+  slovak: словацька
+  slovenian: словенська
+  somali: сомалійська
+  spanish: іспанська
+  sundanese: Sundanese
+  swahili: Swahili
+  swedish: шведська
+  tajik: таджицька
+  tamil: тамільська
+  tatar: татарська
+  telugu: Telugu
+  thai: Thai
+  traditional_chinese: Traditional Chinese
+  turkish: турецька
+  turkmen: Turkmen
+  ukrainian: українська
+  urdu: Urdu
+  uyghur: Uyghur
+  uzbek: узбецька
+  vietnamese: Vietnamese
+  welsh: Welsh
+  xhosa: Xhosa
+  yiddish: Yiddish
+  yoruba: Yoruba
+  zulu: Zul
+main:
+  about: Про застосунок
+  appearance: Вигляд
+  audio_limit: Не можливо отримати звук на більше ніж 200 символів
+  autodetect_not_supported: Автовизначення не підтримується
+  cancel: Скасувати
+  contribute: Співрозробка
+  copied_to_clipboard: Скопійовано до буфера обміну
+  dark: Темна
+  definitions: Definitions
+  donate: Пожертви
+  enter_text_here: Вводьте текст тут
+  error: Там була помилка
+  follow_system: Системна
+  help: Довідка
+  input_limit: Введений переклад перевищує 5000
+  install: Встановити
+  license: Ліцензія
+  light: Світла
+  no_internet: Нема з’єднання з Інтернетом
+  ok: Добре
+  report_bug: Звіт про ваду
+  settings: Налаштування
+  something_went_wrong: Щось пішло не так
+  text_recognition: Розпізнавання тексту
+  text_to_speech: Text-To-Speech
+  theme: Тема
+  translate: Перекласти
+  translation: Переклад
+  translations: Переклади
+  version: Версія
+  website: Вебсайт

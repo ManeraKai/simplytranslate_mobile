@@ -1,0 +1,143 @@
+langs:
+  afrikaans: ആഫ്രിക്കൻസ്
+  albanian: അൽബേനിയൻ
+  amharic: Amharic
+  arabic: അറബിക്
+  armenian: അർമേനിയൻ
+  autodetect: സ്വയം കണ്ടെത്തുക
+  azerbaijani: അസർബൈജാനി
+  basque: Basque
+  belarusian: Belarusian
+  bengali: ബംഗാളി
+  bosnian: ബോസ്നിയൻ
+  bulgarian: ബൾഗേറിയൻ
+  catalan: കറ്റാലൻ
+  cebuano: സെബുവാനോ
+  chichewa: Chichewa
+  chinese: ചൈനീസ്
+  corsican: Corsican
+  croatian: ക്രൊയേഷ്യൻ
+  czech: ചെക്ക്
+  danish: ഡാനിഷ്
+  dutch: ഡച്ച്
+  english: ഇംഗ്ലീഷ്
+  esperanto: Esperanto
+  estonian: എസ്റ്റോണിയൻ
+  filipino: ഫിലിപ്പിനോ
+  finnish: ഫിന്നിഷ്
+  french: ഫ്രഞ്ച്
+  frisian: Frisian
+  galician: ഗലീഷ്യൻ
+  georgian: ജോർജിയൻ
+  german: ജർമ്മൻ
+  greek: ഗ്രീക്ക്
+  gujarati: ഗുജറാത്തി
+  haitian_creole: Haitian Creole
+  hausa: ഹൗസ
+  hawaiian: ഹവായിയൻ
+  hebrew: ഹീബ്രു
+  hindi: ഹിന്ദി
+  hmong: Hmong
+  hungarian: ഹംഗേറിയൻ
+  icelandic: ഐസ്ലാൻഡിക്
+  igbo: Igbo
+  indonesian: ഇന്തോനേഷ്യൻ
+  irish: ഐറിഷ്
+  italian: ഇറ്റാലിയൻ
+  japanese: ജാപ്പനീസ്
+  javanese: ജാവനീസ്
+  kannada: കന്നഡ
+  kazakh: കസാഖ്
+  khmer: Khmer
+  kinyarwanda: Kinyarwanda
+  korean: കൊറിയൻ
+  kurdish_kurmanji: Kurdish (Kurmanji)
+  kyrgyz: Kyrgyz
+  lao: ലാവോ
+  latin: ലാറ്റിൻ
+  latvian: ലാത്വിയൻ
+  lithuanian: ലിത്വാനിയൻ
+  luxembourgish: ലക്സംബർഗിഷ്
+  macedonian: മാസിഡോണിയൻ
+  malagasy: മലഗാസി
+  malay: മലായ്
+  malayalam: മലയാളം
+  maltese: മാൾട്ടീസ്
+  maori: മാവോറി
+  marathi: മറാത്തി
+  mongolian: മംഗോളിയൻ
+  myanmar_burmese: മ്യാൻമർ (ബർമീസ്)
+  nepali: നേപ്പാളി
+  norwegian: നോർവീജിയൻ
+  odia_oriya: ഒഡിയ (ഒറിയ)
+  pashto: Pashto
+  persian: പേർഷ്യൻ
+  polish: പോളിഷ്
+  portuguese: പോർച്ചുഗീസ്
+  punjabi: പഞ്ചാബി
+  romanian: റൊമാനിയൻ
+  russian: റഷ്യൻ
+  samoan: Samoan
+  scots_gaelic: Scots Gaelic
+  serbian: സെർബിയൻ
+  sesotho: Sesotho
+  shona: Shona
+  sindhi: സിന്ധി
+  sinhala: സിംഹള
+  slovak: സ്ലൊവാക്
+  slovenian: സ്ലൊവേനിയൻ
+  somali: സൊമാലി
+  spanish: സ്പാനിഷ്
+  sundanese: Sundanese
+  swahili: Swahili
+  swedish: സ്വീഡിഷ്
+  tajik: താജിക്ക്
+  tamil: തമിഴ്
+  tatar: Tatar
+  telugu: തെലുങ്ക്
+  thai: തായ്
+  traditional_chinese: Traditional Chinese
+  turkish: ടർക്കിഷ്
+  turkmen: തുർക്ക്മെൻ
+  ukrainian: ഉക്രേനിയൻ
+  urdu: ഉറുദു
+  uyghur: Uyghur
+  uzbek: ഉസ്ബെക്ക്
+  vietnamese: Vietnamese
+  welsh: Welsh
+  xhosa: Xhosa
+  yiddish: Yiddish
+  yoruba: Yoruba
+  zulu: സുലു
+main:
+  about: ആപ്പിനെ കുറിച്ച്
+  appearance: കാഴ്ചയിൽ
+  audio_limit: 200-ൽ കൂടുതൽ വാക്കുകൾക്ക് ഓഡിയോ ലഭിക്കില്ല
+  autodetect_not_supported: Autodetect not supported
+  cancel: റദ്ദാക്കുക
+  contribute: സഹായം
+  copied_to_clipboard: ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി
+  dark: ഡാർക്
+  definitions: Definitions
+  donate: Donate
+  enter_text_here: ടെക്സ്റ്റ് ഇവിടെ നൽകുക
+  error: പ്രശനം ഉണ്ടായിരുന്നു
+  follow_system: സിസ്റ്റം തീം പിന്തുടരുക
+  help: Help
+  input_limit: 5000-ന് മുകളിൽ വാക്കുകൾ നൽകിയിരിക്കുന്നു
+  install: Install
+  license: ലൈസൻസ്
+  light: ലൈറ്റ്
+  no_internet: ഇന്റർനെറ്റ് കണക്ഷൻ ലഭ്യമല്ല
+  ok: ശരി
+  report_bug: Report a bug
+  settings: ക്രമീകരണങ്ങൾ
+  something_went_wrong: എന്തോ കുഴപ്പം സംഭവിച്ചു
+  text_recognition: Text Recognition
+  text_to_speech: Text-To-Speech
+  theme: തീം
+  translate: വിവർത്തനം
+  translation: വിവർത്തനം
+  translations: Translation
+  version: പതിപ്പ്
+  website: Website

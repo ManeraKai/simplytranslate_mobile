@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Afrikanso
+  albanian: Albana
+  amharic: Amharo
+  arabic: Araba
+  armenian: Armena
+  autodetect: Aŭtomate trovi
+  azerbaijani: Azerbajĝana
+  basque: Eŭska
+  belarusian: Belorusa
+  bengali: Bengala
+  bosnian: Bosna
+  bulgarian: Bulgara
+  catalan: Kataluna
+  cebuano: Cebua
+  chichewa: Malavia
+  chinese: Ĉina
+  corsican: Korsika
+  croatian: Kroata
+  czech: Ĉeĥa
+  danish: Dana
+  dutch: Nederlanda
+  english: Angla
+  esperanto: Esperanto
+  estonian: Estona
+  filipino: Filipina
+  finnish: Finna
+  french: Franca
+  frisian: Frisa
+  galician: Galega
+  georgian: Kartvela
+  german: Germana
+  greek: Greka
+  gujarati: Guĝarata
+  haitian_creole: Haitia kreola
+  hausa: Haŭsa
+  hawaiian: Havaja
+  hebrew: Hebrea
+  hindi: Hindia
+  hmong: Hmong
+  hungarian: Hungara
+  icelandic: Islanda
+  igbo: Igbo
+  indonesian: Indonezia
+  irish: Irlanda
+  italian: Itala
+  japanese: Japana
+  javanese: Java
+  kannada: Kannada
+  kazakh: Kazaĥa
+  khmer: Ĥmera
+  kinyarwanda: Ruanda
+  korean: Korea
+  kurdish_kurmanji: Kurda (norda)
+  kyrgyz: Kirgiza
+  lao: Laosa
+  latin: Latino
+  latvian: Latva
+  lithuanian: Litova
+  luxembourgish: Leceburga
+  macedonian: Makedona
+  malagasy: Malagasa
+  malay: Malaja
+  malayalam: Malajala
+  maltese: Malta
+  maori: Maoria
+  marathi: Maharaŝtra
+  mongolian: Mongola
+  myanmar_burmese: Birma
+  nepali: Nepala
+  norwegian: Norvega
+  odia_oriya: Orisa
+  pashto: Patana
+  persian: Persa
+  polish: Pola
+  portuguese: Portugala
+  punjabi: Panĝaba
+  romanian: Rumana
+  russian: Rusa
+  samoan: Samoa
+  scots_gaelic: Skotgaela
+  serbian: Serba
+  sesotho: Lesota
+  shona: Zimbabva
+  sindhi: Sinda
+  sinhala: Sinhalo
+  slovak: Slovaka
+  slovenian: Slovena
+  somali: Somalia
+  spanish: Hispana
+  sundanese: Sunda
+  swahili: Svahila
+  swedish: Sveda
+  tajik: Taĝika
+  tamil: Tamula
+  tatar: Tatara
+  telugu: Teluguo
+  thai: Taja
+  traditional_chinese: Traditional Chinese
+  turkish: Turka
+  turkmen: Turkmena
+  ukrainian: Ukraina
+  urdu: Urduo
+  uyghur: Ujgura
+  uzbek: Uzbeka
+  vietnamese: Vjetnama
+  welsh: Kimra
+  xhosa: Kosa
+  yiddish: Jido
+  yoruba: Joruba
+  zulu: Zulua
+main:
+  about: Pri
+  appearance: Aspekto
+  audio_limit: Ne eblas prononci pli ol 200 signojn
+  autodetect_not_supported: Aŭtomata trovado ne funkcias
+  cancel: Nuligi
+  contribute: Kontribui
+  copied_to_clipboard: Kopiita al tondujo
+  dark: Malhela
+  definitions: Difinoj
+  donate: Donaci
+  enter_text_here: Tajpu tekston ĉi tie
+  error: Okazis eraro
+  follow_system: Laŭ sistemo
+  help: Helpo
+  input_limit: La tradukotaĵo estas pli longa ol 5000 signoj
+  install: Instali
+  license: Permesilo
+  light: Hela
+  no_internet: Sen Interreta konekto
+  ok: Bone
+  report_bug: Raporti cimon
+  settings: Agordoj
+  something_went_wrong: Io fiaskis
+  text_recognition: Tekstorekono
+  text_to_speech: Prononcilo
+  theme: Etoso
+  translate: Traduki
+  translation: Tradukado
+  translations: Tradukoj
+  version: Versio
+  website: Retejo

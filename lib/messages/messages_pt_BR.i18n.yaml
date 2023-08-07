@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Africâner
+  albanian: Albanês
+  amharic: Amárico
+  arabic: Árabe
+  armenian: Armênio
+  autodetect: Autodetectar
+  azerbaijani: Azerbaijano
+  basque: Basco
+  belarusian: Bielorruso
+  bengali: Bengali
+  bosnian: Bósnio
+  bulgarian: Búlgaro
+  catalan: Catalão
+  cebuano: Cebuano
+  chichewa: Chewa
+  chinese: Chinês
+  corsican: Corso
+  croatian: Croata
+  czech: Tcheco
+  danish: Dinamarquês
+  dutch: Holândes
+  english: Inglês
+  esperanto: Esperanto
+  estonian: Estônio
+  filipino: Filipino
+  finnish: Finlandês
+  french: Francês
+  frisian: Frisão
+  galician: Galego
+  georgian: Georgiano
+  german: Alemão
+  greek: Grego
+  gujarati: Guzerate
+  haitian_creole: Crioulo haitiano
+  hausa: Hauçá
+  hawaiian: Havaiano
+  hebrew: Hebraico
+  hindi: Hindi
+  hmong: Hmong
+  hungarian: Húngaro
+  icelandic: Islandês
+  igbo: Ibo
+  indonesian: Indonésio
+  irish: Irlandês
+  italian: Italiano
+  japanese: Japônes
+  javanese: Javanês
+  kannada: Canarês
+  kazakh: Cazaque
+  khmer: Quemer
+  kinyarwanda: Quiniaruanda
+  korean: Coreano
+  kurdish_kurmanji: Curmânji
+  kyrgyz: Quirguiz
+  lao: Lao
+  latin: Latim
+  latvian: Letão
+  lithuanian: Lituano
+  luxembourgish: Luxemburguês
+  macedonian: Macedônio
+  malagasy: Malgaxe
+  malay: Malaio
+  malayalam: Malaiala
+  maltese: Maltês
+  maori: Maori
+  marathi: Marati
+  mongolian: Mongol
+  myanmar_burmese: Birmanês
+  nepali: Nepali
+  norwegian: Norueguês
+  odia_oriya: Oriá
+  pashto: Pachto
+  persian: Persa
+  polish: Polaco
+  portuguese: Português
+  punjabi: Panjábi
+  romanian: Romeno
+  russian: Russo
+  samoan: Samoano
+  scots_gaelic: Gaélico Escocês
+  serbian: Sérvio
+  sesotho: Sesoto
+  shona: Xona
+  sindhi: Sindi
+  sinhala: Cingalês
+  slovak: Eslovaco
+  slovenian: Esloveno
+  somali: Somali
+  spanish: Espanhol
+  sundanese: Sundanês
+  swahili: Suaíli
+  swedish: Sueco
+  tajik: Tajique
+  tamil: Tâmil
+  tatar: Tártaro
+  telugu: Telugo
+  thai: Tailandês
+  traditional_chinese: Traditional Chinese
+  turkish: Turco
+  turkmen: Turcomeno
+  ukrainian: Ucraniano
+  urdu: Urdu
+  uyghur: Uigur
+  uzbek: Usbeque
+  vietnamese: Vietnamita
+  welsh: Galês
+  xhosa: Xossa
+  yiddish: Iídiche
+  yoruba: Iorubá
+  zulu: Zulu
+main:
+  about: Sobre
+  appearance: Aparência
+  audio_limit: Não é possível obter áudio para mais de 200 caracteres
+  autodetect_not_supported: Autodetect not supported
+  cancel: Cancelar
+  contribute: Contribuir
+  copied_to_clipboard: Copiado para a área de transferência
+  dark: Escuro
+  definitions: Definitions
+  donate: Doar
+  enter_text_here: Adicione o texto aqui
+  error: Ocorreu um erro
+  follow_system: Seguir o sistema
+  help: Ajuda
+  input_limit: O texto para traduzir excede 5000 caracteres
+  install: Install
+  license: Licença
+  light: Claro
+  no_internet: Sem conexão de internet
+  ok: OK
+  report_bug: Reportar um bug
+  settings: Configurações
+  something_went_wrong: Algo deu errado
+  text_recognition: Text Recognition
+  text_to_speech: Text-To-Speech
+  theme: Tema
+  translate: Traduzir
+  translation: Tradução
+  translations: Translation
+  version: Versão
+  website: Site

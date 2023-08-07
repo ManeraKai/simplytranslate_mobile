@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Afríkanska
+  albanian: Albanska
+  amharic: Amharíska
+  arabic: Arabíska
+  armenian: Armenska
+  autodetect: Finna sjálfvirkt
+  azerbaijani: Azerska
+  basque: Baskneska
+  belarusian: Hvítrússneska
+  bengali: Bengalska
+  bosnian: Bosníska
+  bulgarian: Búlgarska
+  catalan: Katalónska
+  cebuano: Cebúanó
+  chichewa: Chichewa
+  chinese: Kínverska
+  corsican: Korsíska
+  croatian: Króatíska
+  czech: Tékkneska
+  danish: Danska
+  dutch: Hollenska
+  english: Enska
+  esperanto: Esperantó
+  estonian: Eistneska
+  filipino: Filippínska
+  finnish: Finnska
+  french: Franska
+  frisian: Frísneska
+  galician: Galísíska
+  georgian: Georgíska
+  german: Þýska
+  greek: Gríska
+  gujarati: Gujaratíska
+  haitian_creole: Haítískt kreólamál
+  hausa: Hausa
+  hawaiian: Havaíska
+  hebrew: Hebreska
+  hindi: Hindí
+  hmong: Hmong
+  hungarian: Ungverska
+  icelandic: Íslenska
+  igbo: Igbo
+  indonesian: Indonesíska
+  irish: Írska
+  italian: Ítalska
+  japanese: Japanska
+  javanese: Javanska
+  kannada: Kannada
+  kazakh: Kasakíska
+  khmer: Khmeríska
+  kinyarwanda: Kinyarwanda
+  korean: Kóreska
+  kurdish_kurmanji: Kúrdíska (Kurmanji)
+  kyrgyz: Kyrgsíska
+  lao: Laó
+  latin: Latína
+  latvian: Lettneska
+  lithuanian: Litháíska
+  luxembourgish: Lúxemborgíska
+  macedonian: Makedónska
+  malagasy: Malagasíska
+  malay: Malaíska
+  malayalam: Malaíalam
+  maltese: Maltneska
+  maori: Maori
+  marathi: Marathi
+  mongolian: Mongólska
+  myanmar_burmese: Mjanmar (búrmíska)
+  nepali: Nepalska
+  norwegian: Norska
+  odia_oriya: Odia (oryanska)
+  pashto: Pashtó
+  persian: Persneska
+  polish: Pólska
+  portuguese: Portúgalska
+  punjabi: Punjabíska
+  romanian: Rúmenska
+  russian: Rússneska
+  samoan: Samóíska
+  scots_gaelic: Skosk-gelíska
+  serbian: Serbneska
+  sesotho: Sesótó
+  shona: Shona
+  sindhi: Sindí
+  sinhala: Sinhala
+  slovak: Slóvakíska
+  slovenian: Slóvenska
+  somali: Sómalska
+  spanish: Spænska
+  sundanese: Sundaneskt
+  swahili: Svahílí
+  swedish: Sænska
+  tajik: Tadzjikíska
+  tamil: Tamílska
+  tatar: Tatarska
+  telugu: Telúgú
+  thai: Taílenska
+  traditional_chinese: Traditional Chinese
+  turkish: Tyrkneska
+  turkmen: Túrkmenska
+  ukrainian: Úkraníska
+  urdu: Úrdú
+  uyghur: Úyghúrska
+  uzbek: Úsbekíska
+  vietnamese: Víetnamska
+  welsh: Velska
+  xhosa: Xhosa
+  yiddish: Jiddíska
+  yoruba: Yórúba
+  zulu: Zúlú
+main:
+  about: Um hugbúnaðinn
+  appearance: Útlit
+  audio_limit: Næ ekki hljóði fyrir meira en 200 stafi
+  autodetect_not_supported: Sjálfvirk greining ekki studd
+  cancel: Hætta við
+  contribute: Taktu þátt
+  copied_to_clipboard: Afritað á klippispjald
+  dark: Dökkt
+  definitions: Skilgreiningar
+  donate: Styrkja
+  enter_text_here: Settu hér inn texta
+  error: Það kom upp villa
+  follow_system: Fylgja kerfisstillingum
+  help: Hjálp
+  input_limit: Inntak þýðingarinnar er fleiri en 5000 stafir
+  install: Setja upp
+  license: Notkunarleyfi
+  light: Ljóst
+  no_internet: Engin internettenging
+  ok: Í lagi
+  report_bug: Tilkynna um villu
+  settings: Stillingar
+  something_went_wrong: Eitthvað fór úrskeiðis
+  text_recognition: Textagreining
+  text_to_speech: Texti-í-tal (TTS)
+  theme: Þema
+  translate: Þýða
+  translation: Þýðing
+  translations: Þýðingar
+  version: Útgáfa
+  website: Vefsvæði

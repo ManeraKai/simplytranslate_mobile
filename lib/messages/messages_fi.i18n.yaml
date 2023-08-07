@@ -1,0 +1,143 @@
+langs:
+  afrikaans: afrikaans
+  albanian: albania
+  amharic: amhara
+  arabic: arabia
+  armenian: armenia
+  autodetect: Automaattinen
+  azerbaijani: azerbaidžani
+  basque: baski
+  belarusian: valkovenäjä
+  bengali: bengali
+  bosnian: bosnia
+  bulgarian: bulgaria
+  catalan: katalaani
+  cebuano: cebuano
+  chichewa: chichewa
+  chinese: kiina
+  corsican: korsika
+  croatian: kroaatti
+  czech: tšekki
+  danish: tanska
+  dutch: hollanti
+  english: englanti
+  esperanto: esperanto
+  estonian: viro
+  filipino: Filipino
+  finnish: suomi
+  french: ranska
+  frisian: friisi
+  galician: Galician
+  georgian: Georgian
+  german: saksa
+  greek: kreikka
+  gujarati: gudžarati
+  haitian_creole: Haitin kreoli
+  hausa: hausa
+  hawaiian: havaiji
+  hebrew: heprea
+  hindi: hindi
+  hmong: hmong
+  hungarian: unkari
+  icelandic: islanti
+  igbo: igbo
+  indonesian: indonesia
+  irish: iiri
+  italian: italia
+  japanese: japani
+  javanese: jaava
+  kannada: kannada
+  kazakh: kazakki
+  khmer: khmer
+  kinyarwanda: kinyarwanda
+  korean: korea
+  kurdish_kurmanji: kurdi (kurmanji)
+  kyrgyz: kirgiisi
+  lao: lao
+  latin: latina
+  latvian: latvia
+  lithuanian: liettua
+  luxembourgish: Luxembourgish
+  macedonian: Macedonian
+  malagasy: Malagasy
+  malay: Malay
+  malayalam: Malayalam
+  maltese: malta
+  maori: maori
+  marathi: marathi
+  mongolian: mongoli
+  myanmar_burmese: Myanmar (Burmese)
+  nepali: nepali
+  norwegian: norja
+  odia_oriya: Odia (Oriya)
+  pashto: paštu
+  persian: persia
+  polish: puola
+  portuguese: portugali
+  punjabi: punjabi
+  romanian: romania
+  russian: venäjä
+  samoan: Samoan
+  scots_gaelic: skotlantilainen gaeli
+  serbian: Serbian
+  sesotho: Sesotho
+  shona: Shona
+  sindhi: Sindhi
+  sinhala: Sinhala
+  slovak: slovakki
+  slovenian: Slovenian
+  somali: somali
+  spanish: espanja
+  sundanese: Sundanese
+  swahili: Swahili
+  swedish: ruotsi
+  tajik: Tajik
+  tamil: Tamil
+  tatar: Tatar
+  telugu: Telugu
+  thai: Thai
+  traditional_chinese: Traditional Chinese
+  turkish: Turkish
+  turkmen: Turkmen
+  ukrainian: Ukrainian
+  urdu: Urdu
+  uyghur: Uyghur
+  uzbek: uzbekki
+  vietnamese: Vietnamese
+  welsh: kymri
+  xhosa: xhosa
+  yiddish: jiddiš
+  yoruba: joruba
+  zulu: zulu
+main:
+  about: Tietoja
+  appearance: Ulkonäkö
+  audio_limit: Ääntä ei voi saada yli 200 merkille
+  autodetect_not_supported: Automaattista tunnistusta ei tueta
+  cancel: Peruuta
+  contribute: Osallistu
+  copied_to_clipboard: Tallennettu leikepöydälle
+  dark: Tumma
+  definitions: Määritelmät
+  donate: Lahjoita
+  enter_text_here: Kirjoita teksti tähän
+  error: Tapahtui virhe
+  follow_system: Seuraa järjestelmää
+  help: Apua
+  input_limit: Käännöksen syöttö on yli 5000
+  install: Asenna
+  license: Lisenssi
+  light: Vaalea
+  no_internet: Ei internet-yhteyttä
+  ok: OK
+  report_bug: Ilmoita virheestä
+  settings: Asetukset
+  something_went_wrong: Jokin meni pieleen
+  text_recognition: Tekstintunnistus
+  text_to_speech: Teksti puheeksi
+  theme: Teema
+  translate: Käännä
+  translation: Käännös
+  translations: Käännökset
+  version: Versio
+  website: Verkkosivusto

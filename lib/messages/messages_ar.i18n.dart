@@ -54,55 +54,19 @@ class MessagesAr extends Messages {
   const MessagesAr();
   String get locale => "ar";
   String get languageCode => "ar";
-  MainMessagesAr get main => MainMessagesAr(this);
   LangsMessagesAr get langs => LangsMessagesAr(this);
-}
-
-class MainMessagesAr extends MainMessages {
-  final MessagesAr _parent;
-  const MainMessagesAr(this._parent) : super(_parent);
-  String get copied_to_clipboard => """نُسخ إلى الحافظة""";
-  String get translate => """ترجم""";
-  String get enter_text_here => """أدخل النص هنا""";
-  String get something_went_wrong => """هناك خطأ ما""";
-  String get no_internet => """لا يوجد انترنت""";
-  String get ok => """حسناً""";
-  String get cancel => """إلغاء""";
-  String get input_limit => """عدد أحرف النص أكثر من 5000""";
-  String get audio_limit => """لا يمكن جلب الصوت لأكثر من 200 حرف""";
-  String get settings => """الإعدادات""";
-  String get appearance => """المظهر""";
-  String get translation => """الترجمة""";
-  String get error => """هناك خطأ ما""";
-  String get theme => """السمة""";
-  String get light => """فاتح""";
-  String get dark => """داكن""";
-  String get follow_system => """حسب النظام""";
-  String get about => """عن""";
-  String get contribute => """المساهمة""";
-  String get version => """الإصدار""";
-  String get license => """الرخصة""";
-  String get help => """المساعدة""";
-  String get donate => """تبرع""";
-  String get report_bug => """بلّغ عن خطأ""";
-  String get website => """الموقع""";
-  String get text_recognition => """التعرف على النص""";
-  String get install => """Install""";
-  String get autodetect_not_supported => """التلقائي غير مدعوم""";
-  String get text_to_speech => """نص-إلى-صوت""";
-  String get definitions => """المفردات""";
-  String get translations => """الترجمات""";
+  MainMessagesAr get main => MainMessagesAr(this);
 }
 
 class LangsMessagesAr extends LangsMessages {
   final MessagesAr _parent;
   const LangsMessagesAr(this._parent) : super(_parent);
-  String get autodetect => """تلقائي""";
   String get afrikaans => """الأفريقانية""";
   String get albanian => """الألبانية""";
   String get amharic => """الأمهرية""";
   String get arabic => """العربية""";
   String get armenian => """الأرمنية""";
+  String get autodetect => """تلقائي""";
   String get azerbaijani => """الأذرية""";
   String get basque => """الباسكية""";
   String get belarusian => """البيلاروسية""";
@@ -113,7 +77,6 @@ class LangsMessagesAr extends LangsMessages {
   String get cebuano => """السيبيوانية""";
   String get chichewa => """تشيتشوا""";
   String get chinese => """الصينية""";
-  String get traditional_chinese => """الصينية التقليدية""";
   String get corsican => """الكورسيكي""";
   String get croatian => """الكرواتية""";
   String get czech => """التشيكية""";
@@ -195,6 +158,7 @@ class LangsMessagesAr extends LangsMessages {
   String get tatar => """التتارية""";
   String get telugu => """التيلوجو""";
   String get thai => """التايلاندية""";
+  String get traditional_chinese => """الصينية التقليدية""";
   String get turkish => """التركية""";
   String get turkmen => """التركمانية""";
   String get ukrainian => """الأوكرانية""";
@@ -209,44 +173,49 @@ class LangsMessagesAr extends LangsMessages {
   String get zulu => """الزولوية""";
 }
 
+class MainMessagesAr extends MainMessages {
+  final MessagesAr _parent;
+  const MainMessagesAr(this._parent) : super(_parent);
+  String get about => """عن""";
+  String get appearance => """المظهر""";
+  String get audio_limit => """لا يمكن جلب الصوت لأكثر من 200 حرف""";
+  String get autodetect_not_supported => """التلقائي غير مدعوم""";
+  String get cancel => """إلغاء""";
+  String get contribute => """المساهمة""";
+  String get copied_to_clipboard => """نُسخ إلى الحافظة""";
+  String get dark => """داكن""";
+  String get definitions => """المفردات""";
+  String get donate => """تبرع""";
+  String get enter_text_here => """أدخل النص هنا""";
+  String get error => """هناك خطأ ما""";
+  String get follow_system => """حسب النظام""";
+  String get help => """المساعدة""";
+  String get input_limit => """عدد أحرف النص أكثر من 5000""";
+  String get install => """Install""";
+  String get license => """الرخصة""";
+  String get light => """فاتح""";
+  String get no_internet => """لا يوجد انترنت""";
+  String get ok => """حسناً""";
+  String get report_bug => """بلّغ عن خطأ""";
+  String get settings => """الإعدادات""";
+  String get something_went_wrong => """هناك خطأ ما""";
+  String get text_recognition => """التعرف على النص""";
+  String get text_to_speech => """نص-إلى-صوت""";
+  String get theme => """السمة""";
+  String get translate => """ترجم""";
+  String get translation => """الترجمة""";
+  String get translations => """الترجمات""";
+  String get version => """الإصدار""";
+  String get website => """الموقع""";
+}
+
 Map<String, String> get messagesArMap => {
-      """main.copied_to_clipboard""": """نُسخ إلى الحافظة""",
-      """main.translate""": """ترجم""",
-      """main.enter_text_here""": """أدخل النص هنا""",
-      """main.something_went_wrong""": """هناك خطأ ما""",
-      """main.no_internet""": """لا يوجد انترنت""",
-      """main.ok""": """حسناً""",
-      """main.cancel""": """إلغاء""",
-      """main.input_limit""": """عدد أحرف النص أكثر من 5000""",
-      """main.audio_limit""": """لا يمكن جلب الصوت لأكثر من 200 حرف""",
-      """main.settings""": """الإعدادات""",
-      """main.appearance""": """المظهر""",
-      """main.translation""": """الترجمة""",
-      """main.error""": """هناك خطأ ما""",
-      """main.theme""": """السمة""",
-      """main.light""": """فاتح""",
-      """main.dark""": """داكن""",
-      """main.follow_system""": """حسب النظام""",
-      """main.about""": """عن""",
-      """main.contribute""": """المساهمة""",
-      """main.version""": """الإصدار""",
-      """main.license""": """الرخصة""",
-      """main.help""": """المساعدة""",
-      """main.donate""": """تبرع""",
-      """main.report_bug""": """بلّغ عن خطأ""",
-      """main.website""": """الموقع""",
-      """main.text_recognition""": """التعرف على النص""",
-      """main.install""": """Install""",
-      """main.autodetect_not_supported""": """التلقائي غير مدعوم""",
-      """main.text_to_speech""": """نص-إلى-صوت""",
-      """main.definitions""": """المفردات""",
-      """main.translations""": """الترجمات""",
-      """langs.autodetect""": """تلقائي""",
       """langs.afrikaans""": """الأفريقانية""",
       """langs.albanian""": """الألبانية""",
       """langs.amharic""": """الأمهرية""",
       """langs.arabic""": """العربية""",
       """langs.armenian""": """الأرمنية""",
+      """langs.autodetect""": """تلقائي""",
       """langs.azerbaijani""": """الأذرية""",
       """langs.basque""": """الباسكية""",
       """langs.belarusian""": """البيلاروسية""",
@@ -257,7 +226,6 @@ Map<String, String> get messagesArMap => {
       """langs.cebuano""": """السيبيوانية""",
       """langs.chichewa""": """تشيتشوا""",
       """langs.chinese""": """الصينية""",
-      """langs.traditional_chinese""": """الصينية التقليدية""",
       """langs.corsican""": """الكورسيكي""",
       """langs.croatian""": """الكرواتية""",
       """langs.czech""": """التشيكية""",
@@ -339,6 +307,7 @@ Map<String, String> get messagesArMap => {
       """langs.tatar""": """التتارية""",
       """langs.telugu""": """التيلوجو""",
       """langs.thai""": """التايلاندية""",
+      """langs.traditional_chinese""": """الصينية التقليدية""",
       """langs.turkish""": """التركية""",
       """langs.turkmen""": """التركمانية""",
       """langs.ukrainian""": """الأوكرانية""",
@@ -351,4 +320,35 @@ Map<String, String> get messagesArMap => {
       """langs.yiddish""": """الييدية""",
       """langs.yoruba""": """اليورباية""",
       """langs.zulu""": """الزولوية""",
+      """main.about""": """عن""",
+      """main.appearance""": """المظهر""",
+      """main.audio_limit""": """لا يمكن جلب الصوت لأكثر من 200 حرف""",
+      """main.autodetect_not_supported""": """التلقائي غير مدعوم""",
+      """main.cancel""": """إلغاء""",
+      """main.contribute""": """المساهمة""",
+      """main.copied_to_clipboard""": """نُسخ إلى الحافظة""",
+      """main.dark""": """داكن""",
+      """main.definitions""": """المفردات""",
+      """main.donate""": """تبرع""",
+      """main.enter_text_here""": """أدخل النص هنا""",
+      """main.error""": """هناك خطأ ما""",
+      """main.follow_system""": """حسب النظام""",
+      """main.help""": """المساعدة""",
+      """main.input_limit""": """عدد أحرف النص أكثر من 5000""",
+      """main.install""": """Install""",
+      """main.license""": """الرخصة""",
+      """main.light""": """فاتح""",
+      """main.no_internet""": """لا يوجد انترنت""",
+      """main.ok""": """حسناً""",
+      """main.report_bug""": """بلّغ عن خطأ""",
+      """main.settings""": """الإعدادات""",
+      """main.something_went_wrong""": """هناك خطأ ما""",
+      """main.text_recognition""": """التعرف على النص""",
+      """main.text_to_speech""": """نص-إلى-صوت""",
+      """main.theme""": """السمة""",
+      """main.translate""": """ترجم""",
+      """main.translation""": """الترجمة""",
+      """main.translations""": """الترجمات""",
+      """main.version""": """الإصدار""",
+      """main.website""": """الموقع""",
     };

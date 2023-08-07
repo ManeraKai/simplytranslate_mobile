@@ -1,42 +1,10 @@
-main:
-  copied_to_clipboard: نُسخ إلى الحافظة
-  translate: ترجم
-  enter_text_here: أدخل النص هنا
-  something_went_wrong: هناك خطأ ما
-  no_internet: لا يوجد انترنت
-  ok: حسناً
-  cancel: إلغاء
-  input_limit: عدد أحرف النص أكثر من 5000
-  audio_limit: لا يمكن جلب الصوت لأكثر من 200 حرف
-  settings: الإعدادات
-  appearance: المظهر
-  translation: الترجمة
-  error: هناك خطأ ما
-  theme: السمة
-  light: فاتح
-  dark: داكن
-  follow_system: حسب النظام
-  about: عن
-  contribute: المساهمة
-  version: الإصدار
-  license: الرخصة
-  help: المساعدة
-  donate: تبرع
-  report_bug: بلّغ عن خطأ
-  website: الموقع
-  text_recognition: التعرف على النص
-  install: Install
-  autodetect_not_supported: التلقائي غير مدعوم
-  text_to_speech: نص-إلى-صوت
-  definitions: المفردات
-  translations: الترجمات
 langs:
-  autodetect: تلقائي
   afrikaans: الأفريقانية
   albanian: الألبانية
   amharic: الأمهرية
   arabic: العربية
   armenian: الأرمنية
+  autodetect: تلقائي
   azerbaijani: الأذرية
   basque: الباسكية
   belarusian: البيلاروسية
@@ -47,7 +15,6 @@ langs:
   cebuano: السيبيوانية
   chichewa: تشيتشوا
   chinese: الصينية
-  traditional_chinese: الصينية التقليدية
   corsican: الكورسيكي
   croatian: الكرواتية
   czech: التشيكية
@@ -129,6 +96,7 @@ langs:
   tatar: التتارية
   telugu: التيلوجو
   thai: التايلاندية
+  traditional_chinese: الصينية التقليدية
   turkish: التركية
   turkmen: التركمانية
   ukrainian: الأوكرانية
@@ -141,3 +109,35 @@ langs:
   yiddish: الييدية
   yoruba: اليورباية
   zulu: الزولوية
+main:
+  about: عن
+  appearance: المظهر
+  audio_limit: لا يمكن جلب الصوت لأكثر من 200 حرف
+  autodetect_not_supported: التلقائي غير مدعوم
+  cancel: إلغاء
+  contribute: المساهمة
+  copied_to_clipboard: نُسخ إلى الحافظة
+  dark: داكن
+  definitions: المفردات
+  donate: تبرع
+  enter_text_here: أدخل النص هنا
+  error: هناك خطأ ما
+  follow_system: حسب النظام
+  help: المساعدة
+  input_limit: عدد أحرف النص أكثر من 5000
+  install: Install
+  license: الرخصة
+  light: فاتح
+  no_internet: لا يوجد انترنت
+  ok: حسناً
+  report_bug: بلّغ عن خطأ
+  settings: الإعدادات
+  something_went_wrong: هناك خطأ ما
+  text_recognition: التعرف على النص
+  text_to_speech: نص-إلى-صوت
+  theme: السمة
+  translate: ترجم
+  translation: الترجمة
+  translations: الترجمات
+  version: الإصدار
+  website: الموقع

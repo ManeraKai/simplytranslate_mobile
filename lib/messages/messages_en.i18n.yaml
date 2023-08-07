@@ -1,20 +1,20 @@
 langs:
-  afrikaans: afrikánština
-  albanian: albánština
-  amharic: amharština
-  arabic: arabština
-  armenian: arménština
-  autodetect: Detekovat automaticky
-  azerbaijani: ázerbájdžánština
-  basque: baskičtina
-  belarusian: běloruština
-  bengali: bengálština
-  bosnian: bosenština
-  bulgarian: bulharština
-  catalan: katalánština
-  cebuano: cebuánština
+  afrikaans: Afrikaans
+  albanian: Albanian
+  amharic: Amharic
+  arabic: Arabic
+  armenian: Armenian
+  autodetect: Autodetect
+  azerbaijani: Azerbaijani
+  basque: Basque
+  belarusian: Belarusian
+  bengali: Bengali
+  bosnian: Bosnian
+  bulgarian: Bulgarian
+  catalan: Catalan
+  cebuano: Cebuano
   chichewa: Chichewa
-  chinese: čínština
+  chinese: Chinese
   corsican: Corsican
   croatian: Croatian
   czech: Czech
@@ -108,36 +108,36 @@ langs:
   xhosa: Xhosa
   yiddish: Yiddish
   yoruba: Yoruba
-  zulu: Zul
+  zulu: Zulu
 main:
-  about: O aplikaci
-  appearance: Vzhled
-  audio_limit: Nelze získat zvuk pro více než 200 znaků
-  autodetect_not_supported: Automatická detekce není podporována
-  cancel: Zrušit
-  contribute: Přispějte
-  copied_to_clipboard: Zkopírováno do schránky
-  dark: Tmavý
-  definitions: Definice
-  donate: Darovat
-  enter_text_here: Zde zadejte text
-  error: Něco se nepovedlo
-  follow_system: Systémový
-  help: Nápověda
-  input_limit: Chcete přeložit více než 5000 znaků
-  install: Nainstalovat
-  license: Licence
-  light: Světlý
-  no_internet: Jste bez internetu
+  about: About
+  appearance: Appearance
+  audio_limit: Cannot get audio for more than 200 characters
+  autodetect_not_supported: Autodetect not supported
+  cancel: Cancel
+  contribute: Contribute
+  copied_to_clipboard: Copied to clipboard
+  dark: Dark
+  definitions: Definitions
+  donate: Donate
+  enter_text_here: Enter text here
+  error: There was an error
+  follow_system: Follow system
+  help: Help
+  input_limit: The translation input is above 5000
+  install: Install
+  license: License
+  light: Light
+  no_internet: No internet connection
   ok: OK
-  report_bug: Nahlásit chybu
-  settings: Nastavení
-  something_went_wrong: Něco se pokazilo
-  text_recognition: Rozpoznávání textu
-  text_to_speech: Převod textu na řeč
-  theme: Motiv
-  translate: Přeložit
-  translation: Překlad
-  translations: Překlady
-  version: Verze
-  website: Webové stránky
+  report_bug: Report a bug
+  settings: Settings
+  something_went_wrong: Something went wrong
+  text_recognition: Text Recognition
+  text_to_speech: Text-To-Speech
+  theme: Theme
+  translate: Translate
+  translation: Translation
+  translations: Translations
+  version: Version
+  website: Website

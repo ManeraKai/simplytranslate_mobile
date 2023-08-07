@@ -1,42 +1,10 @@
-main:
-  copied_to_clipboard: Copied to clipboard
-  translate: Translate
-  enter_text_here: Enter text here
-  something_went_wrong: Something went wrong
-  no_internet: No internet connection
-  ok: OK
-  cancel: Cancel
-  input_limit: The translation input is above 5000
-  audio_limit: Cannot get audio for more than 200 characters
-  settings: Settings
-  appearance: Appearance
-  translation: Translation
-  error: There was an error
-  theme: Theme
-  light: Light
-  dark: Dark
-  follow_system: Follow system
-  about: About
-  contribute: Contribute
-  version: Version
-  license: License
-  help: Help
-  donate: Donate
-  report_bug: Report a bug
-  website: Website
-  text_recognition: Text Recognition
-  install: Install
-  autodetect_not_supported: Autodetect not supported
-  text_to_speech: Text-To-Speech
-  definitions: Definitions
-  translations: Translation
 langs:
-  autodetect: Autodetect
   afrikaans: Afrikaans
   albanian: Albanian
   amharic: Amharic
   arabic: Arabic
   armenian: Armenian
+  autodetect: Autodetect
   azerbaijani: Azerbaijani
   basque: Basque
   belarusian: Belarusian
@@ -47,7 +15,6 @@ langs:
   cebuano: Cebuano
   chichewa: Chichewa
   chinese: Chinese
-  traditional_chinese: Traditional Chinese
   corsican: Corsican
   croatian: Croatian
   czech: Czech
@@ -129,6 +96,7 @@ langs:
   tatar: Tatar
   telugu: Telugu
   thai: Thai
+  traditional_chinese: Traditional Chinese
   turkish: Turkish
   turkmen: Turkmen
   ukrainian: Ukrainian
@@ -141,3 +109,35 @@ langs:
   yiddish: Yiddish
   yoruba: Yoruba
   zulu: Zul
+main:
+  about: About
+  appearance: Appearance
+  audio_limit: Cannot get audio for more than 200 characters
+  autodetect_not_supported: Autodetect not supported
+  cancel: Cancel
+  contribute: Contribute
+  copied_to_clipboard: Copied to clipboard
+  dark: Dark
+  definitions: Definitions
+  donate: Donate
+  enter_text_here: Enter text here
+  error: There was an error
+  follow_system: Follow system
+  help: Help
+  input_limit: The translation input is above 5000
+  install: Install
+  license: License
+  light: Light
+  no_internet: No internet connection
+  ok: OK
+  report_bug: Report a bug
+  settings: Settings
+  something_went_wrong: Something went wrong
+  text_recognition: Text Recognition
+  text_to_speech: Text-To-Speech
+  theme: Theme
+  translate: Translate
+  translation: Translation
+  translations: Translation
+  version: Version
+  website: Website

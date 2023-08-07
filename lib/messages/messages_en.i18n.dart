@@ -1,6 +1,7 @@
 // GENERATED FILE, do not edit!
 // ignore_for_file: annotate_overrides, non_constant_identifier_names, prefer_single_quotes, unused_element, unused_field
 import 'package:i18n/i18n.dart' as i18n;
+import 'messages.i18n.dart';
 
 String get _languageCode => 'en';
 String _plural(int count,
@@ -49,17 +50,17 @@ String _cardinal(
       other: other,
     );
 
-class Messages {
-  const Messages();
+class MessagesEn extends Messages {
+  const MessagesEn();
   String get locale => "en";
   String get languageCode => "en";
-  LangsMessages get langs => LangsMessages(this);
-  MainMessages get main => MainMessages(this);
+  LangsMessagesEn get langs => LangsMessagesEn(this);
+  MainMessagesEn get main => MainMessagesEn(this);
 }
 
-class LangsMessages {
-  final Messages _parent;
-  const LangsMessages(this._parent);
+class LangsMessagesEn extends LangsMessages {
+  final MessagesEn _parent;
+  const LangsMessagesEn(this._parent) : super(_parent);
   String get afrikaans => """Afrikaans""";
   String get albanian => """Albanian""";
   String get amharic => """Amharic""";
@@ -169,12 +170,12 @@ class LangsMessages {
   String get xhosa => """Xhosa""";
   String get yiddish => """Yiddish""";
   String get yoruba => """Yoruba""";
-  String get zulu => """Zul""";
+  String get zulu => """Zulu""";
 }
 
-class MainMessages {
-  final Messages _parent;
-  const MainMessages(this._parent);
+class MainMessagesEn extends MainMessages {
+  final MessagesEn _parent;
+  const MainMessagesEn(this._parent) : super(_parent);
   String get about => """About""";
   String get appearance => """Appearance""";
   String get audio_limit => """Cannot get audio for more than 200 characters""";
@@ -203,12 +204,12 @@ class MainMessages {
   String get theme => """Theme""";
   String get translate => """Translate""";
   String get translation => """Translation""";
-  String get translations => """Translation""";
+  String get translations => """Translations""";
   String get version => """Version""";
   String get website => """Website""";
 }
 
-Map<String, String> get messagesMap => {
+Map<String, String> get messagesEnMap => {
       """langs.afrikaans""": """Afrikaans""",
       """langs.albanian""": """Albanian""",
       """langs.amharic""": """Amharic""",
@@ -318,7 +319,7 @@ Map<String, String> get messagesMap => {
       """langs.xhosa""": """Xhosa""",
       """langs.yiddish""": """Yiddish""",
       """langs.yoruba""": """Yoruba""",
-      """langs.zulu""": """Zul""",
+      """langs.zulu""": """Zulu""",
       """main.about""": """About""",
       """main.appearance""": """Appearance""",
       """main.audio_limit""":
@@ -348,7 +349,7 @@ Map<String, String> get messagesMap => {
       """main.theme""": """Theme""",
       """main.translate""": """Translate""",
       """main.translation""": """Translation""",
-      """main.translations""": """Translation""",
+      """main.translations""": """Translations""",
       """main.version""": """Version""",
       """main.website""": """Website""",
     };

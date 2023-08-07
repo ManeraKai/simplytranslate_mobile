@@ -1,0 +1,143 @@
+langs:
+  afrikaans: Αφρικάανς
+  albanian: Αλβανικά
+  amharic: Αμχαρικά
+  arabic: Αραβικά
+  armenian: Αρμενικά
+  autodetect: Αυτόματη αναγνώριση
+  azerbaijani: Αζερμπαϊτζανικά
+  basque: Βασκικά
+  belarusian: Λευκορωσικά
+  bengali: Βεγγαλική
+  bosnian: Βοσνιακά
+  bulgarian: Βουλγαρικά
+  catalan: Καταλανικά
+  cebuano: Σεμπουάνο
+  chichewa: Τσιτσέουα
+  chinese: Κινεζικά
+  corsican: Κορσικανικά
+  croatian: Κροατικά
+  czech: Τσεχικά
+  danish: Δανικά
+  dutch: Ολλανδικά
+  english: Αγγλικά
+  esperanto: Εσπεράντο
+  estonian: Εσθονικά
+  filipino: Φιλιπινεζικά
+  finnish: Φινλανδικά
+  french: Γαλλικά
+  frisian: Φριζιανά
+  galician: Γαλικιακά
+  georgian: Γεωργιανά
+  german: Γερμανικά
+  greek: Ελληνικά
+  gujarati: Γκουτζαρατικά
+  haitian_creole: Κρεόλ Αϊτής
+  hausa: Χάουσα
+  hawaiian: Χαβαϊκά
+  hebrew: Εβραϊκά
+  hindi: Χίντι
+  hmong: Χμονγκ
+  hungarian: Ουγγρικά
+  icelandic: Ισλανδικά
+  igbo: Ίγκμπο
+  indonesian: Ινδονησιακά
+  irish: Ιρλανδικά
+  italian: Ιταλικά
+  japanese: Ιαπωνικά
+  javanese: Τζαβανεζικά
+  kannada: Κανάντα
+  kazakh: Καζακστανικά
+  khmer: Χμερ
+  kinyarwanda: Κινιαρουάντα
+  korean: Κορεατικά
+  kurdish_kurmanji: Κουρδικά
+  kyrgyz: Κιργιζιανά
+  lao: Λάο
+  latin: Λατινικά
+  latvian: Λετονικά
+  lithuanian: Λιθουνιακά
+  luxembourgish: Λουξεμβουργιανά
+  macedonian: Σλαβομακεδονικά
+  malagasy: Μαλαγάσι
+  malay: Μαλέι
+  malayalam: Μαλαγιάλαμ
+  maltese: Μαλτεζικά
+  maori: Μαορί
+  marathi: Μαραθικά
+  mongolian: Μογγολικά
+  myanmar_burmese: Βιρμανικά
+  nepali: Νεπαλικά
+  norwegian: Νορβηγικά
+  odia_oriya: Όντια (Ορίγια)
+  pashto: Πάστο
+  persian: Περσικά
+  polish: Πολωνικά
+  portuguese: Πορτογαλικά
+  punjabi: Παντζάμπι
+  romanian: Ρουμανικά
+  russian: Ρωσικά
+  samoan: Σαμοανικά
+  scots_gaelic: Γαελικά Σκοτίας
+  serbian: Σερβικά
+  sesotho: Σεσότο
+  shona: Σόνα
+  sindhi: Σίντι
+  sinhala: Σινχάλα
+  slovak: Σλοβακικά
+  slovenian: Σλοβενικά
+  somali: Σομαλικά
+  spanish: Ισπανικά
+  sundanese: Σούντα
+  swahili: Σουαχίλι
+  swedish: Σουηδικά
+  tajik: Τατζικιστανικά
+  tamil: Ταμίλ
+  tatar: Ταταρικά
+  telugu: Τελούγκου
+  thai: Ταϊλανδεζικά
+  traditional_chinese: Traditional Chinese
+  turkish: Tουρκικά
+  turkmen: Τουρκμενικά
+  ukrainian: Ουκρανικά
+  urdu: Ουρντού
+  uyghur: Ουιγούρ
+  uzbek: Ουζμπεκικά
+  vietnamese: Βιετναμεζικά
+  welsh: Ουαλικά
+  xhosa: Ζόσα
+  yiddish: Γίντις
+  yoruba: Γιορούμπα
+  zulu: Ζουλού
+main:
+  about: Σχετικά
+  appearance: Εμφάνιση
+  audio_limit: Δεν είναι δυνατή η λήψη ήχου για πάνω από 200 χαρακτήρες
+  autodetect_not_supported: Autodetect not supported
+  cancel: Ακύρωση
+  contribute: Συνεισφέρετε
+  copied_to_clipboard: Αντιγράφηκε στο πρόχειρο
+  dark: Σκούρο
+  definitions: Definitions
+  donate: Κάντε μια δωρεά
+  enter_text_here: Πληκτρολογήστε κείμενο εδώ
+  error: Υπήρχε ένα σφάλμα
+  follow_system: Ακολούθησε το θέμα του συστήματος
+  help: Βοήθεια
+  input_limit: Οι χαρακτήρες που εισήχθηκαν για μετάφραση είναι πάνω από 5000
+  install: Install
+  license: Άδεια
+  light: Φωτεινό
+  no_internet: Δεν υπάρχει σύνδεση στο διαδίκτυο
+  ok: OK
+  report_bug: Αναφέρετε ένα bug
+  settings: Ρυθμίσεις
+  something_went_wrong: Κάτι δεν πήγε καλά
+  text_recognition: Text Recognition
+  text_to_speech: Text-To-Speech
+  theme: Θέμα
+  translate: Μετάφραση
+  translation: Μετάφραση
+  translations: Translation
+  version: Έκδοση
+  website: Ιστοσελίδα
