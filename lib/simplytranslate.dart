@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:html/parser.dart' as html;
 import 'package:http/http.dart' as http;
+import 'package:simplytranslate_mobile/data.dart';
 
 const userAgent =
     "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0";
@@ -65,7 +66,6 @@ Future<Map<String, dynamic>> translate(
     var numMatch = RegExp(r"\n(\d+)\n").firstMatch(responseText);
     var frontPad = numMatch!.end;
     var endNum = frontPad + int.parse(numMatch.group(1)!) - 1;
-
     var data = jsonDecode(responseText.substring(frontPad, endNum));
     data = data[0][2];
     data = jsonDecode(data);
@@ -155,6 +155,14 @@ Future<Map<String, dynamic>> translate(
                 ["frequency"] = frequency + "/3";
           }
         } catch (e) {}
+      }
+    } catch (e) {}
+    try {
+      final detectedLanguage = data[0][2];
+      if (toSelLangMap.keys.contains(detectedLanguage)) {
+        fromLangVal = detectedLanguage;
+        session.write('from_lang', fromLangVal);
+        changeFromTxt(fromSelLangMap[fromLangVal]!);
       }
     } catch (e) {}
   } catch (e) {}
