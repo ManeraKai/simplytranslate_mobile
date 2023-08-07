@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/settings/widgets/settings_button.dart';
 import '../../../data.dart';
 
@@ -14,7 +13,7 @@ class SelectTheme extends StatelessWidget {
       setState(() => themeRadio = AppTheme.dark);
       setStateOverlord(() {
         session.write('theme', 'dark');
-        themeValue = L10n.of(context).dark;
+        themeValue = i18n().main.dark;
         theme = Brightness.dark;
       });
       Navigator.of(context).pop();
@@ -24,7 +23,7 @@ class SelectTheme extends StatelessWidget {
       setState(() => themeRadio = AppTheme.light);
       setStateOverlord(() {
         session.write('theme', 'light');
-        themeValue = L10n.of(context).light;
+        themeValue = i18n().main.light;
         theme = Brightness.light;
       });
       Navigator.of(context).pop();
@@ -34,7 +33,7 @@ class SelectTheme extends StatelessWidget {
       setState(() => themeRadio = AppTheme.system);
       setStateOverlord(() {
         session.write('theme', 'system');
-        themeValue = L10n.of(context).follow_system;
+        themeValue = i18n().main.follow_system;
         theme = MediaQuery.of(context).platformBrightness;
       });
       Navigator.of(context).pop();
@@ -66,7 +65,7 @@ class SelectTheme extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 20),
-                              child: Text(L10n.of(context).dark),
+                              child: Text(i18n().main.dark),
                             ),
                           ),
                         ],
@@ -84,7 +83,7 @@ class SelectTheme extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
-                            child: Text(L10n.of(context).light),
+                            child: Text(i18n().main.light),
                           ),
                         ),
                       ],
@@ -104,7 +103,7 @@ class SelectTheme extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 20),
                               child: Text(
-                                  L10n.of(context).follow_system),
+                                  i18n().main.follow_system),
                             ),
                           ),
                         ],
@@ -114,7 +113,7 @@ class SelectTheme extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text(L10n.of(context).cancel),
+                  child: Text(i18n().main.cancel),
                 )
               ],
             ),
@@ -123,7 +122,7 @@ class SelectTheme extends StatelessWidget {
       },
       icon: theme == Brightness.dark ? Icons.dark_mode : Icons.light_mode,
       iconColor: Colors.yellow[800]!,
-      title: L10n.of(context).theme,
+      title: i18n().main.theme,
       content: themeValue,
     );
   }

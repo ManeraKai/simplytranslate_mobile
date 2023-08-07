@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class Definitions extends StatelessWidget {
@@ -21,7 +20,7 @@ class Definitions extends StatelessWidget {
               translatedText['definitions'].isNotEmpty) ...[
             SizedBox(height: 20),
             Text(
-              L10n.of(context).definitions,
+              i18n().main.definitions,
               style: TextStyle(fontSize: 24),
             ),
             line,

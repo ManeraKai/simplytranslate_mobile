@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 import 'widgets/select_theme.dart';
 
@@ -16,7 +15,7 @@ class _SettingsState extends State<Settings> {
     const textStyle = const TextStyle(fontSize: 20);
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.of(context).settings),
+        title: Text(i18n().main.settings),
         elevation: 3,
       ),
       body: SingleChildScrollView(
@@ -28,7 +27,7 @@ class _SettingsState extends State<Settings> {
             children: [
               const SizedBox(height: 10),
               Text(
-                L10n.of(context).appearance,
+                i18n().main.appearance,
                 style: textStyle,
               ),
               line,

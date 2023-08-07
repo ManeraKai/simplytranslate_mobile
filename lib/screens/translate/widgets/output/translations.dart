@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class Translations extends StatelessWidget {
@@ -24,7 +23,7 @@ class Translations extends StatelessWidget {
             if (translatedText.containsKey('translations') &&
                 translatedText['translations'].isNotEmpty) ...[
               Text(
-                L10n.of(context).translations,
+                i18n().main.translations,
                 style: TextStyle(fontSize: 24),
               ),
               line,

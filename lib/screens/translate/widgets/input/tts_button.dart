@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 import '/simplytranslate.dart' as simplytranslate;
 
@@ -32,7 +31,7 @@ class _TtsOutputState extends State<TtsInput> {
             duration: Duration(seconds: 2),
             width: 300,
             content: Text(
-              L10n.of(context).audio_limit,
+              i18n().main.audio_limit,
               textAlign: TextAlign.center,
             ),
           ),

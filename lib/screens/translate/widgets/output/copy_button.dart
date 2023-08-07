@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
+import '/data.dart';
 
 class CopyToClipboardButton extends StatelessWidget {
   final String text;
@@ -19,7 +19,7 @@ class CopyToClipboardButton extends StatelessWidget {
                     duration: Duration(seconds: 2),
                     width: 160,
                     content: Text(
-                      L10n.of(context).copied_to_clipboard,
+                      i18n().main.copied_to_clipboard,
                       textAlign: TextAlign.center,
                     ),
                   ),

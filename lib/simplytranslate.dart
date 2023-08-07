@@ -26,11 +26,9 @@ Future<Map<String, dynamic>> translate(
 ) async {
   Map<String, dynamic> response = {};
 
-  var document = html.parse((await http.get(
-    Uri.parse(
-      "https://translate.google.com/m?tl=$to&hl=$from&q=${Uri.encodeQueryComponent(text)}",
-    ),
-  ))
+  var document = html.parse((await http.get(Uri.parse(
+    "https://translate.google.com/m?tl=$to&hl=$from&q=${Uri.encodeQueryComponent(text)}",
+  )))
       .body);
   response['text'] =
       document.getElementsByClassName('result-container')[0].innerHtml;

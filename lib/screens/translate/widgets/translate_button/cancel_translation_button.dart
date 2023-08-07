@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 
 class GoogleCancelTranslationButton extends StatelessWidget {
@@ -24,7 +23,7 @@ class GoogleCancelTranslationButton extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
-            L10n.of(context).cancel,
+            i18n().main.cancel,
             style: const TextStyle(fontSize: 18),
           ),
         ),

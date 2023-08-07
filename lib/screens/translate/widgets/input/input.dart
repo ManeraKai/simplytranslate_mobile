@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'tts_button.dart';
 import '/data.dart';
 import 'delete_button.dart';
@@ -58,7 +57,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
               onTap: () => isFirst = true,
               textDirection: googleInCtrl.text.length == 0
                   ? intl.Bidi.detectRtlDirectionality(
-                      L10n.of(context).arabic,
+                      i18n().langs.arabic,
                     )
                       ? TextDirection.rtl
                       : TextDirection.ltr
@@ -77,9 +76,9 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                hintText: L10n.of(context).enter_text_here,
+                hintText: i18n().main.enter_text_here,
                 hintTextDirection:
-                    intl.Bidi.detectRtlDirectionality(L10n.of(context).arabic)
+                    intl.Bidi.detectRtlDirectionality(i18n().langs.arabic)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
               ),

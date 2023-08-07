@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'about_screen_button.dart';
@@ -25,7 +24,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(L10n.of(context).about),
+        title: Text(i18n().main.about),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -34,14 +33,14 @@ class _AboutScreenState extends State<AboutScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                L10n.of(context).help,
+                i18n().main.help,
                 style: textStyle,
               ),
               line,
               AboutButton(
                 icon: Icons.favorite,
                 iconColor: Colors.redAccent,
-                title: L10n.of(context).contribute,
+                title: i18n().main.contribute,
                 onTap: () => launchUrl(
                   Uri.parse(
                     'https://github.com/ManeraKai/simplytranslate_mobile',
@@ -52,7 +51,7 @@ class _AboutScreenState extends State<AboutScreen> {
               AboutButton(
                 icon: Icons.attach_money_rounded,
                 iconColor: Colors.greenAccent,
-                title: L10n.of(context).donate,
+                title: i18n().main.donate,
                 onTap: () => launchUrl(
                   Uri.parse(
                     'https://manerakai.github.io/simplytranslate_mobile/donate.html',
@@ -63,7 +62,7 @@ class _AboutScreenState extends State<AboutScreen> {
               AboutButton(
                 icon: Icons.report,
                 iconColor: Colors.red,
-                title: L10n.of(context).report_bug,
+                title: i18n().main.report_bug,
                 onTap: () => launchUrl(
                   Uri.parse(
                       'https://github.com/ManeraKai/simplytranslate_mobile/issues'),
@@ -72,14 +71,14 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                L10n.of(context).about,
+                i18n().main.about,
                 style: textStyle,
               ),
               line,
               AboutButton(
                 icon: Icons.web,
                 iconColor: Colors.amber,
-                title: L10n.of(context).website,
+                title: i18n().main.website,
                 onTap: () => launchUrl(
                   Uri.parse(
                     'https://manerakai.github.io/simplytranslate_mobile/',
@@ -91,7 +90,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 icon: Icons.info_outline,
                 iconColor:
                     theme == Brightness.dark ? Colors.white : Colors.black,
-                title: L10n.of(context).version,
+                title: i18n().main.version,
                 content: packageInfo.version,
                 onTap: () =>
                     Clipboard.setData(ClipboardData(text: packageInfo.version))
@@ -101,7 +100,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       duration: Duration(seconds: 2),
                       width: 160,
                       content: Text(
-                        L10n.of(context).copied_to_clipboard,
+                        i18n().main.copied_to_clipboard,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -112,7 +111,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 icon: Icons.copyright,
                 iconColor:
                     theme == Brightness.dark ? Colors.white : Colors.black,
-                title: L10n.of(context).license,
+                title: i18n().main.license,
                 content: 'GPL-3.0 License',
                 onTap: () => launchUrl(
                   Uri.parse(

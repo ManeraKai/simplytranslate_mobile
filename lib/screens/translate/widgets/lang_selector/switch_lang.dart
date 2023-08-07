@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 import '/simplytranslate.dart' as simplytranslate;
 
@@ -51,7 +50,7 @@ class GoogleSwitchLang extends StatelessWidget {
                               duration: Duration(seconds: 2),
                               width: 160,
                               content: Text(
-                                L10n.of(context).input_limit,
+                                i18n().main.input_limit,
                                 textAlign: TextAlign.center,
                               ),
                             ),

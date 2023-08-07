@@ -10,17 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.3
+  http: ^1.1.0
   get_storage: ^2.0.3
-  audioplayers: ^4.0.1
+  audioplayers: ^5.0.0
   package_info_plus: ^4.0.1
   url_launcher: ^6.0.12
-  flutter_localizations:
-    sdk: flutter
   intl: ^0.18.0
   path_provider: ^2.0.8
   permission_handler: ^10.2.0
   html: ^0.15.3
+  i18n: ^4.0.6
 
 flutter:
   uses-material-design: true
@@ -34,3 +33,7 @@ flutter_intl:
   enabled: true
   class_name: L10n
   
+dev_dependencies:
+  build_runner: any
+  flutter_test:
+    sdk: flutter

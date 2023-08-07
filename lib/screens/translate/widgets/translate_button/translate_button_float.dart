@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/data.dart';
 import '/simplytranslate.dart' as simplytranslate;
 
@@ -38,7 +37,7 @@ class TranslateButtonFloat extends StatelessWidget {
                   }
                 : null,
         child: Text(
-          L10n.of(context).translate,
+          i18n().main.translate,
           style: TextStyle(
             fontSize: 18,
             color: theme == Brightness.dark
