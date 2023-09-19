@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/definitions.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/translations.dart';
 import '/data.dart';
-import '/screens/translate/widgets/translate_button/cancel_translation_button.dart';
-import 'widgets/keyboard_visibility.dart';
-import 'widgets/translate_button/translate_button_float.dart';
-import 'widgets/translate_button/translate_button.dart';
 import 'widgets/input/input.dart';
 import 'widgets/output/output.dart';
 import 'widgets/lang_selector/from_lang.dart';
@@ -64,52 +59,17 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                   space,
                   GoogleTranslationOutput(),
                   space,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      KeyboardVisibilityBuilder(
-                        builder: (context, _, isKeyboardVisible) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            if (loading)
-                              Container(
-                                width: MediaQuery.of(context).size.width - 20,
-                                child: LinearProgressIndicator(),
-                              ),
-                            loading
-                                ? GoogleCancelTranslationButton()
-                                : !isKeyboardVisible
-                                    ? GoogleTranslateButton()
-                                    : const SizedBox.shrink(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  if (loading)
+                    Container(
+                      width: MediaQuery.of(context).size.width - 20,
+                      child: LinearProgressIndicator(),
+                    ),
                   Definitions(googleOutput),
                   Translations(googleOutput),
                 ],
               ),
             ),
           ),
-        ),
-        KeyboardVisibilityBuilder(
-          builder: (context, _, isKeyboardVisible) => isKeyboardVisible
-              ? Positioned(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                  right: intl.Bidi.detectRtlDirectionality(
-                    i18n().langs.arabic,
-                  )
-                      ? null
-                      : 0,
-                  left: intl.Bidi.detectRtlDirectionality(
-                    i18n().langs.arabic,
-                  )
-                      ? 0
-                      : null,
-                  child: TranslateButtonFloat(),
-                )
-              : const SizedBox.shrink(),
         )
       ],
     );

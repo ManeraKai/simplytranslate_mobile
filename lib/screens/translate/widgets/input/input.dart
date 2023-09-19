@@ -4,6 +4,7 @@ import 'tts_button.dart';
 import '/data.dart';
 import 'delete_button.dart';
 import 'character_limit.dart';
+import '/simplytranslate.dart' as simplytranslate;
 
 class GoogleTranslationInput extends StatefulWidget {
   const GoogleTranslationInput({Key? key}) : super(key: key);
@@ -69,7 +70,31 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
               controller: googleInCtrl,
               keyboardType: TextInputType.multiline,
               onChanged: (String input) {
-                setStateOverlord(() {});
+                Future.delayed(Duration(seconds: 1), () async {
+                  isTranslationCanceled = true;
+                  loading = false;
+                  if (input == googleInCtrl.text) {
+                    if (googleInCtrl.text.length > 0 &&
+                        googleInCtrl.text.length <= 5000) {
+                      isTranslationCanceled = false;
+                      setStateOverlord(() => loading = true);
+                      try {
+                        final translatedText = await simplytranslate.translate(
+                          googleInCtrl.text,
+                          fromLangVal,
+                          toLangVal,
+                        );
+                        if (!isTranslationCanceled)
+                          setStateOverlord(() {
+                            googleOutput = translatedText;
+                            loading = false;
+                          });
+                      } catch (_) {
+                        setStateOverlord(() => loading = false);
+                      }
+                    }
+                  }
+                });
               },
               decoration: InputDecoration(
                 contentPadding:
