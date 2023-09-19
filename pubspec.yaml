@@ -2,7 +2,7 @@ name: simplytranslate_mobile
 description: An alternative frontend to Google Translate
 
 publish_to: 'none'
-version: 1.4.2+1
+version: 1.4.3+1
 
 environment:
   sdk: '>=3.0.1 <4.0.0'
