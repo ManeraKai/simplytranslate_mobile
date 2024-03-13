@@ -165,6 +165,11 @@ Future<Map<String, dynamic>> translate(
         changeFromTxt(fromSelLangMap[fromLangVal]!);
       }
     } catch (e) {}
+
+    try {
+      final raw = data[1][0][0][1];
+      if (raw != null) response['pronunciation'] = raw.toString();
+    } catch (e) {}
   } catch (e) {}
 
   return response;

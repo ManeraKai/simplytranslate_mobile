@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/definitions.dart';
+import 'package:simplytranslate_mobile/screens/translate/widgets/output/pronounciation.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/translations.dart';
 import '/data.dart';
 import 'widgets/input/input.dart';
@@ -64,6 +65,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                       width: MediaQuery.of(context).size.width - 20,
                       child: LinearProgressIndicator(),
                     ),
+                  Pronunciation(googleOutput),
                   Definitions(googleOutput),
                   Translations(googleOutput),
                 ],
