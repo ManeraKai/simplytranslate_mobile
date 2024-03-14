@@ -16,9 +16,14 @@ class GoogleToLang extends StatelessWidget {
           if (_isFirstClick) {
             _isFirstClick = false;
             return toSelLangsIterable;
-          } else
-            return toSelLangsIterable.where((word) =>
-                word.toLowerCase().contains(txtEditingVal.text.toLowerCase()));
+          } else {
+            final query = txtEditingVal.text.toLowerCase();
+            var list = toSelLangsIterable
+                .where((word) => word.toLowerCase().contains(query))
+                .toList();
+            list.sort((a, b) => a.indexOf(query).compareTo(b.indexOf(query)));
+            return list;
+          }
         },
         optionsViewBuilder: (_, __, Iterable<String> options) {
           return Align(
