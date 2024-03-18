@@ -3,22 +3,33 @@ import '/data.dart';
 
 bool _isFirstClick = false;
 
-class GoogleToLang extends StatelessWidget {
-  const GoogleToLang({Key? key}) : super(key: key);
+class GoogleLang extends StatefulWidget {
+  final FromTo fromto;
+  GoogleLang(
+    this.fromto, {
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<GoogleLang> createState() => _GoogleLangState();
+}
+
+class _GoogleLangState extends State<GoogleLang> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width / 3 + 10,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue txtEditingVal) {
-          Iterable<String> toSelLangsIterable = toSelLangMap.values;
+          Iterable<String> selLangsIterable = widget.fromto == FromTo.from
+              ? fromSelLangMap.values
+              : toSelLangMap.values;
           if (_isFirstClick) {
             _isFirstClick = false;
-            return toSelLangsIterable;
+            return selLangsIterable;
           } else {
             final query = txtEditingVal.text.toLowerCase();
-            var list = toSelLangsIterable
+            var list = selLangsIterable
                 .where((word) => word.toLowerCase().contains(query))
                 .toList();
             list.sort((a, b) => a.indexOf(query).compareTo(b.indexOf(query)));
@@ -57,14 +68,31 @@ class GoogleToLang extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
-                                  if (option == toSelLangMap[fromLangVal]) {
+                                  if (option ==
+                                      (widget.fromto == FromTo.from
+                                          ? fromSelLangMap[toLangVal]
+                                          : toSelLangMap[fromLangVal])) {
                                     switchVals();
                                   } else {
-                                    for (var i in toSelLangMap.keys) {
-                                      if (option == toSelLangMap[i]) {
-                                        session.write('to_lang', i);
-                                        toLangVal = i;
-                                        changeToTxt(toSelLangMap[toLangVal]!);
+                                    for (var i in widget.fromto == FromTo.from
+                                        ? fromSelLangMap.keys
+                                        : toSelLangMap.keys) {
+                                      if (option ==
+                                          (widget.fromto == FromTo.from
+                                              ? fromSelLangMap[i]
+                                              : toSelLangMap[i])) {
+                                        session.write('from_lang', i);
+                                        widget.fromto == FromTo.from
+                                            ? () {
+                                                fromLangVal = i;
+                                                changeFromTxt!(fromSelLangMap[
+                                                    fromLangVal]!);
+                                              }()
+                                            : () {
+                                                toLangVal = i;
+                                                changeToTxt!(
+                                                    toSelLangMap[toLangVal]!);
+                                              }();
                                         break;
                                       }
                                     }
@@ -93,13 +121,26 @@ class GoogleToLang extends StatelessWidget {
             ),
           );
         },
-        initialValue: TextEditingValue(text: toSelLangMap[toLangVal]!),
+        initialValue: TextEditingValue(
+            text: widget.fromto == FromTo.from
+                ? fromSelLangMap[fromLangVal]!
+                : toSelLangMap[toLangVal]!),
         fieldViewBuilder: (context, txtCtrl, fieldFocus, _) {
           fieldFocus.addListener(() {
-            if (!fieldFocus.hasPrimaryFocus) toCancel();
+            if (!fieldFocus.hasPrimaryFocus)
+              widget.fromto == FromTo.from ? fromCancel() : toCancel();
           });
-          toCancel = () => txtCtrl.text = toSelLangMap[toLangVal]!;
-          changeToTxt = (String val) => txtCtrl.text = val;
+          widget.fromto == FromTo.from
+              ? () {
+                  fromCancel =
+                      () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
+                  changeFromTxt = (String val) => txtCtrl.text = val;
+                }()
+              : () {
+                  toCancel = () => txtCtrl.text = toSelLangMap[toLangVal]!;
+                  changeToTxt = (String val) => txtCtrl.text = val;
+                }();
+
           return TextField(
             onTap: () {
               _isFirstClick = true;
@@ -111,20 +152,33 @@ class GoogleToLang extends StatelessWidget {
             onEditingComplete: () {
               final input = txtCtrl.text.trim().toLowerCase();
               String? chosenOne;
-              for (var i in toSelLangMap.keys) {
-                if (toSelLangMap[i]!.toLowerCase().contains(input)) {
+              for (var i in widget.fromto == FromTo.from
+                  ? fromSelLangMap.keys
+                  : toSelLangMap.keys) {
+                if ((widget.fromto == FromTo.from
+                        ? fromSelLangMap[i]
+                        : toSelLangMap[i])!
+                    .toLowerCase()
+                    .contains(input)) {
                   chosenOne = i;
                   break;
                 }
               }
               if (chosenOne == null) {
                 FocusScope.of(context).unfocus();
-                txtCtrl.text = toSelLangMap[toLangVal]!;
-              } else if (chosenOne != fromLangVal) {
+                txtCtrl.text = widget.fromto == FromTo.from
+                    ? fromSelLangMap[fromLangVal]!
+                    : toSelLangMap[toLangVal]!;
+              } else if (chosenOne !=
+                  (widget.fromto == FromTo.from ? toLangVal : fromLangVal)) {
                 FocusScope.of(context).unfocus();
-                session.write('to_lang', chosenOne);
-                setStateOverlord(() => toLangVal = chosenOne!);
-                txtCtrl.text = toSelLangMap[chosenOne]!;
+                session.write('from_lang', chosenOne);
+                setStateOverlord(() => widget.fromto == FromTo.from
+                    ? fromLangVal = chosenOne!
+                    : toLangVal = chosenOne!);
+                txtCtrl.text = widget.fromto == FromTo.from
+                    ? fromSelLangMap[chosenOne]!
+                    : toSelLangMap[chosenOne]!;
               } else {
                 switchVals();
                 FocusScope.of(context).unfocus();

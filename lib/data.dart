@@ -65,8 +65,8 @@ late final PackageInfo packageInfo;
 Function() fromCancel = () {};
 Function() toCancel = () {};
 
-late Function(String) changeFromTxt;
-late Function(String) changeToTxt;
+Function(String)? changeFromTxt;
+Function(String)? changeToTxt;
 
 String newText = "";
 
@@ -235,8 +235,8 @@ bool isTtsOutputCanceled = false;
 bool isFirst = true;
 
 switchVals() {
-  changeFromTxt(toSelLangMap[toLangVal]!);
-  changeToTxt(fromSelLangMap[fromLangVal]!);
+  changeFromTxt!(toSelLangMap[toLangVal]!);
+  changeToTxt!(fromSelLangMap[fromLangVal]!);
 
   final tmp = fromLangVal;
   fromLangVal = toLangVal;
@@ -245,3 +245,5 @@ switchVals() {
   session.write('to_lang', toLangVal);
   session.write('from_lang', fromLangVal);
 }
+
+enum FromTo { from, to }

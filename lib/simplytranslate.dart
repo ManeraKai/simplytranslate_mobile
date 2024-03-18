@@ -162,7 +162,7 @@ Future<Map<String, dynamic>> translate(
       if (toSelLangMap.keys.contains(detectedLanguage)) {
         fromLangVal = detectedLanguage;
         session.write('from_lang', fromLangVal);
-        changeFromTxt(fromSelLangMap[fromLangVal]!);
+        changeFromTxt!(fromSelLangMap[fromLangVal]!);
       }
     } catch (e) {}
 

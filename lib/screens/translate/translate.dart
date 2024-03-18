@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:simplytranslate_mobile/screens/translate/widgets/lang_selector/lang.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/definitions.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/pronounciation.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/translations.dart';
 import '/data.dart';
 import 'widgets/input/input.dart';
 import 'widgets/output/output.dart';
-import 'widgets/lang_selector/from_lang.dart';
-import 'widgets/lang_selector/to_lang.dart';
+// import 'widgets/lang_selector/from_lang.dart';
+// import 'widgets/lang_selector/to_lang.dart';
 import 'widgets/lang_selector/switch_lang.dart';
 
 var _scrollController = ScrollController();
@@ -50,9 +51,11 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GoogleFromLang(),
+                      GoogleLang(FromTo.from),
+                      // GoogleFromLang(),
                       GoogleSwitchLang(),
-                      GoogleToLang(),
+                      // GoogleToLang(),
+                      GoogleLang(FromTo.to),
                     ],
                   ),
                   space,
