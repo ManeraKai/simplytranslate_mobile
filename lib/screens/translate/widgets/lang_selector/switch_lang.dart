@@ -31,19 +31,11 @@ class GoogleSwitchLang extends StatelessWidget {
                       final fromLangValTransTmp = fromLangVal;
                       final toLangValTransTmp = toLangVal;
                       switchVals();
-                      final translatedText = await simplytranslate.translate(
-                        transInTmp,
-                        fromLangValTransTmp,
-                        toLangValTransTmp,
-                      );
+                      final translatedText = await simplytranslate.translate(transInTmp, fromLangValTransTmp, toLangValTransTmp);
                       if (!isTranslationCanceled) {
                         final translatedText2;
                         if (translatedText.length <= 5000) {
-                          translatedText2 = await simplytranslate.translate(
-                            translatedText['text'],
-                            fromLangVal,
-                            toLangVal,
-                          );
+                          translatedText2 = await simplytranslate.translate(translatedText['text'], fromLangVal, toLangVal);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

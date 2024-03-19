@@ -95,14 +95,8 @@ class _GoogleLangState extends State<GoogleLang> {
                                 },
                                 child: Container(
                                   width: double.infinity,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 18,
-                                  ),
-                                  child: Text(
-                                    option,
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
+                                  child: Text(option, style: const TextStyle(fontSize: 18)),
                                 ),
                               ),
                             ),
@@ -161,10 +155,7 @@ class _GoogleLangState extends State<GoogleLang> {
                 FocusScope.of(context).unfocus();
               }
             },
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              isDense: true,
-            ),
+            decoration: InputDecoration(contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10), isDense: true),
             controller: txtCtrl,
             focusNode: fieldFocus,
             style: const TextStyle(fontSize: 18),
