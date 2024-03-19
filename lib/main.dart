@@ -20,19 +20,16 @@ void main(List<String> args) async {
 
   await GetStorage.init();
 
-
-  var themeSession = session.read('theme').toString();
-  if (themeSession != 'null') {
-    if (themeSession == 'system') {
-      themeRadio = AppTheme.system;
-      theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-    } else if (themeSession == 'light') {
-      themeRadio = AppTheme.light;
-      theme = Brightness.light;
-    } else if (themeSession == 'dark') {
-      themeRadio = AppTheme.dark;
-      theme = Brightness.dark;
-    }
+  String? themeSession = session.read('theme');
+  if (themeSession == 'system') {
+    themeRadio = AppTheme.system;
+    theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+  } else if (themeSession == 'light') {
+    themeRadio = AppTheme.light;
+    theme = Brightness.light;
+  } else if (themeSession == 'dark') {
+    themeRadio = AppTheme.dark;
+    theme = Brightness.dark;
   }
 
   packageInfo = await PackageInfo.fromPlatform();

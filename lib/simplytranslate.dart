@@ -25,6 +25,26 @@ Future<Map<String, dynamic>> translate(
   String from,
   String to,
 ) async {
+  Map<String, dynamic> fromLangUsage = session.read("fromLangUsage") ??
+      Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0);
+
+  Map<String, dynamic> toLangUsage = session.read("toLangUsage") ??
+      Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0);
+
+  fromLangUsage[from] = fromLangUsage[from]! + 1;
+  toLangUsage[to] = toLangUsage[to]! + 1;
+
+  session.write("fromLangUsage", fromLangUsage);
+  session.write("toLangUsage", toLangUsage);
+
+  return translate_(text, from, to);
+}
+
+Future<Map<String, dynamic>> translate_(
+  String text,
+  String from,
+  String to,
+) async {
   Map<String, dynamic> response = {};
 
   var document = html.parse((await http.get(Uri.parse(

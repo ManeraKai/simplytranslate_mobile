@@ -21,12 +21,26 @@ class _GoogleLangState extends State<GoogleLang> {
       width: size.width / 3 + 10,
       child: Autocomplete(
         optionsBuilder: (TextEditingValue txtEditingVal) {
-          Iterable<String> selLangsIterable = widget.fromto == FromTo.from
-              ? fromSelLangMap.values
-              : toSelLangMap.values;
+          final selLangMap =
+              widget.fromto == FromTo.from ? fromSelLangMap : toSelLangMap;
+          Iterable<String> selLangsIterable = selLangMap.values;
           if (_isFirstClick) {
             _isFirstClick = false;
-            return selLangsIterable;
+            var list = selLangsIterable.toList();
+            var (max1, max2, max3) = lastUsed(widget.fromto);
+            if (max1 != null) {
+              final idx = list.indexOf(selLangMap[max1]!);
+              if (idx >= 0) list.move(idx, 0);
+            }
+            if (max2 != null) {
+              final idx = list.indexOf(selLangMap[max2]!);
+              if (idx >= 0) list.move(idx, 1);
+            }
+            if (max3 != null) {
+              final idx = list.indexOf(selLangMap[max3]!);
+              if (idx >= 0) list.move(idx, 2);
+            }
+            return list;
           } else {
             final query = txtEditingVal.text.toLowerCase();
             var list = selLangsIterable
@@ -81,7 +95,11 @@ class _GoogleLangState extends State<GoogleLang> {
                                           (widget.fromto == FromTo.from
                                               ? fromSelLangMap[i]
                                               : toSelLangMap[i])) {
-                                        session.write('from_lang', i);
+                                        session.write(
+                                            widget.fromto == FromTo.from
+                                                ? 'from_lang'
+                                                : 'to_lang',
+                                            i);
                                         widget.fromto == FromTo.from
                                             ? () {
                                                 fromLangVal = i;
@@ -172,7 +190,9 @@ class _GoogleLangState extends State<GoogleLang> {
               } else if (chosenOne !=
                   (widget.fromto == FromTo.from ? toLangVal : fromLangVal)) {
                 FocusScope.of(context).unfocus();
-                session.write('from_lang', chosenOne);
+                session.write(
+                    widget.fromto == FromTo.from ? 'from_lang' : 'to_lang',
+                    chosenOne);
                 setStateOverlord(() => widget.fromto == FromTo.from
                     ? fromLangVal = chosenOne!
                     : toLangVal = chosenOne!);

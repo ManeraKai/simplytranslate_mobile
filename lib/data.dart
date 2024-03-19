@@ -8,7 +8,6 @@ import '/simplytranslate.dart' as simplytranslate;
 import 'package:simplytranslate_mobile/messages/messages.i18n.dart';
 import 'package:simplytranslate_mobile/messages/messages_ar.i18n.dart';
 
-
 Messages i18n() {
   var locale = appLocale.toString();
   if (MessagesAr().locale == locale) return MessagesAr();
@@ -235,6 +234,7 @@ bool isTtsOutputCanceled = false;
 bool isFirst = true;
 
 switchVals() {
+  if (fromLangVal == 'auto') return;
   changeFromTxt!(toSelLangMap[toLangVal]!);
   changeToTxt!(fromSelLangMap[fromLangVal]!);
 
@@ -247,3 +247,40 @@ switchVals() {
 }
 
 enum FromTo { from, to }
+
+(String?, String?, String?) lastUsed(FromTo fromto) {
+  final Map<String, dynamic>? langUsage = fromto == FromTo.from
+      ? session.read('fromLangUsage')
+      : session.read('toLangUsage');
+  if (langUsage == null) return (null, null, null);
+
+  (String, int)? max1;
+  (String, int)? max2;
+  (String, int)? max3;
+  langUsage.removeWhere((key, value) => value == 0);
+  langUsage.forEach((key, value) {
+    if (max1 == null || max1!.$2 < value) {
+      max1 = (key, value);
+    } else if (max2 == null || max2!.$2 < value) {
+      max2 = (key, value);
+    } else if (max3 == null || max3!.$2 < value) {
+      max3 = (key, value);
+    }
+  });
+
+  return (max1?.$1, max2?.$1, max3?.$1);
+}
+
+extension MoveElement<T> on List<T> {
+  void move(int from, int to) {
+    RangeError.checkValidIndex(from, this, "from", length);
+    RangeError.checkValidIndex(to, this, "to", length);
+    var element = this[from];
+    if (from < to) {
+      this.setRange(from, to, this, from + 1);
+    } else {
+      this.setRange(to + 1, from + 1, this, to);
+    }
+    this[to] = element;
+  }
+}

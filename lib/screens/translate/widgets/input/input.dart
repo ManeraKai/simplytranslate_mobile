@@ -89,7 +89,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                             googleOutput = translatedText;
                             loading = false;
                           });
-                      } catch (_) {
+                      } catch (e) {
+                        print("API Error: $e");
                         setStateOverlord(() => loading = false);
                       }
                     }
