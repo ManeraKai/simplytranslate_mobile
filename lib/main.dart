@@ -13,10 +13,8 @@ import 'screens/translate/translate.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  ByteData data =
-      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext
-      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
 
   await GetStorage.init();
 
@@ -91,11 +89,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
         appLocale = locales[0];
         for (var i = 0; i < locales.length; i++)
-          if (supportedLocalesCountryCode.contains(localesCountryCode[i]) &&
-              supportedLocalesLangCode.contains(localesLangCode[i]))
+          if (supportedLocalesCountryCode.contains(localesCountryCode[i]) && supportedLocalesLangCode.contains(localesLangCode[i]))
             return Locale(localesLangCode[i], localesCountryCode[i]);
-          else if (supportedLocalesLangCode.contains(localesLangCode[i]))
-            return Locale(localesLangCode[i]);
+          else if (supportedLocalesLangCode.contains(localesLangCode[i])) return Locale(localesLangCode[i]);
         return Locale('en');
       },
       debugShowCheckedModeBanner: false,
@@ -130,8 +126,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         )),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(horizontal: 10)),
+            padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 10)),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
             ),
@@ -145,8 +140,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         iconTheme: IconThemeData(color: greenColor),
         switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -155,8 +149,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             }
             return null;
           }),
-          trackColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -167,8 +160,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           }),
         ),
         radioTheme: RadioThemeData(
-          fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -179,8 +171,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           }),
         ),
         checkboxTheme: CheckboxThemeData(
-          fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -232,21 +223,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.pressed))
                   return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-                else if (states.contains(MaterialState.disabled))
-                  return Color(0xff495057);
+                else if (states.contains(MaterialState.disabled)) return Color(0xff495057);
                 return greenColor; // Use the component's default.
               },
             ),
           ),
         ),
         snackBarTheme: SnackBarThemeData(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           behavior: SnackBarBehavior.floating,
         ),
         switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -255,8 +243,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             }
             return null;
           }),
-          trackColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -267,8 +254,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           }),
         ),
         radioTheme: RadioThemeData(
-          fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }
@@ -279,8 +265,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           }),
         ),
         checkboxTheme: CheckboxThemeData(
-          fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return null;
             }

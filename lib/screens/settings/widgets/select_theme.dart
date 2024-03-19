@@ -45,9 +45,7 @@ class SelectTheme extends StatelessWidget {
           context: context,
           builder: (context) => StatefulBuilder(
             builder: (context, setState) => AlertDialog(
-              contentTextStyle: TextStyle(
-                  color: theme == Brightness.dark ? Colors.white : Colors.black,
-                  fontSize: 20),
+              contentTextStyle: TextStyle(color: theme == Brightness.dark ? Colors.white : Colors.black, fontSize: 20),
               contentPadding: EdgeInsets.all(5),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -63,8 +61,7 @@ class SelectTheme extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                               child: Text(i18n().main.dark),
                             ),
                           ),
@@ -81,8 +78,7 @@ class SelectTheme extends StatelessWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                             child: Text(i18n().main.light),
                           ),
                         ),
@@ -100,10 +96,8 @@ class SelectTheme extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 20),
-                              child: Text(
-                                  i18n().main.follow_system),
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                              child: Text(i18n().main.follow_system),
                             ),
                           ),
                         ],

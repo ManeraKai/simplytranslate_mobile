@@ -46,8 +46,7 @@ class _TtsOutputState extends State<TtsInput> {
     startPlayer() async {
       isTtsInCanceled = false;
       setState(() => ttsInputloading = true);
-      await _audioPlayer
-          .setSourceBytes(await simplytranslate.tts(_input, fromLangVal));
+      await _audioPlayer.setSourceBytes(await simplytranslate.tts(_input, fromLangVal));
       if (isTtsInCanceled) return;
       setState(() {
         _listening = true;
@@ -98,9 +97,7 @@ class _TtsOutputState extends State<TtsInput> {
             }(),
             icon: Icon(
               _listening ? Icons.stop : Icons.volume_up,
-              color: googleInCtrl.text.length > 200 && !_listening
-                  ? Colors.grey
-                  : null,
+              color: googleInCtrl.text.length > 200 && !_listening ? Colors.grey : null,
             ),
           );
   }

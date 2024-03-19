@@ -39,9 +39,7 @@ class AboutButton extends StatelessWidget {
                         content!,
                         style: TextStyle(
                           fontSize: 18,
-                          color: theme == Brightness.dark
-                              ? Colors.white54
-                              : Colors.black54,
+                          color: theme == Brightness.dark ? Colors.white54 : Colors.black54,
                         ),
                       ),
                   ],

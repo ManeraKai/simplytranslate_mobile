@@ -64,8 +64,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 iconColor: Colors.red,
                 title: i18n().main.report_bug,
                 onTap: () => launchUrl(
-                  Uri.parse(
-                      'https://github.com/ManeraKai/simplytranslate_mobile/issues'),
+                  Uri.parse('https://github.com/ManeraKai/simplytranslate_mobile/issues'),
                   mode: LaunchMode.externalApplication,
                 ),
               ),
@@ -88,13 +87,10 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               AboutButton(
                 icon: Icons.info_outline,
-                iconColor:
-                    theme == Brightness.dark ? Colors.white : Colors.black,
+                iconColor: theme == Brightness.dark ? Colors.white : Colors.black,
                 title: i18n().main.version,
                 content: packageInfo.version,
-                onTap: () =>
-                    Clipboard.setData(ClipboardData(text: packageInfo.version))
-                        .then(
+                onTap: () => Clipboard.setData(ClipboardData(text: packageInfo.version)).then(
                   (_) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       duration: Duration(seconds: 2),
@@ -109,8 +105,7 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               AboutButton(
                 icon: Icons.copyright,
-                iconColor:
-                    theme == Brightness.dark ? Colors.white : Colors.black,
+                iconColor: theme == Brightness.dark ? Colors.white : Colors.black,
                 title: i18n().main.license,
                 content: 'GPL-3.0 License',
                 onTap: () => launchUrl(

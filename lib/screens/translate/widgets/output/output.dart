@@ -21,8 +21,7 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? Color(0xff131618) : null,
         border: Border.all(
-          color:
-              theme == Brightness.dark ? Color(0xff495057) : Color(0xffa9a9a9),
+          color: theme == Brightness.dark ? Color(0xff495057) : Color(0xffa9a9a9),
           width: 1.5,
           style: BorderStyle.solid,
         ),
@@ -37,15 +36,12 @@ class _TranslationOutputState extends State<GoogleTranslationOutput> {
               child: Scrollbar(
                 child: Directionality(
                   textDirection: translatedText.containsKey('text')
-                      ? intl.Bidi.detectRtlDirectionality(
-                              translatedText['text'])
+                      ? intl.Bidi.detectRtlDirectionality(translatedText['text'])
                           ? TextDirection.rtl
                           : TextDirection.ltr
                       : TextDirection.rtl,
                   child: SelectableText(
-                    translatedText.containsKey('text')
-                        ? translatedText['text']
-                        : '',
+                    translatedText.containsKey('text') ? translatedText['text'] : '',
                     style: TextStyle(fontSize: _outputFontSize),
                     minLines: 7,
                   ),

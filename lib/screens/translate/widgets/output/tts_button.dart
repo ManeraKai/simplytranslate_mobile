@@ -33,22 +33,20 @@ class _TtsOutputState extends State<TtsOutput> {
             duration: Duration(seconds: 2),
             width: 300,
             content: Text(
-             i18n().main.audio_limit,
+              i18n().main.audio_limit,
               textAlign: TextAlign.center,
             ),
           ),
         );
         _isSnackBarPressed = true;
-        Future.delayed(Duration(seconds: 1))
-            .then((_) => _isSnackBarPressed = false);
+        Future.delayed(Duration(seconds: 1)).then((_) => _isSnackBarPressed = false);
       }
     }
 
     startPlayer() async {
       isTtsInCanceled = false;
       setState(() => ttsInputloading = true);
-      await _audioPlayer
-          .setSourceBytes(await simplytranslate.tts(_input, toLangVal));
+      await _audioPlayer.setSourceBytes(await simplytranslate.tts(_input, toLangVal));
       if (isTtsInCanceled) return;
       setState(() {
         _listening = true;
@@ -100,8 +98,7 @@ class _TtsOutputState extends State<TtsOutput> {
             }(),
             icon: Icon(
               _listening ? Icons.stop : Icons.volume_up,
-              color:
-                  googleOutput.length > 200 && !_listening ? Colors.grey : null,
+              color: googleOutput.length > 200 && !_listening ? Colors.grey : null,
             ),
           );
   }

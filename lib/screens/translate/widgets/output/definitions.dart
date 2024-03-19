@@ -16,8 +16,7 @@ class Definitions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (translatedText.containsKey('definitions') &&
-              translatedText['definitions'].isNotEmpty) ...[
+          if (translatedText.containsKey('definitions') && translatedText['definitions'].isNotEmpty) ...[
             SizedBox(height: 20),
             Text(
               i18n().main.definitions,
@@ -29,15 +28,11 @@ class Definitions extends StatelessWidget {
                 type.capitalize(),
                 style: TextStyle(
                   fontSize: 20,
-                  color: theme == Brightness.dark
-                      ? Colors.cyanAccent
-                      : Color(0xff007979),
+                  color: theme == Brightness.dark ? Colors.cyanAccent : Color(0xff007979),
                 ),
               ),
               SizedBox(height: 8),
-              for (int i = 0;
-                  i < translatedText['definitions'][type].length;
-                  i++) ...[
+              for (int i = 0; i < translatedText['definitions'][type].length; i++) ...[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -53,23 +48,17 @@ class Definitions extends StatelessWidget {
                             "${translatedText['definitions'][type][i]['definition']}",
                             style: TextStyle(fontSize: 16),
                           ),
-                          if (translatedText['definitions'][type][i]
-                              .containsKey('use-in-sentence')) ...[
+                          if (translatedText['definitions'][type][i].containsKey('use-in-sentence')) ...[
                             SelectableText(
                               '"${translatedText['definitions'][type][i]['use-in-sentence']}"',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: theme == Brightness.dark
-                                    ? Colors.yellow
-                                    : Color(0xff009902),
+                                color: theme == Brightness.dark ? Colors.yellow : Color(0xff009902),
                               ),
                             ),
                           ],
-                          if (translatedText['definitions'][type][i]
-                              .containsKey('synonyms'))
-                            for (String x in translatedText['definitions'][type]
-                                    [i]['synonyms']
-                                .keys) ...[
+                          if (translatedText['definitions'][type][i].containsKey('synonyms'))
+                            for (String x in translatedText['definitions'][type][i]['synonyms'].keys) ...[
                               SizedBox(height: 5),
                               SelectableText.rich(
                                 TextSpan(children: [
@@ -78,20 +67,14 @@ class Definitions extends StatelessWidget {
                                       text: '$x: ',
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: theme == Brightness.dark
-                                            ? Colors.cyanAccent
-                                            : Color(0xff007979),
+                                        color: theme == Brightness.dark ? Colors.cyanAccent : Color(0xff007979),
                                       ),
                                     ),
                                   TextSpan(
-                                    text: translatedText['definitions'][type][i]
-                                            ['synonyms'][x]
-                                        .join(', '),
+                                    text: translatedText['definitions'][type][i]['synonyms'][x].join(', '),
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: theme == Brightness.dark
-                                          ? Color(0xffdeb887)
-                                          : Color(0xff804700),
+                                      color: theme == Brightness.dark ? Color(0xffdeb887) : Color(0xff804700),
                                     ),
                                   )
                                 ]),

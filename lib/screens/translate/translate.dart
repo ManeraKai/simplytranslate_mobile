@@ -28,8 +28,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
 
     if (MediaQuery.of(context).orientation == Orientation.landscape)
       _isBefore = true;
-    else if (MediaQuery.of(context).orientation == Orientation.portrait &&
-        _isBefore) {
+    else if (MediaQuery.of(context).orientation == Orientation.portrait && _isBefore) {
       _scrollController.jumpTo(0);
       _isBefore = false;
     }

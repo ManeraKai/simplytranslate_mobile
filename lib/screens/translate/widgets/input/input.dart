@@ -42,9 +42,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
       decoration: BoxDecoration(
         color: theme == Brightness.dark ? const Color(0xff131618) : null,
         border: Border.all(
-          color: theme == Brightness.dark
-              ? const Color(0xff495057)
-              : lightThemeGreyColor,
+          color: theme == Brightness.dark ? const Color(0xff495057) : lightThemeGreyColor,
           width: 1.5,
           style: BorderStyle.solid,
         ),
@@ -74,8 +72,7 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   isTranslationCanceled = true;
                   loading = false;
                   if (input == googleInCtrl.text) {
-                    if (googleInCtrl.text.length > 0 &&
-                        googleInCtrl.text.length <= 5000) {
+                    if (googleInCtrl.text.length > 0 && googleInCtrl.text.length <= 5000) {
                       isTranslationCanceled = false;
                       setStateOverlord(() => loading = true);
                       try {
@@ -98,15 +95,11 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                 });
               },
               decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 hintText: i18n().main.enter_text_here,
-                hintTextDirection:
-                    intl.Bidi.detectRtlDirectionality(i18n().langs.arabic)
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
+                hintTextDirection: intl.Bidi.detectRtlDirectionality(i18n().langs.arabic) ? TextDirection.rtl : TextDirection.ltr,
               ),
               style: const TextStyle(fontSize: 20),
             ),

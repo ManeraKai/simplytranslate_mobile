@@ -9,8 +9,7 @@ import 'package:html/parser.dart' as html;
 import 'package:http/http.dart' as http;
 import 'package:simplytranslate_mobile/data.dart';
 
-const userAgent =
-    "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0";
+const userAgent = "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0";
 
 Future<Uint8List> tts(String text, String language) async {
   final url = Uri.parse(
@@ -25,11 +24,9 @@ Future<Map<String, dynamic>> translate(
   String from,
   String to,
 ) async {
-  Map<String, dynamic> fromLangUsage = session.read("fromLangUsage") ??
-      Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0);
+  Map<String, dynamic> fromLangUsage = session.read("fromLangUsage") ?? Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0);
 
-  Map<String, dynamic> toLangUsage = session.read("toLangUsage") ??
-      Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0);
+  Map<String, dynamic> toLangUsage = session.read("toLangUsage") ?? Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0);
 
   fromLangUsage[from] = fromLangUsage[from]! + 1;
   toLangUsage[to] = toLangUsage[to]! + 1;
@@ -51,8 +48,7 @@ Future<Map<String, dynamic>> translate_(
     "https://translate.google.com/m?tl=$to&hl=$from&q=${Uri.encodeQueryComponent(text)}",
   )))
       .body);
-  response['text'] =
-      document.getElementsByClassName('result-container')[0].innerHtml;
+  response['text'] = document.getElementsByClassName('result-container')[0].innerHtml;
 
   try {
     var url = Uri.parse(
@@ -101,20 +97,17 @@ Future<Map<String, dynamic>> translate_(
           var definitionBox = data[3][1][0][x][1][i];
 
           try {
-            response["definitions"][definitionType][i]["dictionary"] =
-                definitionBox[4][0][0];
+            response["definitions"][definitionType][i]["dictionary"] = definitionBox[4][0][0];
           } catch (e) {}
 
           try {
-            response["definitions"][definitionType][i]["definition"] =
-                definitionBox[0];
+            response["definitions"][definitionType][i]["definition"] = definitionBox[0];
           } catch (e) {}
 
           try {
             var useInSentence = definitionBox[1];
             if (useInSentence != null) {
-              response["definitions"][definitionType][i]["use-in-sentence"] =
-                  useInSentence;
+              response["definitions"][definitionType][i]["use-in-sentence"] = useInSentence;
             }
           } catch (e) {}
 
@@ -126,16 +119,13 @@ Future<Map<String, dynamic>> translate_(
               try {
                 synonymType = synonymBox[1][0][0];
               } catch (e) {}
-              response["definitions"][definitionType][i]["synonyms"]
-                  [synonymType] = [];
+              response["definitions"][definitionType][i]["synonyms"][synonymType] = [];
 
               try {
                 var synonymList = synonymBox[0];
                 for (var synonymTypeWord in synonymList) {
                   try {
-                    response["definitions"][definitionType][i]["synonyms"]
-                            [synonymType]
-                        .add(synonymTypeWord[0]);
+                    response["definitions"][definitionType][i]["synonyms"][synonymType].add(synonymTypeWord[0]);
                   } catch (e) {}
                 }
               } catch (e) {}
@@ -154,8 +144,7 @@ Future<Map<String, dynamic>> translate_(
           response["translations"][translationType] = {};
           var translationNamesBox = translationBox[x][1];
           for (var i = 0; i < translationNamesBox.length; i++) {
-            response["translations"][translationType]
-                [translationNamesBox[i][0]] = {};
+            response["translations"][translationType][translationNamesBox[i][0]] = {};
             var frequency = translationNamesBox[i][3].toString();
             if (frequency == "3") {
               frequency = "1";
@@ -163,16 +152,12 @@ Future<Map<String, dynamic>> translate_(
               frequency = "3";
             }
 
-            response["translations"][translationType][translationNamesBox[i][0]]
-                ["words"] = [];
+            response["translations"][translationType][translationNamesBox[i][0]]["words"] = [];
             for (var z = 0; z < translationNamesBox[i][2].length; z++) {
-              response["translations"][translationType]
-                      [translationNamesBox[i][0]]["words"]
-                  .add(translationNamesBox[i][2][z]);
+              response["translations"][translationType][translationNamesBox[i][0]]["words"].add(translationNamesBox[i][2][z]);
             }
 
-            response["translations"][translationType][translationNamesBox[i][0]]
-                ["frequency"] = frequency + "/3";
+            response["translations"][translationType][translationNamesBox[i][0]]["frequency"] = frequency + "/3";
           }
         } catch (e) {}
       }

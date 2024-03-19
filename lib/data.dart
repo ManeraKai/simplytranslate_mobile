@@ -46,8 +46,7 @@ Widget line = Container(
   color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
 );
 
-Brightness theme =
-    SchedulerBinding.instance.platformDispatcher.platformBrightness;
+Brightness theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
 late Map<String, String> toSelLangMap;
 late Map<String, String> fromSelLangMap;
@@ -217,8 +216,7 @@ Map<String, String> selectLanguagesMapGetter(BuildContext context) {
   for (var i in mapOne.values) Valuelist.add(i);
   Valuelist.sort();
 
-  for (String i in Valuelist)
-    for (var x in mapOne.keys) if (mapOne[x] == i) mapTwo[x] = i;
+  for (String i in Valuelist) for (var x in mapOne.keys) if (mapOne[x] == i) mapTwo[x] = i;
 
   return mapTwo;
 }
@@ -249,9 +247,7 @@ switchVals() {
 enum FromTo { from, to }
 
 (String?, String?, String?) lastUsed(FromTo fromto) {
-  final Map<String, dynamic>? langUsage = fromto == FromTo.from
-      ? session.read('fromLangUsage')
-      : session.read('toLangUsage');
+  final Map<String, dynamic>? langUsage = fromto == FromTo.from ? session.read('fromLangUsage') : session.read('toLangUsage');
   if (langUsage == null) return (null, null, null);
 
   (String, int)? max1;
