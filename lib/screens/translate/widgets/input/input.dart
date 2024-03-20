@@ -75,21 +75,12 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                     if (googleInCtrl.text.length > 0 && googleInCtrl.text.length <= 5000) {
                       isTranslationCanceled = false;
                       setStateOverlord(() => loading = true);
-                      try {
-                        final translatedText = await simplytranslate.translate(
-                          googleInCtrl.text,
-                          fromLangVal,
-                          toLangVal,
-                        );
-                        if (!isTranslationCanceled)
-                          setStateOverlord(() {
-                            googleOutput = translatedText;
-                            loading = false;
-                          });
-                      } catch (e) {
-                        print("API Error: $e");
-                        setStateOverlord(() => loading = false);
-                      }
+                      final translatedText = await simplytranslate.translate(googleInCtrl.text, fromLangVal, toLangVal);
+                      if (!isTranslationCanceled)
+                        setStateOverlord(() {
+                          googleOutput = translatedText;
+                          loading = false;
+                        });
                     }
                   }
                 });

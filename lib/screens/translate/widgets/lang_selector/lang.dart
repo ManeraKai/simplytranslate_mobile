@@ -90,11 +90,7 @@ class _GoogleLangState extends State<GoogleLang> {
                                                 changeToTxt!(toSelLangMap[toLangVal]!);
                                               }();
 
-                                        final translatedText = await translate(
-                                          googleInCtrl.text,
-                                          fromLangVal,
-                                          toLangVal,
-                                        );
+                                        final translatedText = await translate(googleInCtrl.text, fromLangVal, toLangVal);
                                         if (!isTranslationCanceled)
                                           setStateOverlord(() {
                                             googleOutput = translatedText;
@@ -166,11 +162,7 @@ class _GoogleLangState extends State<GoogleLang> {
                 switchVals();
                 FocusScope.of(context).unfocus();
               }
-              final translatedText = await translate(
-                googleInCtrl.text,
-                fromLangVal,
-                toLangVal,
-              );
+              final translatedText = await translate(googleInCtrl.text, fromLangVal, toLangVal);
               if (!isTranslationCanceled)
                 setStateOverlord(() {
                   googleOutput = translatedText;

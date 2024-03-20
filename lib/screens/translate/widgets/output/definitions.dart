@@ -26,20 +26,14 @@ class Definitions extends StatelessWidget {
             for (String type in translatedText['definitions'].keys) ...[
               Text(
                 type.capitalize(),
-                style: TextStyle(
-                  fontSize: 20,
-                  color: theme == Brightness.dark ? Colors.cyanAccent : Color(0xff007979),
-                ),
+                style: TextStyle(fontSize: 20, color: theme == Brightness.dark ? Colors.cyanAccent : Color(0xff007979)),
               ),
               SizedBox(height: 8),
               for (int i = 0; i < translatedText['definitions'][type].length; i++) ...[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "${i + 1}. ",
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    Text("${i + 1}. ", style: TextStyle(fontSize: 16)),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

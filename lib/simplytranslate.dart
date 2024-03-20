@@ -19,11 +19,7 @@ Future<Uint8List> tts(String text, String language) async {
   return response.bodyBytes;
 }
 
-Future<Map<String, dynamic>> translate(
-  String text,
-  String from,
-  String to,
-) async {
+Future<Map<String, dynamic>> translate(String text, String from, String to) async {
   Map<String, dynamic> fromSession = jsonDecode(session.read("fromLangUsage") ?? "{}");
   Map<String, dynamic> fromLangUsage = fromSession.isEmpty ? Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0) : fromSession;
   Map<String, dynamic> toSession = jsonDecode(session.read("toLangUsage") ?? "{}");
@@ -44,17 +40,11 @@ Future<Map<String, dynamic>> translate_(
   String to,
 ) async {
   Map<String, dynamic> response = {};
-
-  var document = html.parse((await http.get(Uri.parse(
-    "https://translate.google.com/m?tl=$to&hl=$from&q=${Uri.encodeQueryComponent(text)}",
-  )))
-      .body);
-  response['text'] = document.getElementsByClassName('result-container')[0].innerHtml;
-
   try {
-    var url = Uri.parse(
-      "https://translate.google.com/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&rt=c",
-    );
+    var document = html.parse((await http.get(Uri.parse("https://translate.google.com/m?tl=$to&hl=$from&q=${Uri.encodeQueryComponent(text)}"))).body);
+    response['text'] = document.getElementsByClassName('result-container')[0].innerHtml;
+
+    var url = Uri.parse("https://translate.google.com/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&rt=c");
 
     var req = jsonEncode([
       [text, from, to, true],
@@ -78,12 +68,10 @@ Future<Map<String, dynamic>> translate_(
       body: req,
     );
 
-    var responseText = resp.body;
-
-    var numMatch = RegExp(r"\n(\d+)\n").firstMatch(responseText);
+    var numMatch = RegExp(r"\n(\d+)\n").firstMatch(resp.body);
     var frontPad = numMatch!.end;
     var endNum = frontPad + int.parse(numMatch.group(1)!) - 1;
-    var data = jsonDecode(responseText.substring(frontPad, endNum));
+    var data = jsonDecode(resp.body.substring(frontPad, endNum));
     data = data[0][2];
     data = jsonDecode(data);
 
@@ -106,10 +94,7 @@ Future<Map<String, dynamic>> translate_(
           } catch (e) {}
 
           try {
-            var useInSentence = definitionBox[1];
-            if (useInSentence != null) {
-              response["definitions"][definitionType][i]["use-in-sentence"] = useInSentence;
-            }
+            if (definitionBox[1] != null) response["definitions"][definitionType][i]["use-in-sentence"] = definitionBox[1];
           } catch (e) {}
 
           try {

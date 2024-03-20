@@ -30,16 +30,11 @@ class _TtsOutputState extends State<TtsInput> {
           SnackBar(
             duration: Duration(seconds: 2),
             width: 300,
-            content: Text(
-              i18n().main.audio_limit,
-              textAlign: TextAlign.center,
-            ),
+            content: Text(i18n().main.audio_limit, textAlign: TextAlign.center),
           ),
         );
         _isSnackBarPressed = true;
-        Future.delayed(const Duration(seconds: 1)).then(
-          (_) => _isSnackBarPressed = false,
-        );
+        Future.delayed(const Duration(seconds: 1)).then((_) => _isSnackBarPressed = false);
       }
     }
 

@@ -6,8 +6,6 @@ import 'package:simplytranslate_mobile/screens/translate/widgets/output/translat
 import '/data.dart';
 import 'widgets/input/input.dart';
 import 'widgets/output/output.dart';
-// import 'widgets/lang_selector/from_lang.dart';
-// import 'widgets/lang_selector/to_lang.dart';
 import 'widgets/lang_selector/switch_lang.dart';
 
 var _scrollController = ScrollController();
@@ -51,9 +49,7 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GoogleLang(FromTo.from),
-                      // GoogleFromLang(),
                       GoogleSwitchLang(),
-                      // GoogleToLang(),
                       GoogleLang(FromTo.to),
                     ],
                   ),
