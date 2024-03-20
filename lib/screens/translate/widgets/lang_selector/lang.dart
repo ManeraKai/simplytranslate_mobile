@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simplytranslate_mobile/simplytranslate.dart';
 import '/data.dart';
 
 bool _isFirstClick = false;
@@ -71,7 +72,7 @@ class _GoogleLangState extends State<GoogleLang> {
                             Container(
                               color: theme == Brightness.dark ? greyColor : Colors.white,
                               child: GestureDetector(
-                                onTap: () {
+                                onTap: () async {
                                   FocusScope.of(context).unfocus();
                                   if (option == (widget.fromto == FromTo.from ? fromSelLangMap[toLangVal] : toSelLangMap[fromLangVal])) {
                                     switchVals();
@@ -88,6 +89,17 @@ class _GoogleLangState extends State<GoogleLang> {
                                                 toLangVal = i;
                                                 changeToTxt!(toSelLangMap[toLangVal]!);
                                               }();
+
+                                        final translatedText = await translate(
+                                          googleInCtrl.text,
+                                          fromLangVal,
+                                          toLangVal,
+                                        );
+                                        if (!isTranslationCanceled)
+                                          setStateOverlord(() {
+                                            googleOutput = translatedText;
+                                            loading = false;
+                                          });
                                         break;
                                       }
                                     }
@@ -133,7 +145,7 @@ class _GoogleLangState extends State<GoogleLang> {
                 extentOffset: txtCtrl.text.length,
               );
             },
-            onEditingComplete: () {
+            onEditingComplete: () async {
               final input = txtCtrl.text.trim().toLowerCase();
               String? chosenOne;
               for (var i in widget.fromto == FromTo.from ? fromSelLangMap.keys : toSelLangMap.keys) {
@@ -154,6 +166,16 @@ class _GoogleLangState extends State<GoogleLang> {
                 switchVals();
                 FocusScope.of(context).unfocus();
               }
+              final translatedText = await translate(
+                googleInCtrl.text,
+                fromLangVal,
+                toLangVal,
+              );
+              if (!isTranslationCanceled)
+                setStateOverlord(() {
+                  googleOutput = translatedText;
+                  loading = false;
+                });
             },
             decoration: InputDecoration(contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10), isDense: true),
             controller: txtCtrl,

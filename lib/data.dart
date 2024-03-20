@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -247,8 +249,8 @@ switchVals() {
 enum FromTo { from, to }
 
 (String?, String?, String?) lastUsed(FromTo fromto) {
-  final Map<String, dynamic>? langUsage = fromto == FromTo.from ? session.read('fromLangUsage') : session.read('toLangUsage');
-  if (langUsage == null) return (null, null, null);
+  final Map<String, dynamic> langUsage = jsonDecode((fromto == FromTo.from ? session.read("fromLangUsage") : session.read("toLangUsage")) ?? "{}");
+  if (langUsage.isEmpty) return (null, null, null);
 
   (String, int)? max1;
   (String, int)? max2;

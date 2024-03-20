@@ -24,15 +24,16 @@ Future<Map<String, dynamic>> translate(
   String from,
   String to,
 ) async {
-  Map<String, dynamic> fromLangUsage = session.read("fromLangUsage") ?? Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0);
-
-  Map<String, dynamic> toLangUsage = session.read("toLangUsage") ?? Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0);
+  Map<String, dynamic> fromSession = jsonDecode(session.read("fromLangUsage") ?? "{}");
+  Map<String, dynamic> fromLangUsage = fromSession.isEmpty ? Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0) : fromSession;
+  Map<String, dynamic> toSession = jsonDecode(session.read("toLangUsage") ?? "{}");
+  Map<String, dynamic> toLangUsage = toSession.isEmpty ? Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0) : toSession;
 
   fromLangUsage[from] = fromLangUsage[from]! + 1;
   toLangUsage[to] = toLangUsage[to]! + 1;
 
-  session.write("fromLangUsage", fromLangUsage);
-  session.write("toLangUsage", toLangUsage);
+  session.write("fromLangUsage", jsonEncode(fromLangUsage));
+  session.write("toLangUsage", jsonEncode(toLangUsage));
 
   return translate_(text, from, to);
 }
