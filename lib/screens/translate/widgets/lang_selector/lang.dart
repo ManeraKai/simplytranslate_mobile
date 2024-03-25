@@ -27,7 +27,7 @@ class _GoogleLangState extends State<GoogleLang> {
           if (_isFirstClick) {
             _isFirstClick = false;
             var list = selLangsIterable.toList();
-            var (max1, max2, max3) = lastUsed(widget.fromto);
+            final (max1, max2, max3) = lastUsed(widget.fromto);
             if (max1 != null) {
               final idx = list.indexOf(selLangMap[max1]!);
               if (idx >= 0) list.move(idx, 0);
@@ -65,52 +65,59 @@ class _GoogleLangState extends State<GoogleLang> {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: () {
-                        List<Widget> widgetList = [];
-                        for (var option in options)
-                          widgetList.add(
-                            Container(
-                              color: theme == Brightness.dark ? greyColor : Colors.white,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  FocusScope.of(context).unfocus();
-                                  if (option == (widget.fromto == FromTo.from ? fromSelLangMap[toLangVal] : toSelLangMap[fromLangVal])) {
-                                    switchVals();
-                                  } else {
-                                    for (var i in widget.fromto == FromTo.from ? fromSelLangMap.keys : toSelLangMap.keys) {
-                                      if (option == (widget.fromto == FromTo.from ? fromSelLangMap[i] : toSelLangMap[i])) {
-                                        session.write(widget.fromto == FromTo.from ? 'from_lang' : 'to_lang', i);
-                                        widget.fromto == FromTo.from
-                                            ? () {
-                                                fromLangVal = i;
-                                                changeFromTxt!(fromSelLangMap[fromLangVal]!);
-                                              }()
-                                            : () {
-                                                toLangVal = i;
-                                                changeToTxt!(toSelLangMap[toLangVal]!);
-                                              }();
-
-                                        final translatedText = await translate(googleInCtrl.text, fromLangVal, toLangVal);
-                                        if (!isTranslationCanceled)
-                                          setStateOverlord(() {
-                                            googleOutput = translatedText;
-                                            loading = false;
-                                          });
-                                        break;
-                                      }
+                      children: options.indexed.map((item) {
+                        final option = item.$2;
+                        return Container(
+                          color: theme == Brightness.dark ? greyColor : Colors.white,
+                          child: GestureDetector(
+                            onTap: () async {
+                              FocusScope.of(context).unfocus();
+                              if (option == (widget.fromto == FromTo.from ? fromSelLangMap[toLangVal] : toSelLangMap[fromLangVal])) {
+                                switchVals();
+                              } else {
+                                for (var i in widget.fromto == FromTo.from ? fromSelLangMap.keys : toSelLangMap.keys) {
+                                  if (option == (widget.fromto == FromTo.from ? fromSelLangMap[i] : toSelLangMap[i])) {
+                                    session.write(widget.fromto == FromTo.from ? 'from_lang' : 'to_lang', i);
+                                    if (widget.fromto == FromTo.from) {
+                                      fromLangVal = i;
+                                      changeFromTxt!(fromSelLangMap[fromLangVal]!);
+                                    } else {
+                                      toLangVal = i;
+                                      changeToTxt!(toSelLangMap[toLangVal]!);
                                     }
+                                    final translatedText = await translate(googleInCtrl.text, fromLangVal, toLangVal);
+                                    if (!isTranslationCanceled)
+                                      setStateOverlord(() {
+                                        googleOutput = translatedText;
+                                        loading = false;
+                                      });
+                                    break;
                                   }
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
-                                  child: Text(option, style: const TextStyle(fontSize: 18)),
+                                }
+                              }
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 18),
+                              child: Text(
+                                option,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: () {
+                                    final (max1, max2, max3) = lastUsed(widget.fromto);
+                                    final idx = item.$1 + 1;
+                                    if ((idx == 1 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max1] : toSelLangMap[max1])) ||
+                                        (idx == 2 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max2] : toSelLangMap[max2])) ||
+                                        (idx == 3 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max3] : toSelLangMap[max3]))) {
+                                      return greenColor;
+                                    }
+                                  }(),
                                 ),
                               ),
                             ),
-                          );
-                        return widgetList;
-                      }(),
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
@@ -123,16 +130,13 @@ class _GoogleLangState extends State<GoogleLang> {
           fieldFocus.addListener(() {
             if (!fieldFocus.hasPrimaryFocus) widget.fromto == FromTo.from ? fromCancel() : toCancel();
           });
-          widget.fromto == FromTo.from
-              ? () {
-                  fromCancel = () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
-                  changeFromTxt = (String val) => txtCtrl.text = val;
-                }()
-              : () {
-                  toCancel = () => txtCtrl.text = toSelLangMap[toLangVal]!;
-                  changeToTxt = (String val) => txtCtrl.text = val;
-                }();
-
+          if (widget.fromto == FromTo.from) {
+            fromCancel = () => txtCtrl.text = fromSelLangMap[fromLangVal]!;
+            changeFromTxt = (String val) => txtCtrl.text = val;
+          } else {
+            toCancel = () => txtCtrl.text = toSelLangMap[toLangVal]!;
+            changeToTxt = (String val) => txtCtrl.text = val;
+          }
           return TextField(
             onTap: () {
               _isFirstClick = true;
