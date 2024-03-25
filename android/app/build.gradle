@@ -37,8 +37,8 @@ android {
         applicationId 'com.simplytranslate_mobile'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 12
-        versionName '1.4.3'
+        versionCode 13
+        versionName '1.4.4'
     }
 
 
