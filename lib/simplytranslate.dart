@@ -20,15 +20,15 @@ Future<Uint8List> tts(String text, String language) async {
 }
 
 Future<Map<String, dynamic>> translate(String text, String from, String to) async {
+  if (text.isEmpty) return {};
   Map<String, dynamic> fromSession = jsonDecode(session.read("fromLangUsage") ?? "{}");
   Map<String, dynamic> fromLangUsage = fromSession.isEmpty ? Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0) : fromSession;
+  fromLangUsage[from] = fromLangUsage[from]! + 1;
+  session.write("fromLangUsage", jsonEncode(fromLangUsage));
+
   Map<String, dynamic> toSession = jsonDecode(session.read("toLangUsage") ?? "{}");
   Map<String, dynamic> toLangUsage = toSession.isEmpty ? Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0) : toSession;
-
-  fromLangUsage[from] = fromLangUsage[from]! + 1;
   toLangUsage[to] = toLangUsage[to]! + 1;
-
-  session.write("fromLangUsage", jsonEncode(fromLangUsage));
   session.write("toLangUsage", jsonEncode(toLangUsage));
 
   return translate_(text, from, to);

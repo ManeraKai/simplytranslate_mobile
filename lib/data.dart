@@ -258,14 +258,16 @@ enum FromTo { from, to }
   langUsage.removeWhere((key, value) => value == 0);
   langUsage.forEach((key, value) {
     if (max1 == null || max1!.$2 < value) {
+      max3 = max2;
+      max2 = max1;
       max1 = (key, value);
     } else if (max2 == null || max2!.$2 < value) {
+      max3 = max2;
       max2 = (key, value);
     } else if (max3 == null || max3!.$2 < value) {
       max3 = (key, value);
     }
   });
-
   return (max1?.$1, max2?.$1, max3?.$1);
 }
 

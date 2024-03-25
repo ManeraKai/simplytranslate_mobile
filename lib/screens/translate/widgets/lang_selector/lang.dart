@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:simplytranslate_mobile/simplytranslate.dart';
 import '/data.dart';
 
-bool _isFirstClick = false;
-
 class GoogleLang extends StatefulWidget {
   final FromTo fromto;
   GoogleLang(
@@ -14,6 +12,8 @@ class GoogleLang extends StatefulWidget {
   @override
   State<GoogleLang> createState() => _GoogleLangState();
 }
+
+bool _isFirstClick = true;
 
 class _GoogleLangState extends State<GoogleLang> {
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class _GoogleLangState extends State<GoogleLang> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: options.indexed.map((item) {
-                        final option = item.$2;
+                        final (idx, option) = item;
                         return Container(
                           color: theme == Brightness.dark ? greyColor : Colors.white,
                           child: GestureDetector(
@@ -105,10 +105,9 @@ class _GoogleLangState extends State<GoogleLang> {
                                   fontSize: 18,
                                   color: () {
                                     final (max1, max2, max3) = lastUsed(widget.fromto);
-                                    final idx = item.$1 + 1;
-                                    if ((idx == 1 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max1] : toSelLangMap[max1])) ||
-                                        (idx == 2 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max2] : toSelLangMap[max2])) ||
-                                        (idx == 3 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max3] : toSelLangMap[max3]))) {
+                                    if ((idx == 0 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max1] : toSelLangMap[max1])) ||
+                                        (idx == 1 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max2] : toSelLangMap[max2])) ||
+                                        (idx == 2 && option == (widget.fromto == FromTo.from ? fromSelLangMap[max3] : toSelLangMap[max3]))) {
                                       return greenColor;
                                     }
                                   }(),
