@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -113,38 +111,9 @@ switchVals() {
 enum FromTo { from, to }
 
 (String?, String?, String?) lastUsed(FromTo fromto) {
-  final Map<String, dynamic> langUsage = jsonDecode((fromto == FromTo.from ? session.read("fromLangUsage") : session.read("toLangUsage")) ?? "{}");
-  if (langUsage.isEmpty) return (null, null, null);
-
-  (String, int)? max1;
-  (String, int)? max2;
-  (String, int)? max3;
-  langUsage.removeWhere((key, value) => value == 0);
-  langUsage.forEach((key, value) {
-    if (max1 == null || max1!.$2 < value) {
-      max3 = max2;
-      max2 = max1;
-      max1 = (key, value);
-    } else if (max2 == null || max2!.$2 < value) {
-      max3 = max2;
-      max2 = (key, value);
-    } else if (max3 == null || max3!.$2 < value) {
-      max3 = (key, value);
-    }
-  });
-  return (max1?.$1, max2?.$1, max3?.$1);
-}
-
-extension MoveElement<T> on List<T> {
-  void move(int from, int to) {
-    RangeError.checkValidIndex(from, this, "from", length);
-    RangeError.checkValidIndex(to, this, "to", length);
-    var element = this[from];
-    if (from < to) {
-      this.setRange(from, to, this, from + 1);
-    } else {
-      this.setRange(to + 1, from + 1, this, to);
-    }
-    this[to] = element;
+  if (fromto == FromTo.from) {
+    return (session.read("fromLast1"), session.read("fromLast2"), session.read("fromLast3"));
+  } else {
+    return (session.read("toLast1"), session.read("toLast2"), session.read("toLast3"));
   }
 }

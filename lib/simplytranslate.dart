@@ -21,15 +21,25 @@ Future<Uint8List> tts(String text, String language) async {
 
 Future<Map<String, dynamic>> translate(String text, String from, String to) async {
   if (text.isEmpty) return {};
-  Map<String, dynamic> fromSession = jsonDecode(session.read("fromLangUsage") ?? "{}");
-  Map<String, dynamic> fromLangUsage = fromSession.isEmpty ? Map.fromIterable(fromSelLangMap.keys, key: (k) => k, value: (_) => 0) : fromSession;
-  fromLangUsage[from] = fromLangUsage[from]! + 1;
-  session.write("fromLangUsage", jsonEncode(fromLangUsage));
 
-  Map<String, dynamic> toSession = jsonDecode(session.read("toLangUsage") ?? "{}");
-  Map<String, dynamic> toLangUsage = toSession.isEmpty ? Map.fromIterable(toSelLangMap.keys, key: (k) => k, value: (_) => 0) : toSession;
-  toLangUsage[to] = toLangUsage[to]! + 1;
-  session.write("toLangUsage", jsonEncode(toLangUsage));
+  final fromLast1 = session.read("fromLast1");
+  final fromLast2 = session.read("fromLast2");
+  final fromLast3 = session.read("fromLast3");
+
+  if (from != fromLast1 && from != fromLast2 && from != fromLast3 && from != "auto") {
+    session.write("fromLast1", from);
+    session.write("fromLast2", fromLast1);
+    session.write("fromLast3", fromLast2);
+  }
+
+  final toLast1 = session.read("toLast1");
+  final toLast2 = session.read("toLast2");
+  final toLast3 = session.read("toLast3");
+  if (to != toLast1 && to != toLast2 && to != toLast3) {
+    session.write("toLast1", to);
+    session.write("toLast2", toLast1);
+    session.write("toLast3", toLast2);
+  }
 
   return translate_(text, from, to);
 }
