@@ -71,10 +71,7 @@ Future<void> getSharedText() async {
       });
 
       final translatedText = await simplytranslate.translate(_translationInput, 'auto', toLangVal);
-      setStateOverlord(() {
-        googleOutput = translatedText;
-        loading = false;
-      });
+      setStateOverlord(() => googleOutput = translatedText);
     }
   } catch (_) {
     setStateOverlord(() => loading = false);

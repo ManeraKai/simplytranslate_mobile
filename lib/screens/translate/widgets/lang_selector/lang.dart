@@ -116,11 +116,7 @@ class _GoogleLangState extends State<GoogleLang> {
                                           changeToTxt!(toSelLangMap[toLangVal]!);
                                         }
                                         final translatedText = await translate(googleInCtrl.text, fromLangVal, toLangVal);
-                                        if (!isTranslationCanceled)
-                                          setStateOverlord(() {
-                                            googleOutput = translatedText;
-                                            loading = false;
-                                          });
+                                        if (!isTranslationCanceled) setStateOverlord(() => googleOutput = translatedText);
                                         break;
                                       }
                                     }
@@ -201,11 +197,7 @@ class _GoogleLangState extends State<GoogleLang> {
                 FocusScope.of(context).unfocus();
               }
               final translatedText = await translate(googleInCtrl.text, fromLangVal, toLangVal);
-              if (!isTranslationCanceled)
-                setStateOverlord(() {
-                  googleOutput = translatedText;
-                  loading = false;
-                });
+              if (!isTranslationCanceled) setStateOverlord(() => googleOutput = translatedText);
             },
             decoration: InputDecoration(contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10), isDense: true),
             controller: txtCtrl,

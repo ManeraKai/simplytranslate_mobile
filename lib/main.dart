@@ -283,10 +283,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           preferredSize: Size(0, 60),
           child: Builder(
             builder: (context) => AppBar(
-              bottom: PreferredSize(
-                preferredSize: Size.fromHeight(2),
-                child: Container(height: 2, color: greenColor),
-              ),
               actions: [
                 PopupMenuButton(
                   icon: Icon(Icons.more_vert, color: Colors.white),

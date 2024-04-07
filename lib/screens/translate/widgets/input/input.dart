@@ -74,13 +74,8 @@ class _TranslationInputState extends State<GoogleTranslationInput> {
                   if (input == googleInCtrl.text) {
                     if (googleInCtrl.text.length > 0 && googleInCtrl.text.length <= 5000) {
                       isTranslationCanceled = false;
-                      setStateOverlord(() => loading = true);
                       final translatedText = await simplytranslate.translate(googleInCtrl.text, fromLangVal, toLangVal);
-                      if (!isTranslationCanceled)
-                        setStateOverlord(() {
-                          googleOutput = translatedText;
-                          loading = false;
-                        });
+                      if (!isTranslationCanceled) setStateOverlord(() => googleOutput = translatedText);
                     }
                   }
                 });

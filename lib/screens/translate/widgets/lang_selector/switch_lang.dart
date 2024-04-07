@@ -25,7 +25,6 @@ class GoogleSwitchLang extends StatelessWidget {
                     setStateOverlord(() {});
                   } else if (googleInCtrl.text.length <= 5000) {
                     FocusScope.of(context).unfocus();
-                    setStateOverlord(() => loading = true);
                     try {
                       final transInTmp = googleInCtrl.text;
                       final fromLangValTransTmp = fromLangVal;
@@ -50,7 +49,6 @@ class GoogleSwitchLang extends StatelessWidget {
                           translatedText2 = '';
                         }
                         setStateOverlord(() {
-                          loading = false;
                           googleInCtrl.text = translatedText['text'];
                           googleOutput = translatedText2;
                         });

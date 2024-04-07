@@ -23,6 +23,8 @@ Future<Uint8List> tts(String text, String language) async {
 Future<Map<String, dynamic>> translate(String text, String from, String to) async {
   if (text.isEmpty) return {};
 
+  setStateOverlord(() => loading = true);
+
   final fromLast1 = session.read("fromLast1");
   final fromLast2 = session.read("fromLast2");
   final fromLast3 = session.read("fromLast3");
@@ -42,8 +44,9 @@ Future<Map<String, dynamic>> translate(String text, String from, String to) asyn
     session.write("toLast2", toLast1);
     session.write("toLast3", toLast2);
   }
-
-  return translate_(text, from, to);
+  final result = await translate_(text, from, to);
+  setStateOverlord(() => loading = false);
+  return result;
 }
 
 Future<Map<String, dynamic>> translate_(String text, String from, String to) async {
