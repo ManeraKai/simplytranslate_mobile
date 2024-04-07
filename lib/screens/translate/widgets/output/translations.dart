@@ -39,8 +39,8 @@ class Translations extends StatelessWidget {
                   List sorted = translatedText['translations'][type].keys.toList();
                   sorted.sort(
                     (a, b) {
-                      var aInt = int.parse(translatedText['translations'][type][a]['frequency'][0]);
-                      var bInt = int.parse(translatedText['translations'][type][b]['frequency'][0]);
+                      final aInt = int.parse(translatedText['translations'][type][a]['frequency'][0]);
+                      final bInt = int.parse(translatedText['translations'][type][b]['frequency'][0]);
                       return bInt.compareTo(aInt);
                     },
                   );

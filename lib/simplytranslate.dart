@@ -12,8 +12,9 @@ import 'package:simplytranslate_mobile/data.dart';
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0";
 
 Future<Uint8List> tts(String text, String language) async {
+  text = Uri.encodeQueryComponent(text);
   final url = Uri.parse(
-    "https://translate.google.com/translate_tts?tl=$language&q=${Uri.encodeQueryComponent(text)}&client=tw-ob",
+    "https://translate.google.com/translate_tts?tl=$language&q=$text&client=tw-ob",
   );
   final response = await http.get(url, headers: {"User-Agent": userAgent});
   return response.bodyBytes;
@@ -35,6 +36,7 @@ Future<Map<String, dynamic>> translate(String text, String from, String to) asyn
   final toLast1 = session.read("toLast1");
   final toLast2 = session.read("toLast2");
   final toLast3 = session.read("toLast3");
+
   if (to != toLast1 && to != toLast2 && to != toLast3) {
     session.write("toLast1", to);
     session.write("toLast2", toLast1);
@@ -44,14 +46,13 @@ Future<Map<String, dynamic>> translate(String text, String from, String to) asyn
   return translate_(text, from, to);
 }
 
-Future<Map<String, dynamic>> translate_(
-  String text,
-  String from,
-  String to,
-) async {
+Future<Map<String, dynamic>> translate_(String text, String from, String to) async {
   Map<String, dynamic> response = {};
   try {
-    var document = html.parse((await http.get(Uri.parse("https://translate.google.com/m?tl=$to&hl=$from&q=${Uri.encodeQueryComponent(text)}"))).body);
+    text = Uri.encodeQueryComponent(text);
+    var document = html.parse(
+      (await http.get(Uri.parse("https://translate.google.com/m?tl=$to&hl=$from&q=$text"))).body,
+    );
     response['text'] = document.getElementsByClassName('result-container')[0].innerHtml;
 
     var url = Uri.parse("https://translate.google.com/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&rt=c");

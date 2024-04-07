@@ -30,7 +30,7 @@ enum AppTheme { dark, light, system }
 
 var themeValue = '';
 
-Widget line = Container(
+final Widget line = Container(
   margin: const EdgeInsets.only(top: 10, bottom: 5),
   height: 1.5,
   color: theme == Brightness.dark ? Colors.white : lightThemeGreyColor,
@@ -70,11 +70,7 @@ Future<void> getSharedText() async {
         loading = true;
       });
 
-      final translatedText = await simplytranslate.translate(
-        _translationInput,
-        'auto',
-        toLangVal,
-      );
+      final translatedText = await simplytranslate.translate(_translationInput, 'auto', toLangVal);
       setStateOverlord(() {
         googleOutput = translatedText;
         loading = false;

@@ -61,7 +61,6 @@ class _TtsOutputState extends State<TtsOutput> {
     return ttsOutloading
         ? InkWell(
             onTap: () {
-              print('rofrof');
               setState(() {
                 ttsOutloading = false;
                 isTtsOutputCanceled = true;

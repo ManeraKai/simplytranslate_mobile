@@ -41,7 +41,10 @@ class GoogleSwitchLang extends StatelessWidget {
                             SnackBar(
                               duration: Duration(seconds: 2),
                               width: 160,
-                              content: Text(i18n().main.input_limit, textAlign: TextAlign.center),
+                              content: Text(
+                                i18n().main.input_limit,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           );
                           translatedText2 = '';

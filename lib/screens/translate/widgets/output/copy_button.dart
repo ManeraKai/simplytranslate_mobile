@@ -18,7 +18,10 @@ class CopyToClipboardButton extends StatelessWidget {
                   SnackBar(
                     duration: Duration(seconds: 2),
                     width: 160,
-                    content: Text(i18n().main.copied_to_clipboard, textAlign: TextAlign.center),
+                    content: Text(
+                      i18n().main.copied_to_clipboard,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
