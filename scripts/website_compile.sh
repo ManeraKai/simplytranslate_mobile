@@ -4,10 +4,10 @@ generate_pug() {
 
     jq -s '.[0] * {"dir": "'"${dir}"'"}' docs/strings/"${lang}".json > docs/strings/"${lang}".tmp.json
 
-    pug docs/pug/*.pug -O docs/strings/"${lang}".tmp.json -o docs/"${lang}" -P
+    pnpm run pug docs/pug/*.pug -O docs/strings/"${lang}".tmp.json -o docs/"${lang}" -P
 
-    if [ $lang == en ]; then
-        pug docs/pug/*.pug -O docs/strings/"${lang}".tmp.json -o docs/ -P
+    if [ $lang = "en" ]; then
+        pnpm run pug docs/pug/*.pug -O docs/strings/"${lang}".tmp.json -o docs/ -P
     fi
 
     rm docs/strings/"${lang}".tmp.json
@@ -20,5 +20,5 @@ generate_pug 'en' 'ltr'
 # generate_pug 'pl' 'ltr'
 # generate_pug 'tr' 'ltr'
 
-sudo rm -rf /var/www/simplytranslate_mobile/simplytranslate_mobile/*
-sudo cp -r docs/* /var/www/simplytranslate_mobile/simplytranslate_mobile/
+# sudo rm -rf /var/www/simplytranslate_mobile/simplytranslate_mobile/*
+# sudo cp -r docs/* /var/www/simplytranslate_mobile/simplytranslate_mobile/

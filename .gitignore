@@ -46,3 +46,6 @@ app.*.map.json
 
 # key password
 android/local.properties
+
+# Node Modules
+node_modules/
