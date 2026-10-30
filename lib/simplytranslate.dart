@@ -5,7 +5,6 @@ library simplytranslate;
 
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:html/parser.dart' as html;
 import 'package:http/http.dart' as http;
 import 'package:simplytranslate_mobile/data.dart';
 
@@ -52,12 +51,6 @@ Future<Map<String, dynamic>> translate(String text, String from, String to) asyn
 Future<Map<String, dynamic>> translate_(String text, String from, String to) async {
   Map<String, dynamic> response = {};
   try {
-    text = Uri.encodeQueryComponent(text);
-    var document = html.parse(
-      (await http.get(Uri.parse("https://translate.google.com/m?tl=$to&hl=$from&q=$text"))).body,
-    );
-    response['text'] = document.getElementsByClassName('result-container')[0].innerHtml;
-
     var url = Uri.parse("https://translate.google.com/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&rt=c");
 
     var req = jsonEncode([
@@ -88,6 +81,21 @@ Future<Map<String, dynamic>> translate_(String text, String from, String to) asy
     var data = jsonDecode(resp.body.substring(frontPad, endNum));
     data = data[0][2];
     data = jsonDecode(data);
+
+    try {
+      var variant = data[1][0][0];
+      // Multi-sentence results are split into segments at index 5.
+      if (variant.length > 5 && variant[5] != null) {
+        var translatedText = "";
+        for (var segment in variant[5]) {
+          if (segment.length > 2 && segment[2] == true && translatedText.isNotEmpty) translatedText += " ";
+          translatedText += segment[0];
+        }
+        response['text'] = translatedText;
+      } else {
+        response['text'] = variant[0];
+      }
+    } catch (e) {}
 
     try {
       response["definitions"] = {};
